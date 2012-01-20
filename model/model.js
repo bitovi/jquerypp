@@ -761,11 +761,11 @@ steal('jquery/class', 'jquery/lang/string', function() {
 			if ( this.listType ) {
 				this.list = new this.listType([]);
 			}
-			//@steal-remove-start
+			//!steal-remove-start
 			if (!proto ) {
 				steal.dev.warn("model.js " + fullName + " has no static properties.  You probably need  ,{} ")
 			}
-			//@steal-remove-end
+			//!steal-remove-end
 			each(ajaxMethods, function(name, method){
 				var prop = self[name];
 				if ( typeof prop !== 'function' ) {
@@ -1010,11 +1010,11 @@ steal('jquery/class', 'jquery/lang/string', function() {
 				length = raw ? raw.length : null,
 				i = 0;
 
-			//@steal-remove-start
+			//!steal-remove-start
 			if (!length ) {
 				steal.dev.warn("model.js models has no data.  If you have one item, use model")
 			}
-			//@steal-remove-end
+			//!steal-remove-end
 			for (; i < length; i++ ) {
 				res.push(this.model(raw[i]));
 			}
@@ -1747,9 +1747,9 @@ steal('jquery/class', 'jquery/lang/string', function() {
 			// call event on the instance
 			trigger(this,funcName);
 			
-			//@steal-remove-start
+			//!steal-remove-start
 			steal.dev.log("Model.js - "+ constructor.shortName+" "+ funcName);
-			//@steal-remove-end
+			//!steal-remove-end
 
 			// call event on the instance's Class
 			trigger(constructor,funcName, this);

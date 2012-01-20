@@ -2,7 +2,7 @@
 // This is a modified version of John Resig's class
 // http://ejohn.org/blog/simple-javascript-inheritance/
 // It provides class level inheritance and callbacks.
-//@steal-clean
+//!steal-clean
 steal("jquery","jquery/lang/string",function( $ ) {
 
 	// =============== HELPERS =================
@@ -425,13 +425,13 @@ steal("jquery","jquery/lang/string",function( $ ) {
 			// keep a reference to us in self
 			self = this;
 			
-			//@steal-remove-start
+			//!steal-remove-start
 			for( var i =0; i< funcs.length;i++ ) {
 				if(typeof funcs[i] == "string" && !isFunction(this[funcs[i]])){
 					throw ("class.js "+( this.fullName || this.Class.fullName)+" does not have a "+funcs[i]+"method!");
 				}
 			}
-			//@steal-remove-end
+			//!steal-remove-end
 			return function class_cb() {
 				// add the arguments after the curried args
 				var cur = concatArgs(args, arguments),
@@ -612,14 +612,14 @@ steal("jquery","jquery/lang/string",function( $ ) {
 					current = getObject(parts.join('.'), window, true),
 					namespace = current;
 
-				//@steal-remove-start
+				//!steal-remove-start
 				if (!Class.nameOk ) {
 					//steal.dev.isHappyName(fullName)
 				}
 				if(current[shortName]){
 					steal.dev.warn("class.js There's already something called "+fullName)
 				}
-				//@steal-remove-end
+				//!steal-remove-end
 				current[shortName] = Class;
 			}
 

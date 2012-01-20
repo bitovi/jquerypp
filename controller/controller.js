@@ -394,11 +394,11 @@ steal('jquery/class', 'jquery/lang/string', 'jquery/event/destroyed', function( 
 			}
 
 			// make sure listensTo is an array
-			//@steal-remove-start
+			//!steal-remove-start
 			if (!isArray(this.listensTo) ) {
 				throw "listensTo is not an array in " + this.fullName;
 			}
-			//@steal-remove-end
+			//!steal-remove-end
 			// calculate and cache actions
 			this.actions = {};
 
