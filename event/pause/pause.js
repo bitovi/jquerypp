@@ -105,7 +105,7 @@ $.Event.prototype.pause = function(){
 		isDefaultPrevented : this.isDefaultPrevented() ?
 			returnTrue : returnFalse,
 		isPropagationStopped : this.isPropagationStopped() ?
-			returnTrue : returnFalse,
+			returnTrue : returnFalse
 	};
 	
 	this.stopImmediatePropagation();

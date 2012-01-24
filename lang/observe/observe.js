@@ -638,7 +638,7 @@ steal('jquery/class').then(function() {
 			if(this.comparator && /^\d+./.test(attr) ) {
 				
 				// get the index
-				var index = +/^\d+/.exec(attr)[0],
+				var index = +(/^\d+/.exec(attr)[0]),
 					// and item
 					item = this[index],
 					// and the new item

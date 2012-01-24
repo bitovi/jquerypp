@@ -1624,8 +1624,8 @@ steal('jquery/class', 'jquery/lang/string', function() {
 		 *     }, error);
 		 * 
 		 * 
-		 * @param {Function} [success(instance,data)] called if a successful save.
-		 * @param {Function} [error(jqXHR)] error handler function called if the 
+		 * @param {Function} [success] called with (instance,data) if a successful save.
+		 * @param {Function} [error] error handler function called with (jqXHR) if the 
 		 * save was not successful. It is passed the ajax request's jQXHR object.
 		 * @return {$.Deferred} a jQuery deferred that resolves to the instance, but
 		 * after it has been created or updated.
