@@ -145,7 +145,7 @@ steal("jquery/dom").then(function( $ ) {
 
 				//now we are on the last part, set the value
 				if (current[lastPart]) {
-					if (!$.isArray(current[lastPart]) ) {
+					if (!$.isArray(current[lastPart] && type === "checkbox") ) {
 						current[lastPart] = current[lastPart] === undefined ? [] : [current[lastPart]];
 					}
 					if ( write ) {
