@@ -28,6 +28,16 @@ test("with a form", function(){
 	
 });
 
+test("With a non-form element", function() {
+
+	$("#qunit-test-area").html("//jquery/dom/form_params/test/non-form.micro",{})
+
+	var formParams =  $("#divform").formParams() ;
+
+	equal( formParams.id , "foo-bar-baz", "ID input read correctly" );
+
+});
+
 
 test("with true false", function(){
 	$("#qunit-test-area").html("//jquery/dom/form_params/test/truthy.micro",{});

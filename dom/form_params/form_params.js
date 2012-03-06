@@ -101,7 +101,7 @@ steal("jquery/dom").then(function( $ ) {
 
 			if ( params ) {
 				return this.setParams( params );
-			} else if ( this.is("form") ) {
+			} else {
 				return this.getParams( convert );
 			}
 		},
