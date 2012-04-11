@@ -2,20 +2,20 @@ module("jquery/model", {
 	setup: function() {
         var ids = 0;
 	    $.Model("Person",{
-			findAll: function( params, success, error ) {
-				success("findAll");
+			findAll: function( params) {
+				return $.Deferred().resolve([{name: "foo"}])
 			},
 			findOne: function( params, success, error ) {
-				success("findOne");
+				return $.Deferred().resolve({name: "foo"});
 			},
-			create: function( params, success, error ) {
-				success({zoo: "zed", id: (++ids)},"create");
+			create: function( params) {
+				return $.Deferred( ).resolve({zoo: "zed", id: (++ids)} );
 			},
 			destroy: function( id, success, error ) {
-				success("destroy");
+				return $.Deferred().resolve();
 			},
 			update: function( id, attrs, success, error ) {
-				success({zoo: "monkeys"},"update");
+				return $.Deferred().resolve({zoo: "monkeys"});
 			}
 		},{
 			prettyName: function() {
@@ -29,20 +29,19 @@ module("jquery/model", {
 test("CRUD", function(){
    
 	Person.findAll({}, function(response){
-		equals("findAll", response)
+		equals("foo", response[0].name)
 	})
 	Person.findOne({}, function(response){
-		equals("findOne", response)
+		equals("foo", response.name)
 	})
     var person;
-	new Person({foo: "bar"}).save(function(inst, attrs, create){
-		equals(create, "create")
+	new Person({foo: "bar"}).save(function(inst, attrs){
 		equals("bar", inst.foo)
 		equals("zed", inst.zoo)
 		ok(inst.save, "has save function");
 		person = inst;
 	});
-    person.update({zoo: "monkey"},function(inst, attrs, update){
+    person.attr({zoo: "monkey"}).save(function(inst, attrs, update){
 		equals(inst, person, "we get back the same instance");
 		equals(person.zoo, "monkeys", "updated to monkeys zoo!  This tests that you callback with the attrs")
 	})

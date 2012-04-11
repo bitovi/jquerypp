@@ -31,7 +31,7 @@ test("subscribe testing works", function(){
 	OpenAjax.hub.publish("a.b",{})
 	equals(subscribes,1, "can subscribe")
 	var controllerInstance = ta.controller('my_test')
-	ok( controllerInstance.Class == MyTest, "can get controller" )
+	ok( controllerInstance.constructor == MyTest, "can get controller" )
 	controllerInstance.destroy()
 	
 	equals(destroys,1, "destroy called once")
@@ -117,7 +117,7 @@ test("delegate", function(){
 	})
 	var els = $("<div><span><a href='#'>click me</a></span></div>").appendTo($("#qunit-test-area"))
 	var c = els.delegate_test();
-	c.controller().delegate(els.find("span"), "a", "click", function(){
+	c.controller().on(els.find("span"), "a", "click", function(){
 		called = true;
 	})
 	els.find("a").trigger('click')
