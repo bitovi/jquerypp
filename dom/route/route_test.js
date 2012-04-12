@@ -241,7 +241,7 @@ test("linkTo", function(){
     $.route.routes = {};
     $.route(":foo");
     var res = $.route.link("Hello",{foo: "bar", baz: 'foo'});
-    equal( res, '<a href="#!bar&baz=foo" >Hello</a>');
+    equal( res, '<a href="#!bar&amp;baz=foo">Hello</a>');
 })
 
 test("param with route defined", function(){

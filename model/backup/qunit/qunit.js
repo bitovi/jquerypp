@@ -15,7 +15,7 @@ test("backing up", function(){
 	recipe.backup();
 	ok(!recipe.isDirty(), "backedup, but clean");
 	
-	recipe.name = 'blah'
+	recipe.attr('name', 'blah')
 	
 	ok(recipe.isDirty(), "dirty");
 	
@@ -63,7 +63,7 @@ test("backup / restore with associations", function(){
 	recipe.backup();
 	ok(!recipe.isDirty(), "backedup, but clean");
 	
-	recipe.name = 'blah'
+	recipe.attr('name','blah')
 	
 	ok(recipe.isDirty(), "dirty");
 	

@@ -53,7 +53,7 @@ test("findAll deferred", function(){
 			return $.ajax({
 				url : "/people",
 				data : params,
-				dataType : "json person.models",
+				dataType : "json",
 				fixture: "//jquery/model/test/people.json"
 			})
 		}
@@ -74,7 +74,7 @@ test("findOne deferred", function(){
 			return $.ajax({
 				url : "/people/5",
 				data : params,
-				dataType : "json person.model",
+				dataType : "json",
 				fixture: "//jquery/model/test/person.json"
 			})
 		}
@@ -264,7 +264,7 @@ test("error binding", 1, function(){
 	   }
 	})
 	var school = new School();
-	school.bind("error.name", function(ev, error){
+	school.bind("error.name", function(ev, attr, error){
 		equals(error, "no name", "error message provided")
 	})
 	school.attr("name","");
@@ -291,11 +291,11 @@ test("auto methods",function(){
 			equals(school.constructor.shortName,"School","a single school");
 			
 			
-			new School({name: "Highland"}).save(function(){
-				equals(this.name,"Highland","create gets the right name")
-				this.update({name: "LHS"}, function(){
+			new School({name: "Highland"}).save(function(school){
+				equals(school.name,"Highland","create gets the right name")
+				school.attr({name: "LHS"}).save(function(school){
 					start();
-					equals(this.name,"LHS","create gets the right name")
+					equals(school.name,"LHS","create gets the right name")
 					
 					$.fixture.on = true;
 				})
@@ -326,32 +326,19 @@ test("findAll string", function(){
 		start();
 		$.fixture.on = true;
 	})
-})
-test("Empty uses fixtures", function(){
-	$.Model("Test.Things");
-	$.fixture.make("thing", 10, function(i){
-		return {
-			id: i
-		}
-	});
-	stop();
-	Test.Thing.findAll({}, function(things){
-		start();
-		equals(things.length, 10,"got 10 things")
-	})
 });
 
 test("Model events" , function(){
 	var order = 0;
 	$.Model("Test.Event",{
-		create : function(attrs, success){
-			success({id: 1})
+		create : function(attrs){
+			return $.Deferred().resolve({id: 1})
 		},
 		update : function(id, attrs, success){
-			success(attrs)
+			return $.Deferred().resolve(attrs)
 		},
 		destroy : function(id, success){
-			success()
+			return $.Deferred().resolve()
 		}
 	},{});
 	
@@ -361,7 +348,7 @@ test("Model events" , function(){
 		ok(this === Test.Event, "got model")
 		ok(passedItem === item, "got instance")
 		equals(++order, 1, "order");
-		passedItem.update({});
+		passedItem.attr({}).save();
 		
 	}).bind('updated', function(ev, passedItem){
 		equals(++order, 2, "order");
@@ -450,7 +437,7 @@ test("removeAttr test", function(){
 	person.removeAttr('foo')
 	
 	equals(person.foo, undefined, "property removed");
-	var attrs = person.attrs()
+	var attrs = person.attr()
 	equals(attrs.foo, undefined, "attrs removed");
 });
 
