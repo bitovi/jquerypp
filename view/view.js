@@ -1,3 +1,3 @@
-steal("can/view/modifiers",'can/view/view_steal.js',function(){
+steal("can/view/modifiers",function(){
 	$.View = can.view;
 });
