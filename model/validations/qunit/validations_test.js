@@ -1,9 +1,10 @@
 steal('funcunit/qunit','jquery/model/validations').then(function(){
 
+var Person;
+
 module("jquery/model/validations",{
 	setup : function(){
-		delete window.Person
-		jQuery.Model.extend("Person",{},{});
+		Person = jQuery.Model({},{});
 	}
 })
 
