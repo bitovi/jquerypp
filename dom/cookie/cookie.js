@@ -2,7 +2,7 @@ steal('jquery/lang/json',function() {
     // break
     /**
      * @function jQuery.cookie
-     * @parent dom
+     * @parent jquerypp
      * @plugin jquery/dom/cookie
      * @author Klaus Hartl/klaus.hartl@stilbuero.de
      *

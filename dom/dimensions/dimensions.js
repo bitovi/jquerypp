@@ -1,36 +1,5 @@
 
 steal('jquery/dom/cur_styles').then(function($) {
-/**
- * @page dimensions dimensions
- * @parent dom
- * @plugin jquery/dom/dimensions
- * 
- * The dimensions plugin adds support for setting+animating inner+outer height and widths.
- * 
- * ### Quick Examples
- * 
- *      $('#foo').outerWidth(100).innerHeight(50);
- *      $('#bar').animate({outerWidth: 500});
- *      
- * ## Use
- * 
- * When writing reusable plugins, you often want to 
- * set or animate an element's width and height that include its padding,
- * border, or margin.  This is especially important in plugins that
- * allow custom styling.
- * 
- * The dimensions plugin overwrites [jQuery.fn.outerHeight outerHeight],
- * [jQuery.fn.outerWidth outerWidth], [jQuery.fn.innerHeight innerHeight] 
- * and [jQuery.fn.innerWidth innerWidth]
- * to let you set and animate these properties.
- * 
- * 
- * 
- * 
- * ## Demo
- * 
- * @demo jquery/dom/dimensions/dimensions.html
- */
 
 var weird = /button|select/i, //margin is inside border
 	getBoxes = {},
@@ -42,14 +11,12 @@ var weird = /button|select/i, //margin is inside border
         oldInnerWidth: $.fn.innerWidth,
         oldInnerHeight: $.fn.innerHeight
     };
-/**
- *  @add jQuery.fn
- */
+
 $.each({ 
 
 /**
- * @function outerWidth
- * @parent dimensions
+ * @function $.fn.outerWidth
+ * @parent jQuery.dimensions
  * Lets you set the outer width on an object
  * @param {Number} [height] 
  * @param {Boolean} [includeMargin=false] Makes setting the outerWidth adjust 
@@ -61,15 +28,15 @@ $.each({
  */
 width: 
 /**
- * @function innerWidth
- * @parent dimensions
+ * @function $.fn.innerWidth
+ * @parent jQuery.dimensions
  * Lets you set the inner height of an object
  * @param {Number} [height] 
  */
 "Width", 
 /**
- * @function outerHeight
- * @parent dimensions
+ * @function $.fn.outerHeight
+ * @parent jQuery.dimensions
  * Lets you set the outer height of an object where: <br/> 
  * <code>outerHeight = height + padding + border + (margin)</code>.  
  * @codestart
@@ -88,8 +55,8 @@ width:
  */
 height: 
 /**
- * @function innerHeight
- * @parent dimensions
+ * @function $.fn.innerHeight
+ * @parent jQuery.dimensions
  * Lets you set the outer width on an object
  * @param {Number} [height] 
  */
