@@ -4,6 +4,5 @@
 // It provides class level inheritance and callbacks.
 //!steal-clean
 steal("can/construct/proxy","can/construct/super",function( $ ) {
-
 	$.Class = can.Construct;
 })();
