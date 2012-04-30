@@ -3,6 +3,7 @@
 @test jquery/dom/compare/qunit.html
 @plugin dom/compare
 
+
 Compares the position of two nodes and returns a bitmask detailing how they are positioned 
 relative to each other.  
 
