@@ -37,7 +37,7 @@
 			}
 			
         </style>
-		<link type="text/css" href="../../../mxui/data/grid/grid.css" rel="stylesheet" />
+		<link type="text/css" href="../../../canui/data/grid/grid.css" rel="stylesheet" />
 	</head>
 	<body>
 		<div id='out'>
@@ -84,19 +84,19 @@
 			<td><%= foo %></td>
 		</script>
 		<script type='text/javascript'>
-				steal('mxui/data/grid','mxui/layout/split',
+				steal('canui/data/grid', 'can/control/plugin', 'canui/layout/split',
 					'jquery/dom/fixture').then(function(){
 		
-		$('#content').mxui_layout_fill(document.body)
+		$('#content').can_ui_layout_fill(document.body)
 		
 		
 		
-		$('#split').mxui_layout_fill('#content')
-			.mxui_layout_split({ direction: "vertical", panelClass: "panel" })
+		$('#split').can_ui_layout_fill('#content')
+			.can_ui_layout_split({ direction: "vertical", panelClass: "panel" })
 		
 		
-		$('#vsplit').mxui_layout_fill($('#leftPanel'))
-			.mxui_layout_split({ direction: "horizontal" });
+		$('#vsplit').can_ui_layout_fill($('#leftPanel'))
+			.can_ui_layout_split({ direction: "horizontal" });
 		
 		
 			
@@ -119,7 +119,7 @@
 			var paramsScroll = new Mxui.Data({limit : 50, offset: 0})
 			
 			// Forever Scroll
-			$("#forever").mxui_data_grid({
+			$("#forever").can_ui_data_grid({
 				model : Thing,
 				params : paramsScroll,
 				columns: {
