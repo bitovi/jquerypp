@@ -31,7 +31,7 @@ require('jquery/compare')
 
 [$.fn.compare](http://donejs.com/docs.html#!jQuery.compare) compares
 the position of two nodes and returns a number bitmask detailing how they
-are positioned relative to each other. The following list shows the `bitmask` __number__ and what it corresponds to:
+are positioned relative to each other. The following list shows the `bitmask` -> __number__ and what it corresponds to:
 
 * `000000` -> __0__: Elements are identical
 * `000001` -> __1__: The nodes are in different documents (or one is outside of a document)
@@ -67,7 +67,7 @@ $.cookie('the_cookie', null);
 
 ## $.styles `$(el).styles()`
 
-[$.styles](http://donejs.com/docs.html#!jQuery.styles) is a fast way of getting a bunch of computed styles from an element instead of retrieving them individually. Computed styles reflect the actual style of an element, including browser defaults and CSS settings.
+[$.styles](http://donejs.com/docs.html#!jQuery.styles) is a fast way of getting a set of computed styles from an element instead of retrieving them individually (which is much slower). Computed styles reflect the actual style of an element, including browser defaults and CSS settings.
 
 {% highlight javascript %}
 $("#foo").styles('float','display')
@@ -76,14 +76,14 @@ $("#foo").styles('float','display')
 
 ## $.dimensions
 
-The [$.dimensions](http://donejs.com/docs.html#!jQuery.dimensions) plugin can set an elements inner and outer width and height including margins and paddings and enables `animate` to animate these values. You can set and read it with:
+The [$.dimensions](http://donejs.com/docs.html#!jQuery.dimensions) plugin can set the inner and outer width and height on an element. Inner dimensions include the padding where outer dimensions also take care of any borders. You can set and read these values with:
 
 * `$(el).innerHeight([height])`
 * `$(el).outerHeight([height])`
 * `$(el).innerWidth([width])`
 * `$(el).outerWidth([width])`
 
-And use `$(el).animate({ innerHeight : 100 })` to animate these values. This is useful when you care about animating/setting the visual dimension of an element (which is what you typically want to animate):
+And use `$(el).animate({ innerHeight : 100 })` to animate them. This is useful when you care about animating/setting the visual dimension of an element (which is what you typically want to do):
 
 {% highlight javascript %}
 $('#foo').outerWidth(100).innerHeight(50);
@@ -96,7 +96,7 @@ $('#bar').animate({outerWidth: 500});
 
 ## $.selection `$(el).selection([start], [end])`
 
-[$.selection](http://donejs.com/docs.html#!jQuery.selection) adds a jQuery plugin to set or retrieve the currently selected text. It works on all elements:
+[$.selection](http://donejs.com/docs.html#!jQuery.selection) adds a jQuery plugin to set or retrieve the currently selected text range. It works on all elements:
 
 {% highlight html %}
 <div id="text">This is some text</div>
@@ -125,7 +125,7 @@ $('*').within(200, 200, 100, 100);
 
 ## $.event.drag `dragdown` `draginit` `dragmove` `dragend` `dragover` `dragout`
 
-[$.event.drag](http://donejs.com/docs.html#!jQuery.event.drag) adds special drag events to jQuery:
+[$.event.drag](http://donejs.com/docs.html#!jQuery.event.drag) adds drag events to jQuery:
 
 * `dragdown` - the mouse cursor is pressed down
 * `draginit` - the drag motion is started
@@ -134,7 +134,7 @@ $('*').within(200, 200, 100, 100);
 * `dragover` - the drag is over a drop point
 * `dragout` - the drag moved out of a drop point
 
-An element will become dragable by listening to one of these events on it. A dragable div that can only be moved horizontally can be initialized like this:
+An element will become draggable by listening to one of these events on it. A draggable div that can only be moved horizontally can be initialized like this:
 
 {% highlight javascript %}
 $('div').on('draginit', function(event, drag) {
@@ -158,7 +158,7 @@ The `drag` object (passed to the event handler as the second parameter) has the 
 
 ## $.event.drop `dropinit` `dropover` `dropout` `dropmove` `dropon` `dropend`
 
-When making an element dragable with $.event.drag you probably want to be able to drop it somewhere again. [$.event.drop](http://donejs.com/docs.html#!jQuery.event.drop) adds events for doing so:
+When making an element dragable with $.event.drag you probably want to be able to also drop it somewhere. [$.event.drop](http://donejs.com/docs.html#!jQuery.event.drop) adds events for doing so:
 
 * `dropinit` - the drag motion is started, drop positions are calculated
 * `dropover` - a drag moves over a drop element, called once as the drop is dragged over the element
@@ -167,7 +167,7 @@ When making an element dragable with $.event.drag you probably want to be able t
 * `dropon` - a drag is released over a drop element
 * `dropend` - the drag motion has completed
 
-The following example adds the `highlight` class when a dragable is moved over it and removes it when it left:
+The following example adds the `highlight` class when a drag is moved over the element and removes it when it leaves:
 
 {% highlight javascript %}
 $('.drop').on({
@@ -185,11 +185,14 @@ $('.drop').on({
 [$.event.hover](http://donejs.com/docs.html#!jQuery.event.hover) is a flexible way to deal with hover related events. You can listen to the `hoverinit`, `hoverenter`, `hovermove` and `hoverleave` events:
 
 {% highlight javascript %}
-$('#menu').on(".option", "hoverenter", function(){
-  $(this).addClass("hovering");
-}).on(".option", "hoverleave", function(){
-  $(this).removeClass("hovering");
-})
+$('#menu').on({
+  hoverenter : function(){
+    $(this).addClass("hovering");
+  },
+  hoverleave : function(){
+    $(this).removeClass("hovering");
+  }
+}, ".option");
 {% endhighlight %}
 
 An element is hovered when the mouse moves less than a certain distance in a specific time over the element. You can modify these values either globally by setting `$.Hover.delay` and `$.Hover.distance` or individually during `hoverinit`:
@@ -205,7 +208,7 @@ $(".option").on("hoverinit", function(ev, hover){
 
 ## $.event.destroyed `destroyed`
 
-The [destroyed](http://donejs.com/docs.html#!jQuery.event.destroyed) event is triggered when the element is removed from the DOM through one of the jQuery [manipulation methods](http://api.jquery.com/category/manipulation/).
+The [destroyed](http://donejs.com/docs.html#!jQuery.event.destroyed) event is triggered when the element is removed from the DOM using one of the jQuery [manipulation methods](http://api.jquery.com/category/manipulation/).
 
 {% highlight javascript %}
 $('form').on('destroyed', function() {
@@ -213,12 +216,14 @@ $('form').on('destroyed', function() {
 });
 {% endhighlight %}
 
+*Note: The destroyed event does not bubble.*
+
 ## $.event.resize `resize`
 
 Listening to the `resize` event provided by [$.event.resize](http://donejs.com/docs.html#!jQuery.event.resize) is very useful when you need to resize a specific element whenever the parents dimension changes. Unlike other events that bubble from the current element to the top the *resize* event will propagate from the outside-in. This means that outside elements will always resize first.
 
 {% highlight javascript %}
-$('#foo').bind('resize', function(){
+$('#foo').on('resize', function(){
   // adjust #foo's dimensions
 })
 
@@ -267,34 +272,34 @@ $.event.key({
 You can also call `event.keyName()` to get a string representation of the key pressed, for example backspaces:
 
 {% highlight javascript %}
-$("input").keypress(function(ev){
+$("input").on('keypress', function(ev){
   if(ev.keyName() == '\b') {
     ev.preventDefault();
   }
 });
 {% endhighlight %}
 
-The following keynames will be returned by default:
+The following keynames will be mapped by default:
 
-- `\b` - backspace
-- `\t` - tab
-- `\r` - enter key
-- `shift`, `ctrl`, `alt`
-- `pause-break`, `caps`, `escape`, `num-lock`, `scroll-loc`, `print`
-- `page-up`, `page-down`, `end`, `home`, `left`, `up`, `right`, `down`, `insert`, `delete`
-- `' '` - space
-- `0-9` - number key pressed
-- `a-z` - alpha key pressed
-- `num0-9` - number pad key pressed
-- `/` `;` `:` = , \- . / \` \[ \\ \] ' "
-- `f1-12` - function keys pressed
+* `\b` - backspace
+* `\t` - tab
+* `\r` - enter key
+* `shift`, `ctrl`, `alt`
+* `pause-break`, `caps`, `escape`, `num-lock`, `scroll-loc`, `print`
+* `page-up`, `page-down`, `end`, `home`, `left`, `up`, `right`, `down`, `insert`, `delete`
+* `' '` - space
+* `0-9` - number key pressed
+* `a-z` - alpha key pressed
+* `num0-9` - number pad key pressed
+* `f1-12` - function keys pressed
+* Symbols: `/`, `;`, `:`, `=`, `,`, `-`, `.`, `/`, `[`, `\`, `]`, `'`, `"`
 
 ## $.event.default `eventname.default`
 
 [$.event.default](http://donejs.com/docs.html#!jQuery.event.default) lets you perform default actions for events. A default event runs when all other event handlers have been triggered and none has called `event.preventDefault()` or returned false. To add a default event just prefix it with the *default* namespace:
 
 {% highlight javascript %}
-$("div").bind("default.click", function(ev) {
+$("div").on("default.click", function(ev) {
   // ...
 });
 {% endhighlight %}
@@ -303,10 +308,10 @@ $("div").bind("default.click", function(ev) {
 
 ### pause and resume `event.pause(), event.resume()`
 
-[$.event.pause](http://donejs.com/docs.html#!jQuery.event.pause) lets you pause and resume events. Pausing an event works similar to [.stopImmediatePropagation()](http://api.jquery.com/event.stopImmediatePropagation/) by calling `event.pause()`. When `event.resume()` is being called propagation will continue. This is great for asynchronous processing in an event handler:
+[$.event.pause](http://donejs.com/docs.html#!jQuery.event.pause) lets you pause and resume events. Pausing an event works similar to [.stopImmediatePropagation()](http://api.jquery.com/event.stopImmediatePropagation/) by calling `event.pause()`. Calling `event.resume()` will continue propagation. This is great when going asynchronous processing in an event handler:
 
 {% highlight javascript %}
-$('#todos').bind('show', function(ev){
+$('#todos').on('show', function(ev){
   ev.pause();
 
   $(this).load('todos.html', function(){
