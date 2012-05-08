@@ -6,11 +6,10 @@ steal('jquery/lang/json',function() {
      * @plugin jquery/dom/cookie
      * @author Klaus Hartl/klaus.hartl@stilbuero.de
      *
-     *  JavaScriptMVC's packaged cookie plugin is written by
+     *  The cookie plugin packaged with jQuery++ is written by
      *  Klaus Hartl (stilbuero.de)<br />
-	 *  Dual licensed under the MIT and GPL licenses:<br />
-	 *  http://www.opensource.org/licenses/mit-license.php<br />
-	 *  http://www.gnu.org/licenses/gpl.html
+	 *  Dual licensed under the [MIT](http://www.opensource.org/licenses/mit-license.php)
+     *  and [GPL](http://www.gnu.org/licenses/gpl.html) licenses.
 	 *  </p>
 	 *  <p>
 	 *  Create a cookie with the given name and value and other optional parameters.
