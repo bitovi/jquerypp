@@ -53,7 +53,7 @@ common when widgets can reorder themselves (drag-drop) or with nested widgets (t
 
 ## $.cookie
 
-[$.cookie](http://donejs.com/docs.html#!jQuery.cookie) wraps the [jQuery cookie](https://github.com/carhartl/jquery-cookie) plugin. You can use it like:
+[$.cookie](http://donejs.com/docs.html#!jQuery.cookie) wraps the [jQuery cookie](https://github.com/carhartl/jquery-cookie) plugin for easily manipulating cookies. You can use it like this:
 
 {% highlight javascript %}
 // Set a session cookie
@@ -66,7 +66,7 @@ $.cookie('the_cookie', null);
 
 ## $.styles `$(el).styles()`
 
-[$.styles](http://donejs.com/docs.html#!jQuery.styles) is a fast way of getting computed styles from an element. Computed styles reflect the actual style of an element, including browser defaults and CSS settings.
+[$.styles](http://donejs.com/docs.html#!jQuery.styles) is a fast way of getting a bunch of computed styles from an element instead of retrieving them individually. Computed styles reflect the actual style of an element, including browser defaults and CSS settings.
 
 {% highlight javascript %}
 $("#foo").curStyles('float','display') //->
@@ -77,14 +77,14 @@ $("#foo").curStyles('float','display') //->
 
 ## $.dimensions
 
-The [$.dimensions](http://donejs.com/docs.html#!jQuery.dimensions) plugin can set an elements inner and outer width and height including margins and paddings and modifies the jQuery `animate` to animate these values. You can set and read it with:
+The [$.dimensions](http://donejs.com/docs.html#!jQuery.dimensions) plugin can set an elements inner and outer width and height including margins and paddings and enables `animate` to animate these values. You can set and read it with:
 
 * `$(el).innerHeight([height])`
 * `$(el).outerHeight([height])`
 * `$(el).innerWidth([width])`
 * `$(el).outerWidth([width])`
 
-And use `$(el).animate({ innerHeight : 100 })` to animate these values. This is useful when you care about animating/settings the visual dimension of an element (which is actually what you typically want to animate):
+And use `$(el).animate({ innerHeight : 100 })` to animate these values. This is useful when you care about animating/settings the visual dimension of an element (which is what you typically want to animate):
 
 {% highlight javascript %}
 $('#foo').outerWidth(100).innerHeight(50);
@@ -109,7 +109,7 @@ Gets or sets the selection
 
 ## $.event.destroyed
 
-The [destroyed](http://donejs.com/docs.html#!jQuery.event.destroyed) event is triggered when the element is removed from the DOM through one of the jQuery modifiers like remove, html or replaceWith.
+The [destroyed](http://donejs.com/docs.html#!jQuery.event.destroyed) event is triggered when the element is removed from the DOM through one of the jQuery [manipulation methods](http://api.jquery.com/category/manipulation/).
 
 {% highlight javascript %}
 $('form').on('destroyed', function() {
@@ -129,19 +129,46 @@ The [resize](http://donejs.com/docs.html#!jQuery.event.resize) event can update 
 
 [$.event.key](http://donejs.com/docs.html#!jQuery.event.key) allows you to define alternate keymaps or overwrite existing keycodes. For example lets map the arrow up, down, left and right keys to the more gamer friendly WASD mapping:
 
-  $.event.key({
-    "w" : 38,
-    "a" : 37,
-    "s" : 40,
-    "d" : 39
-  });
+{% highlight javascript %}
+$.event.key({
+  "w" : 38,
+  "a" : 37,
+  "s" : 40,
+  "d" : 39
+});
+{% endhighlight %}
+
+You can also call `event.keyName()` to get a string representation of the key pressed, for example backspaces:
+
+{% highlight javascript %}
+$("input").keypress(function(ev){
+  if(ev.keyName() == '\b') {
+    ev.preventDefault();
+  }
+});
+{% endhighlight %}
+
+The following keynames will be returned by default:
+
+- `\b` - backspace
+- `\t` - tab
+- `\r` - enter key
+- `shift`, `ctrl`, `alt`
+- `pause-break`, `caps`, `escape`, `num-lock`, `scroll-loc`, `print`
+- `page-up`, `page-down`, `end`, `home`, `left`, `up`, `right`, `down`, `insert`, `delete`
+- `' '` - space
+- `0-9` - number key pressed
+- `a-z` - alpha key pressed
+- `num0-9` - number pad key pressed
+- `/` `;` `:` = , \- . / \` \[ \\ \] ' "
+- `f1-12` - function keys pressed
 
 ## $.event.default `$(el).bind('eventname.default', handler)`
 
 [$.event.default](http://donejs.com/docs.html#!jQuery.event.default) lets you perform default actions for events. A default event runs when all other event handlers have been triggered and none has called `event.preventDefault()` or returned false. To add a default event just prefix it with the *default* namespace:
 
 {% highlight javascript %}
-$("div").bind("default.show", function(ev) {
+$("div").bind("default.click", function(ev) {
   // ...
 });
 {% endhighlight %}
@@ -161,7 +188,7 @@ $('panel').triggerAsync('show', function(){
 
 ## $.event.pause `event.pause(), event.resume()`
 
-[$.event.pause](http://donejs.com/docs.html#!jQuery.event.pause) lets you pause and resume events. Pausing an event works similar to [.stopImmediatePropagation()](http://api.jquery.com/event.stopImmediatePropagation/) by calling `event.pause()`. When `event.resume()` is being called propagation will continue. This is great for asynchronous processing when handling an event:
+[$.event.pause](http://donejs.com/docs.html#!jQuery.event.pause) lets you pause and resume events. Pausing an event works similar to [.stopImmediatePropagation()](http://api.jquery.com/event.stopImmediatePropagation/) by calling `event.pause()`. When `event.resume()` is being called propagation will continue. This is great for asynchronous processing in an event handler:
 
 {% highlight javascript %}
 $('#todos').bind('show', function(ev){
