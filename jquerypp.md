@@ -17,15 +17,13 @@ outer width and height of elements like:
 THe following are the other dom plugins:
 
   - [jQuery.cookie Cookie] - Set and get cookie values.
-  - [jQuery.fixture Fixture] - Simulate Ajax responses.
   - [jQuery.fn.closest Closest] - Use the open child selector in event delegation.
   - [jQuery.fn.compare Compare] - Compare the location of two elements rapidly.
-  - [jQuery.fn.curStyles CurStyles] - Get multiple css properties quickly.
+  - [jQuery.fn.styles CurStyles] - Get multiple css properties quickly.
   - [jQuery.fn.formParams FormParams] - Serializes a form into a JSON-like object.
   - [jQuery.fn.selection Selection] - Gets or sets the current text selection.
   - [jQuery.fn.within Within] - Returns elements that have a point within their boundaries.
   - [jQuery.Range Range] - Text range utilities.
-  - [jQuery.route] - Routes for history-enabled ajax apps.
 
 ## Special Events
 
@@ -41,6 +39,6 @@ jQueryMX comes packed with jQuery [specialevents special events] and event helpe
   - [jQuery.event.special.default Default] - Provide default behaviors for events.
   - [jquery.event.pause Pause-Resume] - Pause and resume event propagation.
 
+## Utilities
 
   - [jQuery.Vector Vector] - vector math
-

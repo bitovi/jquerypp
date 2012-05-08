@@ -2,7 +2,7 @@
  * @add jQuery.Drag.prototype
  */
 
-steal('jquery/event/drag', 'jquery/dom/cur_styles').then(function( $ ) {
+steal('jquery/event/drag', 'jquery/dom/styles').then(function( $ ) {
 	var round = function( x, m ) {
 		return Math.round(x / m) * m;
 	}
@@ -43,7 +43,7 @@ steal('jquery/event/drag', 'jquery/dom/cur_styles').then(function( $ ) {
 		container = container || $(document.body);
 		this._step = amount;
 
-		var styles = container.curStyles("borderTopWidth", "paddingTop", "borderLeftWidth", "paddingLeft");
+		var styles = container.styles("borderTopWidth", "paddingTop", "borderLeftWidth", "paddingLeft");
 		var top = parseInt(styles.borderTopWidth) + parseInt(styles.paddingTop),
 			left = parseInt(styles.borderLeftWidth) + parseInt(styles.paddingLeft);
 

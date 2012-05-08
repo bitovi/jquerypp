@@ -15,7 +15,7 @@
     </head>
     <body>
     	<h1>CurStyles Performance</h1>
-		<p>This demo shows how $.curStyles out-performs $.curCSS</p>
+		<p>This demo shows how $.styles out-performs $.curCSS</p>
 <div id="demo-html">
 <div id='content'>
 	Click To Run
@@ -26,11 +26,11 @@
 
 
 <script type='text/javascript' id="demo-source">
-steal('jquery/dom/cur_styles').then(function(){
+steal('jquery/dom/styles').then(function(){
 	
 $.fn.fastHeight = function(){
 	var sum = this[0] && this[0].offsetHeight;
-	$.each(this.curStyles(
+	$.each(this.styles(
 		"borderTopWidth",
 		"borderBottomWidth",
 		"paddingTop",

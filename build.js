@@ -38,7 +38,7 @@ var i, fileName, cmd,
 	"dom/fixture",
 	"dom/form_params",
 	"dom/within", 
-	"dom/cur_styles",
+	"dom/styles",
 	"model",
 	{
 		plugin: "model/backup",

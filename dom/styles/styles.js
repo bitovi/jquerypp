@@ -18,7 +18,7 @@ steal('jquery/dom').then(function( $ ) {
 		rnumpx = /^-?\d+(?:px)?$/i,
 		rnum = /^-?\d/;
 
-	$.curStyles = function( el, styles ) {
+	$.styles = function( el, styles ) {
 		if (!el ) {
 			return null;
 		}
@@ -71,14 +71,14 @@ steal('jquery/dom').then(function( $ ) {
 	};
 
 	/**
-	 * @function jQuery.fn.curStyles
+	 * @function jQuery.fn.styles
 	 * 
-	 * @parent jQuery.curStyles
-	 * @plugin jQuery.curStyles
+	 * @parent jQuery.styles
+	 * @plugin jQuery.styles
 	 * @param {String} style pass style names as arguments
 	 * @return {Object} an object of style:value pairs
 	 */
-	$.fn.curStyles = function() {
-		return $.curStyles(this[0], $.makeArray(arguments));
+	$.fn.styles = function() {
+		return $.styles(this[0], $.makeArray(arguments));
 	};
 });

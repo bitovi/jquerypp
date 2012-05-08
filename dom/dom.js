@@ -36,11 +36,11 @@ Compare the location of two elements rapidly.
 
     $('#foo').compare($('#bar')) & 2 // true if #bar is before #foo
     
-## [jQuery.fn.curStyles CurStyles]
+## [jQuery.fn.styles CurStyles]
 
 Get multiple css properties quickly.
 
-    $('#foo').curStyles('left','top') //-> {left:'20px',top:'10px'}
+    $('#foo').styles('left','top') //-> {left:'20px',top:'10px'}
 
 ## [jQuery.fn.formParams FormParams]
 

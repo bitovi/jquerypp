@@ -81,8 +81,8 @@ var set = function() {
     $(this).val( block[this.id]() )
   })
     
-  //use curStyles
-  $.each($('#block').curStyles("paddingRight",
+  //use styles
+  $.each($('#block').styles("paddingRight",
     "borderRightWidth",
     "marginRight"), function(name, val){
     $("#"+name).val( parseInt(val)  )

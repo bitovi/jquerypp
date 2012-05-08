@@ -30,7 +30,7 @@ var isPhantom = /Phantom/.test(navigator.userAgent),
 var swipe = $.event.swipe = {
 	/**
 	 * @attribute delay
-	 * Delay is the upper limit of time the swipe motion can take in milliseconds.  This defaults to 1000.
+	 * Delay is the upper limit of time the swipe motion can take in milliseconds.  This defaults to 500.
 	 * 
 	 * A user must perform the swipe motion in this much time.
 	 */

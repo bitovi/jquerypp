@@ -2,7 +2,7 @@
  * @add jQuery.Drag.prototype
  */
 
-steal('jquery/event/drag', 'jquery/dom/cur_styles').then(function( $ ) {
+steal('jquery/event/drag', 'jquery/dom/styles').then(function( $ ) {
 
 
 	$.Drag.prototype
@@ -18,7 +18,7 @@ steal('jquery/event/drag', 'jquery/dom/cur_styles').then(function( $ ) {
 	 */
 	.limit = function( container, center ) {
 		//on draws ... make sure this happens
-		var styles = container.curStyles('borderTopWidth', 'paddingTop', 'borderLeftWidth', 'paddingLeft'),
+		var styles = container.styles('borderTopWidth', 'paddingTop', 'borderLeftWidth', 'paddingLeft'),
 			paddingBorder = new $.Vector(
 			parseInt(styles.borderLeftWidth, 10) + parseInt(styles.paddingLeft, 10) || 0, parseInt(styles.borderTopWidth, 10) + parseInt(styles.paddingTop, 10) || 0);
 

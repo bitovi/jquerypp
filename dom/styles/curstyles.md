@@ -1,12 +1,12 @@
-@page jQuery.curStyles
+@page jQuery.styles
 @parent jquerypp
 
-Use curStyles to rapidly get a bunch of computed styles from an element.
+Use styles to rapidly get a bunch of computed styles from an element.
 
 ## Quick Example
 
 
-    $("#foo").curStyles('float','display') //->
+    $("#foo").styles('float','display') //->
     // {
     //  cssFloat: "left", display: "block"
     // }
@@ -26,5 +26,5 @@ the style properties you need all at once.
 The following demo illustrates the performance improvement curStyle provides by providing
 a faster 'height' jQuery function called 'fastHeight'.
 
-@demo jquery/dom/cur_styles/cur_styles.html
+@demo jquery/dom/styles/styles.html
 

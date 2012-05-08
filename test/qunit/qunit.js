@@ -10,7 +10,7 @@ steal('jquery').then(function(){
 },'jquery/class/class_test.js')
 .then('jquery/controller/controller_test.js')
 .then('jquery/dom/compare/compare_test.js')
-.then('jquery/dom/cur_styles/cur_styles_test.js')
+.then('jquery/dom/styles/styles_test.js')
 .then('jquery/dom/dimensions/dimensions_test.js')
 .then('jquery/dom/form_params/form_params_test.js')
 .then('jquery/dom/route/route_test.js')

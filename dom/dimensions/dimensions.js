@@ -1,5 +1,5 @@
 
-steal('jquery/dom/cur_styles').then(function($) {
+steal('jquery/dom/styles').then(function($) {
 
 var weird = /button|select/i, //margin is inside border
 	getBoxes = {},
@@ -75,7 +75,7 @@ height:
                         myChecks.push(name + direction+ (name == 'border' ? "Width" : "") );
                 })
             })
-            $.each($.curStyles(el, myChecks), function(name, value) {
+            $.each($.styles(el, myChecks), function(name, value) {
                 val += (parseFloat(value) || 0);
             })
         }

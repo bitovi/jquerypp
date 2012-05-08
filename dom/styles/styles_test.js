@@ -1,14 +1,14 @@
 steal("jquery/dom/dimensions",'jquery/view/micro')  //load your app
  .then('funcunit/qunit').then(function(){
 
-module("jquery/dom/curStyles");
+module("jquery/dom/styles");
 
 
 test("reading", function(){
 	
-	$("#qunit-test-area").html("//jquery/dom/cur_styles/test/curStyles.micro",{})
+	$("#qunit-test-area").html("//jquery/dom/styles/test/styles.micro",{})
 
-	var res = $.curStyles( $("#styled")[0], 
+	var res = $.styles( $("#styled")[0],
 	   ["padding-left",
 		'position',
 		'display',
