@@ -123,7 +123,29 @@ The [resize](http://donejs.com/docs.html#!jQuery.event.resize) event can update 
 
 ## $.event.swipe
 
-[$.event.swipe](http://donejs.com/docs.html#!jQuery.event.swipe)
+[$.event.swipe](http://donejs.com/docs.html#!jQuery.event.swipe) supports swipe motions on touchscreen devices. You can listen to `swipeleft`, `swiperight`, `swipedown`, `swipeup` and a general `swipe` event.
+
+{% highlight javascript %}
+$('#swiper').on({
+	'swipe' : function(ev) {
+		console.log('Swiping');
+	},
+	'swipeleft' : function(ev) {
+		console.log('Swiping left');
+	},
+	'swiperight' : function(ev) {
+		console.log('Swiping right');
+    },
+    'swipeup' : function(ev) {
+        console.log('Swiping up');
+    },
+    'swipedown' : function(ev) {
+        console.log('Swiping down');
+    },
+});
+{% endhighlight %}
+
+Set `$.event.swipe.delay` to the maximum time the swipe motion can take (default is 500ms).
 
 ## $.event.key
 
