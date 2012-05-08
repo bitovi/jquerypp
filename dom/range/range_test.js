@@ -147,9 +147,9 @@ test("nested range", function(){
 	test("collapsed rect", function(){
 		$("#qunit-test-area")
 			.html("<p id='1'>0123456789</p>");
-		$('#1').selection(1,5);
+		$('#1').selection(1,1);
 		var range = $.Range.current(),
-			start = range.clone().collapse(),
+			start = range.clone(),
 			rect = start.rect();
 		var r = start.rect();
 		ok(rect.height, "height non-zero")
