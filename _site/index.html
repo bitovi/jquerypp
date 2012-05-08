@@ -4,7 +4,7 @@
 <!--[if IE 8]>    <html class="lt-ie9" lang="en"> <![endif]-->
 <!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
 <head>
-<title>CanJS</title>
+<title>jQuery++</title>
 <link rel="stylesheet" type="text/css" href="stylesheets/styles.css">
 <link rel="stylesheet" type="text/css" href="stylesheets/tango.css">
 <link href='/favicon.ico' rel='shortcut icon' type='image/x-icon' />
@@ -16,14 +16,14 @@
 	<div id='menu-wrapper'>
 		<div id='header'>
 			<div id='logo-and-download'>
-				<img alt="Logo" id="logo" src="images/logo.png"/>
-				<a class='primary' href='https://github.com/downloads/jupiterjs/canjs/1.0b2.zip'>Download v1.0b2</a>
+				<img alt="jQuery++" id="logo" src="images/logo.png"/>
+				<a class='primary' href='https://github.com/downloads/jupiterjs/jquerypp/3.3.zip'>Download v3.3</a>
 			</div>
 		</div>
 		<div class='cf' id='buttons'>
-			<a href='https://forum.javascriptmvc.com/#Forum/canjs'>Forums</a>
-			<a href='http://bitovi.com/blog/tag/canjs/'>Blog</a>
-			<a href='https://twitter.com/canjsus'>Twitter</a>
+			<a href='https://forum.javascriptmvc.com/#Forum/jquerymx'>Forums</a>
+			<a href='http://bitovi.com/blog/tag/jquerypp/'>Blog</a>
+			<a href='https://twitter.com/donejs'>Twitter</a>
 		</div>
 		<div id="inner-menu-wrap">
 			<ul id='menu'></ul>
@@ -34,10 +34,10 @@
 	</div>
 	<div id='content-wrapper'>
 		<div id='content'>
-			<a href="http://github.com/jupiterjs/canjs" class="github-fork"><img src="/images/github.png" alt="Fork me on GitHub"></a>
+			<a href="http://github.com/jupiterjs/jquerypp" class="github-fork"><img src="images/github.png" alt="Fork me on GitHub"></a>
 			<h1 id='welcome_to_jquery'>Welcome to jQuery++</h1>
 
-<p>jQuery++ is a collection of useful jQuery extensions and events.  </p>
+<p>jQuery++ is a collection of useful jQuery extensions and events.</p>
 
 <p>They are organized in two broad categories:</p>
 
@@ -63,30 +63,49 @@
 
 <h2 id='compare_'>$.compare <code>$(elA).compare(elB) -&gt; Number</code></h2>
 
-<p><a href='http://donejs.com/docs.html#!jQuery.compare'>$.fn.compare</a> compares the position of two nodes and returns a number bitmask detailing how they are positioned relative to each other.</p>
-<table class='options'>
-    <tr><th>Bits</th><th>Number</th><th>Meaning</th></tr>
-    <tr><td>000000</td><td>0</td><td>Elements are identical.</td></tr>
-    <tr><td>000001</td><td>1</td><td>The nodes are in different
-                    documents (or one is outside of a document).</td></tr>
-    <tr><td>000010</td><td>2</td><td>#bar precedes #foo.</td></tr>
-    <tr><td>000100</td><td>4</td><td>#foo precedes #bar.</td></tr>
-    <tr><td>001000</td><td>8</td><td>#bar contains #foo.</td></tr>
-    <tr><td>010000</td><td>16</td><td>#foo contains #bar.</td></tr>
-</table>
+<p><a href='http://donejs.com/docs.html#!jQuery.compare'>$.fn.compare</a> compares the position of two nodes and returns a number bitmask detailing how they are positioned relative to each other. The following list shows the <code>bitmask</code> <strong>number</strong> and what it corresponds to:</p>
+
+<ul>
+<li><code>000000</code> -&gt; <strong>0</strong>: Elements are identical</li>
+
+<li><code>000001</code> -&gt; <strong>1</strong>: The nodes are in different documents (or one is outside of a document)</li>
+
+<li><code>000010</code> -&gt; <strong>2</strong>: #bar precedes #foo</li>
+
+<li><code>000100</code> -&gt; <strong>4</strong>: #foo precedes #bar</li>
+
+<li><code>001000</code> -&gt; <strong>8</strong>: #bar contains #foo</li>
+
+<li><code>010000</code> -&gt; <strong>16</strong>: #foo contains #bar</li>
+</ul>
+
 <p>You can tell if <code>#foo</code> precedes <code>#bar</code> like:</p>
 
-<p>   if( $(&#8216;#foo&#8217;).compare($(&#8216;#bar&#8217;)) &amp; 4 ) {       console.log(&#8220;#foo preceds #bar&#8221;)    }</p>
+<p>{% highlight javascript %} if( $(&#8216;#foo&#8217;).compare($(&#8216;#bar&#8217;)) &amp; 4 ) { console.log(&#8220;#foo preceds #bar&#8221;) } {% endhiglight %}</p>
 
 <p>This is useful when you want to rapidly compare element positions.  This is common when widgets can reorder themselves (drag-drop) or with nested widgets (trees).</p>
 
 <h2 id='cookie'>$.cookie</h2>
+
+<p><a href='http://donejs.com/docs.html#!jQuery.cookie'>$.cookie</a> wraps</p>
 
 <h2 id='styles'>$.styles</h2>
 
 <p>Reads a bunch of styles</p>
 
 <h2 id='dimensions'>$.dimensions</h2>
+
+<p>The <a href='http://donejs.com/docs.html#!jQuery.dimensions'>$.dimensions</a> plugin allows you to set an elements inner and outer width and height including margins and paddings and modifies the jQuery animate function to animate these values.</p>
+
+<ul>
+<li>$().innerHeight()</li>
+
+<li>$().outerHeight()</li>
+
+<li>$().innerWidth()</li>
+
+<li>$().outerWidth()</li>
+</ul>
 
 <p>Animate innerHeight, innerWidget, outerHeight, outerWidth.</p>
 
@@ -108,15 +127,52 @@
 
 <h2 id='eventdestroyed'>$.event.destroyed</h2>
 
+<p>The <a href='http://donejs.com/docs.html#!jQuery.event.destroyed'>destroyed</a> event is triggered when the element is removed from the DOM through one of the jQuery modifiers like remove, html or replaceWith.</p>
+
+<p>{% highlight javascript %} $(&#8216;form&#8217;).on(&#8216;destroyed&#8217;, function() { // Clean up when a form element has been removed }); {% endhighlight %}</p>
+
 <h2 id='eventresize'>$.event.resize</h2>
+
+<p>The <a href='http://donejs.com/docs.html#!jQuery.event.resize'>resize</a> event can update the</p>
 
 <h2 id='eventswipe'>$.event.swipe</h2>
 
+<p><a href='http://donejs.com/docs.html#!jQuery.event.swipe'>$.event.swipe</a></p>
+
 <h2 id='eventkey'>$.event.key</h2>
 
-<h2 id='eventdefault'>$.event.default</h2>
+<p><a href='http://donejs.com/docs.html#!jQuery.event.key'>$.event.key</a> allows you to define alternate keymaps or overwrite existing keycodes. For example lets map the arrow up, down, left and right keys to the more gamer friendly WASD mapping:</p>
 
-<h2 id='eventpause'>$.event.pause</h2>
+<pre><code>$.event.key({
+	&quot;w&quot; : 38,
+	&quot;a&quot; : 37,
+	&quot;s&quot; : 40,
+	&quot;d&quot; : 39
+});</code></pre>
+
+<h2 id='eventdefault_'>$.event.default <code>$(el).bind(&#39;eventname.default&#39;, handler)</code></h2>
+
+<p><a href='http://donejs.com/docs.html#!jQuery.event.default'>$.event.default</a> lets you perform default actions for events. A default event runs when all other event handlers have been triggered and none has called <code>event.preventDefault()</code> or returned false. To add a default event just prefix it with the <em>default</em> namespace:</p>
+
+<p>{% highlight javascript %} $(&#8220;div&#8221;).bind(&#8220;default.show&#8221;, function(ev) { // &#8230; }); {% endhighlight %}</p>
+
+<h2 id='triggerasync_'>.triggerAsync <code>$(el).triggerAsync(event, [success], [prevented])</code></h2>
+
+<p><a href='http://donejs.com/docs.html#!jQuery.fn.triggerAsync'>$.fn.triggerAsync</a> triggers an event and calls a <em>success</em> handler when it has finished propagating through the DOM and preventDefault is not called. The <em>prevented</em> callback will be used otherwise:</p>
+
+<p>{% highlight javascript %} $(&#8216;panel&#8217;).triggerAsync(&#8216;show&#8217;, function(){ $(&#8216;#panel&#8217;).show(); },function(){ $(&#8216;#other&#8217;).addClass(&#8216;error&#8217;); }); {% endhighlight %}</p>
+
+<h2 id='eventpause_'>$.event.pause <code>event.pause(), event.resume()</code></h2>
+
+<p><a href='http://donejs.com/docs.html#!jQuery.event.pause'>$.event.pause</a> lets you pause and resume events. Pausing an event works similar to <a href='http://api.jquery.com/event.stopImmediatePropagation/'>.stopImmediatePropagation()</a> by calling <code>event.pause()</code>. When <code>event.resume()</code> is being called propagation will continue. This is great for asynchronous processing when handling an event:</p>
+
+<p>{% highlight javascript %} $(&#8216;#todos&#8217;).bind(&#8216;show&#8217;, function(ev){ ev.pause();</p>
+
+<pre><code>$(this).load(&#39;todos.html&#39;, function(){
+    ev.resume();
+});</code></pre>
+
+<p>}) {% endhighlight %}</p>
 
 <h2 id='get_help'>Get Help</h2>
 
