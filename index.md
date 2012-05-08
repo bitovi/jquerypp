@@ -217,20 +217,9 @@ $("div").bind("default.click", function(ev) {
 });
 {% endhighlight %}
 
-## .triggerAsync `$(el).triggerAsync(event, [success], [prevented])`
+## $.event.pause
 
-[$.fn.triggerAsync](http://donejs.com/docs.html#!jQuery.fn.triggerAsync) triggers an event and calls a *success* handler when it has finished propagating through the DOM and `event.preventDefault()` is not called. The *prevented* callback will be used otherwise:
-
-{% highlight javascript %}
-$('panel').triggerAsync('show', function(){
-    $('#panel').show();
-  },function(){
-    $('#other').addClass('error');
-});
-{% endhighlight %}
-
-
-## $.event.pause `event.pause(), event.resume()`
+### Pause and resume `event.pause(), event.resume()`
 
 [$.event.pause](http://donejs.com/docs.html#!jQuery.event.pause) lets you pause and resume events. Pausing an event works similar to [.stopImmediatePropagation()](http://api.jquery.com/event.stopImmediatePropagation/) by calling `event.pause()`. When `event.resume()` is being called propagation will continue. This is great for asynchronous processing in an event handler:
 
@@ -242,6 +231,18 @@ $('#todos').bind('show', function(ev){
     ev.resume();
    });
 })
+{% endhighlight %}
+
+### .triggerAsync `$(el).triggerAsync(event, [success], [prevented])`
+
+[$.fn.triggerAsync](http://donejs.com/docs.html#!jQuery.fn.triggerAsync) triggers an event and calls a *success* handler when it has finished propagating through the DOM and `event.preventDefault()` is not called. The *prevented* callback will be used otherwise:
+
+{% highlight javascript %}
+$('panel').triggerAsync('show', function(){
+    $('#panel').show();
+  },function(){
+    $('#other').addClass('error');
+});
 {% endhighlight %}
 
 ## Get Help
