@@ -63,7 +63,7 @@ $.fn.withinBox = function(left, top, width, height, cache){
     this.each(function(){
         var q = jQuery(this);
 
-        if(this == document.documentElement) return  this.ret.push(this);
+        if(this == document.documentElement) return  ret.push(this);
 
         var offset = cache ? 
 			jQuery.data(this,"offset") || 
