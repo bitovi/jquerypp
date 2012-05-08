@@ -27,7 +27,7 @@ Add these to your jQuery folder:
 
 require('jquery/compare')
 
-## $.compare `$(elA).compare(elB) -> Number`
+## $.compare `$(elA).compare(elB)`
 
 [$.fn.compare](http://donejs.com/docs.html#!jQuery.compare) compares
 the position of two nodes and returns a number bitmask detailing how they
@@ -58,7 +58,7 @@ common when widgets can reorder themselves (drag-drop) or with nested widgets (t
 {% highlight javascript %}
 // Set a session cookie
 $.cookie('the_cookie', 'the_value');
-$.cookie('the_cookie'); // => 'the_value'
+$.cookie('the_cookie'); // -> 'the_value'
 // Set a cookie that expires in 7 days
 $.cookie('the_cookie', 'the_value', { expires: 7 });
 // delete the cookie
@@ -70,10 +70,8 @@ $.cookie('the_cookie', null);
 [$.styles](http://donejs.com/docs.html#!jQuery.styles) is a fast way of getting a bunch of computed styles from an element instead of retrieving them individually. Computed styles reflect the actual style of an element, including browser defaults and CSS settings.
 
 {% highlight javascript %}
-$("#foo").curStyles('float','display') //->
-// {
-//  cssFloat: "left", display: "block"
-// }
+$("#foo").styles('float','display')
+// -> { cssFloat: "left", display: "block" }
 {% endhighlight %}
 
 ## $.dimensions
@@ -85,30 +83,106 @@ The [$.dimensions](http://donejs.com/docs.html#!jQuery.dimensions) plugin can se
 * `$(el).innerWidth([width])`
 * `$(el).outerWidth([width])`
 
-And use `$(el).animate({ innerHeight : 100 })` to animate these values. This is useful when you care about animating/settings the visual dimension of an element (which is what you typically want to animate):
+And use `$(el).animate({ innerHeight : 100 })` to animate these values. This is useful when you care about animating/setting the visual dimension of an element (which is what you typically want to animate):
 
 {% highlight javascript %}
 $('#foo').outerWidth(100).innerHeight(50);
 $('#bar').animate({outerWidth: 500});
 {% endhighlight %}
 
-## $.selection
-
-Gets or sets the selection
-
-## $.within
-
 ## $.Range
 
 
 
-## $.event.drag
+## $.selection `$(el).selection([start], [end])`
 
-## $.event.drop
+[$.selection](http://donejs.com/docs.html#!jQuery.selection) adds a jQuery plugin to set or retrieve the currently selected text. It works on all elements:
+
+{% highlight html %}
+<div id="text">This is some text</div>
+{% endhighlight %}
+
+{% highlight javascript %}
+var selection = $('#text').selection(8, 12).selection();
+// -> { start : 8, end : 12 }
+$('#text').html().substring(selection.start, selection.end)
+// -> some
+{% endhighlight %}
+
+## $.within `$(el).within(left, top, [useOffsetCache])`
+
+[$.within](http://donejs.com/docs.html#!jQuery.within) returns all elements on a given position or area. The following example returns all `div` elements on the point 200px left and 200px from the top:
+
+{% highlight javascript %}
+$('div').within(200, 200);
+{% endhighlight %}
+
+Use `$(el).withinBox(left, top, width, height)` to get all elements within a certain area:
+
+{% highlight javascript %}
+$('*').within(200, 200, 100, 100);
+{% endhighlight %}
+
+## $.event.drag `dragdown` `draginit` `dragmove` `dragend` `dragover` `dragout`
+
+[$.event.drag](http://donejs.com/docs.html#!jQuery.event.drag) adds special drag events to jQuery:
+
+* `dragdown` - the mouse cursor is pressed down
+* `draginit` - the drag motion is started
+* `dragmove` - the drag is moved
+* `dragend` - the drag has ended
+* `dragover` - the drag is over a drop point
+* `dragout` - the drag moved out of a drop point
+
+An element will become dragable by listening to one of these events on it. A dragable div that can only be moved horizontally can be initialized like this:
+
+{% highlight javascript %}
+$('div').on('draginit', function(event, drag) {
+  drag.horizontal();
+})
+{% endhighlight %}
+
+The `drag` object (passed to the event handler as the second parameter) has the following properties:
+
+* `cancel` - stops the drag motion from happening
+* `ghost` - copys the draggable and drags the cloned element
+* `horizontal` - limits the scroll to horizontal movement
+* `location` - where the drag should be on the screen
+* `mouseElementPosition` - where the mouse should be on the drag
+* `only` - only have drags, no drops
+* `representative` - move another element in place of this element
+* `revert` - animate the drag back to its position
+* `vertical` - limit the drag to vertical movement
+* `limit` - limit the drag within an element
+* `scrolls` - scroll scrollable areas when dragging near their boundries
+
+## $.event.drop `dropinit` `dropover` `dropout` `dropmove` `dropon` `dropend`
+
+When making an element dragable with $.event.drag you probably want to be able to drop it somewhere again. [$.event.drop](http://donejs.com/docs.html#!jQuery.event.drop) adds events for doing so:
+
+* `dropinit` - the drag motion is started, drop positions are calculated
+* `dropover` - a drag moves over a drop element, called once as the drop is dragged over the element
+* `dropout` - a drag moves out of the drop element
+* `dropmove` - a drag is moved over a drop element, called repeatedly as the element is moved
+* `dropon` - a drag is released over a drop element
+* `dropend` - the drag motion has completed
+
+The following example adds the `highlight` class when a dragable is moved over it and removes it when it left:
+
+{% highlight javascript %}
+$('.drop').on({
+  "dropover" : function(ev, drop, drag){
+    $(this).addClass('highlight');
+  },
+  "dropout" : function(ev, drop, drag){
+    $(this).removeClass('highlight');
+  }
+})
+{% endhighlight %}
 
 ## $.event.hover `hoverinit` `hoverenter` `hovermove` `hoverleave`
 
-[$.event.hover](http://donejs.com/docs.html#!jQuery.hover) is a flexible way to deal with hover related events. You can listen to the `hoverinit`, `hoverenter`, `hovermove` and `hoverleave`:
+[$.event.hover](http://donejs.com/docs.html#!jQuery.event.hover) is a flexible way to deal with hover related events. You can listen to the `hoverinit`, `hoverenter`, `hovermove` and `hoverleave` events:
 
 {% highlight javascript %}
 $('#menu').on(".option", "hoverenter", function(){
@@ -141,7 +215,15 @@ $('form').on('destroyed', function() {
 
 ## $.event.resize `resize`
 
-Listen to [$.event.resize](http://donejs.com/docs.html#!jQuery.event.resize) event can update the
+Listening to the `resize` event provided by [$.event.resize](http://donejs.com/docs.html#!jQuery.event.resize) is very useful when you need to resize a specific element whenever the parents dimension changes. Unlike other events that bubble from the current element to the top the *resize* event will propagate from the outside-in. This means that outside elements will always resize first.
+
+{% highlight javascript %}
+$('#foo').bind('resize', function(){
+  // adjust #foo's dimensions
+})
+
+$(document.body).trigger("resize");
+{% endhighlight %}
 
 ## $.event.swipe `swipeleft` `swiperight` `swipedown` `swipeup` `swipe`
 
@@ -167,7 +249,7 @@ $('#swiper').on({
 });
 {% endhighlight %}
 
-Set `$.event.swipe.delay` to the maximum time the swipe motion can take (default is 500ms).
+Set `$.event.swipe.delay` to the maximum time the swipe motion should take (default is 500ms).
 
 ## $.event.key
 
@@ -219,7 +301,7 @@ $("div").bind("default.click", function(ev) {
 
 ## $.event.pause
 
-### Pause and resume `event.pause(), event.resume()`
+### pause and resume `event.pause(), event.resume()`
 
 [$.event.pause](http://donejs.com/docs.html#!jQuery.event.pause) lets you pause and resume events. Pausing an event works similar to [.stopImmediatePropagation()](http://api.jquery.com/event.stopImmediatePropagation/) by calling `event.pause()`. When `event.resume()` is being called propagation will continue. This is great for asynchronous processing in an event handler:
 
