@@ -46,51 +46,11 @@ You can tell if `#foo` precedes `#bar` like:
 if( $('#foo').compare($('#bar')) & 4 ) {
     console.log("#foo preceds #bar")
 }
-{% endhiglight %}
+{% endhighlight %}
 
 This is useful when you want to rapidly compare element positions.  This is
 common when widgets can reorder themselves (drag-drop) or with nested widgets (trees).
 
-## $.cookie
-
-[$.cookie](http://donejs.com/docs.html#!jQuery.cookie) wraps
-
-
-## $.styles
-
-Reads a bunch of styles
-
-
-## $.dimensions
-
-The [$.dimensions](http://donejs.com/docs.html#!jQuery.dimensions) plugin allows you to set an elements inner and outer width and height including margins and paddings and modifies the jQuery animate function to animate these values.
-
-* $().innerHeight()
-* $().outerHeight()
-* $().innerWidth()
-* $().outerWidth()
-
-Animate innerHeight, innerWidget, outerHeight, outerWidth.
-
-
-This is useful when you care about animating/settings the visual dimension of an element
-(which is actually what you typically want to animate).
-
-## $.selection
-
-Gets or sets the selection
-
-## $.within
-
-## $.Range
-
-
-
-## $.event.drag
-
-## $.event.drop
-
-## $.event.hover
 
 ## $.event.destroyed
 
