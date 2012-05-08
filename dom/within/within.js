@@ -9,8 +9,8 @@ steal('jquery/dom').then(function($){
                 x <  left + width);
     } 
 /**
- * @function within
- * @parent dom
+ * @function jQuery.fn.within
+ * @parent jquerypp
  * @plugin jquery/dom/within
  * 
  * Returns the elements are within the position.

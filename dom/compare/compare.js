@@ -1,5 +1,14 @@
 steal('jquery/dom').then(function($){
-	
+
+/**
+ * @function jQuery.fn.compare
+ * @parent jQuery.compare
+ *
+ * Compare two elements.
+ *
+ * @param {HTMLElement|jQuery}  element an element or jQuery collection to compare against.
+ * @return {Number} A bitmap number representing how the elements are positioned from each other.}
+ */
 jQuery.fn.compare = function(element){ //usually 
 	//element is usually a relatedTarget, but element/c it is we have to avoid a few FF errors
 	

@@ -180,7 +180,16 @@ getCharElement = function( elems , range, len ) {
 	}
 	return len;
 };
-
+/**
+ * @parent jQuery.selection
+ * @function jQuery.fn.selection
+ * 
+ *
+ * @param {Number} [start] Start of the range
+ * @param {Number} [end] End of the range
+ * @return {Object|jQuery} returns the selection information or the jQuery collection for
+ * chaining.
+ */
 $.fn.selection = function(start, end){
 	if(start !== undefined){
 		return this.each(function(){
