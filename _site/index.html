@@ -80,37 +80,52 @@
 </ul>
 
 <p>You can tell if <code>#foo</code> precedes <code>#bar</code> like:</p>
-
-<p>{% highlight javascript %} if( $(&#8216;#foo&#8217;).compare($(&#8216;#bar&#8217;)) &amp; 4 ) { console.log(&#8220;#foo preceds #bar&#8221;) } {% endhiglight %}</p>
-
+<div class='highlight'><pre><code class='javascript'><span class='k'>if</span><span class='p'>(</span> <span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;#foo&#39;</span><span class='p'>).</span><span class='nx'>compare</span><span class='p'>(</span><span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;#bar&#39;</span><span class='p'>))</span> <span class='o'>&amp;</span> <span class='mi'>4</span> <span class='p'>)</span> <span class='p'>{</span>
+    <span class='nx'>console</span><span class='p'>.</span><span class='nx'>log</span><span class='p'>(</span><span class='s2'>&quot;#foo preceds #bar&quot;</span><span class='p'>)</span>
+<span class='p'>}</span>
+</code></pre>
+</div>
 <p>This is useful when you want to rapidly compare element positions.  This is common when widgets can reorder themselves (drag-drop) or with nested widgets (trees).</p>
 
 <h2 id='cookie'>$.cookie</h2>
 
-<p><a href='http://donejs.com/docs.html#!jQuery.cookie'>$.cookie</a> wraps</p>
+<p><a href='http://donejs.com/docs.html#!jQuery.cookie'>$.cookie</a> wraps the <a href='https://github.com/carhartl/jquery-cookie'>jQuery cookie</a> plugin. You can use it like:</p>
+<div class='highlight'><pre><code class='javascript'><span class='c1'>// Set a session cookie</span>
+<span class='nx'>$</span><span class='p'>.</span><span class='nx'>cookie</span><span class='p'>(</span><span class='s1'>&#39;the_cookie&#39;</span><span class='p'>,</span> <span class='s1'>&#39;the_value&#39;</span><span class='p'>);</span>
+<span class='c1'>// Set a cookie that expires in 7 days</span>
+<span class='nx'>$</span><span class='p'>.</span><span class='nx'>cookie</span><span class='p'>(</span><span class='s1'>&#39;the_cookie&#39;</span><span class='p'>,</span> <span class='s1'>&#39;the_value&#39;</span><span class='p'>,</span> <span class='p'>{</span> <span class='nx'>expires</span><span class='o'>:</span> <span class='mi'>7</span> <span class='p'>});</span>
+<span class='c1'>// delete the cookie</span>
+<span class='nx'>$</span><span class='p'>.</span><span class='nx'>cookie</span><span class='p'>(</span><span class='s1'>&#39;the_cookie&#39;</span><span class='p'>,</span> <span class='kc'>null</span><span class='p'>);</span>
+</code></pre>
+</div>
+<h2 id='styles_'>$.styles <code>$(el).styles()</code></h2>
 
-<h2 id='styles'>$.styles</h2>
-
-<p>Reads a bunch of styles</p>
-
+<p><a href='http://donejs.com/docs.html#!jQuery.styles'>$.styles</a> is a fast way of getting computed styles from an element. Computed styles reflect the actual style of an element, including browser defaults and CSS settings.</p>
+<div class='highlight'><pre><code class='javascript'><span class='nx'>$</span><span class='p'>(</span><span class='s2'>&quot;#foo&quot;</span><span class='p'>).</span><span class='nx'>curStyles</span><span class='p'>(</span><span class='s1'>&#39;float&#39;</span><span class='p'>,</span><span class='s1'>&#39;display&#39;</span><span class='p'>)</span> <span class='c1'>//-&gt;</span>
+<span class='c1'>// {</span>
+<span class='c1'>//  cssFloat: &quot;left&quot;, display: &quot;block&quot;</span>
+<span class='c1'>// }</span>
+</code></pre>
+</div>
 <h2 id='dimensions'>$.dimensions</h2>
 
-<p>The <a href='http://donejs.com/docs.html#!jQuery.dimensions'>$.dimensions</a> plugin allows you to set an elements inner and outer width and height including margins and paddings and modifies the jQuery animate function to animate these values.</p>
+<p>The <a href='http://donejs.com/docs.html#!jQuery.dimensions'>$.dimensions</a> plugin can set an elements inner and outer width and height including margins and paddings and modifies the jQuery <code>animate</code> to animate these values. You can set and read it with:</p>
 
 <ul>
-<li>$().innerHeight()</li>
+<li><code>$(el).innerHeight([height])</code></li>
 
-<li>$().outerHeight()</li>
+<li><code>$(el).outerHeight([height])</code></li>
 
-<li>$().innerWidth()</li>
+<li><code>$(el).innerWidth([width])</code></li>
 
-<li>$().outerWidth()</li>
+<li><code>$(el).outerWidth([width])</code></li>
 </ul>
 
-<p>Animate innerHeight, innerWidget, outerHeight, outerWidth.</p>
-
-<p>This is useful when you care about animating/settings the visual dimension of an element (which is actually what you typically want to animate).</p>
-
+<p>And use <code>$(el).animate({ innerHeight : 100 })</code> to animate these values. This is useful when you care about animating/settings the visual dimension of an element (which is actually what you typically want to animate):</p>
+<div class='highlight'><pre><code class='javascript'><span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;#foo&#39;</span><span class='p'>).</span><span class='nx'>outerWidth</span><span class='p'>(</span><span class='mi'>100</span><span class='p'>).</span><span class='nx'>innerHeight</span><span class='p'>(</span><span class='mi'>50</span><span class='p'>);</span>
+<span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;#bar&#39;</span><span class='p'>).</span><span class='nx'>animate</span><span class='p'>({</span><span class='nx'>outerWidth</span><span class='o'>:</span> <span class='mi'>500</span><span class='p'>});</span>
+</code></pre>
+</div>
 <h2 id='selection'>$.selection</h2>
 
 <p>Gets or sets the selection</p>
@@ -128,9 +143,11 @@
 <h2 id='eventdestroyed'>$.event.destroyed</h2>
 
 <p>The <a href='http://donejs.com/docs.html#!jQuery.event.destroyed'>destroyed</a> event is triggered when the element is removed from the DOM through one of the jQuery modifiers like remove, html or replaceWith.</p>
-
-<p>{% highlight javascript %} $(&#8216;form&#8217;).on(&#8216;destroyed&#8217;, function() { // Clean up when a form element has been removed }); {% endhighlight %}</p>
-
+<div class='highlight'><pre><code class='javascript'><span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;form&#39;</span><span class='p'>).</span><span class='nx'>on</span><span class='p'>(</span><span class='s1'>&#39;destroyed&#39;</span><span class='p'>,</span> <span class='kd'>function</span><span class='p'>()</span> <span class='p'>{</span>
+  <span class='c1'>// Clean up when a form element has been removed</span>
+<span class='p'>});</span>
+</code></pre>
+</div>
 <h2 id='eventresize'>$.event.resize</h2>
 
 <p>The <a href='http://donejs.com/docs.html#!jQuery.event.resize'>resize</a> event can update the</p>
@@ -143,37 +160,38 @@
 
 <p><a href='http://donejs.com/docs.html#!jQuery.event.key'>$.event.key</a> allows you to define alternate keymaps or overwrite existing keycodes. For example lets map the arrow up, down, left and right keys to the more gamer friendly WASD mapping:</p>
 
-<pre><code>$.event.key({
-	&quot;w&quot; : 38,
-	&quot;a&quot; : 37,
-	&quot;s&quot; : 40,
-	&quot;d&quot; : 39
-});</code></pre>
+<p>$.event.key({ &#8220;w&#8221; : 38, &#8220;a&#8221; : 37, &#8220;s&#8221; : 40, &#8220;d&#8221; : 39 });</p>
 
 <h2 id='eventdefault_'>$.event.default <code>$(el).bind(&#39;eventname.default&#39;, handler)</code></h2>
 
 <p><a href='http://donejs.com/docs.html#!jQuery.event.default'>$.event.default</a> lets you perform default actions for events. A default event runs when all other event handlers have been triggered and none has called <code>event.preventDefault()</code> or returned false. To add a default event just prefix it with the <em>default</em> namespace:</p>
-
-<p>{% highlight javascript %} $(&#8220;div&#8221;).bind(&#8220;default.show&#8221;, function(ev) { // &#8230; }); {% endhighlight %}</p>
-
+<div class='highlight'><pre><code class='javascript'><span class='nx'>$</span><span class='p'>(</span><span class='s2'>&quot;div&quot;</span><span class='p'>).</span><span class='nx'>bind</span><span class='p'>(</span><span class='s2'>&quot;default.show&quot;</span><span class='p'>,</span> <span class='kd'>function</span><span class='p'>(</span><span class='nx'>ev</span><span class='p'>)</span> <span class='p'>{</span>
+  <span class='c1'>// ...</span>
+<span class='p'>});</span>
+</code></pre>
+</div>
 <h2 id='triggerasync_'>.triggerAsync <code>$(el).triggerAsync(event, [success], [prevented])</code></h2>
 
-<p><a href='http://donejs.com/docs.html#!jQuery.fn.triggerAsync'>$.fn.triggerAsync</a> triggers an event and calls a <em>success</em> handler when it has finished propagating through the DOM and preventDefault is not called. The <em>prevented</em> callback will be used otherwise:</p>
-
-<p>{% highlight javascript %} $(&#8216;panel&#8217;).triggerAsync(&#8216;show&#8217;, function(){ $(&#8216;#panel&#8217;).show(); },function(){ $(&#8216;#other&#8217;).addClass(&#8216;error&#8217;); }); {% endhighlight %}</p>
-
+<p><a href='http://donejs.com/docs.html#!jQuery.fn.triggerAsync'>$.fn.triggerAsync</a> triggers an event and calls a <em>success</em> handler when it has finished propagating through the DOM and <code>event.preventDefault()</code> is not called. The <em>prevented</em> callback will be used otherwise:</p>
+<div class='highlight'><pre><code class='javascript'><span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;panel&#39;</span><span class='p'>).</span><span class='nx'>triggerAsync</span><span class='p'>(</span><span class='s1'>&#39;show&#39;</span><span class='p'>,</span> <span class='kd'>function</span><span class='p'>(){</span>
+    <span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;#panel&#39;</span><span class='p'>).</span><span class='nx'>show</span><span class='p'>();</span>
+  <span class='p'>},</span><span class='kd'>function</span><span class='p'>(){</span>
+    <span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;#other&#39;</span><span class='p'>).</span><span class='nx'>addClass</span><span class='p'>(</span><span class='s1'>&#39;error&#39;</span><span class='p'>);</span>
+<span class='p'>});</span>
+</code></pre>
+</div>
 <h2 id='eventpause_'>$.event.pause <code>event.pause(), event.resume()</code></h2>
 
 <p><a href='http://donejs.com/docs.html#!jQuery.event.pause'>$.event.pause</a> lets you pause and resume events. Pausing an event works similar to <a href='http://api.jquery.com/event.stopImmediatePropagation/'>.stopImmediatePropagation()</a> by calling <code>event.pause()</code>. When <code>event.resume()</code> is being called propagation will continue. This is great for asynchronous processing when handling an event:</p>
+<div class='highlight'><pre><code class='javascript'><span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;#todos&#39;</span><span class='p'>).</span><span class='nx'>bind</span><span class='p'>(</span><span class='s1'>&#39;show&#39;</span><span class='p'>,</span> <span class='kd'>function</span><span class='p'>(</span><span class='nx'>ev</span><span class='p'>){</span>
+  <span class='nx'>ev</span><span class='p'>.</span><span class='nx'>pause</span><span class='p'>();</span>
 
-<p>{% highlight javascript %} $(&#8216;#todos&#8217;).bind(&#8216;show&#8217;, function(ev){ ev.pause();</p>
-
-<pre><code>$(this).load(&#39;todos.html&#39;, function(){
-    ev.resume();
-});</code></pre>
-
-<p>}) {% endhighlight %}</p>
-
+  <span class='nx'>$</span><span class='p'>(</span><span class='k'>this</span><span class='p'>).</span><span class='nx'>load</span><span class='p'>(</span><span class='s1'>&#39;todos.html&#39;</span><span class='p'>,</span> <span class='kd'>function</span><span class='p'>(){</span>
+    <span class='nx'>ev</span><span class='p'>.</span><span class='nx'>resume</span><span class='p'>();</span>
+   <span class='p'>});</span>
+<span class='p'>})</span>
+</code></pre>
+</div>
 <h2 id='get_help'>Get Help</h2>
 
 <h2 id='why_jquery'>Why jQuery++</h2>

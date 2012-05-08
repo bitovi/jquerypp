@@ -51,6 +51,61 @@ if( $('#foo').compare($('#bar')) & 4 ) {
 This is useful when you want to rapidly compare element positions.  This is
 common when widgets can reorder themselves (drag-drop) or with nested widgets (trees).
 
+## $.cookie
+
+[$.cookie](http://donejs.com/docs.html#!jQuery.cookie) wraps the [jQuery cookie](https://github.com/carhartl/jquery-cookie) plugin. You can use it like:
+
+{% highlight javascript %}
+// Set a session cookie
+$.cookie('the_cookie', 'the_value');
+// Set a cookie that expires in 7 days
+$.cookie('the_cookie', 'the_value', { expires: 7 });
+// delete the cookie
+$.cookie('the_cookie', null);
+{% endhighlight %}
+
+## $.styles `$(el).styles()`
+
+[$.styles](http://donejs.com/docs.html#!jQuery.styles) is a fast way of getting computed styles from an element. Computed styles reflect the actual style of an element, including browser defaults and CSS settings.
+
+{% highlight javascript %}
+$("#foo").curStyles('float','display') //->
+// {
+//  cssFloat: "left", display: "block"
+// }
+{% endhighlight %}
+
+## $.dimensions
+
+The [$.dimensions](http://donejs.com/docs.html#!jQuery.dimensions) plugin can set an elements inner and outer width and height including margins and paddings and modifies the jQuery `animate` to animate these values. You can set and read it with:
+
+* `$(el).innerHeight([height])`
+* `$(el).outerHeight([height])`
+* `$(el).innerWidth([width])`
+* `$(el).outerWidth([width])`
+
+And use `$(el).animate({ innerHeight : 100 })` to animate these values. This is useful when you care about animating/settings the visual dimension of an element (which is actually what you typically want to animate):
+
+{% highlight javascript %}
+$('#foo').outerWidth(100).innerHeight(50);
+$('#bar').animate({outerWidth: 500});
+{% endhighlight %}
+
+## $.selection
+
+Gets or sets the selection
+
+## $.within
+
+## $.Range
+
+
+
+## $.event.drag
+
+## $.event.drop
+
+## $.event.hover
 
 ## $.event.destroyed
 
@@ -58,7 +113,7 @@ The [destroyed](http://donejs.com/docs.html#!jQuery.event.destroyed) event is tr
 
 {% highlight javascript %}
 $('form').on('destroyed', function() {
-	// Clean up when a form element has been removed
+  // Clean up when a form element has been removed
 });
 {% endhighlight %}
 
@@ -74,12 +129,12 @@ The [resize](http://donejs.com/docs.html#!jQuery.event.resize) event can update 
 
 [$.event.key](http://donejs.com/docs.html#!jQuery.event.key) allows you to define alternate keymaps or overwrite existing keycodes. For example lets map the arrow up, down, left and right keys to the more gamer friendly WASD mapping:
 
-	$.event.key({
-		"w" : 38,
-		"a" : 37,
-		"s" : 40,
-		"d" : 39
-	});
+  $.event.key({
+    "w" : 38,
+    "a" : 37,
+    "s" : 40,
+    "d" : 39
+  });
 
 ## $.event.default `$(el).bind('eventname.default', handler)`
 
@@ -87,19 +142,19 @@ The [resize](http://donejs.com/docs.html#!jQuery.event.resize) event can update 
 
 {% highlight javascript %}
 $("div").bind("default.show", function(ev) {
-	// ...
+  // ...
 });
 {% endhighlight %}
 
 ## .triggerAsync `$(el).triggerAsync(event, [success], [prevented])`
 
-[$.fn.triggerAsync](http://donejs.com/docs.html#!jQuery.fn.triggerAsync) triggers an event and calls a *success* handler when it has finished propagating through the DOM and preventDefault is not called. The *prevented* callback will be used otherwise:
+[$.fn.triggerAsync](http://donejs.com/docs.html#!jQuery.fn.triggerAsync) triggers an event and calls a *success* handler when it has finished propagating through the DOM and `event.preventDefault()` is not called. The *prevented* callback will be used otherwise:
 
 {% highlight javascript %}
 $('panel').triggerAsync('show', function(){
-		$('#panel').show();
-    },function(){
-		$('#other').addClass('error');
+    $('#panel').show();
+  },function(){
+    $('#other').addClass('error');
 });
 {% endhighlight %}
 
@@ -110,11 +165,11 @@ $('panel').triggerAsync('show', function(){
 
 {% highlight javascript %}
 $('#todos').bind('show', function(ev){
-	ev.pause();
+  ev.pause();
 
-    $(this).load('todos.html', function(){
-        ev.resume();
-	});
+  $(this).load('todos.html', function(){
+    ev.resume();
+   });
 })
 {% endhighlight %}
 
