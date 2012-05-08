@@ -58,6 +58,7 @@ common when widgets can reorder themselves (drag-drop) or with nested widgets (t
 {% highlight javascript %}
 // Set a session cookie
 $.cookie('the_cookie', 'the_value');
+$.cookie('the_cookie'); // => 'the_value'
 // Set a cookie that expires in 7 days
 $.cookie('the_cookie', 'the_value', { expires: 7 });
 // delete the cookie
@@ -105,9 +106,30 @@ Gets or sets the selection
 
 ## $.event.drop
 
-## $.event.hover
+## $.event.hover `hoverinit` `hoverenter` `hovermove` `hoverleave`
 
-## $.event.destroyed
+[$.event.hover](http://donejs.com/docs.html#!jQuery.hover) is a flexible way to deal with hover related events. You can listen to the `hoverinit`, `hoverenter`, `hovermove` and `hoverleave`:
+
+{% highlight javascript %}
+$('#menu').on(".option", "hoverenter", function(){
+  $(this).addClass("hovering");
+}).on(".option", "hoverleave", function(){
+  $(this).removeClass("hovering");
+})
+{% endhighlight %}
+
+An element is hovered when the mouse moves less than a certain distance in a specific time over the element. You can modify these values either globally by setting `$.Hover.delay` and `$.Hover.distance` or individually during `hoverinit`:
+
+{% highlight javascript %}
+$(".option").on("hoverinit", function(ev, hover){
+  //set the distance to 10px
+  hover.distance(10)
+  //set the delay to 200ms
+  hover.delay(10)
+})
+{% endhighlight %}
+
+## $.event.destroyed `destroyed`
 
 The [destroyed](http://donejs.com/docs.html#!jQuery.event.destroyed) event is triggered when the element is removed from the DOM through one of the jQuery [manipulation methods](http://api.jquery.com/category/manipulation/).
 
@@ -117,31 +139,31 @@ $('form').on('destroyed', function() {
 });
 {% endhighlight %}
 
-## $.event.resize
+## $.event.resize `resize`
 
-The [resize](http://donejs.com/docs.html#!jQuery.event.resize) event can update the
+Listen to [$.event.resize](http://donejs.com/docs.html#!jQuery.event.resize) event can update the
 
-## $.event.swipe
+## $.event.swipe `swipeleft` `swiperight` `swipedown` `swipeup` `swipe`
 
-[$.event.swipe](http://donejs.com/docs.html#!jQuery.event.swipe) supports swipe motions on touchscreen devices. You can listen to `swipeleft`, `swiperight`, `swipedown`, `swipeup` and a general `swipe` event.
+[$.event.swipe](http://donejs.com/docs.html#!jQuery.event.swipe) adds support for swipe motions on touchscreen devices. You can listen to `swipeleft`, `swiperight`, `swipedown`, `swipeup` and a general `swipe` event:
 
 {% highlight javascript %}
 $('#swiper').on({
-	'swipe' : function(ev) {
-		console.log('Swiping');
-	},
-	'swipeleft' : function(ev) {
-		console.log('Swiping left');
-	},
-	'swiperight' : function(ev) {
-		console.log('Swiping right');
-    },
-    'swipeup' : function(ev) {
-        console.log('Swiping up');
-    },
-    'swipedown' : function(ev) {
-        console.log('Swiping down');
-    },
+  'swipe' : function(ev) {
+    console.log('Swiping');
+  },
+  'swipeleft' : function(ev) {
+    console.log('Swiping left');
+  },
+  'swiperight' : function(ev) {
+    console.log('Swiping right');
+  },
+  'swipeup' : function(ev) {
+    console.log('Swiping up');
+  },
+  'swipedown' : function(ev) {
+    console.log('Swiping down');
+  }
 });
 {% endhighlight %}
 
@@ -185,7 +207,7 @@ The following keynames will be returned by default:
 - `/` `;` `:` = , \- . / \` \[ \\ \] ' "
 - `f1-12` - function keys pressed
 
-## $.event.default `$(el).bind('eventname.default', handler)`
+## $.event.default `eventname.default`
 
 [$.event.default](http://donejs.com/docs.html#!jQuery.event.default) lets you perform default actions for events. A default event runs when all other event handlers have been triggered and none has called `event.preventDefault()` or returned false. To add a default event just prefix it with the *default* namespace:
 
