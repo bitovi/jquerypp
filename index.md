@@ -142,7 +142,7 @@ Use `$(el).withinBox(left, top, width, height)` to get all elements within a cer
 $('*').within(200, 200, 100, 100)
 {% endhighlight %}
 
-## $.formParams `$(form).formParams([convert])`
+## jquery.formParams `$(form).formParams([convert])`
 
 [$.formParams](http://donejs.com/docs.html#!jQuery.formParams) returns a JavaScript object for values in a form. You can create nested objects by using bracket notation in the form element name. If *convert* is `true`, values that look like numbers or booleans will be converted and empty strings won't be added to the object. For a form like this:
 
@@ -165,9 +165,9 @@ $('form').formParams()
 // }
 {% endhighlight %}
 
-## $.event.drag `dragdown` `draginit` `dragmove` `dragend` `dragover` `dragout`
+## jquery.event.drag `dragdown` `draginit` `dragmove` `dragend` `dragover` `dragout`
 
-[$.event.drag](http://donejs.com/docs.html#!jQuery.event.drag) adds drag events to jQuery:
+[jquery.event.drag](http://donejs.com/docs.html#!jQuery.event.drag) adds drag events to jQuery:
 
 * `dragdown` - the mouse cursor is pressed down
 * `draginit` - the drag motion is started
@@ -198,7 +198,7 @@ The `drag` object (passed to the event handler as the second parameter) has the 
 * `limit` - limit the drag within an element
 * `scrolls` - scroll scrollable areas when dragging near their boundries
 
-## $.event.drop `dropinit` `dropover` `dropout` `dropmove` `dropon` `dropend`
+## jquery.event.drop `dropinit` `dropover` `dropout` `dropmove` `dropon` `dropend`
 
 When making an element dragable with $.event.drag you also might want to be able to drop it somewhere. [$.event.drop](http://donejs.com/docs.html#!jQuery.event.drop) adds events for doing so:
 
