@@ -25,6 +25,8 @@ Add these to your jQuery folder:
 
 require('jquery/compare')
 
+## DOM HELPERS
+
 ## $.compare `$(elA).compare(elB)`
 
 [$.fn.compare](http://donejs.com/docs.html#!jQuery.compare) compares the position of two nodes and returns a number bitmask detailing how they are positioned relative to each other. The following list shows the `bitmask`, the __number__ and what it corresponds to:
@@ -165,7 +167,9 @@ $('form').formParams()
 // }
 {% endhighlight %}
 
-## jquery.event.drag `dragdown` `draginit` `dragmove` `dragend` `dragover` `dragout`
+## EVENTS
+
+## drag `dragdown` `draginit` `dragmove` `dragend` `dragover` `dragout`
 
 [jquery.event.drag](http://donejs.com/docs.html#!jQuery.event.drag) adds drag events to jQuery:
 
@@ -198,7 +202,7 @@ The `drag` object (passed to the event handler as the second parameter) has the 
 * `limit` - limit the drag within an element
 * `scrolls` - scroll scrollable areas when dragging near their boundries
 
-## jquery.event.drop `dropinit` `dropover` `dropout` `dropmove` `dropon` `dropend`
+## drop `dropinit` `dropover` `dropout` `dropmove` `dropon` `dropend`
 
 When making an element dragable with $.event.drag you also might want to be able to drop it somewhere. [$.event.drop](http://donejs.com/docs.html#!jQuery.event.drop) adds events for doing so:
 
@@ -222,7 +226,7 @@ $('.drop').on({
 })
 {% endhighlight %}
 
-## $.event.hover `hoverinit` `hoverenter` `hovermove` `hoverleave`
+## hover `hoverinit` `hoverenter` `hovermove` `hoverleave`
 
 [$.event.hover](http://donejs.com/docs.html#!jQuery.event.hover) is a flexible way to deal with hover related events. You can listen to the following events:
 
