@@ -63,7 +63,7 @@
 
 <h2 id='compare_'>$.compare <code>$(elA).compare(elB)</code></h2>
 
-<p><a href='http://donejs.com/docs.html#!jQuery.compare'>$.fn.compare</a> compares the position of two nodes and returns a number bitmask detailing how they are positioned relative to each other. The following list shows the <code>bitmask</code> -&gt; <strong>number</strong> and what it corresponds to:</p>
+<p><a href='http://donejs.com/docs.html#!jQuery.compare'>$.fn.compare</a> compares the position of two nodes and returns a number bitmask detailing how they are positioned relative to each other. The following list shows the <code>bitmask</code>, the <strong>number</strong> returned by $.compare and what it corresponds to:</p>
 
 <ul>
 <li><code>000000</code> -&gt; <strong>0</strong>: Elements are identical</li>
@@ -85,11 +85,11 @@
 <span class='p'>}</span>
 </code></pre>
 </div>
-<p>This is useful when you want to rapidly compare element positions.  This is common when widgets can reorder themselves (drag-drop) or with nested widgets (trees).</p>
+<p>This is useful when you want to rapidly compare element positions. This is common when widgets can reorder themselves (drag-drop) or with nested widgets (trees).</p>
 
 <h2 id='cookie'>$.cookie</h2>
 
-<p><a href='http://donejs.com/docs.html#!jQuery.cookie'>$.cookie</a> wraps the <a href='https://github.com/carhartl/jquery-cookie'>jQuery cookie</a> plugin for easily manipulating cookies. You can use it like this:</p>
+<p><a href='http://donejs.com/docs.html#!jQuery.cookie'>$.cookie</a> wraps the <a href='https://github.com/carhartl/jquery-cookie'>jQuery cookie</a> plugin for manipulating cookies. You can use it like this:</p>
 <div class='highlight'><pre><code class='javascript'><span class='c1'>// Set a session cookie</span>
 <span class='nx'>$</span><span class='p'>.</span><span class='nx'>cookie</span><span class='p'>(</span><span class='s1'>&#39;the_cookie&#39;</span><span class='p'>,</span> <span class='s1'>&#39;the_value&#39;</span><span class='p'>);</span>
 <span class='nx'>$</span><span class='p'>.</span><span class='nx'>cookie</span><span class='p'>(</span><span class='s1'>&#39;the_cookie&#39;</span><span class='p'>);</span> <span class='c1'>// -&gt; &#39;the_value&#39;</span>
@@ -108,16 +108,16 @@
 </div>
 <h2 id='dimensions'>$.dimensions</h2>
 
-<p>The <a href='http://donejs.com/docs.html#!jQuery.dimensions'>$.dimensions</a> plugin can set the inner and outer width and height on an element. Inner dimensions include the padding where outer dimensions also take care of any borders. You can set and read these values with:</p>
+<p>The <a href='http://donejs.com/docs.html#!jQuery.dimensions'>$.dimensions</a> plugin lets you set the inner and outer width and height of an element. Inner dimensions include the padding where outer dimensions also take care of borders and - if <em>includeMargin</em> is set to <code>true</code> - margins. You can set and read these values with:</p>
 
 <ul>
 <li><code>$(el).innerHeight([height])</code></li>
 
-<li><code>$(el).outerHeight([height])</code></li>
+<li><code>$(el).outerHeight([height], [includeMargin])</code></li>
 
 <li><code>$(el).innerWidth([width])</code></li>
 
-<li><code>$(el).outerWidth([width])</code></li>
+<li><code>$(el).outerWidth([width], [includeMargin])</code></li>
 </ul>
 
 <p>And use <code>$(el).animate({ innerHeight : 100 })</code> to animate them. This is useful when you care about animating/setting the visual dimension of an element (which is what you typically want to do):</p>
@@ -130,15 +130,14 @@
 <p><a href='http://donejs.com/docs.html#!jQuery.selection'>$.selection</a> adds a jQuery plugin to set or retrieve the currently selected text range. It works on all elements:</p>
 <div class='highlight'><pre><code class='html'><span class='nt'>&lt;div</span> <span class='na'>id=</span><span class='s'>&quot;text&quot;</span><span class='nt'>&gt;</span>This is some text<span class='nt'>&lt;/div&gt;</span>
 </code></pre>
-</div><div class='highlight'><pre><code class='javascript'><span class='kd'>var</span> <span class='nx'>selection</span> <span class='o'>=</span> <span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;#text&#39;</span><span class='p'>).</span><span class='nx'>selection</span><span class='p'>(</span><span class='mi'>8</span><span class='p'>,</span> <span class='mi'>12</span><span class='p'>).</span><span class='nx'>selection</span><span class='p'>();</span>
-<span class='c1'>// -&gt; { start : 8, end : 12 }</span>
-<span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;#text&#39;</span><span class='p'>).</span><span class='nx'>html</span><span class='p'>().</span><span class='nx'>substring</span><span class='p'>(</span><span class='nx'>selection</span><span class='p'>.</span><span class='nx'>start</span><span class='p'>,</span> <span class='nx'>selection</span><span class='p'>.</span><span class='nx'>end</span><span class='p'>)</span>
-<span class='c1'>// -&gt; some</span>
+</div><div class='highlight'><pre><code class='javascript'><span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;#text&#39;</span><span class='p'>).</span><span class='nx'>selection</span><span class='p'>(</span><span class='mi'>8</span><span class='p'>,</span> <span class='mi'>12</span><span class='p'>);</span>
+<span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;#text&#39;</span><span class='p'>).</span><span class='nx'>selection</span><span class='p'>();</span> <span class='c1'>// -&gt; { start : 8, end : 12 }</span>
+<span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;#text&#39;</span><span class='p'>).</span><span class='nx'>html</span><span class='p'>().</span><span class='nx'>substring</span><span class='p'>(</span><span class='nx'>selection</span><span class='p'>.</span><span class='nx'>start</span><span class='p'>,</span> <span class='nx'>selection</span><span class='p'>.</span><span class='nx'>end</span><span class='p'>)</span> <span class='c1'>// -&gt; some</span>
 </code></pre>
 </div>
 <h2 id='range__'>$.Range <code>$.Range([el])</code> <code>$(el).range()</code></h2>
 
-<p><a href='http://donejs.com/docs.html#!jQuery.Range'>$.Range</a> helps dealing with creating, moving and comparing text ranges. Use <code>$.Range().current()</code> to get the currently selected text range or the jQuery plugin <code>$(el).range()</code> to get a <em>$.Range</em> instance on an element. Based on the above <em>$.selection</em> example you can use <em>$.Range</em> like this:</p>
+<p><a href='http://donejs.com/docs.html#!jQuery.Range'>$.Range</a> helps dealing with creating, moving and comparing text ranges. Use <code>$.Range().current()</code> to get the currently selected text range or the jQuery plugin <code>$(el).range()</code> to get a <em>$.Range</em> instance from an element. Based on the above <em>$.selection</em> example you can use <em>$.Range</em> like this:</p>
 <div class='highlight'><pre><code class='javascript'><span class='kd'>var</span> <span class='nx'>range</span> <span class='o'>=</span> <span class='nx'>$</span><span class='p'>.</span><span class='nx'>Range</span><span class='p'>.</span><span class='nx'>current</span><span class='p'>();</span>
 <span class='c1'>// Returns the currently selected text</span>
 <span class='nx'>range</span><span class='p'>.</span><span class='nx'>toString</span><span class='p'>()</span> <span class='c1'>// -&gt; some</span>
@@ -147,7 +146,7 @@
 <span class='c1'>// Get the end of the range</span>
 <span class='nx'>range</span><span class='p'>.</span><span class='nx'>end</span><span class='p'>()</span> <span class='c1'>// -&gt; { offset : 12, container : TextNode }</span>
 <span class='c1'>// Get the selections common parent</span>
-<span class='nx'>range</span><span class='p'>.</span><span class='nx'>parent</span><span class='p'>()</span>
+<span class='nx'>range</span><span class='p'>.</span><span class='nx'>parent</span><span class='p'>()</span> <span class='c1'>// -&gt; TextNode</span>
 <span class='c1'>// Set the range start offset to 4</span>
 <span class='nx'>range</span><span class='p'>.</span><span class='nx'>start</span><span class='p'>(</span><span class='mi'>4</span><span class='p'>)</span>
 </code></pre>
@@ -173,18 +172,20 @@
 </div>
 <h2 id='formparams_'>$.formParams <code>$(form).formParams([convert])</code></h2>
 
-<p><a href='http://donejs.com/docs.html#!jQuery.formParams'>$.formParams</a> returns a JavaScript object for values in a form.</p>
+<p><a href='http://donejs.com/docs.html#!jQuery.formParams'>$.formParams</a> returns a JavaScript object for values in a form. You can create nested objects by using a bracket notation the form element name. If <em>convert</em> is <code>true</code>, values that look like numbers or booleans will be converted and empty strings won&#8217;t be added to the object. For a form like this:</p>
 <div class='highlight'><pre><code class='html'><span class='nt'>&lt;form&gt;</span>
-	<span class='nt'>&lt;input</span> <span class='na'>type=</span><span class='s'>&quot;text&quot;</span> <span class='na'>name=</span><span class='s'>&quot;first&quot;</span> <span class='na'>value=</span><span class='s'>&quot;John&quot;</span> <span class='nt'>/&gt;</span>
-	<span class='nt'>&lt;input</span> <span class='na'>type=</span><span class='s'>&quot;text&quot;</span> <span class='na'>name=</span><span class='s'>&quot;last&quot;</span> <span class='na'>value=</span><span class='s'>&quot;Doe&quot;</span> <span class='nt'>/&gt;</span>
-	<span class='nt'>&lt;input</span> <span class='na'>type=</span><span class='s'>&quot;text&quot;</span> <span class='na'>name=</span><span class='s'>&quot;phone[mobile]&quot;</span> <span class='na'>value=</span><span class='s'>&quot;1234567890&quot;</span> <span class='nt'>/&gt;</span>
-	<span class='nt'>&lt;input</span> <span class='na'>type=</span><span class='s'>&quot;text&quot;</span> <span class='na'>name=</span><span class='s'>&quot;phone[home]&quot;</span> <span class='na'>value=</span><span class='s'>&quot;0987654321&quot;</span> <span class='nt'>/&gt;</span>
+  <span class='nt'>&lt;input</span> <span class='na'>type=</span><span class='s'>&quot;text&quot;</span> <span class='na'>name=</span><span class='s'>&quot;first&quot;</span> <span class='na'>value=</span><span class='s'>&quot;John&quot;</span> <span class='nt'>/&gt;</span>
+  <span class='nt'>&lt;input</span> <span class='na'>type=</span><span class='s'>&quot;text&quot;</span> <span class='na'>name=</span><span class='s'>&quot;last&quot;</span> <span class='na'>value=</span><span class='s'>&quot;Doe&quot;</span> <span class='nt'>/&gt;</span>
+  <span class='nt'>&lt;input</span> <span class='na'>type=</span><span class='s'>&quot;text&quot;</span> <span class='na'>name=</span><span class='s'>&quot;phone[mobile]&quot;</span> <span class='na'>value=</span><span class='s'>&quot;1234567890&quot;</span> <span class='nt'>/&gt;</span>
+  <span class='nt'>&lt;input</span> <span class='na'>type=</span><span class='s'>&quot;text&quot;</span> <span class='na'>name=</span><span class='s'>&quot;phone[home]&quot;</span> <span class='na'>value=</span><span class='s'>&quot;0987654321&quot;</span> <span class='nt'>/&gt;</span>
 <span class='nt'>&lt;/form&gt;</span>
 </code></pre>
-</div><div class='highlight'><pre><code class='javascript'><span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;form&#39;</span><span class='p'>).</span><span class='nx'>formParams</span><span class='p'>()</span>
+</div>
+<p>$.formParams will return an object like this:</p>
+<div class='highlight'><pre><code class='javascript'><span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;form&#39;</span><span class='p'>).</span><span class='nx'>formParams</span><span class='p'>()</span>
 <span class='c1'>// -&gt; {</span>
-<span class='c1'>//      first : &quot;John&quot;, last : &quot;Doe&quot;,</span>
-<span class='c1'>//      phone : { mobile : &quot;1234567890&quot;, home : &quot;0987654321&quot; }</span>
+<span class='c1'>//   first : &quot;John&quot;, last : &quot;Doe&quot;,</span>
+<span class='c1'>//   phone : { mobile : &quot;1234567890&quot;, home : &quot;0987654321&quot; }</span>
 <span class='c1'>// }</span>
 </code></pre>
 </div>
@@ -240,7 +241,7 @@
 
 <h2 id='eventdrop______'>$.event.drop <code>dropinit</code> <code>dropover</code> <code>dropout</code> <code>dropmove</code> <code>dropon</code> <code>dropend</code></h2>
 
-<p>When making an element dragable with $.event.drag you probably want to be able to also drop it somewhere. <a href='http://donejs.com/docs.html#!jQuery.event.drop'>$.event.drop</a> adds events for doing so:</p>
+<p>When making an element dragable with $.event.drag you also might want to be able to drop it somewhere. <a href='http://donejs.com/docs.html#!jQuery.event.drop'>$.event.drop</a> adds events for doing so:</p>
 
 <ul>
 <li><code>dropinit</code> - the drag motion is started, drop positions are calculated</li>
@@ -301,9 +302,11 @@
 
 <h2 id='eventresize_'>$.event.resize <code>resize</code></h2>
 
-<p>Listening to the <code>resize</code> event provided by <a href='http://donejs.com/docs.html#!jQuery.event.resize'>$.event.resize</a> is very useful when you need to resize a specific element whenever the parents dimension changes. Unlike other events that bubble from the current element to the top the <em>resize</em> event will propagate from the outside-in. This means that outside elements will always resize first.</p>
+<p>Listening to the <code>resize</code> event provided by <a href='http://donejs.com/docs.html#!jQuery.event.resize'>$.event.resize</a> is very useful when you need to resize a specific element whenever the parents dimension changes. Unlike other events that bubble from the current element to the top the <code>resize</code> event will propagate from the outside-in. This means that outside elements will always resize first.</p>
 <div class='highlight'><pre><code class='javascript'><span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;#foo&#39;</span><span class='p'>).</span><span class='nx'>on</span><span class='p'>(</span><span class='s1'>&#39;resize&#39;</span><span class='p'>,</span> <span class='kd'>function</span><span class='p'>(){</span>
-  <span class='c1'>// adjust #foo&#39;s dimensions</span>
+  <span class='c1'>// Set width and height to the parent element width and height</span>
+  <span class='kd'>var</span> <span class='nx'>parent</span> <span class='o'>=</span> <span class='nx'>$</span><span class='p'>(</span><span class='k'>this</span><span class='p'>).</span><span class='nx'>parent</span><span class='p'>();</span>
+  <span class='nx'>$</span><span class='p'>(</span><span class='k'>this</span><span class='p'>).</span><span class='nx'>width</span><span class='p'>(</span><span class='nx'>parent</span><span class='p'>.</span><span class='nx'>width</span><span class='p'>()).</span><span class='nx'>height</span><span class='p'>(</span><span class='nx'>parent</span><span class='p'>.</span><span class='nx'>height</span><span class='p'>());</span>
 <span class='p'>})</span>
 
 <span class='nx'>$</span><span class='p'>(</span><span class='nb'>document</span><span class='p'>.</span><span class='nx'>body</span><span class='p'>).</span><span class='nx'>trigger</span><span class='p'>(</span><span class='s2'>&quot;resize&quot;</span><span class='p'>);</span>
@@ -331,11 +334,11 @@
 <span class='p'>});</span>
 </code></pre>
 </div>
-<p>Set <code>$.event.swipe.delay</code> to the maximum time the swipe motion should take (default is 500ms).</p>
+<p>Set <code>$.event.swipe.delay</code> to the maximum time the swipe motion is allowed to take (default is 500ms).</p>
 
 <h2 id='eventkey'>$.event.key</h2>
 
-<p><a href='http://donejs.com/docs.html#!jQuery.event.key'>$.event.key</a> allows you to define alternate keymaps or overwrite existing keycodes. For example lets map the arrow up, down, left and right keys to the more gamer friendly WASD mapping:</p>
+<p><a href='http://donejs.com/docs.html#!jQuery.event.key'>$.event.key</a> allows you to define alternate keymaps or overwrite existing keycodes. It also adds a <code>.keyName()</code> method which returns a string representation of the key pressed. For example lets map the arrow up, down, left and right keys to the more gamer friendly WASD mapping:</p>
 <div class='highlight'><pre><code class='javascript'><span class='nx'>$</span><span class='p'>.</span><span class='nx'>event</span><span class='p'>.</span><span class='nx'>key</span><span class='p'>({</span>
   <span class='s2'>&quot;w&quot;</span> <span class='o'>:</span> <span class='mi'>38</span><span class='p'>,</span>
   <span class='s2'>&quot;a&quot;</span> <span class='o'>:</span> <span class='mi'>37</span><span class='p'>,</span>
@@ -344,10 +347,14 @@
 <span class='p'>});</span>
 </code></pre>
 </div>
-<p>You can also call <code>event.keyName()</code> to get a string representation of the key pressed, for example backspaces:</p>
+<p>You can use <code>event.keyName()</code> to get a string representation of the key pressed:</p>
 <div class='highlight'><pre><code class='javascript'><span class='nx'>$</span><span class='p'>(</span><span class='s2'>&quot;input&quot;</span><span class='p'>).</span><span class='nx'>on</span><span class='p'>(</span><span class='s1'>&#39;keypress&#39;</span><span class='p'>,</span> <span class='kd'>function</span><span class='p'>(</span><span class='nx'>ev</span><span class='p'>){</span>
+  <span class='c1'>// Don&#39;t allow backspace keys</span>
   <span class='k'>if</span><span class='p'>(</span><span class='nx'>ev</span><span class='p'>.</span><span class='nx'>keyName</span><span class='p'>()</span> <span class='o'>==</span> <span class='s1'>&#39;\b&#39;</span><span class='p'>)</span> <span class='p'>{</span>
     <span class='nx'>ev</span><span class='p'>.</span><span class='nx'>preventDefault</span><span class='p'>();</span>
+  <span class='p'>}</span>
+  <span class='k'>if</span><span class='p'>(</span><span class='nx'>ev</span><span class='p'>.</span><span class='nx'>keyName</span><span class='p'>()</span> <span class='o'>==</span> <span class='s1'>&#39;f1&#39;</span><span class='p'>)</span> <span class='p'>{</span>
+    <span class='nx'>alert</span><span class='p'>(</span><span class='s1'>&#39;I could be a tooltip for help&#39;</span><span class='p'>);</span>
   <span class='p'>}</span>
 <span class='p'>});</span>
 </code></pre>
@@ -382,7 +389,7 @@
 
 <h2 id='eventdefault_'>$.event.default <code>eventname.default</code></h2>
 
-<p><a href='http://donejs.com/docs.html#!jQuery.event.default'>$.event.default</a> lets you perform default actions for events. A default event runs when all other event handlers have been triggered and none has called <code>event.preventDefault()</code> or returned false. To add a default event just prefix it with the <em>default</em> namespace:</p>
+<p><a href='http://donejs.com/docs.html#!jQuery.event.default'>$.event.default</a> lets you perform default actions for events. A default event runs when all other event handlers have been triggered and none has called <code>event.preventDefault()</code> or returned <code>false</code>. To add a default event just prefix it with the <em>default</em> namespace:</p>
 <div class='highlight'><pre><code class='javascript'><span class='nx'>$</span><span class='p'>(</span><span class='s2'>&quot;div&quot;</span><span class='p'>).</span><span class='nx'>on</span><span class='p'>(</span><span class='s2'>&quot;default.click&quot;</span><span class='p'>,</span> <span class='kd'>function</span><span class='p'>(</span><span class='nx'>ev</span><span class='p'>)</span> <span class='p'>{</span>
   <span class='c1'>// ...</span>
 <span class='p'>});</span>
@@ -392,7 +399,7 @@
 
 <h3 id='pause_and_resume_'>pause and resume <code>event.pause(), event.resume()</code></h3>
 
-<p><a href='http://donejs.com/docs.html#!jQuery.event.pause'>$.event.pause</a> lets you pause and resume events. Pausing an event works similar to <a href='http://api.jquery.com/event.stopImmediatePropagation/'>.stopImmediatePropagation()</a> by calling <code>event.pause()</code>. Calling <code>event.resume()</code> will continue propagation. This is great when going asynchronous processing in an event handler:</p>
+<p><a href='http://donejs.com/docs.html#!jQuery.event.pause'>$.event.pause</a> lets you pause and resume events. Pausing an event works similar to <a href='http://api.jquery.com/event.stopImmediatePropagation/'>.stopImmediatePropagation()</a> by calling <code>event.pause()</code>. Calling <code>event.resume()</code> will continue propagation. This is great when doing asynchronous processing in an event handler:</p>
 <div class='highlight'><pre><code class='javascript'><span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;#todos&#39;</span><span class='p'>).</span><span class='nx'>on</span><span class='p'>(</span><span class='s1'>&#39;show&#39;</span><span class='p'>,</span> <span class='kd'>function</span><span class='p'>(</span><span class='nx'>ev</span><span class='p'>){</span>
   <span class='nx'>ev</span><span class='p'>.</span><span class='nx'>pause</span><span class='p'>();</span>
 
@@ -404,7 +411,7 @@
 </div>
 <h3 id='triggerasync_'>.triggerAsync <code>$(el).triggerAsync(event, [success], [prevented])</code></h3>
 
-<p><a href='http://donejs.com/docs.html#!jQuery.fn.triggerAsync'>$.fn.triggerAsync</a> triggers an event and calls a <em>success</em> handler when it has finished propagating through the DOM and <code>event.preventDefault()</code> is not called. The <em>prevented</em> callback will be used otherwise:</p>
+<p><a href='http://donejs.com/docs.html#!jQuery.fn.triggerAsync'>$.fn.triggerAsync</a> triggers an event and calls a <em>success</em> handler when it has finished propagating through the DOM and no handler called <code>event.preventDefault()</code> or returned <code>false</code>. The <em>prevented</em> callback will be used otherwise:</p>
 <div class='highlight'><pre><code class='javascript'><span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;panel&#39;</span><span class='p'>).</span><span class='nx'>triggerAsync</span><span class='p'>(</span><span class='s1'>&#39;show&#39;</span><span class='p'>,</span> <span class='kd'>function</span><span class='p'>(){</span>
     <span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;#panel&#39;</span><span class='p'>).</span><span class='nx'>show</span><span class='p'>();</span>
   <span class='p'>},</span><span class='kd'>function</span><span class='p'>(){</span>

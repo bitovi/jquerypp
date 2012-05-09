@@ -31,7 +31,7 @@ require('jquery/compare')
 
 [$.fn.compare](http://donejs.com/docs.html#!jQuery.compare) compares
 the position of two nodes and returns a number bitmask detailing how they
-are positioned relative to each other. The following list shows the `bitmask` -> __number__ and what it corresponds to:
+are positioned relative to each other. The following list shows the `bitmask`, the __number__ returned by $.compare and what it corresponds to:
 
 * `000000` -> __0__: Elements are identical
 * `000001` -> __1__: The nodes are in different documents (or one is outside of a document)
@@ -48,12 +48,11 @@ if( $('#foo').compare($('#bar')) & 4 ) {
 }
 {% endhighlight %}
 
-This is useful when you want to rapidly compare element positions.  This is
-common when widgets can reorder themselves (drag-drop) or with nested widgets (trees).
+This is useful when you want to rapidly compare element positions. This is common when widgets can reorder themselves (drag-drop) or with nested widgets (trees).
 
 ## $.cookie
 
-[$.cookie](http://donejs.com/docs.html#!jQuery.cookie) wraps the [jQuery cookie](https://github.com/carhartl/jquery-cookie) plugin for easily manipulating cookies. You can use it like this:
+[$.cookie](http://donejs.com/docs.html#!jQuery.cookie) wraps the [jQuery cookie](https://github.com/carhartl/jquery-cookie) plugin for manipulating cookies. You can use it like this:
 
 {% highlight javascript %}
 // Set a session cookie
@@ -76,12 +75,12 @@ $("#foo").styles('float','display')
 
 ## $.dimensions
 
-The [$.dimensions](http://donejs.com/docs.html#!jQuery.dimensions) plugin can set the inner and outer width and height on an element. Inner dimensions include the padding where outer dimensions also take care of any borders. You can set and read these values with:
+The [$.dimensions](http://donejs.com/docs.html#!jQuery.dimensions) plugin lets you set the inner and outer width and height of an element. Inner dimensions include the padding where outer dimensions also take care of borders and - if *includeMargin* is set to `true` - margins. You can set and read these values with:
 
 * `$(el).innerHeight([height])`
-* `$(el).outerHeight([height])`
+* `$(el).outerHeight([height], [includeMargin])`
 * `$(el).innerWidth([width])`
-* `$(el).outerWidth([width])`
+* `$(el).outerWidth([width], [includeMargin])`
 
 And use `$(el).animate({ innerHeight : 100 })` to animate them. This is useful when you care about animating/setting the visual dimension of an element (which is what you typically want to do):
 
@@ -99,15 +98,14 @@ $('#bar').animate({outerWidth: 500});
 {% endhighlight %}
 
 {% highlight javascript %}
-var selection = $('#text').selection(8, 12).selection();
-// -> { start : 8, end : 12 }
-$('#text').html().substring(selection.start, selection.end)
-// -> some
+$('#text').selection(8, 12);
+$('#text').selection(); // -> { start : 8, end : 12 }
+$('#text').html().substring(selection.start, selection.end) // -> some
 {% endhighlight %}
 
 ## $.Range `$.Range([el])` `$(el).range()`
 
-[$.Range](http://donejs.com/docs.html#!jQuery.Range) helps dealing with creating, moving and comparing text ranges. Use `$.Range().current()` to get the currently selected text range or the jQuery plugin `$(el).range()` to get a *$.Range* instance on an element. Based on the above *$.selection* example you can use *$.Range* like this:
+[$.Range](http://donejs.com/docs.html#!jQuery.Range) helps dealing with creating, moving and comparing text ranges. Use `$.Range().current()` to get the currently selected text range or the jQuery plugin `$(el).range()` to get a *$.Range* instance from an element. Based on the above *$.selection* example you can use *$.Range* like this:
 
 {% highlight javascript %}
 var range = $.Range.current();
@@ -118,7 +116,7 @@ range.start() // -> { offset : 8, container : TextNode }
 // Get the end of the range
 range.end() // -> { offset : 12, container : TextNode }
 // Get the selections common parent
-range.parent()
+range.parent() // -> TextNode
 // Set the range start offset to 4
 range.start(4)
 {% endhighlight %}
@@ -150,22 +148,24 @@ $('*').within(200, 200, 100, 100);
 
 ## $.formParams `$(form).formParams([convert])`
 
-[$.formParams](http://donejs.com/docs.html#!jQuery.formParams) returns a JavaScript object for values in a form.
+[$.formParams](http://donejs.com/docs.html#!jQuery.formParams) returns a JavaScript object for values in a form. You can create nested objects by using a bracket notation the form element name. If *convert* is `true`, values that look like numbers or booleans will be converted and empty strings won't be added to the object. For a form like this:
 
 {% highlight html %}
 <form>
-	<input type="text" name="first" value="John" />
-	<input type="text" name="last" value="Doe" />
-	<input type="text" name="phone[mobile]" value="1234567890" />
-	<input type="text" name="phone[home]" value="0987654321" />
+  <input type="text" name="first" value="John" />
+  <input type="text" name="last" value="Doe" />
+  <input type="text" name="phone[mobile]" value="1234567890" />
+  <input type="text" name="phone[home]" value="0987654321" />
 </form>
 {% endhighlight %}
+
+$.formParams will return an object like this:
 
 {% highlight javascript %}
 $('form').formParams()
 // -> {
-//      first : "John", last : "Doe",
-//      phone : { mobile : "1234567890", home : "0987654321" }
+//   first : "John", last : "Doe",
+//   phone : { mobile : "1234567890", home : "0987654321" }
 // }
 {% endhighlight %}
 
@@ -204,7 +204,7 @@ The `drag` object (passed to the event handler as the second parameter) has the 
 
 ## $.event.drop `dropinit` `dropover` `dropout` `dropmove` `dropon` `dropend`
 
-When making an element dragable with $.event.drag you probably want to be able to also drop it somewhere. [$.event.drop](http://donejs.com/docs.html#!jQuery.event.drop) adds events for doing so:
+When making an element dragable with $.event.drag you also might want to be able to drop it somewhere. [$.event.drop](http://donejs.com/docs.html#!jQuery.event.drop) adds events for doing so:
 
 * `dropinit` - the drag motion is started, drop positions are calculated
 * `dropover` - a drag moves over a drop element, called once as the drop is dragged over the element
@@ -266,11 +266,13 @@ $('form').on('destroyed', function() {
 
 ## $.event.resize `resize`
 
-Listening to the `resize` event provided by [$.event.resize](http://donejs.com/docs.html#!jQuery.event.resize) is very useful when you need to resize a specific element whenever the parents dimension changes. Unlike other events that bubble from the current element to the top the *resize* event will propagate from the outside-in. This means that outside elements will always resize first.
+Listening to the `resize` event provided by [$.event.resize](http://donejs.com/docs.html#!jQuery.event.resize) is very useful when you need to resize a specific element whenever the parents dimension changes. Unlike other events that bubble from the current element to the top the `resize` event will propagate from the outside-in. This means that outside elements will always resize first.
 
 {% highlight javascript %}
 $('#foo').on('resize', function(){
-  // adjust #foo's dimensions
+  // Set width and height to the parent element width and height
+  var parent = $(this).parent();
+  $(this).width(parent.width()).height(parent.height());
 })
 
 $(document.body).trigger("resize");
@@ -300,11 +302,11 @@ $('#swiper').on({
 });
 {% endhighlight %}
 
-Set `$.event.swipe.delay` to the maximum time the swipe motion should take (default is 500ms).
+Set `$.event.swipe.delay` to the maximum time the swipe motion is allowed to take (default is 500ms).
 
 ## $.event.key
 
-[$.event.key](http://donejs.com/docs.html#!jQuery.event.key) allows you to define alternate keymaps or overwrite existing keycodes. For example lets map the arrow up, down, left and right keys to the more gamer friendly WASD mapping:
+[$.event.key](http://donejs.com/docs.html#!jQuery.event.key) allows you to define alternate keymaps or overwrite existing keycodes. It also adds a `.keyName()` method which returns a string representation of the key pressed. For example lets map the arrow up, down, left and right keys to the more gamer friendly WASD mapping:
 
 {% highlight javascript %}
 $.event.key({
@@ -315,12 +317,16 @@ $.event.key({
 });
 {% endhighlight %}
 
-You can also call `event.keyName()` to get a string representation of the key pressed, for example backspaces:
+You can use `event.keyName()` to get a string representation of the key pressed:
 
 {% highlight javascript %}
 $("input").on('keypress', function(ev){
+  // Don't allow backspace keys
   if(ev.keyName() == '\b') {
     ev.preventDefault();
+  }
+  if(ev.keyName() == 'f1') {
+    alert('I could be a tooltip for help');
   }
 });
 {% endhighlight %}
@@ -342,7 +348,7 @@ The following keynames will be mapped by default:
 
 ## $.event.default `eventname.default`
 
-[$.event.default](http://donejs.com/docs.html#!jQuery.event.default) lets you perform default actions for events. A default event runs when all other event handlers have been triggered and none has called `event.preventDefault()` or returned false. To add a default event just prefix it with the *default* namespace:
+[$.event.default](http://donejs.com/docs.html#!jQuery.event.default) lets you perform default actions for events. A default event runs when all other event handlers have been triggered and none has called `event.preventDefault()` or returned `false`. To add a default event just prefix it with the *default* namespace:
 
 {% highlight javascript %}
 $("div").on("default.click", function(ev) {
@@ -354,7 +360,7 @@ $("div").on("default.click", function(ev) {
 
 ### pause and resume `event.pause(), event.resume()`
 
-[$.event.pause](http://donejs.com/docs.html#!jQuery.event.pause) lets you pause and resume events. Pausing an event works similar to [.stopImmediatePropagation()](http://api.jquery.com/event.stopImmediatePropagation/) by calling `event.pause()`. Calling `event.resume()` will continue propagation. This is great when going asynchronous processing in an event handler:
+[$.event.pause](http://donejs.com/docs.html#!jQuery.event.pause) lets you pause and resume events. Pausing an event works similar to [.stopImmediatePropagation()](http://api.jquery.com/event.stopImmediatePropagation/) by calling `event.pause()`. Calling `event.resume()` will continue propagation. This is great when doing asynchronous processing in an event handler:
 
 {% highlight javascript %}
 $('#todos').on('show', function(ev){
@@ -368,7 +374,7 @@ $('#todos').on('show', function(ev){
 
 ### .triggerAsync `$(el).triggerAsync(event, [success], [prevented])`
 
-[$.fn.triggerAsync](http://donejs.com/docs.html#!jQuery.fn.triggerAsync) triggers an event and calls a *success* handler when it has finished propagating through the DOM and `event.preventDefault()` is not called. The *prevented* callback will be used otherwise:
+[$.fn.triggerAsync](http://donejs.com/docs.html#!jQuery.fn.triggerAsync) triggers an event and calls a *success* handler when it has finished propagating through the DOM and no handler called `event.preventDefault()` or returned `false`. The *prevented* callback will be used otherwise:
 
 {% highlight javascript %}
 $('panel').triggerAsync('show', function(){
