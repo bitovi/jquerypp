@@ -61,7 +61,7 @@
 
 <p>require(&#8216;jquery/compare&#8217;)</p>
 
-<h2 id='compare_'>$.compare <code>$(elA).compare(elB)</code></h2>
+<h2 id='compare_'>$.compare <code>$(elA).compare(elB) -&gt; Number</code></h2>
 
 <p><a href='http://donejs.com/docs.html#!jQuery.compare'>$.fn.compare</a> compares the position of two nodes and returns a number bitmask detailing how they are positioned relative to each other. The following list shows the <code>bitmask</code>, the <strong>number</strong> and what it corresponds to:</p>
 
@@ -87,9 +87,9 @@
 </div>
 <p>This is useful when you want to rapidly compare element positions. This is common when widgets can reorder themselves (drag-drop) or with nested widgets (trees).</p>
 
-<h2 id='cookie_'>$.cookie <code>$.cookie(name, [value], [options])</code></h2>
+<h2 id='cookie_'>$.cookie <code>$.cookie(name, [value], [options]) -&gt; Object|String</code></h2>
 
-<p><a href='http://donejs.com/docs.html#!jQuery.cookie'>$.cookie</a> wraps the <a href='https://github.com/carhartl/jquery-cookie'>jQuery cookie</a> plugin for manipulating cookies. You can use it like this:</p>
+<p><a href='http://donejs.com/docs.html#!jQuery.cookie'>$.cookie</a> packages Klaus Hartl&#8217;s <a href='https://github.com/carhartl/jquery-cookie'>jQuery cookie</a> plugin for manipulating cookies. You can use it like this:</p>
 <div class='highlight'><pre><code class='javascript'><span class='c1'>// Set a session cookie</span>
 <span class='nx'>$</span><span class='p'>.</span><span class='nx'>cookie</span><span class='p'>(</span><span class='s1'>&#39;the_cookie&#39;</span><span class='p'>,</span> <span class='s1'>&#39;the_value&#39;</span><span class='p'>);</span>
 <span class='nx'>$</span><span class='p'>.</span><span class='nx'>cookie</span><span class='p'>(</span><span class='s1'>&#39;the_cookie&#39;</span><span class='p'>);</span> <span class='c1'>// -&gt; &#39;the_value&#39;</span>
@@ -99,14 +99,20 @@
 <span class='nx'>$</span><span class='p'>.</span><span class='nx'>cookie</span><span class='p'>(</span><span class='s1'>&#39;the_cookie&#39;</span><span class='p'>,</span> <span class='kc'>null</span><span class='p'>);</span>
 </code></pre>
 </div>
-<h2 id='styles_'>$.styles <code>$(el).styles()</code></h2>
+<p>The following options are available:</p>
 
-<p><a href='http://donejs.com/docs.html#!jQuery.styles'>$.styles</a> is a fast way of getting a set of computed styles from an element instead of retrieving them individually (which is much slower). Computed styles reflect the actual current style of an element, including browser defaults and CSS settings.</p>
+<ul>
+<li><code>expire</code> - The expiration time in days or an expiry date</li>
+</ul>
+
+<h2 id='styles_'>$.styles <code>$(el).styles() -&gt; Object</code></h2>
+
+<p><a href='http://donejs.com/docs.html#!jQuery.styles'>$.styles</a> is a fast way of getting a set of computed styles from an element instead of retrieving them individually (which is much slower //). Computed styles reflect the actual current style of an element, including browser defaults and CSS settings.</p>
 <div class='highlight'><pre><code class='javascript'><span class='nx'>$</span><span class='p'>(</span><span class='s2'>&quot;#foo&quot;</span><span class='p'>).</span><span class='nx'>styles</span><span class='p'>(</span><span class='s1'>&#39;float&#39;</span><span class='p'>,</span><span class='s1'>&#39;display&#39;</span><span class='p'>)</span>
 <span class='c1'>// -&gt; { cssFloat: &quot;left&quot;, display: &quot;block&quot; }</span>
 </code></pre>
 </div>
-<h2 id='dimensions'>$.dimensions</h2>
+<h2 id='dimensions____'>$.dimensions <code>.innerouterHeight()</code> <code>.outerHeight()</code> <code>.innerWidth()</code> <code>.outerWidth()</code></h2>
 
 <p>The <a href='http://donejs.com/docs.html#!jQuery.dimensions'>$.dimensions</a> plugin lets you set the inner and outer width and height of an element. Inner dimensions include the padding where outer dimensions also take care of borders and margins (if <em>includeMargin</em> is set to <code>true</code>). You can set and read these values with:</p>
 
@@ -135,7 +141,7 @@
 <span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;#text&#39;</span><span class='p'>).</span><span class='nx'>html</span><span class='p'>().</span><span class='nx'>substring</span><span class='p'>(</span><span class='nx'>selection</span><span class='p'>.</span><span class='nx'>start</span><span class='p'>,</span> <span class='nx'>selection</span><span class='p'>.</span><span class='nx'>end</span><span class='p'>)</span> <span class='c1'>// -&gt; some</span>
 </code></pre>
 </div>
-<h2 id='range__'>$.Range <code>$.Range([el])</code> <code>$(el).range()</code></h2>
+<h2 id='range__'>$.Range <code>$.Range([el]) -&gt; $.Range</code> <code>$(el).range() -&gt; $.Range</code></h2>
 
 <p><a href='http://donejs.com/docs.html#!jQuery.Range'>$.Range</a> helps dealing with creating, moving and comparing text ranges. Use <code>$.Range().current()</code> to get the currently selected text range or the jQuery plugin <code>$(el).range()</code> to get a <em>$.Range</em> instance from an element. Based on the above <a href='#__selection'>$.selection</a> example you can use <em>$.Range</em> like this:</p>
 <div class='highlight'><pre><code class='javascript'><span class='kd'>var</span> <span class='nx'>range</span> <span class='o'>=</span> <span class='nx'>$</span><span class='p'>.</span><span class='nx'>Range</span><span class='p'>.</span><span class='nx'>current</span><span class='p'>()</span>
@@ -167,7 +173,7 @@
 </code></pre>
 </div>
 <p>Use <code>$(el).withinBox(left, top, width, height)</code> to get all elements within a certain area:</p>
-<div class='highlight'><pre><code class='javascript'><span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;*&#39;</span><span class='p'>).</span><span class='nx'>within</span><span class='p'>(</span><span class='mi'>200</span><span class='p'>,</span> <span class='mi'>200</span><span class='p'>,</span> <span class='mi'>100</span><span class='p'>,</span> <span class='mi'>100</span><span class='p'>)</span>
+<div class='highlight'><pre><code class='javascript'><span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;*&#39;</span><span class='p'>).</span><span class='nx'>withinBox</span><span class='p'>(</span><span class='mi'>200</span><span class='p'>,</span> <span class='mi'>200</span><span class='p'>,</span> <span class='mi'>100</span><span class='p'>,</span> <span class='mi'>100</span><span class='p'>)</span>
 </code></pre>
 </div>
 <h2 id='formparams_'>$.formParams <code>$(form).formParams([convert])</code></h2>
@@ -288,7 +294,7 @@
   <span class='nx'>hoverleave</span> <span class='o'>:</span> <span class='kd'>function</span><span class='p'>(){</span>
     <span class='nx'>$</span><span class='p'>(</span><span class='k'>this</span><span class='p'>).</span><span class='nx'>removeClass</span><span class='p'>(</span><span class='s2'>&quot;hovering&quot;</span><span class='p'>)</span>
   <span class='p'>}</span>
-<span class='p'>});</span>
+<span class='p'>})</span>
 </code></pre>
 </div>
 <p>An element is hovered when the mouse moves less than a certain distance in a specific time over the element. You can modify these values either globally by setting <code>$.Hover.delay</code> and <code>$.Hover.distance</code> or individually during <code>hoverinit</code>:</p>
@@ -297,7 +303,7 @@
   <span class='nx'>hover</span><span class='p'>.</span><span class='nx'>distance</span><span class='p'>(</span><span class='mi'>10</span><span class='p'>)</span>
   <span class='c1'>//set the delay to 200ms</span>
   <span class='nx'>hover</span><span class='p'>.</span><span class='nx'>delay</span><span class='p'>(</span><span class='mi'>10</span><span class='p'>)</span>
-<span class='p'>});</span>
+<span class='p'>})</span>
 </code></pre>
 </div>
 <h2 id='eventdestroyed_'>$.event.destroyed <code>destroyed</code></h2>
@@ -312,14 +318,14 @@
 
 <h2 id='eventresize_'>$.event.resize <code>resize</code></h2>
 
-<p>Listening to the <code>resize</code> event provided by <a href='http://donejs.com/docs.html#!jQuery.event.resize'>$.event.resize</a> is very useful when you need to resize a specific element whenever the parents dimension changes. Unlike other events that bubble from the current element to the top the <code>resize</code> event will propagate from the outside-in. This means that outside elements will always resize first.</p>
+<p>Listening to the <code>resize</code> event provided by <a href='http://donejs.com/docs.html#!jQuery.event.resize'>$.event.resize</a> is very useful when you need to resize a specific element whenever the parents dimension changes. Unlike other events that bubble from the target element to the document to the top the <code>resize</code> event will propagate from the outside-in. This means that outside elements will always resize first.</p>
 <div class='highlight'><pre><code class='javascript'><span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;#foo&#39;</span><span class='p'>).</span><span class='nx'>on</span><span class='p'>(</span><span class='s1'>&#39;resize&#39;</span><span class='p'>,</span> <span class='kd'>function</span><span class='p'>(){</span>
   <span class='c1'>// Set width and height to the parent element width and height</span>
   <span class='kd'>var</span> <span class='nx'>parent</span> <span class='o'>=</span> <span class='nx'>$</span><span class='p'>(</span><span class='k'>this</span><span class='p'>).</span><span class='nx'>parent</span><span class='p'>()</span>
   <span class='nx'>$</span><span class='p'>(</span><span class='k'>this</span><span class='p'>).</span><span class='nx'>width</span><span class='p'>(</span><span class='nx'>parent</span><span class='p'>.</span><span class='nx'>width</span><span class='p'>()).</span><span class='nx'>height</span><span class='p'>(</span><span class='nx'>parent</span><span class='p'>.</span><span class='nx'>height</span><span class='p'>())</span>
 <span class='p'>})</span>
 
-<span class='nx'>$</span><span class='p'>(</span><span class='nb'>document</span><span class='p'>.</span><span class='nx'>body</span><span class='p'>).</span><span class='nx'>trigger</span><span class='p'>(</span><span class='s2'>&quot;resize&quot;</span><span class='p'>);</span>
+<span class='nx'>$</span><span class='p'>(</span><span class='nb'>document</span><span class='p'>.</span><span class='nx'>body</span><span class='p'>).</span><span class='nx'>resize</span><span class='p'>()</span>
 </code></pre>
 </div>
 <h2 id='eventswipe_____'>$.event.swipe <code>swipeleft</code> <code>swiperight</code> <code>swipedown</code> <code>swipeup</code> <code>swipe</code></h2>
@@ -346,17 +352,10 @@
 </div>
 <p>Set <code>$.event.swipe.delay</code> to the maximum time the swipe motion is allowed to take (default is 500ms).</p>
 
-<h2 id='eventkey__'>$.event.key <code>$.event.key(mapping)</code> <code>event.keyName()</code></h2>
+<h2 id='eventkey_'>$.event.key <code>event.keyName()</code></h2>
 
 <p><a href='http://donejs.com/docs.html#!jQuery.event.key'>$.event.key</a> allows you to define alternate keymaps or overwrite existing keycodes. It also adds a <code>.keyName()</code> method which returns a string representation of the key that has been pressed. For example lets map the arrow up, down, left and right keys to the more gamer friendly WASD mapping:</p>
-<div class='highlight'><pre><code class='javascript'><span class='nx'>$</span><span class='p'>.</span><span class='nx'>event</span><span class='p'>.</span><span class='nx'>key</span><span class='p'>({</span>
-  <span class='s2'>&quot;w&quot;</span> <span class='o'>:</span> <span class='mi'>38</span><span class='p'>,</span>
-  <span class='s2'>&quot;a&quot;</span> <span class='o'>:</span> <span class='mi'>37</span><span class='p'>,</span>
-  <span class='s2'>&quot;s&quot;</span> <span class='o'>:</span> <span class='mi'>40</span><span class='p'>,</span>
-  <span class='s2'>&quot;d&quot;</span> <span class='o'>:</span> <span class='mi'>39</span>
-<span class='p'>})</span>
-</code></pre>
-</div>
+
 <p>Use <code>event.keyName()</code> to get a string representation of the current key:</p>
 <div class='highlight'><pre><code class='javascript'><span class='nx'>$</span><span class='p'>(</span><span class='s2'>&quot;input&quot;</span><span class='p'>).</span><span class='nx'>on</span><span class='p'>(</span><span class='s1'>&#39;keypress&#39;</span><span class='p'>,</span> <span class='kd'>function</span><span class='p'>(</span><span class='nx'>ev</span><span class='p'>){</span>
   <span class='c1'>// Don&#39;t allow backspace keys</span>
