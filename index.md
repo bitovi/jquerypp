@@ -90,10 +90,6 @@ $('#foo').outerWidth(100).innerHeight(50);
 $('#bar').animate({outerWidth: 500});
 {% endhighlight %}
 
-## $.Range
-
-
-
 ## $.selection `$(el).selection([start], [end])`
 
 [$.selection](http://donejs.com/docs.html#!jQuery.selection) adds a jQuery plugin to set or retrieve the currently selected text range. It works on all elements:
@@ -109,6 +105,35 @@ $('#text').html().substring(selection.start, selection.end)
 // -> some
 {% endhighlight %}
 
+## $.Range `$.Range([el])` `$(el).range()`
+
+[$.Range](http://donejs.com/docs.html#!jQuery.Range) helps dealing with creating, moving and comparing text ranges. Use `$.Range().current()` to get the currently selected text range or the jQuery plugin `$(el).range()` to get a *$.Range* instance on an element. Based on the above *$.selection* example you can use *$.Range* like this:
+
+{% highlight javascript %}
+var range = $.Range.current();
+// Returns the currently selected text
+range.toString() // -> some
+// Get the beginning of the range
+range.start() // -> { offset : 8, container : TextNode }
+// Get the end of the range
+range.end() // -> { offset : 12, container : TextNode }
+// Get the selections common parent
+range.parent()
+// Set the range start offset to 4
+range.start(4)
+{% endhighlight %}
+
+The container returned by `start()` and `end()` can be of [type](https://developer.mozilla.org/en/nodeType) `Node.TEXT_NODE` or `Node.CDATA_SECTION_NODE`. To acces the element containing the text use this:
+
+{% highlight javascript %}
+var startNode = range.start().container;
+if(startNode.nodeType === Node.TEXT_NODE ||
+	startNode.nodeType === Node.CDATA_SECTION_NODE) {
+  startNode = startNode.parentNode;
+}
+$(startNode).addClass('highlight');
+{% endhighlight %}
+
 ## $.within `$(el).within(left, top, [useOffsetCache])`
 
 [$.within](http://donejs.com/docs.html#!jQuery.within) returns all elements on a given position or area. The following example returns all `div` elements on the point 200px left and 200px from the top:
@@ -121,6 +146,27 @@ Use `$(el).withinBox(left, top, width, height)` to get all elements within a cer
 
 {% highlight javascript %}
 $('*').within(200, 200, 100, 100);
+{% endhighlight %}
+
+## $.formParams `$(form).formParams([convert])`
+
+[$.formParams](http://donejs.com/docs.html#!jQuery.formParams) returns a JavaScript object for values in a form.
+
+{% highlight html %}
+<form>
+	<input type="text" name="first" value="John" />
+	<input type="text" name="last" value="Doe" />
+	<input type="text" name="phone[mobile]" value="1234567890" />
+	<input type="text" name="phone[home]" value="0987654321" />
+</form>
+{% endhighlight %}
+
+{% highlight javascript %}
+$('form').formParams()
+// -> {
+//      first : "John", last : "Doe",
+//      phone : { mobile : "1234567890", home : "0987654321" }
+// }
 {% endhighlight %}
 
 ## $.event.drag `dragdown` `draginit` `dragmove` `dragend` `dragover` `dragout`
@@ -333,6 +379,28 @@ $('panel').triggerAsync('show', function(){
 {% endhighlight %}
 
 ## Get Help
+
+There are several places you can go to ask questions or get help debugging problems.
+
+### Twitter
+
+Follow [@donejs](https://twitter.com/#!/donejs) for updates, announcements and quick answers to your questions.
+
+### Forums
+
+Visit the [Forums](http://forum.javascriptmvc.com/#Forum/jquerypp) for questions requiring more than 140 characters. DoneJS has a thriving community that's always eager to help out.
+
+### IRC
+
+The DoneJS IRC channel (`#donejs` on **irc.freenode.net**) is an awesome place to hang out with fellow DoneJS users and get your questions answered quickly.
+
+__Help Us Help You __
+
+Help the community help you by using the [jQuery++ jsFiddle template](http://jsfiddle.net/donejs/qYdwR/) below. Just fork it and include the URL when you are asking for help.
+
+### Get Help from Bitovi
+
+Bitovi _(developers of jQuery++)_ offers [training](http://bitovi.com/training/) and [consulting](http://bitovi.com/consulting/) for your team. They can also provide private one-on-one support staffed by their JavaScript/Ajax experts. [Contact Bitovi](contact@bitovi.com) if you're interested.
 
 ## Why jQuery++
 

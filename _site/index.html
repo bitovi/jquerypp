@@ -101,14 +101,14 @@
 </div>
 <h2 id='styles_'>$.styles <code>$(el).styles()</code></h2>
 
-<p><a href='http://donejs.com/docs.html#!jQuery.styles'>$.styles</a> is a fast way of getting a set of computed styles from an element instead of retrieving them individually (which is much more expensive). Computed styles reflect the actual style of an element, including browser defaults and CSS settings.</p>
+<p><a href='http://donejs.com/docs.html#!jQuery.styles'>$.styles</a> is a fast way of getting a set of computed styles from an element instead of retrieving them individually (which is much slower). Computed styles reflect the actual style of an element, including browser defaults and CSS settings.</p>
 <div class='highlight'><pre><code class='javascript'><span class='nx'>$</span><span class='p'>(</span><span class='s2'>&quot;#foo&quot;</span><span class='p'>).</span><span class='nx'>styles</span><span class='p'>(</span><span class='s1'>&#39;float&#39;</span><span class='p'>,</span><span class='s1'>&#39;display&#39;</span><span class='p'>)</span>
 <span class='c1'>// -&gt; { cssFloat: &quot;left&quot;, display: &quot;block&quot; }</span>
 </code></pre>
 </div>
 <h2 id='dimensions'>$.dimensions</h2>
 
-<p>The <a href='http://donejs.com/docs.html#!jQuery.dimensions'>$.dimensions</a> plugin can set an elements inner and outer width and height including margins and paddings and enables <code>animate</code> to animate these values. You can set and read it with:</p>
+<p>The <a href='http://donejs.com/docs.html#!jQuery.dimensions'>$.dimensions</a> plugin can set the inner and outer width and height on an element. Inner dimensions include the padding where outer dimensions also take care of any borders. You can set and read these values with:</p>
 
 <ul>
 <li><code>$(el).innerHeight([height])</code></li>
@@ -120,22 +120,45 @@
 <li><code>$(el).outerWidth([width])</code></li>
 </ul>
 
-<p>And use <code>$(el).animate({ innerHeight : 100 })</code> to animate these values. This is useful when you care about animating/setting the visual dimension of an element (which is what you typically want to do):</p>
+<p>And use <code>$(el).animate({ innerHeight : 100 })</code> to animate them. This is useful when you care about animating/setting the visual dimension of an element (which is what you typically want to do):</p>
 <div class='highlight'><pre><code class='javascript'><span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;#foo&#39;</span><span class='p'>).</span><span class='nx'>outerWidth</span><span class='p'>(</span><span class='mi'>100</span><span class='p'>).</span><span class='nx'>innerHeight</span><span class='p'>(</span><span class='mi'>50</span><span class='p'>);</span>
 <span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;#bar&#39;</span><span class='p'>).</span><span class='nx'>animate</span><span class='p'>({</span><span class='nx'>outerWidth</span><span class='o'>:</span> <span class='mi'>500</span><span class='p'>});</span>
 </code></pre>
 </div>
-<h2 id='range'>$.Range</h2>
-
 <h2 id='selection_'>$.selection <code>$(el).selection([start], [end])</code></h2>
 
-<p><a href='http://donejs.com/docs.html#!jQuery.selection'>$.selection</a> adds a jQuery plugin to set or retrieve the currently selected text area. It works on all elements:</p>
+<p><a href='http://donejs.com/docs.html#!jQuery.selection'>$.selection</a> adds a jQuery plugin to set or retrieve the currently selected text range. It works on all elements:</p>
 <div class='highlight'><pre><code class='html'><span class='nt'>&lt;div</span> <span class='na'>id=</span><span class='s'>&quot;text&quot;</span><span class='nt'>&gt;</span>This is some text<span class='nt'>&lt;/div&gt;</span>
 </code></pre>
 </div><div class='highlight'><pre><code class='javascript'><span class='kd'>var</span> <span class='nx'>selection</span> <span class='o'>=</span> <span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;#text&#39;</span><span class='p'>).</span><span class='nx'>selection</span><span class='p'>(</span><span class='mi'>8</span><span class='p'>,</span> <span class='mi'>12</span><span class='p'>).</span><span class='nx'>selection</span><span class='p'>();</span>
 <span class='c1'>// -&gt; { start : 8, end : 12 }</span>
 <span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;#text&#39;</span><span class='p'>).</span><span class='nx'>html</span><span class='p'>().</span><span class='nx'>substring</span><span class='p'>(</span><span class='nx'>selection</span><span class='p'>.</span><span class='nx'>start</span><span class='p'>,</span> <span class='nx'>selection</span><span class='p'>.</span><span class='nx'>end</span><span class='p'>)</span>
 <span class='c1'>// -&gt; some</span>
+</code></pre>
+</div>
+<h2 id='range__'>$.Range <code>$.Range([el])</code> <code>$(el).range()</code></h2>
+
+<p><a href='http://donejs.com/docs.html#!jQuery.Range'>$.Range</a> helps dealing with creating, moving and comparing text ranges. Use <code>$.Range().current()</code> to get the currently selected text range or the jQuery plugin <code>$(el).range()</code> to get a <em>$.Range</em> instance on an element. Based on the above <em>$.selection</em> example you can use <em>$.Range</em> like this:</p>
+<div class='highlight'><pre><code class='javascript'><span class='kd'>var</span> <span class='nx'>range</span> <span class='o'>=</span> <span class='nx'>$</span><span class='p'>.</span><span class='nx'>Range</span><span class='p'>.</span><span class='nx'>current</span><span class='p'>();</span>
+<span class='c1'>// Returns the currently selected text</span>
+<span class='nx'>range</span><span class='p'>.</span><span class='nx'>toString</span><span class='p'>()</span> <span class='c1'>// -&gt; some</span>
+<span class='c1'>// Get the beginning of the range</span>
+<span class='nx'>range</span><span class='p'>.</span><span class='nx'>start</span><span class='p'>()</span> <span class='c1'>// -&gt; { offset : 8, container : TextNode }</span>
+<span class='c1'>// Get the end of the range</span>
+<span class='nx'>range</span><span class='p'>.</span><span class='nx'>end</span><span class='p'>()</span> <span class='c1'>// -&gt; { offset : 12, container : TextNode }</span>
+<span class='c1'>// Get the selections common parent</span>
+<span class='nx'>range</span><span class='p'>.</span><span class='nx'>parent</span><span class='p'>()</span>
+<span class='c1'>// Set the range start offset to 4</span>
+<span class='nx'>range</span><span class='p'>.</span><span class='nx'>start</span><span class='p'>(</span><span class='mi'>4</span><span class='p'>)</span>
+</code></pre>
+</div>
+<p>The container returned by <code>start()</code> and <code>end()</code> can be of <a href='https://developer.mozilla.org/en/nodeType'>type</a> <code>Node.TEXT_NODE</code> or <code>Node.CDATA_SECTION_NODE</code>. To acces the element containing the text use this:</p>
+<div class='highlight'><pre><code class='javascript'><span class='kd'>var</span> <span class='nx'>startNode</span> <span class='o'>=</span> <span class='nx'>range</span><span class='p'>.</span><span class='nx'>start</span><span class='p'>().</span><span class='nx'>container</span><span class='p'>;</span>
+<span class='k'>if</span><span class='p'>(</span><span class='nx'>startNode</span><span class='p'>.</span><span class='nx'>nodeType</span> <span class='o'>===</span> <span class='nx'>Node</span><span class='p'>.</span><span class='nx'>TEXT_NODE</span> <span class='o'>||</span>
+	<span class='nx'>startNode</span><span class='p'>.</span><span class='nx'>nodeType</span> <span class='o'>===</span> <span class='nx'>Node</span><span class='p'>.</span><span class='nx'>CDATA_SECTION_NODE</span><span class='p'>)</span> <span class='p'>{</span>
+  <span class='nx'>startNode</span> <span class='o'>=</span> <span class='nx'>startNode</span><span class='p'>.</span><span class='nx'>parentNode</span><span class='p'>;</span>
+<span class='p'>}</span>
+<span class='nx'>$</span><span class='p'>(</span><span class='nx'>startNode</span><span class='p'>).</span><span class='nx'>addClass</span><span class='p'>(</span><span class='s1'>&#39;highlight&#39;</span><span class='p'>);</span>
 </code></pre>
 </div>
 <h2 id='within_'>$.within <code>$(el).within(left, top, [useOffsetCache])</code></h2>
@@ -146,6 +169,23 @@
 </div>
 <p>Use <code>$(el).withinBox(left, top, width, height)</code> to get all elements within a certain area:</p>
 <div class='highlight'><pre><code class='javascript'><span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;*&#39;</span><span class='p'>).</span><span class='nx'>within</span><span class='p'>(</span><span class='mi'>200</span><span class='p'>,</span> <span class='mi'>200</span><span class='p'>,</span> <span class='mi'>100</span><span class='p'>,</span> <span class='mi'>100</span><span class='p'>);</span>
+</code></pre>
+</div>
+<h2 id='formparams_'>$.formParams <code>$(form).formParams([convert])</code></h2>
+
+<p><a href='http://donejs.com/docs.html#!jQuery.formParams'>$.formParams</a> returns a JavaScript object for values in a form.</p>
+<div class='highlight'><pre><code class='html'><span class='nt'>&lt;form&gt;</span>
+	<span class='nt'>&lt;input</span> <span class='na'>type=</span><span class='s'>&quot;text&quot;</span> <span class='na'>name=</span><span class='s'>&quot;first&quot;</span> <span class='na'>value=</span><span class='s'>&quot;John&quot;</span> <span class='nt'>/&gt;</span>
+	<span class='nt'>&lt;input</span> <span class='na'>type=</span><span class='s'>&quot;text&quot;</span> <span class='na'>name=</span><span class='s'>&quot;last&quot;</span> <span class='na'>value=</span><span class='s'>&quot;Doe&quot;</span> <span class='nt'>/&gt;</span>
+	<span class='nt'>&lt;input</span> <span class='na'>type=</span><span class='s'>&quot;text&quot;</span> <span class='na'>name=</span><span class='s'>&quot;phone[mobile]&quot;</span> <span class='na'>value=</span><span class='s'>&quot;1234567890&quot;</span> <span class='nt'>/&gt;</span>
+	<span class='nt'>&lt;input</span> <span class='na'>type=</span><span class='s'>&quot;text&quot;</span> <span class='na'>name=</span><span class='s'>&quot;phone[home]&quot;</span> <span class='na'>value=</span><span class='s'>&quot;0987654321&quot;</span> <span class='nt'>/&gt;</span>
+<span class='nt'>&lt;/form&gt;</span>
+</code></pre>
+</div><div class='highlight'><pre><code class='javascript'><span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;form&#39;</span><span class='p'>).</span><span class='nx'>formParams</span><span class='p'>()</span>
+<span class='c1'>// -&gt; {</span>
+<span class='c1'>//      first : &quot;John&quot;, last : &quot;Doe&quot;,</span>
+<span class='c1'>//      phone : { mobile : &quot;1234567890&quot;, home : &quot;0987654321&quot; }</span>
+<span class='c1'>// }</span>
 </code></pre>
 </div>
 <h2 id='eventdrag______'>$.event.drag <code>dragdown</code> <code>draginit</code> <code>dragmove</code> <code>dragend</code> <code>dragover</code> <code>dragout</code></h2>
@@ -230,11 +270,14 @@
 <h2 id='eventhover____'>$.event.hover <code>hoverinit</code> <code>hoverenter</code> <code>hovermove</code> <code>hoverleave</code></h2>
 
 <p><a href='http://donejs.com/docs.html#!jQuery.event.hover'>$.event.hover</a> is a flexible way to deal with hover related events. You can listen to the <code>hoverinit</code>, <code>hoverenter</code>, <code>hovermove</code> and <code>hoverleave</code> events:</p>
-<div class='highlight'><pre><code class='javascript'><span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;#menu&#39;</span><span class='p'>).</span><span class='nx'>on</span><span class='p'>(</span><span class='s2'>&quot;.option&quot;</span><span class='p'>,</span> <span class='s2'>&quot;hoverenter&quot;</span><span class='p'>,</span> <span class='kd'>function</span><span class='p'>(){</span>
-  <span class='nx'>$</span><span class='p'>(</span><span class='k'>this</span><span class='p'>).</span><span class='nx'>addClass</span><span class='p'>(</span><span class='s2'>&quot;hovering&quot;</span><span class='p'>);</span>
-<span class='p'>}).</span><span class='nx'>on</span><span class='p'>(</span><span class='s2'>&quot;.option&quot;</span><span class='p'>,</span> <span class='s2'>&quot;hoverleave&quot;</span><span class='p'>,</span> <span class='kd'>function</span><span class='p'>(){</span>
-  <span class='nx'>$</span><span class='p'>(</span><span class='k'>this</span><span class='p'>).</span><span class='nx'>removeClass</span><span class='p'>(</span><span class='s2'>&quot;hovering&quot;</span><span class='p'>);</span>
-<span class='p'>})</span>
+<div class='highlight'><pre><code class='javascript'><span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;#menu&#39;</span><span class='p'>).</span><span class='nx'>on</span><span class='p'>({</span>
+  <span class='nx'>hoverenter</span> <span class='o'>:</span> <span class='kd'>function</span><span class='p'>(){</span>
+    <span class='nx'>$</span><span class='p'>(</span><span class='k'>this</span><span class='p'>).</span><span class='nx'>addClass</span><span class='p'>(</span><span class='s2'>&quot;hovering&quot;</span><span class='p'>);</span>
+  <span class='p'>},</span>
+  <span class='nx'>hoverleave</span> <span class='o'>:</span> <span class='kd'>function</span><span class='p'>(){</span>
+    <span class='nx'>$</span><span class='p'>(</span><span class='k'>this</span><span class='p'>).</span><span class='nx'>removeClass</span><span class='p'>(</span><span class='s2'>&quot;hovering&quot;</span><span class='p'>);</span>
+  <span class='p'>}</span>
+<span class='p'>},</span> <span class='s2'>&quot;.option&quot;</span><span class='p'>);</span>
 </code></pre>
 </div>
 <p>An element is hovered when the mouse moves less than a certain distance in a specific time over the element. You can modify these values either globally by setting <code>$.Hover.delay</code> and <code>$.Hover.distance</code> or individually during <code>hoverinit</code>:</p>
@@ -370,6 +413,28 @@
 </code></pre>
 </div>
 <h2 id='get_help'>Get Help</h2>
+
+<p>There are several places you can go to ask questions or get help debugging problems.</p>
+
+<h3 id='twitter'>Twitter</h3>
+
+<p>Follow <a href='https://twitter.com/#!/donejs'>@donejs</a> for updates, announcements and quick answers to your questions.</p>
+
+<h3 id='forums'>Forums</h3>
+
+<p>Visit the <a href='http://forum.javascriptmvc.com/#Forum/jquerypp'>Forums</a> for questions requiring more than 140 characters. DoneJS has a thriving community that&#8217;s always eager to help out.</p>
+
+<h3 id='irc'>IRC</h3>
+
+<p>The DoneJS IRC channel (<code>#donejs</code> on <strong>irc.freenode.net</strong>) is an awesome place to hang out with fellow DoneJS users and get your questions answered quickly.</p>
+
+<p><strong>Help Us Help You</strong></p>
+
+<p>Help the community help you by using the <a href='http://jsfiddle.net/donejs/qYdwR/'>jQuery++ jsFiddle template</a> below. Just fork it and include the URL when you are asking for help.</p>
+
+<h3 id='get_help_from_bitovi'>Get Help from Bitovi</h3>
+
+<p>Bitovi <em>(developers of jQuery++)</em> offers <a href='http://bitovi.com/training/'>training</a> and <a href='http://bitovi.com/consulting/'>consulting</a> for your team. They can also provide private one-on-one support staffed by their JavaScript/Ajax experts. <a href='contact@bitovi.com'>Contact Bitovi</a> if you&#8217;re interested.</p>
 
 <h2 id='why_jquery'>Why jQuery++</h2>
 
