@@ -85,9 +85,9 @@ $('#foo').outerWidth(100).innerHeight(50)
 $('#bar').animate({outerWidth: 500})
 {% endhighlight %}
 
-## $.selection `$(el).selection([start], [end])`
+## jquery.selection.js `$(el).selection([start], [end])`
 
-[$.selection](http://donejs.com/docs.html#!jQuery.selection) adds a jQuery plugin to set or retrieve the currently selected text range. It works on all elements:
+[jQuery.selection](http://donejs.com/docs.html#!jQuery.selection) adds `$.fn.selection` to set or retrieve the currently selected text range. It works on all elements:
 
 {% highlight html %}
 <div id="text">This is some text</div>
@@ -99,9 +99,9 @@ $('#text').selection() // -> { start : 8, end : 12 }
 $('#text').html().substring(selection.start, selection.end) // -> some
 {% endhighlight %}
 
-## $.Range `$.Range([el])` `$(el).range()`
+## jquery.range.js `$.Range([el])` `$(el).range()`
 
-[$.Range](http://donejs.com/docs.html#!jQuery.Range) helps dealing with creating, moving and comparing text ranges. Use `$.Range().current()` to get the currently selected text range or the jQuery plugin `$(el).range()` to get a *$.Range* instance from an element. Based on the above [$.selection](#__selection) example you can use *$.Range* like this:
+[jQuery.Range](http://donejs.com/docs.html#!jQuery.Range) helps dealing with creating, moving and comparing text ranges. Use `$.Range().current()` to get the currently selected text range or the jQuery plugin `$(el).range()` to get a *$.Range* instance from an element. Based on the above [$.selection](#__selection) example you can use *$.Range* like this:
 
 {% highlight javascript %}
 var range = $.Range.current()
@@ -128,9 +128,9 @@ if(startNode.nodeType === Node.TEXT_NODE ||
 $(startNode).addClass('highlight')
 {% endhighlight %}
 
-## $.within `$(el).within(left, top, [useOffsetCache])`
+## jquery.within.js `$(el).within(left, top, [useOffsetCache])`
 
-[$.within](http://donejs.com/docs.html#!jQuery.within) returns all elements on a given position or area. The following example returns all `div` elements on the point 200px left and 200px from the top:
+[jQuery.within](http://donejs.com/docs.html#!jQuery.within) adds `$.fn.within` that returns all elements on a given position or area. The following example returns all `div` elements on the point 200px left and 200px from the top:
 
 {% highlight javascript %}
 $('div').within(200, 200)
