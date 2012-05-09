@@ -15,9 +15,7 @@ They are organized in two broad categories:
 
 ### Download Builder
 
-Check the files you want to download and a zip file will be created.  The
-zip file will contain each individual plugin, and a combined version of all plugins
-minified and unminified.
+Check the files you want to download and a zip file will be created. The zip file will contain each individual plugin, and a combined version of all plugins minified and unminified.
 
 ### Using Steal
 
@@ -66,7 +64,7 @@ $.cookie('the_cookie', null);
 
 ## $.styles `$(el).styles()`
 
-[$.styles](http://donejs.com/docs.html#!jQuery.styles) is a fast way of getting a set of computed styles from an element instead of retrieving them individually (which is much slower). Computed styles reflect the actual style of an element, including browser defaults and CSS settings.
+[$.styles](http://donejs.com/docs.html#!jQuery.styles) is a fast way of getting a set of computed styles from an element instead of retrieving them individually (which is much slower). Computed styles reflect the actual current style of an element, including browser defaults and CSS settings.
 
 {% highlight javascript %}
 $("#foo").styles('float','display')
@@ -75,7 +73,7 @@ $("#foo").styles('float','display')
 
 ## $.dimensions
 
-The [$.dimensions](http://donejs.com/docs.html#!jQuery.dimensions) plugin lets you set the inner and outer width and height of an element. Inner dimensions include the padding where outer dimensions also take care of borders and - if *includeMargin* is set to `true` - margins. You can set and read these values with:
+The [$.dimensions](http://donejs.com/docs.html#!jQuery.dimensions) plugin lets you set the inner and outer width and height of an element. Inner dimensions include the padding where outer dimensions also take care of borders and margins (if *includeMargin* is set to `true`). You can set and read these values with:
 
 * `$(el).innerHeight([height])`
 * `$(el).outerHeight([height], [includeMargin])`
@@ -85,8 +83,8 @@ The [$.dimensions](http://donejs.com/docs.html#!jQuery.dimensions) plugin lets y
 And use `$(el).animate({ innerHeight : 100 })` to animate them. This is useful when you care about animating/setting the visual dimension of an element (which is what you typically want to do):
 
 {% highlight javascript %}
-$('#foo').outerWidth(100).innerHeight(50);
-$('#bar').animate({outerWidth: 500});
+$('#foo').outerWidth(100).innerHeight(50)
+$('#bar').animate({outerWidth: 500})
 {% endhighlight %}
 
 ## $.selection `$(el).selection([start], [end])`
@@ -98,17 +96,17 @@ $('#bar').animate({outerWidth: 500});
 {% endhighlight %}
 
 {% highlight javascript %}
-$('#text').selection(8, 12);
-$('#text').selection(); // -> { start : 8, end : 12 }
+$('#text').selection(8, 12)
+$('#text').selection() // -> { start : 8, end : 12 }
 $('#text').html().substring(selection.start, selection.end) // -> some
 {% endhighlight %}
 
 ## $.Range `$.Range([el])` `$(el).range()`
 
-[$.Range](http://donejs.com/docs.html#!jQuery.Range) helps dealing with creating, moving and comparing text ranges. Use `$.Range().current()` to get the currently selected text range or the jQuery plugin `$(el).range()` to get a *$.Range* instance from an element. Based on the above *$.selection* example you can use *$.Range* like this:
+[$.Range](http://donejs.com/docs.html#!jQuery.Range) helps dealing with creating, moving and comparing text ranges. Use `$.Range().current()` to get the currently selected text range or the jQuery plugin `$(el).range()` to get a *$.Range* instance from an element. Based on the above [$.selection](#__selection) example you can use *$.Range* like this:
 
 {% highlight javascript %}
-var range = $.Range.current();
+var range = $.Range.current()
 // Returns the currently selected text
 range.toString() // -> some
 // Get the beginning of the range
@@ -127,9 +125,9 @@ The container returned by `start()` and `end()` can be of [type](https://develop
 var startNode = range.start().container;
 if(startNode.nodeType === Node.TEXT_NODE ||
 	startNode.nodeType === Node.CDATA_SECTION_NODE) {
-  startNode = startNode.parentNode;
+  startNode = startNode.parentNode
 }
-$(startNode).addClass('highlight');
+$(startNode).addClass('highlight')
 {% endhighlight %}
 
 ## $.within `$(el).within(left, top, [useOffsetCache])`
@@ -137,18 +135,18 @@ $(startNode).addClass('highlight');
 [$.within](http://donejs.com/docs.html#!jQuery.within) returns all elements on a given position or area. The following example returns all `div` elements on the point 200px left and 200px from the top:
 
 {% highlight javascript %}
-$('div').within(200, 200);
+$('div').within(200, 200)
 {% endhighlight %}
 
 Use `$(el).withinBox(left, top, width, height)` to get all elements within a certain area:
 
 {% highlight javascript %}
-$('*').within(200, 200, 100, 100);
+$('*').within(200, 200, 100, 100)
 {% endhighlight %}
 
 ## $.formParams `$(form).formParams([convert])`
 
-[$.formParams](http://donejs.com/docs.html#!jQuery.formParams) returns a JavaScript object for values in a form. You can create nested objects by using a bracket notation the form element name. If *convert* is `true`, values that look like numbers or booleans will be converted and empty strings won't be added to the object. For a form like this:
+[$.formParams](http://donejs.com/docs.html#!jQuery.formParams) returns a JavaScript object for values in a form. You can create nested objects by using bracket notation in the form element name. If *convert* is `true`, values that look like numbers or booleans will be converted and empty strings won't be added to the object. For a form like this:
 
 {% highlight html %}
 <form>
@@ -184,7 +182,7 @@ An element will become draggable by listening to one of these events on it. A dr
 
 {% highlight javascript %}
 $('div').on('draginit', function(event, drag) {
-  drag.horizontal();
+  drag.horizontal()
 })
 {% endhighlight %}
 
@@ -218,27 +216,32 @@ The following example adds the `highlight` class when a drag is moved over the e
 {% highlight javascript %}
 $('.drop').on({
   "dropover" : function(ev, drop, drag){
-    $(this).addClass('highlight');
+    $(this).addClass('highlight')
   },
   "dropout" : function(ev, drop, drag){
-    $(this).removeClass('highlight');
+    $(this).removeClass('highlight')
   }
 })
 {% endhighlight %}
 
 ## $.event.hover `hoverinit` `hoverenter` `hovermove` `hoverleave`
 
-[$.event.hover](http://donejs.com/docs.html#!jQuery.event.hover) is a flexible way to deal with hover related events. You can listen to the `hoverinit`, `hoverenter`, `hovermove` and `hoverleave` events:
+[$.event.hover](http://donejs.com/docs.html#!jQuery.event.hover) is a flexible way to deal with hover related events. You can listen to the following events:
+
+* `hoverinit` - called on mouseenter
+* `hoverenter` - an element is being hovered
+* `hovermove` - the mouse moves on an element that has been hovered
+* `hoverleave` - the mouse leaves the hovered element
 
 {% highlight javascript %}
-$('#menu').on({
+$('li.menu').on({
   hoverenter : function(){
-    $(this).addClass("hovering");
+    $(this).addClass("hovering")
   },
   hoverleave : function(){
-    $(this).removeClass("hovering");
+    $(this).removeClass("hovering")
   }
-}, ".option");
+});
 {% endhighlight %}
 
 An element is hovered when the mouse moves less than a certain distance in a specific time over the element. You can modify these values either globally by setting `$.Hover.delay` and `$.Hover.distance` or individually during `hoverinit`:
@@ -249,17 +252,17 @@ $(".option").on("hoverinit", function(ev, hover){
   hover.distance(10)
   //set the delay to 200ms
   hover.delay(10)
-})
+});
 {% endhighlight %}
 
 ## $.event.destroyed `destroyed`
 
-The [destroyed](http://donejs.com/docs.html#!jQuery.event.destroyed) event is triggered when the element is removed from the DOM using one of the jQuery [manipulation methods](http://api.jquery.com/category/manipulation/).
+The `destroyed` event is triggered by [$.event.destroyed](http://donejs.com/docs.html#!jQuery.event.destroyed) when the element is removed from the DOM using one of the jQuery [manipulation methods](http://api.jquery.com/category/manipulation/).
 
 {% highlight javascript %}
 $('form').on('destroyed', function() {
   // Clean up when a form element has been removed
-});
+})
 {% endhighlight %}
 
 *Note: The destroyed event does not bubble.*
@@ -271,8 +274,8 @@ Listening to the `resize` event provided by [$.event.resize](http://donejs.com/d
 {% highlight javascript %}
 $('#foo').on('resize', function(){
   // Set width and height to the parent element width and height
-  var parent = $(this).parent();
-  $(this).width(parent.width()).height(parent.height());
+  var parent = $(this).parent()
+  $(this).width(parent.width()).height(parent.height())
 })
 
 $(document.body).trigger("resize");
@@ -285,28 +288,28 @@ $(document.body).trigger("resize");
 {% highlight javascript %}
 $('#swiper').on({
   'swipe' : function(ev) {
-    console.log('Swiping');
+    console.log('Swiping')
   },
   'swipeleft' : function(ev) {
-    console.log('Swiping left');
+    console.log('Swiping left')
   },
   'swiperight' : function(ev) {
-    console.log('Swiping right');
+    console.log('Swiping right')
   },
   'swipeup' : function(ev) {
-    console.log('Swiping up');
+    console.log('Swiping up')
   },
   'swipedown' : function(ev) {
-    console.log('Swiping down');
+    console.log('Swiping down')
   }
-});
+})
 {% endhighlight %}
 
 Set `$.event.swipe.delay` to the maximum time the swipe motion is allowed to take (default is 500ms).
 
 ## $.event.key `$.event.key(mapping)` `event.keyName()`
 
-[$.event.key](http://donejs.com/docs.html#!jQuery.event.key) allows you to define alternate keymaps or overwrite existing keycodes. It also adds a `.keyName()` method which returns a string representation of the key pressed. For example lets map the arrow up, down, left and right keys to the more gamer friendly WASD mapping:
+[$.event.key](http://donejs.com/docs.html#!jQuery.event.key) allows you to define alternate keymaps or overwrite existing keycodes. It also adds a `.keyName()` method which returns a string representation of the key that has been pressed. For example lets map the arrow up, down, left and right keys to the more gamer friendly WASD mapping:
 
 {% highlight javascript %}
 $.event.key({
@@ -314,21 +317,21 @@ $.event.key({
   "a" : 37,
   "s" : 40,
   "d" : 39
-});
+})
 {% endhighlight %}
 
-You can use `event.keyName()` to get a string representation of the key pressed:
+Use `event.keyName()` to get a string representation of the current key:
 
 {% highlight javascript %}
 $("input").on('keypress', function(ev){
   // Don't allow backspace keys
   if(ev.keyName() == '\b') {
-    ev.preventDefault();
+    ev.preventDefault()
   }
   if(ev.keyName() == 'f1') {
-    alert('I could be a tooltip for help');
+    alert('I could be a tooltip for help')
   }
-});
+})
 {% endhighlight %}
 
 The following keynames will be mapped by default:
@@ -353,22 +356,22 @@ The following keynames will be mapped by default:
 {% highlight javascript %}
 $("div").on("default.click", function(ev) {
   // ...
-});
+})
 {% endhighlight %}
 
 ## $.event.pause
 
 ### pause and resume `event.pause()` `event.resume()`
 
-[$.event.pause](http://donejs.com/docs.html#!jQuery.event.pause) lets you pause and resume events. Pausing an event works similar to [.stopImmediatePropagation()](http://api.jquery.com/event.stopImmediatePropagation/) by calling `event.pause()`. Calling `event.resume()` will continue propagation. This is great when doing asynchronous processing in an event handler:
+Use [$.event.pause](http://donejs.com/docs.html#!jQuery.event.pause) for pausable and resumable event bubbling. Pausing an event works similar to [.stopImmediatePropagation()](http://api.jquery.com/event.stopImmediatePropagation/) by calling `event.pause()`. Calling `event.resume()` will continue propagation. This is great when doing asynchronous processing in an event handler:
 
 {% highlight javascript %}
 $('#todos').on('show', function(ev){
-  ev.pause();
+  ev.pause()
 
   $(this).load('todos.html', function(){
-    ev.resume();
-   });
+    ev.resume()
+  })
 })
 {% endhighlight %}
 
@@ -378,10 +381,10 @@ $('#todos').on('show', function(ev){
 
 {% highlight javascript %}
 $('panel').triggerAsync('show', function(){
-    $('#panel').show();
+    $('#panel').show()
   },function(){
-    $('#other').addClass('error');
-});
+    $('#other').addClass('error')
+})
 {% endhighlight %}
 
 ## Get Help
