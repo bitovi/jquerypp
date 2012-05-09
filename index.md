@@ -27,9 +27,7 @@ require('jquery/compare')
 
 ## $.compare `$(elA).compare(elB)`
 
-[$.fn.compare](http://donejs.com/docs.html#!jQuery.compare) compares
-the position of two nodes and returns a number bitmask detailing how they
-are positioned relative to each other. The following list shows the `bitmask`, the __number__ returned by $.compare and what it corresponds to:
+[$.fn.compare](http://donejs.com/docs.html#!jQuery.compare) compares the position of two nodes and returns a number bitmask detailing how they are positioned relative to each other. The following list shows the `bitmask`, the __number__ and what it corresponds to:
 
 * `000000` -> __0__: Elements are identical
 * `000001` -> __1__: The nodes are in different documents (or one is outside of a document)

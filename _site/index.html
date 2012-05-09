@@ -63,7 +63,7 @@
 
 <h2 id='compare_'>$.compare <code>$(elA).compare(elB)</code></h2>
 
-<p><a href='http://donejs.com/docs.html#!jQuery.compare'>$.fn.compare</a> compares the position of two nodes and returns a number bitmask detailing how they are positioned relative to each other. The following list shows the <code>bitmask</code>, the <strong>number</strong> returned by $.compare and what it corresponds to:</p>
+<p><a href='http://donejs.com/docs.html#!jQuery.compare'>$.fn.compare</a> compares the position of two nodes and returns a number bitmask detailing how they are positioned relative to each other. The following list shows the <code>bitmask</code>, the <strong>number</strong> and what it corresponds to:</p>
 
 <ul>
 <li><code>000000</code> -&gt; <strong>0</strong>: Elements are identical</li>
@@ -348,7 +348,7 @@
 
 <h2 id='eventkey__'>$.event.key <code>$.event.key(mapping)</code> <code>event.keyName()</code></h2>
 
-<p><a href='http://donejs.com/docs.html#!jQuery.event.key'>$.event.key</a> allows you to define alternate keymaps or overwrite existing keycodes. It also adds a <code>.keyName()</code> method which returns a string representation of the key pressed. For example lets map the arrow up, down, left and right keys to the more gamer friendly WASD mapping:</p>
+<p><a href='http://donejs.com/docs.html#!jQuery.event.key'>$.event.key</a> allows you to define alternate keymaps or overwrite existing keycodes. It also adds a <code>.keyName()</code> method which returns a string representation of the key that has been pressed. For example lets map the arrow up, down, left and right keys to the more gamer friendly WASD mapping:</p>
 <div class='highlight'><pre><code class='javascript'><span class='nx'>$</span><span class='p'>.</span><span class='nx'>event</span><span class='p'>.</span><span class='nx'>key</span><span class='p'>({</span>
   <span class='s2'>&quot;w&quot;</span> <span class='o'>:</span> <span class='mi'>38</span><span class='p'>,</span>
   <span class='s2'>&quot;a&quot;</span> <span class='o'>:</span> <span class='mi'>37</span><span class='p'>,</span>
@@ -357,7 +357,7 @@
 <span class='p'>})</span>
 </code></pre>
 </div>
-<p>You can use <code>event.keyName()</code> to get a string representation of the key pressed:</p>
+<p>Use <code>event.keyName()</code> to get a string representation of the current key:</p>
 <div class='highlight'><pre><code class='javascript'><span class='nx'>$</span><span class='p'>(</span><span class='s2'>&quot;input&quot;</span><span class='p'>).</span><span class='nx'>on</span><span class='p'>(</span><span class='s1'>&#39;keypress&#39;</span><span class='p'>,</span> <span class='kd'>function</span><span class='p'>(</span><span class='nx'>ev</span><span class='p'>){</span>
   <span class='c1'>// Don&#39;t allow backspace keys</span>
   <span class='k'>if</span><span class='p'>(</span><span class='nx'>ev</span><span class='p'>.</span><span class='nx'>keyName</span><span class='p'>()</span> <span class='o'>==</span> <span class='s1'>&#39;\b&#39;</span><span class='p'>)</span> <span class='p'>{</span>
@@ -409,13 +409,13 @@
 
 <h3 id='pause_and_resume__'>pause and resume <code>event.pause()</code> <code>event.resume()</code></h3>
 
-<p><a href='http://donejs.com/docs.html#!jQuery.event.pause'>$.event.pause</a> lets you pause and resume events. Pausing an event works similar to <a href='http://api.jquery.com/event.stopImmediatePropagation/'>.stopImmediatePropagation()</a> by calling <code>event.pause()</code>. Calling <code>event.resume()</code> will continue propagation. This is great when doing asynchronous processing in an event handler:</p>
+<p>Use <a href='http://donejs.com/docs.html#!jQuery.event.pause'>$.event.pause</a> for pausable and resumable event bubbling. Pausing an event works similar to <a href='http://api.jquery.com/event.stopImmediatePropagation/'>.stopImmediatePropagation()</a> by calling <code>event.pause()</code>. Calling <code>event.resume()</code> will continue propagation. This is great when doing asynchronous processing in an event handler:</p>
 <div class='highlight'><pre><code class='javascript'><span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;#todos&#39;</span><span class='p'>).</span><span class='nx'>on</span><span class='p'>(</span><span class='s1'>&#39;show&#39;</span><span class='p'>,</span> <span class='kd'>function</span><span class='p'>(</span><span class='nx'>ev</span><span class='p'>){</span>
   <span class='nx'>ev</span><span class='p'>.</span><span class='nx'>pause</span><span class='p'>()</span>
 
   <span class='nx'>$</span><span class='p'>(</span><span class='k'>this</span><span class='p'>).</span><span class='nx'>load</span><span class='p'>(</span><span class='s1'>&#39;todos.html&#39;</span><span class='p'>,</span> <span class='kd'>function</span><span class='p'>(){</span>
     <span class='nx'>ev</span><span class='p'>.</span><span class='nx'>resume</span><span class='p'>()</span>
-   <span class='p'>})</span>
+  <span class='p'>})</span>
 <span class='p'>})</span>
 </code></pre>
 </div>
