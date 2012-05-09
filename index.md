@@ -50,7 +50,7 @@ if( $('#foo').compare($('#bar')) & 4 ) {
 
 This is useful when you want to rapidly compare element positions. This is common when widgets can reorder themselves (drag-drop) or with nested widgets (trees).
 
-## $.cookie
+## $.cookie `$.cookie(name, [value], [options])`
 
 [$.cookie](http://donejs.com/docs.html#!jQuery.cookie) wraps the [jQuery cookie](https://github.com/carhartl/jquery-cookie) plugin for manipulating cookies. You can use it like this:
 
@@ -304,7 +304,7 @@ $('#swiper').on({
 
 Set `$.event.swipe.delay` to the maximum time the swipe motion is allowed to take (default is 500ms).
 
-## $.event.key
+## $.event.key `$.event.key(mapping)` `event.keyName()`
 
 [$.event.key](http://donejs.com/docs.html#!jQuery.event.key) allows you to define alternate keymaps or overwrite existing keycodes. It also adds a `.keyName()` method which returns a string representation of the key pressed. For example lets map the arrow up, down, left and right keys to the more gamer friendly WASD mapping:
 
@@ -358,7 +358,7 @@ $("div").on("default.click", function(ev) {
 
 ## $.event.pause
 
-### pause and resume `event.pause(), event.resume()`
+### pause and resume `event.pause()` `event.resume()`
 
 [$.event.pause](http://donejs.com/docs.html#!jQuery.event.pause) lets you pause and resume events. Pausing an event works similar to [.stopImmediatePropagation()](http://api.jquery.com/event.stopImmediatePropagation/) by calling `event.pause()`. Calling `event.resume()` will continue propagation. This is great when doing asynchronous processing in an event handler:
 
