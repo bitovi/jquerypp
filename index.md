@@ -27,7 +27,7 @@ require('jquery/compare')
 
 ## DOM HELPERS
 
-## $.compare `$(elA).compare(elB)`
+## compare `$(elA).compare(elB)`
 
 [$.fn.compare](http://donejs.com/docs.html#!jQuery.compare) compares the position of two nodes and returns a number bitmask detailing how they are positioned relative to each other. The following list shows the `bitmask`, the __number__ and what it corresponds to:
 
@@ -48,7 +48,7 @@ if( $('#foo').compare($('#bar')) & 4 ) {
 
 This is useful when you want to rapidly compare element positions. This is common when widgets can reorder themselves (drag-drop) or with nested widgets (trees).
 
-## $.cookie `$.cookie(name, [value], [options])`
+## cookie `$.cookie(name, [value], [options])`
 
 [$.cookie](http://donejs.com/docs.html#!jQuery.cookie) wraps the [jQuery cookie](https://github.com/carhartl/jquery-cookie) plugin for manipulating cookies. You can use it like this:
 
@@ -62,7 +62,7 @@ $.cookie('the_cookie', 'the_value', { expires: 7 });
 $.cookie('the_cookie', null);
 {% endhighlight %}
 
-## $.styles `$(el).styles()`
+## styles `$(el).styles()`
 
 [$.styles](http://donejs.com/docs.html#!jQuery.styles) is a fast way of getting a set of computed styles from an element instead of retrieving them individually (which is much slower). Computed styles reflect the actual current style of an element, including browser defaults and CSS settings.
 
@@ -71,7 +71,7 @@ $("#foo").styles('float','display')
 // -> { cssFloat: "left", display: "block" }
 {% endhighlight %}
 
-## $.dimensions
+## dimensions
 
 The [$.dimensions](http://donejs.com/docs.html#!jQuery.dimensions) plugin lets you set the inner and outer width and height of an element. Inner dimensions include the padding where outer dimensions also take care of borders and margins (if *includeMargin* is set to `true`). You can set and read these values with:
 
@@ -87,7 +87,7 @@ $('#foo').outerWidth(100).innerHeight(50)
 $('#bar').animate({outerWidth: 500})
 {% endhighlight %}
 
-## jquery.selection.js `$(el).selection([start], [end])`
+## selection `$(el).selection([start], [end])`
 
 [jQuery.selection](http://donejs.com/docs.html#!jQuery.selection) adds `$.fn.selection` to set or retrieve the currently selected text range. It works on all elements:
 
