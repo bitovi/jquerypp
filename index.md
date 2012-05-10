@@ -386,7 +386,7 @@ $('#todos').on('show', function(ev){
 
 [$.event.resize](http://donejs.com/docs.html#!jQuery.event.resize) adds the `resize` event which is very useful for resizing a specific element whenever the parents dimension changes. Unlike other events that bubble from the target element to the document the `resize` event will propagate from the outside-in. This means that outside elements will always resize first. This is great for creating application layouts like this:
 
-![jQuery.dimensions: .innerWidth()](images/dimensions.png)
+![jQuery.event.resize application layout](images/resize.png)
 
 {% highlight javascript %}
 $('#foo').on('resize', function(){
