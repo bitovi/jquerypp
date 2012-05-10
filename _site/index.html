@@ -63,9 +63,9 @@
 
 <h2 id='dom_helpers'>DOM HELPERS</h2>
 
-<h2 id='compare___number'>compare <code>$(elA).compare(elB)</code> -&gt; Number</h2>
+<h2 id='compare_'>compare <code>$(elA).compare(elB) -&gt; Number</code></h2>
 
-<p><a href='http://donejs.com/docs.html#!jQuery.compare'>$.fn.compare</a> compares the position of two nodes and returns a number bitmask detailing how they are positioned relative to each other. The following list shows the <code>bitmask</code>, the <strong>number</strong> and what it corresponds to:</p>
+<p><a href='http://donejs.com/docs.html#!jQuery.compare'>jQuery.compare</a> adds <code>$.fn.compare</code> to compare the position of two nodes and return a number bitmask detailing how they are positioned relative to each other. The following list shows the <code>bitmask</code>, the <strong>number</strong> and what it corresponds to:</p>
 
 <ul>
 <li><code>000000</code> -&gt; <strong>0</strong>: Elements are identical</li>
@@ -91,7 +91,7 @@
 
 <h2 id='cookie_'>cookie <code>$.cookie(name, [value], [options]) -&gt; Object|String</code></h2>
 
-<p><a href='http://donejs.com/docs.html#!jQuery.cookie'>$.cookie</a> packages Klaus Hartl&#8217;s <a href='https://github.com/carhartl/jquery-cookie'>jQuery cookie</a> plugin for manipulating cookies. You can use it like this:</p>
+<p><a href='http://donejs.com/docs.html#!jQuery.cookie'>jQuery.cookie</a> packages Klaus Hartl&#8217;s <a href='https://github.com/carhartl/jquery-cookie'>jQuery cookie</a> plugin for manipulating cookies. You can use it like this:</p>
 <div class='highlight'><pre><code class='javascript'><span class='c1'>// Set a session cookie</span>
 <span class='nx'>$</span><span class='p'>.</span><span class='nx'>cookie</span><span class='p'>(</span><span class='s1'>&#39;the_cookie&#39;</span><span class='p'>,</span> <span class='s1'>&#39;the_value&#39;</span><span class='p'>);</span>
 <span class='nx'>$</span><span class='p'>.</span><span class='nx'>cookie</span><span class='p'>(</span><span class='s1'>&#39;the_cookie&#39;</span><span class='p'>);</span> <span class='c1'>// -&gt; &#39;the_value&#39;</span>
@@ -101,22 +101,28 @@
 <span class='nx'>$</span><span class='p'>.</span><span class='nx'>cookie</span><span class='p'>(</span><span class='s1'>&#39;the_cookie&#39;</span><span class='p'>,</span> <span class='kc'>null</span><span class='p'>);</span>
 </code></pre>
 </div>
-<p>The following options are available:</p>
+<p>The following <em>options</em> are available:</p>
 
 <ul>
-<li><code>expire</code> - The expiration time in days or an expiry date</li>
+<li><code>expires</code> - The expiration time in days or an expiry date</li>
+
+<li><code>domain</code> - The domain name</li>
+
+<li><code>path</code> - The value of the path for the cookie</li>
+
+<li><code>secure</code> - If the cookie requires HTTPS</li>
 </ul>
 
 <h2 id='styles_'>styles <code>$(el).styles() -&gt; Object</code></h2>
 
-<p><a href='http://donejs.com/docs.html#!jQuery.styles'>$.styles</a> is a fast way of getting a set of computed styles from an element instead of retrieving them individually (which is much slower //). Computed styles reflect the actual current style of an element, including browser defaults and CSS settings.</p>
+<p><a href='http://donejs.com/docs.html#!jQuery.styles'>jQuery.styles</a> adds <code>$.fn.styles</code> as a fast way of getting a set of computed styles from an element. It performs a lot better than retrieving them individually using <a href='http://api.jquery.com/css/'>jQuery.css()</a>. Computed styles reflect the actual current style of an element, including browser defaults and CSS settings.</p>
 <div class='highlight'><pre><code class='javascript'><span class='nx'>$</span><span class='p'>(</span><span class='s2'>&quot;#foo&quot;</span><span class='p'>).</span><span class='nx'>styles</span><span class='p'>(</span><span class='s1'>&#39;float&#39;</span><span class='p'>,</span><span class='s1'>&#39;display&#39;</span><span class='p'>)</span>
 <span class='c1'>// -&gt; { cssFloat: &quot;left&quot;, display: &quot;block&quot; }</span>
 </code></pre>
 </div>
 <h2 id='dimensions'>dimensions</h2>
 
-<p>The <a href='http://donejs.com/docs.html#!jQuery.dimensions'>$.dimensions</a> plugin lets you set the inner and outer width and height of an element. Inner dimensions include the padding where outer dimensions also take care of borders and margins (if <em>includeMargin</em> is set to <code>true</code>). You can set and read these values with:</p>
+<p><a href='http://donejs.com/docs.html#!jQuery.dimensions'>jQuery.dimensions</a> overwrites <code>$.fn.innerWidth</code>, <code>$.fn.outerWidth</code>, <code>$.fn.innerHeight</code>, <code>$.fn.outerHeight</code> and enables <code>$.fn.animate</code> to animate these values. Inner dimensions include the padding where outer dimensions also take care of borders and margins (if <em>includeMargin</em> is set to <code>true</code>). You can set and read these values using:</p>
 
 <ul>
 <li><code>$(el).innerHeight([height])</code></li>
@@ -140,7 +146,7 @@
 </code></pre>
 </div><div class='highlight'><pre><code class='javascript'><span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;#text&#39;</span><span class='p'>).</span><span class='nx'>selection</span><span class='p'>(</span><span class='mi'>8</span><span class='p'>,</span> <span class='mi'>12</span><span class='p'>)</span>
 <span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;#text&#39;</span><span class='p'>).</span><span class='nx'>selection</span><span class='p'>()</span> <span class='c1'>// -&gt; { start : 8, end : 12 }</span>
-<span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;#text&#39;</span><span class='p'>).</span><span class='nx'>html</span><span class='p'>().</span><span class='nx'>substring</span><span class='p'>(</span><span class='nx'>selection</span><span class='p'>.</span><span class='nx'>start</span><span class='p'>,</span> <span class='nx'>selection</span><span class='p'>.</span><span class='nx'>end</span><span class='p'>)</span> <span class='c1'>// -&gt; some</span>
+<span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;#text&#39;</span><span class='p'>).</span><span class='nx'>text</span><span class='p'>().</span><span class='nx'>substring</span><span class='p'>(</span><span class='nx'>selection</span><span class='p'>.</span><span class='nx'>start</span><span class='p'>,</span> <span class='nx'>selection</span><span class='p'>.</span><span class='nx'>end</span><span class='p'>)</span> <span class='c1'>// -&gt; some</span>
 </code></pre>
 </div>
 <h2 id='range__'>range <code>$.Range([el]) -&gt; $.Range</code> <code>$(el).range() -&gt; $.Range</code></h2>
@@ -358,9 +364,7 @@
 
 <h2 id='key_'>key <code>event.keyName()</code></h2>
 
-<p><a href='http://donejs.com/docs.html#!jQuery.event.key'>$.event.key</a> allows you to define alternate keymaps or overwrite existing keycodes. It also adds a <code>.keyName()</code> method which returns a string representation of the key that has been pressed. For example lets map the arrow up, down, left and right keys to the more gamer friendly WASD mapping:</p>
-
-<p>Use <code>event.keyName()</code> to get a string representation of the current key:</p>
+<p><a href='http://donejs.com/docs.html#!jQuery.event.key'>$.event.key</a> adds a <code>.keyName()</code> method to the event object that returns a string representation of the current key:</p>
 <div class='highlight'><pre><code class='javascript'><span class='nx'>$</span><span class='p'>(</span><span class='s2'>&quot;input&quot;</span><span class='p'>).</span><span class='nx'>on</span><span class='p'>(</span><span class='s1'>&#39;keypress&#39;</span><span class='p'>,</span> <span class='kd'>function</span><span class='p'>(</span><span class='nx'>ev</span><span class='p'>){</span>
   <span class='c1'>// Don&#39;t allow backspace keys</span>
   <span class='k'>if</span><span class='p'>(</span><span class='nx'>ev</span><span class='p'>.</span><span class='nx'>keyName</span><span class='p'>()</span> <span class='o'>==</span> <span class='s1'>&#39;\b&#39;</span><span class='p'>)</span> <span class='p'>{</span>
@@ -372,7 +376,7 @@
 <span class='p'>})</span>
 </code></pre>
 </div>
-<p>The following keynames will be mapped by default:</p>
+<p>The following keynames are mapped by default:</p>
 
 <ul>
 <li><code>\b</code> - backspace</li>

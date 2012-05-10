@@ -27,9 +27,9 @@ require('jquery/compare')
 
 ## DOM HELPERS
 
-## compare `$(elA).compare(elB)` -> Number
+## compare `$(elA).compare(elB) -> Number`
 
-[$.fn.compare](http://donejs.com/docs.html#!jQuery.compare) compares the position of two nodes and returns a number bitmask detailing how they are positioned relative to each other. The following list shows the `bitmask`, the __number__ and what it corresponds to:
+[jQuery.compare](http://donejs.com/docs.html#!jQuery.compare) adds `$.fn.compare` to compare the position of two nodes and return a number bitmask detailing how they are positioned relative to each other. The following list shows the `bitmask`, the __number__ and what it corresponds to:
 
 * `000000` -> __0__: Elements are identical
 * `000001` -> __1__: The nodes are in different documents (or one is outside of a document)
@@ -50,7 +50,7 @@ This is useful when you want to rapidly compare element positions. This is commo
 
 ## cookie `$.cookie(name, [value], [options]) -> Object|String`
 
-[$.cookie](http://donejs.com/docs.html#!jQuery.cookie) packages Klaus Hartl's [jQuery cookie](https://github.com/carhartl/jquery-cookie) plugin for manipulating cookies. You can use it like this:
+[jQuery.cookie](http://donejs.com/docs.html#!jQuery.cookie) packages Klaus Hartl's [jQuery cookie](https://github.com/carhartl/jquery-cookie) plugin for manipulating cookies. You can use it like this:
 
 {% highlight javascript %}
 // Set a session cookie
@@ -62,13 +62,16 @@ $.cookie('the_cookie', 'the_value', { expires: 7 });
 $.cookie('the_cookie', null);
 {% endhighlight %}
 
-The following options are available:
+The following *options* are available:
 
-* `expire` - The expiration time in days or an expiry date
+* `expires` - The expiration time in days or an expiry date
+* `domain` - The domain name
+* `path` - The value of the path for the cookie
+* `secure` - If the cookie requires HTTPS
 
 ## styles `$(el).styles() -> Object`
 
-[$.styles](http://donejs.com/docs.html#!jQuery.styles) is a fast way of getting a set of computed styles from an element instead of retrieving them individually (which is much slower //). Computed styles reflect the actual current style of an element, including browser defaults and CSS settings.
+[jQuery.styles](http://donejs.com/docs.html#!jQuery.styles) adds `$.fn.styles` as a fast way of getting a set of computed styles from an element. It performs a lot better than retrieving them individually using [jQuery.css()](http://api.jquery.com/css/). Computed styles reflect the actual current style of an element, including browser defaults and CSS settings.
 
 {% highlight javascript %}
 $("#foo").styles('float','display')
@@ -77,7 +80,7 @@ $("#foo").styles('float','display')
 
 ## dimensions
 
-The [$.dimensions](http://donejs.com/docs.html#!jQuery.dimensions) plugin lets you set the inner and outer width and height of an element. Inner dimensions include the padding where outer dimensions also take care of borders and margins (if *includeMargin* is set to `true`). You can set and read these values with:
+[jQuery.dimensions](http://donejs.com/docs.html#!jQuery.dimensions) overwrites `$.fn.innerWidth`, `$.fn.outerWidth`, `$.fn.innerHeight`, `$.fn.outerHeight` and enables `$.fn.animate` to animate these values. Inner dimensions include the padding where outer dimensions also take care of borders and margins (if *includeMargin* is set to `true`). You can set and read these values using:
 
 * `$(el).innerHeight([height])`
 * `$(el).outerHeight([height], [includeMargin])`
@@ -102,7 +105,7 @@ $('#bar').animate({outerWidth: 500})
 {% highlight javascript %}
 $('#text').selection(8, 12)
 $('#text').selection() // -> { start : 8, end : 12 }
-$('#text').html().substring(selection.start, selection.end) // -> some
+$('#text').text().substring(selection.start, selection.end) // -> some
 {% endhighlight %}
 
 ## range `$.Range([el]) -> $.Range` `$(el).range() -> $.Range`
@@ -315,9 +318,7 @@ Set `$.event.swipe.delay` to the maximum time the swipe motion is allowed to tak
 
 ## key `event.keyName()`
 
-[$.event.key](http://donejs.com/docs.html#!jQuery.event.key) allows you to define alternate keymaps or overwrite existing keycodes. It also adds a `.keyName()` method which returns a string representation of the key that has been pressed. For example lets map the arrow up, down, left and right keys to the more gamer friendly WASD mapping:
-
-Use `event.keyName()` to get a string representation of the current key:
+[$.event.key](http://donejs.com/docs.html#!jQuery.event.key) adds a `.keyName()` method to the event object that returns a string representation of the current key:
 
 {% highlight javascript %}
 $("input").on('keypress', function(ev){
@@ -331,7 +332,7 @@ $("input").on('keypress', function(ev){
 })
 {% endhighlight %}
 
-The following keynames will be mapped by default:
+The following keynames are mapped by default:
 
 * `\b` - backspace
 * `\t` - tab
