@@ -1,2 +1,45 @@
 @page jQuery.event.hover
 @parent jquerypp
+
+Provides delegate-able hover events.
+
+A hover happens when the mouse stops moving over an element for a period of time.  You can listen and configure hover with the following events:
+
+* `[jQuery.event.hover.hoverinit hoverinit]` - called on mouseenter, use this event to customize [jQuery.Hover.prototype.delay] and [jQuery.Hover.prototype.distance]
+* `[jQuery.event.hover.hoverenter hoverenter]` - an element is being hovered
+* `[jQuery.event.hover.hovermove hovermove]` - the mouse moves on an element that has been hovered
+* `[jQuery.event.hover.hoverleave hoverleave]` - the mouse leaves the element that has been hovered
+
+## Quick Example
+
+The following listens for hoverenter and adds a class to style the element, and removes the class on hoverleave.
+
+	$('#menu').delegate(".option","hoverenter",function(){
+	  $(this).addClass("hovering");
+	}).delegate(".option","hoverleave",function(){
+	  $(this).removeClass("hovering");
+	})
+
+## Configuring Distance and Delay
+
+An element is hovered when the mouse moves less than a certain distance in specific time over the element.
+
+You can configure that distance and time by adjusting the <code>distance</code> and `delay` values.
+
+You can set delay and distance globally by adjusting the static properties:
+
+	$.Hover.delay = 10
+	$.Hover.distance = 1
+
+Or you can adjust delay and distance for an individual element in hoverenter:
+
+	$(".option").delegate("hoverinit", function(ev, hover){
+	//set the distance to 10px
+	hover.distance(10)
+	//set the delay to 200ms
+	hover.delay(10)
+	})
+
+## Demo
+
+@demo jquery/event/hover/hover.html

@@ -1,6 +1,3 @@
-/**
- *  @add jQuery.fn
- */
 steal('jquery/dom').then(function($){
    var withinBox = function(x, y, left, top, width, height ){
         return (y >= top &&
@@ -10,10 +7,10 @@ steal('jquery/dom').then(function($){
     } 
 /**
  * @function jQuery.fn.within
- * @parent jquerypp
+ * @parent jQuery.within
  * @plugin jquery/dom/within
  * 
- * Returns the elements are within the position.
+ * Returns the elements are within a given position.
  * 
  *     // get all elements that touch 200x200.
  *     $('*').within(200, 200);
@@ -49,17 +46,23 @@ $.fn.within= function(left, top, useOffsetCache) {
 
 
 /**
- * @function withinBox
- * @parent jQuery.fn.within
- * returns if elements are within the box
- * @param {Object} left
- * @param {Object} top
- * @param {Object} width
- * @param {Object} height
- * @param {Object} cache
+ * @function jQuery.fn.withinBox
+ * @parent jQuery.within
+ *
+ * Returns a jQuery collection of elements that have a given area in common.
+ *
+ *      $('*').withinBox(200, 200, 100, 100)
+ *
+ * @param {Number} left the position from the left of the page
+ * @param {Number} top the position from the top of the page
+ * @param {Number} width the width of the area
+ * @param {Number} height the height of the area
+ * @param {Boolean} [useOffsetCache] cache the dimensions and offset of the elements.
+ * @return {jQuery} a jQuery collection of elements whos area
+ * overlaps the element position.
  */
-$.fn.withinBox = function(left, top, width, height, cache){
-  	var ret = []
+$.fn.withinBox = function(left, top, width, height, useOffsetCache){
+	var ret = []
     this.each(function(){
         var q = jQuery(this);
 

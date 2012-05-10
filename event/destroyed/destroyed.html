@@ -11,13 +11,17 @@
 </div>
 	    
 <script type='text/javascript'  id='demo-source'
-		src='../../../steal/steal.js?jquery/event/destroyed/destroyed.js'>
-$("#clickToDestroy").bind("destroyed", function(){
-	$("#change").html("destroyed with "+$(this).data("testData"))
-}).data("testData","joy :)")
-$("#change").bind("click", function(){
-	$("#clickToDestroy").remove()
-})
+		src='../../../steal/steal.js?jquery/event/destroyed'></script>
+<script type="text/javascript">
+	steal(function() {
+		$("#clickToDestroy").bind("destroyed", function(){
+			$("#change").html("destroyed with "+$(this).data("testData"))
+		}).data("testData","joy :)")
+
+		$("#change").bind("click", function(){
+			$("#clickToDestroy").remove()
+		})
+	})
 </script>
 
 	</body>

@@ -1,2 +1,2 @@
-@page jQuery.range
+@page jQuery.Range
 @parent jquerypp

@@ -13,8 +13,7 @@ returns an object with:
  
 - __start__ - The number of characters from the start of the element to the start of the selection.
 - __end__ - The number of characters from the start of the element to the end of the selection.
-- __range__ - A [jQuery.Range $.Range] that represents the current selection.
- 
+
 This lets you get the selected text in a textarea like:
  
 	var textarea = $('textarea')

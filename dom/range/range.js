@@ -4,9 +4,9 @@ steal('jquery','jquery/dom/compare').then(function($){
 
 /**
  * @function jQuery.fn.range
- * @parent $.Range
+ * @parent jQuery.Range
  * 
- * Returns a jQuery.Range for the element selected.
+ * Returns a jQuery.Range for the selected element.
  * 
  *     $('#content').range()
  */
@@ -36,9 +36,8 @@ bisect = function(el, start, end){
 support = {};
 /**
  * @Class jQuery.Range
- * @parent dom
- * @tag alpha
- * 
+ * @parent jQuery.Range
+ *
  * Provides text range helpers for creating, moving, 
  * and comparing ranges cross browser.
  * 

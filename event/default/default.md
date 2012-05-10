@@ -13,8 +13,8 @@ preventDefault or returned false.
 
 To listen for a default event, just prefix the event with default.
 
-    $("div").bind("default.show", function(ev){ ... });
-    $("ul").delegate("li","default.activate", function(ev){ ... });
+    $("div").on("default.show", function(ev){ ... });
+    $("ul").on("default.activate", "li", function(ev){ ... });
 
 
 ## Example
@@ -35,7 +35,7 @@ tab until the checkbox is checked.
 
 @demo jquery/event/default/defaultjquery.html
 
-Lets see how we would build this with JavaScriptMVC:
+Lets see how we would build this with DoneJS:
 
 @demo jquery/event/default/default.html
  

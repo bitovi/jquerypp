@@ -39,58 +39,61 @@
 	    
 		<script type='text/javascript' src='../../../steal/steal.js?jquery/event/destroyed/destroyed.js'></script>
 <script type='text/javascript' id='demo-source'>
-//create a contextmenu plugin
-jQuery.fn.reusemenu = function(options){
-  //create menu and put in dom
-  var ul = $("<ul/>")
-              .addClass("menu")
-              .html(options.length ? "<li>"+options.join("</li><li>")+"</li>" :""  )
-              .appendTo(document.body),
-      //save a reference to our handler so we can remove it
-	  hideHandler = function(){ 
-        ul.find("li").animate({fontSize: 1, padding: 1});
-      },
-	  //the number of elements that remain
-	  count = this.length; 
-  
-  //take out the hide handler when we
-  //no longer have the ul
-  ul.bind("destroyed", function(){
-    $(document).unbind("click",hideHandler )	 
-  })
+	steal(function() {
+		//create a contextmenu plugin
+		jQuery.fn.reusemenu = function(options){
+		  //create menu and put in dom
+		  var ul = $("<ul/>")
+		              .addClass("menu")
+		              .html(options.length ? "<li>"+options.join("</li><li>")+"</li>" :""  )
+		              .appendTo(document.body),
+		      //save a reference to our handler so we can remove it
+			  hideHandler = function(){
+		        ul.find("li").animate({fontSize: 1, padding: 1});
+		      },
+			  //the number of elements that remain
+			  count = this.length;
 
-  $(document).click(hideHandler)	  
-  
-  //for each menu 
-  this.each(function(){
-    
-	var me = $(this);
-	
-    //position menu on click
-	me.click( function(ev) {
-		
-      ul.offset({
-        top: ev.pageY+20,
-        left: ev.pageX+20
-      }).find("li").animate({fontSize: 12, padding: 10});
-      ev.stopPropagation();
-    })
-	
-	//if last element, remove menu
-	.bind("destroyed", function() {
-      count--;
-      if(!count){
-        ul.remove();
-        ul = null;
-      }
-    })
-  })
-};
+		  //take out the hide handler when we
+		  //no longer have the ul
+		  ul.bind("destroyed", function(){
+		    $(document).unbind("click",hideHandler )
+		  })
 
-$(".context").reusemenu(["reuse","able","menu"])
-$("#remove").click(function(){
-  $(".context:first").remove()
-})
-		</script>
-	</body>
+		  $(document).click(hideHandler)
+
+		  //for each menu
+		  this.each(function(){
+
+			var me = $(this);
+
+		    //position menu on click
+			me.click( function(ev) {
+
+		      ul.offset({
+		        top: ev.pageY+20,
+		        left: ev.pageX+20
+		      }).find("li").animate({fontSize: 12, padding: 10});
+		      ev.stopPropagation();
+		    })
+
+			//if last element, remove menu
+			.bind("destroyed", function() {
+		      count--;
+		      if(!count){
+		        ul.remove();
+		        ul = null;
+		      }
+		    })
+		  })
+		};
+
+		$(".context").reusemenu(["reuse","able","menu"])
+		$("#remove").click(function(){
+		  $(".context:first").remove()
+		});
+	})
+</script>
+
+</body>
 </html>

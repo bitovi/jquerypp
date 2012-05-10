@@ -3,7 +3,6 @@ steal('jquery/event').then(function($){
 		reverseKeyMap = {};
 		
 	/**
-	 * @function jQuery.event.key
 	 * @parent jQuery.Event.prototype.key
 	 * 
 	 * Allows you to set alternate key maps or overwrite existing key codes.
@@ -76,22 +75,13 @@ steal('jquery/event').then(function($){
 	});
 	
 	/**
-	 * @parent specialevents
+	 * @parent jQuery.event.key
 	 * @plugin jquery/event/key
-	 * 
-	 * Returns a string representation of the key pressed.  The following
-	 * listens to and prevents backspaces being pressed in inputs:
-	 * 
-	 *     $("input").keypress(function(ev){
-	 *       if(ev.keyName() == '\b') {
-	 *        ev.preventDefault();
-	 *       }
-	 *     });
-	 * 
-	 * ## Keys
-	 * 
+	 * @function jQuery.Event.prototype.keyName
+	 *
+	 * Returns a string representation of the key pressed.
 	 * The following describes the key values returned by [jQuery.Event.prototype.key].
-	 * 
+	 *
 	 *  - \b - backspace
 	 *  - \t - tab
 	 *  - \r - enter key
@@ -104,11 +94,7 @@ steal('jquery/event').then(function($){
 	 *  - num0-9 - number pad key pressed
 	 *  - / ; : = , - . / ` [ \\ ] ' "
 	 *  - f1-12 - function keys pressed
-	 *  
-	 * ## Alternate keys
-	 * 
-	 * Use [jQuery.event.key] to set alternate key mappings for other locales.
-	 *  
+	 *
 	 * @return {String} The string representation of of the key pressed.
 	 */
 	jQuery.Event.prototype.keyName  = function(){
@@ -134,21 +120,10 @@ steal('jquery/event').then(function($){
 			return key_Key.toLowerCase()
 		}
 
-		//if IE
-		//if ($.browser.msie){
-			if (event.type == 'keypress'){
-				return event.keyCode ? String.fromCharCode(event.keyCode) : String.fromCharCode(event.which)
-			} /*else if (event.type == 'keydown') {
-				// IE only recognizes the backspace and delete keys in the keydown event, not keypress
-				keycode = reverseKeyMap[event.keyCode];
-				
-				if (keycode === '\b' || keycode === 'delete'){
-					return keycode;
-				}
-			} */
-		//}
-		
-		
+		if (event.type == 'keypress'){
+			return event.keyCode ? String.fromCharCode(event.keyCode) : String.fromCharCode(event.which)
+		}
+
 		if (!event.keyCode && event.which) {
 			return String.fromCharCode(event.which)
 		}

@@ -18,14 +18,7 @@ var isPhantom = /Phantom/.test(navigator.userAgent),
 	};
 
 /**
- * @class jQuery.event.swipe
- * @parent specialevents
- * @plugin jquery/event/swipe
- * 
- * Swipe provides cross browser swipe events.  On mobile devices, swipe uses touch events.  On desktop browsers,
- * swipe uses mouseevents.
- *
- * A swipe happens when a touch or drag moves 
+ * @add jQuery.event.swipe
  */
 var swipe = $.event.swipe = {
 	/**
@@ -47,11 +40,28 @@ var swipe = $.event.swipe = {
 	min : 30
 };
 
-
 $.event.setupHelper( [
 
-
-"swipe",'swipeleft','swiperight','swipeup','swipedown'], touchStartEvent, function(ev){
+/**
+ * @attribute swipe
+ */
+"swipe",
+/**
+ * @attribute swipeleft
+ */
+'swipeleft',
+/**
+ * @attribute swiperight
+ */
+'swiperight',
+/**
+ * @attribute swipeup
+ */
+'swipeup',
+/**
+ * @attribute swipedown
+ */
+'swipedown'], touchStartEvent, function(ev){
 	//listen to mouseup
 	var start = data(ev),
 		stop,

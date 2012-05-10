@@ -50,7 +50,24 @@ steal("jquery/dom").then(function( $ ) {
 			}
 
 		};
-		
+
+	/**
+	 * @function jQuery.fn.formParams
+	 * @parent jQuery.formParams
+	 * @plugin jquery/dom/form_params
+	 * @test jquery/dom/form_params/qunit.html
+	 *
+	 * Returns a JavaScript object for values in a form.
+	 * It creates nested objects by using bracket notation in the form element name.
+	 *
+	 * @param {Object} [params] If an object is passed, the form will be repopulated
+	 * with the values of the object based on the name of the inputs within
+	 * the form
+	 * @param {Boolean} [convert=false] True if strings that look like numbers
+	 * and booleans should be converted and if empty string should not be added
+	 * to the result. Defaults to false.
+	 * @return {Object} An object of name-value pairs.
+	 */
 	$.fn.extend({
 		formParams: function( params ) {
 

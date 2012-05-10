@@ -15,7 +15,7 @@ steal('jquery/event', 'jquery/lang/vector', 'jquery/event/livehack',function( $ 
 	// var handle = event.handle; //unused
 	/**
 	 * @class jQuery.Drag
-	 * @parent specialevents
+	 * @parent jQuery.event.drag
 	 * @plugin jquery/event/drag
 	 * @download  http://jmvcsite.heroku.com/pluginify?plugins[]=jquery/event/drag/drag.js
 	 * @test jquery/event/drag/qunit.html
@@ -465,7 +465,7 @@ steal('jquery/event', 'jquery/lang/vector', 'jquery/event/livehack',function( $ 
 	});
 
 	/**
-	 * @add jQuery.event.special
+	 * @add jQuery.event.drag
 	 */
 	event.setupHelper([
 	/**

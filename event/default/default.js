@@ -3,9 +3,9 @@ steal('jquery/event').then(function($){
 
 /**
  * @function jQuery.fn.triggerAsync
+ * @parent jQuery.event.default
  * @plugin jquery/event/default
- * @parent jquery.event.pause
- * 
+ *
  * Triggers an event and calls success when the event has finished propagating through the DOM and preventDefault is not called.
  *
  *     $('#panel').triggerAsync('show', function() {
@@ -63,7 +63,6 @@ var types = {}, rnamespaces= /\.(.*)$/, $event = $.event;
  * @plugin jquery/event/default
  * @download  http://jmvcsite.heroku.com/pluginify?plugins[]=jquery/event/default/default.js
  * @test jquery/event/default/qunit.html
- *
  *
  */
 $event.special["default"] = {

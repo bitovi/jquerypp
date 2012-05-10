@@ -10,9 +10,11 @@ events.
 
 ## Quick Example
 
-	$(".foo").bind("destroyed", function(){
+	$(".foo").on("destroyed", function(){
 	   //clean up code
 	})
+
+> Note: The destroyed event does not bubble.
 
 ## Quick Demo
 

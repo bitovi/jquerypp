@@ -183,12 +183,16 @@ getCharElement = function( elems , range, len ) {
 /**
  * @parent jQuery.selection
  * @function jQuery.fn.selection
- * 
+ *
+ * Set or retrieve the currently selected text range. It works on all elements:
+ *
+ *      $('#text').selection(8, 12)
+ *      $('#text').selection() // -> { start : 8, end : 12 }
  *
  * @param {Number} [start] Start of the range
  * @param {Number} [end] End of the range
  * @return {Object|jQuery} returns the selection information or the jQuery collection for
- * chaining.
+ * chaining when start and end are given.
  */
 $.fn.selection = function(start, end){
 	if(start !== undefined){

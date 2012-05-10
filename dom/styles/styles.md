@@ -1,7 +1,7 @@
 @page jQuery.styles
 @parent jquerypp
 
-Use styles to rapidly get a bunch of computed styles from an element.
+Use $.fn.styles to rapidly get a bunch of computed styles from an element.
 
 ## Quick Example
 
@@ -18,8 +18,8 @@ This is different than the values on `element.style` as
 `element.style` doesn't reflect styles provided by css or the browser's default
 css properties.
 
-Getting computed values individually is expensive! This plugin lets you get all
-the style properties you need all at once.
+Getting computed values individually (e.g. by using jQuery [.css()](http://api.jquery.com/css/)) is expensive!
+This plugin lets you get all the style properties you need all at once.
 
 ## Demo
 

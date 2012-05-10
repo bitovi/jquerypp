@@ -18,14 +18,16 @@ $.each({
  * @function jQuery.fn.outerWidth
  * @parent jQuery.dimensions
  *
- * Lets you set the outer height of an object where: <br/>
+ * Lets you set the outer width of an object where:
  *
- * > outerWidth = height + padding + border + (margin)
+ *      outerWidth = height + padding + border + (margin)
+ *
+ * And can be used like:
  *
  *      $("#foo").outerWidth(100); //sets outer width
  *      $("#foo").outerWidth(100, true); // uses margins
  *      $("#foo").outerWidth(); //returns outer width
- *      $("#foo").outerWidth(true); //returns outer width including margins
+ *      $("#foo").outerWidth(true); //returns outer width + margins
  *
  * When setting the outerWidth, it adjusts the width of the element.
  *
@@ -38,7 +40,14 @@ width:
 /**
  * @function jQuery.fn.innerWidth
  * @parent jQuery.dimensions
- * Lets you set the inner height of an object
+ *
+ * Lets you set the inner width of an element which includes padding.
+ *
+ *      $("#foo").innerWidth(100); //sets inner width
+ *      $("#foo").outerWidth(); // returns inner width
+ *
+ * Setting inner width adjusts the width of the element.
+ *
  * @param {Number} [height] 
  */
 "Width", 
@@ -47,12 +56,15 @@ width:
  * @parent jQuery.dimensions
  *
  * Lets you set the outer height of an object where: <br/> 
- * <code>outerHeight = height + padding + border + (margin)</code>.
+ *
+ *      outerHeight = height + padding + border + (margin)
+ *
+ * And can be used like:
  *
  *      $("#foo").outerHeight(100); //sets outer height
  *      $("#foo").outerHeight(100, true); //uses margins
  *      $("#foo").outerHeight(); //returns outer height
- *      $("#foo").outerHeight(true); //returns outer height with margins
+ *      $("#foo").outerHeight(true); //returns outer height + margins
  *
  * When setting the outerHeight, it adjusts the height of the element.
  *
@@ -67,8 +79,15 @@ height:
 /**
  * @function jQuery.fn.innerHeight
  * @parent jQuery.dimensions
- * Lets you set the outer width on an object
- * @param {Number} [height] 
+ *
+ * Lets you read and set the inner height of an element which includes the padding.
+ *
+ *      $("#foo").innerHeight(100); //sets inner height
+ *      $("#foo").outerHeight(); // returns inner height
+ *
+ * Setting inner width adjusts the height of the element.
+ *
+ * @param {Number} [height]
  */
 "Height" }, function(lower, Upper) {
 
