@@ -15,37 +15,47 @@ var weird = /button|select/i, //margin is inside border
 $.each({ 
 
 /**
- * @function $.fn.outerWidth
+ * @function jQuery.fn.outerWidth
  * @parent jQuery.dimensions
- * Lets you set the outer width on an object
- * @param {Number} [height] 
- * @param {Boolean} [includeMargin=false] Makes setting the outerWidth adjust 
+ *
+ * Lets you set the outer height of an object where: <br/>
+ *
+ * > outerWidth = height + padding + border + (margin)
+ *
+ *      $("#foo").outerWidth(100); //sets outer width
+ *      $("#foo").outerWidth(100, true); // uses margins
+ *      $("#foo").outerWidth(); //returns outer width
+ *      $("#foo").outerWidth(true); //returns outer width including margins
+ *
+ * When setting the outerWidth, it adjusts the width of the element.
+ *
+ * @param {Number} [height]
+ * @param {Boolean} [includeMargin=false] Makes setting the outerWidth adjust
  * for margin. Defaults to false.
- * 
- *     $('#hasMargin').outerWidth(50, true);
- * 
  * @return {jQuery|Number} If you are setting the value, returns the jQuery wrapped elements.
  */
 width: 
 /**
- * @function $.fn.innerWidth
+ * @function jQuery.fn.innerWidth
  * @parent jQuery.dimensions
  * Lets you set the inner height of an object
  * @param {Number} [height] 
  */
 "Width", 
 /**
- * @function $.fn.outerHeight
+ * @function jQuery.fn.outerHeight
  * @parent jQuery.dimensions
+ *
  * Lets you set the outer height of an object where: <br/> 
- * <code>outerHeight = height + padding + border + (margin)</code>.  
- * @codestart
- * $("#foo").outerHeight(100); //sets outer height
- * $("#foo").outerHeight(100, true); //uses margins
- * $("#foo").outerHeight(); //returns outer height
- * $("#foo").outerHeight(true); //returns outer height with margins
- * @codeend
+ * <code>outerHeight = height + padding + border + (margin)</code>.
+ *
+ *      $("#foo").outerHeight(100); //sets outer height
+ *      $("#foo").outerHeight(100, true); //uses margins
+ *      $("#foo").outerHeight(); //returns outer height
+ *      $("#foo").outerHeight(true); //returns outer height with margins
+ *
  * When setting the outerHeight, it adjusts the height of the element.
+ *
  * @param {Number|Boolean} [height] If a number is provided -> sets the outer height of the object.<br/>
  * If true is given ->  returns the outer height and includes margins.<br/>
  * If no value is given -> returns the outer height without margin.
@@ -55,7 +65,7 @@ width:
  */
 height: 
 /**
- * @function $.fn.innerHeight
+ * @function jQuery.fn.innerHeight
  * @parent jQuery.dimensions
  * Lets you set the outer width on an object
  * @param {Number} [height] 

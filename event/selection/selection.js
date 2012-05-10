@@ -1,6 +1,6 @@
 // a text selection event that is useful in mobile safari
 
-steal('jquery/dom/range','jquery/controller','jquery/event/livehack').then(function($){
+steal('jquery/dom/range', 'jquery/event/livehack').then(function($){
 
 
 	var event = $.event;

@@ -6,55 +6,47 @@ steal('jquery/lang/json',function() {
      * @plugin jquery/dom/cookie
      * @author Klaus Hartl/klaus.hartl@stilbuero.de
      *
-     *  The cookie plugin packaged with jQuery++ is written by
-     *  Klaus Hartl (stilbuero.de)<br />
-	 *  Dual licensed under the [MIT](http://www.opensource.org/licenses/mit-license.php)
+     *  The [cookie plugin](https://github.com/carhartl/jquery-cookie) packaged with jQuery++ is written by
+     *  [Klaus Hartl](stilbuero.de) and dual licensed under the [MIT](http://www.opensource.org/licenses/mit-license.php)
      *  and [GPL](http://www.gnu.org/licenses/gpl.html) licenses.
-	 *  </p>
-	 *  <p>
-	 *  Create a cookie with the given name and value and other optional parameters.
-	 *  / Get the value of a cookie with the given name.
-	 *  </p>
-	 *  <h3>Quick Examples</h3>
+     *
+	 *  ## Quick Examples</h3>
 	 * 
 	 *  Set the value of a cookie.
 	 *  
 	 *     $.cookie('the_cookie', 'the_value');
 	 * 
 	 *  Create a cookie with all available options.
-	 *  @codestart
-	 *  $.cookie('the_cookie', 'the_value',
-	 *  { expires: 7, path: '/', domain: 'jquery.com', secure: true });
-	 *  @codeend
-	 * 
+	 *
+     *      $.cookie('the_cookie', 'the_value', {
+     *          expires: 7,
+     *          path: '/',
+     *          domain: 'jquery.com',
+     *          secure: true
+     *      });
+	 *
 	 *  Create a session cookie.
-	 *  @codestart
-	 *  $.cookie('the_cookie', 'the_value');
-	 *  @codeend
-	 * 
+	 *
+     *      $.cookie('the_cookie', 'the_value');
+	 *
 	 *  Delete a cookie by passing null as value. Keep in mind that you have to use the same path and domain
 	 *  used when the cookie was set.
-	 *  @codestart
-	 *  $.cookie('the_cookie', null);
-	 *  @codeend
-	 * 
+	 *
+     *      $.cookie('the_cookie', null);
+	 *
 	 *  Get the value of a cookie.
-	 *  @codestart
-	 *  $.cookie('the_cookie');
-	 *  @codeend
-	 * 
+     *
+	 *      $.cookie('the_cookie');
      *
      * @param {String} [name] The name of the cookie.
      * @param {String} [value] The value of the cookie.
-     * @param {Object} [options] An object literal containing key/value pairs to provide optional cookie attributes.<br />
-     * @param {Number|Date} [expires] Either an integer specifying the expiration date from now on in days or a Date object.
-     *                             If a negative value is specified (e.g. a date in the past), the cookie will be deleted.
-     *                             If set to null or omitted, the cookie will be a session cookie and will not be retained
-     *                             when the the browser exits.<br />
-     * @param {String} [path] The value of the path atribute of the cookie (default: path of page that created the cookie).<br />
-     * @param {String} [domain] The value of the domain attribute of the cookie (default: domain of page that created the cookie).<br />
-     * @param {Boolean} secure If true, the secure attribute of the cookie will be set and the cookie transmission will
-     *                        require a secure protocol (like HTTPS).<br />
+     * @param {Object} [options] An object literal containing key/value pairs to provide optional cookie attributes. Values can be:
+     *
+     * - `expires` - Either an integer specifying the expiration date from now on in days or a Date object. If a negative value is specified (e.g. a date in the past), the cookie will be deleted. If set to null or omitted, the cookie will be a session cookie and will not be retained when the the browser exits.
+     * - `domain` - The domain name
+     * - `path` - The value of the path atribute of the cookie (default: path of page that created the cookie).
+     * - `secure` - If true, the secure attribute of the cookie will be set and the cookie transmission will require a secure protocol (like HTTPS).
+     *
      * @return {String} the value of the cookie or {undefined} when setting the cookie.
      */
     jQuery.cookie = function(name, value, options) {

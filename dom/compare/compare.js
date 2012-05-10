@@ -4,7 +4,14 @@ steal('jquery/dom').then(function($){
  * @function jQuery.fn.compare
  * @parent jQuery.compare
  *
- * Compare two elements.
+ * Compare two elements and return a bitmask in number form representing the following conditions:
+ *
+ * - `000000` -> __0__: Elements are identical
+ * - `000001` -> __1__: The nodes are in different documents (or one is outside of a document)
+ * - `000010` -> __2__: #bar precedes #foo
+ * - `000100` -> __4__: #foo precedes #bar
+ * - `001000` -> __8__: #bar contains #foo
+ * - `010000` -> __16__: #foo contains #bar
  *
  * @param {HTMLElement|jQuery}  element an element or jQuery collection to compare against.
  * @return {Number} A bitmap number representing how the elements are positioned from each other.}

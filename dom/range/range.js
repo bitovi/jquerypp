@@ -48,7 +48,7 @@ support = {};
  *     var range = $.Range.current()
  *     
  *     // move the end of the range 2 characters right
- *     range.end("+2")
+ *     range.end(2)
  *     
  *     // get the startOffset of the range and the container
  *     range.start() //-> { offset: 2, container: HTMLELement }

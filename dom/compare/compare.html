@@ -23,13 +23,21 @@
 			h3 {
 				margin: 20px 0px 0px 0px;
 			}
+			table {
+				margin-top: 20px;
+				border-collapse: collapse;
+			}
+			th, td {
+				border: 1px solid gray;
+				padding: 5px;
+			}
 			th {
-				padding: 0px 5px;
 				color: gray;
+				text-align: left;
 			}
-			td {
-				padding: 0px 5px;
-			}
+	        .matches {
+		        background-color: yellow;
+	        }
         </style>
 	</head>
 	<body>
@@ -37,7 +45,7 @@
 <pre>
 <code>$('.red').compare($('.green')) = <span id='result'></span></code>
 </pre>
-<div id="demo-html">
+<div id="demo-html" style="margin: 0;">
 <div>
 	A
 	<div>A.1</div>
@@ -47,21 +55,19 @@
 	B
 </div>
 </div>
-<h3 class='hide'>Key</h3>
-<table class='hide'>
+<table>
 	<tr><th>Bits</th><th>Number</th><th>Meaning</th></tr>
-	<tr><td>000000</td><td>0</td><td>Elements are identical.</td></tr>
-	<tr><td>000001</td><td>1</td><td>The nodes are in different documents (or one is outside of a document).</td></tr>
-	<tr><td>000010</td><td>2</td><td>Node B precedes Node A.</td></tr>
-	<tr><td>000100</td><td>4</td><td>Node A precedes Node B.</td></tr>
-	<tr><td>001000</td><td>8</td><td>Node B contains Node A.</td></tr>
-	<tr><td>010000</td><td>16</td><td>Node A contains Node B.</td></tr>
-	
+	<tr class="no_0"><td>000000</td><td>0</td><td>.red and .green are identical</td></tr>
+	<tr class="no_1"><td>000001</td><td>1</td><td>The nodes are in different documents (or one is outside of a document)</td></tr>
+	<tr class="no_2"><td>000010</td><td>2</td><td>.green precedes .red</td></tr>
+	<tr class="no_4"><td>000100</td><td>4</td><td>.red precedes .green</td></tr>
+	<tr class="no_8"><td>001000</td><td>8</td><td>.green contains .red</td></tr>
+	<tr class="no_16"><td>010000</td><td>16</td><td>.red contains .green</td></tr>
 </table>
 
-		<script type='text/javascript' 
-                src='../../../steal/steal.js'>   
-        </script>
+<script type='text/javascript'
+        src='../../../steal/steal.js'>
+</script>
 <script id="demo-source" type='text/javascript'>
 steal('jquery/dom/compare').then(function(){
 	var placing = 'red'
@@ -74,7 +80,14 @@ steal('jquery/dom/compare').then(function(){
 	  ev.stopPropagation();
 	  //don't worry about repeat queries for simple example
 	  if($('.green').length){
-	    $("#result").text(  $('.red').compare($('.green')) )
+		  var result = $('.red').compare($('.green'))
+		  $("#result").text(result);
+		  $('tr.matches').removeClass('matches');
+		  $.each([0, 1, 2, 4, 8, 16], function(i, value) {
+			 if(result & value || result === value) {
+				 $('tr.no_' + value).addClass('matches');
+			 }
+		  });
 	  }
 	})
 	
