@@ -104,13 +104,13 @@
 <p>The following <em>options</em> are available:</p>
 
 <ul>
-<li><code>expires</code> - The expiration time in days or an expiry date</li>
+<li><code>expires</code> - the expiration time in days or an expiry date</li>
 
-<li><code>domain</code> - The domain name</li>
+<li><code>domain</code> - the domain name</li>
 
-<li><code>path</code> - The value of the path for the cookie</li>
+<li><code>path</code> - the value of the path for the cookie</li>
 
-<li><code>secure</code> - If the cookie requires HTTPS</li>
+<li><code>secure</code> - if the cookie requires HTTPS</li>
 </ul>
 
 <h2 id='dimensions'>dimensions</h2>
@@ -155,7 +155,7 @@
 <span class='c1'>// }</span>
 </code></pre>
 </div>
-<p>It is also possible to set form values based on the element:</p>
+<p>It is also possible to set form values:</p>
 <div class='highlight'><pre><code class='javascript'><span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;form&#39;</span><span class='p'>).</span><span class='nx'>formParams</span><span class='p'>({</span>
   <span class='nx'>first</span> <span class='o'>:</span> <span class='s1'>&#39;Mike&#39;</span><span class='p'>,</span>
   <span class='nx'>last</span> <span class='o'>:</span> <span class='s1'>&#39;Smith&#39;</span>
@@ -164,7 +164,7 @@
 </div>
 <h2 id='range__'>range <code>$.Range([el]) -&gt; $.Range</code> <code>$(el).range() -&gt; $.Range</code></h2>
 
-<p><a href='http://donejs.com/docs.html#!jQuery.Range'>jQuery.Range</a> helps dealing with creating, moving and comparing text ranges. Use <code>$.Range().current()</code> to get the currently selected text range or the jQuery plugin <code>$(el).range()</code> to get a <em>$.Range</em> instance from an element. Based on the above <a href='#__selection'>$.selection</a> example <em>$.Range</em> can be used like this:</p>
+<p><a href='http://donejs.com/docs.html#!jQuery.Range'>jQuery.Range</a> helps dealing with creating, moving and comparing text ranges. Use <code>$.Range().current()</code> to get the currently selected text range or the jQuery plugin <code>$(el).range()</code> to get a <code>$.Range</code> instance from an element. Based on the above <a href='#__selection'>$.selection</a> example <code>$.Range</code> can be used like this:</p>
 <div class='highlight'><pre><code class='javascript'><span class='kd'>var</span> <span class='nx'>range</span> <span class='o'>=</span> <span class='nx'>$</span><span class='p'>.</span><span class='nx'>Range</span><span class='p'>.</span><span class='nx'>current</span><span class='p'>()</span>
 <span class='c1'>// Returns the currently selected text</span>
 <span class='nx'>range</span><span class='p'>.</span><span class='nx'>toString</span><span class='p'>()</span> <span class='c1'>// -&gt; some</span>
@@ -225,14 +225,14 @@
 </div>
 <h2 id='styles_'>styles <code>$(el).styles() -&gt; Object</code></h2>
 
-<p><a href='http://donejs.com/docs.html#!jQuery.styles'>jQuery.styles</a> adds <code>$.fn.styles</code> as a fast way of getting a set of computed styles from an element. It performs a lot better than retrieving them individually using <a href='http://api.jquery.com/css/'>jQuery.css()</a>. Computed styles reflect the actual current style of an element, including browser defaults and CSS settings.</p>
+<p><a href='http://donejs.com/docs.html#!jQuery.styles'>jQuery.styles</a> adds <code>$.fn.styles</code> as a fast way of getting a set of computed styles from an element. It performs a lot better than retrieving them individually (e.g. using <a href='http://api.jquery.com/css/'>jQuery.css()</a>). Computed styles reflect the actual current style of an element, including browser defaults and CSS settings.</p>
 <div class='highlight'><pre><code class='javascript'><span class='nx'>$</span><span class='p'>(</span><span class='s2'>&quot;#foo&quot;</span><span class='p'>).</span><span class='nx'>styles</span><span class='p'>(</span><span class='s1'>&#39;float&#39;</span><span class='p'>,</span><span class='s1'>&#39;display&#39;</span><span class='p'>)</span>
 <span class='c1'>// -&gt; { cssFloat: &quot;left&quot;, display: &quot;block&quot; }</span>
 </code></pre>
 </div>
 <h2 id='within_'>within <code>$(el).within(left, top, [useOffsetCache]) -&gt; jQuery</code></h2>
 
-<p><a href='http://donejs.com/docs.html#!jQuery.within'>jQuery.within</a> adds <code>$.fn.within</code> and <code>$.fn.withinBox</code> that return all elements that have a certain position or area in common. The following example returns all <code>div</code> elements on the point 200px left and 200px from the top:</p>
+<p><a href='http://donejs.com/docs.html#!jQuery.within'>jQuery.within</a> adds <code>$.fn.within</code> and <code>$.fn.withinBox</code> that return all elements having a given position or area in common. The following example returns all <code>div</code> elements on the point 200px left and 200px from the top:</p>
 <div class='highlight'><pre><code class='javascript'><span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;div&#39;</span><span class='p'>).</span><span class='nx'>within</span><span class='p'>(</span><span class='mi'>200</span><span class='p'>,</span> <span class='mi'>200</span><span class='p'>)</span>
 </code></pre>
 </div>
@@ -240,7 +240,9 @@
 <div class='highlight'><pre><code class='javascript'><span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;*&#39;</span><span class='p'>).</span><span class='nx'>withinBox</span><span class='p'>(</span><span class='mi'>200</span><span class='p'>,</span> <span class='mi'>200</span><span class='p'>,</span> <span class='mi'>100</span><span class='p'>,</span> <span class='mi'>100</span><span class='p'>)</span>
 </code></pre>
 </div>
+<blockquote>
 <p><em>jQuery.event.drag</em> uses <em>$.within</em> to determine dropable elements at the current position.</p>
+</blockquote>
 
 <h2 id='events'>EVENTS</h2>
 
@@ -421,9 +423,11 @@
 
 <h2 id='pause'>pause</h2>
 
+<p><a href='http://donejs.com/docs.html#!jQuery.event.pause'>$.event.pause</a> adds a default event handler, <code>event.pause()</code> and <code>event.resume()</code> for pausing and resuming event propagation and <code>$.fn.triggerAsync</code> for triggering an event asynchronously and passing a callback when propagation is finished.</p>
+
 <h3 id='default_events_'>default events <code>eventname.default</code></h3>
 
-<p><a href='http://donejs.com/docs.html#!jQuery.event.default'>$.event.default</a> lets you perform default actions for events. A default event runs when all other event handlers have been triggered and none has called <code>event.preventDefault()</code> or returned <code>false</code>. To add a default event just prefix it with the <em>default</em> namespace:</p>
+<p>Allows you to add default event handlers. A default event runs when all other event handlers have been triggered and none has called <code>event.preventDefault()</code> or returned <code>false</code>. To add a default event just prefix it with the <em>default</em> namespace:</p>
 <div class='highlight'><pre><code class='javascript'><span class='nx'>$</span><span class='p'>(</span><span class='s2'>&quot;div&quot;</span><span class='p'>).</span><span class='nx'>on</span><span class='p'>(</span><span class='s2'>&quot;default.click&quot;</span><span class='p'>,</span> <span class='kd'>function</span><span class='p'>(</span><span class='nx'>ev</span><span class='p'>)</span> <span class='p'>{</span>
   <span class='c1'>// ...</span>
 <span class='p'>})</span>
@@ -441,7 +445,7 @@
 </div>
 <h3 id='pause_and_resume__'>pause and resume <code>event.pause()</code> <code>event.resume()</code></h3>
 
-<p>Use <a href='http://donejs.com/docs.html#!jQuery.event.pause'>$.event.pause</a> for pausable and resumable event bubbling. Pausing an event works similar to <a href='http://api.jquery.com/event.stopImmediatePropagation/'>.stopImmediatePropagation()</a> by calling <code>event.pause()</code>. Calling <code>event.resume()</code> will continue propagation. This is great when doing asynchronous processing in an event handler:</p>
+<p>Pausing an event works similar to <a href='http://api.jquery.com/event.stopImmediatePropagation/'>.stopImmediatePropagation()</a> by calling <code>event.pause()</code>. Calling <code>event.resume()</code> will continue propagation. This is great when doing asynchronous processing in an event handler:</p>
 <div class='highlight'><pre><code class='javascript'><span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;#todos&#39;</span><span class='p'>).</span><span class='nx'>on</span><span class='p'>(</span><span class='s1'>&#39;show&#39;</span><span class='p'>,</span> <span class='kd'>function</span><span class='p'>(</span><span class='nx'>ev</span><span class='p'>){</span>
   <span class='nx'>ev</span><span class='p'>.</span><span class='nx'>pause</span><span class='p'>()</span>
 
@@ -453,9 +457,14 @@
 </div>
 <h2 id='resize_'>resize <code>resize</code></h2>
 
-<p>Listening to the <code>resize</code> event provided by <a href='http://donejs.com/docs.html#!jQuery.event.resize'>$.event.resize</a> is very useful for resizing a specific element whenever the parents dimension changes. Unlike other events that bubble from the target element to the document the <code>resize</code> event will propagate from the outside-in. This means that outside elements will always resize first which is great for application layouts like this:</p>
+<p><a href='http://donejs.com/docs.html#!jQuery.event.resize'>$.event.resize</a> adds the <code>resize</code> event which is very useful for resizing a specific element whenever the parents dimension changes. Unlike other events that bubble from the target element to the document the <code>resize</code> event will propagate from the outside-in. This means that outside elements will always resize first. This is great for creating application layouts like this:</p>
+
+<p><img src='images/resize.png' alt='jQuery.event.resize application layout' /></p>
+
+<pre><code>// TODO Descibe and link JS Fiddle example</code></pre>
+
+<p>The following example will always resize to it&#8217;s full parent width and height</p>
 <div class='highlight'><pre><code class='javascript'><span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;#foo&#39;</span><span class='p'>).</span><span class='nx'>on</span><span class='p'>(</span><span class='s1'>&#39;resize&#39;</span><span class='p'>,</span> <span class='kd'>function</span><span class='p'>(){</span>
-  <span class='c1'>// Set width and height to the parent element width and height</span>
   <span class='kd'>var</span> <span class='nx'>parent</span> <span class='o'>=</span> <span class='nx'>$</span><span class='p'>(</span><span class='k'>this</span><span class='p'>).</span><span class='nx'>parent</span><span class='p'>()</span>
   <span class='nx'>$</span><span class='p'>(</span><span class='k'>this</span><span class='p'>).</span><span class='nx'>width</span><span class='p'>(</span><span class='nx'>parent</span><span class='p'>.</span><span class='nx'>width</span><span class='p'>()).</span><span class='nx'>height</span><span class='p'>(</span><span class='nx'>parent</span><span class='p'>.</span><span class='nx'>height</span><span class='p'>())</span>
 <span class='p'>})</span>

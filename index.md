@@ -64,10 +64,10 @@ $.cookie('the_cookie', null);
 
 The following *options* are available:
 
-* `expires` - The expiration time in days or an expiry date
-* `domain` - The domain name
-* `path` - The value of the path for the cookie
-* `secure` - If the cookie requires HTTPS
+* `expires` - the expiration time in days or an expiry date
+* `domain` - the domain name
+* `path` - the value of the path for the cookie
+* `secure` - if the cookie requires HTTPS
 
 ## dimensions
 
@@ -112,7 +112,7 @@ $('form').formParams()
 // }
 {% endhighlight %}
 
-It is also possible to set form values based on the element:
+It is also possible to set form values:
 
 {% highlight javascript %}
 $('form').formParams({
@@ -123,7 +123,7 @@ $('form').formParams({
 
 ## range `$.Range([el]) -> $.Range` `$(el).range() -> $.Range`
 
-[jQuery.Range](http://donejs.com/docs.html#!jQuery.Range) helps dealing with creating, moving and comparing text ranges. Use `$.Range().current()` to get the currently selected text range or the jQuery plugin `$(el).range()` to get a *$.Range* instance from an element. Based on the above [$.selection](#__selection) example *$.Range* can be used like this:
+[jQuery.Range](http://donejs.com/docs.html#!jQuery.Range) helps dealing with creating, moving and comparing text ranges. Use `$.Range().current()` to get the currently selected text range or the jQuery plugin `$(el).range()` to get a `$.Range` instance from an element. Based on the above [$.selection](#__selection) example `$.Range` can be used like this:
 
 {% highlight javascript %}
 var range = $.Range.current()
@@ -180,7 +180,7 @@ $('#text').text().substring(selection.start, selection.end) // -> some
 
 ## styles `$(el).styles() -> Object`
 
-[jQuery.styles](http://donejs.com/docs.html#!jQuery.styles) adds `$.fn.styles` as a fast way of getting a set of computed styles from an element. It performs a lot better than retrieving them individually using [jQuery.css()](http://api.jquery.com/css/). Computed styles reflect the actual current style of an element, including browser defaults and CSS settings.
+[jQuery.styles](http://donejs.com/docs.html#!jQuery.styles) adds `$.fn.styles` as a fast way of getting a set of computed styles from an element. It performs a lot better than retrieving them individually (e.g. using [jQuery.css()](http://api.jquery.com/css/)). Computed styles reflect the actual current style of an element, including browser defaults and CSS settings.
 
 {% highlight javascript %}
 $("#foo").styles('float','display')
@@ -189,7 +189,7 @@ $("#foo").styles('float','display')
 
 ## within `$(el).within(left, top, [useOffsetCache]) -> jQuery`
 
-[jQuery.within](http://donejs.com/docs.html#!jQuery.within) adds `$.fn.within` and `$.fn.withinBox` that return all elements that have a certain position or area in common. The following example returns all `div` elements on the point 200px left and 200px from the top:
+[jQuery.within](http://donejs.com/docs.html#!jQuery.within) adds `$.fn.within` and `$.fn.withinBox` that return all elements having a given position or area in common. The following example returns all `div` elements on the point 200px left and 200px from the top:
 
 {% highlight javascript %}
 $('div').within(200, 200)
@@ -201,7 +201,7 @@ Use `$(el).withinBox(left, top, width, height)` to get all elements within a cer
 $('*').withinBox(200, 200, 100, 100)
 {% endhighlight %}
 
-*jQuery.event.drag* uses *$.within* to determine dropable elements at the current position.
+> *jQuery.event.drag* uses *$.within* to determine dropable elements at the current position.
 
 ## EVENTS
 
@@ -346,9 +346,11 @@ The following keynames are mapped by default:
 
 ## pause
 
+[$.event.pause](http://donejs.com/docs.html#!jQuery.event.pause) adds a default event handler, `event.pause()` and `event.resume()` for pausing and resuming event propagation and `$.fn.triggerAsync` for triggering an event asynchronously and passing a callback when propagation is finished.
+
 ### default events `eventname.default`
 
-[$.event.default](http://donejs.com/docs.html#!jQuery.event.default) lets you perform default actions for events. A default event runs when all other event handlers have been triggered and none has called `event.preventDefault()` or returned `false`. To add a default event just prefix it with the *default* namespace:
+Allows you to add default event handlers. A default event runs when all other event handlers have been triggered and none has called `event.preventDefault()` or returned `false`. To add a default event just prefix it with the *default* namespace:
 
 {% highlight javascript %}
 $("div").on("default.click", function(ev) {
@@ -356,7 +358,7 @@ $("div").on("default.click", function(ev) {
 })
 {% endhighlight %}
 
-### .triggerAsync `$(el).triggerAsync(event, [success], [prevented])`
+### triggerAsync `$(el).triggerAsync(event, [success], [prevented])`
 
 [$.fn.triggerAsync](http://donejs.com/docs.html#!jQuery.fn.triggerAsync) triggers an event and calls a *success* handler when it has finished propagating through the DOM and no handler called `event.preventDefault()` or returned `false`. The *prevented* callback will be used otherwise:
 
@@ -370,7 +372,7 @@ $('panel').triggerAsync('show', function(){
 
 ### pause and resume `event.pause()` `event.resume()`
 
-Use [$.event.pause](http://donejs.com/docs.html#!jQuery.event.pause) for pausable and resumable event bubbling. Pausing an event works similar to [.stopImmediatePropagation()](http://api.jquery.com/event.stopImmediatePropagation/) by calling `event.pause()`. Calling `event.resume()` will continue propagation. This is great when doing asynchronous processing in an event handler:
+Pausing an event works similar to [.stopImmediatePropagation()](http://api.jquery.com/event.stopImmediatePropagation/) by calling `event.pause()`. Calling `event.resume()` will continue propagation. This is great when doing asynchronous processing in an event handler:
 
 {% highlight javascript %}
 $('#todos').on('show', function(ev){
@@ -384,13 +386,18 @@ $('#todos').on('show', function(ev){
 
 ## resize `resize`
 
-[$.event.resize](http://donejs.com/docs.html#!jQuery.event.resize) adds the `resize` event which is very useful for resizing a specific element whenever the parents dimension changes. Unlike other events that bubble from the target element to the document the `resize` event will propagate from the outside-in. This means that outside elements will always resize first. This is great for creating application layouts like this:
+[$.event.resize](http://donejs.com/docs.html#!jQuery.event.resize) adds the `resize` event which is very useful for resizing a specific element whenever the parents dimension changes. Unlike other events that bubble from the target element to the document the `resize` event will propagate from the outside-in. This means that outside elements will always resize first.
+
+This is great for creating application layouts like this:
 
 ![jQuery.event.resize application layout](images/resize.png)
 
+	// TODO Descibe and link JS Fiddle example
+
+The following example will always resize to it's full parent width and height
+
 {% highlight javascript %}
 $('#foo').on('resize', function(){
-  // Set width and height to the parent element width and height
   var parent = $(this).parent()
   $(this).width(parent.width()).height(parent.height())
 })
