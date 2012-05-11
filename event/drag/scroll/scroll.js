@@ -5,16 +5,31 @@ steal("jquery/event/drop").then(function($){ //needs drop to determine if respon
  */
 $.Drag.prototype.
 	/**
-	 * Will scroll elements with a scroll bar as the drag moves to borders.
 	 * @plugin jquery/event/drag/scroll
 	 * @download  http://jmvcsite.heroku.com/pluginify?plugins[]=jquery/event/drag/scroll/scroll.js
-	 * @param {jQuery} elements to scroll.  The window can be in this array.
-	 * @param {Object} options changes the default settings.
 	 * 
-	 *   - distance {number} 30 - how many pixels away from a boundry where we start scrolling
-	 *   - delta(diff) {Function} - returns how far we should scroll.  It is passed how many pixels the cursor is
+	 * `drag.scrolls(elements, [options])` scroll elements with 
+	 * a scroll bar as the drag moves to borders.
+	 * 
+	 * The following sets up the drag motions to scroll `#todos` and the window.  Scrolling will
+	 * start 50px away from a boundary and the speed will increase to 50px of scroll every 15ms.
+	 * 
+	 *     $('#todos').on(".todo","draginit", function(ev, drag){
+	 *       drag.scrolls($('#todos').add(window), {
+	 *         distance : 50,
+	 *         delta : function(diff) { return (50 - diff) / 2},
+	 *         direction : "y"
+	 *       })
+	 *     })
+	 * 
+	 * 
+	 * @param {jQuery} elements an array of elements to scroll.  The window can be in this array.
+	 * @param {Object} [options] changes the default settings.
+	 * 
+	 *   - `distance` {number} 30 - how many pixels away from a boundry where we start scrolling
+	 *   - `delta(diff)` {Function} - returns how far we should scroll.  It is passed how many pixels the cursor is
 	 *     from the boundry.
-	 *   - direction {String} - direction scrolling should happen.  "xy" is the default.
+	 *   - `direction` {String} - direction scrolling should happen.  "xy" is the default.
 	 */
 	scrolls = function(elements, options){
 		var elements = $(elements);
@@ -113,12 +128,7 @@ $.extend($.Scrollable.prototype,{
 	},
 	/**
 	 * Scrolls an element then calls mouse a mousemove in the same location.
-	 * @param {HTMLElement} scroll_element the element to be scrolled
-	 * @param {HTMLElement} drag_element
-	 * @param {Number} dx how far to scroll
-	 * @param {Number} dy how far to scroll
-	 * @param {Number} x the mouse position
-	 * @param {Number} y the mouse position
+	 * @hide
 	 */
 	move: function( scroll_element, drag_element, dx, dy, ev/*, x,y,sx, sy*/ ) {
 		scroll_element.scrollTop( scroll_element.scrollTop() + dy);
