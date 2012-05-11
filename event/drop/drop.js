@@ -29,6 +29,7 @@ steal('jquery/event/drag','jquery/dom/within','jquery/dom/compare',function($){
 	"dropout",
 	/**
 	 * @attribute dropinit
+	 *
 	 * Called when a drag motion starts and the drop elements are initialized.
 	 *
 	 * Drop events are covered in more detail in [jQuery.Drop].

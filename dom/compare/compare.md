@@ -23,12 +23,12 @@ The following list shows the `bitmask`, the __number__ and what it corresponds t
 
 You can tests if the number returned by $.compare matches any of these conditions by combining them with a binary AND:
 
-	if( $('#foo').compare($('#bar')) & 4 ) {
-	    console.log("#foo preceds #bar")
-	}
+    if( $('#foo').compare($('#bar')) & 4 ) {
+      console.log("#foo preceds #bar")
+    }
 
-	if( $('#foo').compare($('#bar')) & 8 ) {
-        console.log("#bar contains #foo")
+    if( $('#foo').compare($('#bar')) & 8 ) {
+      console.log("#bar contains #foo")
     }
 
 ## Demo

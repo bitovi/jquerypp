@@ -6,17 +6,17 @@ steal('jquery/lang/json',function() {
      * @plugin jquery/dom/cookie
      * @author Klaus Hartl/klaus.hartl@stilbuero.de
      *
-     *  The [cookie plugin](https://github.com/carhartl/jquery-cookie) packaged with jQuery++ is written by
-     *  [Klaus Hartl](stilbuero.de) and dual licensed under the [MIT](http://www.opensource.org/licenses/mit-license.php)
-     *  and [GPL](http://www.gnu.org/licenses/gpl.html) licenses.
+     * The [cookie plugin](https://github.com/carhartl/jquery-cookie) packaged with jQuery++ is written by
+     * [Klaus Hartl](stilbuero.de) and dual licensed under the [MIT](http://www.opensource.org/licenses/mit-license.php)
+     * and [GPL](http://www.gnu.org/licenses/gpl.html) licenses.
      *
-	 *  ## Quick Examples</h3>
+	 * ## Quick Examples</h3>
 	 * 
-	 *  Set the value of a cookie.
+	 * Set the value of a cookie.
 	 *  
-	 *     $.cookie('the_cookie', 'the_value');
+	 *      $.cookie('the_cookie', 'the_value');
 	 * 
-	 *  Create a cookie with all available options.
+	 * Create a cookie with all available options.
 	 *
      *      $.cookie('the_cookie', 'the_value', {
      *          expires: 7,
@@ -24,17 +24,19 @@ steal('jquery/lang/json',function() {
      *          domain: 'jquery.com',
      *          secure: true
      *      });
+     *
+     *
 	 *
-	 *  Create a session cookie.
+	 * Create a session cookie.
 	 *
      *      $.cookie('the_cookie', 'the_value');
 	 *
-	 *  Delete a cookie by passing null as value. Keep in mind that you have to use the same path and domain
-	 *  used when the cookie was set.
+	 * Delete a cookie by passing null as value. Keep in mind that you have to use the same path and domain
+	 * used when the cookie was set.
 	 *
      *      $.cookie('the_cookie', null);
 	 *
-	 *  Get the value of a cookie.
+	 * Get the value of a cookie.
      *
 	 *      $.cookie('the_cookie');
      *
