@@ -1,6 +1,6 @@
 
 load("steal/rhino/rhino.js");
-steal('steal/build/pluginify', 'jquery/build/stealify.js', function() {
+steal('steal/build/pluginify', 'jquery/build/stealify.js', 'jquery/build/amdify.js', function() {
 
 	var extend = steal.extend,
 		out = "jquery/dist/",
@@ -16,6 +16,7 @@ steal('steal/build/pluginify', 'jquery/build/stealify.js', function() {
 		exclude : excludes
 	};
 
+	/*
 	steal.build.pluginify('jquery/build/lib.js', extend({
 		out: out + "jquerypp.js"
 	}, options));
@@ -38,5 +39,17 @@ steal('steal/build/pluginify', 'jquery/build/stealify.js', function() {
 	steal.build.stealify('jquery/build/lib.js', {
 		out : out + 'steal/',
 		excludes : excludes
+	});
+	*/
+
+	steal.build.amdify('jquery/build/lib.js', {
+		out : out + 'amd/',
+		excludes : excludes,
+		map : { // steal file to CommonJS module name mappings
+			"jquery/dom/compare/compare.js" : "compare"
+		},
+		names : { // Variable name mappings
+			'jquery' : 'jQuery'
+		}
 	});
 });
