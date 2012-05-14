@@ -1,5 +1,7 @@
 steal('steal/build', 'steal/build/pluginify', function(steal) {
-	var inexcludes = function(excludes, src) {
+	var contents = {},
+	modules = {},
+	inexcludes = function(excludes, src) {
 		for(var i = 0; i < excludes.length; i++) {
 			if(src.indexOf(excludes[i]) !== -1) {
 				return true;
@@ -7,11 +9,31 @@ steal('steal/build', 'steal/build/pluginify', function(steal) {
 		}
 		return false;
 	},
+	/**
+	 * Creates a variable name from a filename or AMD module name.
+	 *
+	 * @param {String} name The name of the AMD module or file
+	 * @return {String} The variable name
+	 */
 	variableName = function(name) {
-		return '__' + name.substring(name.lastIndexOf('/') + 1, name.lastIndexOf('.'));
+		var start = name.lastIndexOf('/') + 1,
+			end = name.lastIndexOf('.') !== -1 ? name.lastIndexOf('.') : name.length;
+		return '__' + name.substring(start, end).replace(/\./g, '_');
 	},
-	contents = {},
-	modules = {},
+	/**
+	 * Returns a steal.File instance from a filename or AMD module name.
+	 *
+	 * @param name
+	 * @param suffix
+	 * @return {*}
+	 */
+	getFile = function(name, suffix) {
+		var suffix = suffix || '.js', file = name;
+		if(name.indexOf(suffix, name.length - suffix.length) === -1) {
+			file = file + suffix;
+		}
+		return steal.File(file);
+	},
 	/**
 	 * Returns a list of steal dependencies for a given file and caches
 	 * the plain content.
@@ -41,43 +63,42 @@ steal('steal/build', 'steal/build/pluginify', function(steal) {
 		}, null);
 	},
 	/**
-	 *
-	 * @param name
-	 * @param excludes
-	 * @param options
+	 * Creates the actual module recursively
+	 * @param {String} name The name of the main module file
+	 * @param {Array} excludes A list of files to exclude
+	 * @param {Object} options The options to use
 	 */
-	createModule =
-		function(name, excludes, options) {
-		// options.name
-		// options.map
-		// options.out
+	createModule = function(name, excludes, options) {
 		getDependencies(name, excludes, options, function(steals) {
-			print('Creating AMD module for ' + name);
 			var content,
 				dependencies = [],
 				names = [],
 				nameMap = options.names || {},
 				map = options.map || {},
-				where = steal.File(options.out + (map[name] || name));
+				where = getFile(options.out + (map[name] || name));
+
+			print('  ' + name + ' -> ' + (map[name] || name));
+
 			steals.forEach(function(stl) {
 				var current = (map[stl.rootSrc] || stl.rootSrc);
-				dependencies.push("'" + current + "'");
-				names.push(nameMap[current] || variableName(current));
+				if(stl.rootSrc !== name) { // Don't include the current file
+					if(!modules[stl.rootSrc]) {
+						createModule(stl.rootSrc, excludes, options);
+					}
+					dependencies.push("'" + current + "'");
+					names.push(nameMap[current] || variableName(current));
+				}
 			});
+
 			content = "define([" +
 				dependencies.join(',') +
 				'], function(' +
-				names.join(',') +
-				') {' +
-				(contents[name] || ' return {}; ') +
-				'; })';
+				names.join(', ') +
+				') { \n' +
+				(contents[name] || (' return ' + (options.global || '{}'))) +
+				';\n})';
 
 			modules[name] = content;
-			steals.forEach(function(stl) {
-				if(!modules[stl.rootSrc]) {
-					createModule(stl.rootSrc, excludes, options);
-				}
-			});
 
 			steal.File(where.dir()).mkdirs();
 			where.save(content);
@@ -92,7 +113,7 @@ steal('steal/build', 'steal/build/pluginify', function(steal) {
 	 */
 	steal.build.amdify = function(source, options) {
 		var out = options.out;
-		print('Creating AMD modules for ' + source);
+		print('Creating AMD modules for ' + source + " in " + options.out);
 		steal.File(out).mkdirs();
 		createModule(source, options.excludes || {}, options);
 	}
