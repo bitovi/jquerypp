@@ -64,6 +64,7 @@ steal('steal/build', 'steal/build/pluginify', function(steal) {
 	},
 	/**
 	 * Creates the actual module recursively
+	 *
 	 * @param {String} name The name of the main module file
 	 * @param {Array} excludes A list of files to exclude
 	 * @param {Object} options The options to use
@@ -77,7 +78,7 @@ steal('steal/build', 'steal/build/pluginify', function(steal) {
 				map = options.map || {},
 				where = getFile(options.out + (map[name] || name));
 
-			print('  ' + name + ' -> ' + (map[name] || name));
+			print('  > ' + name + ' -> ' + (map[name] || name));
 
 			steals.forEach(function(stl) {
 				var current = (map[stl.rootSrc] || stl.rootSrc);
@@ -106,10 +107,29 @@ steal('steal/build', 'steal/build/pluginify', function(steal) {
 	};
 
 	/**
-	 * Creates a deliverable AMD module
+	 * Creates a set of AMD modules recursively. The `map` options contain a mapping from Steal
+	 * rootSrc filenames to AMD module names. For examples:
 	 *
-	 * @param source
-	 * @param options
+	 *      { "jquery/dom/compare/compare.js" : "jquerypp/compare" }
+	 *
+	 * Will map "jquery/dom/compare/compare.js" to "jquerypp/compare.js" in the output folder
+	 * and all dependencies as well (e.g. dependent files would `define(['jquery/compare'], ...)`.
+	 * By default it will use the Steal rootSrc name.
+	 * The `names` mapping can be used to map AMD module names to variable names passed to the
+	 * pluginified function. By default this will be the filename without extension, `__` prefixed and
+	 * `.` converted to `_` (looking like `define(['jquery/compare`], function(__compare) { ... })`).
+	 *
+	 * @param {String} source The root JavaScript source file name to generate the modules from.
+	 * @param {Object} options The options for generating AMD modules.
+	 * The following options will be used:
+	 *
+	 * - `out` - The output folder
+	 * - `excludes` - An array of files to exclude (must be the full Steal rootSrc)
+	 * - `map` - A mapping from full Steal rootSrc filenames to the AMD module name.
+	 * Any missing folders will be created automatically.
+	 * - `names` - A mapping from AMD module names (as set in `map` or the default)
+	 * to parameter variable names.
+	 * - `global` - The global option passed to pluginify
 	 */
 	steal.build.amdify = function(source, options) {
 		var out = options.out;
