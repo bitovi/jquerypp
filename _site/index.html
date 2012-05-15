@@ -65,7 +65,7 @@
 
 <h2 id='compare_'>compare <code>$(elA).compare(elB) -&gt; Number</code></h2>
 
-<p><a href='http://donejs.com/docs.html#!jQuery.compare'>jQuery.compare</a> adds <code>$.fn.compare</code> to compare the position of two nodes and return a number bitmask detailing how they are positioned relative to each other. The following list shows the <code>bitmask</code>, the <strong>number</strong> and what it corresponds to:</p>
+<p><a href='http://donejs.com/docs.html#!jQuery.compare'>jQuery.compare</a> adds <code>$.fn.compare</code> to compare the position of two nodes. It returns a number that represents a bitmask showing how they are positioned relative to each other. The following list shows the <code>bitmask</code>, the <strong>number</strong> and what it corresponds to for a plugin call like <code>$(&#39;#foo&#39;).compare($(&#39;#bar&#39;))</code>:</p>
 
 <ul>
 <li><code>000000</code> -&gt; <strong>0</strong>: Elements are identical</li>
@@ -87,7 +87,7 @@
 <span class='p'>}</span>
 </code></pre>
 </div>
-<p>This is useful to rapidly compare element positions. This is common when widgets can reorder themselves (drag-drop) or with nested widgets (trees).</p>
+<p>This is useful to rapidly compare element positions which is common when widgets can reorder themselves (drag-drop) or with nested widgets (trees).</p>
 
 <h2 id='cookie_'>cookie <code>$.cookie(name, [value], [options]) -&gt; Object|String</code></h2>
 
@@ -132,13 +132,13 @@
 <span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;#bar&#39;</span><span class='p'>).</span><span class='nx'>animate</span><span class='p'>({</span><span class='nx'>outerWidth</span><span class='o'>:</span> <span class='mi'>500</span><span class='p'>});</span>
 </code></pre>
 </div>
-<p>The following graphic shows which dimensions are included for <code>.innerWidth()</code> and <code>.outerWidth()</code>:</p>
+<p>The following graphic shows which dimensions are included for <code>$(el).width()</code>, <code>$(el).innerWidth()</code> and <code>$(el).outerWidth()</code>:</p>
 
-<p><img src='images/dimensions.png' alt='jQuery.dimensions: .innerWidth()' /></p>
+<p><img alt='jQuery.dimensions: .innerWidth()' src='images/dimensions.png' /></p>
 
 <h2 id='formparams_'>formParams <code>$(form).formParams([convert]) -&gt; Object|jQuery</code></h2>
 
-<p><a href='http://donejs.com/docs.html#!jQuery.formParams'>$.formParams</a> add <code>$.fn.formParams</code> which returns a JavaScript object for values in a form. It creates nested objects by using bracket notation in the form element name. If <em>convert</em> is <code>true</code>, values that look like numbers or booleans will be converted and empty strings won&#8217;t be added to the object. For a form like this:</p>
+<p><a href='http://donejs.com/docs.html#!jQuery.formParams'>$.formParams</a> adds <code>$.fn.formParams</code> which returns a JavaScript object for values in a form. It creates nested objects by using bracket notation in the form element name. If <em>convert</em> is <code>true</code>, values that look like numbers or booleans will be converted and empty strings won&#8217;t be added to the object. For a form like this:</p>
 <div class='highlight'><pre><code class='html'><span class='nt'>&lt;form&gt;</span>
   <span class='nt'>&lt;input</span> <span class='na'>type=</span><span class='s'>&quot;text&quot;</span> <span class='na'>name=</span><span class='s'>&quot;first&quot;</span> <span class='na'>value=</span><span class='s'>&quot;John&quot;</span> <span class='nt'>/&gt;</span>
   <span class='nt'>&lt;input</span> <span class='na'>type=</span><span class='s'>&quot;text&quot;</span> <span class='na'>name=</span><span class='s'>&quot;last&quot;</span> <span class='na'>value=</span><span class='s'>&quot;Doe&quot;</span> <span class='nt'>/&gt;</span>
@@ -162,9 +162,9 @@
 <span class='p'>});</span>
 </code></pre>
 </div>
-<h2 id='range__'>range <code>$.Range([el]) -&gt; $.Range</code> <code>$(el).range() -&gt; $.Range</code></h2>
+<h2 id='range__'>range <code>$.Range([el]) -&gt; range</code> <code>$(el).range() -&gt; range</code></h2>
 
-<p><a href='http://donejs.com/docs.html#!jQuery.Range'>jQuery.Range</a> helps dealing with creating, moving and comparing text ranges. Use <code>$.Range().current()</code> to get the currently selected text range or the jQuery plugin <code>$(el).range()</code> to get a <code>$.Range</code> instance from an element. Based on the above <a href='#__selection'>$.selection</a> example <code>$.Range</code> can be used like this:</p>
+<p><a href='http://donejs.com/docs.html#!jQuery.Range'>jQuery.Range</a> helps dealing with creating, moving and comparing text ranges. Use <code>$.Range().current()</code> to get the currently selected text range or the jQuery plugin <code>$(el).range()</code> to get a <code>$.Range</code> instance from an element. Based on the <a href='#selection'>$.selection</a> example <code>$.Range</code> can be used like this:</p>
 <div class='highlight'><pre><code class='javascript'><span class='kd'>var</span> <span class='nx'>range</span> <span class='o'>=</span> <span class='nx'>$</span><span class='p'>.</span><span class='nx'>Range</span><span class='p'>.</span><span class='nx'>current</span><span class='p'>();</span>
 <span class='c1'>// Returns the currently selected text</span>
 <span class='nx'>range</span><span class='p'>.</span><span class='nx'>toString</span><span class='p'>()</span> <span class='c1'>// -&gt; some</span>
@@ -225,7 +225,7 @@
 </div>
 <h2 id='styles_'>styles <code>$(el).styles() -&gt; Object</code></h2>
 
-<p><a href='http://donejs.com/docs.html#!jQuery.styles'>jQuery.styles</a> adds <code>$.fn.styles</code> as a fast way of getting a set of computed styles from an element. It performs a lot better than retrieving them individually (e.g. using <a href='http://api.jquery.com/css/'>jQuery.css()</a>). Computed styles reflect the actual current style of an element, including browser defaults and CSS settings.</p>
+<p><a href='http://donejs.com/docs.html#!jQuery.styles'>jQuery.styles</a> adds <code>$.fn.styles</code> as a fast way of getting a set of computed styles from an element. It performs a lot better than retrieving them individually e.g. by using <a href='http://api.jquery.com/css/'>jQuery.css()</a>. Computed styles reflect the actual current style of an element, including browser defaults and CSS settings.</p>
 <div class='highlight'><pre><code class='javascript'><span class='nx'>$</span><span class='p'>(</span><span class='s2'>&quot;#foo&quot;</span><span class='p'>).</span><span class='nx'>styles</span><span class='p'>(</span><span class='s1'>&#39;float&#39;</span><span class='p'>,</span><span class='s1'>&#39;display&#39;</span><span class='p'>)</span>
 <span class='c1'>// -&gt; { cssFloat: &quot;left&quot;, display: &quot;block&quot; }</span>
 </code></pre>
@@ -241,7 +241,7 @@
 </code></pre>
 </div>
 <blockquote>
-<p><em>jQuery.event.drag</em> uses <em>$.within</em> to determine dropable elements at the current position.</p>
+<p><a href='#drag'>jQuery.event.drag</a> uses <em>$.within</em> to determine dropable elements at the current position.</p>
 </blockquote>
 
 <h2 id='events'>EVENTS</h2>
@@ -274,7 +274,7 @@
 <li><code>dragout</code> - the drag moved out of a drop point</li>
 </ul>
 
-<p>An element will become draggable by listening to one of these events on it. A draggable div that can only be moved horizontally can be initialized like this:</p>
+<p>An element will become draggable by attaching an event listener for one of these events on it. A draggable div that can only be moved horizontally can be initialized like this:</p>
 <div class='highlight'><pre><code class='javascript'><span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;div&#39;</span><span class='p'>).</span><span class='nx'>on</span><span class='p'>(</span><span class='s1'>&#39;draginit&#39;</span><span class='p'>,</span> <span class='kd'>function</span><span class='p'>(</span><span class='nx'>event</span><span class='p'>,</span> <span class='nx'>drag</span><span class='p'>)</span> <span class='p'>{</span>
   <span class='nx'>drag</span><span class='p'>.</span><span class='nx'>horizontal</span><span class='p'>();</span>
 <span class='p'>});</span>
@@ -342,10 +342,8 @@
 
 <li><code>drop.cache()</code> - call on <code>dropinit</code> to cache the position of draggable elements</li>
 
-<li><code>drop.compile()</code> - get all droppable elements and put them into a list</li>
+<li><code>drop.compile()</code> - get all droppable elements and put them into a list. This will be called on <code>dropinit</code> by default. If new droppable elements are added after <code>dropinit</code>, compile has to be called explicitly.</li>
 </ul>
-
-<p><code>drop.compile()</code> will be called on <code>dropinit</code> by default. If new droppable elements are added afterwards it has to be called manually.</p>
 
 <h2 id='hover____'>hover <code>hoverinit</code> <code>hoverenter</code> <code>hovermove</code> <code>hoverleave</code></h2>
 
@@ -393,7 +391,7 @@
 <span class='p'>});</span>
 </code></pre>
 </div>
-<p>The following keynames are mapped by default:</p>
+<p>The following key names are mapped by default:</p>
 
 <ul>
 <li><code>\b</code> - backspace</li>
@@ -423,11 +421,11 @@
 
 <h2 id='pause'>pause</h2>
 
-<p><a href='http://donejs.com/docs.html#!jQuery.event.pause'>$.event.pause</a> adds a default event handler, <code>event.pause()</code> and <code>event.resume()</code> for pausing and resuming event propagation and <code>$.fn.triggerAsync</code> for triggering an event asynchronously and passing a callback when propagation is finished.</p>
+<p><a href='http://donejs.com/docs.html#!jQuery.event.pause'>$.event.pause</a> adds a default event handler, <code>event.pause()</code> and <code>event.resume()</code> for pausing and resuming event propagation and <code>$.fn.triggerAsync</code> for triggering an event asynchronously and executing a callback when propagation is finished.</p>
 
 <h3 id='default_events_'>default events <code>eventname.default</code></h3>
 
-<p>Allows you to add default event handlers. A default event runs when all other event handlers have been triggered and none has called <code>event.preventDefault()</code> or returned <code>false</code>. To add a default event just prefix it with the <em>default</em> namespace:</p>
+<p>Allow you to add default event handlers. A default event runs when all other event handlers have been triggered and none has called <code>event.preventDefault()</code> or returned <code>false</code>. Default events are prefixed with the <code>default</code> namespace:</p>
 <div class='highlight'><pre><code class='javascript'><span class='nx'>$</span><span class='p'>(</span><span class='s2'>&quot;div&quot;</span><span class='p'>).</span><span class='nx'>on</span><span class='p'>(</span><span class='s2'>&quot;default.click&quot;</span><span class='p'>,</span> <span class='kd'>function</span><span class='p'>(</span><span class='nx'>ev</span><span class='p'>)</span> <span class='p'>{</span>
   <span class='c1'>// ...</span>
 <span class='p'>});</span>
@@ -470,24 +468,24 @@
 <span class='nx'>$</span><span class='p'>(</span><span class='nb'>document</span><span class='p'>.</span><span class='nx'>body</span><span class='p'>).</span><span class='nx'>resize</span><span class='p'>();</span>
 </code></pre>
 </div>
-<h2 id='swipe_____'>swipe <code>swipeleft</code> <code>swiperight</code> <code>swipedown</code> <code>swipeup</code> <code>swipe</code></h2>
+<h2 id='swipe_____'>swipe <code>swipeleft</code> <code>swiperight</code> <code>swipeup</code> <code>swipedown</code> <code>swipe</code></h2>
 
-<p><a href='http://donejs.com/docs.html#!jQuery.event.swipe'>$.event.swipe</a> adds support for swipe motions on touchscreen devices providing the <code>swipeleft</code>, <code>swiperight</code>, <code>swipedown</code>, <code>swipeup</code> and a general <code>swipe</code> event:</p>
+<p><a href='http://donejs.com/docs.html#!jQuery.event.swipe'>$.event.swipe</a> adds support for swipe motions providing the <code>swipeleft</code>, <code>swiperight</code>, <code>swipedown</code>, <code>swipeup</code> and a general <code>swipe</code> event:</p>
 <div class='highlight'><pre><code class='javascript'><span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;#swiper&#39;</span><span class='p'>).</span><span class='nx'>on</span><span class='p'>({</span>
   <span class='s1'>&#39;swipe&#39;</span> <span class='o'>:</span> <span class='kd'>function</span><span class='p'>(</span><span class='nx'>ev</span><span class='p'>)</span> <span class='p'>{</span>
-    <span class='nx'>console</span><span class='p'>.</span><span class='nx'>log</span><span class='p'>(</span><span class='s1'>&#39;Swiping&#39;</span><span class='p'>)</span>
+    <span class='nx'>console</span><span class='p'>.</span><span class='nx'>log</span><span class='p'>(</span><span class='s1'>&#39;Swiping&#39;</span><span class='p'>);</span>
   <span class='p'>},</span>
   <span class='s1'>&#39;swipeleft&#39;</span> <span class='o'>:</span> <span class='kd'>function</span><span class='p'>(</span><span class='nx'>ev</span><span class='p'>)</span> <span class='p'>{</span>
-    <span class='nx'>console</span><span class='p'>.</span><span class='nx'>log</span><span class='p'>(</span><span class='s1'>&#39;Swiping left&#39;</span><span class='p'>)</span>
+    <span class='nx'>console</span><span class='p'>.</span><span class='nx'>log</span><span class='p'>(</span><span class='s1'>&#39;Swiping left&#39;</span><span class='p'>);</span>
   <span class='p'>},</span>
   <span class='s1'>&#39;swiperight&#39;</span> <span class='o'>:</span> <span class='kd'>function</span><span class='p'>(</span><span class='nx'>ev</span><span class='p'>)</span> <span class='p'>{</span>
-    <span class='nx'>console</span><span class='p'>.</span><span class='nx'>log</span><span class='p'>(</span><span class='s1'>&#39;Swiping right&#39;</span><span class='p'>)</span>
+    <span class='nx'>console</span><span class='p'>.</span><span class='nx'>log</span><span class='p'>(</span><span class='s1'>&#39;Swiping right&#39;</span><span class='p'>);</span>
   <span class='p'>},</span>
   <span class='s1'>&#39;swipeup&#39;</span> <span class='o'>:</span> <span class='kd'>function</span><span class='p'>(</span><span class='nx'>ev</span><span class='p'>)</span> <span class='p'>{</span>
-    <span class='nx'>console</span><span class='p'>.</span><span class='nx'>log</span><span class='p'>(</span><span class='s1'>&#39;Swiping up&#39;</span><span class='p'>)</span>
+    <span class='nx'>console</span><span class='p'>.</span><span class='nx'>log</span><span class='p'>(</span><span class='s1'>&#39;Swiping up&#39;</span><span class='p'>);</span>
   <span class='p'>},</span>
   <span class='s1'>&#39;swipedown&#39;</span> <span class='o'>:</span> <span class='kd'>function</span><span class='p'>(</span><span class='nx'>ev</span><span class='p'>)</span> <span class='p'>{</span>
-    <span class='nx'>console</span><span class='p'>.</span><span class='nx'>log</span><span class='p'>(</span><span class='s1'>&#39;Swiping down&#39;</span><span class='p'>)</span>
+    <span class='nx'>console</span><span class='p'>.</span><span class='nx'>log</span><span class='p'>(</span><span class='s1'>&#39;Swiping down&#39;</span><span class='p'>);</span>
   <span class='p'>}</span>
 <span class='p'>});</span>
 </code></pre>
@@ -522,7 +520,7 @@
 
 <h2 id='developing_jquery'>Developing jQuery++</h2>
 
-<p>To develop jQuery++, add features, etc, you first must install DoneJS. DoneJS is the parent project of jQuery++. DoneJS is the 4.0 version of JavaSciptMVC. It has DocumentJS and Steal as submodules that are used to generate the documentation and build the jQuery++ downloads.</p>
+<p>To develop jQuery++, add features, etc, you first must install DoneJS. DoneJS is the parent project of jQuery++ and the 4.0 version of JavaSciptMVC. It has DocumentJS and Steal as submodules that are used to generate the documentation and build the jQuery++ downloads.</p>
 
 <h3 id='installing'>Installing</h3>
 
@@ -559,7 +557,7 @@ git submodule update --init --recursive</code></pre>
 
 <h3 id='developing'>Developing</h3>
 
-<p>After <a href='#developing_jquery__-installing'>installing</a> jQuery++ and DoneJS, you&#8217;ll find the jQuery++ files in the <code>jquery</code> folder. Within <code>jquery</code> the plugins are located in the <code>dom</code> and <code>event</code> folders. In each folder (for example <code>jquery/dom/compare</code>) you will find:</p>
+<p>After <a href='#developing_jquery__-installing'>installing</a> jQuery++ and DoneJS, you&#8217;ll find the jQuery++ files in the <code>jquery</code> folder. Within <code>jquery</code> the plugins are located in the <code>dom</code> and <code>event</code> folders. For each plugin (for example <code>jquery/dom/compare</code>) you will find:</p>
 
 <ul>
 <li><code>compare.html</code> - A demo page</li>
@@ -587,7 +585,7 @@ git submodule update --init --recursive</code></pre>
 
 <h3 id='documentation'>Documentation</h3>
 
-<p>To edit jquerypp.com, installing jQuery++ and DoneJS is not necessary. Simply <code>fork</code> and edit the github pages&#8217;s <a href='https://github.com/jupiterjs/jquerypp/blob/gh-pages/index.md'>index.md page</a> online. Don&#8217;t forget to submit a pull request.</p>
+<p>To edit jquerypp.com, installing jQuery++ and DoneJS is not necessary. Simply <em>fork</em> and edit the github pages&#8217;s <a href='https://github.com/jupiterjs/jquerypp/blob/gh-pages/index.md'>index.md page</a> online. Don&#8217;t forget to submit a pull request.</p>
 
 <p>To edit the documentation at <a href='http://doneJS.com/docs.html'>DoneJS.com</a>:</p>
 
@@ -597,7 +595,7 @@ git submodule update --init --recursive</code></pre>
 </li>
 
 <li>
-<p>Edit the markdown and js files in the <a href='https://github.com/jupiterjs/jquerypp'>jQuery++ github repo</a>.</p>
+<p>Edit the markdown and js files in the <code>jquery</code> folder.</p>
 </li>
 
 <li>
@@ -615,11 +613,11 @@ git submodule update --init --recursive</code></pre>
 
 <h3 id='making_a_build'>Making a build</h3>
 
-<p>To make the jQuery++ build, run:</p>
+<p>To make a jQuery++ build, run:</p>
 
 <pre><code>js jquery/build/make.js</code></pre>
 
-<p>It puts the downloads in <code>jquery/dist</code></p>
+<p>It puts the downloads in <code>jquery/dist</code>. To build a specific version just check out the <a href='https://github.com/jupiterjs/jquerypp/tags'>git tag</a> you want to build and run the above command.</p>
 		</div>
 	</div>
 </div>

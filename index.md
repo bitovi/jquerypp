@@ -29,7 +29,7 @@ require('jquery/compare')
 
 ## compare `$(elA).compare(elB) -> Number`
 
-[jQuery.compare](http://donejs.com/docs.html#!jQuery.compare) adds `$.fn.compare` to compare the position of two nodes and return a number bitmask detailing how they are positioned relative to each other. The following list shows the `bitmask`, the __number__ and what it corresponds to:
+[jQuery.compare](http://donejs.com/docs.html#!jQuery.compare) adds `$.fn.compare` to compare the position of two nodes. It returns a number that represents a bitmask showing how they are positioned relative to each other. The following list shows the `bitmask`, the __number__ and what it corresponds to for a plugin call like `$('#foo').compare($('#bar'))`:
 
 * `000000` -> __0__: Elements are identical
 * `000001` -> __1__: The nodes are in different documents (or one is outside of a document)
@@ -46,7 +46,7 @@ if( $('#foo').compare($('#bar')) & 4 ) {
 }
 {% endhighlight %}
 
-This is useful to rapidly compare element positions. This is common when widgets can reorder themselves (drag-drop) or with nested widgets (trees).
+This is useful to rapidly compare element positions which is common when widgets can reorder themselves (drag-drop) or with nested widgets (trees).
 
 ## cookie `$.cookie(name, [value], [options]) -> Object|String`
 
@@ -85,13 +85,13 @@ $('#foo').outerWidth(100).innerHeight(50);
 $('#bar').animate({outerWidth: 500});
 {% endhighlight %}
 
-The following graphic shows which dimensions are included for `.innerWidth()` and `.outerWidth()`:
+The following graphic shows which dimensions are included for  `$(el).width()`, `$(el).innerWidth()` and `$(el).outerWidth()`:
 
 ![jQuery.dimensions: .innerWidth()](images/dimensions.png)
 
 ## formParams `$(form).formParams([convert]) -> Object|jQuery`
 
-[$.formParams](http://donejs.com/docs.html#!jQuery.formParams) add `$.fn.formParams` which returns a JavaScript object for values in a form. It creates nested objects by using bracket notation in the form element name. If *convert* is `true`, values that look like numbers or booleans will be converted and empty strings won't be added to the object. For a form like this:
+[$.formParams](http://donejs.com/docs.html#!jQuery.formParams) adds `$.fn.formParams` which returns a JavaScript object for values in a form. It creates nested objects by using bracket notation in the form element name. If *convert* is `true`, values that look like numbers or booleans will be converted and empty strings won't be added to the object. For a form like this:
 
 {% highlight html %}
 <form>
@@ -121,9 +121,9 @@ $('form').formParams({
 });
 {% endhighlight %}
 
-## range `$.Range([el]) -> $.Range` `$(el).range() -> $.Range`
+## range `$.Range([el]) -> range` `$(el).range() -> range`
 
-[jQuery.Range](http://donejs.com/docs.html#!jQuery.Range) helps dealing with creating, moving and comparing text ranges. Use `$.Range().current()` to get the currently selected text range or the jQuery plugin `$(el).range()` to get a `$.Range` instance from an element. Based on the above [$.selection](#__selection) example `$.Range` can be used like this:
+[jQuery.Range](http://donejs.com/docs.html#!jQuery.Range) helps dealing with creating, moving and comparing text ranges. Use `$.Range().current()` to get the currently selected text range or the jQuery plugin `$(el).range()` to get a `$.Range` instance from an element. Based on the  [$.selection](#selection) example `$.Range` can be used like this:
 
 {% highlight javascript %}
 var range = $.Range.current();
@@ -180,7 +180,7 @@ $('#text').text().substring(selection.start, selection.end) // -> some
 
 ## styles `$(el).styles() -> Object`
 
-[jQuery.styles](http://donejs.com/docs.html#!jQuery.styles) adds `$.fn.styles` as a fast way of getting a set of computed styles from an element. It performs a lot better than retrieving them individually (e.g. using [jQuery.css()](http://api.jquery.com/css/)). Computed styles reflect the actual current style of an element, including browser defaults and CSS settings.
+[jQuery.styles](http://donejs.com/docs.html#!jQuery.styles) adds `$.fn.styles` as a fast way of getting a set of computed styles from an element. It performs a lot better than retrieving them individually e.g. by using [jQuery.css()](http://api.jquery.com/css/). Computed styles reflect the actual current style of an element, including browser defaults and CSS settings.
 
 {% highlight javascript %}
 $("#foo").styles('float','display')
@@ -201,7 +201,7 @@ Use `$(el).withinBox(left, top, width, height)` to get all elements within a cer
 $('*').withinBox(200, 200, 100, 100)
 {% endhighlight %}
 
-> *jQuery.event.drag* uses *$.within* to determine dropable elements at the current position.
+> [jQuery.event.drag](#drag) uses *$.within* to determine dropable elements at the current position.
 
 ## EVENTS
 
@@ -228,7 +228,7 @@ $('form').on('destroyed', function() {
 * `dragover` - the drag is over a drop point
 * `dragout` - the drag moved out of a drop point
 
-An element will become draggable by listening to one of these events on it. A draggable div that can only be moved horizontally can be initialized like this:
+An element will become draggable by attaching an event listener for one of these events on it. A draggable div that can only be moved horizontally can be initialized like this:
 
 {% highlight javascript %}
 $('div').on('draginit', function(event, drag) {
@@ -278,9 +278,7 @@ The `drop` object offers the following methods:
 
 * `drop.cancel()`- prevents this drop from being dropped on
 * `drop.cache()` - call on `dropinit` to cache the position of draggable elements
-* `drop.compile()` - get all droppable elements and put them into a list
-
-`drop.compile()` will be called on `dropinit` by default. If new droppable elements are added afterwards it has to be called manually.
+* `drop.compile()` - get all droppable elements and put them into a list. This will be called on `dropinit` by default. If new droppable elements are added after `dropinit`, compile has to be called explicitly.
 
 ## hover `hoverinit` `hoverenter` `hovermove` `hoverleave`
 
@@ -329,7 +327,7 @@ $("input").on('keypress', function(ev){
 });
 {% endhighlight %}
 
-The following keynames are mapped by default:
+The following key names are mapped by default:
 
 * `\b` - backspace
 * `\t` - tab
@@ -346,11 +344,11 @@ The following keynames are mapped by default:
 
 ## pause
 
-[$.event.pause](http://donejs.com/docs.html#!jQuery.event.pause) adds a default event handler, `event.pause()` and `event.resume()` for pausing and resuming event propagation and `$.fn.triggerAsync` for triggering an event asynchronously and passing a callback when propagation is finished.
+[$.event.pause](http://donejs.com/docs.html#!jQuery.event.pause) adds a default event handler, `event.pause()` and `event.resume()` for pausing and resuming event propagation and `$.fn.triggerAsync` for triggering an event asynchronously and executing a callback when propagation is finished.
 
 ### default events `eventname.default`
 
-Allows you to add default event handlers. A default event runs when all other event handlers have been triggered and none has called `event.preventDefault()` or returned `false`. To add a default event just prefix it with the *default* namespace:
+Allow you to add default event handlers. A default event runs when all other event handlers have been triggered and none has called `event.preventDefault()` or returned `false`. Default events are prefixed with the `default` namespace:
 
 {% highlight javascript %}
 $("div").on("default.click", function(ev) {
@@ -401,26 +399,26 @@ $('#foo').on('resize', function(){
 $(document.body).resize();
 {% endhighlight %}
 
-## swipe `swipeleft` `swiperight` `swipedown` `swipeup` `swipe`
+## swipe `swipeleft` `swiperight` `swipeup` `swipedown` `swipe`
 
-[$.event.swipe](http://donejs.com/docs.html#!jQuery.event.swipe) adds support for swipe motions on touchscreen devices providing the `swipeleft`, `swiperight`, `swipedown`, `swipeup` and a general `swipe` event:
+[$.event.swipe](http://donejs.com/docs.html#!jQuery.event.swipe) adds support for swipe motions providing the `swipeleft`, `swiperight`, `swipedown`, `swipeup` and a general `swipe` event:
 
 {% highlight javascript %}
 $('#swiper').on({
   'swipe' : function(ev) {
-    console.log('Swiping')
+    console.log('Swiping');
   },
   'swipeleft' : function(ev) {
-    console.log('Swiping left')
+    console.log('Swiping left');
   },
   'swiperight' : function(ev) {
-    console.log('Swiping right')
+    console.log('Swiping right');
   },
   'swipeup' : function(ev) {
-    console.log('Swiping up')
+    console.log('Swiping up');
   },
   'swipedown' : function(ev) {
-    console.log('Swiping down')
+    console.log('Swiping down');
   }
 });
 {% endhighlight %}
@@ -456,7 +454,7 @@ Bitovi _(developers of jQuery++)_ offers [training](http://bitovi.com/training/)
 ## Developing jQuery++
 
 To develop jQuery++, add features, etc, you first must install DoneJS. DoneJS is the
-parent project of jQuery++.  DoneJS is the 4.0 version of JavaSciptMVC. It has DocumentJS and
+parent project of jQuery++ and the 4.0 version of JavaSciptMVC. It has DocumentJS and
 Steal as submodules that are used to generate the documentation and build the jQuery++ downloads.
 
 ### Installing
@@ -485,7 +483,7 @@ Steal as submodules that are used to generate the documentation and build the jQ
 
 After [installing](#developing_jquery__-installing) jQuery++ and DoneJS, you'll find
 the jQuery++ files in the `jquery` folder. Within `jquery` the plugins are located in the `dom` and `event` folders.
-In each folder (for example `jquery/dom/compare`) you will find:
+For each plugin (for example `jquery/dom/compare`) you will find:
 
 - `compare.html` - A demo page
 - `compare.js` - The actual commented and uncompressed source code
@@ -502,14 +500,14 @@ To develop jQuery++:
 
 ### Documentation
 
-To edit jquerypp.com, installing jQuery++ and DoneJS is not necessary. Simply `fork` and edit the
+To edit jquerypp.com, installing jQuery++ and DoneJS is not necessary. Simply *fork* and edit the
 github pages's [index.md page](https://github.com/jupiterjs/jquerypp/blob/gh-pages/index.md) online. Don't forget to
 submit a pull request.
 
 To edit the documentation at [DoneJS.com](http://doneJS.com/docs.html):
 
  1. [install](#developing_jquery__-installing) jQuery++ and DoneJS.
- 2. Edit the markdown and js files in the [jQuery++ github repo](https://github.com/jupiterjs/jquerypp).
+ 2. Edit the markdown and js files in the `jquery` folder.
  3. Generate the docs with:
 
         js site/scripts/doc.js
@@ -520,8 +518,9 @@ To edit the documentation at [DoneJS.com](http://doneJS.com/docs.html):
 
 ### Making a build
 
-To make the jQuery++ build, run:
+To make a jQuery++ build, run:
 
     js jquery/build/make.js
 
-It puts the downloads in `jquery/dist`
+It puts the downloads in `jquery/dist`. To build a specific version check out the [git tag](https://github.com/jupiterjs/jquerypp/tags)
+you want to build and run the above command.
