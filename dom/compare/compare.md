@@ -21,7 +21,7 @@ The following list shows the `bitmask`, the __number__ and what it corresponds t
 * `001000` -> __8__: #bar contains #foo
 * `010000` -> __16__: #foo contains #bar
 
-You can tests if the number returned by $.compare matches any of these conditions by combining them with a binary AND:
+So if `$('#foo').compare($('#bar'))` returns __10__ which represents a bitmask of `001010` that means that #bar precedes #foo and #bar contains #foo. You can tests if the number returned by  `$.fn.compare` matches any of these conditions by combining them with a binary AND:
 
     if( $('#foo').compare($('#bar')) & 4 ) {
       console.log("#foo preceds #bar")

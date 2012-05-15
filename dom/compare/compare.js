@@ -13,6 +13,8 @@ steal('jquery/dom').then(function($){
  * - `001000` -> __8__: #bar contains #foo
  * - `010000` -> __16__: #foo contains #bar
  *
+ *
+ *
  * @param {HTMLElement|jQuery}  element an element or jQuery collection to compare against.
  * @return {Number} A bitmap number representing how the elements are positioned from each other.}
  */
