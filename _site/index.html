@@ -134,7 +134,7 @@
 </div>
 <p>The following graphic shows which dimensions are included for <code>.innerWidth()</code> and <code>.outerWidth()</code>:</p>
 
-<p><img src='images/dimensions.png' alt='jQuery.dimensions: .innerWidth()' /></p>
+<p><img alt='jQuery.dimensions: .innerWidth()' src='images/dimensions.png' /></p>
 
 <h2 id='formparams_'>formParams <code>$(form).formParams([convert]) -&gt; Object|jQuery</code></h2>
 
@@ -521,6 +521,105 @@
 <h2 id='why_jquery'>Why jQuery++</h2>
 
 <h2 id='developing_jquery'>Developing jQuery++</h2>
+
+<p>To develop jQuery++, add features, etc, you first must install DoneJS. DoneJS is the parent project of jQuery++. DoneJS is the 4.0 version of JavaSciptMVC. It has DocumentJS and Steal as submodules that are used to generate the documentation and build the jQuery++ downloads.</p>
+
+<h3 id='installing'>Installing</h3>
+
+<ol>
+<li>
+<p><code>fork</code> <a href='https://github.com/jupiterjs/jquerypp'>jQuery++ on github</a>.</p>
+</li>
+
+<li>
+<p>Clone DoneJS with:</p>
+
+<pre><code>git clone git@github.com:jupiterjs/donejs</code></pre>
+</li>
+
+<li>
+<p>Open the donejs folder&#8217;s .gitmodule file and change the URL of the <code>&quot;jquery&quot;</code> submodule:</p>
+
+<pre><code>url = git://github.com/jupiterjs/jquerypp.git</code></pre>
+
+<p>to your <code>fork</code>ed URL like</p>
+
+<pre><code>url = git://github.com/justinbmeyer/canjs.git</code></pre>
+</li>
+
+<li>
+<p>Install all submodules by running</p>
+
+<pre><code>cd donejs
+git submodule update --init --recursive</code></pre>
+
+<p>Depending on your version of git, you might need to cd into each submodule and run <code>git checkout</code>.</p>
+</li>
+</ol>
+
+<h3 id='developing'>Developing</h3>
+
+<p>After <a href='#developing_jquery__-installing'>installing</a> jQuery++ and DoneJS, you&#8217;ll find the jQuery++ files in the <code>jquery</code> folder. Within <code>jquery</code> the plugins are located in the <code>dom</code> and <code>event</code> folders. In each folder (for example <code>jquery/dom/compare</code>) you will find:</p>
+
+<ul>
+<li><code>compare.html</code> - A demo page</li>
+
+<li><code>compare.js</code> - The actual commented and uncompressed source code</li>
+
+<li><code>compare.md</code> - The overview page (used in the generated documentation)</li>
+
+<li><code>compare_test.js</code> - The plugin tests</li>
+
+<li><code>qunit.html/funcunit.html</code> - The unit and/or functional tests</li>
+</ul>
+
+<p>To develop jQuery++:</p>
+
+<ol>
+<li>Edit the <em>plugin&#8217;s</em> file.</li>
+
+<li>Add tests to the <em>plugin_test.js</em> test file.</li>
+
+<li>Open the plugins&#8217;s test page (<code>funcunit.html</code> and/or <code>qunit.html</code>). Make sure it passes.</li>
+
+<li>Submit a pull request!</li>
+</ol>
+
+<h3 id='documentation'>Documentation</h3>
+
+<p>To edit jquerypp.com, installing jQuery++ and DoneJS is not necessary. Simply <code>fork</code> and edit the github pages&#8217;s <a href='https://github.com/jupiterjs/jquerypp/blob/gh-pages/index.md'>index.md page</a> online. Don&#8217;t forget to submit a pull request.</p>
+
+<p>To edit the documentation at <a href='http://doneJS.com/docs.html'>DoneJS.com</a>:</p>
+
+<ol>
+<li>
+<p><a href='#developing_jquery__-installing'>install</a> jQuery++ and DoneJS.</p>
+</li>
+
+<li>
+<p>Edit the markdown and js files in the <a href='https://github.com/jupiterjs/jquerypp'>jQuery++ github repo</a>.</p>
+</li>
+
+<li>
+<p>Generate the docs with:</p>
+
+<pre><code>js site/scripts/doc.js</code></pre>
+
+<p>View them at <code>site/docs.html</code></p>
+</li>
+
+<li>
+<p>Submit a pull request.</p>
+</li>
+</ol>
+
+<h3 id='making_a_build'>Making a build</h3>
+
+<p>To make the jQuery++ build, run:</p>
+
+<pre><code>js jquery/build/make.js</code></pre>
+
+<p>It puts the downloads in <code>jquery/dist</code></p>
 		</div>
 	</div>
 </div>

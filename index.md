@@ -454,3 +454,74 @@ Bitovi _(developers of jQuery++)_ offers [training](http://bitovi.com/training/)
 ## Why jQuery++
 
 ## Developing jQuery++
+
+To develop jQuery++, add features, etc, you first must install DoneJS. DoneJS is the
+parent project of jQuery++.  DoneJS is the 4.0 version of JavaSciptMVC. It has DocumentJS and
+Steal as submodules that are used to generate the documentation and build the jQuery++ downloads.
+
+### Installing
+
+ 1. `fork` [jQuery++ on github](https://github.com/jupiterjs/jquerypp).
+ 2. Clone DoneJS with:
+
+        git clone git@github.com:jupiterjs/donejs
+
+ 3. Open the donejs folder's .gitmodule file and change the URL of the `"jquery"` submodule:
+
+        url = git://github.com/jupiterjs/jquerypp.git
+
+    to your `fork`ed URL like
+
+        url = git://github.com/justinbmeyer/canjs.git
+
+ 4. Install all submodules by running
+
+        cd donejs
+        git submodule update --init --recursive
+
+    Depending on your version of git, you might need to cd into each submodule and run `git checkout`.
+
+### Developing
+
+After [installing](#developing_jquery__-installing) jQuery++ and DoneJS, you'll find
+the jQuery++ files in the `jquery` folder. Within `jquery` the plugins are located in the `dom` and `event` folders.
+In each folder (for example `jquery/dom/compare`) you will find:
+
+- `compare.html` - A demo page
+- `compare.js` - The actual commented and uncompressed source code
+- `compare.md` - The overview page (used in the generated documentation)
+- `compare_test.js` - The plugin tests
+- `qunit.html/funcunit.html` - The unit and/or functional tests
+
+To develop jQuery++:
+
+ 1. Edit the _plugin's_ file.
+ 2. Add tests to the _plugin\_test.js_ test file.
+ 3. Open the plugins's test page (`funcunit.html` and/or `qunit.html`). Make sure it passes.
+ 4. Submit a pull request!
+
+### Documentation
+
+To edit jquerypp.com, installing jQuery++ and DoneJS is not necessary. Simply `fork` and edit the
+github pages's [index.md page](https://github.com/jupiterjs/jquerypp/blob/gh-pages/index.md) online. Don't forget to
+submit a pull request.
+
+To edit the documentation at [DoneJS.com](http://doneJS.com/docs.html):
+
+ 1. [install](#developing_jquery__-installing) jQuery++ and DoneJS.
+ 2. Edit the markdown and js files in the [jQuery++ github repo](https://github.com/jupiterjs/jquerypp).
+ 3. Generate the docs with:
+
+        js site/scripts/doc.js
+
+    View them at `site/docs.html`
+
+ 4. Submit a pull request.
+
+### Making a build
+
+To make the jQuery++ build, run:
+
+    js jquery/build/make.js
+
+It puts the downloads in `jquery/dist`
