@@ -171,7 +171,7 @@ $('#text').text().substring(selection.start, selection.end) // -> some
 
 The following example shows how `$.fn.selection` can be used. Initially the selection is set from position eight to 12. You can change the selection in the highlighted area and the status text will be updated:
 
-<iframe style="width: 100%; height: 300px" src="http://jsfiddle.net/FH49q/embedded/result,html,js,css" allowfullscreen="allowfullscreen" frameborder="0">JSFiddle</iframe>
+<iframe style="width: 100%; height: 200px" src="http://jsfiddle.net/FH49q/embedded/result,html,js,css" allowfullscreen="allowfullscreen" frameborder="0">JSFiddle</iframe>
 
 ## styles `$(el).styles() -> Object`
 
@@ -227,13 +227,18 @@ $('form').on('destroyed', function() {
 * `dragover` - the drag is over a drop point
 * `dragout` - the drag moved out of a drop point
 
-An element will become draggable by attaching an event listener for one of these events on it. A draggable div that can only be moved horizontally can be initialized like this:
+An element will become draggable by attaching an event listener for one of these events on it. A simple slider can be implemented like this:
 
 {% highlight javascript %}
-$('div').on('draginit', function(event, drag) {
+$('#dragger').on('draginit', function(ev, drag) {
+  drag.limit($(this).parent());
   drag.horizontal();
 });
 {% endhighlight %}
+
+Which looks like this in action:
+
+<iframe style="width: 100%; height: 200px" src="http://jsfiddle.net/xx5Er/embedded/result,html,js,css" allowfullscreen="allowfullscreen" frameborder="0">JSFiddle</iframe>
 
 The `drag` object (passed to the event handler as the second parameter) can be used to modify the drag behavior:
 
@@ -247,6 +252,8 @@ The `drag` object (passed to the event handler as the second parameter) can be u
 * `drag.vertical()` - limit the drag to vertical movement
 * `drag.limit(container, center) -> drag` - limit the drag within an element
 * `drag.scrolls(elements, options)` - scroll scrollable areas when dragging near their boundaries
+
+
 
 ## drop `dropinit` `dropover` `dropout` `dropmove` `dropon` `dropend`
 
@@ -276,7 +283,8 @@ The `drop` object offers the following methods:
 
 * `drop.cancel()`- prevents this drop from being dropped on
 * `drop.cache()` - call on `dropinit` to cache the position of draggable elements
-* `drop.compile()` - get all droppable elements and put them into a list. This will be called on `dropinit` by default. If new droppable elements are added after `dropinit`, compile has to be called explicitly.
+
+When adding drop-able elements after `dropinit`, for example when expanding a folder view after hovering over it with a draggable for a while, `$.Drop.compile()` needs to be called explicitly to update the list of dropable elements (this happens automatically on `dropinit`).
 
 ## hover `hoverinit` `hoverenter` `hovermove` `hoverleave`
 

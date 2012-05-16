@@ -217,7 +217,7 @@
 </code></pre>
 </div>
 <p>The following example shows how <code>$.fn.selection</code> can be used. Initially the selection is set from position eight to 12. You can change the selection in the highlighted area and the status text will be updated:</p>
-<iframe allowfullscreen='allowfullscreen' frameborder='0' src='http://jsfiddle.net/FH49q/embedded/result,html,js,css' style='width: 100%; height: 300px'>JSFiddle</iframe>
+<iframe allowfullscreen='allowfullscreen' frameborder='0' src='http://jsfiddle.net/FH49q/embedded/result,html,js,css' style='width: 100%; height: 200px'>JSFiddle</iframe>
 <h2 id='styles_'>styles <code>$(el).styles() -&gt; Object</code></h2>
 
 <p><a href='http://donejs.com/docs.html#!jQuery.styles'>jQuery.styles</a> adds <code>$.fn.styles</code> as a fast way of getting a set of computed styles from an element. It performs a lot faster than retrieving them individually e.g. by using <a href='http://api.jquery.com/css/'>jQuery.css()</a>. Computed styles reflect the actual current style of an element, including browser defaults and CSS settings.</p>
@@ -271,12 +271,15 @@
 <li><code>dragout</code> - the drag moved out of a drop point</li>
 </ul>
 
-<p>An element will become draggable by attaching an event listener for one of these events on it. A draggable div that can only be moved horizontally can be initialized like this:</p>
-<div class='highlight'><pre><code class='javascript'><span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;div&#39;</span><span class='p'>).</span><span class='nx'>on</span><span class='p'>(</span><span class='s1'>&#39;draginit&#39;</span><span class='p'>,</span> <span class='kd'>function</span><span class='p'>(</span><span class='nx'>event</span><span class='p'>,</span> <span class='nx'>drag</span><span class='p'>)</span> <span class='p'>{</span>
+<p>An element will become draggable by attaching an event listener for one of these events on it. A simple slider can be implemented like this:</p>
+<div class='highlight'><pre><code class='javascript'><span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;#dragger&#39;</span><span class='p'>).</span><span class='nx'>on</span><span class='p'>(</span><span class='s1'>&#39;draginit&#39;</span><span class='p'>,</span> <span class='kd'>function</span><span class='p'>(</span><span class='nx'>ev</span><span class='p'>,</span> <span class='nx'>drag</span><span class='p'>)</span> <span class='p'>{</span>
+  <span class='nx'>drag</span><span class='p'>.</span><span class='nx'>limit</span><span class='p'>(</span><span class='nx'>$</span><span class='p'>(</span><span class='k'>this</span><span class='p'>).</span><span class='nx'>parent</span><span class='p'>());</span>
   <span class='nx'>drag</span><span class='p'>.</span><span class='nx'>horizontal</span><span class='p'>();</span>
 <span class='p'>});</span>
 </code></pre>
 </div>
+<p>Which looks like this in action:</p>
+<iframe allowfullscreen='allowfullscreen' frameborder='0' src='http://jsfiddle.net/xx5Er/embedded/result,html,js,css' style='width: 100%; height: 200px'>JSFiddle</iframe>
 <p>The <code>drag</code> object (passed to the event handler as the second parameter) can be used to modify the drag behavior:</p>
 
 <ul>
@@ -336,9 +339,9 @@
 <li><code>drop.cancel()</code>- prevents this drop from being dropped on</li>
 
 <li><code>drop.cache()</code> - call on <code>dropinit</code> to cache the position of draggable elements</li>
-
-<li><code>drop.compile()</code> - get all droppable elements and put them into a list. This will be called on <code>dropinit</code> by default. If new droppable elements are added after <code>dropinit</code>, compile has to be called explicitly.</li>
 </ul>
+
+<p>When adding drop-able elements after <code>dropinit</code>, for example when expanding a folder view after hovering over it with a draggable for a while, <code>$.Drop.compile()</code> needs to be called explicitly to update the list of dropable elements (this happens automatically on <code>dropinit</code>).</p>
 
 <h2 id='hover____'>hover <code>hoverinit</code> <code>hoverenter</code> <code>hovermove</code> <code>hoverleave</code></h2>
 
