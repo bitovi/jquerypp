@@ -29,7 +29,7 @@ require('jquery/compare')
 
 ## compare `$(elA).compare(elB) -> Number`
 
-[jQuery.compare](http://donejs.com/docs.html#!jQuery.compare) adds `$.fn.compare` to compare the position of two nodes. It returns a number that represents a bitmask showing how they are positioned relative to each other. The following list shows the `bitmask`, the __number__ and what it corresponds to for a plugin call like `$('#foo').compare($('#bar'))`:
+[jQuery.compare](http://donejs.com/docs.html#!jQuery.compare) adds `$.fn.compare` to compare the position of two nodes. It returns a number that represents a bitmask showing how they are positioned relative to each other. The following list shows the `bitmask`, the __number__ and what it means for a `$.fn.compare` call like `$('#foo').compare($('#bar'))`:
 
 * `000000` -> __0__: Elements are identical
 * `000001` -> __1__: The nodes are in different documents (or one is outside of a document)
@@ -50,7 +50,7 @@ This is useful to rapidly compare element positions which is common when widgets
 
 ## cookie `$.cookie(name, [value], [options]) -> Object|String`
 
-[jQuery.cookie](http://donejs.com/docs.html#!jQuery.cookie) packages Klaus Hartl's [jQuery cookie](https://github.com/carhartl/jquery-cookie) plugin for manipulating cookies. It can be used like this:
+[jQuery.cookie](http://donejs.com/docs.html#!jQuery.cookie) packages Klaus Hartl's [jQuery cookie](https://github.com/carhartl/jquery-cookie) plugin for manipulating cookies. Use it like:
 
 {% highlight javascript %}
 // Set a session cookie
@@ -91,7 +91,7 @@ The following graphic shows which dimensions are included for  `$(el).width()`, 
 
 ## formParams `$(form).formParams([convert]) -> Object|jQuery`
 
-[$.formParams](http://donejs.com/docs.html#!jQuery.formParams) adds `$.fn.formParams` which returns a JavaScript object for values in a form. It creates nested objects by using bracket notation in the form element name. If *convert* is `true`, values that look like numbers or booleans will be converted and empty strings won't be added to the object. For a form like this:
+[$.formParams](http://donejs.com/docs.html#!jQuery.formParams) adds `$.fn.formParams` which serializes a form into a JavaScript object. It creates nested objects by using bracket notation in the form element name. If *convert* is `true`, values that look like numbers or booleans will be converted and empty strings won't be added to the object. For a form like this:
 
 {% highlight html %}
 <form>
@@ -102,7 +102,7 @@ The following graphic shows which dimensions are included for  `$(el).width()`, 
 </form>
 {% endhighlight %}
 
-`$.fn.formParams` will return an object like this:
+`$.fn.formParams` returns:
 
 {% highlight javascript %}
 $('form').formParams()
@@ -123,7 +123,7 @@ $('form').formParams({
 
 ## range `$.Range([el]) -> range` `$(el).range() -> range`
 
-[jQuery.Range](http://donejs.com/docs.html#!jQuery.Range) helps dealing with creating, moving and comparing text ranges. Use `$.Range().current()` to get the currently selected text range or the jQuery plugin `$(el).range()` to get a `$.Range` instance from an element. Based on the  [$.selection](#selection) example `$.Range` can be used like this:
+[jQuery.Range](http://donejs.com/docs.html#!jQuery.Range) helps creating, moving and comparing text ranges. Use `$.Range().current()` to get the currently selected text range or the jQuery plugin `$(el).range()` to get a `$.Range` instance from an element. For example, assuming that in a div like `<div>This is some text</div>` the text from position eight to 12 is currently selected, `$.Range` can be used like this:
 
 {% highlight javascript %}
 var range = $.Range.current();
@@ -152,17 +152,17 @@ $(startNode).addClass('highlight');
 
 A `$.Range` instance offers the following methods:
 
-* `range.clone() -> $.Range` - clones the range and returns a new $.Range object
-* `range.collapse([toStart]) -> $.Range` - clones the range and returns a new $.Range object
+* `range.clone() -> range` - clones the range and returns a new $.Range object
+* `range.collapse([toStart]) -> range` - clones the range and returns a new `$.Range` object
 * `range.compare(other) -> Number` - compares one range to another range
-* `range.end([val]) -> $.Range|Object` - sets or returns the end of the range
-* `range.move(type, referenceRange) -> $.Range` - move the endpoints of a range relative to another range
+* `range.end([val]) -> range|Object` - sets or returns the end of the range
+* `range.move(type, referenceRange) -> range` - move the endpoints of a range relative to another range
 * `range.overlaps(other) -> Boolean` - returns if any portion of these two ranges overlap
-* `range.parent() -> DomNode` - returns the most common ancestor element of the endpoints in the range
+* `range.parent() -> HtmlElement|Element|Node` - returns the most common ancestor element of the endpoints in the range
 * `range.rect(from) -> TextRectangle` - returns the bounding rectangle of this range
-* `range.rects(from)` - returns the client rects
-* `range.start([val]) -> $.Range|Object` - sets or returns the beginning of the range
-* `range.toString()` - returns the text of the range
+* `range.rects(from) -> undefined` - returns the client rects
+* `range.start([val]) -> range|Object` - sets or returns the beginning of the range
+* `range.toString() -> String` - returns the text of the range
 
 ## selection `$(el).selection([start], [end]) -> Object|jQuery`
 
@@ -173,14 +173,16 @@ A `$.Range` instance offers the following methods:
 {% endhighlight %}
 
 {% highlight javascript %}
+// Make a selection in #text from position eight to 12
 $('#text').selection(8, 12);
-$('#text').selection() // -> { start : 8, end : 12 }
+var selection = $('#text').selection();
+// -> { start : 8, end : 12 }
 $('#text').text().substring(selection.start, selection.end) // -> some
 {% endhighlight %}
 
 ## styles `$(el).styles() -> Object`
 
-[jQuery.styles](http://donejs.com/docs.html#!jQuery.styles) adds `$.fn.styles` as a fast way of getting a set of computed styles from an element. It performs a lot better than retrieving them individually e.g. by using [jQuery.css()](http://api.jquery.com/css/). Computed styles reflect the actual current style of an element, including browser defaults and CSS settings.
+[jQuery.styles](http://donejs.com/docs.html#!jQuery.styles) adds `$.fn.styles` as a fast way of getting a set of computed styles from an element. It performs a lot faster than retrieving them individually e.g. by using [jQuery.css()](http://api.jquery.com/css/). Computed styles reflect the actual current style of an element, including browser defaults and CSS settings.
 
 {% highlight javascript %}
 $("#foo").styles('float','display')
@@ -189,7 +191,7 @@ $("#foo").styles('float','display')
 
 ## within `$(el).within(left, top, [useOffsetCache]) -> jQuery`
 
-[jQuery.within](http://donejs.com/docs.html#!jQuery.within) adds `$.fn.within` and `$.fn.withinBox` that return all elements having a given position or area in common. The following example returns all `div` elements on the point 200px left and 200px from the top:
+[jQuery.within](http://donejs.com/docs.html#!jQuery.within) adds `$.fn.within` and `$.fn.withinBox` that return all elements having a given position or area in common. The following example returns all `div` elements having the point 200px left and 200px from the top in common:
 
 {% highlight javascript %}
 $('div').within(200, 200)
@@ -219,7 +221,7 @@ $('form').on('destroyed', function() {
 
 ## drag `dragdown` `draginit` `dragmove` `dragend` `dragover` `dragout`
 
-[jquery.event.drag](http://donejs.com/docs.html#!jQuery.event.drag) adds drag events to jQuery:
+[jQuery.event.drag](http://donejs.com/docs.html#!jQuery.event.drag) adds __delegatable__ drag events to jQuery:
 
 * `dragdown` - the mouse cursor is pressed down
 * `draginit` - the drag motion is started
@@ -241,18 +243,16 @@ The `drag` object (passed to the event handler as the second parameter) can be u
 * `drag.cancel()` - stops the drag motion from happening
 * `drag.ghost() -> jQuery` - copys the draggable and drags the cloned element
 * `drag.horizontal() -> Boolean` - limits the scroll to horizontal movement
-* `drag.location -> $.Vector` - where the drag should be on the screen
-* `drag.mouseElementPosition -> $.Vector` - where the mouse should be on the drag
 * `drag.only([only]) -> Boolean` - only have drags, no drops
 * `drag.representative(element, offsetX, offsetY)` - move another element in place of this element
-* `drag.revert(val) -> $.Drag` - animate the drag back to its position
+* `drag.revert(val) -> drag` - animate the drag back to its position
 * `drag.vertical()` - limit the drag to vertical movement
-* `drag.limit(container, center) -> $.Drag` - limit the drag within an element
+* `drag.limit(container, center) -> drag` - limit the drag within an element
 * `drag.scrolls(elements, options)` - scroll scrollable areas when dragging near their boundaries
 
 ## drop `dropinit` `dropover` `dropout` `dropmove` `dropon` `dropend`
 
-[$.event.drop](http://donejs.com/docs.html#!jQuery.event.drop) complements `jQuery.event.drag` with drop related events:
+[$.event.drop](http://donejs.com/docs.html#!jQuery.event.drop) complements `jQuery.event.drag` with __delegatable__ drop events:
 
 * `dropinit` - the drag motion is started, drop positions are calculated
 * `dropover` - a drag moves over a drop element, called once as the drop is dragged over the element
@@ -282,7 +282,7 @@ The `drop` object offers the following methods:
 
 ## hover `hoverinit` `hoverenter` `hovermove` `hoverleave`
 
-[$.event.hover](http://donejs.com/docs.html#!jQuery.event.hover) is a flexible way to deal with the following hover related events:
+[jQuery.event.hover](http://donejs.com/docs.html#!jQuery.event.hover) is a flexible way to deal with the following hover related events:
 
 * `hoverinit` - called on mouseenter
 * `hoverenter` - an element is being hovered
@@ -313,7 +313,7 @@ $(".option").on("hoverinit", function(ev, hover){
 
 ## key `event.keyName()`
 
-[$.event.key](http://donejs.com/docs.html#!jQuery.event.key) adds a `.keyName()` method to the event object that returns a string representation of the current key:
+[jQuery.event.key](http://donejs.com/docs.html#!jQuery.event.key) adds a `.keyName()` method to the event object that returns a string representation of the current key:
 
 {% highlight javascript %}
 $("input").on('keypress', function(ev){
@@ -388,6 +388,8 @@ $('#todos').on('show', function(ev){
 
 	// TODO Descibe and link JS Fiddle example
 
+<iframe style="width: 100%; height: 300px" src="http://jsfiddle.net/Daff/u7PpX/embedded/" allowfullscreen="allowfullscreen" frameborder="0">JSFiddle</iframe>
+
 The following example will always resize to it's full parent width and height
 
 {% highlight javascript %}
@@ -459,7 +461,7 @@ Steal as submodules that are used to generate the documentation and build the jQ
 
 ### Installing
 
- 1. `fork` [jQuery++ on github](https://github.com/jupiterjs/jquerypp).
+ 1. `fork` [jquerypp on github](https://github.com/jupiterjs/jquerypp).
  2. Clone DoneJS with:
 
         git clone git@github.com:jupiterjs/donejs
@@ -470,7 +472,7 @@ Steal as submodules that are used to generate the documentation and build the jQ
 
     to your `fork`ed URL like
 
-        url = git://github.com/justinbmeyer/canjs.git
+        url = git://github.com/justinbmeyer/jquerypp.git
 
  4. Install all submodules by running
 
@@ -482,7 +484,8 @@ Steal as submodules that are used to generate the documentation and build the jQ
 ### Developing
 
 After [installing](#developing_jquery__-installing) jQuery++ and DoneJS, you'll find
-the jQuery++ files in the `jquery` folder. Within `jquery` the plugins are located in the `dom` and `event` folders.
+the jQuery++ files in the `jquery` folder. Within `jquery`, the plugins are located in the `dom` and `event` folders.
+The `controller`, `model`, `class` and `view` folder are currently kept for backwards compatibility with JavaScriptMVC 3.2/3.3 and shouldn't be modified.
 For each plugin (for example `jquery/dom/compare`) you will find:
 
 - `compare.html` - A demo page
@@ -495,7 +498,7 @@ To develop jQuery++:
 
  1. Edit the _plugin's_ file.
  2. Add tests to the _plugin\_test.js_ test file.
- 3. Open the plugins's test page (`funcunit.html` and/or `qunit.html`). Make sure it passes.
+ 3. Open the full test page in `jquery/qunit.html` and make sure your tests are included and everything still passes.
  4. Submit a pull request!
 
 ### Documentation

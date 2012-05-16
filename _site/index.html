@@ -65,7 +65,7 @@
 
 <h2 id='compare_'>compare <code>$(elA).compare(elB) -&gt; Number</code></h2>
 
-<p><a href='http://donejs.com/docs.html#!jQuery.compare'>jQuery.compare</a> adds <code>$.fn.compare</code> to compare the position of two nodes. It returns a number that represents a bitmask showing how they are positioned relative to each other. The following list shows the <code>bitmask</code>, the <strong>number</strong> and what it corresponds to for a plugin call like <code>$(&#39;#foo&#39;).compare($(&#39;#bar&#39;))</code>:</p>
+<p><a href='http://donejs.com/docs.html#!jQuery.compare'>jQuery.compare</a> adds <code>$.fn.compare</code> to compare the position of two nodes. It returns a number that represents a bitmask showing how they are positioned relative to each other. The following list shows the <code>bitmask</code>, the <strong>number</strong> and what it means for a <code>$.fn.compare</code> call like <code>$(&#39;#foo&#39;).compare($(&#39;#bar&#39;))</code>:</p>
 
 <ul>
 <li><code>000000</code> -&gt; <strong>0</strong>: Elements are identical</li>
@@ -91,7 +91,7 @@
 
 <h2 id='cookie_'>cookie <code>$.cookie(name, [value], [options]) -&gt; Object|String</code></h2>
 
-<p><a href='http://donejs.com/docs.html#!jQuery.cookie'>jQuery.cookie</a> packages Klaus Hartl&#8217;s <a href='https://github.com/carhartl/jquery-cookie'>jQuery cookie</a> plugin for manipulating cookies. It can be used like this:</p>
+<p><a href='http://donejs.com/docs.html#!jQuery.cookie'>jQuery.cookie</a> packages Klaus Hartl&#8217;s <a href='https://github.com/carhartl/jquery-cookie'>jQuery cookie</a> plugin for manipulating cookies. Use it like:</p>
 <div class='highlight'><pre><code class='javascript'><span class='c1'>// Set a session cookie</span>
 <span class='nx'>$</span><span class='p'>.</span><span class='nx'>cookie</span><span class='p'>(</span><span class='s1'>&#39;the_cookie&#39;</span><span class='p'>,</span> <span class='s1'>&#39;the_value&#39;</span><span class='p'>);</span>
 <span class='nx'>$</span><span class='p'>.</span><span class='nx'>cookie</span><span class='p'>(</span><span class='s1'>&#39;the_cookie&#39;</span><span class='p'>)</span> <span class='c1'>// -&gt; &#39;the_value&#39;</span>
@@ -138,7 +138,7 @@
 
 <h2 id='formparams_'>formParams <code>$(form).formParams([convert]) -&gt; Object|jQuery</code></h2>
 
-<p><a href='http://donejs.com/docs.html#!jQuery.formParams'>$.formParams</a> adds <code>$.fn.formParams</code> which returns a JavaScript object for values in a form. It creates nested objects by using bracket notation in the form element name. If <em>convert</em> is <code>true</code>, values that look like numbers or booleans will be converted and empty strings won&#8217;t be added to the object. For a form like this:</p>
+<p><a href='http://donejs.com/docs.html#!jQuery.formParams'>$.formParams</a> adds <code>$.fn.formParams</code> which serializes a form into a JavaScript object. It creates nested objects by using bracket notation in the form element name. If <em>convert</em> is <code>true</code>, values that look like numbers or booleans will be converted and empty strings won&#8217;t be added to the object. For a form like this:</p>
 <div class='highlight'><pre><code class='html'><span class='nt'>&lt;form&gt;</span>
   <span class='nt'>&lt;input</span> <span class='na'>type=</span><span class='s'>&quot;text&quot;</span> <span class='na'>name=</span><span class='s'>&quot;first&quot;</span> <span class='na'>value=</span><span class='s'>&quot;John&quot;</span> <span class='nt'>/&gt;</span>
   <span class='nt'>&lt;input</span> <span class='na'>type=</span><span class='s'>&quot;text&quot;</span> <span class='na'>name=</span><span class='s'>&quot;last&quot;</span> <span class='na'>value=</span><span class='s'>&quot;Doe&quot;</span> <span class='nt'>/&gt;</span>
@@ -147,7 +147,7 @@
 <span class='nt'>&lt;/form&gt;</span>
 </code></pre>
 </div>
-<p><code>$.fn.formParams</code> will return an object like this:</p>
+<p><code>$.fn.formParams</code> returns:</p>
 <div class='highlight'><pre><code class='javascript'><span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;form&#39;</span><span class='p'>).</span><span class='nx'>formParams</span><span class='p'>()</span>
 <span class='c1'>// -&gt; {</span>
 <span class='c1'>//   first : &quot;John&quot;, last : &quot;Doe&quot;,</span>
@@ -164,7 +164,7 @@
 </div>
 <h2 id='range__'>range <code>$.Range([el]) -&gt; range</code> <code>$(el).range() -&gt; range</code></h2>
 
-<p><a href='http://donejs.com/docs.html#!jQuery.Range'>jQuery.Range</a> helps dealing with creating, moving and comparing text ranges. Use <code>$.Range().current()</code> to get the currently selected text range or the jQuery plugin <code>$(el).range()</code> to get a <code>$.Range</code> instance from an element. Based on the <a href='#selection'>$.selection</a> example <code>$.Range</code> can be used like this:</p>
+<p><a href='http://donejs.com/docs.html#!jQuery.Range'>jQuery.Range</a> helps creating, moving and comparing text ranges. Use <code>$.Range().current()</code> to get the currently selected text range or the jQuery plugin <code>$(el).range()</code> to get a <code>$.Range</code> instance from an element. For example, assuming that in a div like <code>&lt;div&gt;This is some text&lt;/div&gt;</code> the text from position eight to 12 is currently selected, <code>$.Range</code> can be used like this:</p>
 <div class='highlight'><pre><code class='javascript'><span class='kd'>var</span> <span class='nx'>range</span> <span class='o'>=</span> <span class='nx'>$</span><span class='p'>.</span><span class='nx'>Range</span><span class='p'>.</span><span class='nx'>current</span><span class='p'>();</span>
 <span class='c1'>// Returns the currently selected text</span>
 <span class='nx'>range</span><span class='p'>.</span><span class='nx'>toString</span><span class='p'>()</span> <span class='c1'>// -&gt; some</span>
@@ -190,27 +190,27 @@
 <p>A <code>$.Range</code> instance offers the following methods:</p>
 
 <ul>
-<li><code>range.clone() -&gt; $.Range</code> - clones the range and returns a new $.Range object</li>
+<li><code>range.clone() -&gt; range</code> - clones the range and returns a new $.Range object</li>
 
-<li><code>range.collapse([toStart]) -&gt; $.Range</code> - clones the range and returns a new $.Range object</li>
+<li><code>range.collapse([toStart]) -&gt; range</code> - clones the range and returns a new <code>$.Range</code> object</li>
 
 <li><code>range.compare(other) -&gt; Number</code> - compares one range to another range</li>
 
-<li><code>range.end([val]) -&gt; $.Range|Object</code> - sets or returns the end of the range</li>
+<li><code>range.end([val]) -&gt; range|Object</code> - sets or returns the end of the range</li>
 
-<li><code>range.move(type, referenceRange) -&gt; $.Range</code> - move the endpoints of a range relative to another range</li>
+<li><code>range.move(type, referenceRange) -&gt; range</code> - move the endpoints of a range relative to another range</li>
 
 <li><code>range.overlaps(other) -&gt; Boolean</code> - returns if any portion of these two ranges overlap</li>
 
-<li><code>range.parent() -&gt; DomNode</code> - returns the most common ancestor element of the endpoints in the range</li>
+<li><code>range.parent() -&gt; HtmlElement|Element|Node</code> - returns the most common ancestor element of the endpoints in the range</li>
 
 <li><code>range.rect(from) -&gt; TextRectangle</code> - returns the bounding rectangle of this range</li>
 
-<li><code>range.rects(from)</code> - returns the client rects</li>
+<li><code>range.rects(from) -&gt; undefined</code> - returns the client rects</li>
 
-<li><code>range.start([val]) -&gt; $.Range|Object</code> - sets or returns the beginning of the range</li>
+<li><code>range.start([val]) -&gt; range|Object</code> - sets or returns the beginning of the range</li>
 
-<li><code>range.toString()</code> - returns the text of the range</li>
+<li><code>range.toString() -&gt; String</code> - returns the text of the range</li>
 </ul>
 
 <h2 id='selection_'>selection <code>$(el).selection([start], [end]) -&gt; Object|jQuery</code></h2>
@@ -218,21 +218,23 @@
 <p><a href='http://donejs.com/docs.html#!jQuery.selection'>jQuery.selection</a> adds <code>$.fn.selection</code> to set or retrieve the currently selected text range. It works on all elements:</p>
 <div class='highlight'><pre><code class='html'><span class='nt'>&lt;div</span> <span class='na'>id=</span><span class='s'>&quot;text&quot;</span><span class='nt'>&gt;</span>This is some text<span class='nt'>&lt;/div&gt;</span>
 </code></pre>
-</div><div class='highlight'><pre><code class='javascript'><span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;#text&#39;</span><span class='p'>).</span><span class='nx'>selection</span><span class='p'>(</span><span class='mi'>8</span><span class='p'>,</span> <span class='mi'>12</span><span class='p'>);</span>
-<span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;#text&#39;</span><span class='p'>).</span><span class='nx'>selection</span><span class='p'>()</span> <span class='c1'>// -&gt; { start : 8, end : 12 }</span>
+</div><div class='highlight'><pre><code class='javascript'><span class='c1'>// Make a selection in #text from position eight to 12</span>
+<span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;#text&#39;</span><span class='p'>).</span><span class='nx'>selection</span><span class='p'>(</span><span class='mi'>8</span><span class='p'>,</span> <span class='mi'>12</span><span class='p'>);</span>
+<span class='kd'>var</span> <span class='nx'>selection</span> <span class='o'>=</span> <span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;#text&#39;</span><span class='p'>).</span><span class='nx'>selection</span><span class='p'>();</span>
+<span class='c1'>// -&gt; { start : 8, end : 12 }</span>
 <span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;#text&#39;</span><span class='p'>).</span><span class='nx'>text</span><span class='p'>().</span><span class='nx'>substring</span><span class='p'>(</span><span class='nx'>selection</span><span class='p'>.</span><span class='nx'>start</span><span class='p'>,</span> <span class='nx'>selection</span><span class='p'>.</span><span class='nx'>end</span><span class='p'>)</span> <span class='c1'>// -&gt; some</span>
 </code></pre>
 </div>
 <h2 id='styles_'>styles <code>$(el).styles() -&gt; Object</code></h2>
 
-<p><a href='http://donejs.com/docs.html#!jQuery.styles'>jQuery.styles</a> adds <code>$.fn.styles</code> as a fast way of getting a set of computed styles from an element. It performs a lot better than retrieving them individually e.g. by using <a href='http://api.jquery.com/css/'>jQuery.css()</a>. Computed styles reflect the actual current style of an element, including browser defaults and CSS settings.</p>
+<p><a href='http://donejs.com/docs.html#!jQuery.styles'>jQuery.styles</a> adds <code>$.fn.styles</code> as a fast way of getting a set of computed styles from an element. It performs a lot faster than retrieving them individually e.g. by using <a href='http://api.jquery.com/css/'>jQuery.css()</a>. Computed styles reflect the actual current style of an element, including browser defaults and CSS settings.</p>
 <div class='highlight'><pre><code class='javascript'><span class='nx'>$</span><span class='p'>(</span><span class='s2'>&quot;#foo&quot;</span><span class='p'>).</span><span class='nx'>styles</span><span class='p'>(</span><span class='s1'>&#39;float&#39;</span><span class='p'>,</span><span class='s1'>&#39;display&#39;</span><span class='p'>)</span>
 <span class='c1'>// -&gt; { cssFloat: &quot;left&quot;, display: &quot;block&quot; }</span>
 </code></pre>
 </div>
 <h2 id='within_'>within <code>$(el).within(left, top, [useOffsetCache]) -&gt; jQuery</code></h2>
 
-<p><a href='http://donejs.com/docs.html#!jQuery.within'>jQuery.within</a> adds <code>$.fn.within</code> and <code>$.fn.withinBox</code> that return all elements having a given position or area in common. The following example returns all <code>div</code> elements on the point 200px left and 200px from the top:</p>
+<p><a href='http://donejs.com/docs.html#!jQuery.within'>jQuery.within</a> adds <code>$.fn.within</code> and <code>$.fn.withinBox</code> that return all elements having a given position or area in common. The following example returns all <code>div</code> elements having the point 200px left and 200px from the top in common:</p>
 <div class='highlight'><pre><code class='javascript'><span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;div&#39;</span><span class='p'>).</span><span class='nx'>within</span><span class='p'>(</span><span class='mi'>200</span><span class='p'>,</span> <span class='mi'>200</span><span class='p'>)</span>
 </code></pre>
 </div>
@@ -258,7 +260,7 @@
 
 <h2 id='drag______'>drag <code>dragdown</code> <code>draginit</code> <code>dragmove</code> <code>dragend</code> <code>dragover</code> <code>dragout</code></h2>
 
-<p><a href='http://donejs.com/docs.html#!jQuery.event.drag'>jquery.event.drag</a> adds drag events to jQuery:</p>
+<p><a href='http://donejs.com/docs.html#!jQuery.event.drag'>jQuery.event.drag</a> adds <strong>delegatable</strong> drag events to jQuery:</p>
 
 <ul>
 <li><code>dragdown</code> - the mouse cursor is pressed down</li>
@@ -289,26 +291,22 @@
 
 <li><code>drag.horizontal() -&gt; Boolean</code> - limits the scroll to horizontal movement</li>
 
-<li><code>drag.location -&gt; $.Vector</code> - where the drag should be on the screen</li>
-
-<li><code>drag.mouseElementPosition -&gt; $.Vector</code> - where the mouse should be on the drag</li>
-
 <li><code>drag.only([only]) -&gt; Boolean</code> - only have drags, no drops</li>
 
 <li><code>drag.representative(element, offsetX, offsetY)</code> - move another element in place of this element</li>
 
-<li><code>drag.revert(val) -&gt; $.Drag</code> - animate the drag back to its position</li>
+<li><code>drag.revert(val) -&gt; drag</code> - animate the drag back to its position</li>
 
 <li><code>drag.vertical()</code> - limit the drag to vertical movement</li>
 
-<li><code>drag.limit(container, center) -&gt; $.Drag</code> - limit the drag within an element</li>
+<li><code>drag.limit(container, center) -&gt; drag</code> - limit the drag within an element</li>
 
 <li><code>drag.scrolls(elements, options)</code> - scroll scrollable areas when dragging near their boundaries</li>
 </ul>
 
 <h2 id='drop______'>drop <code>dropinit</code> <code>dropover</code> <code>dropout</code> <code>dropmove</code> <code>dropon</code> <code>dropend</code></h2>
 
-<p><a href='http://donejs.com/docs.html#!jQuery.event.drop'>$.event.drop</a> complements <code>jQuery.event.drag</code> with drop related events:</p>
+<p><a href='http://donejs.com/docs.html#!jQuery.event.drop'>$.event.drop</a> complements <code>jQuery.event.drag</code> with <strong>delegatable</strong> drop events:</p>
 
 <ul>
 <li><code>dropinit</code> - the drag motion is started, drop positions are calculated</li>
@@ -347,7 +345,7 @@
 
 <h2 id='hover____'>hover <code>hoverinit</code> <code>hoverenter</code> <code>hovermove</code> <code>hoverleave</code></h2>
 
-<p><a href='http://donejs.com/docs.html#!jQuery.event.hover'>$.event.hover</a> is a flexible way to deal with the following hover related events:</p>
+<p><a href='http://donejs.com/docs.html#!jQuery.event.hover'>jQuery.event.hover</a> is a flexible way to deal with the following hover related events:</p>
 
 <ul>
 <li><code>hoverinit</code> - called on mouseenter</li>
@@ -379,7 +377,7 @@
 </div>
 <h2 id='key_'>key <code>event.keyName()</code></h2>
 
-<p><a href='http://donejs.com/docs.html#!jQuery.event.key'>$.event.key</a> adds a <code>.keyName()</code> method to the event object that returns a string representation of the current key:</p>
+<p><a href='http://donejs.com/docs.html#!jQuery.event.key'>jQuery.event.key</a> adds a <code>.keyName()</code> method to the event object that returns a string representation of the current key:</p>
 <div class='highlight'><pre><code class='javascript'><span class='nx'>$</span><span class='p'>(</span><span class='s2'>&quot;input&quot;</span><span class='p'>).</span><span class='nx'>on</span><span class='p'>(</span><span class='s1'>&#39;keypress&#39;</span><span class='p'>,</span> <span class='kd'>function</span><span class='p'>(</span><span class='nx'>ev</span><span class='p'>){</span>
   <span class='c1'>// Don&#39;t allow backspace keys</span>
   <span class='k'>if</span><span class='p'>(</span><span class='nx'>ev</span><span class='p'>.</span><span class='nx'>keyName</span><span class='p'>()</span> <span class='o'>==</span> <span class='s1'>&#39;\b&#39;</span><span class='p'>)</span> <span class='p'>{</span>
@@ -458,7 +456,7 @@
 <p><a href='http://donejs.com/docs.html#!jQuery.event.resize'>$.event.resize</a> adds the <code>resize</code> event which is very useful for resizing a specific element whenever the parents dimension changes. Unlike other events that bubble from the target element to the document the <code>resize</code> event will propagate from the outside-in. This means that outside elements will always resize first.</p>
 
 <pre><code>// TODO Descibe and link JS Fiddle example</code></pre>
-
+<iframe allowfullscreen='allowfullscreen' frameborder='0' src='http://jsfiddle.net/Daff/u7PpX/embedded/' style='width: 100%; height: 300px'>JSFiddle</iframe>
 <p>The following example will always resize to it&#8217;s full parent width and height</p>
 <div class='highlight'><pre><code class='javascript'><span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;#foo&#39;</span><span class='p'>).</span><span class='nx'>on</span><span class='p'>(</span><span class='s1'>&#39;resize&#39;</span><span class='p'>,</span> <span class='kd'>function</span><span class='p'>(){</span>
   <span class='kd'>var</span> <span class='nx'>parent</span> <span class='o'>=</span> <span class='nx'>$</span><span class='p'>(</span><span class='k'>this</span><span class='p'>).</span><span class='nx'>parent</span><span class='p'>();</span>
@@ -526,7 +524,7 @@
 
 <ol>
 <li>
-<p><code>fork</code> <a href='https://github.com/jupiterjs/jquerypp'>jQuery++ on github</a>.</p>
+<p><code>fork</code> <a href='https://github.com/jupiterjs/jquerypp'>jquerypp on github</a>.</p>
 </li>
 
 <li>
@@ -542,7 +540,7 @@
 
 <p>to your <code>fork</code>ed URL like</p>
 
-<pre><code>url = git://github.com/justinbmeyer/canjs.git</code></pre>
+<pre><code>url = git://github.com/justinbmeyer/jquerypp.git</code></pre>
 </li>
 
 <li>
@@ -557,7 +555,7 @@ git submodule update --init --recursive</code></pre>
 
 <h3 id='developing'>Developing</h3>
 
-<p>After <a href='#developing_jquery__-installing'>installing</a> jQuery++ and DoneJS, you&#8217;ll find the jQuery++ files in the <code>jquery</code> folder. Within <code>jquery</code> the plugins are located in the <code>dom</code> and <code>event</code> folders. For each plugin (for example <code>jquery/dom/compare</code>) you will find:</p>
+<p>After <a href='#developing_jquery__-installing'>installing</a> jQuery++ and DoneJS, you&#8217;ll find the jQuery++ files in the <code>jquery</code> folder. Within <code>jquery</code>, the plugins are located in the <code>dom</code> and <code>event</code> folders. The <code>controller</code>, <code>model</code>, <code>class</code> and <code>view</code> folder are currently kept for backwards compatibility with JavaScriptMVC 3.2/3.3 and shouldn&#8217;t be modified. For each plugin (for example <code>jquery/dom/compare</code>) you will find:</p>
 
 <ul>
 <li><code>compare.html</code> - A demo page</li>
@@ -578,7 +576,7 @@ git submodule update --init --recursive</code></pre>
 
 <li>Add tests to the <em>plugin_test.js</em> test file.</li>
 
-<li>Open the plugins&#8217;s test page (<code>funcunit.html</code> and/or <code>qunit.html</code>). Make sure it passes.</li>
+<li>Open the full test page in <code>jquery/qunit.html</code> and make sure your tests are included and everything still passes.</li>
 
 <li>Submit a pull request!</li>
 </ol>
@@ -617,7 +615,7 @@ git submodule update --init --recursive</code></pre>
 
 <pre><code>js jquery/build/make.js</code></pre>
 
-<p>It puts the downloads in <code>jquery/dist</code>. To build a specific version just check out the <a href='https://github.com/jupiterjs/jquerypp/tags'>git tag</a> you want to build and run the above command.</p>
+<p>It puts the downloads in <code>jquery/dist</code>. To build a specific version check out the <a href='https://github.com/jupiterjs/jquerypp/tags'>git tag</a> you want to build and run the above command.</p>
 		</div>
 	</div>
 </div>
