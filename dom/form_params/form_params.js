@@ -65,7 +65,7 @@ steal("jquery/dom").then(function( $ ) {
 	 * the form
 	 * @param {Boolean} [convert=false] True if strings that look like numbers
 	 * and booleans should be converted and if empty string should not be added
-	 * to the result. Defaults to false.
+	 * to the result.
 	 * @return {Object} An object of name-value pairs.
 	 */
 	$.fn.extend({

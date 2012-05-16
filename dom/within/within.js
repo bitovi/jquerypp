@@ -17,7 +17,7 @@ steal('jquery/dom').then(function($){
  * 
  * @param {Number} left the position from the left of the page 
  * @param {Number} top the position from the top of the page
- * @param {Boolean} [useOffsetCache] cache the dimensions and offset of the elements.
+ * @param {Boolean} [useOffsetCache=false] cache the dimensions and offset of the elements.
  * @return {jQuery} a jQuery collection of elements whos area
  * overlaps the element position.
  */
@@ -57,7 +57,7 @@ $.fn.within= function(left, top, useOffsetCache) {
  * @param {Number} top the position from the top of the page
  * @param {Number} width the width of the area
  * @param {Number} height the height of the area
- * @param {Boolean} [useOffsetCache] cache the dimensions and offset of the elements.
+ * @param {Boolean} [useOffsetCache=false] cache the dimensions and offset of the elements.
  * @return {jQuery} a jQuery collection of elements whos area
  * overlaps the element position.
  */

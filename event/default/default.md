@@ -1,7 +1,7 @@
 @page jQuery.event.default
 @parent jquerypp
 
-Allows you to perform default actions as a result of an event.
+`jQuery.event.default` allows you to perform default actions as a result of an event.
 
 Event based APIs are a powerful way of exposing functionality of your widgets.  It also fits in 
 quite nicely with how the DOM works.
@@ -11,7 +11,7 @@ Like default events in normal functions (e.g. submitting a form), synthetic defa
 all event handlers have been triggered and no event handler has called
 preventDefault or returned false.
 
-To listen for a default event, just prefix the event with default.
+To listen to a default event, just prefix the event with `default` namespace:
 
     $("div").on("default.show", function(ev){ ... });
     $("ul").on("default.activate", "li", function(ev){ ... });
@@ -34,8 +34,3 @@ In this case, the application developer doesn't want to show the second
 tab until the checkbox is checked. 
 
 @demo jquery/event/default/defaultjquery.html
-
-Lets see how we would build this with DoneJS:
-
-@demo jquery/event/default/default.html
- 

@@ -75,13 +75,14 @@ steal('jquery/dom').then(function( $ ) {
 	 * @parent jQuery.styles
 	 * @plugin jQuery.styles
 	 *
-	 * Returns a set of computed styles. Pass the names of the styles you need as arguments:
+	 * Returns a set of computed styles. Pass the names of the styles you want to
+	 * retrieve as arguments:
 	 *
 	 *      $("div").styles('float','display')
 	 *      // -> { cssFloat: "left", display: "block" }
 	 *
-	 * @param {String} style pass the style names you want to get returned as arguments.
-	 * @return {Object} an object of style:value pairs
+	 * @param {String} style pass the names of the styles to retrieve as the argument list
+	 * @return {Object} an object of `style` : `value` pairs
 	 */
 	$.fn.styles = function() {
 		return $.styles(this[0], $.makeArray(arguments));

@@ -189,8 +189,8 @@ getCharElement = function( elems , range, len ) {
  *      $('#text').selection(8, 12)
  *      $('#text').selection() // -> { start : 8, end : 12 }
  *
- * @param {Number} [start] Start of the range
- * @param {Number} [end] End of the range
+ * @param {Number} [start] Start position of the selection range
+ * @param {Number} [end] End position of the selection range
  * @return {Object|jQuery} returns the selection information or the jQuery collection for
  * chaining when start and end are given.
  */

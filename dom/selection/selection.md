@@ -1,11 +1,11 @@
 @page jQuery.selection
 @parent jquerypp
 
-Gets or sets the current text selection.
+`jQuery.selection` adds `$.fn.selection` to get or set the current selection.
 
 ## Getting
 
-Gets the current selection in the context of an element.  For example:
+The following call to `$.fn.selection`
  
 	$('textarea').selection() // -> { .... }
      
@@ -22,7 +22,7 @@ This lets you get the selected text in a textarea like:
        
 	alert('You selected '+selected+'.');
      
-Selection works with all elements.  If you want to get selection information of the document:
+Selection works with all elements. If you want to get selection information of the document:
  
 	$(document.body).selection();
      

@@ -4,19 +4,25 @@ steal('jquery/dom').then(function($){
  * @function jQuery.fn.compare
  * @parent jQuery.compare
  *
- * Compare two elements and return a bitmask in number form representing the following conditions:
+ * Compare two elements and return a bitmask as a number representing the following conditions:
  *
  * - `000000` -> __0__: Elements are identical
  * - `000001` -> __1__: The nodes are in different documents (or one is outside of a document)
  * - `000010` -> __2__: #bar precedes #foo
  * - `000100` -> __4__: #foo precedes #bar
  * - `001000` -> __8__: #bar contains #foo
+ * - `001010` -> __10__: #bar precedes #foo __and__ #bar contains #foo
  * - `010000` -> __16__: #foo contains #bar
+ * - `010100` -> __20__: #foo precedes #bar __and__ #foo contains #bar
  *
+ * You can check for any of these conditions using a bitwise AND:
  *
+ *     if( $('#foo').compare($('#bar')) & 2 ) {
+ *       console.log("#bar precedes #foo")
+ *     }
  *
- * @param {HTMLElement|jQuery}  element an element or jQuery collection to compare against.
- * @return {Number} A bitmap number representing how the elements are positioned from each other.}
+ * @param {HTMLElement|jQuery} element an element or jQuery collection to compare against.
+ * @return {Number} A number representing a bitmask deatiling how the elements are positioned from each other.
  */
 jQuery.fn.compare = function(element){ //usually 
 	//element is usually a relatedTarget, but element/c it is we have to avoid a few FF errors

@@ -1,15 +1,9 @@
-/**
- * @add jQuery.event.special
- */
 steal('jquery/event').then(function( $ ) {
 	/**
 	 * @attribute destroyed
-	 * @parent specialevents
 	 * @download  http://jmvcsite.heroku.com/pluginify?plugins[]=jquery/dom/destroyed/destroyed.js
 	 * @test jquery/event/destroyed/qunit.html
-	 *
 	 */
-
 	var oldClean = jQuery.cleanData;
 
 	$.cleanData = function( elems ) {

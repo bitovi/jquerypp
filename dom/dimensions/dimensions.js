@@ -20,7 +20,7 @@ $.each({
  *
  * Lets you set the outer width of an object where:
  *
- *      outerWidth = height + padding + border + (margin)
+ *      outerWidth = width + padding + border + (margin)
  *
  * And can be used like:
  *
@@ -30,64 +30,92 @@ $.each({
  *      $("#foo").outerWidth(true); //returns outer width + margins
  *
  * When setting the outerWidth, it adjusts the width of the element.
+ * If *includeMargin* is set to `true` margins will also be included.
+ * It is also possible to animate the outer width:
+ * 
+ *      $('#foo').animate({ outerWidth: 200 });
  *
- * @param {Number} [height]
+ * @param {Number} [width] The width to set
  * @param {Boolean} [includeMargin=false] Makes setting the outerWidth adjust
- * for margin. Defaults to false.
- * @return {jQuery|Number} If you are setting the value, returns the jQuery wrapped elements.
+ * for margins.
+ * @return {jQuery|Number} Returns the outer width or the jQuery wrapped elements
+ * if you are setting the outer width.
  */
 width: 
 /**
  * @function jQuery.fn.innerWidth
  * @parent jQuery.dimensions
  *
- * Lets you set the inner width of an element which includes padding.
+ * Lets you set the inner width of an element where
+ * 
+ *      innerWidth = width + padding
+ *      
+ * Use it like:
  *
  *      $("#foo").innerWidth(100); //sets inner width
  *      $("#foo").outerWidth(); // returns inner width
+ *      
+ * Or in an animation like:
+ * 
+ *      $('#foo').animate({ innerWidth : 200 });
  *
  * Setting inner width adjusts the width of the element.
  *
- * @param {Number} [height] 
+ * @param {Number} [width] The inner width to set
+ * @return {jQuery|Number} Returns the inner width or the jQuery wrapped elements
+ * if you are setting the inner width.
  */
 "Width", 
 /**
  * @function jQuery.fn.outerHeight
  * @parent jQuery.dimensions
  *
- * Lets you set the outer height of an object where: <br/> 
+ * Lets you set the outer height of an object where:
  *
  *      outerHeight = height + padding + border + (margin)
  *
  * And can be used like:
  *
  *      $("#foo").outerHeight(100); //sets outer height
- *      $("#foo").outerHeight(100, true); //uses margins
+ *      $("#foo").outerHeight(100, true); // uses margins
  *      $("#foo").outerHeight(); //returns outer height
  *      $("#foo").outerHeight(true); //returns outer height + margins
  *
  * When setting the outerHeight, it adjusts the height of the element.
+ * If *includeMargin* is set to `true` margins will also be included.
+ * It is also possible to animate the outer heihgt:
  *
- * @param {Number|Boolean} [height] If a number is provided -> sets the outer height of the object.<br/>
- * If true is given ->  returns the outer height and includes margins.<br/>
- * If no value is given -> returns the outer height without margin.
- * @param {Boolean} [includeMargin] Makes setting the outerHeight adjust for margin.
- * @return {jQuery|Number} If you are setting the value, returns the jQuery wrapped elements.
- * Otherwise, returns outerHeight in pixels.
+ *      $('#foo').animate({ outerHeight : 200 });
+ *
+ * @param {Number} [height] The height to set
+ * @param {Boolean} [includeMargin=false] Makes setting the outerHeight adjust
+ * for margins.
+ * @return {jQuery|Number} Returns the outer height or the jQuery wrapped elements
+ * if you are setting the outer height.
  */
 height: 
 /**
  * @function jQuery.fn.innerHeight
  * @parent jQuery.dimensions
  *
- * Lets you read and set the inner height of an element which includes the padding.
+ * Lets you set the inner height of an element where
+ *
+ *      innerHeight = height + padding
+ *
+ * Use it like:
  *
  *      $("#foo").innerHeight(100); //sets inner height
  *      $("#foo").outerHeight(); // returns inner height
  *
- * Setting inner width adjusts the height of the element.
+ * Or in an animation like:
  *
- * @param {Number} [height]
+ *      $('#foo').animate({ innerHeight : 200 });
+ *
+ * Setting inner height adjusts the height of the element.
+ *
+ * @param {Number} [height] The inner height to set
+ * @return {jQuery|Number} Returns the inner height or the jQuery wrapped elements
+ * if you are setting the inner height.
  */
 "Height" }, function(lower, Upper) {
 
