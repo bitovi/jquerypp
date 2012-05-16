@@ -1,5 +1,5 @@
 module Jekyll
-  class JMVCLink < Liquid::Tag
+  class DoneJSLink < Liquid::Tag
 
     def initialize(tag_name, text, tokens)
       super
@@ -14,9 +14,9 @@ module Jekyll
     end
 
     def render(context)
-    	%Q([#{@link}](http://javascriptmvc.com/docs.html#!##{@url}))
+    	%Q([#{@link}](http://donejs.com/docs.html#!##{@url}))
     end
   end
 end
 
-Liquid::Template.register_tag('jmvclink', Jekyll::JMVCLink)
+Liquid::Template.register_tag('donejs', Jekyll::DoneJSLink)
