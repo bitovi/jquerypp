@@ -29,7 +29,7 @@ require('jquery/compare')
 
 ## compare `$(elA).compare(elB) -> Number`
 
-{% donejs jQuery.compare %} adds `$.fn.compare` to compare the position of two nodes. It returns a number that represents a bitmask showing how they are positioned relative to each other. The following list shows the `bitmask`, the __number__ and what it means for a `$.fn.compare` call like `$('#foo').compare($('#bar'))`:
+[jQuery.compare](http://donejs.com/docs.html#!jQuery.compare) adds `$.fn.compare` to compare the position of two nodes. It returns a number that represents a bitmask showing how they are positioned relative to each other. The following list shows the `bitmask`, the __number__ and what it means for a `$.fn.compare` call like `$('#foo').compare($('#bar'))`:
 
 * `000000` -> __0__: Elements are identical
 * `000001` -> __1__: The nodes are in different documents (or one is outside of a document)
@@ -50,7 +50,7 @@ This is useful to rapidly compare element positions which is common when widgets
 
 ## cookie `$.cookie(name, [value], [options]) -> Object|String`
 
-{% donejs jQuery.cookie %} packages Klaus Hartl's [jQuery cookie](https://github.com/carhartl/jquery-cookie) plugin for manipulating cookies. Use it like:
+[jQuery.cookie](http://donejs.com/docs.html#!jQuery.cookie) packages Klaus Hartl's [jQuery cookie](https://github.com/carhartl/jquery-cookie) plugin for manipulating cookies. Use it like:
 
 {% highlight javascript %}
 // Set a session cookie
@@ -71,7 +71,7 @@ The following *options* are available:
 
 ## dimensions
 
-{% donejs jQuery.dimensions %} overwrites `$.fn.innerWidth`, `$.fn.outerWidth`, `$.fn.innerHeight`, `$.fn.outerHeight` and enables `$.fn.animate` to animate these values. Inner dimensions include the padding where outer dimensions also take care of borders and margins (if *includeMargin* is set to `true`). Set and read these values using:
+[jQuery.dimensions](http://donejs.com/docs.html#!jQuery.dimensions) overwrites `$.fn.innerWidth`, `$.fn.outerWidth`, `$.fn.innerHeight`, `$.fn.outerHeight` and enables `$.fn.animate` to animate these values. Inner dimensions include the padding where outer dimensions also take care of borders and margins (if *includeMargin* is set to `true`). Set and read these values using:
 
 * `$(el).innerHeight([height])`
 * `$(el).outerHeight([height], [includeMargin])`
@@ -91,7 +91,7 @@ The following graphic shows which dimensions are included for  `$(el).width()`, 
 
 ## formParams `$(form).formParams([convert]) -> Object|jQuery`
 
-{% donejs jQuery.formParams %} adds `$.fn.formParams` which serializes a form into a JavaScript object. It creates nested objects by using bracket notation in the form element name. If *convert* is `true`, values that look like numbers or booleans will be converted and empty strings won't be added to the object. For a form like this:
+[jQuery.formParams](http://donejs.com/docs.html#!jQuery.formParams) adds `$.fn.formParams` which serializes a form into a JavaScript object. It creates nested objects by using bracket notation in the form element name. If *convert* is `true`, values that look like numbers or booleans will be converted and empty strings won't be added to the object. For a form like this:
 
 {% highlight html %}
 <form>
@@ -123,7 +123,7 @@ $('form').formParams({
 
 ## range `$.Range([el]) -> range` `$(el).range() -> range`
 
-{% donejs jQuery.Range %} helps creating, moving and comparing text ranges. Use `$.Range().current()` to get the currently selected text range or the jQuery plugin `$(el).range()` to get a `$.Range` instance from an element. For example, assuming that in a div like `<div>This is some text</div>` the text from position eight to 12 is currently selected, `$.Range` can be used like this:
+[jQuery.Range](http://donejs.com/docs.html#!jQuery.Range) helps creating, moving and comparing text ranges. Use `$.Range().current()` to get the currently selected text range or the jQuery plugin `$(el).range()` to get a `$.Range` instance from an element. For example, assuming that in a div like `<div>This is some text</div>` the text from position eight to 12 is currently selected, `$.Range` can be used like this:
 
 {% highlight javascript %}
 var range = $.Range.current();
@@ -155,7 +155,7 @@ A `$.Range` instance offers the following methods:
 
 ## selection `$(el).selection([start], [end]) -> Object|jQuery`
 
-{% donejs jQuery.selection %} adds `$.fn.selection` to set or retrieve the currently selected text range. It works on all elements:
+[jQuery.selection](http://donejs.com/docs.html#!jQuery.selection) adds `$.fn.selection` to set or retrieve the currently selected text range. It works on all elements:
 
 {% highlight html %}
 <div id="text">This is some text</div>
@@ -171,11 +171,11 @@ $('#text').text().substring(selection.start, selection.end) // -> some
 
 The following example shows how `$.fn.selection` can be used. Initially the selection is set from position eight to 12. You can change the selection in the highlighted area and the status text will be updated:
 
-{% jsfiddle FH49q %}
+<iframe style="width: 100%; height: 300px" src="http://jsfiddle.net/FH49q/embedded/result,html,js,css" allowfullscreen="allowfullscreen" frameborder="0">JSFiddle</iframe>
 
 ## styles `$(el).styles() -> Object`
 
-{% donejs jQuery.styles %} adds `$.fn.styles` as a fast way of getting a set of computed styles from an element. It performs a lot faster than retrieving them individually e.g. by using [jQuery.css()](http://api.jquery.com/css/). Computed styles reflect the actual current style of an element, including browser defaults and CSS settings.
+[jQuery.styles](http://donejs.com/docs.html#!jQuery.styles) adds `$.fn.styles` as a fast way of getting a set of computed styles from an element. It performs a lot faster than retrieving them individually e.g. by using [jQuery.css()](http://api.jquery.com/css/). Computed styles reflect the actual current style of an element, including browser defaults and CSS settings.
 
 {% highlight javascript %}
 $("#foo").styles('float','display')
@@ -184,7 +184,7 @@ $("#foo").styles('float','display')
 
 ## within `$(el).within(left, top, [useOffsetCache]) -> jQuery`
 
-{% donejs jQuery.within %} adds `$.fn.within` and `$.fn.withinBox` that return all elements having a given position or area in common. The following example returns all `div` elements having the point 200px left and 200px from the top in common:
+[jQuery.within](http://donejs.com/docs.html#!jQuery.within) adds `$.fn.within` and `$.fn.withinBox` that return all elements having a given position or area in common. The following example returns all `div` elements having the point 200px left and 200px from the top in common:
 
 {% highlight javascript %}
 $('div').within(200, 200)
@@ -196,13 +196,13 @@ Use `$(el).withinBox(left, top, width, height)` to get all elements within a cer
 $('*').withinBox(200, 200, 100, 100)
 {% endhighlight %}
 
-> {% donejs jQuery.event.drag %} uses *$.within* to determine dropable elements at the current position.
+> [jQuery.event.drag](http://donejs.com/docs.html#!jQuery.event.drag) uses *$.within* to determine dropable elements at the current position.
 
 ## EVENTS
 
 ## destroyed `destroyed`
 
-The `destroyed` event is triggered by {% donejs jQuery.event.destroyed %} when the element is removed from the DOM using one of the jQuery [manipulation methods](http://api.jquery.com/category/manipulation/).
+The `destroyed` event is triggered by [jQuery.event.destroyed](http://donejs.com/docs.html#!jQuery.event.destroyed) when the element is removed from the DOM using one of the jQuery [manipulation methods](http://api.jquery.com/category/manipulation/).
 
 {% highlight javascript %}
 $('form').on('destroyed', function() {
@@ -214,7 +214,7 @@ $('form').on('destroyed', function() {
 
 ## drag `dragdown` `draginit` `dragmove` `dragend` `dragover` `dragout`
 
-{% donejs jQuery.event.drag %} adds __delegatable__ drag events to jQuery:
+[jQuery.event.drag](http://donejs.com/docs.html#!jQuery.event.drag) adds __delegatable__ drag events to jQuery:
 
 * `dragdown` - the mouse cursor is pressed down
 * `draginit` - the drag motion is started
@@ -246,7 +246,7 @@ The `drag` object (passed to the event handler as the second parameter) can be u
 
 ## drop `dropinit` `dropover` `dropout` `dropmove` `dropon` `dropend`
 
-{% donejs jQuery.event.drop %} complements `jQuery.event.drag` with __delegatable__ drop events:
+[jQuery.event.drop](http://donejs.com/docs.html#!jQuery.event.drop) complements `jQuery.event.drag` with __delegatable__ drop events:
 
 * `dropinit` - the drag motion is started, drop positions are calculated
 * `dropover` - a drag moves over a drop element, called once as the drop is dragged over the element
@@ -276,7 +276,7 @@ The `drop` object offers the following methods:
 
 ## hover `hoverinit` `hoverenter` `hovermove` `hoverleave`
 
-{% donejs jQuery.event.hover %} is a flexible way to deal with the following hover related events:
+[jQuery.event.hover](http://donejs.com/docs.html#!jQuery.event.hover) is a flexible way to deal with the following hover related events:
 
 * `hoverinit` - called on mouseenter
 * `hoverenter` - an element is being hovered
@@ -307,7 +307,7 @@ $(".option").on("hoverinit", function(ev, hover){
 
 ## key `event.keyName()`
 
-{% donejs jQuery.event.key %} adds a `.keyName()` method to the event object that returns a string representation of the current key:
+[jQuery.event.key](http://donejs.com/docs.html#!jQuery.event.key) adds a `.keyName()` method to the event object that returns a string representation of the current key:
 
 {% highlight javascript %}
 $("input").on('keypress', function(ev){
@@ -338,11 +338,11 @@ The following key names are mapped by default:
 
 ## pause
 
-{% donejs jQuery.event.pause %} adds a default event handler, `event.pause()` and `event.resume()` for pausing and resuming event propagation and `$.fn.triggerAsync` for triggering an event asynchronously and executing a callback when propagation is finished.
+[jQuery.event.pause](http://donejs.com/docs.html#!jQuery.event.pause) adds a default event handler, `event.pause()` and `event.resume()` for pausing and resuming event propagation and `$.fn.triggerAsync` for triggering an event asynchronously and executing a callback when propagation is finished.
 
 ### default events `eventname.default`
 
-{% donejs jQuery.even.default %} adds default event handlers. A default event runs when all other event handlers have been triggered and none has called `event.preventDefault()` or returned `false`. Default events are prefixed with the `default` namespace. The following example adds a default `toggle` event:
+[jQuery.even.default](http://donejs.com/docs.html#!jQuery.even.default) adds default event handlers. A default event runs when all other event handlers have been triggered and none has called `event.preventDefault()` or returned `false`. Default events are prefixed with the `default` namespace. The following example adds a default `toggle` event:
 
 {% highlight javascript %}
 $('#text').on('toggle.default', function(ev) {
@@ -357,11 +357,11 @@ $('#text').on('toggle', function(ev, animation) {
 });
 {% endhighlight %}
 
-{% jsfiddle mXePt %}
+<iframe style="width: 100%; height: 300px" src="http://jsfiddle.net/mXePt/embedded/result,html,js,css" allowfullscreen="allowfullscreen" frameborder="0">JSFiddle</iframe>
 
 ### triggerAsync `$(el).triggerAsync(event, [success], [prevented])`
 
-{% donejs jQuery.fn.triggerAsync %} triggers an event and calls a *success* handler when it has finished propagating through the DOM and no handler called `event.preventDefault()` or returned `false`. The *prevented* callback will be used otherwise:
+[jQuery.fn.triggerAsync](http://donejs.com/docs.html#!jQuery.fn.triggerAsync) triggers an event and calls a *success* handler when it has finished propagating through the DOM and no handler called `event.preventDefault()` or returned `false`. The *prevented* callback will be used otherwise:
 
 {% highlight javascript %}
 $('panel').triggerAsync('show', function(){
@@ -387,7 +387,7 @@ $('#todos').on('show', function(ev){
 
 ## resize `resize`
 
-{% donejs jQuery.event.resize %} adds the `resize` event which is very useful for resizing a specific element whenever the parents dimension changes. Unlike other events that bubble from the target element to the document the `resize` event will propagate from the outside-in. This means that outside elements will always resize first.
+[jQuery.event.resize](http://donejs.com/docs.html#!jQuery.event.resize) adds the `resize` event which is very useful for resizing a specific element whenever the parents dimension changes. Unlike other events that bubble from the target element to the document the `resize` event will propagate from the outside-in. This means that outside elements will always resize first.
 
 	// TODO Descibe and link JS Fiddle example
 
@@ -405,7 +405,7 @@ $(document.body).resize();
 
 ## swipe `swipeleft` `swiperight` `swipeup` `swipedown` `swipe`
 
-{% donejs jQuery.event.swipe %} adds support for swipe motions providing the `swipeleft`, `swiperight`, `swipedown`, `swipeup` and a general `swipe` event:
+[jQuery.event.swipe](http://donejs.com/docs.html#!jQuery.event.swipe) adds support for swipe motions providing the `swipeleft`, `swiperight`, `swipedown`, `swipeup` and a general `swipe` event:
 
 {% highlight javascript %}
 $('#swiper').on({

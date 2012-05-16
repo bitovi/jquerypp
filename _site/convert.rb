@@ -1,7 +1,7 @@
 file = File.open("index.md", "rb")
 contents = file.read
 
-link_matcher = /\{% jmvclink ([a-zA-Z\. :\$\/]+) %\}/
+link_matcher = /\{% donejs ([a-zA-Z\. :\$\/]+) %\}/
 
 link_converter = Proc.new do |m|
 	text_array = $1.split(' ')
@@ -12,7 +12,7 @@ link_converter = Proc.new do |m|
 		@url  = text_array.first
 		@link = text_array.first
 	end
-	%Q([#{@link}](http://javascriptmvc.com/docs.html#!#{@url}))
+	%Q([#{@link}](http://donejs.com/docs.html#!#{@url}))
 end
 
 code_matcher = /(\{% highlight [a-z]+ %\})(.*?)(\{% endhighlight %\})/m
