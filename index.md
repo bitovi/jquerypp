@@ -196,6 +196,10 @@ Use `$(el).withinBox(left, top, width, height)` to get all elements within a cer
 $('*').withinBox(200, 200, 100, 100)
 {% endhighlight %}
 
+Move the mouse in the following example and it will show the ids for `div` elements within the current mouse position:
+
+<iframe style="width: 100%; height: 330px" src="http://jsfiddle.net/hHLcg/embedded/result,html,js,css" allowfullscreen="allowfullscreen" frameborder="0">JSFiddle</iframe>
+
 > [jQuery.event.drag](http://donejs.com/docs.html#!jQuery.event.drag) uses *$.within* to determine dropable elements at the current position.
 
 ## EVENTS
@@ -387,10 +391,8 @@ $('#todos').on('show', function(ev){
 
 ## resize `resize`
 
-[jQuery.event.resize](http://donejs.com/docs.html#!jQuery.event.resize) adds the `resize` event which is very useful for resizing a specific element whenever the parents dimension changes. Unlike other events that bubble from the target element to the document the `resize` event will propagate from the outside-in. This means that outside elements will always resize first.
-
-	// TODO Descibe and link JS Fiddle example
-
+[jQuery.event.resize](http://donejs.com/docs.html#!jQuery.event.resize) allows you to listen to `resize` events on arbitrary elements. Unlike other events that bubble from the target element to the document the `resize` event will propagate from the outside-in.
+This means that outside elements will always resize first. Trigger the `resize` event whenever the dimensions of an element change and inside elements should adjust as well.
 
 The following example will always resize to it's full parent width and height
 
@@ -402,6 +404,10 @@ $('#foo').on('resize', function(){
 
 $(document.body).resize();
 {% endhighlight %}
+
+The `resize` event makes creating application like layouts a lot easier. The following example creates a common layout with top, left, right and center elements within a container. Use the blue square to resize the outside container. The `resize` event will take care of adjusting the dimensions of the inside elements accordingly using the [jQuery.dimensions](#dimensions) plugin:
+
+<iframe style="width: 100%; height: 350px" src="http://jsfiddle.net/TcB5y/embedded/result,html,js,css" allowfullscreen="allowfullscreen" frameborder="0">JSFiddle</iframe>
 
 ## swipe `swipeleft` `swiperight` `swipeup` `swipedown` `swipe`
 

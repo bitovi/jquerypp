@@ -235,6 +235,8 @@
 <div class='highlight'><pre><code class='javascript'><span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;*&#39;</span><span class='p'>).</span><span class='nx'>withinBox</span><span class='p'>(</span><span class='mi'>200</span><span class='p'>,</span> <span class='mi'>200</span><span class='p'>,</span> <span class='mi'>100</span><span class='p'>,</span> <span class='mi'>100</span><span class='p'>)</span>
 </code></pre>
 </div>
+<p>Move the mouse in the following example and it will show the ids for <code>div</code> elements within the current mouse position:</p>
+<iframe allowfullscreen='allowfullscreen' frameborder='0' src='http://jsfiddle.net/hHLcg/embedded/result,html,js,css' style='width: 100%; height: 330px'>JSFiddle</iframe>
 <blockquote>
 <p><a href='http://donejs.com/docs.html#!jQuery.event.drag'>jQuery.event.drag</a> uses <em>$.within</em> to determine dropable elements at the current position.</p>
 </blockquote>
@@ -455,9 +457,7 @@
 </div>
 <h2 id='resize_'>resize <code>resize</code></h2>
 
-<p><a href='http://donejs.com/docs.html#!jQuery.event.resize'>jQuery.event.resize</a> adds the <code>resize</code> event which is very useful for resizing a specific element whenever the parents dimension changes. Unlike other events that bubble from the target element to the document the <code>resize</code> event will propagate from the outside-in. This means that outside elements will always resize first.</p>
-
-<pre><code>// TODO Descibe and link JS Fiddle example</code></pre>
+<p><a href='http://donejs.com/docs.html#!jQuery.event.resize'>jQuery.event.resize</a> allows you to listen to <code>resize</code> events on arbitrary elements. Unlike other events that bubble from the target element to the document the <code>resize</code> event will propagate from the outside-in. This means that outside elements will always resize first. Trigger the <code>resize</code> event whenever the dimensions of an element change and inside elements should adjust as well.</p>
 
 <p>The following example will always resize to it&#8217;s full parent width and height</p>
 <div class='highlight'><pre><code class='javascript'><span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;#foo&#39;</span><span class='p'>).</span><span class='nx'>on</span><span class='p'>(</span><span class='s1'>&#39;resize&#39;</span><span class='p'>,</span> <span class='kd'>function</span><span class='p'>(){</span>
@@ -468,6 +468,8 @@
 <span class='nx'>$</span><span class='p'>(</span><span class='nb'>document</span><span class='p'>.</span><span class='nx'>body</span><span class='p'>).</span><span class='nx'>resize</span><span class='p'>();</span>
 </code></pre>
 </div>
+<p>The <code>resize</code> event makes creating application like layouts a lot easier. The following example creates a common layout with top, left, right and center elements within a container. Use the blue square to resize the outside container. The <code>resize</code> event will take care of adjusting the dimensions of the inside elements accordingly using the <a href='#dimensions'>jQuery.dimensions</a> plugin:</p>
+<iframe allowfullscreen='allowfullscreen' frameborder='0' src='http://jsfiddle.net/TcB5y/embedded/result,html,js,css' style='width: 100%; height: 350px'>JSFiddle</iframe>
 <h2 id='swipe_____'>swipe <code>swipeleft</code> <code>swiperight</code> <code>swipeup</code> <code>swipedown</code> <code>swipe</code></h2>
 
 <p><a href='http://donejs.com/docs.html#!jQuery.event.swipe'>jQuery.event.swipe</a> adds support for swipe motions providing the <code>swipeleft</code>, <code>swiperight</code>, <code>swipedown</code>, <code>swipeup</code> and a general <code>swipe</code> event:</p>
