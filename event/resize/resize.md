@@ -37,4 +37,6 @@ use the following:
 If your element doesn't need to change it's dimensions as a result of the parent element, it should
 call ev.stopPropagation().  This will only stop resize from being sent to child elements of the current element.
 
+## Demo
 
+@demo jquery/event/resize/demo.html

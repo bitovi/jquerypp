@@ -10,3 +10,9 @@ Use `$(el).withinBox(left, top, width, height)` to get all elements within a cer
 	$('*').withinBox(200, 200, 100, 100)
 
 [jQuery.event.drag] uses *$.within* to determine dropable elements at the current position.
+
+## Example
+
+Move the mouse in the following example and it will show the ids for `div` elements within the current mouse position:
+
+<iframe style="width: 100%; height: 330px" src="http://jsfiddle.net/hHLcg/embedded/result,html,js,css" allowfullscreen="allowfullscreen" frameborder="0">JSFiddle</iframe>
