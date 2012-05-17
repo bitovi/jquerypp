@@ -247,7 +247,7 @@
 <p>Move the mouse in the following example and it will show the ids for <code>div</code> elements within the current mouse position:</p>
 <iframe allowfullscreen='allowfullscreen' frameborder='0' src='http://jsfiddle.net/hHLcg/embedded/result,html,js,css' style='width: 100%; height: 330px'>JSFiddle</iframe>
 <blockquote>
-<p><a href='http://donejs.com/docs.html#!jQuery.event.drag'>jQuery.event.drag</a> uses <em>$.within</em> to determine dropable elements at the current position.</p>
+<p><a href='http://donejs.com/docs.html#!jQuery.event.drag'>jQuery.event.drag</a> uses <em>jQuery.within</em> to determine dropable elements at the current position.</p>
 </blockquote>
 
 <h2 id='events'>EVENTS</h2>
@@ -290,29 +290,37 @@
 <p>Which looks like this in action:</p>
 <iframe allowfullscreen='allowfullscreen' frameborder='0' src='http://jsfiddle.net/xx5Er/embedded/result,html,js,css' style='width: 100%; height: 200px'>JSFiddle</iframe>
 <p>The <code>drag</code> object (passed to the event handler as the second parameter) can be used to modify the drag behavior:</p>
-
 <ul>
-<li><code>drag.cancel()</code> - stops the drag motion from happening</li>
-
-<li><code>drag.ghost() -&gt; jQuery</code> - copys the draggable and drags the cloned element</li>
-
-<li><code>drag.horizontal() -&gt; Boolean</code> - limits the scroll to horizontal movement</li>
-
-<li><code>drag.only([only]) -&gt; Boolean</code> - only have drags, no drops</li>
-
-<li><code>drag.representative(element, offsetX, offsetY)</code> - move another element in place of this element</li>
-
-<li><code>drag.revert(val) -&gt; drag</code> - animate the drag back to its position</li>
-
-<li><code>drag.step(pixels) -&gt; drag</code> - makes the drag move in steps of amount pixels</li>
-
-<li><code>drag.vertical()</code> - limit the drag to vertical movement</li>
-
-<li><code>drag.limit(container, center) -&gt; drag</code> - limit the drag within an element</li>
-
-<li><code>drag.scrolls(elements, options)</code> - scroll scrollable areas when dragging near their boundaries</li>
+  <li><a class='code' href='http://donejs.com/docs.html#!jQuery.Drag.prototype.cancel'>drag.cancel() -> undefined</a>
+  - stops the drag motion from happening
+  </li>
+  <li><a class='code' href='http://donejs.com/docs.html#!jQuery.Drag.prototype.ghost'>drag.ghost() -> jQuery</a>
+  - copys the draggable and drags the cloned element
+  </li>
+  <li><a class='code' href='http://donejs.com/docs.html#!jQuery.Drag.prototype.horizontal'>drag.horizontal() -> Boolean</a>
+  - limits the scroll to horizontal movement
+  </li>
+  <li><a class='code' href='http://donejs.com/docs.html#!jQuery.Drag.prototype.only'>drag.only([only]) -> Boolean</a>
+  - only have drags, no drops
+  </li>
+  <li><a class='code' href='http://donejs.com/docs.html#!jQuery.Drag.prototype.representative'>drag.representative(element, offsetX, offsetY)</a> - move another element in place of this element
+  </li>
+  <li><a class='code' href='http://donejs.com/docs.html#!jQuery.Drag.prototype.revert'>drag.revert(val) -> drag</a>
+  - animate the drag back to its position
+  </li>
+  <li><a class='code' href='http://donejs.com/docs.html#!jQuery.Drag.prototype.step'>drag.step(pixels) -> drag</a>
+  - makes the drag move in steps of amount pixels
+  </li>
+  <li><a class='code' href='http://donejs.com/docs.html#!jQuery.Drag.prototype.vertical'>drag.vertical() -> undefined</a>
+  - limit the drag to vertical movement
+  </li>
+  <li><a class='code' href='http://donejs.com/docs.html#!jQuery.Drag.prototype.limit'>drag.limit(container, center) -> drag</a>
+  - limit the drag within an element
+  </li>
+  <li><a class='code' href='http://donejs.com/docs.html#!jQuery.Drag.prototype.scrolls'>drag.scrolls(elements, options) -> undefined</a>
+  - scroll scrollable areas when dragging near their boundaries
+  </li>
 </ul>
-
 <h2 id='drop______'>drop <code>dropinit</code> <code>dropover</code> <code>dropout</code> <code>dropmove</code> <code>dropon</code> <code>dropend</code></h2>
 
 <p><a href='http://donejs.com/docs.html#!jQuery.event.drop'>jQuery.event.drop</a> complements <code>jQuery.event.drag</code> with <strong>delegatable</strong> drop events:</p>
@@ -343,14 +351,15 @@
 </code></pre>
 </div>
 <p>The <code>drop</code> object offers the following methods:</p>
-
 <ul>
-<li><code>drop.cancel()</code>- prevents this drop from being dropped on</li>
-
-<li><code>drop.cache()</code> - call on <code>dropinit</code> to cache the position of draggable elements</li>
+  <li><a class='code' href='http://donejs.com/docs.html#!jQuery.Drop.prototype.cancel'>drop.cancel() -> undefined</a>
+  - prevents this drop from being dropped on
+  </li>
+  <li><a class='code' href='http://donejs.com/docs.html#!jQuery.Drop.prototype.cache'>drop.cache() -> undefined</a>
+  - call on <code>dropinit</code> to cache the position of draggable elements
+  </li>
 </ul>
-
-<p>When adding drop-able elements after <code>dropinit</code>, for example when expanding a folder view after hovering over it with a draggable for a while, <code>$.Drop.compile()</code> needs to be called explicitly to update the list of dropable elements (this happens automatically on <code>dropinit</code>).</p>
+<p>When adding drop-able elements after <code>dropinit</code>, for example when expanding a folder view after hovering over it with a draggable for a while, <a class='code' href='http://donejs.com/docs.html#!jQuery.Drop.compile'>$.Drop.compile()</a> needs to be called explicitly to update the list of dropable elements (this happens automatically on <code>dropinit</code>).</p>
 
 <h2 id='hover____'>hover <code>hoverinit</code> <code>hoverenter</code> <code>hovermove</code> <code>hoverleave</code></h2>
 
@@ -504,8 +513,8 @@
 <span class='p'>});</span>
 </code></pre>
 </div>
-<p>Set <code>jQuery.event.swipe.delay</code> to the maximum time the swipe motion is allowed to take (default is 500ms).</p>
-
+<p>Set <code>jQuery.event.swipe.delay</code> to the maximum time the swipe motion is allowed to take (default is 500ms). Swipe (using the mouse) in the green area in the following example to see the swiping direction:</p>
+<iframe allowfullscreen='allowfullscreen' frameborder='0' src='http://jsfiddle.net/abaZN/embedded/result,html,js,css' style='width: 100%; height: 300px'>JSFiddle</iframe>
 <h2 id='get_help'>Get Help</h2>
 
 <p>There are several places you can go to ask questions or get help debugging problems.</p>

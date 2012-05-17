@@ -223,7 +223,7 @@ Move the mouse in the following example and it will show the ids for `div` eleme
 
 <iframe style="width: 100%; height: 330px" src="http://jsfiddle.net/hHLcg/embedded/result,html,js,css" allowfullscreen="allowfullscreen" frameborder="0">JSFiddle</iframe>
 
-> [jQuery.event.drag](http://donejs.com/docs.html#!jQuery.event.drag) uses *$.within* to determine dropable elements at the current position.
+> [jQuery.event.drag](http://donejs.com/docs.html#!jQuery.event.drag) uses *jQuery.within* to determine dropable elements at the current position.
 
 ## EVENTS
 
@@ -265,17 +265,37 @@ Which looks like this in action:
 
 The `drag` object (passed to the event handler as the second parameter) can be used to modify the drag behavior:
 
-* `drag.cancel()` - stops the drag motion from happening
-* `drag.ghost() -> jQuery` - copys the draggable and drags the cloned element
-* `drag.horizontal() -> Boolean` - limits the scroll to horizontal movement
-* `drag.only([only]) -> Boolean` - only have drags, no drops
-* `drag.representative(element, offsetX, offsetY)` - move another element in place of this element
-* `drag.revert(val) -> drag` - animate the drag back to its position
-* `drag.step(pixels) -> drag` - makes the drag move in steps of amount pixels
-* `drag.vertical()` - limit the drag to vertical movement
-* `drag.limit(container, center) -> drag` - limit the drag within an element
-* `drag.scrolls(elements, options)` - scroll scrollable areas when dragging near their boundaries
-
+<ul>
+  <li><a href="http://donejs.com/docs.html#!jQuery.Drag.prototype.cancel" class="code">drag.cancel() -> undefined</a>
+  - stops the drag motion from happening
+  </li>
+  <li><a href="http://donejs.com/docs.html#!jQuery.Drag.prototype.ghost" class="code">drag.ghost() -> jQuery</a>
+  - copys the draggable and drags the cloned element
+  </li>
+  <li><a href="http://donejs.com/docs.html#!jQuery.Drag.prototype.horizontal" class="code">drag.horizontal() -> Boolean</a>
+  - limits the scroll to horizontal movement
+  </li>
+  <li><a href="http://donejs.com/docs.html#!jQuery.Drag.prototype.only" class="code">drag.only([only]) -> Boolean</a>
+  - only have drags, no drops
+  </li>
+  <li><a href="http://donejs.com/docs.html#!jQuery.Drag.prototype.representative" class="code">drag.representative(element, offsetX, offsetY)</a> - move another element in place of this element
+  </li>
+  <li><a href="http://donejs.com/docs.html#!jQuery.Drag.prototype.revert" class="code">drag.revert(val) -> drag</a>
+  - animate the drag back to its position
+  </li>
+  <li><a href="http://donejs.com/docs.html#!jQuery.Drag.prototype.step" class="code">drag.step(pixels) -> drag</a>
+  - makes the drag move in steps of amount pixels
+  </li>
+  <li><a href="http://donejs.com/docs.html#!jQuery.Drag.prototype.vertical" class="code">drag.vertical() -> undefined</a>
+  - limit the drag to vertical movement
+  </li>
+  <li><a href="http://donejs.com/docs.html#!jQuery.Drag.prototype.limit" class="code">drag.limit(container, center) -> drag</a>
+  - limit the drag within an element
+  </li>
+  <li><a href="http://donejs.com/docs.html#!jQuery.Drag.prototype.scrolls" class="code">drag.scrolls(elements, options) -> undefined</a>
+  - scroll scrollable areas when dragging near their boundaries
+  </li>
+</ul>
 
 
 ## drop `dropinit` `dropover` `dropout` `dropmove` `dropon` `dropend`
@@ -304,10 +324,16 @@ $('.drop').on({
 
 The `drop` object offers the following methods:
 
-* `drop.cancel()`- prevents this drop from being dropped on
-* `drop.cache()` - call on `dropinit` to cache the position of draggable elements
+<ul>
+  <li><a href="http://donejs.com/docs.html#!jQuery.Drop.prototype.cancel" class="code">drop.cancel() -> undefined</a>
+  - prevents this drop from being dropped on
+  </li>
+  <li><a href="http://donejs.com/docs.html#!jQuery.Drop.prototype.cache" class="code">drop.cache() -> undefined</a>
+  - call on <code>dropinit</code> to cache the position of draggable elements
+  </li>
+</ul>
 
-When adding drop-able elements after `dropinit`, for example when expanding a folder view after hovering over it with a draggable for a while, `$.Drop.compile()` needs to be called explicitly to update the list of dropable elements (this happens automatically on `dropinit`).
+When adding drop-able elements after `dropinit`, for example when expanding a folder view after hovering over it with a draggable for a while, <a href="http://donejs.com/docs.html#!jQuery.Drop.compile" class="code">$.Drop.compile()</a> needs to be called explicitly to update the list of dropable elements (this happens automatically on `dropinit`).
 
 ## hover `hoverinit` `hoverenter` `hovermove` `hoverleave`
 
@@ -465,6 +491,10 @@ $('#swiper').on({
 {% endhighlight %}
 
 Set `jQuery.event.swipe.delay` to the maximum time the swipe motion is allowed to take (default is 500ms).
+
+Swipe (using the mouse) in the green area in the following example to see the direction of the swipe:
+
+<iframe style="width: 100%; height: 300px" src="http://jsfiddle.net/abaZN/embedded/result,html,js,css" allowfullscreen="allowfullscreen" frameborder="0">JSFiddle</iframe>
 
 ## Get Help
 
