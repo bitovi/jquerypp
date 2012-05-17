@@ -78,7 +78,7 @@ em {
 #logo-and-download img {
 	display: block;
 	position: absolute;
-	top: 10px;
+	top: 20px;
 	left: 14px;
 }
 #logo-and-download a {
@@ -239,12 +239,12 @@ em {
 	white-space: -o-pre-wrap; /* Opera 7 */
 	word-wrap: break-word; /* Internet Explorer 5.5+ */
 }
-#content pre code { 
+#content pre code {
 	line-height: 22px;
 	background: none;
 	white-space: pre;
 }
-#content code {
+#content code, #content a.code {
 	display: inline-block;
 	font-family: Monaco,Consolas,"Courier New",Courier,monospace;
 	background: #EEF0F7;
