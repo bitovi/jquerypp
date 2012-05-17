@@ -3,7 +3,7 @@ steal('jquery/event').then(function($){
 
 /**
  * @function jQuery.fn.triggerAsync
- * @parent jQuery.event.default
+ * @parent jQuery.event.pause
  * @plugin jquery/event/default
  *
  * Triggers an event and calls success when the event has finished propagating through the DOM and preventDefault is not called.

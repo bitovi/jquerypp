@@ -1,7 +1,8 @@
 @page jQuery.event.key
 @parent jquerypp
 
-Adds a [jQuery.Event.prototype.keyName .keyName()] method to the [event object](http://api.jquery.com/category/events/event-object/)
+`jQuery.event.key` adds a [jQuery.Event.prototype.keyName keyName()] method to the
+[event object](http://api.jquery.com/category/events/event-object/)
 that returns a string representation of the current key:
 
 	$("input").on('keypress', function(ev){
@@ -28,3 +29,7 @@ The following keynames are mapped by default:
 * `num0-9` - number pad key pressed
 * `f1-12` - function keys pressed
 * Symbols: `/`, `;`, `:`, `=`, `,`, `-`, `.`, `/`, `[`, `\`, `]`, `'`, `"`
+
+## Demo
+
+@demo jquery/event/key/key.html

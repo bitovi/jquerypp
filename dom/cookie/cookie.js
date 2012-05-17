@@ -6,8 +6,9 @@ steal('jquery/lang/json',function() {
      * @plugin jquery/dom/cookie
      * @author Klaus Hartl/klaus.hartl@stilbuero.de
      *
-     * The [cookie plugin](https://github.com/carhartl/jquery-cookie) packaged with jQuery++ is written by
-     * [Klaus Hartl](stilbuero.de) and dual licensed under the [MIT](http://www.opensource.org/licenses/mit-license.php)
+     * `jQuery.cookie` contains the [jQuery cookie plugin](https://github.com/carhartl/jquery-cookie) for
+     * easily manipulating cookies written by [Klaus Hartl](stilbuero.de).
+     * It is dual licensed under the [MIT](http://www.opensource.org/licenses/mit-license.php)
      * and [GPL](http://www.gnu.org/licenses/gpl.html) licenses.
      *
 	 * ## Quick Examples</h3>
@@ -24,8 +25,6 @@ steal('jquery/lang/json',function() {
      *          domain: 'jquery.com',
      *          secure: true
      *      });
-     *
-     *
 	 *
 	 * Create a session cookie.
 	 *

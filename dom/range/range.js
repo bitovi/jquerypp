@@ -9,6 +9,8 @@ steal('jquery','jquery/dom/compare').then(function($){
  * Returns a jQuery.Range for the selected element.
  * 
  *     $('#content').range()
+ *
+ * @return {$.Range} A $.Range instance for the selected element
  */
 $.fn.range = function(){
 	return $.Range(this[0])
@@ -38,7 +40,7 @@ support = {};
  * @Class jQuery.Range
  * @parent jQuery.Range
  *
- * Returns a jQuery range object.
+ * Creates a a new range object.
  * 
  * @param {TextRange|HTMLElement|Point} [range] An object specifiying a 
  * range.  Depending on the object, the selected text will be different.  $.Range supports the
@@ -103,12 +105,15 @@ $.Range = function(range){
  */
 $.Range.
 /**
- * Gets the current range.
+ * `$.Range.current([element])` returns the currently selected range
+ * (using [window.getSelection](https://developer.mozilla.org/en/nsISelection)).
  * 
- *     $.Range.current() //-> jquery.range
+ *     var range = $.Range.current()
+ *     range.start().offset // -> selection start offset
+ *     range.end().offset // -> selection end offset
  * 
  * @param {HTMLElement} [el] an optional element used to get selection for a given window.
- * @return {jQuery.Range} a jQuery.Range wrapped range.
+ * @return {jQuery.Range} The range instance.
  */
 current = function(el){
 	var win = getWindow(el),
@@ -190,13 +195,13 @@ $.extend($.Range.prototype,
 		return this.win || window;
 	},
 	/**
-	 * Return true if any portion of these two ranges overlap.
-	 * 
+	 * `range.overlaps([elRange])` returns `true` if any portion of these two ranges overlap.
+	 *
 	 *     var foo = document.getElementById('foo');
-	 *     
-	 *     $.Range(foo.childNodes[0]).compare(foo.childNodes[1]) //-> false
+	 *
+	 *     $.Range(foo.childNodes[0]).overlaps(foo.childNodes[1]) //-> false
 	 * 
-	 * @param {jQuery.Range} elRange
+	 * @param {jQuery.Range} elRange The range to compare
 	 * @return {Boolean} true if part of the ranges overlap, false if otherwise.
 	 */
 	overlaps : function(elRange){
@@ -224,7 +229,8 @@ $.extend($.Range.prototype,
 		return false;
 	},
 	/**
-	 * Collapses a range
+	 * `range.collapse([toStart])` collapses a range to one of its boundary points.
+	 * See [range.collapse](https://developer.mozilla.org/en/DOM/range.collapse).
 	 * 
 	 *     $('#foo').range().collapse()
 	 * 
@@ -237,39 +243,48 @@ $.extend($.Range.prototype,
 		return this;
 	},
 	/**
-	 * Returns the text of the range.
+	 * `range.toString()` returns the text of the range.
 	 * 
 	 *     currentText = $.Range.current().toString()
 	 * 
-	 * @return {String} the text of the range
+	 * @return {String} The text content of this range
 	 */
 	toString : function(){
 		return typeof this.range.text == "string"  ? this.range.text : this.range.toString();
 	},
 	/**
-	 * Gets or sets the start of the range.
-	 * 
+	 * `range.start([start])` gets or sets the start of the range.
+	 *
 	 * If a value is not provided, start returns the range's starting container and offset like:
-	 * 
-	 *     $('#foo').range().start() //-> {container: fooElement, offset: 0 } 
-	 * 
+	 *
+	 *     $('#foo').range().start()
+	 *     //-> {container: fooElement, offset: 0 }
+	 *
 	 * If a set value is provided, it can set the range.  The start of the range is set differently
 	 * depending on the type of set value:
-	 * 
-	 *   - __Object__ - an object with the new starting container and offset is provided like
-	 *     
+	 *
+	 *   - __Object__ - an object with the new starting container and offset like
+	 *
 	 *         $.Range().start({container:  $('#foo')[0], offset: 20})
-	 *   
+	 *
 	 *   - __Number__ - the new offset value.  The container is kept the same.
-	 *   
+	 *
 	 *   - __String__ - adjusts the offset by converting the string offset to a number and adding it to the current
 	 *     offset.  For example, the following moves the offset forward four characters:
-	 *                  
+	 *
 	 *         $('#foo').range().start("+4")
-	 * 
-	 * 
+	 *
+	 * Note that end can return a text node. To get the containing element use this:
+	 *
+	 *     var startNode = range.start().container;
+	 *     if( startNode.nodeType === Node.TEXT_NODE ||
+	 *      startNode.nodeType === Node.CDATA_SECTION_NODE ) {
+	 *          startNode = startNode.parentNode;
+	 *     }
+	 *     $(startNode).addClass('highlight');
+	 *
 	 * @param {Object|String|Number} [set] a set value if setting the start of the range or nothing if reading it.
-	 * @return {jQuery.Range|Object} if setting the start, the range is returned for chaining, otherwise, the 
+	 * @return {jQuery.Range|Object} if setting the start, the range is returned for chaining, otherwise, the
 	 *   start offset and container are returned.
 	 */
 	start : function(set){
@@ -302,13 +317,34 @@ $.extend($.Range.prototype,
 			}
 			return this;
 		}
-		
-		
+
+
 	},
 	/**
-	 * Sets or gets the end of the range.  
-	 * It takes similar options as [jQuery.Range.prototype.start].
-	 * @param {Object} [set]
+	 * `range.end([end])` or gets the end of the range.
+	 * It takes similar options as [jQuery.Range.prototype.start]:
+	 *
+	 * - __Object__ - an object with the new end container and offset like
+	 *
+	 *         $.Range().end({container:  $('#foo')[0], offset: 20})
+	 *
+	 * - __Number__ - the new offset value. The container is kept the same.
+	 *
+	 * - __String__ - adjusts the offset by converting the string offset to a number and adding it to the current
+	 * offset. For example, the following moves the offset forward four characters:
+	 *
+	 *         $('#foo').range().end("+4")
+	 *
+	 * Note that end can return a text node. To get the containing element use this:
+	 *
+	 *     var startNode = range.end().container;
+	 *     if( startNode.nodeType === Node.TEXT_NODE ||
+	 *      startNode.nodeType === Node.CDATA_SECTION_NODE ) {
+	 *          startNode = startNode.parentNode;
+	 *     }
+	 *     $(startNode).addClass('highlight');
+	 *
+	 * @param {Object|String|Number} [set] a set value if setting the end of the range or nothing if reading it.
 	 */
 	end : function(set){
 		if (set === undefined) {
@@ -341,9 +377,17 @@ $.extend($.Range.prototype,
 		}
 	},
 	/**
-	 * Returns the most common ancestor element of 
-	 * the endpoints in the range. This will return text elements if the range is
-	 * within a text element.
+	 * `range.parent()` returns the most common ancestor element of
+	 * the endpoints in the range. This will return a text element if the range is
+	 * within a text element. In this case, to get the containing element use this:
+	 *
+	 *     var parent = range.parent();
+	 *     if( parent.nodeType === Node.TEXT_NODE ||
+	 *      parent.nodeType === Node.CDATA_SECTION_NODE ) {
+	 *          parent = startNode.parentNode;
+	 *     }
+	 *     $(parent).addClass('highlight');
+	 *
 	 * @return {HTMLNode} the TextNode or HTMLElement
 	 * that fully contains the range
 	 */
@@ -368,7 +412,7 @@ $.extend($.Range.prototype,
 		}	
 	},
 	/**
-	 * Returns the bounding rectangle of this range.
+	 * `range.rect([from])` returns the bounding rectangle of this range.
 	 * 
 	 * @param {String} [from] - where the coordinates should be 
 	 * positioned from.  By default, coordinates are given from the client viewport.
@@ -391,7 +435,8 @@ $.extend($.Range.prototype,
 		return rect;
 	},
 	/**
-	 * Returns client rects
+	 * `range.rects(from)` returns the client rects.
+	 *
 	 * @param {String} [from] how the rects coordinates should be given (viewport or page).  Provide 'page' for 
 	 * rect coordinates from the page.
 	 */
@@ -456,7 +501,8 @@ $.extend($.Range.prototype,
 	
 	/**
 	 * @function compare
-	 * Compares one range to another range.  
+	 *
+	 * `range.compare([compareRange])` compares one range to another range.
 	 * 
 	 * ## Example
 	 * 
@@ -497,7 +543,8 @@ $.extend($.Range.prototype,
 	
 	/**
 	 * @function move
-	 * Move the endpoints of a range relative to another range.
+	 *
+	 * `range.move([referenceRange])` moves the endpoints of a range relative to another range.
 	 * 
 	 *     // Move the current selection's end to the 
 	 *     // end of the #highlight element
@@ -546,7 +593,7 @@ $.extend($.Range.prototype,
 	
 	fn.
 	/**
-	 * Clones the range and returns a new $.Range 
+	 * `range.clone()` clones the range and returns a new $.Range
 	 * object.
 	 * 
 	 * @return {jQuery.Range} returns the range as a $.Range.
@@ -558,13 +605,14 @@ $.extend($.Range.prototype,
 	fn.
 	/**
 	 * @function
-	 * Selects an element with this range.  If nothing 
+	 *
+	 * `range.select([el])` selects an element with this range.  If nothing
 	 * is provided, makes the current
 	 * range appear as if the user has selected it.
 	 * 
 	 * This works with text nodes.
 	 * 
-	 * @param {HTMLElement} [el]
+	 * @param {HTMLElement} [el] The element in which this range should be selected
 	 * @return {jQuery.Range} the range for chaining.
 	 */
 	select = range.selectNodeContents ? function(el){

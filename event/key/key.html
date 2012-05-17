@@ -14,19 +14,22 @@
 <div>Keypress:<span id='keypress'></span></div>
 <div>Keyup:<span id='keyup'></span></div>
 </div>
-<script type='text/javascript' 
-        src='../../../steal/steal.js?jquery/event/key'
-		id='demo-source'>   
+<script type='text/javascript'
+        src='../../../steal/steal.js'>
+</script>
+<script id="demo-source" type='text/javascript'>
+  steal('jquery/event/key').then(function(){
 		var readable = {
 			"\r" : "\\r",
 			"\b" : "\\b",
 			"\t" : "\\t"
-		},
-		printKey = function(ev){
-			var key = ev.key();
-			$("#"+ev.type).html(readable[key] || key)
 		};
-		$('#key').keydown(printKey).keypress(printKey).keyup(printKey)
+
+		$('#key').on('keydown keypress keyup', function(ev){
+      var key = ev.keyName();
+      $("#"+ev.type).html(readable[key] || key)
+    });
+  });
 </script>
 	</body>
 </html>

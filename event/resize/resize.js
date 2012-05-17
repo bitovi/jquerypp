@@ -1,7 +1,4 @@
 steal('jquery/event').then(function( $ ) {
-	/**
-	 * @add jQuery.event.special
-	 */
 	var resizers = $(),
 		resizeCount = 0,
 		// bind on the window window resizes to happen
@@ -17,7 +14,6 @@ steal('jquery/event').then(function( $ ) {
 
 	/**
 	 * @attribute resize
-	 * @parent jQuery.event.resize
 	 */
 	$.event.special.resize = {
 		setup: function( handleObj ) {

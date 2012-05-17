@@ -10,14 +10,14 @@ steal('jquery/dom').then(function($){
  * @parent jQuery.within
  * @plugin jquery/dom/within
  * 
- * Returns the elements are within a given position.
+ * Returns all elements matching the selector that touch a given point:
  * 
  *     // get all elements that touch 200x200.
  *     $('*').within(200, 200);
  * 
  * @param {Number} left the position from the left of the page 
  * @param {Number} top the position from the top of the page
- * @param {Boolean} [useOffsetCache] cache the dimensions and offset of the elements.
+ * @param {Boolean} [useOffsetCache=false] cache the dimensions and offset of the elements.
  * @return {jQuery} a jQuery collection of elements whos area
  * overlaps the element position.
  */
@@ -49,7 +49,7 @@ $.fn.within= function(left, top, useOffsetCache) {
  * @function jQuery.fn.withinBox
  * @parent jQuery.within
  *
- * Returns a jQuery collection of elements that have a given area in common.
+ * Returns all elements matching the selector that have a given area in common:
  *
  *      $('*').withinBox(200, 200, 100, 100)
  *
@@ -57,7 +57,7 @@ $.fn.within= function(left, top, useOffsetCache) {
  * @param {Number} top the position from the top of the page
  * @param {Number} width the width of the area
  * @param {Number} height the height of the area
- * @param {Boolean} [useOffsetCache] cache the dimensions and offset of the elements.
+ * @param {Boolean} [useOffsetCache=false] cache the dimensions and offset of the elements.
  * @return {jQuery} a jQuery collection of elements whos area
  * overlaps the element position.
  */

@@ -3,6 +3,7 @@ steal('jquery/event').then(function($){
 		reverseKeyMap = {};
 		
 	/**
+	 * @hide
 	 * @parent jQuery.Event.prototype.key
 	 * 
 	 * Allows you to set alternate key maps or overwrite existing key codes.
@@ -79,21 +80,15 @@ steal('jquery/event').then(function($){
 	 * @plugin jquery/event/key
 	 * @function jQuery.Event.prototype.keyName
 	 *
-	 * Returns a string representation of the key pressed.
-	 * The following describes the key values returned by [jQuery.Event.prototype.key].
+	 * Returns a string representation of the key pressed:
 	 *
-	 *  - \b - backspace
-	 *  - \t - tab
-	 *  - \r - enter key
-	 *  - shift, ctrl, alt
-	 *  - pause-break, caps, escape, num-lock, scroll-loc, print
-	 *  - page-up, page-down, end, home, left, up, right, down, insert, delete
-	 *  - ' ' - space
-	 *  - 0-9 - number key pressed
-	 *  - a-z - alpha key pressed
-	 *  - num0-9 - number pad key pressed
-	 *  - / ; : = , - . / ` [ \\ ] ' "
-	 *  - f1-12 - function keys pressed
+	 *      $("input").on('keypress', function(ev){
+	 *          if(ev.keyName() == 'ctrl') {
+	 *              $(this).addClass('highlight');
+	 *          }
+	 *      });
+	 *
+	 * The key names mapped by default can be found in the [jQuery.event.key jQuery.event.key overview].
 	 *
 	 * @return {String} The string representation of of the key pressed.
 	 */
