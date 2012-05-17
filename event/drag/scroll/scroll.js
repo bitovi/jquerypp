@@ -22,7 +22,6 @@ $.Drag.prototype.
 	 *       })
 	 *     })
 	 * 
-	 * 
 	 * @param {jQuery} elements an array of elements to scroll.  The window can be in this array.
 	 * @param {Object} [options] changes the default settings.
 	 * 

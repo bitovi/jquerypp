@@ -58,31 +58,43 @@ support = {};
  *   - __TextRange__ a raw text range object.
  */
 $.Range = function(range){
+	// If it's called w/o new, call it with new!
 	if(this.constructor !== $.Range){
 		return new $.Range(range);
 	}
+	// If we are passed a jQuery-wrapped element, get the raw element
 	if(range && range.jquery){
 		range = range[0];
 	}
-	// create one
+	// If we have an element, or nothing
 	if(!range || range.nodeType){
+		// create a range
 		this.win = getWindow(range)
 		if(this.win.document.createRange){
 			this.range = this.win.document.createRange()
 		}else{
 			this.range = this.win.document.body.createTextRange()
 		}
+		// if we have an element, make the range select it
 		if(range){
 			this.select(range)
 		}
-		
-	} else if (range.clientX != null || range.pageX != null || range.left != null) {
-		this.moveToPoint(range)
-	} else if (range.originalEvent && range.originalEvent.touches && range.originalEvent.touches.length) {
+	} 
+	// if we are given a point
+	else if (range.clientX != null || range.pageX != null || range.left != null) {
+		this.moveToPoint(range);
+	} 
+	// if we are given a touch event
+	else if (range.originalEvent && range.originalEvent.touches && range.originalEvent.touches.length) {
 		this.moveToPoint(range.originalEvent.touches[0])
-	} else if (range.originalEvent && range.originalEvent.changedTouches && range.originalEvent.changedTouches.length) {
+	
+	} 
+	// if we are a normal event
+	else if (range.originalEvent && range.originalEvent.changedTouches && range.originalEvent.changedTouches.length) {
 		this.moveToPoint(range.originalEvent.changedTouches[0])
-	} else {
+	} 
+	// given a TextRange or something else?
+	else {
 		this.range = range;
 	} 
 };
