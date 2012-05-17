@@ -141,17 +141,40 @@ range.start(4);
 
 A `$.Range` instance offers the following methods:
 
-* `range.clone() -> range` - clones the range and returns a new $.Range object
-* `range.collapse([toStart]) -> range` - clones the range and returns a new `$.Range` object
-* `range.compare(other) -> Number` - compares one range to another range
-* `range.end([val]) -> range|Object` - sets or returns the end of the range
-* `range.move(type, referenceRange) -> range` - move the endpoints of a range relative to another range
-* `range.overlaps(other) -> Boolean` - returns if any portion of these two ranges overlap
-* `range.parent() -> HtmlElement|Element|Node` - returns the most common ancestor element of the endpoints in the range
-* `range.rect(from) -> TextRectangle` - returns the bounding rectangle of this range
-* `range.rects(from) -> undefined` - returns the client rects
-* `range.start([val]) -> range|Object` - sets or returns the beginning of the range
-* `range.toString() -> String` - returns the text of the range
+<ul>
+  <li><a href="http://donejs.com/docs.html#!jQuery.Range.prototype.clone" class="code">range.clone() -> range</a>
+  - clones the range and returns a new $.Range object
+  </li>
+  <li><a href="http://donejs.com/docs.html#!jQuery.Range.prototype.collapse" class="code">range.collapse([toStart]) -> range</a> collapses a range
+  </li>
+  <li><a href="http://donejs.com/docs.html#!jQuery.Range.prototype.compare" class="code">range.compare(other) -> Number</a>
+  - compares one range to another range
+  </li>
+  <li><a href="http://donejs.com/docs.html#!jQuery.Range.prototype.end" class="code">range.end([val]) -> range|Object</a>
+  - sets or returns the end of the range
+  </li>
+  <li><a href="http://donejs.com/docs.html#!jQuery.Range.prototype.move" class="code">range.move(type, referenceRange) -> range</a>
+  - move the endpoints of a range relative to another range
+  </li>
+  <li><a href="http://donejs.com/docs.html#!jQuery.Range.prototype.overlaps" class="code">range.overlaps(other) -> Boolean</a>
+  - returns if any portion of these two ranges overlap
+  </li>
+  <li><a href="http://donejs.com/docs.html#!jQuery.Range.prototype.parent" class="code">range.parent() -> HtmlElement|Element|Node</a>
+  - returns the most common ancestor element of the endpoints in the range
+  </li>
+  <li><a href="http://donejs.com/docs.html#!jQuery.Range.prototype.rect" class="code">range.rect(from) -> TextRectangle</a>
+  - returns the bounding rectangle of this range
+  </li>
+  <li><a href="http://donejs.com/docs.html#!jQuery.Range.prototype.rects" class="code">range.rects(from) -> undefined</a>
+  - returns the client rects
+  </li>
+  <li><a href="http://donejs.com/docs.html#!jQuery.Range.prototype.start" class="code">range.start([val]) -> range|Object</a>
+  - sets or returns the beginning of the range
+  </li>
+  <li><a href="http://donejs.com/docs.html#!jQuery.Range.prototype.start" class="code">range.toString() -> String</a>
+  - returns the text of the range
+  </li>
+</ul>
 
 ## selection `$(el).selection([start], [end]) -> Object|jQuery`
 
