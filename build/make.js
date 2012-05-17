@@ -6,26 +6,45 @@ steal('steal/build/pluginify', 'jquery/build/stealify.js', 'jquery/build/amdify.
 		out = "jquery/dist/",
 		excludes = [ 'steal/dev',
 			"can/util/jquery/jquery.1.7.1.js",
-			"jquery/build/lib.js" ];
+			"jquery/build/lib.js" ],
+		options = {
+			global: "jQuery",
+			skipCallbacks: true,
+			exclude : excludes
+		},
+		plugins = {
+			"jquery/dom/compare/compare.js" : "jquery.compare.js",
+			"jquery/dom/cookie/cookie.js" : "jquery.cookie.js",
+			"jquery/dom/dimensions/dimensions.js" : "jquery.dimensions.js",
+			"jquery/dom/form_params/form_params.js" : "jquery.form_params.js",
+			"jquery/dom/range/range.js" : "jquery.range.js",
+			"jquery/dom/selection/selection.js" : "jquery.selection.js",
+			"jquery/dom/styles/styles.js" : "jquery.styles.js",
+			"jquery/dom/within/within.js" : "jquery.within.js",
+			"jquery/event/default/default.js" : "jquery.event.default.js",
+			"jquery/event/destroyed/destroyed.js" : "jquery.event.destroyed.js",
+			"jquery/event/drag/drag.js" : "jquery.event.drag.js",
+			"jquery/event/drop/drop.js" : "jquery.event.drop.js",
+			"jquery/event/hover/hover.js" : "jquery.event.hover.js",
+			"jquery/event/key/key.js" : "jquery.event.key.js",
+			"jquery/event/pause/pause.js" : "jquery.event.pause.js",
+			"jquery/event/resize/resize.js" : "jquery.event.resize.js",
+			"jquery/event/swipe/swipe.js" : "jquery.event.swipe.js"
+		};
 
 	steal.File(out).mkdirs();
-
-	var options = {
-		global: "jQuery",
-		skipCallbacks: true,
-		exclude : excludes
-	};
 
 	// Create full library
 	steal.build.pluginify('jquery/build/lib.js', extend({
 		out: out + "jquerypp.js"
 	}, options));
 
-	// Create minified full library
-	steal.build.pluginify('jquery/build/lib.js',  extend({
-		out: out + "jquerypp.min.js",
-		compress: true
-	}, options));
+	// Create each plugin
+	for(var file in plugins) {
+		steal.build.pluginify(file, extend({
+			out: out + plugins[file]
+		}, options));
+	}
 
 	// Make Steal distributable
 	steal.build.stealify('jquery/build/lib.js', {

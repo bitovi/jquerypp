@@ -29,7 +29,7 @@ test("swipe right event",2, function(){
 	Syn.drag({
 		from: "20x20",
 		to: "50x20",
-		duration: 100,
+		duration: 100
 	},"outer", function(){
 		start();
 	})
@@ -50,7 +50,7 @@ test("swipe left event",2, function(){
 	Syn.drag({
 		from: "50x20",
 		to: "20x20",
-		duration: 100,
+		duration: 100
 	},"outer", function(){
 		start();
 	})
@@ -73,7 +73,7 @@ test("swipe up event",2, function(){
 	Syn.drag({
 		from: "20x50",
 		to: "20x20",
-		duration: 100,
+		duration: 100
 	},"outer", function(){
 		start();
 	})
@@ -95,7 +95,7 @@ test("swipe down event",2, function(){
 	Syn.drag({
 		from: "20x20",
 		to: "20x50",
-		duration: 100,
+		duration: 100
 	},"outer", function(){
 		start();
 	})
