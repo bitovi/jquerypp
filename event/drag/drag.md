@@ -1,9 +1,9 @@
 @page jQuery.event.drag
 @parent jquerypp
 
-Provides drag events as a special events to jQuery.
+`jQuery.event.drag` provides drag events for jQuery.
 A jQuery.Drag instance is created on a drag and passed
-as a parameter to the drag event callbacks.  By calling
+as a parameter to the drag event handlers.  By calling
 methods on the drag event, you can alter the drag's
 behavior.
 
@@ -18,9 +18,9 @@ The drag plugin allows you to listen to the following events:
 * `dragover` - the drag is over a drop point
 * `dragout` - the drag moved out of a drop point
 
-Just by binding or delegating on one of these events, you make
+Just by binding on one of these events, you make
 the element dragable.  You can change the behavior of the drag
-by calling methods on the drag object passed to the callback.
+by calling methods on the drag object passed to the event handler.
 
 ### Example
 
@@ -33,13 +33,13 @@ Here's a quick example:
     //gets the position of the drag and uses that to set the width
     //of an element
     $(".resize").on("dragmove",function(event, drag){
-      $(this).width(drag.position.left() - $(this).offset().left   )
+      $(this).width(drag.location.x() - $(this).offset().left   )
     })
 
 ## Drag Object
 
 The drag object is passed after the event to drag  event callback functions.
-By calling methodsand changing the properties of the drag object, you can alter how the drag behaves.
+By calling methods and changing the properties of the drag object, you can alter how the drag behaves.
 
 The drag properties and methods:
 

@@ -20,8 +20,12 @@ steal('jquery/event', 'jquery/lang/vector', 'jquery/event/livehack',function( $ 
 	 * @download  http://jmvcsite.heroku.com/pluginify?plugins[]=jquery/event/drag/drag.js
 	 * @test jquery/event/drag/qunit.html
 	 *
-	 * @constructor
-	 * The constructor is never called directly.
+	 * The `$.Drag` constructor is never called directly but an instance of `$.Drag` is passed as the second argument
+	 * to the `dragdown`, `draginit`, `dragmove`, `dragend`, `dragover` and `dragout` event handlers:
+	 *
+	 *      $('#dragger').on('draginit', function(el, drag) {
+	 *          // drag -> $.Drag
+	 *      });
 	 */
 	$.Drag = function() {};
 
@@ -140,7 +144,7 @@ steal('jquery/event', 'jquery/lang/vector', 'jquery/event/livehack',function( $ 
 		},
 
         /**
-         * noSelection method turns off text selection during a drag event.
+         * The `drag.noSelection(element)` method turns off text selection during a drag event.
          * This method is called by default unless a event is listening to the 'dragdown' event.
          *
          * ## Example
@@ -164,7 +168,7 @@ steal('jquery/event', 'jquery/lang/vector', 'jquery/event/livehack',function( $ 
 
         /**
          * @hide
-         * `selection()` method turns on text selection that was previously turned off during the drag event.
+         * `drag.selection()` method turns on text selection that was previously turned off during the drag event.
          * This method is always called.
          * 
          * ## Example
@@ -173,7 +177,7 @@ steal('jquery/event', 'jquery/lang/vector', 'jquery/event/livehack',function( $ 
          *       drag.selection();
          *     });
          */
-		selection: function(elm) {
+		selection: function() {
             if(this.selectionDisabled){
                 document.documentElement.onselectstart = function() {};
                 document.documentElement.unselectable = "off";
@@ -283,7 +287,7 @@ steal('jquery/event', 'jquery/lang/vector', 'jquery/event/livehack',function( $ 
 			}
 		},
 		/**
-		 * `position( newOffsetVector )` sets the position of the movingElement.  This is overwritten by 
+		 * `drag.position( newOffsetVector )` sets the position of the movingElement.  This is overwritten by
 		 * the [$.Drag::scrolls], [$.Drag::limit] and [$.Drag::step] plugins 
 		 * to make sure the moving element scrolls some element
 		 * or stays within some boundary.  This function is exposed and documented so you could do the same.
@@ -378,7 +382,7 @@ steal('jquery/event', 'jquery/lang/vector', 'jquery/event/livehack',function( $ 
 			this.movingElement = this.element = this.event = null;
 		},
 		/**
-		 * `cancel()` stops a drag motion from from running.  This also stops any other events from firing, meaning
+		 * `drag.cancel()` stops a drag motion from from running.  This also stops any other events from firing, meaning
 		 * that "dragend" will not be called.
 		 * 
 		 *     $("#todos").on(".handle", "draginit", function( ev, drag ) {
@@ -469,7 +473,7 @@ steal('jquery/event', 'jquery/lang/vector', 'jquery/event/livehack',function( $ 
 			return this;
 		},
 		/**
-		 * `revert([val])` makes the [$.Drag::representative representative] element revert back to it
+		 * `drag.revert([val])` makes the [$.Drag::representative representative] element revert back to it
 		 * original position after the drag motion has completed.  The revert is done with an animation.
 		 * 
 		 *     $("#todos").on(".handle","dragend",function( ev, drag ) {
@@ -514,7 +518,7 @@ steal('jquery/event', 'jquery/lang/vector', 'jquery/event/livehack',function( $ 
 			return this;
 		},
 		/**
-		 * `only(only)` indicates if you __only__ want a drag motion and the drag should
+		 * `drag.only([only])` indicates if you __only__ want a drag motion and the drag should
 		 * not notify drops.  The default value is `false`.  Call it with no arguments or pass it true
 		 * to prevent drop events.
 		 * 

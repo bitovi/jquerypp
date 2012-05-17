@@ -56,8 +56,15 @@ steal('jquery/event/drag','jquery/dom/within','jquery/dom/compare',function($){
 	 * @plugin jquery/event/drop
 	 * @download  http://jmvcsite.heroku.com/pluginify?plugins[]=jquery/event/drop/drop.js
 	 * @test jquery/event/drag/qunit.html
-	 * 
-	 * The constructor is never called directly.
+	 *
+	 * The `$.Drop` constructor is never called directly but an instance of `$.Drag` is passed as the second argument
+	 * to the `dropinit`, `dropover`, `dropmove`, `dropon`, and `dropend` event handlers. The third argument will be
+	 * an instance of [jQuery.Drag]:
+	 *
+	 *      $('#dropper').on('dropover', function(el, drop, drag) {
+	 *          // drop -> $.Drop
+	 *          // drag -> $.Drag
+	 *      });
 	 */
 	$.Drop = function(callbacks, element){
 		jQuery.extend(this,callbacks);
@@ -85,6 +92,9 @@ steal('jquery/event/drag','jquery/dom/within','jquery/dom/compare',function($){
 	});
 	
 	$.extend($.Drop,{
+		/**
+		 * @static
+		 */
 		lowerName: "drop",
 		_rootElements: [], //elements that are listening for drops
 		_elements: $(),    //elements that can be dropped on
@@ -363,6 +373,9 @@ steal('jquery/event/drag','jquery/dom/within','jquery/dom/compare',function($){
 	$.Drag.responder = $.Drop;
 	
 	$.extend($.Drop.prototype,{
+		/**
+		 * @prototype
+		 */
 		callHandlers: function( method, el, ev, drag ) {
 			var length = this[method] ? this[method].length : 0
 			for(var i =0; i < length; i++){
