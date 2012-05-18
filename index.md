@@ -19,7 +19,7 @@ Check the files you want to download and a zip file will be created. The zip fil
 
 ### Using Steal
 
-The files needed for StealJS are located in the `steal` folder which contains all needed jQuery++ files. Take the `jquery` folder and put it in the steal root. Make sure to use `steal.map` to map any dependency of `jquery` to your jQuery library. For example, when using jQuery++ with [CanJS](http://canjs.us) and Steal, use this:
+The files needed for using jQuery++ with [StealJS](http://javascriptmvc.com/docs.html#!stealjs) are located in the `steal/` folder. Take the `jquery/` folder and put it in your steal root. Make sure to use `steal.map` to map any dependency of `jquery` to your jQuery library. For example, when using jQuery++ with [CanJS](http://canjs.us) and Steal, use this:
 
 {% highlight javascript %}
 steal.map({
@@ -29,28 +29,32 @@ steal.map({
 
 ### Using AMD
 
-The files to load the jQuery++ plugins as [AMD modules](https://github.com/amdjs/amdjs-api/wiki/AMD), for example using [RequireJS](http://requirejs.org/), are located in the `amd` folder. Place the `jquerypp` folder in your modules directory and load a plugin like:
+The files to load the jQuery++ plugins as [AMD modules](https://github.com/amdjs/amdjs-api/wiki/AMD), for example using [RequireJS](http://requirejs.org/), are located in the `amd/` folder. Place the `jquerypp/` folder in your modules directory and load a plugin like this:
 
 {% highlight javascript %}
-define(['jquery', 'jquerypp/dimensions', 'jquerypp/event/resize'], function(jQuery) {
+define(['jquery', 'jquerypp/dimensions', 'jquerypp/event/resize'],
+  function($) {
+    $('#element').outerWidth(500).trigger('resize');
 });
 {% endhighlight %}
 
-You might have to map calls to `jquery` to the module name of your jQuery AMD module. In RequireJS like this:
+You might have to map the `jquery` module name to the name of your jQuery AMD module. In RequireJS like this:
 
 {% highlight javascript %}
 require.config({
   paths: {
-    "jquery": "./jquery-1.7"
+    "jquery": "./jquery-1.7.2"
   }
 });
 {% endhighlight %}
 
-> Note: Starting at version 1.7 jQuery will directly define itself as an AMD module if a loader is available. There is no need to create a wrapper.
+> Note: Starting at version 1.7 jQuery will define itself as an AMD module if a loader is available. There is no need to create a wrapper.
 
 ## DOM HELPERS
 
 ## compare `$(elA).compare(elB) -> Number`
+
+[jquery.compare.js](release/latest/jquery.compare.js)
 
 [jQuery.compare](http://donejs.com/docs.html#!jQuery.compare) adds `$.fn.compare` to compare the position of two nodes. It returns a number that represents a bitmask showing how they are positioned relative to each other. The following list shows the `bitmask`, the __number__ and what it means for a `$.fn.compare` call like `$('#foo').compare($('#bar'))`:
 
@@ -217,7 +221,7 @@ $('#text').text().substring(selection.start, selection.end) // -> some
 
 The following example shows how `$.fn.selection` can be used. Initially the selection is set from position eight to 12. You can change the selection in the highlighted area and the status text will be updated:
 
-<iframe style="width: 100%; height: 200px" src="http://jsfiddle.net/FH49q/embedded/result,html,js,css" allowfullscreen="allowfullscreen" frameborder="0">JSFiddle</iframe>
+<iframe style="width: 100%; height: 200px" src="http://jsfiddle.net/uze4F/embedded/result,html,js,css" allowfullscreen="allowfullscreen" frameborder="0">JSFiddle</iframe>
 
 ## styles `$(el).styles() -> Object`
 
@@ -244,7 +248,7 @@ $('*').withinBox(200, 200, 100, 100)
 
 Move the mouse in the following example and it will show the ids for `div` elements within the current mouse position:
 
-<iframe style="width: 100%; height: 330px" src="http://jsfiddle.net/hHLcg/embedded/result,html,js,css" allowfullscreen="allowfullscreen" frameborder="0">JSFiddle</iframe>
+<iframe style="width: 100%; height: 330px" src="http://jsfiddle.net/akSQD/embedded/result,html,js,css" allowfullscreen="allowfullscreen" frameborder="0">JSFiddle</iframe>
 
 > [jQuery.event.drag](http://donejs.com/docs.html#!jQuery.event.drag) uses *jQuery.within* to determine dropable elements at the current position.
 
@@ -284,7 +288,7 @@ $('#dragger').on('draginit', function(ev, drag) {
 
 Which looks like this in action:
 
-<iframe style="width: 100%; height: 200px" src="http://jsfiddle.net/xx5Er/embedded/result,html,js,css" allowfullscreen="allowfullscreen" frameborder="0">JSFiddle</iframe>
+<iframe style="width: 100%; height: 200px" src="http://jsfiddle.net/T5K3j/embedded/result,html,js,css" allowfullscreen="allowfullscreen" frameborder="0">JSFiddle</iframe>
 
 The `drag` object (passed to the event handler as the second parameter) can be used to modify the drag behavior:
 
@@ -358,6 +362,10 @@ The `drop` object offers the following methods:
 
 When adding drop-able elements after `dropinit`, for example when expanding a folder view after hovering over it with a draggable for a while, <a href="http://donejs.com/docs.html#!jQuery.Drop.static.compile" class="code">$.Drop.compile()</a> needs to be called explicitly to update the list of dropable elements (this happens automatically on `dropinit`).
 
+The following example shows two draggable elements and a drop area. When a drag starts it will create a copy of the element using `drag.ghost()`. The drop area will be highlighted when the drag moves over it and update the text when it is dropped:
+
+<iframe style="width: 100%; height: 250px" src="http://jsfiddle.net/3NkZM/embedded/result,html,js,css" allowfullscreen="allowfullscreen" frameborder="0">JSFiddle</iframe>
+
 ## hover `hoverinit` `hoverenter` `hovermove` `hoverleave`
 
 [jQuery.event.hover](http://donejs.com/docs.html#!jQuery.event.hover) is a flexible way to deal with the following hover related events:
@@ -388,6 +396,11 @@ $(".option").on("hoverinit", function(ev, hover){
   hover.delay(200);
 })
 {% endhighlight %}
+
+You can also set `hover.leave(time)` to set a time that the hover should stay active for after the mouse left.
+The following example shows `jQuery.event.hover` with different settings for distance, delay and leave:
+
+<iframe style="width: 100%; height: 300px" src="http://jsfiddle.net/uGUju/embedded/result,html,js,css" allowfullscreen="allowfullscreen" frameborder="0">JSFiddle</iframe>
 
 ## key `event.keyName()`
 
@@ -590,8 +603,9 @@ To develop jQuery++:
 
  1. Edit the _plugin's_ file.
  2. Add tests to the _plugin\_test.js_ test file.
- 3. Open the full test page in `jquery/qunit.html` and make sure your tests are included and everything still passes.
- 4. Submit a pull request!
+ 3. Open the plugin test page `qunit.html` or `funcunit.html` and make sure everything passes
+ 4. Open the big test page in `jquery/qunit.html` and make sure all tests pass
+ 5. Submit a pull request!
 
 ### Documentation
 

@@ -17,7 +17,7 @@
 		<div id='header'>
 			<div id='logo-and-download'>
 				<img alt="jQuery++" id="logo" src="images/logo.png"/>
-				<a class='primary' href='https://github.com/downloads/jupiterjs/jquerypp/3.3.zip'>Download v3.3</a>
+				<a class='primary' href='https://github.com/downloads/jupiterjs/jquerypp/jquerypp-1.0.0.zip'>Download 1.0.0</a>
 			</div>
 		</div>
 		<div class='cf' id='buttons'>
@@ -55,15 +55,38 @@
 
 <h3 id='using_steal'>Using Steal</h3>
 
-<p>Add these to your jQuery folder:</p>
-
+<p>The files needed for using jQuery++ with <a href='http://javascriptmvc.com/docs.html#!stealjs'>StealJS</a> are located in the <code>steal/</code> folder. Take the <code>jquery/</code> folder and put it in your steal root. Make sure to use <code>steal.map</code> to map any dependency of <code>jquery</code> to your jQuery library. For example, when using jQuery++ with <a href='http://canjs.us'>CanJS</a> and Steal, use this:</p>
+<div class='highlight'><pre><code class='javascript'><span class='nx'>steal</span><span class='p'>.</span><span class='nx'>map</span><span class='p'>({</span>
+  <span class='nx'>jquery</span> <span class='o'>:</span> <span class='s2'>&quot;can/util/jquery/jquery.1.7.1.js&quot;</span>
+<span class='p'>});</span>
+</code></pre>
+</div>
 <h3 id='using_amd'>Using AMD</h3>
 
-<p>require(&#8216;jquery/compare&#8217;)</p>
+<p>The files to load the jQuery++ plugins as <a href='https://github.com/amdjs/amdjs-api/wiki/AMD'>AMD modules</a>, for example using <a href='http://requirejs.org/'>RequireJS</a>, are located in the <code>amd/</code> folder. Place the <code>jquerypp/</code> folder in your modules directory and load a plugin like this:</p>
+<div class='highlight'><pre><code class='javascript'><span class='nx'>define</span><span class='p'>([</span><span class='s1'>&#39;jquery&#39;</span><span class='p'>,</span> <span class='s1'>&#39;jquerypp/dimensions&#39;</span><span class='p'>,</span> <span class='s1'>&#39;jquerypp/event/resize&#39;</span><span class='p'>],</span>
+  <span class='kd'>function</span><span class='p'>(</span><span class='nx'>$</span><span class='p'>)</span> <span class='p'>{</span>
+    <span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;#element&#39;</span><span class='p'>).</span><span class='nx'>outerWidth</span><span class='p'>(</span><span class='mi'>500</span><span class='p'>).</span><span class='nx'>trigger</span><span class='p'>(</span><span class='s1'>&#39;resize&#39;</span><span class='p'>);</span>
+<span class='p'>});</span>
+</code></pre>
+</div>
+<p>You might have to map the <code>jquery</code> module name to the name of your jQuery AMD module. In RequireJS like this:</p>
+<div class='highlight'><pre><code class='javascript'><span class='nx'>require</span><span class='p'>.</span><span class='nx'>config</span><span class='p'>({</span>
+  <span class='nx'>paths</span><span class='o'>:</span> <span class='p'>{</span>
+    <span class='s2'>&quot;jquery&quot;</span><span class='o'>:</span> <span class='s2'>&quot;./jquery-1.7.2&quot;</span>
+  <span class='p'>}</span>
+<span class='p'>});</span>
+</code></pre>
+</div>
+<blockquote>
+<p>Note: Starting at version 1.7 jQuery will define itself as an AMD module if a loader is available. There is no need to create a wrapper.</p>
+</blockquote>
 
 <h2 id='dom_helpers'>DOM HELPERS</h2>
 
 <h2 id='compare_'>compare <code>$(elA).compare(elB) -&gt; Number</code></h2>
+
+<p><a href='release/latest/jquery.compare.js'>jquery.compare.js</a></p>
 
 <p><a href='http://donejs.com/docs.html#!jQuery.compare'>jQuery.compare</a> adds <code>$.fn.compare</code> to compare the position of two nodes. It returns a number that represents a bitmask showing how they are positioned relative to each other. The following list shows the <code>bitmask</code>, the <strong>number</strong> and what it means for a <code>$.fn.compare</code> call like <code>$(&#39;#foo&#39;).compare($(&#39;#bar&#39;))</code>:</p>
 
@@ -226,7 +249,7 @@
 </code></pre>
 </div>
 <p>The following example shows how <code>$.fn.selection</code> can be used. Initially the selection is set from position eight to 12. You can change the selection in the highlighted area and the status text will be updated:</p>
-<iframe allowfullscreen='allowfullscreen' frameborder='0' src='http://jsfiddle.net/FH49q/embedded/result,html,js,css' style='width: 100%; height: 200px'>JSFiddle</iframe>
+<iframe allowfullscreen='allowfullscreen' frameborder='0' src='http://jsfiddle.net/uze4F/embedded/result,html,js,css' style='width: 100%; height: 200px'>JSFiddle</iframe>
 <h2 id='styles_'>styles <code>$(el).styles() -&gt; Object</code></h2>
 
 <p><a href='http://donejs.com/docs.html#!jQuery.styles'>jQuery.styles</a> adds <code>$.fn.styles</code> as a fast way of getting a set of computed styles from an element. It performs much faster than retrieving them individually e.g. by using <a href='http://api.jquery.com/css/'>jQuery.css()</a>. Computed styles reflect the actual current style of an element, including browser defaults and CSS settings.</p>
@@ -245,7 +268,7 @@
 </code></pre>
 </div>
 <p>Move the mouse in the following example and it will show the ids for <code>div</code> elements within the current mouse position:</p>
-<iframe allowfullscreen='allowfullscreen' frameborder='0' src='http://jsfiddle.net/hHLcg/embedded/result,html,js,css' style='width: 100%; height: 330px'>JSFiddle</iframe>
+<iframe allowfullscreen='allowfullscreen' frameborder='0' src='http://jsfiddle.net/akSQD/embedded/result,html,js,css' style='width: 100%; height: 330px'>JSFiddle</iframe>
 <blockquote>
 <p><a href='http://donejs.com/docs.html#!jQuery.event.drag'>jQuery.event.drag</a> uses <em>jQuery.within</em> to determine dropable elements at the current position.</p>
 </blockquote>
@@ -288,7 +311,7 @@
 </code></pre>
 </div>
 <p>Which looks like this in action:</p>
-<iframe allowfullscreen='allowfullscreen' frameborder='0' src='http://jsfiddle.net/xx5Er/embedded/result,html,js,css' style='width: 100%; height: 200px'>JSFiddle</iframe>
+<iframe allowfullscreen='allowfullscreen' frameborder='0' src='http://jsfiddle.net/T5K3j/embedded/result,html,js,css' style='width: 100%; height: 200px'>JSFiddle</iframe>
 <p>The <code>drag</code> object (passed to the event handler as the second parameter) can be used to modify the drag behavior:</p>
 <ul>
   <li><a class='code' href='http://donejs.com/docs.html#!jQuery.Drag.prototype.cancel'>drag.cancel() -> undefined</a>
@@ -323,7 +346,7 @@
 </ul>
 <h2 id='drop______'>drop <code>dropinit</code> <code>dropover</code> <code>dropout</code> <code>dropmove</code> <code>dropon</code> <code>dropend</code></h2>
 
-<p><a href='http://donejs.com/docs.html#!jQuery.event.drop'>jQuery.event.drop</a> complements <code>jQuery.event.drag</code> with <strong>delegatable</strong> drop events:</p>
+<p><a href='http://donejs.com/docs.html#!jQuery.event.drop'>jQuery.event.drop</a> complements <code>jQuery.event.drag</code> with <em>delegatable</em> drop events:</p>
 
 <ul>
 <li><code>dropinit</code> - the drag motion is started, drop positions are calculated</li>
@@ -359,8 +382,10 @@
   - call on <code>dropinit</code> to cache the position of draggable elements
   </li>
 </ul>
-<p>When adding drop-able elements after <code>dropinit</code>, for example when expanding a folder view after hovering over it with a draggable for a while, <a class='code' href='http://donejs.com/docs.html#!jQuery.Drop.compile'>$.Drop.compile()</a> needs to be called explicitly to update the list of dropable elements (this happens automatically on <code>dropinit</code>).</p>
+<p>When adding drop-able elements after <code>dropinit</code>, for example when expanding a folder view after hovering over it with a draggable for a while, <a class='code' href='http://donejs.com/docs.html#!jQuery.Drop.static.compile'>$.Drop.compile()</a> needs to be called explicitly to update the list of dropable elements (this happens automatically on <code>dropinit</code>).</p>
 
+<p>The following example shows two draggable elements and a drop area. When a drag starts it will create a copy of the element using <code>drag.ghost()</code>. The drop area will be highlighted when the drag moves over it and update the text when it is dropped:</p>
+<iframe allowfullscreen='allowfullscreen' frameborder='0' src='http://jsfiddle.net/3NkZM/embedded/result,html,js,css' style='width: 100%; height: 250px'>JSFiddle</iframe>
 <h2 id='hover____'>hover <code>hoverinit</code> <code>hoverenter</code> <code>hovermove</code> <code>hoverleave</code></h2>
 
 <p><a href='http://donejs.com/docs.html#!jQuery.event.hover'>jQuery.event.hover</a> is a flexible way to deal with the following hover related events:</p>
@@ -393,6 +418,8 @@
 <span class='p'>})</span>
 </code></pre>
 </div>
+<p>You can also set <code>hover.leave(time)</code> to set a time that the hover should stay active for after the mouse left. The following example shows <code>jQuery.event.hover</code> with different settings for distance, delay and leave:</p>
+<iframe allowfullscreen='allowfullscreen' frameborder='0' src='http://jsfiddle.net/uGUju/embedded/result,html,js,css' style='width: 100%; height: 300px'>JSFiddle</iframe>
 <h2 id='key_'>key <code>event.keyName()</code></h2>
 
 <p><a href='http://donejs.com/docs.html#!jQuery.event.key'>jQuery.event.key</a> adds a <code>.keyName()</code> method to the event object that returns a string representation of the current key:</p>
@@ -489,7 +516,7 @@
 <span class='nx'>$</span><span class='p'>(</span><span class='nb'>document</span><span class='p'>.</span><span class='nx'>body</span><span class='p'>).</span><span class='nx'>resize</span><span class='p'>();</span>
 </code></pre>
 </div>
-<p>The <code>resize</code> event makes creating application like layouts a lot easier. The following example creates a common layout with top, left, right and center elements within a container. Use the blue square to resize the outside container. The <code>resize</code> event will take care of adjusting the dimensions of the inside elements accordingly using the <a href='#dimensions'>jQuery.dimensions</a> plugin. Note the yellow top area. Even if the text wraps the layout will still resize properly:</p>
+<p>The <code>resize</code> event makes creating application like layouts a lot easier. The following example creates a common layout with top, left, right and center elements within a container. Use the blue square to resize the outside container. The <code>resize</code> event will take care of adjusting the dimensions of the inside elements accordingly using the <a href='#dimensions'>jQuery.dimensions</a> plugin:</p>
 <iframe allowfullscreen='allowfullscreen' frameborder='0' src='http://jsfiddle.net/TcB5y/embedded/result,html,js,css' style='width: 100%; height: 350px'>JSFiddle</iframe>
 <h2 id='swipe_____'>swipe <code>swipeleft</code> <code>swiperight</code> <code>swipeup</code> <code>swipedown</code> <code>swipe</code></h2>
 
@@ -535,7 +562,7 @@
 
 <p><strong>Help Us Help You</strong></p>
 
-<p>Help the community help you by using the <a href='http://jsfiddle.net/donejs/qYdwR/'>jQuery++ jsFiddle template</a> below. Just fork it and include the URL when you are asking for help.</p>
+<p>Help the community help you by using the <a href='http://jsfiddle.net/donejs/ZLvA5/'>jQuery++ jsFiddle template</a> below. Just fork it and include the URL when you are asking for help.</p>
 
 <h3 id='get_help_from_bitovi'>Get Help from Bitovi</h3>
 
@@ -603,7 +630,9 @@ git submodule update --init --recursive</code></pre>
 
 <li>Add tests to the <em>plugin_test.js</em> test file.</li>
 
-<li>Open the full test page in <code>jquery/qunit.html</code> and make sure your tests are included and everything still passes.</li>
+<li>Open the plugin test page <code>qunit.html</code> or <code>funcunit.html</code> and make sure everything passes</li>
+
+<li>Open the big test page in <code>jquery/qunit.html</code> and make sure all tests pass</li>
 
 <li>Submit a pull request!</li>
 </ol>
