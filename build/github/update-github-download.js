@@ -109,7 +109,7 @@ function updateDist() {
 
 							push.on("exit", function () {
 
-								var remove = spawn("rm", ["-rf", "jquery"], {
+								var remove = spawn("rm", ["-rf", "jquerypp"], {
 									cwd : __dirname
 								});
 								console.log("Done!")

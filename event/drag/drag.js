@@ -1,4 +1,4 @@
-steal('jquery/event', 'jquery/lang/vector', 'jquery/event/livehack',function( $ ) {
+steal('jquery/event', 'jquery/lang/vector', 'jquery/event/livehack', function( $ ) {
 	//modify live
 	//steal the live handler ....
 	var bind = function( object, method ) {
