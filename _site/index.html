@@ -229,7 +229,7 @@
 <iframe allowfullscreen='allowfullscreen' frameborder='0' src='http://jsfiddle.net/FH49q/embedded/result,html,js,css' style='width: 100%; height: 200px'>JSFiddle</iframe>
 <h2 id='styles_'>styles <code>$(el).styles() -&gt; Object</code></h2>
 
-<p><a href='http://donejs.com/docs.html#!jQuery.styles'>jQuery.styles</a> adds <code>$.fn.styles</code> as a fast way of getting a set of computed styles from an element. It performs a lot faster than retrieving them individually e.g. by using <a href='http://api.jquery.com/css/'>jQuery.css()</a>. Computed styles reflect the actual current style of an element, including browser defaults and CSS settings.</p>
+<p><a href='http://donejs.com/docs.html#!jQuery.styles'>jQuery.styles</a> adds <code>$.fn.styles</code> as a fast way of getting a set of computed styles from an element. It performs much faster than retrieving them individually e.g. by using <a href='http://api.jquery.com/css/'>jQuery.css()</a>. Computed styles reflect the actual current style of an element, including browser defaults and CSS settings.</p>
 <div class='highlight'><pre><code class='javascript'><span class='nx'>$</span><span class='p'>(</span><span class='s2'>&quot;#foo&quot;</span><span class='p'>).</span><span class='nx'>styles</span><span class='p'>(</span><span class='s1'>&#39;float&#39;</span><span class='p'>,</span><span class='s1'>&#39;display&#39;</span><span class='p'>)</span>
 <span class='c1'>// -&gt; { cssFloat: &quot;left&quot;, display: &quot;block&quot; }</span>
 </code></pre>
@@ -264,7 +264,7 @@
 
 <h2 id='drag______'>drag <code>dragdown</code> <code>draginit</code> <code>dragmove</code> <code>dragend</code> <code>dragover</code> <code>dragout</code></h2>
 
-<p><a href='http://donejs.com/docs.html#!jQuery.event.drag'>jQuery.event.drag</a> adds <strong>delegatable</strong> drag events to jQuery:</p>
+<p><a href='http://donejs.com/docs.html#!jQuery.event.drag'>jQuery.event.drag</a> adds <em>delegatable</em> drag events to jQuery:</p>
 
 <ul>
 <li><code>dragdown</code> - the mouse cursor is pressed down</li>
@@ -297,7 +297,7 @@
   <li><a class='code' href='http://donejs.com/docs.html#!jQuery.Drag.prototype.ghost'>drag.ghost() -> jQuery</a>
   - copys the draggable and drags the cloned element
   </li>
-  <li><a class='code' href='http://donejs.com/docs.html#!jQuery.Drag.prototype.horizontal'>drag.horizontal() -> Boolean</a>
+  <li><a class='code' href='http://donejs.com/docs.html#!jQuery.Drag.prototype.horizontal'>drag.horizontal() -> drag</a>
   - limits the scroll to horizontal movement
   </li>
   <li><a class='code' href='http://donejs.com/docs.html#!jQuery.Drag.prototype.only'>drag.only([only]) -> Boolean</a>
@@ -311,7 +311,7 @@
   <li><a class='code' href='http://donejs.com/docs.html#!jQuery.Drag.prototype.step'>drag.step(pixels) -> drag</a>
   - makes the drag move in steps of amount pixels
   </li>
-  <li><a class='code' href='http://donejs.com/docs.html#!jQuery.Drag.prototype.vertical'>drag.vertical() -> undefined</a>
+  <li><a class='code' href='http://donejs.com/docs.html#!jQuery.Drag.prototype.vertical'>drag.vertical() -> drag</a>
   - limit the drag to vertical movement
   </li>
   <li><a class='code' href='http://donejs.com/docs.html#!jQuery.Drag.prototype.limit'>drag.limit(container, center) -> drag</a>
@@ -489,11 +489,11 @@
 <span class='nx'>$</span><span class='p'>(</span><span class='nb'>document</span><span class='p'>.</span><span class='nx'>body</span><span class='p'>).</span><span class='nx'>resize</span><span class='p'>();</span>
 </code></pre>
 </div>
-<p>The <code>resize</code> event makes creating application like layouts a lot easier. The following example creates a common layout with top, left, right and center elements within a container. Use the blue square to resize the outside container. The <code>resize</code> event will take care of adjusting the dimensions of the inside elements accordingly using the <a href='#dimensions'>jQuery.dimensions</a> plugin:</p>
+<p>The <code>resize</code> event makes creating application like layouts a lot easier. The following example creates a common layout with top, left, right and center elements within a container. Use the blue square to resize the outside container. The <code>resize</code> event will take care of adjusting the dimensions of the inside elements accordingly using the <a href='#dimensions'>jQuery.dimensions</a> plugin. Note the yellow top area. Even if the text wraps the layout will still resize properly:</p>
 <iframe allowfullscreen='allowfullscreen' frameborder='0' src='http://jsfiddle.net/TcB5y/embedded/result,html,js,css' style='width: 100%; height: 350px'>JSFiddle</iframe>
 <h2 id='swipe_____'>swipe <code>swipeleft</code> <code>swiperight</code> <code>swipeup</code> <code>swipedown</code> <code>swipe</code></h2>
 
-<p><a href='http://donejs.com/docs.html#!jQuery.event.swipe'>jQuery.event.swipe</a> adds support for swipe motions providing the <code>swipeleft</code>, <code>swiperight</code>, <code>swipedown</code>, <code>swipeup</code> and a general <code>swipe</code> event:</p>
+<p><a href='http://donejs.com/docs.html#!jQuery.event.swipe'>jQuery.event.swipe</a> adds support for swipe motions providing the <em>delegatable</em> <code>swipeleft</code>, <code>swiperight</code>, <code>swipedown</code>, <code>swipeup</code> and <code>swipe</code> events:</p>
 <div class='highlight'><pre><code class='javascript'><span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;#swiper&#39;</span><span class='p'>).</span><span class='nx'>on</span><span class='p'>({</span>
   <span class='s1'>&#39;swipe&#39;</span> <span class='o'>:</span> <span class='kd'>function</span><span class='p'>(</span><span class='nx'>ev</span><span class='p'>)</span> <span class='p'>{</span>
     <span class='nx'>console</span><span class='p'>.</span><span class='nx'>log</span><span class='p'>(</span><span class='s1'>&#39;Swiping&#39;</span><span class='p'>);</span>
@@ -513,7 +513,9 @@
 <span class='p'>});</span>
 </code></pre>
 </div>
-<p>Set <code>jQuery.event.swipe.delay</code> to the maximum time the swipe motion is allowed to take (default is 500ms). Swipe (using the mouse) in the green area in the following example to see the swiping direction:</p>
+<p>Set <code>jQuery.event.swipe.delay</code> to the maximum time the swipe motion is allowed to take (default is 500ms).</p>
+
+<p>Swipe (using the mouse) in the green area in the following example to see the direction of the swipe:</p>
 <iframe allowfullscreen='allowfullscreen' frameborder='0' src='http://jsfiddle.net/abaZN/embedded/result,html,js,css' style='width: 100%; height: 300px'>JSFiddle</iframe>
 <h2 id='get_help'>Get Help</h2>
 

@@ -19,11 +19,34 @@ Check the files you want to download and a zip file will be created. The zip fil
 
 ### Using Steal
 
-Add these to your jQuery folder:
+The files needed for StealJS are located in the `steal` folder which contains all needed jQuery++ files. Take the `jquery` folder and put it in the steal root. Make sure to use `steal.map` to map any dependency of `jquery` to your jQuery library. For example, when using jQuery++ with [CanJS](http://canjs.us) and Steal, use this:
+
+{% highlight javascript %}
+steal.map({
+  jquery : "can/util/jquery/jquery.1.7.1.js"
+});
+{% endhighlight %}
 
 ### Using AMD
 
-require('jquery/compare')
+The files to load the jQuery++ plugins as [AMD modules](https://github.com/amdjs/amdjs-api/wiki/AMD), for example using [RequireJS](http://requirejs.org/), are located in the `amd` folder. Place the `jquerypp` folder in your modules directory and load a plugin like:
+
+{% highlight javascript %}
+define(['jquery', 'jquerypp/dimensions', 'jquerypp/event/resize'], function(jQuery) {
+});
+{% endhighlight %}
+
+You might have to map calls to `jquery` to the module name of your jQuery AMD module. In RequireJS like this:
+
+{% highlight javascript %}
+require.config({
+  paths: {
+    "jquery": "./jquery-1.7"
+  }
+});
+{% endhighlight %}
+
+> Note: Starting at version 1.7 jQuery will directly define itself as an AMD module if a loader is available. There is no need to create a wrapper.
 
 ## DOM HELPERS
 
@@ -198,7 +221,7 @@ The following example shows how `$.fn.selection` can be used. Initially the sele
 
 ## styles `$(el).styles() -> Object`
 
-[jQuery.styles](http://donejs.com/docs.html#!jQuery.styles) adds `$.fn.styles` as a fast way of getting a set of computed styles from an element. It performs a lot faster than retrieving them individually e.g. by using [jQuery.css()](http://api.jquery.com/css/). Computed styles reflect the actual current style of an element, including browser defaults and CSS settings.
+[jQuery.styles](http://donejs.com/docs.html#!jQuery.styles) adds `$.fn.styles` as a fast way of getting a set of computed styles from an element. It performs much faster than retrieving them individually e.g. by using [jQuery.css()](http://api.jquery.com/css/). Computed styles reflect the actual current style of an element, including browser defaults and CSS settings.
 
 {% highlight javascript %}
 $("#foo").styles('float','display')
@@ -241,7 +264,7 @@ $('form').on('destroyed', function() {
 
 ## drag `dragdown` `draginit` `dragmove` `dragend` `dragover` `dragout`
 
-[jQuery.event.drag](http://donejs.com/docs.html#!jQuery.event.drag) adds __delegatable__ drag events to jQuery:
+[jQuery.event.drag](http://donejs.com/docs.html#!jQuery.event.drag) adds *delegatable* drag events to jQuery:
 
 * `dragdown` - the mouse cursor is pressed down
 * `draginit` - the drag motion is started
@@ -272,7 +295,7 @@ The `drag` object (passed to the event handler as the second parameter) can be u
   <li><a href="http://donejs.com/docs.html#!jQuery.Drag.prototype.ghost" class="code">drag.ghost() -> jQuery</a>
   - copys the draggable and drags the cloned element
   </li>
-  <li><a href="http://donejs.com/docs.html#!jQuery.Drag.prototype.horizontal" class="code">drag.horizontal() -> Boolean</a>
+  <li><a href="http://donejs.com/docs.html#!jQuery.Drag.prototype.horizontal" class="code">drag.horizontal() -> drag</a>
   - limits the scroll to horizontal movement
   </li>
   <li><a href="http://donejs.com/docs.html#!jQuery.Drag.prototype.only" class="code">drag.only([only]) -> Boolean</a>
@@ -286,7 +309,7 @@ The `drag` object (passed to the event handler as the second parameter) can be u
   <li><a href="http://donejs.com/docs.html#!jQuery.Drag.prototype.step" class="code">drag.step(pixels) -> drag</a>
   - makes the drag move in steps of amount pixels
   </li>
-  <li><a href="http://donejs.com/docs.html#!jQuery.Drag.prototype.vertical" class="code">drag.vertical() -> undefined</a>
+  <li><a href="http://donejs.com/docs.html#!jQuery.Drag.prototype.vertical" class="code">drag.vertical() -> drag</a>
   - limit the drag to vertical movement
   </li>
   <li><a href="http://donejs.com/docs.html#!jQuery.Drag.prototype.limit" class="code">drag.limit(container, center) -> drag</a>
@@ -300,7 +323,7 @@ The `drag` object (passed to the event handler as the second parameter) can be u
 
 ## drop `dropinit` `dropover` `dropout` `dropmove` `dropon` `dropend`
 
-[jQuery.event.drop](http://donejs.com/docs.html#!jQuery.event.drop) complements `jQuery.event.drag` with __delegatable__ drop events:
+[jQuery.event.drop](http://donejs.com/docs.html#!jQuery.event.drop) complements `jQuery.event.drag` with *delegatable* drop events:
 
 * `dropinit` - the drag motion is started, drop positions are calculated
 * `dropover` - a drag moves over a drop element, called once as the drop is dragged over the element
@@ -333,7 +356,7 @@ The `drop` object offers the following methods:
   </li>
 </ul>
 
-When adding drop-able elements after `dropinit`, for example when expanding a folder view after hovering over it with a draggable for a while, <a href="http://donejs.com/docs.html#!jQuery.Drop.compile" class="code">$.Drop.compile()</a> needs to be called explicitly to update the list of dropable elements (this happens automatically on `dropinit`).
+When adding drop-able elements after `dropinit`, for example when expanding a folder view after hovering over it with a draggable for a while, <a href="http://donejs.com/docs.html#!jQuery.Drop.static.compile" class="code">$.Drop.compile()</a> needs to be called explicitly to update the list of dropable elements (this happens automatically on `dropinit`).
 
 ## hover `hoverinit` `hoverenter` `hovermove` `hoverleave`
 
@@ -468,7 +491,7 @@ The `resize` event makes creating application like layouts a lot easier. The fol
 
 ## swipe `swipeleft` `swiperight` `swipeup` `swipedown` `swipe`
 
-[jQuery.event.swipe](http://donejs.com/docs.html#!jQuery.event.swipe) adds support for swipe motions providing the `swipeleft`, `swiperight`, `swipedown`, `swipeup` and a general `swipe` event:
+[jQuery.event.swipe](http://donejs.com/docs.html#!jQuery.event.swipe) adds support for swipe motions providing the *delegatable* `swipeleft`, `swiperight`, `swipedown`, `swipeup` and `swipe` events:
 
 {% highlight javascript %}
 $('#swiper').on({
@@ -514,7 +537,7 @@ The DoneJS IRC channel (`#donejs` on **irc.freenode.net**) is an awesome place t
 
 __Help Us Help You __
 
-Help the community help you by using the [jQuery++ jsFiddle template](http://jsfiddle.net/donejs/qYdwR/) below. Just fork it and include the URL when you are asking for help.
+Help the community help you by using the [jQuery++ jsFiddle template](http://jsfiddle.net/donejs/ZLvA5/) below. Just fork it and include the URL when you are asking for help.
 
 ### Get Help from Bitovi
 
