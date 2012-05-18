@@ -2904,6 +2904,80 @@ $event.trigger =  function defaultTriggerer( event, data, elem, onlyHandlers){
 
 	});
 })(jQuery);
+(function( $ ) {
+
+
+	$.Drag.prototype
+	/**
+	 * @function limit
+	 * @plugin jquery/event/drag/limit
+	 * @download  http://jmvcsite.heroku.com/pluginify?plugins[]=jquery/event/event/drag/limit/limit.js
+	 * `drag.limit(container, [center])` limits a drag to a containing element.
+	 * 
+	 *     $("#todos").on(".todo","draginit", function( ev, drag ) {
+	 *       drag.limit($("#todos").parent())
+	 *     })
+	 * 
+	 * @param {jQuery} container the jQuery-wrapped container element you do not want the drag element to escape.
+	 * @param {String} [center] can set the limit to the center of the object.  Can be 
+	 *   'x', 'y' or 'both'.  By default it will keep the outer edges of the moving element within the
+	 * container element.  If you provide x, it will keep the horizontal center of the moving element
+	 * within the container element.  If you provide y, it will keep the vertical center of the moving
+	 * element within the container element.  If you provide both, it will keep the center of the 
+	 * moving element within the containing element.
+	 * @return {drag} returns the drag for chaining.
+	 */
+	.limit = function( container, center ) {
+		//on draws ... make sure this happens
+		var styles = container.styles('borderTopWidth', 'paddingTop', 'borderLeftWidth', 'paddingLeft'),
+			paddingBorder = new $.Vector(
+			parseInt(styles.borderLeftWidth, 10) + parseInt(styles.paddingLeft, 10) || 0, parseInt(styles.borderTopWidth, 10) + parseInt(styles.paddingTop, 10) || 0);
+
+		this._limit = {
+			offset: container.offsetv().plus(paddingBorder),
+			size: container.dimensionsv(),
+			center : center === true ? 'both' : center
+		};
+		return this;
+	};
+
+	var oldPosition = $.Drag.prototype.position;
+	$.Drag.prototype.position = function( offsetPositionv ) {
+		//adjust required_css_position accordingly
+		if ( this._limit ) {
+			var limit = this._limit,
+				center = limit.center && limit.center.toLowerCase(),
+				movingSize = this.movingElement.dimensionsv('outer'),
+				halfHeight = center && center != 'x' ? movingSize.height() / 2 : 0,
+				halfWidth = center && center != 'y' ? movingSize.width() / 2 : 0,
+				lot = limit.offset.top(),
+				lof = limit.offset.left(),
+				height = limit.size.height(),
+				width = limit.size.width();
+
+			//check if we are out of bounds ...
+			//above
+			if ( offsetPositionv.top()+halfHeight < lot ) {
+				offsetPositionv.top(lot - halfHeight);
+			}
+			//below
+			if ( offsetPositionv.top() + movingSize.height() - halfHeight > lot + height ) {
+				offsetPositionv.top(lot + height - movingSize.height() + halfHeight);
+			}
+			//left
+			if ( offsetPositionv.left()+halfWidth < lof ) {
+				offsetPositionv.left(lof - halfWidth);
+			}
+			//right
+			if ( offsetPositionv.left() + movingSize.width() -halfWidth > lof + width ) {
+				offsetPositionv.left(lof + width - movingSize.left()+halfWidth);
+			}
+		}
+
+		oldPosition.call(this, offsetPositionv);
+	};
+
+})(jQuery);
 (function($){
 	var event = $.event;
 	//somehow need to keep track of elements with selectors on them.  When element is removed, somehow we need to know that
@@ -3309,6 +3383,228 @@ $event.trigger =  function defaultTriggerer( event, data, elem, onlyHandlers){
 		}
 	} )
 })(jQuery);
+(function($){ //needs drop to determine if respondable
+
+/**
+ * @add jQuery.Drag.prototype
+ */
+$.Drag.prototype.
+	/**
+	 * @plugin jquery/event/drag/scroll
+	 * @download  http://jmvcsite.heroku.com/pluginify?plugins[]=jquery/event/drag/scroll/scroll.js
+	 * 
+	 * `drag.scrolls(elements, [options])` scroll elements with 
+	 * a scroll bar as the drag moves to borders.
+	 * 
+	 * The following sets up the drag motions to scroll `#todos` and the window.  Scrolling will
+	 * start 50px away from a boundary and the speed will increase to 50px of scroll every 15ms.
+	 * 
+	 *     $('#todos').on(".todo","draginit", function(ev, drag){
+	 *       drag.scrolls($('#todos').add(window), {
+	 *         distance : 50,
+	 *         delta : function(diff) { return (50 - diff) / 2},
+	 *         direction : "y"
+	 *       })
+	 *     })
+	 * 
+	 * 
+	 * @param {jQuery} elements an array of elements to scroll.  The window can be in this array.
+	 * @param {Object} [options] changes the default settings.
+	 * 
+	 *   - `distance` {number} 30 - how many pixels away from a boundry where we start scrolling
+	 *   - `delta(diff)` {Function} - returns how far we should scroll.  It is passed how many pixels the cursor is
+	 *     from the boundry.
+	 *   - `direction` {String} - direction scrolling should happen.  "xy" is the default.
+	 */
+	scrolls = function(elements, options){
+		var elements = $(elements);
+		
+		for(var i = 0 ; i < elements.length; i++){
+			this.constructor.responder._elements.push( elements.eq(i).data("_dropData", new $.Scrollable(elements[i], options) )[0] )
+		}
+	},
+	
+$.Scrollable = function(element, options){
+	this.element = jQuery(element);
+	this.options = $.extend({
+		// when  we should start scrolling
+		distance : 30,
+		// how far we should move
+		delta : function(diff, distance){
+			return (distance - diff) / 2;
+		},
+		direction: "xy"
+	}, options);
+	this.x = this.options.direction.indexOf("x") != -1;
+	this.y = this.options.direction.indexOf("y") != -1;
+}
+$.extend($.Scrollable.prototype,{
+	init: function( element ) {
+		this.element = jQuery(element);
+	},
+	callHandlers: function( method, el, ev, drag ) {
+		this[method](el || this.element[0], ev, this, drag)
+	},
+	dropover: function() {
+		
+	},
+	dropon: function() {
+		this.clear_timeout();
+	}, 
+	dropout: function() {
+		this.clear_timeout();
+	},
+	dropinit: function() {
+		
+	},
+	dropend: function() {},
+	clear_timeout: function() {
+		if(this.interval){
+			clearTimeout(this.interval)
+			this.interval = null;
+		}
+	},
+	distance: function( diff ) {
+		return (30 - diff) / 2;
+	},
+	dropmove: function( el, ev, drop, drag ) {
+		
+		//if we were about to call a move, clear it.
+		this.clear_timeout();
+		
+		//position of the mouse
+		var mouse = ev.vector(),
+		
+		//get the object we are going to get the boundries of
+			location_object = $(el == document.documentElement ? window : el),
+		
+		//get the dimension and location of that object
+			dimensions = location_object.dimensionsv('outer'),
+			position = location_object.offsetv(),
+		
+		//how close our mouse is to the boundries
+			bottom = position.y()+dimensions.y() - mouse.y(),
+			top = mouse.y() - position.y(),
+			right = position.x()+dimensions.x() - mouse.x(),
+			left = mouse.x() - position.x(),
+		
+		//how far we should scroll
+			dx =0, dy =0,
+			distance =  this.options.distance;
+
+		//check if we should scroll
+		if(bottom < distance && this.y)
+			dy = this.options.delta(bottom,distance);
+		else if(top < distance && this.y)
+			dy = -this.options.delta(top,distance)
+		if(right < distance && this.options && this.x)
+			dx = this.options.delta(right,distance);
+		else if(left < distance && this.x)
+			dx = -this.options.delta(left,distance);
+		
+		//if we should scroll
+		if(dx || dy){
+			//set a timeout that will create a mousemove on that object
+			var self = this;
+			this.interval =  setTimeout( function(){
+				self.move($(el), drag.movingElement, dx, dy, ev, ev.clientX, ev.clientY, ev.screenX, ev.screenY)
+			},15)
+		}
+	},
+	/**
+	 * Scrolls an element then calls mouse a mousemove in the same location.
+	 * @hide
+	 */
+	move: function( scroll_element, drag_element, dx, dy, ev/*, x,y,sx, sy*/ ) {
+		scroll_element.scrollTop( scroll_element.scrollTop() + dy);
+		scroll_element.scrollLeft(scroll_element.scrollLeft() + dx);
+		
+		drag_element.trigger(
+			$.event.fix({type: "mousemove", 
+					 clientX: ev.clientX, 
+					 clientY: ev.clientY, 
+					 screenX: ev.screenX, 
+					 screenY: ev.screenY,
+					 pageX:   ev.pageX,
+					 pageY:   ev.pageY}))
+		//drag_element.synthetic('mousemove',{clientX: x, clientY: y, screenX: sx, screenY: sy})
+	}
+})
+
+})(jQuery);
+(function( $ ) {
+	var round = function( x, m ) {
+		return Math.round(x / m) * m;
+	}
+
+	$.Drag.prototype.
+	/**
+	 * @function step
+	 * @plugin jquery/event/drag/step
+	 * @download  http://jmvcsite.heroku.com/pluginify?plugins[]=jquery/event/drag/step/step.js
+	 * makes the drag move in steps of amount pixels.
+	 * 
+	 *     drag.step({x: 5}, $('foo'), "xy")
+	 * 
+	 * ## Demo
+	 * 
+	 * @demo jquery/event/drag/step/step.html
+	 * 
+	 * @param {number|Object} amount make the drag move X amount in pixels from the top-left of container.
+	 * @param {jQuery} [container] the container to move in reference to.  If not provided, the document is used.
+	 * @param {String} [center] Indicates how to position the drag element in relationship to the container.
+	 * 
+	 *   -  If nothing is provided, places the top left corner of the drag element at
+	 *      'amount' intervals from the top left corner of the container.  
+	 *   -  If 'x' is provided, it centers the element horizontally on the top-left corner.
+	 *   -  If 'y' is provided, it centers the element vertically on the top-left corner of the container.
+	 *   -  If 'xy' is provided, it centers the element on the top-left corner of the container.
+	 *   
+	 * @return {jQuery.Drag} the drag object for chaining.
+	 */
+	step = function( amount, container, center ) {
+		//on draws ... make sure this happens
+		if ( typeof amount == 'number' ) {
+			amount = {
+				x: amount,
+				y: amount
+			}
+		}
+		container = container || $(document.body);
+		this._step = amount;
+
+		var styles = container.styles("borderTopWidth", "paddingTop", "borderLeftWidth", "paddingLeft");
+		var top = parseInt(styles.borderTopWidth) + parseInt(styles.paddingTop),
+			left = parseInt(styles.borderLeftWidth) + parseInt(styles.paddingLeft);
+
+		this._step.offset = container.offsetv().plus(left, top);
+		this._step.center = center;
+		return this;
+	};
+
+
+	var oldPosition = $.Drag.prototype.position;
+	$.Drag.prototype.position = function( offsetPositionv ) {
+		//adjust required_css_position accordingly
+		if ( this._step ) {
+			var step = this._step,
+				center = step.center && step.center.toLowerCase(),
+				movingSize = this.movingElement.dimensionsv('outer'),
+				lot = step.offset.top()- (center && center != 'x' ? movingSize.height() / 2 : 0),
+				lof = step.offset.left() - (center && center != 'y' ? movingSize.width() / 2 : 0);
+
+			if ( this._step.x ) {
+				offsetPositionv.left(Math.round(lof + round(offsetPositionv.left() - lof, this._step.x)))
+			}
+			if ( this._step.y ) {
+				offsetPositionv.top(Math.round(lot + round(offsetPositionv.top() - lot, this._step.y)))
+			}
+		}
+
+		oldPosition.call(this, offsetPositionv)
+	}
+
+})(jQuery);
 (function($){
 /**
  * @class jQuery.Hover
@@ -3381,6 +3677,13 @@ $.extend($.Hover.prototype,{
 		this._distance = distance;
 		return this;
 	},
+	/**
+	 * Sets a delay after which the hover stops. This method should only be used in
+	 * [jQuery.event.hover.hoverinit hoverinit].
+	 *
+	 * @param {Number} delay the number of milliseconds the hover should stay active after the mouse leaves
+	 * @return {$.Hover} The hover object
+	 */
 	leave : function(leave){
 		this._leave = leave;
 		return this;

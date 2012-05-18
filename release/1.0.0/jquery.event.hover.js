@@ -243,6 +243,13 @@ $.extend($.Hover.prototype,{
 		this._distance = distance;
 		return this;
 	},
+	/**
+	 * Sets a delay after which the hover stops. This method should only be used in
+	 * [jQuery.event.hover.hoverinit hoverinit].
+	 *
+	 * @param {Number} delay the number of milliseconds the hover should stay active after the mouse leaves
+	 * @return {$.Hover} The hover object
+	 */
 	leave : function(leave){
 		this._leave = leave;
 		return this;
