@@ -75,7 +75,7 @@ steal('steal/build/pluginify', 'jquery/build/stealify.js', 'jquery/build/amdify.
 			"jquery/event/destroyed/destroyed.js" : "jquerypp/event/destroyed",
 			"jquery/event/drag/drag.js" : "jquerypp/event/drag",
 			"jquery/event/drag/limit/limit.js" : "jquerypp/event/drag.limit",
-			"jquery/event/drag/scroll/srcoll.js" : "jquerypp/event/drag.scroll",
+			"jquery/event/drag/scroll/scroll.js" : "jquerypp/event/drag.scroll",
 			"jquery/event/drag/step/step.js" : "jquerypp/event/drag.step",
 			"jquery/event/drop/drop.js" : "jquerypp/event/drop",
 			"jquery/event/hover/hover.js" : "jquerypp/event/hover",
