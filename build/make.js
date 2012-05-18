@@ -10,7 +10,7 @@ steal('steal/build/pluginify', 'jquery/build/stealify.js', 'jquery/build/amdify.
 		options = {
 			global: "jQuery",
 			skipCallbacks: true,
-			exclude : excludes
+			exclude : excludes.concat(["jquery/jquery.js"])
 		},
 		plugins = {
 			"jquery/dom/compare/compare.js" : "jquery.compare.js",

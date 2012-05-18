@@ -19,6 +19,7 @@ var path = require("path"),
 
 // Figure out some paths
 	rhinoPath = path.join(__dirname, "../../.."),
+	distPathShort = "jquery/dist/",
 	distPath = path.join(__dirname, "../../dist"),
 
 // Github client
@@ -202,16 +203,16 @@ function stealBuild() {
 		cwd : rhinoPath
 	});
 
-	pluginify.on("exit", function () {
+	pluginify.on("exit", function (code) {
 		// Create a zip file
 		// tar -cvzf jquery/dist/jquerypp.tar.gz jquery/dist
-		zipFile = 'jquerypp-' + version + '.tar.gz';
+		zipFile = 'jquerypp-' + version + '.zip';
 		descriptions[zipFile] = "jQuery++ #{VERSION} - Full download";
-		spawn("tar", ["-czvf", distPath + '/' + zipFile, distPath], {
-			cwd : rhinoPath
-		}).on("exit", function (args) {
+		spawn("zip", ["-r", zipFile, '.'], {
+			cwd : distPath
+		}).on("exit", function () {
 			console.log("Done creating ZIP file " + zipFile);
-			dfd.resolve(args);
+			dfd.resolve(code);
 		});
 	});
 
@@ -262,6 +263,7 @@ _.when(stealBuild(), getCredentials()).done(function (code) {
 		process.stdout.write(" Done!\n")
 	}
 
+	console.log(code);
 	if (code != 0) {
 		console.log("Steal build process failed.")
 	} else {
