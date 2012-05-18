@@ -150,7 +150,10 @@ $('form').formParams({
 
 ## range `$.Range([el]) -> range` `$(el).range() -> range`
 
-[jQuery.Range](http://donejs.com/docs.html#!jQuery.Range) helps creating, moving and comparing text ranges. Use `$.Range().current()` to get the currently selected text range or the jQuery plugin `$(el).range()` to get a `$.Range` instance from an element. For example, assuming that in a div like `<div>This is some text</div>` the text from position eight to 12 is currently selected, `$.Range` can be used like this:
+Use [jQuery.Range](http://donejs.com/docs.html#!jQuery.Range) to create, move and compare text ranges. Use `$.Range.current()` to get the currently selected text range or the jQuery plugin `$(el).range()` to get a `$.Range` instance for an element.
+
+
+For example, assuming that in a div like `<div>This is some text</div>` the text from position eight to 12 is currently selected, `$.Range` can be used like this:
 
 {% highlight javascript %}
 var range = $.Range.current();
@@ -437,6 +440,18 @@ The following key names are mapped by default:
 
 [jQuery.event.pause](http://donejs.com/docs.html#!jQuery.event.pause) adds a default event handler, `event.pause()` and `event.resume()` for pausing and resuming event propagation and `$.fn.triggerAsync` for triggering an event asynchronously and executing a callback when propagation is finished.
 
+### triggerAsync `$(el).triggerAsync(event, [success], [prevented])`
+
+[jQuery.fn.triggerAsync](http://donejs.com/docs.html#!jQuery.fn.triggerAsync) triggers an event and calls a *success* handler when it has finished propagating through the DOM and no handler called `event.preventDefault()` or returned `false`. The *prevented* callback will be used otherwise:
+
+{% highlight javascript %}
+$('panel').triggerAsync('show', function(){
+    $('#panel').show();
+  },function(){
+    $('#other').addClass('error');
+});
+{% endhighlight %}
+
 ### default events `eventname.default`
 
 [jQuery.even.default](http://donejs.com/docs.html#!jQuery.even.default) adds default event handlers. A default event runs when all other event handlers have been triggered and none has called `event.preventDefault()` or returned `false`. Default events are prefixed with the `default` namespace. The following example adds a default `toggle` event:
@@ -454,20 +469,6 @@ $('#text').on('toggle', function(ev, animation) {
 });
 {% endhighlight %}
 
-<iframe style="width: 100%; height: 300px" src="http://jsfiddle.net/mXePt/embedded/result,html,js,css" allowfullscreen="allowfullscreen" frameborder="0">JSFiddle</iframe>
-
-### triggerAsync `$(el).triggerAsync(event, [success], [prevented])`
-
-[jQuery.fn.triggerAsync](http://donejs.com/docs.html#!jQuery.fn.triggerAsync) triggers an event and calls a *success* handler when it has finished propagating through the DOM and no handler called `event.preventDefault()` or returned `false`. The *prevented* callback will be used otherwise:
-
-{% highlight javascript %}
-$('panel').triggerAsync('show', function(){
-    $('#panel').show();
-  },function(){
-    $('#other').addClass('error');
-});
-{% endhighlight %}
-
 ### pause and resume `event.pause()` `event.resume()`
 
 Pausing an event works similar to [.stopImmediatePropagation()](http://api.jquery.com/event.stopImmediatePropagation/) by calling `event.pause()`. Calling `event.resume()` will continue propagation. This is great when doing asynchronous processing in an event handler:
@@ -481,6 +482,14 @@ $('#todos').on('show', function(ev){
   });
 });
 {% endhighlight %}
+
+### Use
+
+`event.pause()`, `event.resume()`, `$.fn.triggerAsync` and default events can be very helpful when creating event oriented widgets. The following example implements a `tabs` jQuery plugin that triggers a `show` event when a tab is selected and, by default, shows that tab.
+
+A user of the plugin can intercept that `show` event to change that behavior. In this example the second tab should only show if the checkbox from the first step is checked and after the first tab has done some asynchronous processing (like saving its state to the server):
+
+<iframe style="width: 100%; height: 350px" src="http://jsfiddle.net/TPB8P/embedded/result,html,js,css" allowfullscreen="allowfullscreen" frameborder="0">JSFiddle</iframe>
 
 ## resize `resize`
 
