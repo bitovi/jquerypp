@@ -3,8 +3,10 @@ steal('jquery').then(function($){
 		getSetOne = function(v){ return v !== undefined ? (this.array[1] = v) : this.array[1] }
 /**
  * @class jQuery.Vector
- * @parent jquerymx.lang
+ * @parent jquerypp
+ *
  * A vector class
+ *
  * @constructor creates a new vector instance from the arguments.  Example:
  * @codestart
  * new jQuery.Vector(1,2)
@@ -18,9 +20,10 @@ steal('jquery').then(function($){
 	/* @Prototype*/
 	{
 		/**
-		 * Applys the function to every item in the vector.  Returns the new vector.
-		 * @param {Function} f
-		 * @return {jQuery.Vector} new vector class.
+		 * Applys the function to every item in the vector and returns a new vector.
+		 *
+		 * @param {Function} f The function to apply
+		 * @return {jQuery.Vector} A new $.Vector instance
 		 */
 		app: function( f ) {
 			var i, vec, newArr = [];
@@ -32,7 +35,8 @@ steal('jquery').then(function($){
 			return vec.update(newArr);
 		},
 		/**
-		 * Adds two vectors together.  Example:
+		 * Adds two vectors together and returns a new instance. Example:
+		 *
 		 * @codestart
 		 * new Vector(1,2).plus(2,3) //-> &lt;3,5>
 		 * new Vector(3,5).plus(new Vector(4,5)) //-> &lt;7,10>
@@ -49,7 +53,8 @@ steal('jquery').then(function($){
 			return vec.update(arr);
 		},
 		/**
-		 * Like plus but subtracts 2 vectors
+		 * Subtract one vector from another.
+		 *
 		 * @return {jQuery.Vector}
 		 */
 		minus: function() {
@@ -62,7 +67,8 @@ steal('jquery').then(function($){
 			return vec.update(arr);
 		},
 		/**
-		 * Returns the current vector if it is equal to the vector passed in.  
+		 * Returns the current vector if it is equal to the vector passed in.
+		 *
 		 * False if otherwise.
 		 * @return {jQuery.Vector}
 		 */
@@ -116,6 +122,7 @@ steal('jquery').then(function($){
 		},
 		/**
 		 * Replaces the vectors contents
+		 *
 		 * @param {Object} array
 		 */
 		update: function( array ) {

@@ -161,7 +161,7 @@ steal('jquery/event/drag','jquery/dom/within','jquery/dom/compare',function($){
 			responder.callHandlers(this.lowerName+'move',responder.element[0], event, mover)
 		},
 		/**
-		 * Gets all elements that are droppable and adds them to a list.
+		 * `$.Drop.compile()` gets all elements that are droppable and adds them to a list.
 		 * 
 		 * This should be called if and when new drops are added to the page
 		 * during the motion of a single drag.
@@ -383,16 +383,20 @@ steal('jquery/event/drag','jquery/dom/within','jquery/dom/compare',function($){
 			}
 		},
 		/**
-		 * Caches positions of draggable elements.  This should be called in dropinit.  For example:
-		 * @codestart
-		 * dropinit: function( el, ev, drop ) { drop.cache_position() }
-		 * @codeend
+		 * `drop.cache(value)` sets the drop to cache positions of draggable elements.
+		 * This should be called in `dropinit`. For example:
+		 *
+		 *      $('#dropable').on('dropinit', function( el, ev, drop ) {
+		 *          drop.cache();
+		 *      });
+		 *
+		 * @param {Boolean} [value=true] Whether to cache drop elements or not.
 		 */
 		cache: function( value ) {
 			this._cache = value != null ? value : true;
 		},
 		/**
-		 * Prevents this drop from being dropped on.
+		 * `drop.cancel()` prevents this drop from being dropped on.
 		 */
 		cancel: function() {
 			this._canceled = true;

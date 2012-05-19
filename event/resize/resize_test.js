@@ -42,7 +42,7 @@ steal('funcunit/qunit', 'jquery/event/resize').then(function() {
 		$(document.body).bind('resize', record);
 
 		$(window).trigger("resize");
-		same(ids, [document.body, '1', '2']);
+		same(ids, [document.body, '1']);
 
 		$(document.body).unbind('resize', record);
 	});

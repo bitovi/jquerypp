@@ -2,7 +2,7 @@
 @parent jquerypp
 
 `jQuery.event.key` adds a [jQuery.Event.prototype.keyName keyName()] method to the
-[event object](http://api.jquery.com/category/events/event-object/)
+[jQuery event object](http://api.jquery.com/category/events/event-object/)
 that returns a string representation of the current key:
 
 	$("input").on('keypress', function(ev){

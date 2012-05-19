@@ -131,8 +131,8 @@ test("drag position", function(){
 	
 	Syn.drag("+20 +20","drag", function(){
 		var offset2 = $('#drag').offset();
-		equals(offset.top+20, offset2.top, "top")
-		equals(offset.left+20, offset2.left, "left")
+		equals(offset.top+20, Math.round(offset2.top), "top")
+		equals(offset.left+20, Math.round(offset2.left), "left")
 		start();
 	})
 });
@@ -178,8 +178,8 @@ test("dragdown" , function(){
 	stop();
 	Syn.drag("+20 +20","draginp", function(){
 		var offset2 = $('#dragger').offset();
-		equals(offset.top, offset2.top, "top")
-		equals(offset.left, offset2.left, "left")
+		equals(offset.top, Math.round(offset2.top), "top")
+		equals(offset.left, Math.round(offset2.left), "left")
 		
 	}).drag("+20 +20","dragnoprevent", function(){
 		var offset2 = $('#dragger').offset();

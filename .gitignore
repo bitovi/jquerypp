@@ -3,3 +3,4 @@ dist
 *.swp
 .DS_store
 *node_modules*
+build/github/jquerypp

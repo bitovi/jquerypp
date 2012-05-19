@@ -1,12 +1,12 @@
 @page jQuery.event.resize
 @parent jquerypp
 
-`jQuery.event.resize` provides the `resize` event wich is useful for updating element dimensions when a parent element
-has been resized. It allows you to only resize elements that need to be resized
-in the 'right order'.
+`jQuery.event.resize` allows you to listen to `resize` events on arbitrary elements.
+Unlike other events that bubble from the target element to the document the `resize` event will propagate from the outside-in.
+This means that outside elements will always resize first.
+Trigger the `resize` event whenever the dimensions of an element change and inside elements should adjust as well.
 
-By listening to a resize event, you will be alerted whenever a parent
-element has a `resize` event triggered on it.  For example:
+By listening to a resize event, you will be alerted whenever a parent element has a `resize` event triggered on it. For example:
 
     $('#foo').bind('resize', function(){
       // adjust #foo's dimensions
@@ -35,14 +35,10 @@ use the following:
 ## Stopping Children Updates
 
 If your element doesn't need to change it's dimensions as a result of the parent element, it should
-call `event.stopPropagation()`.  This will only stop `resize` from being sent to child elements of the current element.
-
-## Example
-
-The `resize` event is very helpful for creating application like layouts. The following example uses  [jQuery.dimensions] and the `resize` event to implement a common layout. Just drag the blue square to resize the container:
-
-<iframe style="width: 100%; height: 350px" src="http://jsfiddle.net/TcB5y/embedded/result,html,js,css" allowfullscreen="allowfullscreen" frameborder="0">JSFiddle</iframe>
+call `event.stopPropagation()`.  This will stop `resize` from being sent to child elements of the current element.
 
 ## Demo
 
-@demo jquery/event/resize/demo.html
+The `resize` event is very helpful for creating application like layouts. The following example uses [jQuery.dimensions] and the `resize` event to implement a common layout. Just drag the blue square to resize the container. Note the yellow top navigation. Even when the text wraps the sizes will still adjust properly. This is not possible using only CSS:
+
+<iframe style="width: 100%; height: 350px" src="http://jsfiddle.net/TcB5y/embedded/result,html,js,css" allowfullscreen="allowfullscreen" frameborder="0">JSFiddle</iframe>
