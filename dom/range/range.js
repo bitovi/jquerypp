@@ -308,12 +308,29 @@ $.extend($.Range.prototype,
 				if(typeof set == 'number'){
 					this.range.setStart(this.range.startContainer, set)
 				} else if(typeof set == 'string') {
-					this.range.setStart(this.range.startContainer, this.range.startOffset+ parseInt(set,10) );
+					var res = callMove(this.range.startContainer, this.range.startOffset, parseInt(set,10))
+					this.range.setStart(res.node, res.offset );
 				} else {
 					this.range.setStart(set.container, set.offset)
 				}
 			} else {
-				throw 'todo'
+				if(typeof set == "string"){
+					this.range.moveStart(parseInt(set,10))
+				} else {
+					// get the current end container
+					var container = this.start().container,
+						offset
+					if(typeof set == "number") {
+						offset = set
+					} else {
+						container = set.container
+						offset = set.offset
+					}
+					var newPoint = $.Range(container).collapse();
+					//move it over offset characters
+					newPoint.range.move(offset);
+					this.move("START_TO_START",newPoint);
+				}
 			}
 			return this;
 		}
@@ -367,11 +384,30 @@ $.extend($.Range.prototype,
 			if (this.range.setEnd) {
 				if(typeof set == 'number'){
 					this.range.setEnd(this.range.endContainer, set)
+				} else if(typeof set == 'string') {
+					var res = callMove(this.range.endContainer, this.range.endOffset, parseInt(set,10))
+					this.range.setEnd(res.node, res.offset );
 				} else {
 					this.range.setEnd(set.container, set.offset)
 				}
 			} else {
-				throw 'todo'
+				if(typeof set == "string"){
+					this.range.moveEnd( parseInt(set,10) );
+				} else {
+					// get the current end container
+					var container = this.end().container,
+						offset
+					if(typeof set == "number") {
+						offset = set
+					} else {
+						container = set.container
+						offset = set.offset
+					}
+					var newPoint = $.Range(container).collapse();
+					//move it over offset characters
+					newPoint.range.move(offset);
+					this.move("END_TO_START",newPoint);
+				}
 			}
 			return this;
 		}
@@ -677,6 +713,60 @@ var iterate = function(elems, cb){
 	}
 
 }, 
+isText = function(node){
+	return node.nodeType === 3 || node.nodeType === 4
+},
+iteratorMaker = function(toChildren, toNext){
+	return function( node, mustMoveRight ) {
+		// first try down
+		if(node[toChildren] && !mustMoveRight){
+			return isText(node[toChildren]) ? 
+				node[toChildren] :
+			 	arguments.callee(node[toChildren])
+		} else if(node[toNext]) {
+			return isText(node[toNext]) ? 
+				node[toNext] :
+			 	arguments.callee(node[toNext])
+		} else if(node.parentNode){
+			return arguments.callee(node.parentNode, true)
+		}
+	}
+},
+getNextTextNode = iteratorMaker("firstChild","nextSibling"),
+getPrevTextNode = iteratorMaker("lastChild","previousSibling"),
+callMove = function(container, offset, howMany){
+	if(isText(container)){
+		return move(container, offset+howMany)
+	} else {
+		return container.childNodes[offset] ?
+			move(container.childNodes[offset] , howMany) :
+			move(container.lastChild, howMany , true)
+		return 
+	}
+},
+move = function(from, howMany, adjust){
+	var mover = howMany < 0 ? 
+		getPrevTextNode : getNextTextNode;
+		
+	howMany = Math.abs(howMany);
+	
+	if(!isText(from)){
+		from = mover(from)
+	}
+	if(adjust){
+		//howMany = howMany + from.nodeValue.length
+	}
+	while(from && howMany >= from.nodeValue.length){
+		hasMany  = howMany- from.nodeValue.length;
+		from = mover(from)
+	}
+	return {
+		node: from,
+		offset: mover === getNextTextNode ?
+			howMany : 
+			from.nodeValue.length - howMany
+	}
+},
 supportWhitespace,
 isWhitespace = function(el){
 	if(supportWhitespace == null){

@@ -11,6 +11,14 @@ test("basic range", function(){
 	equals(range.end().offset, 5, "end is 5")
 });
 
+test("jquery helper, start, select", function(){
+	var range = $('#qunit-test-area').html("<span>Hello</span> <b>World</b><i>!</i>").range();
+	range.start("+2");
+	range.end("-2")
+	range.select();
+	equals(range.toString(), "llo Wor")
+})
+
 
 test('jQuery helper', function(){
 	
