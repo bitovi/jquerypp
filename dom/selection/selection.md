@@ -1,37 +1,39 @@
 @page jQuery.selection
 @parent jquerypp
 
-`jQuery.selection` adds `$.fn.selection` to get or set the current selection.
+`jQuery.selection` adds `[jQuery.fn.selection]` to get or set the current selection.
+
+## Setting
+
+You can select the text, for example on an element like this:
+
+    <div id="text">This is some text</div>
+
+Using `jQuery.fn.selection` by providing a start and end offset:
+
+  	$('#text').selection(8, 12)
 
 ## Getting
 
-The following call to `$.fn.selection`
+A call without any parameters will return the current selection:
  
-	$('textarea').selection() // -> { .... }
-     
-returns an object with:
- 
+	  $('#text').selection() // -> { start : 8, end : 12 }
+
+Where the returned object contains:
+
 - __start__ - The number of characters from the start of the element to the start of the selection.
 - __end__ - The number of characters from the start of the element to the end of the selection.
 
-This lets you get the selected text in a textarea like:
- 
-	var textarea = $('textarea')
-	selection = textarea.selection(),
-	selected = textarea.val().substr(selection.start, selection.end);
-       
-	alert('You selected '+selected+'.');
-     
+The selected text can be retrieved like this:
+
+	  var text = $('#text').text(),
+	      selected = text.substr(selection.start, selection.end);
+	  selected // -> some
+
 Selection works with all elements. If you want to get selection information of the document:
  
-	$(document.body).selection();
+    $(document.body).selection();
      
-## Setting
- 
-By providing a start and end offset, you can select text within a given element.
- 
-	$('#rte').selection(30, 40)
- 
 ## Demo
  
 This demo shows setting the selection in various elements

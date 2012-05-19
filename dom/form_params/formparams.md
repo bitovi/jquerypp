@@ -1,49 +1,30 @@
 @page jQuery.formParams
 @parent jquerypp
 
-`$.fn.formParams` returns an object of name-value pairs that represents values in a form.
-It is able to nest values use a square bracket notation in the element name.
-
-When convert is set to `true` strings that represent numbers and booleans will
-be converted and empty strings will not be added to the object.
-
-## Example
-
-A form like this:
+`jQuery.formParams` adds `[jQuery.fn.formParams jQuery.fn.formParams(convert)]` which serializes a form into a JavaScript object. It creates nested objects by using bracket notation in the form element name. If *convert* is `true`, values that look like numbers or booleans will be converted and empty strings won't be added to the object. For a form like this:
 
     <form>
-      <input type="text" name="name[first]" value="John" />
-      <input type="text" name="name[middle]" value="" />
-      <input type="text" name="name[last]" value="Doe" />
-      <input type="text" name="age" value="42" />
+      <input type="text" name="first" value="John" />
+      <input type="text" name="last" value="Doe" />
+      <input type="text" name="phone[mobile]" value="1234567890" />
+      <input type="text" name="phone[home]" value="0987654321" />
     </form>
 
-Will return a JavaScript object like this:
+`jQuery.fn.formParams` returns:
 
     $('form').formParams()
     // -> {
-    //   name : { first : "John", middle : "", last : "Doe" },
-    //   age : "42"
+    //   first : "John", last : "Doe",
+    //   phone : { mobile : "1234567890", home : "0987654321" }
     // }
 
-With *convert* set to `true` it will look like this:
-
-    $('form').formParams(true)
-    // -> {
-    //   name : { first : "John", last : "Doe" },
-    //   age : 42
-    // }
-
-It is also possible to set the form values by passing an object to `$.fn.formParams`:
+It is also possible to set form values by passing an object:
 
     $('form').formParams({
-      name : {
-        first : 'Mike'
-      },
-      age : 23
+      first : 'Mike',
+      last : 'Smith'
     });
 
 ## Demo
 
 @demo jquery/dom/form_params/form_params.html
-

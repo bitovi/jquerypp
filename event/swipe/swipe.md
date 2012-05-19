@@ -1,10 +1,10 @@
 @page jQuery.event.swipe
 @parent jquerypp
 
-Swipe provides cross browser swipe events [jQuery..  On mobile devices, swipe uses touch events.  On desktop browsers,
-swipe uses mouseevents.
+`jQuery.event.swipe` provides cross browser `swipeleft`, `swiperight`, `swipeup`, `swipedown` and a general `swipe` event.
+On mobile devices, swipe uses touch events. On desktop browsers, swipe uses mouseevents.
 
-A swipe happens when a touch or drag moves.
+A swipe happens when the pointer travels between [jQuery.event.swipe.min] and [jQuery.event.swipe.max] pixels within [jQuery.event.swipe.delay] milliseconds in any of the four directions.
 
 	$('#swiper').on({
 	  'swipe' : function(ev) {

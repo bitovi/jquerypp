@@ -20,9 +20,9 @@ var current,
  */
 //
 /**
- * @page jquery.event.pause Pause-Resume
+ * @page jQuery.event.pause
  * @plugin jquery/event/pause
- * @parent specialevents
+ * @parent jquerypp
  * The jquery/event/pause plugin adds the ability to pause and 
  * resume events. 
  * 
@@ -91,8 +91,7 @@ var current,
  * a tab when a new tab is clicked.
  * 
  * @demo jquery/event/pause/pause.html
- * 
- * It's a long, but great example of how to do some pretty complex state management with JavaScriptMVC.
+ *
  * 
  */
 $.Event.prototype.isPaused = returnFalse

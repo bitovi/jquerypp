@@ -191,8 +191,13 @@ getCharElement = function( elems , range, len ) {
  *
  * @param {Number} [start] Start position of the selection range
  * @param {Number} [end] End position of the selection range
- * @return {Object|jQuery} returns the selection information or the jQuery collection for
- * chaining when start and end are given.
+ * @return {Object|jQuery} Returns either the jQuery object when setting the selection or
+ * an object containing
+ *
+ * - __start__ - The number of characters from the start of the element to the start of the selection.
+ * - __end__ - The number of characters from the start of the element to the end of the selection.
+ *
+ * when no arguments are passed.
  */
 $.fn.selection = function(start, end){
 	if(start !== undefined){
