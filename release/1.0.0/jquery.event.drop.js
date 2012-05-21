@@ -446,6 +446,15 @@
 			}
 		},
 		/**
+		 * @attribute element
+		 * A reference to the element that is being dragged. For example:
+		 *
+		 *      $('.draggable').on('draginit', function(ev, drag) {
+		 *          drag.element.html('I am the drag element');
+		 *      });
+		 */
+
+		/**
 		 * Unbinds listeners and allows other drags ...
 		 * @hide
 		 */
@@ -908,47 +917,94 @@
 	event.setupHelper([
 	/**
 	 * @attribute dragdown
-	 * <p>Listens for when a drag movement has started on a mousedown.
+	 *
+	 * `dragdown` is called when a drag movement has started on a mousedown.
+	 * The event handler gets an instance of [jQuery.Drag] passed as the second
+	 * parameter.
 	 * If you listen to this, the mousedown's default event (preventing
 	 * text selection) is not prevented.  You are responsible for calling it
-	 * if you want it (you probably do).  </p>
-	 * <p><b>Why might you not want it?</b></p>
-	 * <p>You might want it if you want to allow text selection on element
-	 * within the drag element.  Typically these are input elements.</p>
-	 * <p>Drag events are covered in more detail in [jQuery.Drag].</p>
-	 * @codestart
-	 * $(".handles").delegate("dragdown", function(ev, drag){})
-	 * @codeend
+	 * if you want it (you probably do).
+	 *
+	 * ## Why might you not want it?
+	 *
+	 * You might want it if you want to allow text selection on element
+	 * within the drag element.  Typically these are input elements.
+	 *
+	 *      $(".handles").delegate("dragdown", function(ev, drag){})
 	 */
 	'dragdown',
 	/**
 	 * @attribute draginit
-	 * Called when the drag starts.
-	 * <p>Drag events are covered in more detail in [jQuery.Drag].</p>
+	 *
+	 * `draginit` is triggered when the drag motion starts. The event handler gets
+	 * an instance of [jQuery.Drag] passed as the second parameter. Use it to customize
+	 * the drag behavior:
+	 *
+	 *      $(".draggable").on('draginit', function(ev, drag) {
+	 *          // Only allow vertical drags
+	 *          drag.vertical();
+	 *          // Create a draggable copy of the element
+	 *          drag.ghost();
+	 *      });
 	 */
 	'draginit',
 	/**
 	 * @attribute dragover
-	 * Called when the drag is over a drop.
-	 * <p>Drag events are covered in more detail in [jQuery.Drag].</p>
+	 *
+	 * `dragover` is triggered when a drag is over a [jQuery.event.drop drop element].
+	 * The event handler gets an instance of [jQuery.Drag] passed as the second
+	 * parameter.
+	 *
+	 *      $('.draggable').on('dragover', function(ev, drag) {
+	 *          // Add the drop-here class indicating that the drag
+	 *          // can be dropped here
+	 *          drag.element.addClass('drop-here');
+	 *      });
 	 */
 	'dragover',
 	/**
 	 * @attribute dragmove
-	 * Called when the drag is moved.
-	 * <p>Drag events are covered in more detail in [jQuery.Drag].</p>
+	 *
+	 * `dragmove` is triggered when the drag element moves (similar to a mousemove).
+	 * The event handler gets an instance of [jQuery.Drag] passed as the second
+	 * parameter.
+	 * Use [jQuery.Drag.prototype.location] to determine the current position
+	 * as a [jQuery.Vector vector].
+	 *
+	 * For example, `dragmove` can be used to create a draggable element to resize
+	 * a container:
+	 *
+	 *      $('.resizer').on('dragmove', function(ev, drag) {
+	 *          $('#container').width(drag.location.x())
+	 *              .height(drag.location.y());
+	 *      });
 	 */
 	'dragmove',
 	/**
 	 * @attribute dragout
-	 * When the drag leaves a drop point.
-	 * <p>Drag events are covered in more detail in [jQuery.Drag].</p>
+	 *
+	 * `dragout` is called when the drag leaves a drop point.
+	 * The event handler gets an instance of [jQuery.Drag] passed as the second
+	 * parameter.
+	 *
+	 *      $('.draggable').on('dragout', function(ev, drag) {
+	 *      	 // Remove the drop-here class
+	 *      	 // (e.g. crossing the drag element out indicating that it
+	 *      	 // can't be dropped here
+	 *          drag.element.removeClass('drop-here');
+	 *      });
 	 */
 	'dragout',
 	/**
 	 * @attribute dragend
-	 * Called when the drag is done.
-	 * <p>Drag events are covered in more detail in [jQuery.Drag].</p>
+	 *
+	 * `dragend` is called when the drag motion is done.
+	 * The event handler gets an instance of [jQuery.Drag] passed as the second
+	 * parameter.
+	 *
+	 *      $('.draggable').on('dragend', function(ev, drag)
+	 *          // Clean up when the drag motion is done
+	 *      });
 	 */
 	'dragend'], "mousedown", function( e ) {
 		$.Drag.mousedown.call($.Drag, e, this);
@@ -1055,9 +1111,7 @@ $.fn.withinBox = function(left, top, width, height, useOffsetCache){
  * - `000010` -> __2__: #bar precedes #foo
  * - `000100` -> __4__: #foo precedes #bar
  * - `001000` -> __8__: #bar contains #foo
- * - `001010` -> __10__: #bar precedes #foo __and__ #bar contains #foo
  * - `010000` -> __16__: #foo contains #bar
- * - `010100` -> __20__: #foo precedes #bar __and__ #foo contains #bar
  *
  * You can check for any of these conditions using a bitwise AND:
  *
@@ -1120,45 +1174,80 @@ jQuery.fn.compare = function(element){ //usually
 	var eventNames = [
 	/**
 	 * @attribute dropover
-	 * Called when a drag is first moved over this drop element.
 	 *
-	 * Drop events are covered in more detail in [jQuery.Drop].
+	 * `dropover` is triggered when a [jQuery.event.drag drag] is first moved onto this
+	 * drop element.
+	 * The event handler gets an instance of [jQuery.Drag] passed as the second and a
+	 * [jQuery.Drop] as the third parameter.
+	 * This event can be used to highlight the element when a drag is moved over it:
+	 *
+	 *      $('.droparea').on('dropover', function(ev, drop, drag) {
+	 *          $(this).addClass('highlight');
+	 *      });
 	 */
 	"dropover",
 	/**
 	 * @attribute dropon
-	 * Called when a drag is dropped on a drop element.
 	 *
-	 * Drop events are covered in more detail in [jQuery.Drop].
+	 * `dropon` is triggered when a drag is dropped on a drop element.
+	 * The event handler gets an instance of [jQuery.Drag] passed as the second and a
+	 * [jQuery.Drop] as the third parameter.
+	 *
+	 *      $('.droparea').on('dropon', function(ev, drop, drag) {
+	 *          $(this).html('Dropped: ' + drag.element.text());
+	 *      });
 	 */
 	"dropon",
 	/**
 	 * @attribute dropout
-	 * Called when a drag is moved out of this drop.
 	 *
-	 * Drop events are covered in more detail in [jQuery.Drop].
+	 * `dropout` is called when a drag is moved out of this drop element.
+	 * The event handler gets an instance of [jQuery.Drag] passed as the second and a
+	 * [jQuery.Drop] as the third parameter.
+	 *
+	 *      $('.droparea').on('dropover', function(ev, drop, drag) {
+	 *          // Remove the drop element highlight
+	 *          $(this).removeClass('highlight');
+	 *      });
 	 */
 	"dropout",
 	/**
 	 * @attribute dropinit
 	 *
-	 * Called when a drag motion starts and the drop elements are initialized.
+	 * `dropinit` is called when a drag motion starts and the drop elements are initialized.
+	 * The event handler gets an instance of [jQuery.Drag] passed as the second and a
+	 * [jQuery.Drop] as the third parameter.
+	 * Calling [jQuery.Drop.prototype.cancel drop.cancel()] prevents the element from
+	 * being dropped on:
 	 *
-	 * Drop events are covered in more detail in [jQuery.Drop].
+	 *      $('.droparea').on('dropover', function(ev, drop, drag) {
+	 *          if(drag.element.hasClass('not-me')) {
+	 *            drop.cancel();
+	 *          }
+	 *      });
 	 */
 	"dropinit",
 	/**
 	 * @attribute dropmove
-	 * Called repeatedly when a drag is moved over a drop.
 	 *
-	 * Drop events are covered in more detail in [jQuery.Drop].
+	 * `dropmove` is triggered repeatedly when a drag is moved over a drop
+	 * (similar to a mousemove).
+	 *
+	 *      $('.droparea').on('dropmove', function(ev, drop, drag) {
+	 *          $(this).html(drag.location.x() + '/' + drag.location.y());
+	 *      });
 	 */
 	"dropmove",
 	/**
 	 * @attribute dropend
-	 * Called when the drag is done for this drop.
 	 *
-	 * Drop events are covered in more detail in [jQuery.Drop].
+	 * `dropend` is called when the drag motion is done for this drop element.
+	 *
+	 *
+	 *      $('.droparea').on('dropend', function(ev, drop, drag) {
+	 *          // Remove the drop element highlight
+	 *          $(this).removeClass('highlight');
+	 *      });
 	 */
 	"dropend"];
 	
@@ -1169,9 +1258,9 @@ jQuery.fn.compare = function(element){ //usually
 	 * @download  http://jmvcsite.heroku.com/pluginify?plugins[]=jquery/event/drop/drop.js
 	 * @test jquery/event/drag/qunit.html
 	 *
-	 * The `$.Drop` constructor is never called directly but an instance of `$.Drag` is passed as the second argument
-	 * to the `dropinit`, `dropover`, `dropmove`, `dropon`, and `dropend` event handlers. The third argument will be
-	 * an instance of [jQuery.Drag]:
+	 * The `jQuery.Drop` constructor is never called directly but an instance is passed to the
+	 * to the `dropinit`, `dropover`, `dropmove`, `dropon`, and `dropend` event handlers as the
+	 * third argument (the second will be the [jQuery.Drag]):
 	 *
 	 *      $('#dropper').on('dropover', function(el, drop, drag) {
 	 *          // drop -> $.Drop

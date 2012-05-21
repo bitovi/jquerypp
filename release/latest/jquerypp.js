@@ -11,9 +11,7 @@
  * - `000010` -> __2__: #bar precedes #foo
  * - `000100` -> __4__: #foo precedes #bar
  * - `001000` -> __8__: #bar contains #foo
- * - `001010` -> __10__: #bar precedes #foo __and__ #bar contains #foo
  * - `010000` -> __16__: #foo contains #bar
- * - `010100` -> __20__: #foo precedes #bar __and__ #foo contains #bar
  *
  * You can check for any of these conditions using a bitwise AND:
  *
@@ -269,7 +267,7 @@ jQuery.fn.compare = function(element){ //usually
      * @plugin jquery/dom/cookie
      * @author Klaus Hartl/klaus.hartl@stilbuero.de
      *
-     * `jQuery.cookie` contains the [jQuery cookie plugin](https://github.com/carhartl/jquery-cookie) for
+     * `jQuery.cookie` is the [jQuery cookie plugin](https://github.com/carhartl/jquery-cookie) for
      * easily manipulating cookies written by [Klaus Hartl](stilbuero.de).
      * It is dual licensed under the [MIT](http://www.opensource.org/licenses/mit-license.php)
      * and [GPL](http://www.gnu.org/licenses/gpl.html) licenses.
@@ -858,31 +856,43 @@ support = {};
  *   - __TextRange__ a raw text range object.
  */
 $.Range = function(range){
+	// If it's called w/o new, call it with new!
 	if(this.constructor !== $.Range){
 		return new $.Range(range);
 	}
+	// If we are passed a jQuery-wrapped element, get the raw element
 	if(range && range.jquery){
 		range = range[0];
 	}
-	// create one
+	// If we have an element, or nothing
 	if(!range || range.nodeType){
+		// create a range
 		this.win = getWindow(range)
 		if(this.win.document.createRange){
 			this.range = this.win.document.createRange()
 		}else{
 			this.range = this.win.document.body.createTextRange()
 		}
+		// if we have an element, make the range select it
 		if(range){
 			this.select(range)
 		}
-		
-	} else if (range.clientX != null || range.pageX != null || range.left != null) {
-		this.moveToPoint(range)
-	} else if (range.originalEvent && range.originalEvent.touches && range.originalEvent.touches.length) {
+	} 
+	// if we are given a point
+	else if (range.clientX != null || range.pageX != null || range.left != null) {
+		this.moveToPoint(range);
+	} 
+	// if we are given a touch event
+	else if (range.originalEvent && range.originalEvent.touches && range.originalEvent.touches.length) {
 		this.moveToPoint(range.originalEvent.touches[0])
-	} else if (range.originalEvent && range.originalEvent.changedTouches && range.originalEvent.changedTouches.length) {
+	
+	} 
+	// if we are a normal event
+	else if (range.originalEvent && range.originalEvent.changedTouches && range.originalEvent.changedTouches.length) {
 		this.moveToPoint(range.originalEvent.changedTouches[0])
-	} else {
+	} 
+	// given a TextRange or something else?
+	else {
 		this.range = range;
 	} 
 };
@@ -1094,12 +1104,29 @@ $.extend($.Range.prototype,
 				if(typeof set == 'number'){
 					this.range.setStart(this.range.startContainer, set)
 				} else if(typeof set == 'string') {
-					this.range.setStart(this.range.startContainer, this.range.startOffset+ parseInt(set,10) );
+					var res = callMove(this.range.startContainer, this.range.startOffset, parseInt(set,10))
+					this.range.setStart(res.node, res.offset );
 				} else {
 					this.range.setStart(set.container, set.offset)
 				}
 			} else {
-				throw 'todo'
+				if(typeof set == "string"){
+					this.range.moveStart(parseInt(set,10))
+				} else {
+					// get the current end container
+					var container = this.start().container,
+						offset
+					if(typeof set == "number") {
+						offset = set
+					} else {
+						container = set.container
+						offset = set.offset
+					}
+					var newPoint = $.Range(container).collapse();
+					//move it over offset characters
+					newPoint.range.move(offset);
+					this.move("START_TO_START",newPoint);
+				}
 			}
 			return this;
 		}
@@ -1153,11 +1180,30 @@ $.extend($.Range.prototype,
 			if (this.range.setEnd) {
 				if(typeof set == 'number'){
 					this.range.setEnd(this.range.endContainer, set)
+				} else if(typeof set == 'string') {
+					var res = callMove(this.range.endContainer, this.range.endOffset, parseInt(set,10))
+					this.range.setEnd(res.node, res.offset );
 				} else {
 					this.range.setEnd(set.container, set.offset)
 				}
 			} else {
-				throw 'todo'
+				if(typeof set == "string"){
+					this.range.moveEnd( parseInt(set,10) );
+				} else {
+					// get the current end container
+					var container = this.end().container,
+						offset
+					if(typeof set == "number") {
+						offset = set
+					} else {
+						container = set.container
+						offset = set.offset
+					}
+					var newPoint = $.Range(container).collapse();
+					//move it over offset characters
+					newPoint.range.move(offset);
+					this.move("END_TO_START",newPoint);
+				}
 			}
 			return this;
 		}
@@ -1463,6 +1509,60 @@ var iterate = function(elems, cb){
 	}
 
 }, 
+isText = function(node){
+	return node.nodeType === 3 || node.nodeType === 4
+},
+iteratorMaker = function(toChildren, toNext){
+	return function( node, mustMoveRight ) {
+		// first try down
+		if(node[toChildren] && !mustMoveRight){
+			return isText(node[toChildren]) ? 
+				node[toChildren] :
+			 	arguments.callee(node[toChildren])
+		} else if(node[toNext]) {
+			return isText(node[toNext]) ? 
+				node[toNext] :
+			 	arguments.callee(node[toNext])
+		} else if(node.parentNode){
+			return arguments.callee(node.parentNode, true)
+		}
+	}
+},
+getNextTextNode = iteratorMaker("firstChild","nextSibling"),
+getPrevTextNode = iteratorMaker("lastChild","previousSibling"),
+callMove = function(container, offset, howMany){
+	if(isText(container)){
+		return move(container, offset+howMany)
+	} else {
+		return container.childNodes[offset] ?
+			move(container.childNodes[offset] , howMany) :
+			move(container.lastChild, howMany , true)
+		return 
+	}
+},
+move = function(from, howMany, adjust){
+	var mover = howMany < 0 ? 
+		getPrevTextNode : getNextTextNode;
+		
+	howMany = Math.abs(howMany);
+	
+	if(!isText(from)){
+		from = mover(from)
+	}
+	if(adjust){
+		//howMany = howMany + from.nodeValue.length
+	}
+	while(from && howMany >= from.nodeValue.length){
+		hasMany  = howMany- from.nodeValue.length;
+		from = mover(from)
+	}
+	return {
+		node: from,
+		offset: mover === getNextTextNode ?
+			howMany : 
+			from.nodeValue.length - howMany
+	}
+},
 supportWhitespace,
 isWhitespace = function(el){
 	if(supportWhitespace == null){
@@ -1515,41 +1615,43 @@ support.moveToPoint = !!$.Range().range.moveToPoint
 
 })(jQuery);
 (function($){
-var convertType = function(type){
-	return  type.replace(/([a-z])([a-z]+)/gi, function(all,first,  next){
-			  return first+next.toLowerCase()	
-			}).replace(/_/g,"");
-},
-reverse = function(type){
-	return type.replace(/^([a-z]+)_TO_([a-z]+)/i, function(all, first, last){
-		return last+"_TO_"+first;
-	});
-},
-getWindow = function( element ) {
+
+var getWindow = function( element ) {
 	return element ? element.ownerDocument.defaultView || element.ownerDocument.parentWindow : window
 },
 // A helper that uses range to abstract out getting the current start and endPos.
 getElementsSelection = function(el, win){
+	// get a copy of the current range and a range that spans the element
 	var current = $.Range.current(el).clone(),
 		entireElement = $.Range(el).select(el);
+	// if there is no overlap, there is nothing selected
 	if(!current.overlaps(entireElement)){
 		return null;
 	}
-	// we need to check if it starts before our element ...
+	// if the current range starts before our element
 	if(current.compare("START_TO_START", entireElement) < 1){
+		// the selection within the element begins at 0
 		startPos = 0;
-		// we should move current ...
+		// move the current range to start at our element
 		current.move("START_TO_START",entireElement);
 	}else{
+		// Make a copy of the element's range.
+		// Move it's end to the start of the selected range
+		// The length of the copy is the start of the selected
+		// range.
 		fromElementToCurrent =entireElement.clone();
 		fromElementToCurrent.move("END_TO_START", current);
 		startPos = fromElementToCurrent.toString().length
 	}
 	
-	// now we need to make sure current isn't to the right of us ...
+	// If the current range ends after our element
 	if(current.compare("END_TO_END", entireElement) >= 0){
+		// the end position is the last character
 		endPos = entireElement.toString().length
 	}else{
+		// otherwise, it's the start position plus the current range
+		// TODO: this doesn't seem like it works if current
+		// extends to the left of the element.
 		endPos = startPos+current.toString().length
 	}
 	return {
@@ -1557,10 +1659,13 @@ getElementsSelection = function(el, win){
 		end : endPos
 	};
 },
+// Text selection works differently for selection in an input vs
+// normal html elements like divs, spans, and ps.
+// This function branches between the various methods of getting the selection.
 getSelection = function(el){
-	// use selectionStart if we can.
 	var win = getWindow(el);
 	
+	// `selectionStart` means this is an input element in a standards browser.
 	if (el.selectionStart !== undefined) {
 
 		if(document.activeElement 
@@ -1570,16 +1675,17 @@ getSelection = function(el){
 			return {start: el.value.length, end: el.value.length};
 		}
 		return  {start: el.selectionStart, end: el.selectionEnd}
-	} else if(win.getSelection){
+	} 
+	// getSelection means a 'normal' element in a standards browser.
+	else if(win.getSelection){
 		return getElementsSelection(el, win)
 	} else{
-
+		// IE will freak out, where there is no way to detect it, so we provide a callback if it does.
 		try {
-			//try 2 different methods that work differently
-			// one should only work for input elements, but sometimes doesn't
-			// I don't know why this is, or what to detect
+			// The following typically works for input elements in IE:
 			if (el.nodeName.toLowerCase() == 'input') {
-				var real = getWindow(el).document.selection.createRange(), r = el.createTextRange();
+				var real = getWindow(el).document.selection.createRange(), 
+					r = el.createTextRange();
 				r.setEndPoint("EndToStart", real);
 				
 				var start = r.text.length
@@ -1588,12 +1694,14 @@ getSelection = function(el){
 					end: start + real.text.length
 				}
 			}
+			// This works on textareas and other elements
 			else {
 				var res = getElementsSelection(el,win)
 				if(!res){
 					return res;
 				}
-				// we have to clean up for ie's textareas
+				// we have to clean up for ie's textareas which don't count for 
+				// newlines correctly
 				var current = $.Range.current().clone(),
 					r2 = current.clone().collapse().range,
 					r3 = current.clone().collapse(false).range;
@@ -1616,8 +1724,12 @@ getSelection = function(el){
 		}
 	} 
 },
+// Selects text within an element.  Depending if it's a form element or
+// not, or a standards based browser or not, we do different things.
 select = function( el, start, end ) {
-	var win = getWindow(el)
+	var win = getWindow(el);
+	// IE behaves bad even if it sorta supports
+	// getSelection so we have to try the IE methods first. barf.
 	if(el.setSelectionRange){
 		if(end === undefined){
             el.focus();
@@ -1658,10 +1770,9 @@ select = function( el, start, end ) {
 	}
 
 },
-/*
- * If one of the range values is within start and len, replace the range
- * value with the element and its offset.
- */
+// TODO: can this be removed?
+// If one of the range values is within start and len, replace the range
+// value with the element and its offset.
 replaceWithLess = function(start, len, range, el){
 	if(typeof range[0] === 'number' && range[0] < len){
 			range[0] = {
@@ -1676,6 +1787,7 @@ replaceWithLess = function(start, len, range, el){
 			};;
 	}
 },
+// TODO: can this be removed?
 getCharElement = function( elems , range, len ) {
 	var elem,
 		start;
@@ -1707,8 +1819,13 @@ getCharElement = function( elems , range, len ) {
  *
  * @param {Number} [start] Start position of the selection range
  * @param {Number} [end] End position of the selection range
- * @return {Object|jQuery} returns the selection information or the jQuery collection for
- * chaining when start and end are given.
+ * @return {Object|jQuery} Returns either the jQuery object when setting the selection or
+ * an object containing
+ *
+ * - __start__ - The number of characters from the start of the element to the start of the selection.
+ * - __end__ - The number of characters from the start of the element to the end of the selection.
+ *
+ * when no arguments are passed.
  */
 $.fn.selection = function(start, end){
 	if(start !== undefined){
@@ -2395,6 +2512,15 @@ $event.trigger =  function defaultTriggerer( event, data, elem, onlyHandlers){
 			}
 		},
 		/**
+		 * @attribute element
+		 * A reference to the element that is being dragged. For example:
+		 *
+		 *      $('.draggable').on('draginit', function(ev, drag) {
+		 *          drag.element.html('I am the drag element');
+		 *      });
+		 */
+
+		/**
 		 * Unbinds listeners and allows other drags ...
 		 * @hide
 		 */
@@ -2857,47 +2983,94 @@ $event.trigger =  function defaultTriggerer( event, data, elem, onlyHandlers){
 	event.setupHelper([
 	/**
 	 * @attribute dragdown
-	 * <p>Listens for when a drag movement has started on a mousedown.
+	 *
+	 * `dragdown` is called when a drag movement has started on a mousedown.
+	 * The event handler gets an instance of [jQuery.Drag] passed as the second
+	 * parameter.
 	 * If you listen to this, the mousedown's default event (preventing
 	 * text selection) is not prevented.  You are responsible for calling it
-	 * if you want it (you probably do).  </p>
-	 * <p><b>Why might you not want it?</b></p>
-	 * <p>You might want it if you want to allow text selection on element
-	 * within the drag element.  Typically these are input elements.</p>
-	 * <p>Drag events are covered in more detail in [jQuery.Drag].</p>
-	 * @codestart
-	 * $(".handles").delegate("dragdown", function(ev, drag){})
-	 * @codeend
+	 * if you want it (you probably do).
+	 *
+	 * ## Why might you not want it?
+	 *
+	 * You might want it if you want to allow text selection on element
+	 * within the drag element.  Typically these are input elements.
+	 *
+	 *      $(".handles").delegate("dragdown", function(ev, drag){})
 	 */
 	'dragdown',
 	/**
 	 * @attribute draginit
-	 * Called when the drag starts.
-	 * <p>Drag events are covered in more detail in [jQuery.Drag].</p>
+	 *
+	 * `draginit` is triggered when the drag motion starts. The event handler gets
+	 * an instance of [jQuery.Drag] passed as the second parameter. Use it to customize
+	 * the drag behavior:
+	 *
+	 *      $(".draggable").on('draginit', function(ev, drag) {
+	 *          // Only allow vertical drags
+	 *          drag.vertical();
+	 *          // Create a draggable copy of the element
+	 *          drag.ghost();
+	 *      });
 	 */
 	'draginit',
 	/**
 	 * @attribute dragover
-	 * Called when the drag is over a drop.
-	 * <p>Drag events are covered in more detail in [jQuery.Drag].</p>
+	 *
+	 * `dragover` is triggered when a drag is over a [jQuery.event.drop drop element].
+	 * The event handler gets an instance of [jQuery.Drag] passed as the second
+	 * parameter.
+	 *
+	 *      $('.draggable').on('dragover', function(ev, drag) {
+	 *          // Add the drop-here class indicating that the drag
+	 *          // can be dropped here
+	 *          drag.element.addClass('drop-here');
+	 *      });
 	 */
 	'dragover',
 	/**
 	 * @attribute dragmove
-	 * Called when the drag is moved.
-	 * <p>Drag events are covered in more detail in [jQuery.Drag].</p>
+	 *
+	 * `dragmove` is triggered when the drag element moves (similar to a mousemove).
+	 * The event handler gets an instance of [jQuery.Drag] passed as the second
+	 * parameter.
+	 * Use [jQuery.Drag.prototype.location] to determine the current position
+	 * as a [jQuery.Vector vector].
+	 *
+	 * For example, `dragmove` can be used to create a draggable element to resize
+	 * a container:
+	 *
+	 *      $('.resizer').on('dragmove', function(ev, drag) {
+	 *          $('#container').width(drag.location.x())
+	 *              .height(drag.location.y());
+	 *      });
 	 */
 	'dragmove',
 	/**
 	 * @attribute dragout
-	 * When the drag leaves a drop point.
-	 * <p>Drag events are covered in more detail in [jQuery.Drag].</p>
+	 *
+	 * `dragout` is called when the drag leaves a drop point.
+	 * The event handler gets an instance of [jQuery.Drag] passed as the second
+	 * parameter.
+	 *
+	 *      $('.draggable').on('dragout', function(ev, drag) {
+	 *      	 // Remove the drop-here class
+	 *      	 // (e.g. crossing the drag element out indicating that it
+	 *      	 // can't be dropped here
+	 *          drag.element.removeClass('drop-here');
+	 *      });
 	 */
 	'dragout',
 	/**
 	 * @attribute dragend
-	 * Called when the drag is done.
-	 * <p>Drag events are covered in more detail in [jQuery.Drag].</p>
+	 *
+	 * `dragend` is called when the drag motion is done.
+	 * The event handler gets an instance of [jQuery.Drag] passed as the second
+	 * parameter.
+	 *
+	 *      $('.draggable').on('dragend', function(ev, drag)
+	 *          // Clean up when the drag motion is done
+	 *      });
 	 */
 	'dragend'], "mousedown", function( e ) {
 		$.Drag.mousedown.call($.Drag, e, this);
@@ -2988,45 +3161,80 @@ $event.trigger =  function defaultTriggerer( event, data, elem, onlyHandlers){
 	var eventNames = [
 	/**
 	 * @attribute dropover
-	 * Called when a drag is first moved over this drop element.
 	 *
-	 * Drop events are covered in more detail in [jQuery.Drop].
+	 * `dropover` is triggered when a [jQuery.event.drag drag] is first moved onto this
+	 * drop element.
+	 * The event handler gets an instance of [jQuery.Drag] passed as the second and a
+	 * [jQuery.Drop] as the third parameter.
+	 * This event can be used to highlight the element when a drag is moved over it:
+	 *
+	 *      $('.droparea').on('dropover', function(ev, drop, drag) {
+	 *          $(this).addClass('highlight');
+	 *      });
 	 */
 	"dropover",
 	/**
 	 * @attribute dropon
-	 * Called when a drag is dropped on a drop element.
 	 *
-	 * Drop events are covered in more detail in [jQuery.Drop].
+	 * `dropon` is triggered when a drag is dropped on a drop element.
+	 * The event handler gets an instance of [jQuery.Drag] passed as the second and a
+	 * [jQuery.Drop] as the third parameter.
+	 *
+	 *      $('.droparea').on('dropon', function(ev, drop, drag) {
+	 *          $(this).html('Dropped: ' + drag.element.text());
+	 *      });
 	 */
 	"dropon",
 	/**
 	 * @attribute dropout
-	 * Called when a drag is moved out of this drop.
 	 *
-	 * Drop events are covered in more detail in [jQuery.Drop].
+	 * `dropout` is called when a drag is moved out of this drop element.
+	 * The event handler gets an instance of [jQuery.Drag] passed as the second and a
+	 * [jQuery.Drop] as the third parameter.
+	 *
+	 *      $('.droparea').on('dropover', function(ev, drop, drag) {
+	 *          // Remove the drop element highlight
+	 *          $(this).removeClass('highlight');
+	 *      });
 	 */
 	"dropout",
 	/**
 	 * @attribute dropinit
 	 *
-	 * Called when a drag motion starts and the drop elements are initialized.
+	 * `dropinit` is called when a drag motion starts and the drop elements are initialized.
+	 * The event handler gets an instance of [jQuery.Drag] passed as the second and a
+	 * [jQuery.Drop] as the third parameter.
+	 * Calling [jQuery.Drop.prototype.cancel drop.cancel()] prevents the element from
+	 * being dropped on:
 	 *
-	 * Drop events are covered in more detail in [jQuery.Drop].
+	 *      $('.droparea').on('dropover', function(ev, drop, drag) {
+	 *          if(drag.element.hasClass('not-me')) {
+	 *            drop.cancel();
+	 *          }
+	 *      });
 	 */
 	"dropinit",
 	/**
 	 * @attribute dropmove
-	 * Called repeatedly when a drag is moved over a drop.
 	 *
-	 * Drop events are covered in more detail in [jQuery.Drop].
+	 * `dropmove` is triggered repeatedly when a drag is moved over a drop
+	 * (similar to a mousemove).
+	 *
+	 *      $('.droparea').on('dropmove', function(ev, drop, drag) {
+	 *          $(this).html(drag.location.x() + '/' + drag.location.y());
+	 *      });
 	 */
 	"dropmove",
 	/**
 	 * @attribute dropend
-	 * Called when the drag is done for this drop.
 	 *
-	 * Drop events are covered in more detail in [jQuery.Drop].
+	 * `dropend` is called when the drag motion is done for this drop element.
+	 *
+	 *
+	 *      $('.droparea').on('dropend', function(ev, drop, drag) {
+	 *          // Remove the drop element highlight
+	 *          $(this).removeClass('highlight');
+	 *      });
 	 */
 	"dropend"];
 	
@@ -3037,9 +3245,9 @@ $event.trigger =  function defaultTriggerer( event, data, elem, onlyHandlers){
 	 * @download  http://jmvcsite.heroku.com/pluginify?plugins[]=jquery/event/drop/drop.js
 	 * @test jquery/event/drag/qunit.html
 	 *
-	 * The `$.Drop` constructor is never called directly but an instance of `$.Drag` is passed as the second argument
-	 * to the `dropinit`, `dropover`, `dropmove`, `dropon`, and `dropend` event handlers. The third argument will be
-	 * an instance of [jQuery.Drag]:
+	 * The `jQuery.Drop` constructor is never called directly but an instance is passed to the
+	 * to the `dropinit`, `dropover`, `dropmove`, `dropon`, and `dropend` event handlers as the
+	 * third argument (the second will be the [jQuery.Drag]):
 	 *
 	 *      $('#dropper').on('dropover', function(el, drop, drag) {
 	 *          // drop -> $.Drop
@@ -3407,7 +3615,6 @@ $.Drag.prototype.
 	 *       })
 	 *     })
 	 * 
-	 * 
 	 * @param {jQuery} elements an array of elements to scroll.  The window can be in this array.
 	 * @param {Object} [options] changes the default settings.
 	 * 
@@ -3656,8 +3863,13 @@ $.extend($.Hover,{
  */
 $.extend($.Hover.prototype,{
 	/**
-	 * Sets the delay for this hover. This method should only be used in
-	 * [jQuery.event.hover.hoverinit hoverinit].
+	 * Sets the delay (in ms) for this hover. This method should only be used in
+	 * [jQuery.event.hover.hoverinit hoverinit]:
+	 *
+	 *      $('.hoverable').on('hoverinit', function(ev, hover) {
+	 *          // Set the delay to 500ms
+	 *          hover.delay(500);
+	 *      });
 	 *
 	 * @param {Number} delay the number of milliseconds used to determine a hover
 	 * @return {$.Hover} The hover object
@@ -3667,8 +3879,13 @@ $.extend($.Hover.prototype,{
 		return this;
 	},
 	/**
-	 * Sets the distance for this hover. This method should only be used in
-	 * [jQuery.event.hover.hoverinit hoverinit].
+	 * Sets the maximum distance (in pixels) the mouse is allowed to travel in order to activate
+	 * the hover. This method should only be used in [jQuery.event.hover.hoverinit hoverinit]:
+	 *
+	 *      $('.hoverable').on('hoverinit', function(ev, hover) {
+	 *          // Set the distance to 1px
+	 *          hover.distance(1);
+	 *      });
 	 *
 	 * @param {Number} distance the max distance in pixels a mouse can move to be considered a hover
 	 * @return {$.Hover} The hover object
@@ -3678,8 +3895,13 @@ $.extend($.Hover.prototype,{
 		return this;
 	},
 	/**
-	 * Sets a delay after which the hover stops. This method should only be used in
-	 * [jQuery.event.hover.hoverinit hoverinit].
+	 * Sets a delay how long the hover should stay active after the mouse left. This method should only be used in
+	 * [jQuery.event.hover.hoverinit hoverinit]:
+	 *
+	 *      $('.hoverable').on('hoverinit', function(ev, hover) {
+	 *          // Stay active for another second after the mouse left
+	 *          hover.leave(1000);
+	 *      });
 	 *
 	 * @param {Number} delay the number of milliseconds the hover should stay active after the mouse leaves
 	 * @return {$.Hover} The hover object
@@ -3782,9 +4004,11 @@ event.setupHelper( [
  *
  *      $(".option").on("hoverinit", function(ev, hover){
  *          //set the distance to 10px
- *          hover.distance(10)
+ *          hover.distance(10);
  *          //set the delay to 200ms
- *          hover.delay(10)
+ *          hover.delay(10);
+ *          // End the hover one second after the mouse leaves
+ *          hover.leave(1000);
  *      })
  */
 "hoverinit", 
@@ -3976,9 +4200,9 @@ var current,
  */
 //
 /**
- * @page jquery.event.pause Pause-Resume
+ * @page jQuery.event.pause
  * @plugin jquery/event/pause
- * @parent specialevents
+ * @parent jquerypp
  * The jquery/event/pause plugin adds the ability to pause and 
  * resume events. 
  * 
@@ -4047,8 +4271,7 @@ var current,
  * a tab when a new tab is clicked.
  * 
  * @demo jquery/event/pause/pause.html
- * 
- * It's a long, but great example of how to do some pretty complex state management with JavaScriptMVC.
+ *
  * 
  */
 $.Event.prototype.isPaused = returnFalse
@@ -4277,7 +4500,7 @@ var swipe = $.event.swipe = {
 	max : 75,
 	/**
 	 * @attribute min
-	 * The minimum distance the pointer must travel in pixesl.  The default is 30 pixels.
+	 * The minimum distance the pointer must travel in pixels.  The default is 30 pixels.
 	 */
 	min : 30
 };
@@ -4285,22 +4508,27 @@ var swipe = $.event.swipe = {
 $.event.setupHelper( [
 
 /**
+ * @hide
  * @attribute swipe
  */
 "swipe",
 /**
+ * @hide
  * @attribute swipeleft
  */
 'swipeleft',
 /**
+ * @hide
  * @attribute swiperight
  */
 'swiperight',
 /**
+ * @hide
  * @attribute swipeup
  */
 'swipeup',
 /**
+ * @hide
  * @attribute swipedown
  */
 'swipedown'], touchStartEvent, function(ev){

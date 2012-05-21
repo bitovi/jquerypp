@@ -208,7 +208,7 @@ var swipe = $.event.swipe = {
 	max : 75,
 	/**
 	 * @attribute min
-	 * The minimum distance the pointer must travel in pixesl.  The default is 30 pixels.
+	 * The minimum distance the pointer must travel in pixels.  The default is 30 pixels.
 	 */
 	min : 30
 };
@@ -216,22 +216,27 @@ var swipe = $.event.swipe = {
 $.event.setupHelper( [
 
 /**
+ * @hide
  * @attribute swipe
  */
 "swipe",
 /**
+ * @hide
  * @attribute swipeleft
  */
 'swipeleft',
 /**
+ * @hide
  * @attribute swiperight
  */
 'swiperight',
 /**
+ * @hide
  * @attribute swipeup
  */
 'swipeup',
 /**
+ * @hide
  * @attribute swipedown
  */
 'swipedown'], touchStartEvent, function(ev){

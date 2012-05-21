@@ -11,9 +11,7 @@
  * - `000010` -> __2__: #bar precedes #foo
  * - `000100` -> __4__: #foo precedes #bar
  * - `001000` -> __8__: #bar contains #foo
- * - `001010` -> __10__: #bar precedes #foo __and__ #bar contains #foo
  * - `010000` -> __16__: #foo contains #bar
- * - `010100` -> __20__: #foo precedes #bar __and__ #foo contains #bar
  *
  * You can check for any of these conditions using a bitwise AND:
  *
@@ -128,31 +126,43 @@ support = {};
  *   - __TextRange__ a raw text range object.
  */
 $.Range = function(range){
+	// If it's called w/o new, call it with new!
 	if(this.constructor !== $.Range){
 		return new $.Range(range);
 	}
+	// If we are passed a jQuery-wrapped element, get the raw element
 	if(range && range.jquery){
 		range = range[0];
 	}
-	// create one
+	// If we have an element, or nothing
 	if(!range || range.nodeType){
+		// create a range
 		this.win = getWindow(range)
 		if(this.win.document.createRange){
 			this.range = this.win.document.createRange()
 		}else{
 			this.range = this.win.document.body.createTextRange()
 		}
+		// if we have an element, make the range select it
 		if(range){
 			this.select(range)
 		}
-		
-	} else if (range.clientX != null || range.pageX != null || range.left != null) {
-		this.moveToPoint(range)
-	} else if (range.originalEvent && range.originalEvent.touches && range.originalEvent.touches.length) {
+	} 
+	// if we are given a point
+	else if (range.clientX != null || range.pageX != null || range.left != null) {
+		this.moveToPoint(range);
+	} 
+	// if we are given a touch event
+	else if (range.originalEvent && range.originalEvent.touches && range.originalEvent.touches.length) {
 		this.moveToPoint(range.originalEvent.touches[0])
-	} else if (range.originalEvent && range.originalEvent.changedTouches && range.originalEvent.changedTouches.length) {
+	
+	} 
+	// if we are a normal event
+	else if (range.originalEvent && range.originalEvent.changedTouches && range.originalEvent.changedTouches.length) {
 		this.moveToPoint(range.originalEvent.changedTouches[0])
-	} else {
+	} 
+	// given a TextRange or something else?
+	else {
 		this.range = range;
 	} 
 };
@@ -364,12 +374,29 @@ $.extend($.Range.prototype,
 				if(typeof set == 'number'){
 					this.range.setStart(this.range.startContainer, set)
 				} else if(typeof set == 'string') {
-					this.range.setStart(this.range.startContainer, this.range.startOffset+ parseInt(set,10) );
+					var res = callMove(this.range.startContainer, this.range.startOffset, parseInt(set,10))
+					this.range.setStart(res.node, res.offset );
 				} else {
 					this.range.setStart(set.container, set.offset)
 				}
 			} else {
-				throw 'todo'
+				if(typeof set == "string"){
+					this.range.moveStart(parseInt(set,10))
+				} else {
+					// get the current end container
+					var container = this.start().container,
+						offset
+					if(typeof set == "number") {
+						offset = set
+					} else {
+						container = set.container
+						offset = set.offset
+					}
+					var newPoint = $.Range(container).collapse();
+					//move it over offset characters
+					newPoint.range.move(offset);
+					this.move("START_TO_START",newPoint);
+				}
 			}
 			return this;
 		}
@@ -423,11 +450,30 @@ $.extend($.Range.prototype,
 			if (this.range.setEnd) {
 				if(typeof set == 'number'){
 					this.range.setEnd(this.range.endContainer, set)
+				} else if(typeof set == 'string') {
+					var res = callMove(this.range.endContainer, this.range.endOffset, parseInt(set,10))
+					this.range.setEnd(res.node, res.offset );
 				} else {
 					this.range.setEnd(set.container, set.offset)
 				}
 			} else {
-				throw 'todo'
+				if(typeof set == "string"){
+					this.range.moveEnd( parseInt(set,10) );
+				} else {
+					// get the current end container
+					var container = this.end().container,
+						offset
+					if(typeof set == "number") {
+						offset = set
+					} else {
+						container = set.container
+						offset = set.offset
+					}
+					var newPoint = $.Range(container).collapse();
+					//move it over offset characters
+					newPoint.range.move(offset);
+					this.move("END_TO_START",newPoint);
+				}
 			}
 			return this;
 		}
@@ -733,6 +779,60 @@ var iterate = function(elems, cb){
 	}
 
 }, 
+isText = function(node){
+	return node.nodeType === 3 || node.nodeType === 4
+},
+iteratorMaker = function(toChildren, toNext){
+	return function( node, mustMoveRight ) {
+		// first try down
+		if(node[toChildren] && !mustMoveRight){
+			return isText(node[toChildren]) ? 
+				node[toChildren] :
+			 	arguments.callee(node[toChildren])
+		} else if(node[toNext]) {
+			return isText(node[toNext]) ? 
+				node[toNext] :
+			 	arguments.callee(node[toNext])
+		} else if(node.parentNode){
+			return arguments.callee(node.parentNode, true)
+		}
+	}
+},
+getNextTextNode = iteratorMaker("firstChild","nextSibling"),
+getPrevTextNode = iteratorMaker("lastChild","previousSibling"),
+callMove = function(container, offset, howMany){
+	if(isText(container)){
+		return move(container, offset+howMany)
+	} else {
+		return container.childNodes[offset] ?
+			move(container.childNodes[offset] , howMany) :
+			move(container.lastChild, howMany , true)
+		return 
+	}
+},
+move = function(from, howMany, adjust){
+	var mover = howMany < 0 ? 
+		getPrevTextNode : getNextTextNode;
+		
+	howMany = Math.abs(howMany);
+	
+	if(!isText(from)){
+		from = mover(from)
+	}
+	if(adjust){
+		//howMany = howMany + from.nodeValue.length
+	}
+	while(from && howMany >= from.nodeValue.length){
+		hasMany  = howMany- from.nodeValue.length;
+		from = mover(from)
+	}
+	return {
+		node: from,
+		offset: mover === getNextTextNode ?
+			howMany : 
+			from.nodeValue.length - howMany
+	}
+},
 supportWhitespace,
 isWhitespace = function(el){
 	if(supportWhitespace == null){
@@ -785,41 +885,43 @@ support.moveToPoint = !!$.Range().range.moveToPoint
 
 })(jQuery);
 (function($){
-var convertType = function(type){
-	return  type.replace(/([a-z])([a-z]+)/gi, function(all,first,  next){
-			  return first+next.toLowerCase()	
-			}).replace(/_/g,"");
-},
-reverse = function(type){
-	return type.replace(/^([a-z]+)_TO_([a-z]+)/i, function(all, first, last){
-		return last+"_TO_"+first;
-	});
-},
-getWindow = function( element ) {
+
+var getWindow = function( element ) {
 	return element ? element.ownerDocument.defaultView || element.ownerDocument.parentWindow : window
 },
 // A helper that uses range to abstract out getting the current start and endPos.
 getElementsSelection = function(el, win){
+	// get a copy of the current range and a range that spans the element
 	var current = $.Range.current(el).clone(),
 		entireElement = $.Range(el).select(el);
+	// if there is no overlap, there is nothing selected
 	if(!current.overlaps(entireElement)){
 		return null;
 	}
-	// we need to check if it starts before our element ...
+	// if the current range starts before our element
 	if(current.compare("START_TO_START", entireElement) < 1){
+		// the selection within the element begins at 0
 		startPos = 0;
-		// we should move current ...
+		// move the current range to start at our element
 		current.move("START_TO_START",entireElement);
 	}else{
+		// Make a copy of the element's range.
+		// Move it's end to the start of the selected range
+		// The length of the copy is the start of the selected
+		// range.
 		fromElementToCurrent =entireElement.clone();
 		fromElementToCurrent.move("END_TO_START", current);
 		startPos = fromElementToCurrent.toString().length
 	}
 	
-	// now we need to make sure current isn't to the right of us ...
+	// If the current range ends after our element
 	if(current.compare("END_TO_END", entireElement) >= 0){
+		// the end position is the last character
 		endPos = entireElement.toString().length
 	}else{
+		// otherwise, it's the start position plus the current range
+		// TODO: this doesn't seem like it works if current
+		// extends to the left of the element.
 		endPos = startPos+current.toString().length
 	}
 	return {
@@ -827,10 +929,13 @@ getElementsSelection = function(el, win){
 		end : endPos
 	};
 },
+// Text selection works differently for selection in an input vs
+// normal html elements like divs, spans, and ps.
+// This function branches between the various methods of getting the selection.
 getSelection = function(el){
-	// use selectionStart if we can.
 	var win = getWindow(el);
 	
+	// `selectionStart` means this is an input element in a standards browser.
 	if (el.selectionStart !== undefined) {
 
 		if(document.activeElement 
@@ -840,16 +945,17 @@ getSelection = function(el){
 			return {start: el.value.length, end: el.value.length};
 		}
 		return  {start: el.selectionStart, end: el.selectionEnd}
-	} else if(win.getSelection){
+	} 
+	// getSelection means a 'normal' element in a standards browser.
+	else if(win.getSelection){
 		return getElementsSelection(el, win)
 	} else{
-
+		// IE will freak out, where there is no way to detect it, so we provide a callback if it does.
 		try {
-			//try 2 different methods that work differently
-			// one should only work for input elements, but sometimes doesn't
-			// I don't know why this is, or what to detect
+			// The following typically works for input elements in IE:
 			if (el.nodeName.toLowerCase() == 'input') {
-				var real = getWindow(el).document.selection.createRange(), r = el.createTextRange();
+				var real = getWindow(el).document.selection.createRange(), 
+					r = el.createTextRange();
 				r.setEndPoint("EndToStart", real);
 				
 				var start = r.text.length
@@ -858,12 +964,14 @@ getSelection = function(el){
 					end: start + real.text.length
 				}
 			}
+			// This works on textareas and other elements
 			else {
 				var res = getElementsSelection(el,win)
 				if(!res){
 					return res;
 				}
-				// we have to clean up for ie's textareas
+				// we have to clean up for ie's textareas which don't count for 
+				// newlines correctly
 				var current = $.Range.current().clone(),
 					r2 = current.clone().collapse().range,
 					r3 = current.clone().collapse(false).range;
@@ -886,8 +994,12 @@ getSelection = function(el){
 		}
 	} 
 },
+// Selects text within an element.  Depending if it's a form element or
+// not, or a standards based browser or not, we do different things.
 select = function( el, start, end ) {
-	var win = getWindow(el)
+	var win = getWindow(el);
+	// IE behaves bad even if it sorta supports
+	// getSelection so we have to try the IE methods first. barf.
 	if(el.setSelectionRange){
 		if(end === undefined){
             el.focus();
@@ -928,10 +1040,9 @@ select = function( el, start, end ) {
 	}
 
 },
-/*
- * If one of the range values is within start and len, replace the range
- * value with the element and its offset.
- */
+// TODO: can this be removed?
+// If one of the range values is within start and len, replace the range
+// value with the element and its offset.
 replaceWithLess = function(start, len, range, el){
 	if(typeof range[0] === 'number' && range[0] < len){
 			range[0] = {
@@ -946,6 +1057,7 @@ replaceWithLess = function(start, len, range, el){
 			};;
 	}
 },
+// TODO: can this be removed?
 getCharElement = function( elems , range, len ) {
 	var elem,
 		start;
@@ -977,8 +1089,13 @@ getCharElement = function( elems , range, len ) {
  *
  * @param {Number} [start] Start position of the selection range
  * @param {Number} [end] End position of the selection range
- * @return {Object|jQuery} returns the selection information or the jQuery collection for
- * chaining when start and end are given.
+ * @return {Object|jQuery} Returns either the jQuery object when setting the selection or
+ * an object containing
+ *
+ * - __start__ - The number of characters from the start of the element to the start of the selection.
+ * - __end__ - The number of characters from the start of the element to the end of the selection.
+ *
+ * when no arguments are passed.
  */
 $.fn.selection = function(start, end){
 	if(start !== undefined){

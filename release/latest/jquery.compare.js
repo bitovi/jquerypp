@@ -11,9 +11,7 @@
  * - `000010` -> __2__: #bar precedes #foo
  * - `000100` -> __4__: #foo precedes #bar
  * - `001000` -> __8__: #bar contains #foo
- * - `001010` -> __10__: #bar precedes #foo __and__ #bar contains #foo
  * - `010000` -> __16__: #foo contains #bar
- * - `010100` -> __20__: #foo precedes #bar __and__ #foo contains #bar
  *
  * You can check for any of these conditions using a bitwise AND:
  *
