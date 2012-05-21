@@ -16,7 +16,7 @@ Extensions:
  - [jQuery.range](#range) - create and manipulate text ranges
  - [jQuery.selection](#selection) - get and set the current text selection
  - [jQuery.styles](#styles) - quickly read computed styles
- - [jQuery.within] - get elements within an area or at a point
+ - [jQuery.within](#within) - get elements within an area or at a point
 
 Events:
 
