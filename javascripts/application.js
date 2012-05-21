@@ -293,7 +293,7 @@ if($('.lt-ie7, .lt-ie8, .lt-ie9').length == 0){
 	$('#wrapper').menu('html,body');
 }
 
-$('a[href$=#dom_helpers], a[href$=#dom_helpers]').prepend('<span class="special">&#x2605;</span>')
+$('a[href$=#dom_helpers], a[href$=#events]').prepend('<span class="special">&#x2605;</span>')
 
 
 // google analytics
