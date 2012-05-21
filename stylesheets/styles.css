@@ -309,3 +309,20 @@ html.lt-ie7 .github-fork img {
 	margin-left: -5px;
 	margin-right: 2px;
 }
+
+#builder input {
+	width: 13px;
+	height: 13px;
+	padding: 0;
+	margin:0;
+	vertical-align: middle;
+	position: relative;
+	top: -1px;
+	*overflow: hidden;
+}
+
+#builder label {
+	display: block;
+	padding-left: 15px;
+	text-indent: -15px;
+}

@@ -7,54 +7,13 @@ layout: default
 jQuery++ is a collection of useful jQuery extensions and 
 special events.
 
-Extensions:
-
- - [jQuery.compare](#compare) - compare element document position
- - [jQuery.cookie](#cookie) - read and write cookies
- - [jQuery.dimensions](#dimensions) - set and animate innerWidth and outerWidth
- - [jQuery.formParams](#formParams) - serializes a form into an object
- - [jQuery.range](#range) - create and manipulate text ranges
- - [jQuery.selection](#selection) - get and set the current text selection
- - [jQuery.styles](#styles) - quickly read computed styles
- - [jQuery.within](#within) - get elements within an area or at a point
-
-Events:
-
- - [jQuery.event.destroyed](#destroyed) - an element is removed from the DOM
- - [jQuery.event.drag](#drag) - delegatable drag events
- - [jQuery.event.drop](#drop) - delegatable drop events
- - [jQuery.event.hover](#hover) - delegatable hover events
- - [jQuery.event.key](#key) - returns a string representation of the key pressed
- - [jQuery.event.pause](#pause) - pause and resume event propagation
- - [jQuery.event.resize](#resize) - listen to a resize event on every object
- - [jQuery.event.swipe](#swipe) - delegatable swipe events
-
 ## Get jQuery++
 
 ### Download Builder
 
 Check the plugins you want to download and click the download button. You will download an *uncompressed* JavaScript file containing the selected plugins and all their dependencies.
 
-<form id="builder" method="get" action="http://bitbuilder.herokuapp.com/donejs" target="_blank">
-  <h4>DOM Helpers</h4>
-  <input type="checkbox" value="jquery/dom/compare" name="plugins" /><label>jQuery.compare</label>
-  <input type="checkbox" value="jquery/dom/dimensions" name="plugins" /><label>jQuery.dimensions</label>
-  <input type="checkbox" value="jquery/dom/form_params" name="plugins" /><label>jQuery.formParams</label>
-  <input type="checkbox" value="jquery/dom/range" name="plugins" /><label>jQuery.range</label>
-  <input type="checkbox" value="jquery/dom/selection" name="plugins" /><label>jQuery.selection</label>
-  <input type="checkbox" value="jquery/dom/styles" name="plugins" /><label>jQuery.styles</label>
-  <input type="checkbox" value="jquery/dom/within" name="plugins" /><label>jQuery.within</label>
-  <h4>Events</h4>
-  <input type="checkbox" value="jquery/event/destroyed" name="plugins" /><label>jQuery.event.destroyed</label>
-  <input type="checkbox" value="jquery/event/drag" name="plugins" /><label>jQuery.event.drag</label>
-  <input type="checkbox" value="jquery/event/drop" name="plugins" /><label>jQuery.event.drop</label>
-  <input type="checkbox" value="jquery/event/hover" name="plugins" /><label>jQuery.event.hover</label>
-  <input type="checkbox" value="jquery/event/key" name="plugins" /><label>jQuery.event.key</label>
-  <input type="checkbox" value="jquery/event/pause" name="plugins" /><label>jQuery.event.pause</label>
-  <input type="checkbox" value="jquery/event/resize" name="plugins" /><label>jQuery.event.resize</label>
-  <input type="checkbox" value="jquery/event/swipe" name="plugins" /><label>jQuery.event.swipe</label>
-  <button type="submit">Download</button>
-</form>
+{% include builder.html %}
 
 ### Using Steal
 
