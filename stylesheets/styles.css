@@ -116,7 +116,7 @@ em {
 #menu a:hover,
 #menu a.active {
 	color: white;
-	background: #006ab0;
+	background: #EE2435;
 	text-shadow: none;
 }
 #menu a.heading-1 {
@@ -163,10 +163,10 @@ em {
 #buttons a.primary,
 #logo-and-download a.primary {
 	color: white;
-	background: #006fb8;
+	background: #EE2435;
 }
 #logo-and-download a.primary:hover {
-	background: #FF5100;
+	background: #0FA256;
 }
 #buttons {
 	border-top: 1px solid #f0f1f0;
@@ -179,7 +179,7 @@ em {
 	width: 72px;
 }
 #buttons a:hover {
-	background: #006fb8;
+	background: #EE2435;
 	color: white;
 }
 #developed-by {
@@ -303,4 +303,9 @@ html.lt-ie7 .github-fork {
 }
 html.lt-ie7 .github-fork img {
 	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='https://a248.e.akamai.net/assets.github.com/img/30f550e0d38ceb6ef5b81500c64d970b7fb0f028/687474703a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6f72616e67655f6666373630302e706e67', sizingMethod='scale');
+}
+.special {
+	float: left;
+	margin-left: -5px;
+	margin-right: 2px;
 }
