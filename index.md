@@ -139,7 +139,7 @@ $('form').formParams()
 // }
 {% endhighlight %}
 
-It is also possible to set form values:
+It is also possible to set form values by passing an object:
 
 {% highlight javascript %}
 $('form').formParams({
@@ -151,7 +151,6 @@ $('form').formParams({
 ## range `$.Range([el]) -> range` `$(el).range() -> range`
 
 Use [jQuery.Range](http://donejs.com/docs.html#!jQuery.Range) to create, move and compare text ranges. Use `$.Range.current()` to get the currently selected text range or the jQuery plugin `$(el).range()` to get a `$.Range` instance for an element.
-
 
 For example, assuming that in a div like `<div>This is some text</div>` the text from position eight to 12 is currently selected, `$.Range` can be used like this:
 
@@ -195,7 +194,7 @@ A `$.Range` instance offers the following methods:
   <li><a href="http://donejs.com/docs.html#!jQuery.Range.prototype.rect" class="code">range.rect(from) -> TextRectangle</a>
   - returns the bounding rectangle of this range
   </li>
-  <li><a href="http://donejs.com/docs.html#!jQuery.Range.prototype.rects" class="code">range.rects(from) -> undefined</a>
+  <li><a href="http://donejs.com/docs.html#!jQuery.Range.prototype.rects" class="code">range.rects(from) -> Array</a>
   - returns the client rects
   </li>
   <li><a href="http://donejs.com/docs.html#!jQuery.Range.prototype.start" class="code">range.start([val]) -> range|Object</a>
@@ -371,7 +370,7 @@ The following example shows two draggable elements and a drop area. When a drag 
 
 ## hover `hoverinit` `hoverenter` `hovermove` `hoverleave`
 
-[jQuery.event.hover](http://donejs.com/docs.html#!jQuery.event.hover) is a flexible way to deal with the following hover related events:
+[jQuery.event.hover](http://donejs.com/docs.html#!jQuery.event.hover) provides the following hover events:
 
 * `hoverinit` - called on mouseenter
 * `hoverenter` - an element is being hovered
