@@ -7,28 +7,6 @@ layout: default
 jQuery++ is a collection of useful jQuery extensions and 
 special events.
 
-Extensions:
-
- - [jQuery.compare](#compare) - compare element document position
- - [jQuery.cookie](#cookie) - read and write cookies
- - [jQuery.dimensions](#dimensions) - set and animate innerWidth and outerWidth
- - [jQuery.formParams](#formParams) - serializes a form into an object
- - [jQuery.range](#range) - create and manipulate text ranges
- - [jQuery.selection](#selection) - get and set the current text selection
- - [jQuery.styles](#styles) - quickly read computed styles
- - [jQuery.within](#within) - get elements within an area or at a point
-
-Events:
-
- - [jQuery.event.destroyed](#destroyed) - an element is removed from the DOM
- - [jQuery.event.drag](#drag) - delegatable drag events
- - [jQuery.event.drop](#drop) - delegatable drop events
- - [jQuery.event.hover](#hover) - delegatable hover events
- - [jQuery.event.key](#key) - returns a string representation of the key pressed
- - [jQuery.event.pause](#pause) - pause and resume event propagation
- - [jQuery.event.resize](#resize) - listen to a resize event on every object
- - [jQuery.event.swipe](#swipe) - delegatable swipe events
-
 ## Get jQuery++
 
 ### Download Builder
