@@ -113,6 +113,11 @@ em {
 	font-weight: bold;
 	margin: 0;
 }
+#menu a.special {
+	color: #363636;
+	border-bottom: 1px dotted #363636;
+	border-top: 1px dotted #363636;
+}
 #menu a:hover,
 #menu a.active {
 	color: white;

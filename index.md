@@ -68,7 +68,7 @@ require.config({
 
 > Note: Starting at version 1.7 jQuery will define itself as an AMD module if a loader is available. There is no need to create a wrapper.
 
-## DOM HELPERS
+<h2 class="special">DOM HELPERS</h2>
 
 ## compare `$(elA).compare(elB) -> Number`
 
@@ -272,7 +272,7 @@ Move the mouse in the following example and it will show the ids for `div` eleme
 
 > [jQuery.event.drag](http://donejs.com/docs.html#!jQuery.event.drag) uses *jQuery.within* to determine dropable elements at the current position.
 
-## EVENTS
+<h2 class="special">EVENTS</h2>
 
 ## destroyed `destroyed`
 
@@ -500,7 +500,7 @@ $('#todos').on('show', function(ev){
 });
 {% endhighlight %}
 
-### Use
+### Example
 
 `event.pause()`, `event.resume()`, `$.fn.triggerAsync` and default events can be very helpful when creating event oriented widgets. The following example implements a `tabs` jQuery plugin that triggers a `show` event when a tab is selected and, by default, shows that tab.
 
