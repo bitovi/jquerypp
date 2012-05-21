@@ -16,12 +16,12 @@ Extensions:
  - create and manipulate text [ranges](#range)
  - get and set the current text [selection](#selection)
  - quickly read computed [styles](#styles)
- - get elements [within](#within) an area or at a point. 
+ - get elements [within](#within) an area or at a point
 
 Events:
 
- - an element is [removed](#destroyed) from the DOM
- - delegatable [drag](#drag) 
+ - [jQuery.event.destroyed](#destroyed) - an element is removed from the DOM
+ - [jQuery.event.drag](#drag) - delegatable drag events
  - [jQuery.event.drop](#drop) - delegatable drop events
  - [jQuery.event.hover](#hover) - delegatable hover events
  - [jQuery.event.key](#key) - get a string representation of the key pressed
