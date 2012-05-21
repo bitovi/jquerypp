@@ -9,14 +9,14 @@ special events.
 
 Extensions:
 
- - [jQuery.compare](#compare) - compare two element's document position
- - read and write [cookies](#cookie)
- - set and animate innerWidth and outerWidth element [dimensions](#dimensions)
- - serializes a [form](#formParams) into an object
- - create and manipulate text [ranges](#range)
- - get and set the current text [selection](#selection)
- - quickly read computed [styles](#styles)
- - get elements [within](#within) an area or at a point
+ - [jQuery.compare](#compare) - compare element document position
+ - [jQuery.cookie](#cookie) - read and write cookies
+ - [jQuery.dimensions](#dimensions) - set and animate innerWidth and outerWidth
+ - [jQuery.formParams](#formParams) - serializes a form into an object
+ - [jQuery.range](#range) - create and manipulate text ranges
+ - [jQuery.selection](#selection) - get and set the current text selection
+ - [jQuery.styles](#styles) - quickly read computed styles
+ - [jQuery.within] - get elements within an area or at a point
 
 Events:
 
