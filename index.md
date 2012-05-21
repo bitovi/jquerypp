@@ -33,26 +33,26 @@ Events:
 
 ### Download Builder
 
-Check the files you want to download and a zip file will be created. The zip file will contain each individual plugin, and a combined version of all plugins minified and unminified.
+Check the plugins you want to download and click the download button. You will download an *uncompressed* JavaScript file containing the selected plugins and all their dependencies.
 
 <form id="builder" method="get" action="http://bitbuilder.herokuapp.com/donejs" target="_blank">
   <h4>DOM Helpers</h4>
-  <div><input type="checkbox" value="jquery/dom/compare" name="plugins" /><label>jQuery.compare</label></div>
-  <div><input type="checkbox" value="jquery/dom/dimensions" name="plugins" /><label>jQuery.dimensions</label></div>
-  <div><input type="checkbox" value="jquery/dom/form_params" name="plugins" /><label>jQuery.formParams</label></div>
-  <div><input type="checkbox" value="jquery/dom/range" name="plugins" /><label>jQuery.range</label></div>
-  <div><input type="checkbox" value="jquery/dom/selection" name="plugins" /><label>jQuery.selection</label></div>
-  <div><input type="checkbox" value="jquery/dom/styles" name="plugins" /><label>jQuery.styles</label></div>
-  <div><input type="checkbox" value="jquery/dom/within" name="plugins" /><label>jQuery.within</label></div>
+  <input type="checkbox" value="jquery/dom/compare" name="plugins" /><label>jQuery.compare</label>
+  <input type="checkbox" value="jquery/dom/dimensions" name="plugins" /><label>jQuery.dimensions</label>
+  <input type="checkbox" value="jquery/dom/form_params" name="plugins" /><label>jQuery.formParams</label>
+  <input type="checkbox" value="jquery/dom/range" name="plugins" /><label>jQuery.range</label>
+  <input type="checkbox" value="jquery/dom/selection" name="plugins" /><label>jQuery.selection</label>
+  <input type="checkbox" value="jquery/dom/styles" name="plugins" /><label>jQuery.styles</label>
+  <input type="checkbox" value="jquery/dom/within" name="plugins" /><label>jQuery.within</label>
   <h4>Events</h4>
-  <div><input type="checkbox" value="jquery/event/destroyed" name="plugins" /><label>jQuery.event.destroyed</label></div>
-  <div><input type="checkbox" value="jquery/event/drag" name="plugins" /><label>jQuery.event.drag</label></div>
-  <div><input type="checkbox" value="jquery/event/drop" name="plugins" /><label>jQuery.event.drop</label></div>
-  <div><input type="checkbox" value="jquery/event/hover" name="plugins" /><label>jQuery.event.hover</label></div>
-  <div><input type="checkbox" value="jquery/event/key" name="plugins" /><label>jQuery.event.key</label></div>
-  <div><input type="checkbox" value="jquery/event/pause" name="plugins" /><label>jQuery.event.pause</label></div>
-  <div><input type="checkbox" value="jquery/event/resize" name="plugins" /><label>jQuery.event.resize</label></div>
-  <div><input type="checkbox" value="jquery/event/swipe" name="plugins" /><label>jQuery.event.swipe</label></div>
+  <input type="checkbox" value="jquery/event/destroyed" name="plugins" /><label>jQuery.event.destroyed</label>
+  <input type="checkbox" value="jquery/event/drag" name="plugins" /><label>jQuery.event.drag</label>
+  <input type="checkbox" value="jquery/event/drop" name="plugins" /><label>jQuery.event.drop</label>
+  <input type="checkbox" value="jquery/event/hover" name="plugins" /><label>jQuery.event.hover</label>
+  <input type="checkbox" value="jquery/event/key" name="plugins" /><label>jQuery.event.key</label>
+  <input type="checkbox" value="jquery/event/pause" name="plugins" /><label>jQuery.event.pause</label>
+  <input type="checkbox" value="jquery/event/resize" name="plugins" /><label>jQuery.event.resize</label>
+  <input type="checkbox" value="jquery/event/swipe" name="plugins" /><label>jQuery.event.swipe</label>
   <button type="submit">Download</button>
 </form>
 
@@ -611,8 +611,8 @@ Plugins like [styles](#styles) and [compare](#compare) can speed up your app.
 
 ### Flexible
 
-Delegatable events makes it easy to integrate with libraries like [CanJS](http://canjs.us) and [Backbone].  Use 
-jQuery++ standalone, [StealJS], or [RequireJS].
+Delegatable events makes it easy to integrate with libraries like [CanJS](http://canjs.us) and [Backbone](http://documentcloud.github.com/backbone/).
+Use  jQuery++ standalone, [StealJS](http://javascriptmvc.com/docs.html#!stealjs), or [RequireJS](http://requirejs.org/).
 
 ### Supported
 
