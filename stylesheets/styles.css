@@ -163,7 +163,7 @@ em {
 #buttons a.primary,
 #logo-and-download a.primary {
 	color: white;
-	background: #EE2435;
+	background: #BB380A;
 }
 #logo-and-download a.primary:hover {
 	background: #0FA256;
@@ -179,7 +179,7 @@ em {
 	width: 72px;
 }
 #buttons a:hover {
-	background: #EE2435;
+	background: #BB380A;
 	color: white;
 }
 #developed-by {
