@@ -1,39 +1,41 @@
-steal('jquery','jquery/dom/range').then(function($){
-var convertType = function(type){
-	return  type.replace(/([a-z])([a-z]+)/gi, function(all,first,  next){
-			  return first+next.toLowerCase()	
-			}).replace(/_/g,"");
-},
-reverse = function(type){
-	return type.replace(/^([a-z]+)_TO_([a-z]+)/i, function(all, first, last){
-		return last+"_TO_"+first;
-	});
-},
-getWindow = function( element ) {
+steal('jquery','jquery/dom/range',function($){
+
+var getWindow = function( element ) {
 	return element ? element.ownerDocument.defaultView || element.ownerDocument.parentWindow : window
 },
 // A helper that uses range to abstract out getting the current start and endPos.
 getElementsSelection = function(el, win){
+	// get a copy of the current range and a range that spans the element
 	var current = $.Range.current(el).clone(),
 		entireElement = $.Range(el).select(el);
+	// if there is no overlap, there is nothing selected
 	if(!current.overlaps(entireElement)){
 		return null;
 	}
-	// we need to check if it starts before our element ...
+	// if the current range starts before our element
 	if(current.compare("START_TO_START", entireElement) < 1){
+		// the selection within the element begins at 0
 		startPos = 0;
-		// we should move current ...
+		// move the current range to start at our element
 		current.move("START_TO_START",entireElement);
 	}else{
+		// Make a copy of the element's range.
+		// Move it's end to the start of the selected range
+		// The length of the copy is the start of the selected
+		// range.
 		fromElementToCurrent =entireElement.clone();
 		fromElementToCurrent.move("END_TO_START", current);
 		startPos = fromElementToCurrent.toString().length
 	}
 	
-	// now we need to make sure current isn't to the right of us ...
+	// If the current range ends after our element
 	if(current.compare("END_TO_END", entireElement) >= 0){
+		// the end position is the last character
 		endPos = entireElement.toString().length
 	}else{
+		// otherwise, it's the start position plus the current range
+		// TODO: this doesn't seem like it works if current
+		// extends to the left of the element.
 		endPos = startPos+current.toString().length
 	}
 	return {
@@ -41,10 +43,13 @@ getElementsSelection = function(el, win){
 		end : endPos
 	};
 },
+// Text selection works differently for selection in an input vs
+// normal html elements like divs, spans, and ps.
+// This function branches between the various methods of getting the selection.
 getSelection = function(el){
-	// use selectionStart if we can.
 	var win = getWindow(el);
 	
+	// `selectionStart` means this is an input element in a standards browser.
 	if (el.selectionStart !== undefined) {
 
 		if(document.activeElement 
@@ -54,16 +59,17 @@ getSelection = function(el){
 			return {start: el.value.length, end: el.value.length};
 		}
 		return  {start: el.selectionStart, end: el.selectionEnd}
-	} else if(win.getSelection){
+	} 
+	// getSelection means a 'normal' element in a standards browser.
+	else if(win.getSelection){
 		return getElementsSelection(el, win)
 	} else{
-
+		// IE will freak out, where there is no way to detect it, so we provide a callback if it does.
 		try {
-			//try 2 different methods that work differently
-			// one should only work for input elements, but sometimes doesn't
-			// I don't know why this is, or what to detect
+			// The following typically works for input elements in IE:
 			if (el.nodeName.toLowerCase() == 'input') {
-				var real = getWindow(el).document.selection.createRange(), r = el.createTextRange();
+				var real = getWindow(el).document.selection.createRange(), 
+					r = el.createTextRange();
 				r.setEndPoint("EndToStart", real);
 				
 				var start = r.text.length
@@ -72,12 +78,14 @@ getSelection = function(el){
 					end: start + real.text.length
 				}
 			}
+			// This works on textareas and other elements
 			else {
 				var res = getElementsSelection(el,win)
 				if(!res){
 					return res;
 				}
-				// we have to clean up for ie's textareas
+				// we have to clean up for ie's textareas which don't count for 
+				// newlines correctly
 				var current = $.Range.current().clone(),
 					r2 = current.clone().collapse().range,
 					r3 = current.clone().collapse(false).range;
@@ -100,8 +108,12 @@ getSelection = function(el){
 		}
 	} 
 },
+// Selects text within an element.  Depending if it's a form element or
+// not, or a standards based browser or not, we do different things.
 select = function( el, start, end ) {
-	var win = getWindow(el)
+	var win = getWindow(el);
+	// IE behaves bad even if it sorta supports
+	// getSelection so we have to try the IE methods first. barf.
 	if(el.setSelectionRange){
 		if(end === undefined){
             el.focus();
@@ -142,10 +154,9 @@ select = function( el, start, end ) {
 	}
 
 },
-/*
- * If one of the range values is within start and len, replace the range
- * value with the element and its offset.
- */
+// TODO: can this be removed?
+// If one of the range values is within start and len, replace the range
+// value with the element and its offset.
 replaceWithLess = function(start, len, range, el){
 	if(typeof range[0] === 'number' && range[0] < len){
 			range[0] = {
@@ -160,6 +171,7 @@ replaceWithLess = function(start, len, range, el){
 			};;
 	}
 },
+// TODO: can this be removed?
 getCharElement = function( elems , range, len ) {
 	var elem,
 		start;
