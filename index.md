@@ -592,13 +592,12 @@ Plugins like [styles](#styles) and [compare](#compare) can speed up your app.
 ### Flexible
 
 Delegatable events makes it easy to integrate with libraries like [CanJS](http://canjs.us) and [Backbone].  Use 
-jQuery++ with
-
-### Easy
-
-
+jQuery++ standalone, [StealJS], or [RequireJS].
 
 ### Supported
+
+jQuery++ is developed by [Bitovi](http://bitovi.com).  We're active on the forums, but should the need 
+arise, can also be hired for paid support, training, and development.
 
 ## Developing jQuery++
 
