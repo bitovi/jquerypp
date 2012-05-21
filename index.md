@@ -7,17 +7,48 @@ layout: default
 jQuery++ is a collection of useful jQuery extensions and 
 special events.
 
+Extensions:
+
+ - [jQuery.compare](#compare) - compare element document position
+ - [jQuery.cookie](#cookie) - read and write cookies
+ - [jQuery.dimensions](#dimensions) - set and animate innerWidth and outerWidth
+ - [jQuery.formParams](#formParams) - serializes a form into an object
+ - [jQuery.range](#range) - create and manipulate text ranges
+ - [jQuery.selection](#selection) - get and set the current text selection
+ - [jQuery.styles](#styles) - quickly read computed styles
+ - [jQuery.within](#within) - get elements within an area or at a point
+
+Events:
+
+ - [jQuery.event.destroyed](#destroyed) - an element is removed from the DOM
+ - [jQuery.event.drag](#drag) - delegatable drag events
+ - [jQuery.event.drop](#drop) - delegatable drop events
+ - [jQuery.event.hover](#hover) - delegatable hover events
+ - [jQuery.event.key](#key) - returns a string representation of the key pressed
+ - [jQuery.event.pause](#pause) - pause and resume event propagation
+ - [jQuery.event.resize](#resize) - listen to a resize event on every object
+ - [jQuery.event.swipe](#swipe) - delegatable swipe events
+
 ## Get jQuery++
 
 ### Download Builder
 
-Check the plugins you want to download and click the download button. You will download an *uncompressed* JavaScript file containing the selected plugins and all their dependencies.
+Check the plugins you want to download and click the download button. You will download a single *uncompressed* JavaScript file containing the selected plugins and all their dependencies.
 
 {% include builder.html %}
 
+### Full download
+
+You can also download the [full archive](https://github.com/downloads/jupiterjs/jquerypp/jquerypp-1.0.0.zip) which contains
+
+- `jquerypp.js`: The full version of jQuery++
+- Each plugin as a standalone JavaScript file
+- A `steal` folder containing the files for [using jQuery++ with StealJS](#get_jquery__-using_steal)
+- An `amd` folder to use the jQuery++ plugins as [AMD modules](#get_jquery__-using_amd)
+
 ### Using Steal
 
-The files needed for using jQuery++ with [StealJS](http://javascriptmvc.com/docs.html#!stealjs) are located in the `steal/` folder. Take the `jquery/` folder and put it in your steal root. Make sure to use `steal.map` to map any dependency of `jquery` to your jQuery library. For example, when using jQuery++ with [CanJS](http://canjs.us) and Steal, use this:
+The files needed for using jQuery++ with [StealJS](http://javascriptmvc.com/docs.html#!stealjs) are located in the `steal/` folder of the full download. Take the `jquery/` folder and put it in your steal root. Make sure to use `steal.map` to map any dependency of `jquery` to your jQuery library. For example, when using jQuery++ with [CanJS](http://canjs.us) and Steal:
 
 {% highlight javascript %}
 steal.map({
@@ -27,7 +58,7 @@ steal.map({
 
 ### Using AMD
 
-The files to load the jQuery++ plugins as [AMD modules](https://github.com/amdjs/amdjs-api/wiki/AMD), for example using [RequireJS](http://requirejs.org/), are located in the `amd/` folder. Place the `jquerypp/` folder in your modules directory and load a plugin like this:
+The files to load the jQuery++ plugins as [AMD modules](https://github.com/amdjs/amdjs-api/wiki/AMD), for example using [RequireJS](http://requirejs.org/), are located in the `amd/` folder. Place the `jquerypp/` folder in your module directory and load a plugin like this:
 
 {% highlight javascript %}
 define(['jquery', 'jquerypp/dimensions', 'jquerypp/event/resize'],
