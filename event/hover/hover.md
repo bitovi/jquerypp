@@ -29,8 +29,8 @@ and removes the class on `hoverleave`.
 An element is hovered when the mouse moves less than a certain distance in specific time over the element.
 
 You can configure that distance and time by adjusting the `distance` (in pixels) and `delay` (in ms) values.
-It can either be set globally by adjusting the static properties `$.Hover.delay` and `$.Hover.distance`:
-Or you can adjust [jQuery.Hover.prototype.delay] and [jQuery.Hover.prototype.distance] for an individual hover during `hoverenter`:
+It can either be set globally by adjusting the static properties [jQuery.Hover.static.delay] and [jQuery.Hover.static.distance]:
+Or you can adjust [jQuery.Hover.prototype.delay] and [jQuery.Hover.prototype.distance] for an individual hover during `hoverinit`:
 
 	$(".option").on("hoverinit", function(ev, hover){
 	  //set the distance to 10px
