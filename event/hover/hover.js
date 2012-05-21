@@ -8,7 +8,7 @@ steal('jquery/event','jquery/event/livehack').then(function($){
  * Creates a new hover. The constructor should not be called directly.
  *
  * An instance of `$.Hover` is passed as the second argument to each
- * `jQuery.event.hover` handler:
+ * [jQuery.event.hover] event handler:
  *
  *      $('#menu').on("hoverinit", function(ev, hover) {
  *          // Set the hover distance to 20px
@@ -26,10 +26,14 @@ $.Hover = function(){
 $.extend($.Hover,{
 	/**
 	 * @attribute delay
+	 *
 	 * `$.Hover.delay` is the delay (in milliseconds) after which the hover is
 	 * activated by default.
 	 *
 	 * Set this value as a global default. The default is 100ms.
+	 *
+	 *      // Set the global hover delay to 1 second
+	 *      $.Hover.delay = 1000;
 	 */
 	delay: 100,
 	/**
@@ -39,6 +43,9 @@ $.extend($.Hover,{
 	 * travel within the time of [jQuery.Hover.delay] in order to activate a hover.
 	 *
 	 * Set this value as a global default. The default is 10px.
+	 *
+	 *      // Set the global hover distance to 1 pixel
+	 *      $.Hover.distance = 1;
 	 */
 	distance: 10,
 	leave : 0

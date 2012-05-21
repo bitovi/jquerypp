@@ -19,9 +19,9 @@ The following list shows the `bitmask`, the __number__ and what it corresponds t
 - `000010` -> __2__: #bar precedes #foo
 - `000100` -> __4__: #foo precedes #bar
 - `001000` -> __8__: #bar contains #foo
-- `001010` -> __10__: #bar precedes #foo __and__ #bar contains #foo
 - `010000` -> __16__: #foo contains #bar
-- `010100` -> __20__: #foo precedes #bar __and__ #foo contains #bar
+
+The returned number can also represent a bitmask matching multiple conditions. For example, if the returned number is __20__, which is the bitmask of `010100`, it means that #foo precedes #bar *and* #foo contains #bar.
 
 You can tests if the number returned by `$.fn.compare` matches any of these conditions by combining it with a [bitwise AND operator](https://developer.mozilla.org/en/JavaScript/Reference/Operators/Bitwise_Operators):
 

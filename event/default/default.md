@@ -19,10 +19,7 @@ To listen to a default event, just prefix the event with `default` namespace:
 
 ## Example
 
-Lets look at how you could build a simple tabs widget with default events.
-First with just jQuery:
-
-Default events are useful in cases where you want to provide an event based 
+Default events are useful in cases where you want to provide an event based
 API for users of your widgets.  Users can simply listen to your synthetic events and 
 prevent your default functionality by calling preventDefault.  
 

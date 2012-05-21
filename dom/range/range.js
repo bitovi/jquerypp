@@ -315,7 +315,7 @@ $.extend($.Range.prototype,
 				}
 			} else {
 				if(typeof set == "string"){
-					this.range.moveStart(parseInt(set,10))
+					this.range.moveStart('character', parseInt(set,10))
 				} else {
 					// get the current end container
 					var container = this.start().container,
@@ -392,7 +392,7 @@ $.extend($.Range.prototype,
 				}
 			} else {
 				if(typeof set == "string"){
-					this.range.moveEnd( parseInt(set,10) );
+					this.range.moveEnd('character', parseInt(set,10));
 				} else {
 					// get the current end container
 					var container = this.end().container,
