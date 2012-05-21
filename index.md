@@ -9,7 +9,7 @@ special events.
 
 Extensions:
 
- - [compare](#compare) two element's document position
+ - [jQuery.compare](#compare) - compare two element's document position
  - read and write [cookies](#cookie)
  - set and animate innerWidth and outerWidth element [dimensions](#dimensions)
  - serializes a [form](#formParams) into an object
@@ -24,16 +24,10 @@ Events:
  - [jQuery.event.drag](#drag) - delegatable drag events
  - [jQuery.event.drop](#drop) - delegatable drop events
  - [jQuery.event.hover](#hover) - delegatable hover events
- - [jQuery.event.key](#key) - get a string representation of the key pressed
+ - [jQuery.event.key](#key) - returns a string representation of the key pressed
  - [jQuery.event.pause](#pause) - pause and resume event propagation
  - [jQuery.event.resize](#resize) - listen to a resize event on every object
  - [jQuery.event.swipe](#swipe) - delegatable swipe events
-
-
-They are organized in two broad categories:
-
- - DOM Helpers - helpers to work with DOM function or improve jQuery performance
- - Events - jQuery special events
 
 ## Get jQuery++
 
