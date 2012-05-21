@@ -4,12 +4,30 @@ layout: default
 
 # Welcome to jQuery++
 
-jQuery++ is a collection of useful jQuery extensions and events.
+jQuery++ is a collection of useful jQuery extensions and 
+special events.
 
-They are organized in two broad categories:
+Extensions:
 
- - DOM Helpers - helpers to work with DOM function or improve jQuery performance
- - Events - jQuery special events
+ - [jQuery.compare](#compare) - compare element document position
+ - [jQuery.cookie](#cookie) - read and write cookies
+ - [jQuery.dimensions](#dimensions) - set and animate innerWidth and outerWidth
+ - [jQuery.formParams](#formParams) - serializes a form into an object
+ - [jQuery.range](#range) - create and manipulate text ranges
+ - [jQuery.selection](#selection) - get and set the current text selection
+ - [jQuery.styles](#styles) - quickly read computed styles
+ - [jQuery.within](#within) - get elements within an area or at a point
+
+Events:
+
+ - [jQuery.event.destroyed](#destroyed) - an element is removed from the DOM
+ - [jQuery.event.drag](#drag) - delegatable drag events
+ - [jQuery.event.drop](#drop) - delegatable drop events
+ - [jQuery.event.hover](#hover) - delegatable hover events
+ - [jQuery.event.key](#key) - returns a string representation of the key pressed
+ - [jQuery.event.pause](#pause) - pause and resume event propagation
+ - [jQuery.event.resize](#resize) - listen to a resize event on every object
+ - [jQuery.event.swipe](#swipe) - delegatable swipe events
 
 ## Get jQuery++
 
@@ -565,6 +583,20 @@ Help the community help you by using the [jQuery++ jsFiddle template](http://jsf
 Bitovi _(developers of jQuery++)_ offers [training](http://bitovi.com/training/) and [consulting](http://bitovi.com/consulting/) for your team. They can also provide private one-on-one support staffed by their JavaScript/Ajax experts. [Contact Bitovi](contact@bitovi.com) if you're interested.
 
 ## Why jQuery++
+
+### Fast
+
+Plugins like [styles](#styles) and [compare](#compare) can speed up your app.
+
+### Flexible
+
+Delegatable events makes it easy to integrate with libraries like [CanJS](http://canjs.us) and [Backbone].  Use 
+jQuery++ standalone, [StealJS], or [RequireJS].
+
+### Supported
+
+jQuery++ is developed by [Bitovi](http://bitovi.com).  We're active on the forums, but should the need 
+arise, can also be hired for paid support, training, and development.
 
 ## Developing jQuery++
 
