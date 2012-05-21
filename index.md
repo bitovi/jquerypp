@@ -585,6 +585,21 @@ Bitovi _(developers of jQuery++)_ offers [training](http://bitovi.com/training/)
 
 ## Why jQuery++
 
+### Fast
+
+Plugins like [styles](#styles) and [compare](#compare) can speed up your app.
+
+### Flexible
+
+Delegatable events makes it easy to integrate with libraries like [CanJS](http://canjs.us) and [Backbone].  Use 
+jQuery++ with
+
+### Easy
+
+
+
+### Supported
+
 ## Developing jQuery++
 
 To develop jQuery++, add features, etc, you first must install DoneJS. DoneJS is the
