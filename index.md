@@ -35,6 +35,27 @@ Events:
 
 Check the files you want to download and a zip file will be created. The zip file will contain each individual plugin, and a combined version of all plugins minified and unminified.
 
+<form id="builder" method="get" action="http://bitbuilder.herokuapp.com/donejs" target="_blank">
+  <h4>DOM Helpers</h4>
+  <div><input type="checkbox" value="jquery/dom/compare" name="plugins" /><label>jQuery.compare</label></div>
+  <div><input type="checkbox" value="jquery/dom/dimensions" name="plugins" /><label>jQuery.dimensions</label></div>
+  <div><input type="checkbox" value="jquery/dom/form_params" name="plugins" /><label>jQuery.formParams</label></div>
+  <div><input type="checkbox" value="jquery/dom/range" name="plugins" /><label>jQuery.range</label></div>
+  <div><input type="checkbox" value="jquery/dom/selection" name="plugins" /><label>jQuery.selection</label></div>
+  <div><input type="checkbox" value="jquery/dom/styles" name="plugins" /><label>jQuery.styles</label></div>
+  <div><input type="checkbox" value="jquery/dom/within" name="plugins" /><label>jQuery.within</label></div>
+  <h4>Events</h4>
+  <div><input type="checkbox" value="jquery/event/destroyed" name="plugins" /><label>jQuery.event.destroyed</label></div>
+  <div><input type="checkbox" value="jquery/event/drag" name="plugins" /><label>jQuery.event.drag</label></div>
+  <div><input type="checkbox" value="jquery/event/drop" name="plugins" /><label>jQuery.event.drop</label></div>
+  <div><input type="checkbox" value="jquery/event/hover" name="plugins" /><label>jQuery.event.hover</label></div>
+  <div><input type="checkbox" value="jquery/event/key" name="plugins" /><label>jQuery.event.key</label></div>
+  <div><input type="checkbox" value="jquery/event/pause" name="plugins" /><label>jQuery.event.pause</label></div>
+  <div><input type="checkbox" value="jquery/event/resize" name="plugins" /><label>jQuery.event.resize</label></div>
+  <div><input type="checkbox" value="jquery/event/swipe" name="plugins" /><label>jQuery.event.swipe</label></div>
+  <button type="submit">Download</button>
+</form>
+
 ### Using Steal
 
 The files needed for using jQuery++ with [StealJS](http://javascriptmvc.com/docs.html#!stealjs) are located in the `steal/` folder. Take the `jquery/` folder and put it in your steal root. Make sure to use `steal.map` to map any dependency of `jquery` to your jQuery library. For example, when using jQuery++ with [CanJS](http://canjs.us) and Steal, use this:
@@ -68,7 +89,7 @@ require.config({
 
 > Note: Starting at version 1.7 jQuery will define itself as an AMD module if a loader is available. There is no need to create a wrapper.
 
-<h2 class="special">DOM HELPERS</h2>
+## DOM HELPERS
 
 ## compare `$(elA).compare(elB) -> Number`
 
@@ -272,7 +293,7 @@ Move the mouse in the following example and it will show the ids for `div` eleme
 
 > [jQuery.event.drag](http://donejs.com/docs.html#!jQuery.event.drag) uses *jQuery.within* to determine dropable elements at the current position.
 
-<h2 class="special">EVENTS</h2>
+## EVENTS
 
 ## destroyed `destroyed`
 
@@ -457,6 +478,14 @@ The following key names are mapped by default:
 
 [jQuery.event.pause](http://donejs.com/docs.html#!jQuery.event.pause) adds a default event handler, `event.pause()` and `event.resume()` for pausing and resuming event propagation and `$.fn.triggerAsync` for triggering an event asynchronously and executing a callback when propagation is finished.
 
+### Example
+
+`event.pause()`, `event.resume()`, `$.fn.triggerAsync` and default events can be very helpful when creating event oriented widgets. The following example implements a `tabs` jQuery plugin that triggers a `show` event when a tab is selected and, by default, shows that tab.
+
+A user of the plugin can intercept that `show` event to change that behavior. In this example the second tab should only show if the checkbox from the first step is checked and after the first tab has done some asynchronous processing (like saving its state to the server):
+
+<iframe style="width: 100%; height: 350px" src="http://jsfiddle.net/TPB8P/embedded/result,html,js,css" allowfullscreen="allowfullscreen" frameborder="0">JSFiddle</iframe>
+
 ### triggerAsync `$(el).triggerAsync(event, [success], [prevented])`
 
 [jQuery.fn.triggerAsync](http://donejs.com/docs.html#!jQuery.fn.triggerAsync) triggers an event and calls a *success* handler when it has finished propagating through the DOM and no handler called `event.preventDefault()` or returned `false`. The *prevented* callback will be used otherwise:
@@ -500,14 +529,6 @@ $('#todos').on('show', function(ev){
 });
 {% endhighlight %}
 
-### Example
-
-`event.pause()`, `event.resume()`, `$.fn.triggerAsync` and default events can be very helpful when creating event oriented widgets. The following example implements a `tabs` jQuery plugin that triggers a `show` event when a tab is selected and, by default, shows that tab.
-
-A user of the plugin can intercept that `show` event to change that behavior. In this example the second tab should only show if the checkbox from the first step is checked and after the first tab has done some asynchronous processing (like saving its state to the server):
-
-<iframe style="width: 100%; height: 350px" src="http://jsfiddle.net/TPB8P/embedded/result,html,js,css" allowfullscreen="allowfullscreen" frameborder="0">JSFiddle</iframe>
-
 ## resize `resize`
 
 [jQuery.event.resize](http://donejs.com/docs.html#!jQuery.event.resize) allows you to listen to `resize` events on arbitrary elements. Unlike other events that bubble from the target element to the document the `resize` event will propagate from the outside-in.
@@ -516,7 +537,7 @@ This means that outside elements will always resize first. Trigger the `resize` 
 The following example will always resize to it's full parent width and height
 
 {% highlight javascript %}
-$('#foo').on('resize', function(){
+$('#foo').on('resize', function() {
   var parent = $(this).parent();
   $(this).width(parent.width()).height(parent.height());
 })
@@ -526,7 +547,7 @@ $(document.body).resize();
 
 The `resize` event makes creating application like layouts a lot easier. The following example creates a common layout with top, left, right and center elements within a container. Use the blue square to resize the outside container. The `resize` event will take care of adjusting the dimensions of the inside elements accordingly using the [jQuery.dimensions](#dimensions) plugin:
 
-<iframe style="width: 100%; height: 350px" src="http://jsfiddle.net/TcB5y/embedded/result,html,js,css" allowfullscreen="allowfullscreen" frameborder="0">JSFiddle</iframe>
+<iframe style="width: 100%; height: 350px" src="http://jsfiddle.net/3dRGM/embedded/result,html,js,css" allowfullscreen="allowfullscreen" frameborder="0">JSFiddle</iframe>
 
 ## swipe `swipeleft` `swiperight` `swipeup` `swipedown` `swipe`
 

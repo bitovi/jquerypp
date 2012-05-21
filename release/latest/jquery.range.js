@@ -11,9 +11,7 @@
  * - `000010` -> __2__: #bar precedes #foo
  * - `000100` -> __4__: #foo precedes #bar
  * - `001000` -> __8__: #bar contains #foo
- * - `001010` -> __10__: #bar precedes #foo __and__ #bar contains #foo
  * - `010000` -> __16__: #foo contains #bar
- * - `010100` -> __20__: #foo precedes #bar __and__ #foo contains #bar
  *
  * You can check for any of these conditions using a bitwise AND:
  *
@@ -128,31 +126,43 @@ support = {};
  *   - __TextRange__ a raw text range object.
  */
 $.Range = function(range){
+	// If it's called w/o new, call it with new!
 	if(this.constructor !== $.Range){
 		return new $.Range(range);
 	}
+	// If we are passed a jQuery-wrapped element, get the raw element
 	if(range && range.jquery){
 		range = range[0];
 	}
-	// create one
+	// If we have an element, or nothing
 	if(!range || range.nodeType){
+		// create a range
 		this.win = getWindow(range)
 		if(this.win.document.createRange){
 			this.range = this.win.document.createRange()
 		}else{
 			this.range = this.win.document.body.createTextRange()
 		}
+		// if we have an element, make the range select it
 		if(range){
 			this.select(range)
 		}
-		
-	} else if (range.clientX != null || range.pageX != null || range.left != null) {
-		this.moveToPoint(range)
-	} else if (range.originalEvent && range.originalEvent.touches && range.originalEvent.touches.length) {
+	} 
+	// if we are given a point
+	else if (range.clientX != null || range.pageX != null || range.left != null) {
+		this.moveToPoint(range);
+	} 
+	// if we are given a touch event
+	else if (range.originalEvent && range.originalEvent.touches && range.originalEvent.touches.length) {
 		this.moveToPoint(range.originalEvent.touches[0])
-	} else if (range.originalEvent && range.originalEvent.changedTouches && range.originalEvent.changedTouches.length) {
+	
+	} 
+	// if we are a normal event
+	else if (range.originalEvent && range.originalEvent.changedTouches && range.originalEvent.changedTouches.length) {
 		this.moveToPoint(range.originalEvent.changedTouches[0])
-	} else {
+	} 
+	// given a TextRange or something else?
+	else {
 		this.range = range;
 	} 
 };
@@ -364,12 +374,29 @@ $.extend($.Range.prototype,
 				if(typeof set == 'number'){
 					this.range.setStart(this.range.startContainer, set)
 				} else if(typeof set == 'string') {
-					this.range.setStart(this.range.startContainer, this.range.startOffset+ parseInt(set,10) );
+					var res = callMove(this.range.startContainer, this.range.startOffset, parseInt(set,10))
+					this.range.setStart(res.node, res.offset );
 				} else {
 					this.range.setStart(set.container, set.offset)
 				}
 			} else {
-				throw 'todo'
+				if(typeof set == "string"){
+					this.range.moveStart(parseInt(set,10))
+				} else {
+					// get the current end container
+					var container = this.start().container,
+						offset
+					if(typeof set == "number") {
+						offset = set
+					} else {
+						container = set.container
+						offset = set.offset
+					}
+					var newPoint = $.Range(container).collapse();
+					//move it over offset characters
+					newPoint.range.move(offset);
+					this.move("START_TO_START",newPoint);
+				}
 			}
 			return this;
 		}
@@ -423,11 +450,30 @@ $.extend($.Range.prototype,
 			if (this.range.setEnd) {
 				if(typeof set == 'number'){
 					this.range.setEnd(this.range.endContainer, set)
+				} else if(typeof set == 'string') {
+					var res = callMove(this.range.endContainer, this.range.endOffset, parseInt(set,10))
+					this.range.setEnd(res.node, res.offset );
 				} else {
 					this.range.setEnd(set.container, set.offset)
 				}
 			} else {
-				throw 'todo'
+				if(typeof set == "string"){
+					this.range.moveEnd( parseInt(set,10) );
+				} else {
+					// get the current end container
+					var container = this.end().container,
+						offset
+					if(typeof set == "number") {
+						offset = set
+					} else {
+						container = set.container
+						offset = set.offset
+					}
+					var newPoint = $.Range(container).collapse();
+					//move it over offset characters
+					newPoint.range.move(offset);
+					this.move("END_TO_START",newPoint);
+				}
 			}
 			return this;
 		}
@@ -733,6 +779,60 @@ var iterate = function(elems, cb){
 	}
 
 }, 
+isText = function(node){
+	return node.nodeType === 3 || node.nodeType === 4
+},
+iteratorMaker = function(toChildren, toNext){
+	return function( node, mustMoveRight ) {
+		// first try down
+		if(node[toChildren] && !mustMoveRight){
+			return isText(node[toChildren]) ? 
+				node[toChildren] :
+			 	arguments.callee(node[toChildren])
+		} else if(node[toNext]) {
+			return isText(node[toNext]) ? 
+				node[toNext] :
+			 	arguments.callee(node[toNext])
+		} else if(node.parentNode){
+			return arguments.callee(node.parentNode, true)
+		}
+	}
+},
+getNextTextNode = iteratorMaker("firstChild","nextSibling"),
+getPrevTextNode = iteratorMaker("lastChild","previousSibling"),
+callMove = function(container, offset, howMany){
+	if(isText(container)){
+		return move(container, offset+howMany)
+	} else {
+		return container.childNodes[offset] ?
+			move(container.childNodes[offset] , howMany) :
+			move(container.lastChild, howMany , true)
+		return 
+	}
+},
+move = function(from, howMany, adjust){
+	var mover = howMany < 0 ? 
+		getPrevTextNode : getNextTextNode;
+		
+	howMany = Math.abs(howMany);
+	
+	if(!isText(from)){
+		from = mover(from)
+	}
+	if(adjust){
+		//howMany = howMany + from.nodeValue.length
+	}
+	while(from && howMany >= from.nodeValue.length){
+		hasMany  = howMany- from.nodeValue.length;
+		from = mover(from)
+	}
+	return {
+		node: from,
+		offset: mover === getNextTextNode ?
+			howMany : 
+			from.nodeValue.length - howMany
+	}
+},
 supportWhitespace,
 isWhitespace = function(el){
 	if(supportWhitespace == null){
