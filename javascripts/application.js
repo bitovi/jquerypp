@@ -297,8 +297,10 @@ $(function() {
 		new Menu($('#wrapper'), 'html,body');
 	}
 
-	$('a[href$=#dom_helpers], a[href$=#events]').prepend('<span class="special">&#x2605;</span>')
-
+	$('a[href$=#dom_helpers], a[href$=#events]').prepend('<span class="special">&#x2605;</span>');
+	$('#builder input[type="checkbox"]').on('click', function() {
+		$('#builder button').attr('disabled', $('#builder input:checked').length === 0);
+	});
 
 	// google analytics
 	var _gaq = _gaq || [];
