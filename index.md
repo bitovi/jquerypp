@@ -4,7 +4,19 @@ layout: default
 
 # Welcome to jQuery++
 
-jQuery++ is a collection of useful jQuery extensions and events.
+jQuery++ is a collection of useful jQuery extensions and 
+special events.
+
+ - [jQuery.compare](#compare) - compare two element's document position.
+ - [jQuery.cookie](#cookie) - read and write cookies
+ - [jQuery.dimensions](#dimensions) - set and animate innerWidth and outerWidth
+ - [jQuery.formParam](#formParams) - serializes a form into an object
+ - [jQuery.range](#range) - create and manipulate ranges
+ - [jQuery.selection](#selection) - get and set the current text selection
+ - [jQuery.styles](#styles) - quickly read computed styles
+ - [jQuery.within](#within) - get elements at a certain position
+ - [jQuery.event.destroyed] - listen to when an element is removed from the DOM
+
 
 They are organized in two broad categories:
 
