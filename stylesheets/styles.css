@@ -36,7 +36,7 @@ table {
 .cf:after { clear: both }
 .cf { zoom: 1 }
 body {
-	background: url(../images/body.png);
+	background-color: #885B4B;/*url(../images/body.png);*/
 	background-attachment: fixed;
 	font-family: Helvetica,"Lucida Grande","Lucida Sans",Arial,Helvetica,sans-serif;
 	font-size: 10px;
@@ -116,7 +116,7 @@ em {
 #menu a:hover,
 #menu a.active {
 	color: white;
-	background: #EE2435;
+	background: #BB380A;
 	text-shadow: none;
 }
 #menu a.heading-1 {
