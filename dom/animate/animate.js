@@ -2,7 +2,7 @@ steal('jquery', 'jquery/dom/styles').then(function () {
 
 	var animationNum = 0,
 	//Animation events implies animations right?
-		suportsAnimations = !!window.WebKitAnimationEvent;
+		supportsAnimations = !!window.WebKitAnimationEvent;
 
 	//gets the last editable stylesheet or creates one
 	var getLastStyleSheet = function () {
@@ -41,7 +41,30 @@ steal('jquery', 'jquery/dom/styles').then(function () {
 					return;
 				}
 			}
-		}
+		},
+		/**
+		 * Returns whether the animation should be passed to the original
+		 * $.fn.animate.
+		 */
+		passThrough = function(props, ops) {
+			var nonElement = !(this[0] && this[0].nodeType),
+				isInline = !nonElement && jQuery(this).css("display") === "inline" && jQuery(this).css("float") === "none";
+
+			for(var name in props) {
+				console.log(name, $.isArray(props[name]))
+				if(props[name] == 'show' || props[name] == 'hide' // jQuery does something with these two values
+					|| $.isArray(props[name]) // Array for individual easing
+					|| props[name] < 0) { // Can't animate negative properties
+					return true;
+				}
+			}
+			return !supportsAnimations ||
+				$.isEmptyObject(props) || // Animating empty properties
+				($.isPlainObject(ops) || // Second parameter is an object - anifast only handles numbers
+				typeof ops == 'string') || // Second parameter is a string lik 'slow'
+				isInline || nonElement;
+		},
+		oldanimate = $.fn.animate;
 
 	// essentially creates webkit keyframes and points the element to that
 	/**
@@ -56,10 +79,9 @@ steal('jquery', 'jquery/dom/styles').then(function () {
 	 * @return {jQuery} The jQuery element
 	 */
 	$.fn.anifast = function (props, speed, callback) {
-
 		//default to normal animations if browser doesn't support them
-		if (!suportsAnimations) {
-			return this.animate(props, speed, callback)
+		if (passThrough.apply(this, arguments)) {
+			return oldanimate.apply(this, arguments);
 		}
 
 		if($.isFunction(speed)) {
