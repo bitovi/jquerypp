@@ -3,11 +3,22 @@
 
 `jQuery.animate` adds `[jQuery.fn.anifast jQuery.fn.anifast(properties, duration, callback)]`
 which allows you to animate properties using CSS animations, if supported.
-If the browser doesn't support CSS animations, [jQuery .animate()](http://api.jquery.com/animate/) will be used.
+If the browser doesn't support CSS animations, [jQuery.fn.animate()](http://api.jquery.com/animate/) will be used.
+
+## Compatibility
+
+`jQuery.fn.animate` is mostly compatible with `jQuery.fn.animate` which will also be used as a fallback when
+
+- The browser doesn't support animations (checked with `window.WebKitAnimationEvent`)
+- The duration is not a number (like a string or a settings object)
+- A property is set to `show` or `hide` which is used by jQuery to set the original property
+- The properties are empty
+- The elements are not DOM nodes (e.g. created with `$({ test : 'object' })`)
+- The element is displayed `inline`
 
 ## Example
 
-This makes it possible to create a fade in effect using CSS animations like this:
+The following example creates a fade-in effect using CSS animations:
 
     $('#element').css({
       opacity : 0

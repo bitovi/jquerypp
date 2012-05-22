@@ -71,11 +71,13 @@ steal('jquery', 'jquery/dom/styles').then(function () {
 	 * @function jQuery.fn.anifast
 	 * @parent jQuery.animate
 	 *
-	 * Uses CSS animations if available.
+	 * Animate CSS properties using native CSS animations, if possible.
+	 * Uses [jQuery.fn.animate()](http://api.jquery.com/animate/) otherwise.
 	 *
-	 * @param props
-	 * @param speed
-	 * @param callback
+	 * @param {Object} props The CSS properties to animate
+	 * @param {Integer|String|Object} [speed=400] The animation duration in ms.
+	 * Will use jQuery.fn.animate if a string or object is passed
+	 * @param {Function} [callback] A callback to execute once the animation is complete
 	 * @return {jQuery} The jQuery element
 	 */
 	$.fn.anifast = function (props, speed, callback) {
