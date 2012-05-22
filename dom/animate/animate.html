@@ -5,13 +5,16 @@
     </head>
     <body>
     <style type="text/css">
-      #animated {
-        background-color: red;
-        height: 100px;
+      #block {
+        background-color:#bca;
+        width:100px;
+        border:1px solid green;
       }
     </style>
 <div id="demo-html">
-<div id="animated">This is an animated div</div>
+  <button id="go">&raquo; Run</button>
+
+  <div id="block">Hello!</div>
 </div>
 <div style='clear:both'></div>
 <script type='text/javascript'
@@ -19,7 +22,15 @@
 </script>
 <script type='text/javascript' id="demo-source">
 steal('jquery/dom/animate').then(function(){
-  $('#animated').anifast({ width :200, height: 300 }, 2000);
+  $("#go").click(function(){
+    $("#block").animate({
+      width: "70%",
+      opacity: 0.4,
+      marginLeft: "0.6in",
+      fontSize: "3em",
+      borderWidth: "10px"
+    }, 1500 );
+  });
 });
 </script>
 </body>

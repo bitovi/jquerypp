@@ -1,4 +1,4 @@
-steal('jquery').then(function () {
+steal('jquery', 'jquery/dom/styles').then(function () {
 
 	var animationNum = 0,
 	//Animation events implies animations right?
@@ -70,8 +70,8 @@ steal('jquery').then(function () {
 			to = "",
 			self = this,
 			prop,
-			animationName = "animate" + (animationNum++)					//the animation keyframe name are going to create
-		style = "@-webkit-keyframes " + animationName + " { from {";	//the text for the keyframe
+			animationName = "animate" + (animationNum++), //the animation keyframe name are going to create
+			style = "@-webkit-keyframes " + animationName + " { from {";	//the text for the keyframe
 
 		for (prop in props) {
 			current[prop] = this.css(prop);
@@ -79,15 +79,26 @@ steal('jquery').then(function () {
 			style += prop + " : " + current[prop] + "; ";
 			to += prop + " : " + props[prop] + "; ";
 		}
+
+//		for(prop in props) {
+//			properties.push(prop);
+//		}
+//		current = this.styles.apply(this, properties);
+//		$.each(properties, function(i, prop) {
+//			self.css(props, "") //clear property
+//			style += prop + " : " + current[prop] + "; ";
+//			to += prop + " : " + props[prop] + "; ";
+//		})
+
 		style += "} to {" + to + " }}"
 
-		// get teh last sheet and insert this rule into it
-		var lastSheet = getLastStyleSheet(),
-			index = lastSheet.insertRule(style, lastSheet.cssRules.length);
+		// get the last sheet and insert this rule into it
+		var lastSheet = getLastStyleSheet();
+		lastSheet.insertRule(style, lastSheet.cssRules.length);
 
 		// set this element to point to that animation
 		this.css({
-			"-webkit-animation-duration" : speed + "ms",
+			"-webkit-animation-duration" : (speed ||400) + "ms",
 			"-webkit-animation-name" : animationName
 		})
 
