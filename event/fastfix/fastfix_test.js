@@ -28,7 +28,7 @@ steal("jquery/event/fastfix",
 		};
 
 		jQuery("#foo").bind("foo", handler);
-		jQuery("#foo").live("foo", handler);
+//		jQuery("#foo").live("foo", handler);
 //		jQuery("div").delegate("#foo", "foo", handler);
 
 		jQuery("#foo").trigger("foo", 0);
@@ -1277,7 +1277,6 @@ steal("jquery/event/fastfix",
 				ok("keyCode" in event, "Special property 'keyCode' exists");
 				equal(event.keyCode, 64, "event.keyCode has explicit value '64'");
 			};
-
 		// Supports jQuery.Event implementation
 		equal(event.type, "keydown", "Verify type");
 

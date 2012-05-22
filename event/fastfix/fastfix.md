@@ -25,10 +25,9 @@ jQuery creates and normalizes the `jQuery.Event` from the raw event in `jQuery.e
 
 ## Using ES5 getters
 
-`jQuery.event.fastfix` uses ECMASCript 5 getters which allows `jQuery.event.fix` to avoid copying every
-property and normalizing it for every event.
-Instead getters can do this on-demand.
-That is, they can lookup the `originalEvent`'s value and normalize it if needed.
+`jQuery.event.fastfix` uses ECMASCript 5 getters for browser that [support defineProperty](http://kangax.github.com/es5-compat-table/)
+which allows `jQuery.event.fix` to avoid copying every property and normalizing it for every event.
+Instead getters can do this on-demand. That is, they can lookup the `originalEvent`'s value and normalize it if needed.
 `jQuery.event.fastfix` goes through the list of properties that `jQuery.event.fix` copies and creates getters for each one.
 
 In the getter, it checks if that property is special (needs normalizing) and uses that properties special
@@ -38,4 +37,3 @@ function to normalize the value.
 
 A [basic JSPerf](http://jsperf.com/jquery-event-fix/3) of `jQuery.event.fastfix` shows a
 3 to 4 times performance improvement compared to the original `jQuery.event.fix`.
-http://kangax.github.com/es5-compat-table/
