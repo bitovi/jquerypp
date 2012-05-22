@@ -1,4 +1,4 @@
-(function(){
+steal('jquery', function() {
     // http://bitovi.com/blog/2012/04/faster-jquery-event-fix.html
     // https://gist.github.com/2377196
 
@@ -85,4 +85,4 @@
             return event;
     }
     
-})();
+});

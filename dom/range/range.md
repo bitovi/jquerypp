@@ -11,7 +11,7 @@ An instance of $.Range offers the following methods:
 * `[jQuery.Range.prototype.collapse collapse]` - clones the range and returns a new `$.Range` object
 * `[jQuery.Range.prototype.compare compare]` - compares one range to another range
 * `[jQuery.Range.prototype.end end]` - sets or returns the end of the range
-* [jQuery.Range.prototype.move move]` - move the endpoints of a range relative to another range
+* `[jQuery.Range.prototype.move move]` - move the endpoints of a range relative to another range
 * `[jQuery.Range.prototype.overlaps overlaps]` - returns if any portion of these two ranges overlap
 * `[jQuery.Range.prototype.parent parent]` - returns the most common ancestor element of the endpoints in the range
 * `[jQuery.Range.prototype.rect rect]` - returns the bounding rectangle of this range

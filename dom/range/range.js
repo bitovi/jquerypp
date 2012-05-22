@@ -6,7 +6,7 @@ steal('jquery','jquery/dom/compare').then(function($){
  * @function jQuery.fn.range
  * @parent jQuery.Range
  * 
- * Returns a jQuery.Range for the selected element.
+ * `jQuery.fn.range` returns a jQuery.Range for the selected element.
  * 
  *     $('#content').range()
  *
