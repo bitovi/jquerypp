@@ -4,8 +4,14 @@
         <title>Animate Demo</title>
     </head>
     <body>
+    <style type="text/css">
+      #animated {
+        background-color: red;
+        height: 100px;
+      }
+    </style>
 <div id="demo-html">
-
+<div id="animated">This is an animated div</div>
 </div>
 <div style='clear:both'></div>
 <script type='text/javascript'
@@ -13,7 +19,7 @@
 </script>
 <script type='text/javascript' id="demo-source">
 steal('jquery/dom/animate').then(function(){
-
+  $('#animated').anifast({ width :200, height: 300 }, 2000);
 });
 </script>
 </body>

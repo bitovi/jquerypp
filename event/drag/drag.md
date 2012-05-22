@@ -2,7 +2,7 @@
 @parent jquerypp
 
 `jQuery.event.drag` provides drag events for jQuery.
-A jQuery.Drag instance is created on a drag and passed
+A [jQuery.Drag] instance is created on a drag and passed
 as a parameter to the drag event handlers.  By calling
 methods on the drag event, you can alter the drag's
 behavior.

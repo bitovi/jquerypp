@@ -3,7 +3,7 @@
 @test jquery/dom/compare/qunit.html
 @plugin dom/compare
 
-`jQuery.compare` adds `$.fn.compare` which compares the position of two nodes and returns a number representing
+`jQuery.compare` adds `[jQuery.fn.compare jQuery.fn.compare(element)]` which compares the position of two nodes and returns a number representing
 a bitmask detailing how they are positioned relative to each other.
 
     $('#foo').compare($('#bar')) //-> Number

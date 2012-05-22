@@ -1,4 +1,5 @@
 steal(
+	"jquery/dom/animate",
 	"jquery/dom/compare",
 	"jquery/dom/cookie",
 	"jquery/dom/dimensions",

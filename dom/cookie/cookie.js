@@ -6,12 +6,12 @@ steal('jquery/lang/json',function() {
      * @plugin jquery/dom/cookie
      * @author Klaus Hartl/klaus.hartl@stilbuero.de
      *
-     * `jQuery.cookie` is the [jQuery cookie plugin](https://github.com/carhartl/jquery-cookie) for
-     * easily manipulating cookies written by [Klaus Hartl](stilbuero.de).
-     * It is dual licensed under the [MIT](http://www.opensource.org/licenses/mit-license.php)
+     * `jQuery.cookie(name, [value], [options])` lets you create, read and remove cookies. It is the
+     * [jQuery cookie plugin](https://github.com/carhartl/jquery-cookie) written by [Klaus Hartl](stilbuero.de)
+     * and dual licensed under the [MIT](http://www.opensource.org/licenses/mit-license.php)
      * and [GPL](http://www.gnu.org/licenses/gpl.html) licenses.
      *
-	 * ## Quick Examples</h3>
+	 * ## Examples
 	 * 
 	 * Set the value of a cookie.
 	 *  

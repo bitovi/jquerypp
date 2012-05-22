@@ -593,9 +593,8 @@ steal('jquery/event', 'jquery/lang/vector', 'jquery/event/livehack', function( $
 	/**
 	 * @attribute draginit
 	 *
-	 * `draginit` is triggered when the drag motion starts. The event handler gets
-	 * an instance of [jQuery.Drag] passed as the second parameter. Use it to customize
-	 * the drag behavior:
+	 * `draginit` is triggered when the drag motion starts. Use it to customize the drag behavior
+	 * using the [jQuery.Drag] instance passed as the second parameter:
 	 *
 	 *      $(".draggable").on('draginit', function(ev, drag) {
 	 *          // Only allow vertical drags

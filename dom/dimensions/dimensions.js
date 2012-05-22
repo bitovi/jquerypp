@@ -18,7 +18,8 @@ $.each({
  * @function jQuery.fn.outerWidth
  * @parent jQuery.dimensions
  *
- * Lets you set the outer width of an object where:
+ * `jQuery.fn.outerWidth([value], [includeMargins])` lets you set
+ * the outer width of an object where:
  *
  *      outerWidth = width + padding + border + (margin)
  *
@@ -46,7 +47,7 @@ width:
  * @function jQuery.fn.innerWidth
  * @parent jQuery.dimensions
  *
- * Lets you set the inner width of an element where
+ * `jQuery.fn.innerWidth([value])` lets you set the inner width of an element where
  * 
  *      innerWidth = width + padding
  *      
@@ -70,7 +71,8 @@ width:
  * @function jQuery.fn.outerHeight
  * @parent jQuery.dimensions
  *
- * Lets you set the outer height of an object where:
+ * `jQuery.fn.outerHeight([value], [includeMargins])` lets
+ * you set the outer height of an object where:
  *
  *      outerHeight = height + padding + border + (margin)
  *
@@ -98,7 +100,7 @@ height:
  * @function jQuery.fn.innerHeight
  * @parent jQuery.dimensions
  *
- * Lets you set the inner height of an element where
+ * `jQuery.fn.innerHeight([value])` lets you set the inner height of an element where
  *
  *      innerHeight = height + padding
  *
