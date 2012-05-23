@@ -59,17 +59,17 @@ require.config({
 
 ## DOM HELPERS
 
-## animation `$(el).anifast(properties, [speed], [callback]) -> jQuery`
+## animation `$(el).animate(properties, [speed], [callback]) -> jQuery`
 
-[jQuery.animate](http://donejs.com/docs.html#!jQuery.animate) adds `$.fn.anifast` which works similar to jQuery
-[$.fn.animate](http://api.jquery.com/animate/) but uses browser native CSS animations. It will fall
-back to `$.fn.animate` if a CSS animation is not possible.
+[jQuery.animate](http://donejs.com/docs.html#!jQuery.animate) overwrites `$.fn.animate` to use CSS 3 animations, if possible.
+It takes the same arguments as the original [$.fn.animate](http://api.jquery.com/animate) and will fall back to it if a CSS animation
+is not possible.
 
 A fade-in effect using a CSS animation can be implemented like this:
 
     $('#element').css({
       opacity : 0
-    }).anifast({
+    }).animate({
       opacity : 1
     }, 1000, function() {
       console.log('Animation done');
@@ -77,8 +77,6 @@ A fade-in effect using a CSS animation can be implemented like this:
 
 
 ## compare `$(elA).compare(elB) -> Number`
-
-[jquery.compare.js](release/latest/jquery.compare.js)
 
 [jQuery.compare](http://donejs.com/docs.html#!jQuery.compare) adds `$.fn.compare` to compare the position of two nodes. It returns a number that represents a bitmask showing how they are positioned relative to each other. The following list shows the `bitmask`, the __number__ and what it means for a `$.fn.compare` call like `$('#foo').compare($('#bar'))`:
 
@@ -393,12 +391,15 @@ The following example shows two draggable elements and a drop area. When a drag 
 
 ## fastfix
 
-[jQuery.event.fastfix](http://donejs.com/docs.html#!jQuery.event.fastfix) speeds up `jQuery.event.fix` using ECMAScript 5
+[jQuery.event.fastfix](http://donejs.com/docs.html#!jQuery.event.fastfix) speeds up `jQuery.event.fix` by using ECMAScript 5
 getters. `jQuery.event.fix` is used to normalize a DOM event before it gets passed as a
-[jQuery.Event](http://api.jquery.com/category/events/event-object/) instance to event handlers.
+[jQuery.Event](http://api.jquery.com/category/events/event-object/) instance to event handlers. This is usually done by
+*copying* the properties from the DOM event. `jQuery.event.fastfix` uses ES 5 getters to access these properties
+only when they are needed and without copying.
 
-The following chart shows the [performance improvement](http://jsperf.com/jquery-event-fix) for major browser when using
-`jQuery.event.fastfix`:
+Since `jQuery.event.fix` usually takes up a major portion of an applications runtime, using `jQuery.event.fastfix`
+can significantly improve overall performance. The following chart [compares the
+performance](http://jsperf.com/jquery-event-fix) of the original `jQuery.event.fix` and `jQuery.event.fastfix` in major browsers:
 
 ![jQuery.event.fastfix performance](images/fastfix.png)
 
