@@ -1,5 +1,5 @@
 steal('jquery/dom/animate',
-	'funcunit/qunit').then(function () {
+	'funcunit/qunit').then('./qunit.css', function () {
 
 	module("jquery/dom/animate");
 
@@ -196,7 +196,7 @@ steal('jquery/dom/animate',
 		stop();
 		var hash = {opacity : "show"};
 		var hashCopy = jQuery.extend({}, hash);
-		jQuery("#foo").anifast(hash, 0, function () {
+		jQuery("#foo").animate(hash, 0, function () {
 			equal(hash.opacity, hashCopy.opacity, "Check if animate changed the hash parameter");
 			start();
 		});
@@ -205,7 +205,7 @@ steal('jquery/dom/animate',
 	test("animate negative height", function () {
 		expect(1);
 		stop();
-		jQuery("#foo").anifast({ height : -100 }, 100, function () {
+		jQuery("#foo").animate({ height : -100 }, 100, function () {
 			equal(this.offsetHeight, 0, "Verify height.");
 			start();
 		});
@@ -222,7 +222,7 @@ steal('jquery/dom/animate',
 		if (jQuery.support.inlineBlockNeedsLayout || expected === "inline-block") {
 			stop();
 
-			jQuery("#foo").css({ display : "inline", width : "", height : "" }).anifast({ width : 42, height : 42 }, 100, function () {
+			jQuery("#foo").css({ display : "inline", width : "", height : "" }).animate({ width : 42, height : 42 }, 100, function () {
 				equal(jQuery(this).css("display"), jQuery.support.inlineBlockNeedsLayout ? "inline" : "inline-block", "inline-block was set on non-floated inline element when animating width/height");
 				equal(this.offsetWidth, 42, "width was animated");
 				equal(this.offsetHeight, 42, "height was animated");
@@ -250,7 +250,7 @@ steal('jquery/dom/animate',
 			jQuery("#foo").css({ display : "", width : "", height : "" })
 				.append("<span>text</span>")
 				.children("span")
-				.anifast({ width : 42, height : 42 }, 100, function () {
+				.animate({ width : 42, height : 42 }, 100, function () {
 					equal(jQuery(this).css("display"), "inline-block", "inline-block was set on non-floated inline element when animating width/height");
 					equal(this.offsetWidth, 42, "width was animated");
 					equal(this.offsetHeight, 42, "height was animated");
@@ -268,7 +268,7 @@ steal('jquery/dom/animate',
 	test("animate block width/height", function () {
 		expect(3);
 		stop();
-		jQuery("#foo").css({ display : "block", width : 20, height : 20 }).anifast({ width : 42, height : 42 }, 100, function () {
+		jQuery("#foo").css({ display : "block", width : 20, height : 20 }).animate({ width : 42, height : 42 }, 100, function () {
 			equal(jQuery(this).css("display"), "block", "inline-block was not set on block element when animating width/height");
 			equal(this.offsetWidth, 42, "width was animated");
 			equal(this.offsetHeight, 42, "height was animated");
@@ -282,7 +282,7 @@ steal('jquery/dom/animate',
 
 		var displayMode = jQuery("#table").css("display") !== "table" ? "block" : "table";
 
-		jQuery("#table").anifast({ width : 42, height : 42 }, 100, function () {
+		jQuery("#table").animate({ width : 42, height : 42 }, 100, function () {
 			equal(jQuery(this).css("display"), displayMode, "display mode is correct");
 			start();
 		});
@@ -299,7 +299,7 @@ steal('jquery/dom/animate',
 		// IE<8 uses "block" instead of the correct display type
 		var displayMode = tr.css("display") !== "table-row" ? "block" : "table-row";
 
-		tr.anifast({ width : 10, height : 10 }, 100, function () {
+		tr.animate({ width : 10, height : 10 }, 100, function () {
 			equal(jQuery(this).css("display"), displayMode, "display mode is correct");
 			equal(this.offsetWidth, 20, "width animated to shrink wrap point");
 			equal(this.offsetHeight, 20, "height animated to shrink wrap point");
@@ -318,7 +318,7 @@ steal('jquery/dom/animate',
 		// IE<8 uses "block" instead of the correct display type
 		var displayMode = td.css("display") !== "table-cell" ? "block" : "table-cell";
 
-		td.anifast({ width : 10, height : 10 }, 100, function () {
+		td.animate({ width : 10, height : 10 }, 100, function () {
 			equal(jQuery(this).css("display"), displayMode, "display mode is correct");
 			equal(this.offsetWidth, 20, "width animated to shrink wrap point");
 			equal(this.offsetHeight, 20, "height animated to shrink wrap point");
@@ -333,7 +333,7 @@ steal('jquery/dom/animate',
 			.appendTo("#qunit-fixture").children("div");
 
 		stop();
-		$div.anifast({ width : "25%", height : "25%" }, 13, function () {
+		$div.animate({ width : "25%", height : "25%" }, 13, function () {
 			var $this = jQuery(this);
 			equal($this.width(), 15, "Width was animated to 15px rather than 25px");
 			equal($this.height(), 15, "Height was animated to 15px rather than 25px");
@@ -346,7 +346,7 @@ steal('jquery/dom/animate',
 		stop();
 		jQuery("#foo")
 			.css({ display : "block", width : 20, height : 20, overflowX : "visible", overflowY : "auto" })
-			.anifast({ width : 42, height : 42 }, 100, function () {
+			.animate({ width : 42, height : 42 }, 100, function () {
 				equal(this.style.overflowX, "visible", "overflow-x is visible");
 				equal(this.style.overflowY, "auto", "overflow-y is auto");
 				start();
@@ -361,13 +361,13 @@ steal('jquery/dom/animate',
 	 var order = [];
 
 	 var $foo = jQuery("#foo");
-	 $foo.anifast({width:"100px"}, 3000, function () {
+	 $foo.animate({width:"100px"}, 3000, function () {
 	 // should finish after unqueued animation so second
 	 order.push(2);
 	 deepEqual( order, [ 1, 2 ], "Animations finished in the correct order" );
 	 start();
 	 });
-	 $foo.anifast({fontSize:"2em"}, {queue:false, duration:10, complete:function () {
+	 $foo.animate({fontSize:"2em"}, {queue:false, duration:10, complete:function () {
 	 // short duration and out of queue so should finish first
 	 order.push(1);
 	 }});
@@ -378,7 +378,7 @@ steal('jquery/dom/animate',
 		expect(2);
 		var foo = jQuery("#foo");
 
-		foo.anifast({
+		foo.animate({
 			fontSize : "2em"
 		}, {
 			queue : false,
@@ -396,7 +396,7 @@ steal('jquery/dom/animate',
 		expect(2);
 		var foo = jQuery("#foo");
 
-		foo.anifast({
+		foo.animate({
 			fontSize : "2em"
 		}, {
 			queue : true,
@@ -417,7 +417,7 @@ steal('jquery/dom/animate',
 			origWidth = foo.width(),
 			order = [];
 
-		foo.anifast({ width : origWidth + 100 }, {
+		foo.animate({ width : origWidth + 100 }, {
 			queue : 'name',
 			duration : 1,
 			complete : function () {
@@ -450,7 +450,7 @@ steal('jquery/dom/animate',
 
 		var divs = jQuery("div"), count = 0;
 
-		divs.anifast({}, function () {
+		divs.animate({}, function () {
 			count++;
 		});
 
@@ -460,8 +460,8 @@ steal('jquery/dom/animate',
 
 		var foo = jQuery("#foo");
 
-		foo.anifast({});
-		foo.anifast({top : 10}, 100, function () {
+		foo.animate({});
+		foo.animate({top : 10}, 100, function () {
 			ok(true, "Animation was properly dequeued.");
 			start();
 		});
@@ -479,7 +479,7 @@ steal('jquery/dom/animate',
 
 		equal(jQuery.timers.length, 0, "Make sure no animation was running from another test");
 
-		$elems.eq(0).anifast({a : 1}, 0, function () {
+		$elems.eq(0).animate({a : 1}, 0, function () {
 			ok(true, "Animate a simple property.");
 			counter++;
 		});
@@ -489,18 +489,18 @@ steal('jquery/dom/animate',
 
 		equal(counter, 1, "One synchronic animations");
 
-		$elems.anifast({ a : 2 }, 0, function () {
+		$elems.animate({ a : 2 }, 0, function () {
 			ok(true, "Animate a second simple property.");
 			counter++;
 		});
 
 		equal(counter, 3, "Multiple synchronic animations");
 
-		$elems.eq(0).anifast({a : 3}, 0, function () {
+		$elems.eq(0).animate({a : 3}, 0, function () {
 			ok(true, "Animate a third simple property.");
 			counter++;
 		});
-		$elems.eq(1).anifast({a : 3}, 200, function () {
+		$elems.eq(1).animate({a : 3}, 200, function () {
 			counter++;
 			// Failed until [6115]
 			equal(counter, 5, "One synchronic and one asynchronic");
@@ -525,7 +525,7 @@ steal('jquery/dom/animate',
 
 		jQuery("#foo")
 			.css("font-size", 10)
-			.anifast({"font-size" : 20}, 200, function () {
+			.animate({"font-size" : 20}, 200, function () {
 				equal(this.style.fontSize, "20px", "The font-size property was animated.");
 				start();
 			});
@@ -537,7 +537,7 @@ steal('jquery/dom/animate',
 
 		var obj = { test : 0 };
 
-		jQuery(obj).anifast({test : 200}, 200, function () {
+		jQuery(obj).animate({test : 200}, 200, function () {
 			equal(obj.test, 200, "The custom property should be modified.");
 			start();
 		});
@@ -551,7 +551,7 @@ steal('jquery/dom/animate',
 		var w = 0;
 
 		$foo.hide().width(200)
-			.anifast({ width : "show" }, 1000);
+			.animate({ width : "show" }, 1000);
 
 		setTimeout(function () {
 			var nw = $foo.width();
@@ -590,9 +590,9 @@ steal('jquery/dom/animate',
 		var w = 0;
 		$foo.hide().width(200).width();
 
-		$foo.anifast({ width : "show" }, 1000);
-		$foo.anifast({ width : "hide" }, 1000);
-		$foo.anifast({ width : "show" }, 1000);
+		$foo.animate({ width : "show" }, 1000);
+		$foo.animate({ width : "hide" }, 1000);
+		$foo.animate({ width : "show" }, 1000);
 		setTimeout(function () {
 			equal($foo.queue().length, 3, "All 3 still in the queue");
 			var nw = $foo.width();
@@ -615,9 +615,9 @@ steal('jquery/dom/animate',
 		var w = 0;
 		$foo.hide().width(200).width();
 
-		$foo.anifast({ width : "show" }, 1000);
-		$foo.anifast({ width : "hide" }, 1000);
-		$foo.anifast({ width : "show" }, 1000);
+		$foo.animate({ width : "show" }, 1000);
+		$foo.animate({ width : "hide" }, 1000);
+		$foo.animate({ width : "show" }, 1000);
 		setTimeout(function () {
 			var nw = $foo.width();
 			ok(nw != w, "An animation occurred " + nw + "px " + w + "px");
@@ -642,10 +642,10 @@ steal('jquery/dom/animate',
 		var w = 0;
 		$foo.hide().width(200).width();
 
-		$foo.anifast({ width : "show" }, 1000);
-		$foo.anifast({ width : "hide" }, 1000);
-		$foo.anifast({ width : "show" }, 1000);
-		$foo.anifast({ width : "hide" }, 1000);
+		$foo.animate({ width : "show" }, 1000);
+		$foo.animate({ width : "hide" }, 1000);
+		$foo.animate({ width : "show" }, 1000);
+		$foo.animate({ width : "hide" }, 1000);
 		setTimeout(function () {
 			var nw = $foo.width();
 			ok(nw != w, "An animation occurred " + nw + "px " + w + "px");
@@ -670,7 +670,7 @@ steal('jquery/dom/animate',
 			saved;
 
 		foo.width(200).height(200);
-		foo.anifast({
+		foo.animate({
 			width : 400
 		}, {
 			duration : 1000,
@@ -681,7 +681,7 @@ steal('jquery/dom/animate',
 			}
 		});
 
-		foo.anifast({
+		foo.animate({
 			height : 400
 		}, {
 			duration : 1000,
@@ -690,7 +690,7 @@ steal('jquery/dom/animate',
 
 		equal(foo.height(), 400, "Height was stopped with gotoEnd");
 
-		foo.anifast({
+		foo.animate({
 			height : 200
 		}, {
 			duration : 1000,
@@ -785,7 +785,7 @@ steal('jquery/dom/animate',
 			.text("Some sample text.")
 			.before("text before")
 			.after("text after")
-			.anifast({ opacity : 0.5 }, "slow", jQuery.checkOverflowDisplay);
+			.animate({ opacity : 0.5 }, "slow", jQuery.checkOverflowDisplay);
 	});
 
 	test("CSS Overflow and Display", function () {
@@ -797,7 +797,7 @@ steal('jquery/dom/animate',
 			.text("Some sample text.")
 			.before("text before")
 			.after("text after")
-			.anifast({ opacity : 0.5 }, "slow", jQuery.checkOverflowDisplay);
+			.animate({ opacity : 0.5 }, "slow", jQuery.checkOverflowDisplay);
 	});
 
 	jQuery.each({
@@ -888,7 +888,7 @@ steal('jquery/dom/animate',
 
 				var anim = { width : t_w, height : t_h, opacity : t_o };
 
-				elem.anifast(anim, 50);
+				elem.animate(anim, 50);
 
 				jQuery.when(elem).done(function (elem) {
 
@@ -1150,7 +1150,7 @@ steal('jquery/dom/animate',
 			return p;
 		};
 
-		jQuery(data).anifast(props, 400, "_default_test", function () {
+		jQuery(data).animate(props, 400, "_default_test", function () {
 			start();
 
 			ok(_test1_called, "Easing function (_test1) called");
@@ -1192,17 +1192,17 @@ steal('jquery/dom/animate',
 		});
 	});
 
-	/** TODO this need to work with anifast
 	test("animate unit-less properties (#4966)", 2, function () {
 		stop();
 		var div = jQuery("<div style='z-index: 0; position: absolute;'></div>").appendTo("#qunit-fixture");
 		equal(div.css("z-index"), "0", "z-index is 0");
-		div.anifast({ zIndex : 2 }, function () {
+		div.animate({ zIndex : 2 }, function () {
 			equal(div.css("z-index"), "2", "z-index is 2");
 			start();
 		});
 	});
 
+	/* TODO this should be handled properly by CSS animations but test fails
 	test("animate properties missing px w/ opacity as last (#9074)", 2, function () {
 		expect(6);
 		stop();
@@ -1215,7 +1215,7 @@ steal('jquery/dom/animate',
 
 		equal(cssInt("marginLeft"), 0, "Margin left is 0");
 		equal(cssInt("left"), 0, "Left is 0");
-		div.anifast({
+		div.animate({
 			left : 200,
 			marginLeft : 200,
 			opacity : 0
@@ -1231,6 +1231,7 @@ steal('jquery/dom/animate',
 			start();
 		}, 100);
 	});
+	*/
 
 	test("callbacks should fire in correct order (#9100)", function () {
 		stop();
@@ -1238,7 +1239,7 @@ steal('jquery/dom/animate',
 			cb = 0,
 			$lis = jQuery("<p data-operation='*2'></p><p data-operation='^2'></p>").appendTo("#qunit-fixture")
 				// The test will always pass if no properties are animated or if the duration is 0
-				.anifast({fontSize : 12}, 13, function () {
+				.animate({fontSize : 12}, 13, function () {
 					a *= jQuery(this).data("operation") === "*2" ? 2 : a;
 					cb++;
 					if (cb === 2) {
@@ -1256,7 +1257,7 @@ steal('jquery/dom/animate',
 		function testException() {
 		}
 
-		foo.anifast({ height : 1 }, 1, function () {
+		foo.animate({ height : 1 }, 1, function () {
 			throw new testException;
 		});
 
@@ -1279,5 +1280,4 @@ steal('jquery/dom/animate',
 			start();
 		}, 1);
 	});
-	*/
 });
