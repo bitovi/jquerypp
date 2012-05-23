@@ -13,6 +13,7 @@ steal('steal/build/pluginify', 'jquery/build/stealify.js', 'jquery/build/amdify.
 			exclude : excludes.concat(["jquery/jquery.js"])
 		},
 		plugins = {
+			"jquery/dom/animate/animate.js" : "jquery.animate.js",
 			"jquery/dom/compare/compare.js" : "jquery.compare.js",
 			"jquery/dom/cookie/cookie.js" : "jquery.cookie.js",
 			"jquery/dom/dimensions/dimensions.js" : "jquery.dimensions.js",
@@ -25,6 +26,7 @@ steal('steal/build/pluginify', 'jquery/build/stealify.js', 'jquery/build/amdify.
 			"jquery/event/destroyed/destroyed.js" : "jquery.event.destroyed.js",
 			"jquery/event/drag/drag.js" : "jquery.event.drag.js",
 			"jquery/event/drop/drop.js" : "jquery.event.drop.js",
+			"jquery/event/fastfix/fastfix.js" : "jquery.event.fastfix.js",
 			"jquery/event/hover/hover.js" : "jquery.event.hover.js",
 			"jquery/event/key/key.js" : "jquery.event.key.js",
 			"jquery/event/pause/pause.js" : "jquery.event.pause.js",
@@ -63,6 +65,7 @@ steal('steal/build/pluginify', 'jquery/build/stealify.js', 'jquery/build/amdify.
 			"jquery/build/lib.js" : "jquerypp/index",
 			"jquery/lang/json/json.js" : "jquerypp/util/json",
 			"jquery/lang/vector/vector.js" : "jquerypp/util/vector",
+			"jquery/dom/animation/animation.js" : "jquerypp/animation",
 			"jquery/dom/compare/compare.js" : "jquerypp/compare",
 			"jquery/dom/cookie/cookie.js" : "jquerypp/cookie",
 			"jquery/dom/dimensions/dimensions.js" : "jquerypp/dimensions",
@@ -78,6 +81,7 @@ steal('steal/build/pluginify', 'jquery/build/stealify.js', 'jquery/build/amdify.
 			"jquery/event/drag/scroll/scroll.js" : "jquerypp/event/drag.scroll",
 			"jquery/event/drag/step/step.js" : "jquerypp/event/drag.step",
 			"jquery/event/drop/drop.js" : "jquerypp/event/drop",
+			"jquery/event/fastfix/fastfix.js" : "jquerypp/event/fastfix",
 			"jquery/event/hover/hover.js" : "jquerypp/event/hover",
 			"jquery/event/key/key.js" : "jquerypp/event/key",
 			"jquery/event/livehack/livehack.js" : "jquerypp/event/livehack",
