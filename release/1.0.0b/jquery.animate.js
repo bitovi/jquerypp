@@ -92,10 +92,9 @@
 
 	var animationNum = 0,
 	//Animation events implies animations right?
-		supportsAnimations = !!window.WebKitAnimationEvent;
-
+		supportsAnimations = !!window.WebKitAnimationEvent,
 	//gets the last editable stylesheet or creates one
-	var getLastStyleSheet = function () {
+		getLastStyleSheet = function () {
 			var sheets = document.styleSheets,
 				x = sheets.length - 1,
 				foundSheet = null,
@@ -136,32 +135,34 @@
 		 * Returns whether the animation should be passed to the original
 		 * $.fn.animate.
 		 */
-		passThrough = function(props, ops) {
+		passThrough = function (props, ops) {
 			var nonElement = !(this[0] && this[0].nodeType),
 				isInline = !nonElement && jQuery(this).css("display") === "inline" && jQuery(this).css("float") === "none";
 
-			for(var name in props) {
-				if(props[name] == 'show' || props[name] == 'hide' // jQuery does something with these two values
-					|| $.isArray(props[name]) // Array for individual easing
-					|| props[name] < 0) { // Can't animate negative properties
+			for (var name in props) {
+				if (props[name] == 'show' || props[name] == 'hide' // jQuery does something with these two values
+					|| $.isArray(props[name]) // Arrays for individual easing
+					|| props[name] < 0 // Negative values not handled the same
+					|| name == 'zIndex' || name == 'z-index') { // unit-less value
 					return true;
 				}
 			}
 			return !supportsAnimations ||
 				$.isEmptyObject(props) || // Animating empty properties
-				($.isPlainObject(ops) || // Second parameter is an object - anifast only handles numbers
-				typeof ops == 'string') || // Second parameter is a string lik 'slow'
+				$.isPlainObject(ops) || // Second parameter is an object - anifast only handles numbers
+				typeof ops == 'string' || // Second parameter is a string like 'slow' TODO: remove
 				isInline || nonElement;
 		},
-		oldanimate = $.fn.animate;
+		oldanimate = $.fn.animate,
+		oldTick = jQuery.fx.tick;
 
 	// essentially creates webkit keyframes and points the element to that
 	/**
-	 * @function jQuery.fn.anifast
+	 * @function jQuery.fn.animate
 	 * @parent jQuery.animate
 	 *
 	 * Animate CSS properties using native CSS animations, if possible.
-	 * Uses [jQuery.fn.animate()](http://api.jquery.com/animate/) otherwise.
+	 * Uses the original [jQuery.fn.animate()](http://api.jquery.com/animate/) otherwise.
 	 *
 	 * @param {Object} props The CSS properties to animate
 	 * @param {Integer|String|Object} [speed=400] The animation duration in ms.
@@ -169,13 +170,13 @@
 	 * @param {Function} [callback] A callback to execute once the animation is complete
 	 * @return {jQuery} The jQuery element
 	 */
-	$.fn.anifast = function (props, speed, callback) {
+	$.fn.animate = function (props, speed, callback) {
 		//default to normal animations if browser doesn't support them
 		if (passThrough.apply(this, arguments)) {
 			return oldanimate.apply(this, arguments);
 		}
 
-		if($.isFunction(speed)) {
+		if ($.isFunction(speed)) {
 			callback = speed;
 		}
 
@@ -183,6 +184,7 @@
 			to = "",
 			self = this,
 			prop,
+			duration = jQuery.fx.speeds[speed] || speed || jQuery.fx.speeds._default,
 			animationName = "animate" + (animationNum++), //the animation keyframe name are going to create
 			style = "@-webkit-keyframes " + animationName + " { from {";	//the text for the keyframe
 
@@ -193,15 +195,20 @@
 			to += prop + " : " + props[prop] + "; ";
 		}
 
-//		for(prop in props) {
-//			properties.push(prop);
-//		}
-//		current = this.styles.apply(this, properties);
-//		$.each(properties, function(i, prop) {
-//			self.css(props, "") //clear property
-//			style += prop + " : " + current[prop] + "; ";
-//			to += prop + " : " + props[prop] + "; ";
-//		})
+		/* TODO use jQuery.styles - returns different values than this.css
+		 var cleared = {}, properties = [];
+		 for(prop in props) {
+		 cleared[prop] = '';
+		 this.css(prop, '');
+		 properties.push(prop);
+		 }
+		 current = this.styles.apply(this, properties);
+		 // this.css(cleared);
+		 $.each(properties, function(i, cur) {
+		 style += cur + " : " + current[cur] + "; ";
+		 to += cur + " : " + props[cur] + "; ";
+		 });
+		 */
 
 		style += "} to {" + to + " }}"
 
@@ -211,7 +218,7 @@
 
 		// set this element to point to that animation
 		this.css({
-			"-webkit-animation-duration" : (speed ||400) + "ms",
+			"-webkit-animation-duration" : duration + "ms",
 			"-webkit-animation-name" : animationName
 		})
 
@@ -227,8 +234,7 @@
 			removeAnimation(lastSheet, animationName);
 
 			// call success (this should happen once for each element)
-			if(callback) {
-
+			if (callback) {
 				callback.apply(this, arguments)
 			}
 		})
