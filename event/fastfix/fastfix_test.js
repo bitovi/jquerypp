@@ -1289,6 +1289,11 @@ steal("jquery/event/fastfix",
 
 		jQuery("body").unbind("keydown");
 
+//		jQuery.extend(ev, { keyCode : 52 })
+//		// ev['keyCode'] = 42;
+//		var ev = jQuery.Event('click');
+//		ev.keyCode = 42;
+//		console.log(ev);
 	});
 
 	test("jQuery.Event.currentTarget", function () {
