@@ -11,13 +11,13 @@ special events.
 
 ### Download Builder
 
-Check the plugins you want to download and click the download button. You will download a single *uncompressed* JavaScript file containing the selected plugins and all their dependencies.
+Use the download builder to create a customized jQuery++ download. The builder will create a single *uncompressed* JavaScript file containing all selected plugins and their dependencies.
 
 {% include builder.html %}
 
 ### Full download
 
-You can also download the [full archive](https://github.com/downloads/jupiterjs/jquerypp/jquerypp-1.0.0.zip) which contains
+You can also download the [full archive](https://github.com/downloads/jupiterjs/jquerypp/jquerypp-1.0.0b.zip) which contains
 
 - `jquerypp.js`: The full version of jQuery++
 - Each plugin as a standalone JavaScript file
@@ -26,7 +26,7 @@ You can also download the [full archive](https://github.com/downloads/jupiterjs/
 
 ### Using Steal
 
-The files needed for using jQuery++ with [StealJS](http://javascriptmvc.com/docs.html#!stealjs) are located in the `steal/` folder of the full download. Take the `jquery/` folder and put it in your steal root. Make sure to use `steal.map` to map any dependency of `jquery` to your jQuery library. For example, when using jQuery++ with [CanJS](http://canjs.us) and Steal:
+The files needed for using jQuery++ with [StealJS](http://javascriptmvc.com/docs.html#!stealjs) are located in the `steal/` folder of the full download. Take the `jquery/` folder and put it in your steal root. Make sure to use `steal.map` to map any dependency of `jquery` to your jQuery library, if necessary. For example, when using jQuery++ with [CanJS](http://canjs.us) and Steal:
 
 {% highlight javascript %}
 steal.map({
@@ -36,7 +36,7 @@ steal.map({
 
 ### Using AMD
 
-The files to load the jQuery++ plugins as [AMD modules](https://github.com/amdjs/amdjs-api/wiki/AMD), for example using [RequireJS](http://requirejs.org/), are located in the `amd/` folder. Place the `jquerypp/` folder in your module directory and load a plugin like this:
+The files to load the jQuery++ plugins with an [AMD](https://github.com/amdjs/amdjs-api/wiki/AMD) module loader like [RequireJS](http://requirejs.org/), are located in the `amd/` folder. Place the `jquerypp/` folder in your module directory and load a plugin like this:
 
 {% highlight javascript %}
 define(['jquery', 'jquerypp/dimensions', 'jquerypp/event/resize'],
@@ -55,9 +55,26 @@ require.config({
 });
 {% endhighlight %}
 
-> Note: Starting at version 1.7 jQuery will define itself as an AMD module if a loader is available. There is no need to create a wrapper.
+> Note: Starting at version 1.7 jQuery will define itself as an AMD module if a loader is available.
 
 ## DOM HELPERS
+
+## animation `$(el).anifast(properties, [speed], [callback]) -> jQuery`
+
+[jQuery.animate](http://donejs.com/docs.html#!jQuery.animate) adds `$.fn.anifast` which works similar to jQuery
+[$.fn.animate](http://api.jquery.com/animate/) but uses browser native CSS animations. It will fall
+back to `$.fn.animate` if a CSS animation is not possible.
+
+A fade-in effect using a CSS animation can be implemented like this:
+
+    $('#element').css({
+      opacity : 0
+    }).anifast({
+      opacity : 1
+    }, 1000, function() {
+      console.log('Animation done');
+    });
+
 
 ## compare `$(elA).compare(elB) -> Number`
 
@@ -157,22 +174,21 @@ $('form').formParams({
 
 ## range `$.Range([el]) -> range` `$(el).range() -> range`
 
-Use [jQuery.Range](http://donejs.com/docs.html#!jQuery.Range) to create, move and compare text ranges. Use `$.Range.current()` to get the currently selected text range or the jQuery plugin `$(el).range()` to get a `$.Range` instance for an element.
+Use [jQuery.Range](http://donejs.com/docs.html#!jQuery.Range) to create, move and compare text ranges. Use `$.Range.current()` to get the currently selected text range. `$(el).range()` returns a text range on an element.
 
-For example, assuming that in a div like `<div>This is some text</div>` the text from position eight to 12 is currently selected, `$.Range` can be used like this:
+For example, for an element like `<div id="text">This is some text</div>`, `$.Range` can be used like this:
 
 {% highlight javascript %}
-var range = $.Range.current();
-// Returns the currently selected text
-range.toString() // -> some
-// Get the beginning of the range
-range.start() // -> { offset : 8, container : TextNode }
-// Get the end of the range
-range.end() // -> { offset : 12, container : TextNode }
-// Get the selections common parent
-range.parent() // -> TextNode
-// Set the range start offset to 4
-range.start(4);
+// Get a text range for #text
+var range = $('#text').range();
+// Move the start 5 characters to the right
+range.start('+5');
+// Move the end 5 characters to the left
+range.end('-5');
+// Return the range text
+range.toString() // is some
+// Select the current range
+range.select();
 {% endhighlight %}
 
 A `$.Range` instance offers the following methods:
@@ -374,6 +390,17 @@ When adding drop-able elements after `dropinit`, for example when expanding a fo
 The following example shows two draggable elements and a drop area. When a drag starts it will create a copy of the element using `drag.ghost()`. The drop area will be highlighted when the drag moves over it and update the text when it is dropped:
 
 <iframe style="width: 100%; height: 250px" src="http://jsfiddle.net/3NkZM/embedded/result,html,js,css" allowfullscreen="allowfullscreen" frameborder="0">JSFiddle</iframe>
+
+## fastfix
+
+[jQuery.event.fastfix](http://donejs.com/docs.html#!jQuery.event.fastfix) speeds up `jQuery.event.fix` using ECMAScript 5
+getters. `jQuery.event.fix` is used to normalize a DOM event before it gets passed as a
+[jQuery.Event](http://api.jquery.com/category/events/event-object/) instance to event handlers.
+
+The following chart shows the [performance improvement](http://jsperf.com/jquery-event-fix) for major browser when using
+`jQuery.event.fastfix`:
+
+![jQuery.event.fastfix performance](images/fastfix.png)
 
 ## hover `hoverinit` `hoverenter` `hovermove` `hoverleave`
 
