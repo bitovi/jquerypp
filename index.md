@@ -4,14 +4,13 @@ layout: default
 
 # Welcome to jQuery++
 
-jQuery++ is a collection of useful jQuery extensions and 
-special events.
+jQuery++ is a collection of useful extensions and special events for jQuery 1.7 and later.
 
 ## Get jQuery++
 
 ### Download Builder
 
-Use the download builder to create a customized jQuery++ download. The builder will create a single *uncompressed* JavaScript file containing all selected plugins and their dependencies.
+Use the download builder to create a customized jQuery++ download. The builder will create a single *uncompressed* JavaScript file containing the plugins you selected and their dependencies.
 
 {% include builder.html %}
 
@@ -55,11 +54,11 @@ require.config({
 });
 {% endhighlight %}
 
-> Note: Starting at version 1.7 jQuery will define itself as an AMD module if a loader is available.
+> Note: Starting at version 1.7 jQuery will define itself as an AMD module if a loader is available. There is no need to create a wrapper anymore.
 
 ## DOM HELPERS
 
-## animation `$(el).animate(properties, [speed], [callback]) -> jQuery`
+## animate `$(el).animate(properties, [speed], [callback]) -> jQuery`
 
 [jQuery.animate](http://donejs.com/docs.html#!jQuery.animate) overwrites `$.fn.animate` to use CSS 3 animations, if possible.
 It takes the same arguments as the original [$.fn.animate](http://api.jquery.com/animate) and will fall back to it if a CSS animation
@@ -134,9 +133,11 @@ $('#foo').outerWidth(100).innerHeight(50);
 $('#bar').animate({outerWidth: 500});
 {% endhighlight %}
 
-The following graphic shows which dimensions are included for  `$(el).width()`, `$(el).innerWidth()` and `$(el).outerWidth()`:
+The following example lets you change the different width properties used by `$(el).innerWidth([width])` and
+`$(el).outerWidth([width], [includeMargin])` like margin, padding and border and shows how it influences the other
+ values:
 
-![jQuery.dimensions: .innerWidth()](images/dimensions.png)
+<iframe style="width: 100%; height: 500px" src="http://jsfiddle.net/5ZbSH/embedded/result,html,js,css" allowfullscreen="allowfullscreen" frameborder="0">JSFiddle</iframe>
 
 ## formParams `$(form).formParams([convert]) -> Object|jQuery`
 
