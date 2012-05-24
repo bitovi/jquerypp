@@ -395,7 +395,7 @@ The following example shows two draggable elements and a drop area. When a drag 
 getters. `jQuery.event.fix` is used to normalize a DOM event before it gets passed as a
 [jQuery.Event](http://api.jquery.com/category/events/event-object/) instance to event handlers. This is usually done by
 *copying* the properties from the DOM event. `jQuery.event.fastfix` uses ES 5 getters to access these properties
-only when they are needed and without copying.
+only when they are needed.
 
 Since `jQuery.event.fix` usually takes up a major portion of an applications runtime, using `jQuery.event.fastfix`
 can significantly improve overall performance. The following chart [compares the
