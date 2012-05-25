@@ -4,13 +4,21 @@ layout: default
 
 # Welcome to jQuery++
 
-jQuery++ is a collection of useful extensions and special events for jQuery 1.7 and later.
+jQuery++ is a collection of useful DOM helpers and special events for jQuery 1.7 and later. Here is what it can do:
+
+- [DOM Helpers](#): jQuery++ DOM helpers make working with the DOM even easier and faster by adding useful plugins and
+extending existing ones.
+- [Events](#): Special events add rich functionality like drag&drop as delegatable events that can be used with
+any library.
+
+Learn more about [why jQuery++](#why_jquery__) can be useful for you.
 
 ## Get jQuery++
 
 ### Download Builder
 
-Use the download builder to create a customized jQuery++ download. The builder will create a single *uncompressed* JavaScript file containing the plugins you selected and their dependencies.
+Use the download builder to create a customized jQuery++ download.
+The builder will create a single *uncompressed* JavaScript file containing the plugins you selected and their dependencies.
 
 {% include builder.html %}
 
@@ -29,7 +37,7 @@ The files needed for using jQuery++ with [StealJS](http://javascriptmvc.com/docs
 
 {% highlight javascript %}
 steal.map({
-  jquery : "can/util/jquery/jquery.1.7.1.js"
+  "jquery/jquery.js" : "can/util/jquery/jquery.1.7.1.js"
 });
 {% endhighlight %}
 
@@ -399,7 +407,7 @@ getters. `jQuery.event.fix` is used to normalize a DOM event before it gets pass
 only when they are needed.
 
 Since `jQuery.event.fix` usually takes up a major portion of an applications runtime, using `jQuery.event.fastfix`
-can significantly improve overall performance. The following chart [compares the
+can significantly improve overall performance - just by including this plugin. The following chart [compares the
 performance](http://jsperf.com/jquery-event-fix) of the original `jQuery.event.fix` and `jQuery.event.fastfix` in major browsers:
 
 ![jQuery.event.fastfix performance](images/fastfix.png)
@@ -578,11 +586,14 @@ Swipe (using the mouse) in the green area in the following example to see the di
 
 ## Get Help
 
-There are several places you can go to ask questions or get help debugging problems.
+This site highlights the most important features of jQuery++. You can find the full API documentation on the
+[DoneJS documentation](http://donejs.com/docs.html#!jquerypp) page.
+
+There are also several places you can go to ask questions or get help debugging problems.
 
 ### Twitter
 
-Follow [@donejs](https://twitter.com/#!/donejs) for updates, announcements and quick answers to your questions.
+Follow [@jquerypp](https://twitter.com/#!/jquerypp) for updates, announcements and quick answers to your questions.
 
 ### Forums
 
@@ -602,14 +613,36 @@ Bitovi _(developers of jQuery++)_ offers [training](http://bitovi.com/training/)
 
 ## Why jQuery++
 
-### Fast
+### Easy to use
 
-Plugins like [styles](#styles) and [compare](#compare) can speed up your app.
+jQuery++ does things the jQuery way, which makes it really easy to learn if you are already familiar with jQuery.
+Get functionality that was always tricky to implement from one coherent library:
+
+- Set and animte outer and inner dimensions with [dimensions](#dimensions)
+- Serialize forms into objects with [formParams](#formparams)
+- [Drag](#drag) & [drop](#drop) events - no need for jQuery UI
+- [Resize](#resize) elements the right way
+- Listen to [swipe events](#swipe) for mobile apps
+- [Pause and resume](#pause) events for event oriented JavaScript applications
 
 ### Flexible
 
-Delegatable events makes it easy to integrate with libraries like [CanJS](http://canjs.us) and [Backbone](http://documentcloud.github.com/backbone/).
-Use  jQuery++ standalone, [StealJS](http://javascriptmvc.com/docs.html#!stealjs), or [RequireJS](http://requirejs.org/).
+You don't have to use all of jQuery++. Just chose the plugins you want using the [download builder](#get_jquery__-download_builder),
+load them with [StealJS](#get_jquery__-using_steal) or as [AMD modules](#get_jquery__-using_amd).
+Each plugin only includes the dependencies it actually needs, so your JavaScript application will stay as small as possible.
+
+Delegatable events also make it easy to integrate with libraries like [CanJS](http://canjs.us) and
+[Backbone](http://documentcloud.github.com/backbone/). No custom APIs to take care of, just the jQuery
+way of handling events.
+
+### Fast
+
+Some jQuery++ plugins can help to significantly speed up your applications. Use
+
+- [styles](#styles) to get computed style from an element a lot faster
+- [compare](#compare) to quickly compare element positions
+- [fastfix](#fastfix) to speed up jQuery's event handling on modern browsers
+- [destroyed](#destroyed) to avoid memory leaks and keep your references up to date when elements get removed from the DOM
 
 ### Supported
 
