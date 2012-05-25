@@ -595,7 +595,7 @@ There are also several places you can go to ask questions or get help debugging 
 
 ### Twitter
 
-Follow [@jquerypp](https://twitter.com/#!/jquerypp) for updates, announcements and quick answers to your questions.
+Follow [@jquerypp](http://twitter.com/#!/jquerypp) for updates, announcements and quick answers to your questions.
 
 ### Forums
 
@@ -607,11 +607,11 @@ The DoneJS IRC channel (`#donejs` on **irc.freenode.net**) is an awesome place t
 
 __Help Us Help You __
 
-Help the community help you by using the [jQuery++ jsFiddle template](http://jsfiddle.net/donejs/ZLvA5/) below. Just fork it and include the URL when you are asking for help.
+Help the community help you by using the [jQuery++ jsFiddle template](http://jsfiddle.net/donejs/ZLvA5/). Just fork it and include the URL when you are asking for help.
 
 ### Get Help from Bitovi
 
-Bitovi _(developers of jQuery++)_ offers [training](http://bitovi.com/training/) and [consulting](http://bitovi.com/consulting/) for your team. They can also provide private one-on-one support staffed by their JavaScript/Ajax experts. [Contact Bitovi](contact@bitovi.com) if you're interested.
+Bitovi _(developers of jQuery++)_ offers [training](http://bitovi.com/training/) and [consulting](http://bitovi.com/consulting/) for your team. They can also provide private one-on-one support staffed by their JavaScript/Ajax experts. [Contact Bitovi](mailto:contact@bitovi.com) if you're interested.
 
 ## Why jQuery++
 
