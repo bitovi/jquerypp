@@ -22,14 +22,23 @@
 </script>
 <script type='text/javascript' id="demo-source">
 steal('jquery/dom/animate').then(function(){
+  /*
+  var old = jQuery.fx.prototype.custom;
+  jQuery.fx.prototype.custom = function( from, to, unit ) {
+    console.log(arguments, this);
+    old.apply(this, arguments);
+  }
+  */
   $("#go").click(function(){
-    $("#block").animate({
-      width: "70%",
+    var block = $("#block").hide().fadeIn('slow').animate({
       opacity: 0.4,
-      marginLeft: "0.6in",
-      fontSize: "3em",
-      borderWidth: "10px"
-    }, 1500 );
+      height: '200px'
+    }, 3000 , function() { console.log('callback'); });
+
+    setTimeout(function() {
+      // block.stop();
+      console.log(block.height());
+    }, 1500);
   });
 });
 </script>

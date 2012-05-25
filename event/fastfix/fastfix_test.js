@@ -2818,6 +2818,7 @@ steal("jquery/event/fastfix",
 		markup.remove();
 	});
 
+	/* Doesn't work in big test since Steal callback fires after DOM ready
 	(function () {
 		// This code must be run before DOM ready!
 		var notYetReady, noEarlyExecution,
@@ -2857,4 +2858,5 @@ steal("jquery/event/fastfix",
 		noEarlyExecution = order.length == 0;
 
 	})();
+	*/
 });

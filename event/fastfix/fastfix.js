@@ -2,7 +2,10 @@ steal('jquery', function () {
 	// http://bitovi.com/blog/2012/04/faster-jquery-event-fix.html
 	// https://gist.github.com/2377196
 
-	if(Object.defineProperty) {
+	// IE 8 has Object.defineProperty but it only defines DOM Nodes. According to
+	// http://kangax.github.com/es5-compat-table/#define-property-ie-note
+	// All browser that have Object.defineProperties also support Object.defineProperty properly
+	if(Object.defineProperties) {
 		var set = function (obj, prop, val) {
 				if(val !== undefined) {
 					Object.defineProperty(obj, prop, {

@@ -1,9 +1,9 @@
 steal('jquery', 'jquery/dom/styles').then(function () {
 
 	var animationNum = 0,
-	//Animation events implies animations right?
+		//Animation events implies animations right?
 		supportsAnimations = !!window.WebKitAnimationEvent,
-	//gets the last editable stylesheet or creates one
+		//gets the last editable stylesheet or creates one
 		getLastStyleSheet = function () {
 			var sheets = document.styleSheets,
 				x = sheets.length - 1,
@@ -30,7 +30,7 @@ steal('jquery', 'jquery/dom/styles').then(function () {
 			return foundSheet;
 		},
 
-	//removes an animation rule from a sheet
+		//removes an animation rule from a sheet
 		removeAnimation = function (sheet, name) {
 			for (var j = sheet.cssRules.length - 1; j >= 0; j--) {
 				var rule = sheet.cssRules[j];
@@ -41,9 +41,10 @@ steal('jquery', 'jquery/dom/styles').then(function () {
 				}
 			}
 		},
+
 		/**
 		 * Returns whether the animation should be passed to the original
-		 * $.fn.animate.
+		 * jQuery.fn.animate.
 		 */
 		passThrough = function (props, ops) {
 			var nonElement = !(this[0] && this[0].nodeType),
@@ -51,22 +52,31 @@ steal('jquery', 'jquery/dom/styles').then(function () {
 
 			for (var name in props) {
 				if (props[name] == 'show' || props[name] == 'hide' // jQuery does something with these two values
-					|| $.isArray(props[name]) // Arrays for individual easing
+					|| jQuery.isArray(props[name]) // Arrays for individual easing
 					|| props[name] < 0 // Negative values not handled the same
 					|| name == 'zIndex' || name == 'z-index') { // unit-less value
 					return true;
 				}
 			}
 			return !supportsAnimations ||
-				$.isEmptyObject(props) || // Animating empty properties
-				$.isPlainObject(ops) || // Second parameter is an object - anifast only handles numbers
+				jQuery.isEmptyObject(props) || // Animating empty properties
+				jQuery.isPlainObject(ops) || // Second parameter is an object - anifast only handles numbers
 				typeof ops == 'string' || // Second parameter is a string like 'slow' TODO: remove
 				isInline || nonElement;
 		},
-		oldanimate = $.fn.animate,
-		oldTick = jQuery.fx.tick;
 
-	// essentially creates webkit keyframes and points the element to that
+		/**
+		 * Return the CSS number (with px added as the default unit if the value is a number)
+		 */
+		cssNumber = function(origName, value) {
+			if ( typeof value === "number" && !jQuery.cssNumber[ origName ] ) {
+				return value += "px";
+			}
+			return value;
+		},
+
+		oldanimate = jQuery.fn.animate;
+
 	/**
 	 * @function jQuery.fn.animate
 	 * @parent jQuery.animate
@@ -80,74 +90,97 @@ steal('jquery', 'jquery/dom/styles').then(function () {
 	 * @param {Function} [callback] A callback to execute once the animation is complete
 	 * @return {jQuery} The jQuery element
 	 */
-	$.fn.animate = function (props, speed, callback) {
+	jQuery.fn.animate = function (props, speed, callback) {
 		//default to normal animations if browser doesn't support them
 		if (passThrough.apply(this, arguments)) {
 			return oldanimate.apply(this, arguments);
 		}
 
-		if ($.isFunction(speed)) {
+		if (jQuery.isFunction(speed)) {
 			callback = speed;
 		}
 
-		var current = {}, //current CSS values
-			to = "",
-			self = this,
-			prop,
-			duration = jQuery.fx.speeds[speed] || speed || jQuery.fx.speeds._default,
-			animationName = "animate" + (animationNum++), //the animation keyframe name are going to create
-			style = "@-webkit-keyframes " + animationName + " { from {";	//the text for the keyframe
+		// Most of of these calls need to happen once per element
+		this.each(function() {
+			// Add everything to the animation queue
+			jQuery(this).queue('fx', function() {
+				var current, //current CSS values
+					properties = [], // The list of properties passed
+					to = "",
+					prop,
+					self = jQuery(this),
+					duration = jQuery.fx.speeds[speed] || speed || jQuery.fx.speeds._default,
+					//the animation keyframe name
+					animationName = "animate" + (animationNum++),
+					// The key used to store the animation hook
+					dataKey = animationName + '.run',
+					//the text for the keyframe
+					style = "@-webkit-keyframes " + animationName + " { from {",
+					// The animation end event handler.
+					// Will be called both on animation end and after calling .stop()
+					animationEnd = function (currentCSS) {
 
-		for (prop in props) {
-			current[prop] = this.css(prop);
-			this.css(props, "") //clear property
-			style += prop + " : " + current[prop] + "; ";
-			to += prop + " : " + props[prop] + "; ";
-		}
+						self.css(currentCSS).css({
+							"-webkit-animation-duration" : "",
+							"-webkit-animation-name" : ""
+						});
 
-		/* TODO use jQuery.styles - returns different values than this.css
-		 var cleared = {}, properties = [];
-		 for(prop in props) {
-		 cleared[prop] = '';
-		 this.css(prop, '');
-		 properties.push(prop);
-		 }
-		 current = this.styles.apply(this, properties);
-		 // this.css(cleared);
-		 $.each(properties, function(i, cur) {
-		 style += cur + " : " + current[cur] + "; ";
-		 to += cur + " : " + props[cur] + "; ";
-		 });
-		 */
+						// remove the animation keyframe
+						removeAnimation(lastSheet, animationName);
 
-		style += "} to {" + to + " }}"
+						if (callback) {
+							// Call success, pass the DOM element as the this reference
+							callback.apply(self[0])
+						}
 
-		// get the last sheet and insert this rule into it
-		var lastSheet = getLastStyleSheet();
-		lastSheet.insertRule(style, lastSheet.cssRules.length);
+						jQuery.removeData(self, dataKey, true);
+					}
 
-		// set this element to point to that animation
-		this.css({
-			"-webkit-animation-duration" : duration + "ms",
-			"-webkit-animation-name" : animationName
-		})
+				for(prop in props) {
+					properties.push(prop);
+				}
 
-		// listen for when it's completed
-		this.one('webkitAnimationEnd', function () {
+				// Use jQuery.styles
+				current = self.styles.apply(self, properties);
+				jQuery.each(properties, function(i, cur) {
+					style += cur + " : " + cssNumber(cur, current[cur]) + "; ";
+					to += cur + " : " + cssNumber(cur, props[cur]) + "; ";
+				});
 
-			// clear old properties
-			self.css(props).css({
-				"-webkit-animation-duration" : "",
-				"-webkit-animation-name" : ""
+				style += "} to {" + to + " }}";
+
+				// get the last sheet and insert this rule into it
+				var lastSheet = getLastStyleSheet();
+				lastSheet.insertRule(style, lastSheet.cssRules.length);
+
+				// Add a hook which will be called when the animation stops
+				jQuery._data(this, animationName + '.run', {
+					stop : function(gotoEnd) {
+						if(!gotoEnd) { // We were told not to finish the animation
+							// Pause the animation
+							self.css('-webkit-animation-play-state', 'paused');
+							// Unbind the animation end handler
+							self.off('webkitAnimationEnd', animationEnd);
+							// Call animationEnd but set the CSS to the current computed style
+							animationEnd(self.styles.apply(self, properties));
+						}
+					}
+				});
+
+				// set this element to point to that animation
+				self.css({
+					"-webkit-animation-duration" : duration + "ms",
+					"-webkit-animation-name" : animationName
+				});
+
+				self.one('webkitAnimationEnd', function() {
+					// Call animationEnd using the current properties
+					animationEnd(props);
+					self.dequeue();
+				});
 			});
-			// remove the animation keyframe
-			removeAnimation(lastSheet, animationName);
+		});
 
-			// call success (this should happen once for each element)
-			if (callback) {
-				callback.apply(this, arguments)
-			}
-		})
 		return this;
 	};
 });

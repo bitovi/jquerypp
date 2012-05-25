@@ -8,9 +8,10 @@ If the browser doesn't support CSS animations, the original
 
 ## Compatibility
 
-`jQuery.fn.animate` is mostly compatible with `jQuery.fn.animate` which will also be used as a fallback when
+`jQuery.fn.animate` is mostly compatible with the original [jQuery.fn.animate()](http://api.jquery.com/animate/)
+which will be used as a fallback when
 
-- The browser doesn't support animations (checked with `window.WebKitAnimationEvent`)
+- The browser doesn't support CSS animations (checked with `window.WebKitAnimationEvent`)
 - The duration is not a number
 - A property is set to `show` or `hide` which is used by jQuery to set the original property
 - The properties are empty

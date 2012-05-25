@@ -1202,37 +1202,6 @@ steal('jquery/dom/animate',
 		});
 	});
 
-	/* TODO this should be handled properly by CSS animations but test fails
-	test("animate properties missing px w/ opacity as last (#9074)", 2, function () {
-		expect(6);
-		stop();
-		var div = jQuery("<div style='position: absolute; margin-left: 0; left: 0px;'></div>")
-			.appendTo("#qunit-fixture");
-
-		function cssInt(prop) {
-			return parseInt(div.css(prop), 10);
-		}
-
-		equal(cssInt("marginLeft"), 0, "Margin left is 0");
-		equal(cssInt("left"), 0, "Left is 0");
-		div.animate({
-			left : 200,
-			marginLeft : 200,
-			opacity : 0
-		}, 1000);
-		setTimeout(function () {
-			var ml = cssInt("marginLeft"),
-				l = cssInt("left");
-			notEqual(ml, 0, "Margin left is not 0 after partial animate");
-			notEqual(ml, 200, "Margin left is not 200 after partial animate");
-			notEqual(l, 0, "Left is not 0 after partial animate");
-			notEqual(l, 200, "Left is not 200 after partial animate");
-			div.stop().remove();
-			start();
-		}, 100);
-	});
-	*/
-
 	test("callbacks should fire in correct order (#9100)", function () {
 		stop();
 		var a = 1,
@@ -1249,10 +1218,12 @@ steal('jquery/dom/animate',
 				});
 	});
 
+	/* As mentioned, thoroughly abuses undocumented methods. Since the overwritten animate doesn't
+	 * use timers this doesn't need to be tested
 	asyncTest("callbacks that throw exceptions will be removed (#5684)", function () {
 		expect(2);
 
-		var foo = jQuery("#foo");
+		var foo = jQuery("#foo").fadeIn()
 
 		function testException() {
 		}
@@ -1280,4 +1251,5 @@ steal('jquery/dom/animate',
 			start();
 		}, 1);
 	});
+	*/
 });

@@ -1,7 +1,8 @@
 @page jQuery.event.fastfix
 @parent jquerypp
 
-`jQuery.event.fastfix` provides a faster `jQuery.event.fix` using ES 5 Getters.
+`jQuery.event.fastfix` provides a faster `jQuery.event.fix` using ES 5 Getters first introduced in
+[this blog post](http://bitovi.com/blog/2012/04/faster-jquery-event-fix.html).
 
 ## How jQuery Normalizes Events
 
@@ -25,7 +26,7 @@ jQuery creates and normalizes the `jQuery.Event` from the raw event in `jQuery.e
 
 ## Using ES5 getters
 
-`jQuery.event.fastfix` uses ECMASCript 5 getters for browser that [support defineProperty](http://kangax.github.com/es5-compat-table/)
+`jQuery.event.fastfix` uses ECMAScript 5 getters for browsers that [support Object.defineProperty](http://kangax.github.com/es5-compat-table/),
 which allows `jQuery.event.fix` to avoid copying every property and normalizing it for every event.
 Instead getters can do this on-demand. That is, they can lookup the `originalEvent`'s value and normalize it if needed.
 `jQuery.event.fastfix` goes through the list of properties that `jQuery.event.fix` copies and creates getters for each one.
@@ -36,4 +37,6 @@ function to normalize the value.
 ## Performance
 
 A [basic JSPerf](http://jsperf.com/jquery-event-fix/3) of `jQuery.event.fastfix` shows a
-3 to 4 times performance improvement compared to the original `jQuery.event.fix`.
+3 to 4 times performance improvement compared to the original `jQuery.event.fix`. Since event handling
+and `jQuery.event.fix` are usually a major part of the runtime of a jQuery application including `jQuery.event.fastfix`
+can bring you significant performance improvements in modern browsers.
