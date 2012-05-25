@@ -1218,17 +1218,16 @@ steal('jquery/dom/animate',
 				});
 	});
 
-	test("jQuery.stop() on CSS animation", function () {
+	test("jQuery.stop() on CSS animation", 2, function () {
 		stop();
 		var div = jQuery("<div style='height: 0; width: 0;'></div>").appendTo("#qunit-fixture");
-		div.animate({ height : 100, width: 150 }, 200, function () {
-			ok(true, 'Callback fired');
+		div.animate({ height : 100, width: 150 }, 200);
+		setTimeout(function() {
+			// Clear the queue and stop
+			div.stop();
 			ok(div.height() < 90, 'Animation stopped before it reached full height');
 			ok(div.width() < 120, 'Animation stopped before it reached full width');
 			start();
-		});
-		setTimeout(function() {
-			div.stop();
 		}, 100);
 	});
 

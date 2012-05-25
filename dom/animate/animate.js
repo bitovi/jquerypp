@@ -92,7 +92,7 @@ steal('jquery', 'jquery/dom/styles').then(function () {
 	 */
 	jQuery.fn.animate = function (props, speed, callback) {
 		// console.log(arguments);
-		
+
 		//default to normal animations if browser doesn't support them
 		if (passThrough.apply(this, arguments)) {
 			return oldanimate.apply(this, arguments);
@@ -120,7 +120,7 @@ steal('jquery', 'jquery/dom/styles').then(function () {
 					style = "@-webkit-keyframes " + animationName + " { from {",
 					// The animation end event handler.
 					// Will be called both on animation end and after calling .stop()
-					animationEnd = function (currentCSS) {
+					animationEnd = function (currentCSS, exec) {
 
 						self.css(currentCSS).css({
 							"-webkit-animation-duration" : "",
@@ -130,7 +130,7 @@ steal('jquery', 'jquery/dom/styles').then(function () {
 						// remove the animation keyframe
 						removeAnimation(lastSheet, animationName);
 
-						if (callback) {
+						if (callback && exec) {
 							// Call success, pass the DOM element as the this reference
 							callback.apply(self[0])
 						}
@@ -158,13 +158,16 @@ steal('jquery', 'jquery/dom/styles').then(function () {
 				// Add a hook which will be called when the animation stops
 				jQuery._data(this, dataKey, {
 					stop : function(gotoEnd) {
+						// Pause the animation
+						self.css('-webkit-animation-play-state', 'paused');
+						// Unbind the animation end handler
+						self.off('webkitAnimationEnd', animationEnd);
 						if(!gotoEnd) { // We were told not to finish the animation
-							// Pause the animation
-							self.css('-webkit-animation-play-state', 'paused');
-							// Unbind the animation end handler
-							self.off('webkitAnimationEnd', animationEnd);
 							// Call animationEnd but set the CSS to the current computed style
-							animationEnd(self.styles.apply(self, properties));
+							animationEnd(self.styles.apply(self, properties), false);
+						} else {
+							// Finish animaion
+							animationEnd(props, true);
 						}
 					}
 				});
@@ -177,7 +180,7 @@ steal('jquery', 'jquery/dom/styles').then(function () {
 
 				self.one('webkitAnimationEnd', function() {
 					// Call animationEnd using the current properties
-					animationEnd(props);
+					animationEnd(props, true);
 					self.dequeue();
 				});
 			});
