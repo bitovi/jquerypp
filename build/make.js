@@ -65,7 +65,7 @@ steal('steal/build/pluginify', 'jquery/build/stealify.js', 'jquery/build/amdify.
 			"jquery/build/lib.js" : "jquerypp/index",
 			"jquery/lang/json/json.js" : "jquerypp/util/json",
 			"jquery/lang/vector/vector.js" : "jquerypp/util/vector",
-			"jquery/dom/animation/animation.js" : "jquerypp/animation",
+			"jquery/dom/animate/animate.js" : "jquerypp/animate",
 			"jquery/dom/compare/compare.js" : "jquerypp/compare",
 			"jquery/dom/cookie/cookie.js" : "jquerypp/cookie",
 			"jquery/dom/dimensions/dimensions.js" : "jquerypp/dimensions",
