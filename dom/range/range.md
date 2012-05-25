@@ -31,16 +31,22 @@ Note, that the container returned by [jQuery.Range.prototype.start start] and [j
 ## Examples
 
      // Get the current range
-     var range = $.Range.current()
-     
-     // move the end of the range 2 characters right
-     range.end(2)
-     
+     var range = $.Range.current();
+
+     // Move the beginning of the range 2 characters to the right
+     range.start('+2');
+
+     // move the end of the range 2 characters to the left
+     range.end('-2');
+
+     // Select the current range
+     range.select();
+
      // get the startOffset of the range and the container
      range.start() //-> { offset: 2, container: HTMLELement }
      
      //get the most common ancestor element
-     var parent = range.parent()
+     var parent = range.parent();
      
      //select the parent
-     var range2 = new $.Range(parent)
+     var range2 = new $.Range(parent);

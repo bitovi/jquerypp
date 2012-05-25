@@ -263,7 +263,7 @@ steal('jquery/event', 'jquery/lang/vector', 'jquery/event/livehack', function( $
 			clearSelection();
 			/**
 			 * @attribute location
-			 * `drag.location` is a vector specifying where the element should be in the page.  This 
+			 * `drag.location` is a [jQuery.Vector] specifying where the element should be in the page.  This
 			 * takes into account the start position of the cursor on the element.
 			 * 
 			 * If the drag is going to be moved to an unacceptable location, you can call preventDefault in

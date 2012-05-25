@@ -55,24 +55,24 @@ $.extend($.Hover,{
  * @Prototype
  */
 $.extend($.Hover.prototype,{
-	/**
-	 * Sets the delay (in ms) for this hover. This method should only be used in
-	 * [jQuery.event.hover.hoverinit hoverinit]:
-	 *
-	 *      $('.hoverable').on('hoverinit', function(ev, hover) {
-	 *          // Set the delay to 500ms
-	 *          hover.delay(500);
-	 *      });
-	 *
-	 * @param {Number} delay the number of milliseconds used to determine a hover
-	 * @return {$.Hover} The hover object
-	 */
 	delay: function( delay ) {
+		/**
+		 * `hover.delay(time)` sets the delay (in ms) for this hover.
+		 * This method should only be used in [jQuery.event.hover.hoverinit hoverinit]:
+		 *
+		 *      $('.hoverable').on('hoverinit', function(ev, hover) {
+		 *          // Set the delay to 500ms
+		 *          hover.delay(500);
+		 *      });
+		 *
+		 * @param {Number} delay the number of milliseconds used to determine a hover
+		 * @return {$.Hover} The hover object
+		 */
 		this._delay = delay;
 		return this;
 	},
 	/**
-	 * Sets the maximum distance (in pixels) the mouse is allowed to travel in order to activate
+	 * `hover.distance(px) sets the maximum distance (in pixels) the mouse is allowed to travel in order to activate
 	 * the hover. This method should only be used in [jQuery.event.hover.hoverinit hoverinit]:
 	 *
 	 *      $('.hoverable').on('hoverinit', function(ev, hover) {
@@ -88,8 +88,8 @@ $.extend($.Hover.prototype,{
 		return this;
 	},
 	/**
-	 * Sets a delay how long the hover should stay active after the mouse left. This method should only be used in
-	 * [jQuery.event.hover.hoverinit hoverinit]:
+	 * `hover.leave(delay)` sets a delay for how long the hover should stay active after the mouse left.
+	 * This method should only be used in [jQuery.event.hover.hoverinit hoverinit]:
 	 *
 	 *      $('.hoverable').on('hoverinit', function(ev, hover) {
 	 *          // Stay active for another second after the mouse left

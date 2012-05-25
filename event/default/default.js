@@ -6,13 +6,15 @@ steal('jquery/event').then(function($){
  * @parent jQuery.event.pause
  * @plugin jquery/event/default
  *
- * Triggers an event and calls success when the event has finished propagating through the DOM and preventDefault is not called.
+ * `jQuery.fn.triggerAsync(type, [data], [success], [prevented]` triggers an event and calls success
+ * when the event has finished propagating through the DOM and no other handler
+ * called `event.preventDefault()` or returned `false`.
  *
  *     $('#panel').triggerAsync('show', function() {
  *        $('#panel').show();
  *     });
  *
- * You can also provide a callback that gets called if preventDefault was called on the event:
+ * You can also provide a callback that gets called if `event.preventDefault()` was called on the event:
  *
  *     $('panel').triggerAsync('show', function(){
  *         $('#panel').show();
@@ -20,9 +22,6 @@ steal('jquery/event').then(function($){
  *         $('#other').addClass('error');
  *     });
  *
- * triggerAsync is design to work with the [jquery.event.pause] 
- * plugin although it is defined in _jquery/event/default_.
- * 
  * @param {String} type The type of event
  * @param {Object} data The data for the event
  * @param {Function} success a callback function which occurs upon success

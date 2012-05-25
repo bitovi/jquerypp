@@ -2,17 +2,19 @@ steal('jquery','jquery/dom/compare').then(function($){
 // TODOS ...
 // Ad
 
+$.fn.range =
 /**
  * @function jQuery.fn.range
  * @parent jQuery.Range
- * 
- * `jQuery.fn.range` returns a jQuery.Range for the selected element.
- * 
+ *
+ * `jQuery.fn.range` returns a [jQuery.Range] instance for the selected element.
+ *
  *     $('#content').range()
+ *
  *
  * @return {$.Range} A $.Range instance for the selected element
  */
-$.fn.range = function(){
+function(){
 	return $.Range(this[0])
 }
 
@@ -475,6 +477,7 @@ $.extend($.Range.prototype,
 	 *
 	 * @param {String} [from] how the rects coordinates should be given (viewport or page).  Provide 'page' for 
 	 * rect coordinates from the page.
+	 * @return {Array} The client rects
 	 */
 	rects : function(from){
 		// order rects by size 

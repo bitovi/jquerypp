@@ -44,7 +44,6 @@ test("models can validate, events, callbacks", 7 ,function(){
 
 test("validatesFormatOf", function(){
 	Person.validateFormatOf("thing",/\d-\d/)
-	console.log( new Person({thing: "1-2"}).errors() )
 	ok(!new Person({thing: "1-2"}).errors(),"no errors");
 	
 	var errors = new Person({thing: "foobar"}).errors();

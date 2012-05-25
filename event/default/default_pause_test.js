@@ -6,42 +6,42 @@ module("jquery/event/default_pause");
 test("default and pause with delegate", function(){
 	var order = [];
 	stop();
-	$("#qunit-test-area").html("<div id='foo'><p id='bar'>hello</p></div>")
-	
-	$("#foo").delegate("#bar","default.show", function(){
+	$("#qunit-test-area").html("<div id='foo_default_pause'><p id='bar_default_pause'>hello</p></div>")
+
+	$("#foo_default_pause").delegate("#bar_default_pause","default.show", function(){
 		order.push("default")
 	});
-	
-	$("#foo").delegate("#bar","show", function(ev){
-		order.push('show')
+
+	$("#foo_default_pause").delegate("#bar_default_pause","show", function(ev){
+		order.push('show');
 		ev.pause();
-		
+
 		setTimeout(function(){
 			ev.resume();
-			
+
 			setTimeout(function(){
 				start();
 				same(order,['show','default'])
 			},30)
-			
+
 		},50)
 	});
-	
-	
-	$("#bar").trigger("show")
-	
+
+
+	$("#bar_default_pause").trigger("show")
+
 });
 
 test("default and pause with live", function(){
-	$("#qunit-test-area").html("<div id='foo'>hello</div>")
-	
+	$("#qunit-test-area").html("<div id='foo_default_pause'>hello</div>")
+
 	var order = [];
 	stop();
-	
-	$("#foo").live("default.show", function(){
+
+	$("#foo_default_pause").live("default.show", function(){
 		order.push("default")
 	});
-	$("#foo").live("show", function(ev){
+	$("#foo_default_pause").live("show", function(ev){
 		order.push('show')
 		ev.pause();
 		setTimeout(function(){
@@ -49,43 +49,43 @@ test("default and pause with live", function(){
 			setTimeout(function(){
 				start();
 				same(order,['show','default'])
-				$("#foo").die("show");
-				$("#foo").die("default.show");
+				$("#foo_default_pause").die("show");
+				$("#foo_default_pause").die("default.show");
 			},30)
 		},50)
 	});
-	
-	
-	$("#foo").trigger("show")
-	
+
+
+	$("#foo_default_pause").trigger("show")
+
 });
 
 
 test("triggerAsync", function(){
-	$("#qunit-test-area").html("<div id='foo'>hello</div>")
-	
+	$("#qunit-test-area").html("<div id='foo_default_pause'>hello</div>")
+
 	var order = [];
 	stop();
-	
-	$("#foo").live("default.show", function(){
+
+	$("#foo_default_pause").live("default.show", function(){
 		order.push("default")
 	});
-	
-	$("#foo").live("show", function(ev){
+
+	$("#foo_default_pause").live("show", function(ev){
 		order.push('show')
 		ev.pause();
 		setTimeout(function(){
 			ev.resume();
 			setTimeout(function(){
 				start();
-				$("#foo").die()
+				$("#foo_default_pause").die()
 				same(order,['show','default','async'])
 			},30)
 		},50)
 	});
-	
-	
-	$("#foo").triggerAsync("show", function(){
+
+
+	$("#foo_default_pause").triggerAsync("show", function(){
 		order.push("async")
 	})
 });

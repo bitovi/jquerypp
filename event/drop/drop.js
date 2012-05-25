@@ -66,6 +66,8 @@ steal('jquery/event/drag','jquery/dom/within','jquery/dom/compare',function($){
 	 *
 	 * `dropmove` is triggered repeatedly when a drag is moved over a drop
 	 * (similar to a mousemove).
+	 * The event handler gets an instance of [jQuery.Drag] passed as the second and a
+	 * [jQuery.Drop] as the third parameter.
 	 *
 	 *      $('.droparea').on('dropmove', function(ev, drop, drag) {
 	 *          $(this).html(drag.location.x() + '/' + drag.location.y());
@@ -76,6 +78,8 @@ steal('jquery/event/drag','jquery/dom/within','jquery/dom/compare',function($){
 	 * @attribute dropend
 	 *
 	 * `dropend` is called when the drag motion is done for this drop element.
+	 * The event handler gets an instance of [jQuery.Drag] passed as the second and a
+	 * [jQuery.Drop] as the third parameter.
 	 *
 	 *
 	 *      $('.droparea').on('dropend', function(ev, drop, drag) {
@@ -207,14 +211,14 @@ steal('jquery/event/drag','jquery/dom/within','jquery/dom/compare',function($){
 		 * 
 		 * After adding an element or drop, call compile.
 		 * 
-		 * $("#midpoint").bind("dropover",function(){
-		 * 		// when a drop hovers over midpoint,
-		 *      // make drop a drop.
-		 * 		$("#drop").bind("dropover", function(){
+		 *      $("#midpoint").bind("dropover",function(){
+		 * 		    // when a drop hovers over midpoint,
+		 *          // make drop a drop.
+		 * 		    $("#drop").bind("dropover", function(){
 		 * 			
-		 * 		});
-		 * 		$.Drop.compile();
-		 * 	});
+		 * 		    });
+		 * 		    $.Drop.compile();
+		 * 	    });
 		 */
 		compile: function( event, drag ) {
 			// if we called compile w/o a current drag
@@ -419,7 +423,7 @@ steal('jquery/event/drag','jquery/dom/within','jquery/dom/compare',function($){
 		},
 		/**
 		 * `drop.cache(value)` sets the drop to cache positions of draggable elements.
-		 * This should be called in `dropinit`. For example:
+		 * This should be called on `dropinit`. For example:
 		 *
 		 *      $('#dropable').on('dropinit', function( el, ev, drop ) {
 		 *          drop.cache();
@@ -432,6 +436,12 @@ steal('jquery/event/drag','jquery/dom/within','jquery/dom/compare',function($){
 		},
 		/**
 		 * `drop.cancel()` prevents this drop from being dropped on.
+		 *
+		 *      $('.droparea').on('dropover', function(ev, drop, drag) {
+		 *          if(drag.element.hasClass('not-me')) {
+		 *            drop.cancel();
+		 *          }
+		 *      });
 		 */
 		cancel: function() {
 			this._canceled = true;

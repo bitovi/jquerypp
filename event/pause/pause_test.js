@@ -2,9 +2,9 @@ steal('funcunit/qunit','funcunit/syn','jquery/event/pause').then(function(){
 
 module("jquery/event/pause", {setup : function(){
 	$("#qunit-test-area").html("")
-	var div = $("<div id='wrapper'><ul id='ul'>"+
+	var div = $("<div id='wrapper_pause_test'><ul id='ul_pause_test'>"+
 				"<li><p>Hello</p>"+
-					"<ul><li><p id='foo'>Foo Bar</p></li></ul>"+
+					"<ul><li><p id='foo_pause_test'>foo_pause_test Bar</p></li></ul>"+
 				"</li></ul></div>").appendTo($("#qunit-test-area"));
 	
 }});
@@ -21,7 +21,7 @@ test("basics",3, function(){
 			lastTime = new Date()
 		};
 	
-	$('#ul').delegate("li", "show",function(ev){
+	$('#ul_pause_test').delegate("li", "show",function(ev){
 		calls++;
 		space();
 		
@@ -33,13 +33,13 @@ test("basics",3, function(){
 		
 	})
 	
-	$('#wrapper').bind('show', function(){
+	$('#wrapper_pause_test').bind('show', function(){
 		space()
 		equals(calls, 2, "both lis called");
 		start()
 	});
 	stop();
-	$('#foo').trigger("show")
+	$('#foo_pause_test').trigger("show")
 });
 
 

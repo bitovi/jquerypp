@@ -8,14 +8,14 @@ steal('jquery').then(function(){
 			isReady = true;
 	})
 })
-.then('./jmvc.js')
-.then('jquery/dom/animate/animate_test.js',
+.then('jquery/event/default/default_test.js',
+	'jquery/event/default/default_pause_test.js',
+	'jquery/dom/animate/animate_test.js',
 	'jquery/dom/compare/compare_test.js',
 	'jquery/dom/compare/compare_test.js',
 	'jquery/dom/dimensions/dimensions_test.js',
 	'jquery/dom/form_params/form_params_test.js',
 	'jquery/dom/styles/styles_test.js',
-	'jquery/event/default/default_test.js',
 	'jquery/event/destroyed/destroyed_test.js',
 	'jquery/event/drag/drag_test.js',
 	'jquery/event/drop/drop_test.js',
@@ -25,12 +25,15 @@ steal('jquery').then(function(){
 	'jquery/event/pause/pause_test.js',
 	'jquery/event/resize/resize_test.js',
 	'jquery/event/swipe/swipe_test.js',
-	'jquery/event/default/default_pause_test.js',
-	function(){
-		stateAfterScript = isReady;
-		module('jquery v steal');
-		test("jquery isn't ready", function(){
-			ok(!stateAfterScript, "jQuery isn't ready yet")
-		});
+	'jquery/lang/lang_test.js'
+)
+.then('./jmvc.js')
+.then(function(){
+	stateAfterScript = isReady;
+	module('jquery v steal');
+	test("jquery isn't ready", function(){
+		ok(!stateAfterScript, "jQuery isn't ready yet")
 	});
+});
+
 })();

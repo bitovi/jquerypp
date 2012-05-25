@@ -7,7 +7,11 @@ steal('funcunit/qunit', 'jquery/event/resize').then(function() {
 	test("resize hits only children in order", function() {
 		var ids = []
 		record = function( ev ) {
-			ids.push(this.id ? this.id : this)
+			if($(this).is(document.body)) {
+				ids.push('body');
+			} else {
+				ids.push(this.id ? this.id : this)
+			}
 		},
 			divs = $("#qunit-test-area").html("<div id='1'><div id='1.1'></div><div id='1.2'></div></div><div id='2'></div>").find('div').bind('resize', record);
 
@@ -19,11 +23,11 @@ steal('funcunit/qunit', 'jquery/event/resize').then(function() {
 
 		ids = [];
 		$("#qunit-test-area").trigger("resize");
-		same(ids, [document.body, '1', '1.1', '1.2', '2']);
+		same(ids, [document.body.tagName.toLowerCase(), '1', '1.1', '1.2', '2']);
 
 		ids = [];
 		$(window).trigger("resize");
-		same(ids, [document.body, '1', '1.1', '1.2', '2']);
+		same(ids, [document.body.tagName.toLowerCase(), '1', '1.1', '1.2', '2']);
 
 		$(document.body).unbind('resize', record);
 	});
@@ -42,7 +46,7 @@ steal('funcunit/qunit', 'jquery/event/resize').then(function() {
 		$(document.body).bind('resize', record);
 
 		$(window).trigger("resize");
-		same(ids, [document.body, '1']);
+		same(ids, [document.body.tagName.toLowerCase(), '1']);
 
 		$(document.body).unbind('resize', record);
 	});
