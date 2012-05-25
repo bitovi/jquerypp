@@ -4,11 +4,11 @@ layout: default
 
 # Welcome to jQuery++
 
-jQuery++ is a collection of useful DOM helpers and special events for jQuery 1.7 and later. Here is what it can do:
+jQuery++ is a collection of useful DOM helpers and special events for jQuery 1.7 and later:
 
-- [DOM Helpers](#): jQuery++ DOM helpers make working with the DOM even easier and faster by adding useful plugins and
+- [DOM Helpers](#dom_helpers): jQuery++ DOM helpers make working with the DOM even easier and faster by adding useful plugins and
 extending existing ones.
-- [Events](#): Special events add rich functionality like drag&drop as delegatable events that can be used with
+- [Events](#events): Special events add rich functionality like drag&drop as delegatable events that can be used with
 any library.
 
 Learn more about [why jQuery++](#why_jquery__) can be useful for you.
@@ -33,7 +33,8 @@ You can also download the [full archive](https://github.com/downloads/jupiterjs/
 
 ### Using Steal
 
-The files needed for using jQuery++ with [StealJS](http://javascriptmvc.com/docs.html#!stealjs) are located in the `steal/` folder of the full download. Take the `jquery/` folder and put it in your steal root. Make sure to use `steal.map` to map any dependency of `jquery` to your jQuery library, if necessary. For example, when using jQuery++ with [CanJS](http://canjs.us) and Steal:
+The files needed for using jQuery++ with [StealJS](http://javascriptmvc.com/docs.html#!stealjs) are located in the `steal/` folder of the [full download](https://github.com/downloads/jupiterjs/jquerypp/jquerypp-1.0.0b.zip).
+Take the `jquery/` folder and put it in your steal root. Make sure to use `steal.map` to map any dependency of `jquery` to your jQuery library, if necessary. For example, when using jQuery++ with [CanJS](http://canjs.us) and Steal:
 
 {% highlight javascript %}
 steal.map({
@@ -43,7 +44,8 @@ steal.map({
 
 ### Using AMD
 
-The files to load the jQuery++ plugins with an [AMD](https://github.com/amdjs/amdjs-api/wiki/AMD) module loader like [RequireJS](http://requirejs.org/), are located in the `amd/` folder. Place the `jquerypp/` folder in your module directory and load a plugin like this:
+The files to load the jQuery++ plugins with an [AMD](https://github.com/amdjs/amdjs-api/wiki/AMD) module loader like [RequireJS](http://requirejs.org/), are located in the `amd/` folder of the [full download](https://github.com/downloads/jupiterjs/jquerypp/jquerypp-1.0.0b.zip).
+Place the `jquerypp/` folder in your module directory and load a plugin like this:
 
 {% highlight javascript %}
 define(['jquery', 'jquerypp/dimensions', 'jquerypp/event/resize'],
