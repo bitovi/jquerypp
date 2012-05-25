@@ -1218,6 +1218,20 @@ steal('jquery/dom/animate',
 				});
 	});
 
+	test("jQuery.stop() on CSS animation", function () {
+		stop();
+		var div = jQuery("<div style='height: 0; width: 0;'></div>").appendTo("#qunit-fixture");
+		div.animate({ height : 100, width: 150 }, 200, function () {
+			ok(true, 'Callback fired');
+			ok(div.height() < 90, 'Animation stopped before it reached full height');
+			ok(div.width() < 120, 'Animation stopped before it reached full width');
+			start();
+		});
+		setTimeout(function() {
+			div.stop();
+		}, 100);
+	});
+
 	/* As mentioned, thoroughly abuses undocumented methods. Since the overwritten animate doesn't
 	 * use timers this doesn't need to be tested
 	asyncTest("callbacks that throw exceptions will be removed (#5684)", function () {

@@ -22,24 +22,28 @@
 </script>
 <script type='text/javascript' id="demo-source">
 steal('jquery/dom/animate').then(function(){
-  /*
   var old = jQuery.fx.prototype.custom;
   jQuery.fx.prototype.custom = function( from, to, unit ) {
     console.log(arguments, this);
     old.apply(this, arguments);
   }
-  */
   $("#go").click(function(){
-    var block = $("#block").hide().fadeIn('slow').animate({
-      opacity: 0.4,
-      height: '200px'
-    }, 3000 , function() { console.log('callback'); });
 
-    setTimeout(function() {
-      // block.stop();
-      console.log(block.height());
-    }, 1500);
+    var block = $("#block");
+    block.hide('slow').show('fast');
   });
+  $().fadeIn
+
+//    .hide().fadeIn('slow').animate({
+//      opacity: 0.4,
+//      height: '200px'
+//    }, 3000 , function() { console.log('callback'); });
+
+//    setTimeout(function() {
+//      // block.stop();
+//      console.log(block.height());
+//    }, 1500);
+//  });
 });
 </script>
 </body>

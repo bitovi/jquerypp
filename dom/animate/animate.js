@@ -91,6 +91,8 @@ steal('jquery', 'jquery/dom/styles').then(function () {
 	 * @return {jQuery} The jQuery element
 	 */
 	jQuery.fn.animate = function (props, speed, callback) {
+		// console.log(arguments);
+		
 		//default to normal animations if browser doesn't support them
 		if (passThrough.apply(this, arguments)) {
 			return oldanimate.apply(this, arguments);
@@ -154,7 +156,7 @@ steal('jquery', 'jquery/dom/styles').then(function () {
 				lastSheet.insertRule(style, lastSheet.cssRules.length);
 
 				// Add a hook which will be called when the animation stops
-				jQuery._data(this, animationName + '.run', {
+				jQuery._data(this, dataKey, {
 					stop : function(gotoEnd) {
 						if(!gotoEnd) { // We were told not to finish the animation
 							// Pause the animation
