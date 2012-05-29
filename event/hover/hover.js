@@ -183,10 +183,13 @@ var event = $.event,
 		}, hover._delay)
 		
 	};
-		
+
+/**
+ * @add jQuery.event.special
+ */
 event.setupHelper( [
 /**
- * @attribute jQuery.event.special.hoverinit
+ * @attribute hoverinit
  * @parent jQuery.event.hover
  *
  * `hoverinit` is called when a hover is about to start (on `mouseenter`). Listen for `hoverinit` events to configure
@@ -204,7 +207,7 @@ event.setupHelper( [
  */
 "hoverinit", 
 /**
- * @attribute jQuery.event.special.hoverenter
+ * @attribute hoverenter
  * @parent jQuery.event.hover
  *
  * `hoverenter` events are called when the mouses less than [jQuery.Hover.prototype.distance] pixels in
@@ -216,7 +219,7 @@ event.setupHelper( [
  */
 "hoverenter",
 /**
- * @attribute jQuery.event.special.hoverleave
+ * @attribute hoverleave
  * @parent jQuery.event.hover
  *
  * `hoverleave` is called when the mouse leaves an element that has been hovered.
@@ -227,7 +230,7 @@ event.setupHelper( [
  */
 "hoverleave",
 /**
- * @attribute jQuery.event.special.hovermove
+ * @attribute hovermove
  * @parent jQuery.event.hover
  *
  * `hovermove` is called when a `mousemove` occurs on an element that has been hovered.
