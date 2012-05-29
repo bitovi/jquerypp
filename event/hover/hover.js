@@ -55,19 +55,19 @@ $.extend($.Hover,{
  * @Prototype
  */
 $.extend($.Hover.prototype,{
+	/**
+	 * `hover.delay(time)` sets the delay (in ms) for this hover.
+	 * This method should only be used in [jQuery.event.hover.hoverinit hoverinit]:
+	 *
+	 *      $('.hoverable').on('hoverinit', function(ev, hover) {
+	 *          // Set the delay to 500ms
+	 *          hover.delay(500);
+	 *      });
+	 *
+	 * @param {Number} delay the number of milliseconds used to determine a hover
+	 * @return {$.Hover} The hover object
+	 */
 	delay: function( delay ) {
-		/**
-		 * `hover.delay(time)` sets the delay (in ms) for this hover.
-		 * This method should only be used in [jQuery.event.hover.hoverinit hoverinit]:
-		 *
-		 *      $('.hoverable').on('hoverinit', function(ev, hover) {
-		 *          // Set the delay to 500ms
-		 *          hover.delay(500);
-		 *      });
-		 *
-		 * @param {Number} delay the number of milliseconds used to determine a hover
-		 * @return {$.Hover} The hover object
-		 */
 		this._delay = delay;
 		return this;
 	},
