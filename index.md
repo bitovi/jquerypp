@@ -5,7 +5,9 @@ version: 1.0b
 
 # Welcome to jQuery++
 
-jQuery++ is a collection of useful DOM helpers and special events for jQuery 1.7 and later. Just select the plugins you want to create a customized download as an unminified JavaScript file:
+jQuery++ is a collection of useful DOM helpers and special events for jQuery 1.7 and 
+later. Just select the plugins you want to create a customized download as 
+an unminified JavaScript file:
 
 {% include builder.html %}
 
