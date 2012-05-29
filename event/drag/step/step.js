@@ -20,7 +20,12 @@ steal('jquery/event/drag', 'jquery/dom/styles').then(function( $ ) {
 	 * 
 	 * @demo jquery/event/drag/step/step.html
 	 * 
-	 * @param {number|Object} amount make the drag move X amount in pixels from the top-left of container.
+	 * @param {number|Object} amount make the drag move the amount in pixels from the top-left of container.
+	 * 
+	 * If the amount is a `number`, the drag will move step-wise that number pixels in both 
+	 * dimensions.  If it's an object like `{x: 20, y: 10}` the drag will move in steps 20px from
+	 * left to right and 10px up and down.
+	 * 
 	 * @param {jQuery} [container] the container to move in reference to.  If not provided, the document is used.
 	 * @param {String} [center] Indicates how to position the drag element in relationship to the container.
 	 * 
