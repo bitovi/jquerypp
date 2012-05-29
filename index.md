@@ -483,7 +483,6 @@ action or prevent it entirely.
 
 ### Example
 
-
 The following example implements a `tabs` widget using [CanJS](http://canjs.us). Each tab panel contains a form to input data. When the form data changes and you go to another tab it will ask you to save these changes before moving on. This will pause the tabs `hide` event until you either confirmed or declined to save the form. On *cancel* the event will be prevented and the widget will stay in the current tab:
 
 <iframe style="width: 100%; height: 350px" src="http://jsfiddle.net/4Bg3Z/embedded/result,html,js,css" allowfullscreen="allowfullscreen" frameborder="0">JSFiddle</iframe>
