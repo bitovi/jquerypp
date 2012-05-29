@@ -44,31 +44,40 @@
         src='../../../steal/steal.js'></script>
 <script type='text/javascript' id='demo-source'>
 steal('jquery/event/drop', function(){
-	//make drags
-	$('.handle').live("draginit", function(){})
-				
-	//add dropout/dropover
-	$('#dropout')
-	  .delegate(".dropout","dropover", function(){ $(this).addClass('over') })
-	  .delegate(".dropout","dropout", function(){ $(this).removeClass('over') })
-	  .bind("dropover", function(){ $(this).addClass('over') })
-	  .bind("dropout", function(){ $(this).removeClass('over') });
-		
-	//turn off dropout/dropover
-	$("#undelegate").click(function(){
-	    $('#dropout').undelegate(".dropout","dropover");
-	    $('#dropout').undelegate(".dropout","dropout");
-	})
-		
-	//add dropmove/dropon
-	var count = 0
-	$('.dropmove')
-	  .bind('dropmove', function(){
-	    $('.count').text(count++)
-	  })
-	  .bind('dropon', function(){
-	    $(this).text("Dropped on!")
-	  }) 
+//make drags
+$('.handle').live("draginit", function(){})
+	
+//add dropout/dropover
+$('#dropout')
+  .delegate(".dropout","dropover", function(){ 
+    $(this).addClass('over') 
+  })
+  .delegate(".dropout","dropout", function(){ 
+    $(this).removeClass('over') 
+  })
+  .bind("dropover", function(){ 
+    $(this).addClass('over') 
+  })
+  .bind("dropout", function(){ 
+    $(this).removeClass('over') 
+  });
+	
+//turn off dropout/dropover
+$("#undelegate").click(function(){
+  $('#dropout').undelegate(".dropout","dropover");
+  $('#dropout').undelegate(".dropout","dropout");
+})
+	
+//add dropmove/dropon
+var count = 0
+$('.dropmove')
+  .bind('dropmove', function(){
+    $('.count').text(count++)
+  })
+  .bind('dropon', function(){
+    $(this).text("Dropped on!")
+  });
+  
 })
 </script>
 	</body>

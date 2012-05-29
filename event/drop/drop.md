@@ -1,19 +1,28 @@
 @page jQuery.event.drop
 @parent jquerypp
 
-Provides drop events as a special event to jQuery. By binding to a drop event, your callback functions will be called during the corresponding phase of drag.
+`jQuery.event.drop` provides drop events for [jQuery.event.drag]. By binding to a 
+drop event, callback functions will be called during the corresponding phase of the drag motion.
  
 ## Drop Events
 
-All drop events are called with the native event, an instance of drop, and the drag.  Here are the available drop 
-events:
+All drop events are called with the native event, an instance of [jQuery.Drop], and [jQuery.Drag]. The following
+drop events are supported:
 
-* `dropinit` - the drag motion is started, drop positions are calculated.
-* `dropover` - a drag moves over a drop element, called once as the drop is dragged over the element.
-* `dropout` - a drag moves out of the drop element.
-* `dropmove` - a drag is moved over a drop element, called repeatedly as the element is moved.
-* `dropon` - a drag is released over a drop element.
-* `dropend` - the drag motion has completed.
+* [jQuery.event.special.dropinit dropinit] - the drag motion is started, drop positions are calculated.
+* [jQuery.event.special.dropover dropover] - a drag moves over a drop element, called once as the drop is dragged over the element.
+* [jQuery.event.special.dropout dropout] - a drag moves out of the drop element.
+* [jQuery.event.special.dropmove dropmove] - a drag is moved over a drop element, called repeatedly as the element is moved.
+* [jQuery.event.special.dropon dropon] - a drag is released over a drop element.
+* [jQuery.event.special.dropend dropend] - the drag motion has completed.
+
+A drop instance supports the following methods:
+
+* [$.Drop::cache cache] - cache the position of the drop for faster hit detection
+* [$.Drop::cancel cancel] - cancel this drop point from responding to drags
+
+If you are adding drop points after the start of a drag motion, call [$.Drop.compile] to
+re-calculate all drop points.
 
 ## Examples
 
@@ -26,6 +35,7 @@ Here's how to listen for when a drag moves over a drop:
 A bit more complex example:
 
 @demo jquery/event/drop/drop.html 1000
+
 
 ## How it works
 

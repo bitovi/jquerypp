@@ -3,12 +3,13 @@ steal('jquery/event/drag','jquery/dom/within','jquery/dom/compare',function($){
 	//somehow need to keep track of elements with selectors on them.  When element is removed, somehow we need to know that
 	//
 	/**
-	 * @add jQuery.event.drop
+	 * @add jQuery.event.special
 	 */
 	var eventNames = [
 	/**
 	 * @attribute dropover
-	 *
+	 * @parent jQuery.event.drop
+	 * 
 	 * `dropover` is triggered when a [jQuery.event.drag drag] is first moved onto this
 	 * drop element.
 	 * The event handler gets an instance of [jQuery.Drag] passed as the second and a
@@ -22,7 +23,8 @@ steal('jquery/event/drag','jquery/dom/within','jquery/dom/compare',function($){
 	"dropover",
 	/**
 	 * @attribute dropon
-	 *
+	 * @parent jQuery.event.drop
+	 * 
 	 * `dropon` is triggered when a drag is dropped on a drop element.
 	 * The event handler gets an instance of [jQuery.Drag] passed as the second and a
 	 * [jQuery.Drop] as the third parameter.
@@ -34,7 +36,8 @@ steal('jquery/event/drag','jquery/dom/within','jquery/dom/compare',function($){
 	"dropon",
 	/**
 	 * @attribute dropout
-	 *
+	 * @parent jQuery.event.drop
+	 * 
 	 * `dropout` is called when a drag is moved out of this drop element.
 	 * The event handler gets an instance of [jQuery.Drag] passed as the second and a
 	 * [jQuery.Drop] as the third parameter.
@@ -47,7 +50,8 @@ steal('jquery/event/drag','jquery/dom/within','jquery/dom/compare',function($){
 	"dropout",
 	/**
 	 * @attribute dropinit
-	 *
+	 * @parent jQuery.event.drop
+	 * 
 	 * `dropinit` is called when a drag motion starts and the drop elements are initialized.
 	 * The event handler gets an instance of [jQuery.Drag] passed as the second and a
 	 * [jQuery.Drop] as the third parameter.
@@ -63,7 +67,8 @@ steal('jquery/event/drag','jquery/dom/within','jquery/dom/compare',function($){
 	"dropinit",
 	/**
 	 * @attribute dropmove
-	 *
+	 * @parent jQuery.event.drop
+	 * 
 	 * `dropmove` is triggered repeatedly when a drag is moved over a drop
 	 * (similar to a mousemove).
 	 * The event handler gets an instance of [jQuery.Drag] passed as the second and a
@@ -76,7 +81,8 @@ steal('jquery/event/drag','jquery/dom/within','jquery/dom/compare',function($){
 	"dropmove",
 	/**
 	 * @attribute dropend
-	 *
+	 * @parent jQuery.event.drop
+	 * 
 	 * `dropend` is called when the drag motion is done for this drop element.
 	 * The event handler gets an instance of [jQuery.Drag] passed as the second and a
 	 * [jQuery.Drop] as the third parameter.
