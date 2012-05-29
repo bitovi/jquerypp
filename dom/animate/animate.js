@@ -75,7 +75,9 @@ steal('jquery', 'jquery/dom/styles').then(function () {
 			return value;
 		},
 
-
+		/**
+		 * Feature detection borrowed by Modernizr
+		 */
 		getBrowserProperties = function(){
 			var t,
 				el = document.createElement('fakeelement'),
@@ -84,6 +86,7 @@ steal('jquery', 'jquery/dom/styles').then(function () {
 						transitionEnd : 'transitionEnd',
 						prefix : ''
 					},
+					/*
 					'OTransition': {
 						transitionEnd : 'oTransitionEnd',
 						prefix : '-o-'
@@ -96,6 +99,7 @@ steal('jquery', 'jquery/dom/styles').then(function () {
 						transitionEnd : 'animationend',
 						prefix : '-moz-'
 					},
+					*/
 					'WebkitTransition': {
 						transitionEnd : 'webkitAnimationEnd',
 						prefix : '-webkit-'
