@@ -56,7 +56,7 @@ The following example implements a `tabs` widget using [CanJS](http://canjs.us) 
       }
     })
 
-Each tab panel contains a form to input data and has a `Dirtybit` conrol attached to it which keeps track if the form has been saved or not. When the form data changes and you go to another tab The `Saver` widget will pause the `hide` event and show a modal that allows you to save the form, or cancel to stay in the current tab. Saving the data will send a POST Ajax request and resume the event when it returns:
+Each tab panel contains a form to input data and has a `Dirtybit` control attached to it which keeps track if the form has been saved or not. When the form data changes and you go to another tab The `Saver` widget will pause the `hide` event and show a modal that allows you to save the form, or cancel to stay in the current tab. Saving the data will send a POST Ajax request and resume the event when it returns:
 
     can.Control("Saver", {
     }, {

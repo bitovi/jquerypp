@@ -7,10 +7,9 @@ $.fn.range =
  * @function jQuery.fn.range
  * @parent jQuery.Range
  *
- * `jQuery.fn.range` returns a [jQuery.Range] instance for the selected element.
+ * `$.fn.range` returns a new [jQuery.Range] instance for the first selected element.
  *
- *     $('#content').range()
- *
+ *     $('#content').range() //-> range
  *
  * @return {$.Range} A $.Range instance for the selected element
  */
@@ -42,7 +41,7 @@ support = {};
  * @Class jQuery.Range
  * @parent jQuery.Range
  *
- * Creates a a new range object.
+ * Depending on the object passed, the selected text will be different.
  * 
  * @param {TextRange|HTMLElement|Point} [range] An object specifiying a 
  * range.  Depending on the object, the selected text will be different.  $.Range supports the
@@ -134,6 +133,20 @@ current = function(el){
 $.extend($.Range.prototype,
 /** @prototype **/
 {
+	/**
+	 * Moves the range end and start position to a specific point.
+	 * A point can be defined like:
+	 *
+	 *      //client coordinates
+	 *      {clientX: 200, clientY: 300}
+	 *
+	 *      //page coordinates
+	 *      {pageX: 200, pageY: 300}
+	 *      {top: 200, left: 300}
+	 *
+	 * @param point The point to move the range to
+	 * @return {$.Range}
+	 */
 	moveToPoint : function(point){
 		var clientX = point.clientX, clientY = point.clientY
 		if(!clientX){
@@ -276,7 +289,7 @@ $.extend($.Range.prototype,
 	 *
 	 *         $('#foo').range().start("+4")
 	 *
-	 * Note that end can return a text node. To get the containing element use this:
+	 * Note that `start` can return a text node. To get the containing element use this:
 	 *
 	 *     var startNode = range.start().container;
 	 *     if( startNode.nodeType === Node.TEXT_NODE ||
@@ -340,8 +353,8 @@ $.extend($.Range.prototype,
 
 	},
 	/**
-	 * `range.end([end])` or gets the end of the range.
-	 * It takes similar options as [jQuery.Range.prototype.start]:
+	 * `range.end([end])` gets or sets the end of the range.
+	 * It takes similar options as [jQuery.Range::start start]:
 	 *
 	 * - __Object__ - an object with the new end container and offset like
 	 *
@@ -354,7 +367,7 @@ $.extend($.Range.prototype,
 	 *
 	 *         $('#foo').range().end("+4")
 	 *
-	 * Note that end can return a text node. To get the containing element use this:
+	 * Note that `end` can return a text node. To get the containing element use this:
 	 *
 	 *     var startNode = range.end().container;
 	 *     if( startNode.nodeType === Node.TEXT_NODE ||
@@ -541,7 +554,7 @@ $.extend($.Range.prototype,
 	/**
 	 * @function compare
 	 *
-	 * `range.compare([compareRange])` compares one range to another range.
+	 * `range.compare(type, compareRange)` compares one range to another range.
 	 * 
 	 * ## Example
 	 * 
@@ -553,13 +566,13 @@ $.extend($.Range.prototype,
 	 * 
 	 * 
 	 *
-	 * @param {Object} type Specifies the boundry of the
+	 * @param {String} type Specifies the boundary of the
 	 * range and the <code>compareRange</code> to compare.
 	 * 
-	 *   - START\_TO\_START - the start of the range and the start of compareRange
-	 *   - START\_TO\_END - the start of the range and the end of compareRange
-	 *   - END\_TO\_END - the end of the range and the end of compareRange
-	 *   - END\_TO\_START - the end of the range and the start of compareRange
+	 *   - `"START_TO_START"` - the start of the range and the start of compareRange
+	 *   - `"START_TO_END"` - the start of the range and the end of compareRange
+	 *   - `"END_TO_END"` - the end of the range and the end of compareRange
+	 *   - `"END_TO_START"` - the end of the range and the start of compareRange
 	 *   
 	 * @param {$.Range} compareRange The other range
 	 * to compare against.
@@ -594,10 +607,10 @@ $.extend($.Range.prototype,
 	 * @param {String} type a string indicating the ranges boundary point
 	 * to move to which referenceRange boundary point where:
 	 * 
-	 *   - START\_TO\_START - the start of the range moves to the start of referenceRange
-	 *   - START\_TO\_END - the start of the range move to the end of referenceRange
-	 *   - END\_TO\_END - the end of the range moves to the end of referenceRange
-	 *   - END\_TO\_START - the end of the range moves to the start of referenceRange
+	 *   - `"START_TO_START"` - the start of the range moves to the start of referenceRange
+	 *   - `"START\_TO\_END"` - the start of the range move to the end of referenceRange
+	 *   - `"END_TO_END"` - the end of the range moves to the end of referenceRange
+	 *   - `"END_TO_START"` - the end of the range moves to the start of referenceRange
 	 *   
 	 * @param {jQuery.Range} referenceRange
 	 * @return {jQuery.Range} the original range for chaining
@@ -633,7 +646,12 @@ $.extend($.Range.prototype,
 	fn.
 	/**
 	 * `range.clone()` clones the range and returns a new $.Range
-	 * object.
+	 * object:
+	 *
+	 *      var range = new $.Range(document.getElementById('text'));
+	 *      var newRange = range.clone();
+	 *      range.start('+2');
+	 *      range.select();
 	 * 
 	 * @return {jQuery.Range} returns the range as a $.Range.
 	 */
@@ -646,11 +664,19 @@ $.extend($.Range.prototype,
 	 * @function
 	 *
 	 * `range.select([el])` selects an element with this range.  If nothing
-	 * is provided, makes the current
-	 * range appear as if the user has selected it.
+	 * is provided, makes the current range appear as if the user has selected it.
 	 * 
-	 * This works with text nodes.
-	 * 
+	 * This works with text nodes. For example with:
+	 *
+	 *      <div id="text">This is a text</div>
+	 *
+	 * $.Range can select `is a` like this:
+	 *
+	 *      var range = new $.Range(document.getElementById('text'));
+	 *      range.start('+5');
+	 *      range.end('-5');
+	 *      range.select();
+	 *
 	 * @param {HTMLElement} [el] The element in which this range should be selected
 	 * @return {jQuery.Range} the range for chaining.
 	 */
