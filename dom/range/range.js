@@ -134,8 +134,8 @@ $.extend($.Range.prototype,
 /** @prototype **/
 {
 	/**
-	 * Moves the range end and start position to a specific point.
-	 * A point can be defined like:
+	 * `range.moveToPoint(point)` moves the range end and start position to a specific point.
+	 * A point can be specified like:
 	 *
 	 *      //client coordinates
 	 *      {clientX: 200, clientY: 300}

@@ -227,8 +227,8 @@ event.setupHelper( [
  */
 "hoverleave",
 /**
- * @parent jQuery.event.hover
  * @attribute jQuery.event.special.hovermove
+ * @parent jQuery.event.hover
  *
  * `hovermove` is called when a `mousemove` occurs on an element that has been hovered.
  *

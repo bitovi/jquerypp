@@ -29,23 +29,13 @@ steal('jquery/dom/animate').then(function(){
   }
   $("#go").click(function() {
     $('#block').animate({
-      width: 300,
-      height: 300
-    }, 1000, function() {
-      alert('Callback')
-    })
+      width: "70%",
+      opacity: 0.4,
+      marginLeft: "0.6in",
+      fontSize: "3em",
+      borderWidth: "10px"
+    }, 1500);
   });
-
-//    .hide().fadeIn('slow').animate({
-//      opacity: 0.4,
-//      height: '200px'
-//    }, 3000 , function() { console.log('callback'); });
-
-//    setTimeout(function() {
-//      // block.stop();
-//      console.log(block.height());
-//    }, 1500);
-//  });
 });
 </script>
 </body>
