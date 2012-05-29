@@ -567,51 +567,67 @@ steal('jquery/event', 'jquery/lang/vector', 'jquery/event/livehack', function( $
 			}
 		}
 	});
-
 	/**
-	 * @add jQuery.event.drag
+	 * @add jQuery.event.special
 	 */
 	event.setupHelper([
 	/**
 	 * @attribute dragdown
-	 *
+	 * @parent jQuery.event.drag
+	 * 
 	 * `dragdown` is called when a drag movement has started on a mousedown.
 	 * The event handler gets an instance of [jQuery.Drag] passed as the second
-	 * parameter.
-	 * If you listen to this, the mousedown's default event (preventing
-	 * text selection) is not prevented.  You are responsible for calling it
+	 * parameter.  Listening to `dragdown` allows you to customize 
+	 * the behavior of a drag motion, especially when `draginit` should be called.
+	 * 
+	 *     $(".handles").delegate("dragdown", function(ev, drag){
+	 *       // call draginit only when the mouse has moved 20 px
+	 *       drag.distance(20);
+	 *     })
+	 * 
+	 * Typically, when a drag motion is started, `event.preventDefault` is automatically
+	 * called, preventing text selection.  However, if you listen to 
+	 * `dragdown`, this default behavior is not called. You are responsible for calling it
 	 * if you want it (you probably do).
 	 *
-	 * ## Why might you not want it?
+	 * ### Why might you not want to call `preventDefault`?
 	 *
 	 * You might want it if you want to allow text selection on element
 	 * within the drag element.  Typically these are input elements.
 	 *
-	 *      $(".handles").delegate("dragdown", function(ev, drag){})
+	 *     $(".handles").delegate("dragdown", function(ev, drag){
+	 *       if(ev.target.nodeName === "input"){
+	 *         drag.cancel();
+	 *       } else {
+	 *         ev.preventDefault();
+	 *       }
+	 *     })
 	 */
 	'dragdown',
 	/**
 	 * @attribute draginit
+	 * @parent jQuery.event.drag
 	 *
 	 * `draginit` is triggered when the drag motion starts. Use it to customize the drag behavior
 	 * using the [jQuery.Drag] instance passed as the second parameter:
 	 *
-	 *      $(".draggable").on('draginit', function(ev, drag) {
-	 *          // Only allow vertical drags
-	 *          drag.vertical();
-	 *          // Create a draggable copy of the element
-	 *          drag.ghost();
-	 *      });
+	 *     $(".draggable").on('draginit', function(ev, drag) {
+	 *       // Only allow vertical drags
+	 *       drag.vertical();
+	 *       // Create a draggable copy of the element
+	 *       drag.ghost();
+	 *     });
 	 */
 	'draginit',
 	/**
 	 * @attribute dragover
+	 * @parent jQuery.event.drag
 	 *
 	 * `dragover` is triggered when a drag is over a [jQuery.event.drop drop element].
 	 * The event handler gets an instance of [jQuery.Drag] passed as the second
-	 * parameter.
+	 * parameter and an instance of [jQuery.Drop] passed as the third argument:
 	 *
-	 *      $('.draggable').on('dragover', function(ev, drag) {
+	 *      $('.draggable').on('dragover', function(ev, drag, drop) {
 	 *          // Add the drop-here class indicating that the drag
 	 *          // can be dropped here
 	 *          drag.element.addClass('drop-here');
@@ -620,11 +636,12 @@ steal('jquery/event', 'jquery/lang/vector', 'jquery/event/livehack', function( $
 	'dragover',
 	/**
 	 * @attribute dragmove
+	 * @parent jQuery.event.drag
 	 *
 	 * `dragmove` is triggered when the drag element moves (similar to a mousemove).
 	 * The event handler gets an instance of [jQuery.Drag] passed as the second
 	 * parameter.
-	 * Use [jQuery.Drag.prototype.location] to determine the current position
+	 * Use [jQuery.Drag::location] to determine the current position
 	 * as a [jQuery.Vector vector].
 	 *
 	 * For example, `dragmove` can be used to create a draggable element to resize
@@ -638,6 +655,7 @@ steal('jquery/event', 'jquery/lang/vector', 'jquery/event/livehack', function( $
 	'dragmove',
 	/**
 	 * @attribute dragout
+	 * @parent jQuery.event.drag
 	 *
 	 * `dragout` is called when the drag leaves a drop point.
 	 * The event handler gets an instance of [jQuery.Drag] passed as the second
@@ -653,14 +671,15 @@ steal('jquery/event', 'jquery/lang/vector', 'jquery/event/livehack', function( $
 	'dragout',
 	/**
 	 * @attribute dragend
+	 * @parent jQuery.event.drag
 	 *
 	 * `dragend` is called when the drag motion is done.
 	 * The event handler gets an instance of [jQuery.Drag] passed as the second
 	 * parameter.
 	 *
-	 *      $('.draggable').on('dragend', function(ev, drag)
-	 *          // Clean up when the drag motion is done
-	 *      });
+	 *     $('.draggable').on('dragend', function(ev, drag)
+	 *       // Clean up when the drag motion is done
+	 *     });
 	 */
 	'dragend'], "mousedown", function( e ) {
 		$.Drag.mousedown.call($.Drag, e, this);
