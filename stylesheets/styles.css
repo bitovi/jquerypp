@@ -206,6 +206,9 @@ em {
 	margin: 20px 0 10px;
 	text-shadow: 0 2px #e6e6e6;
 }
+#content h4 {
+	margin-bottom: 10px;	
+}
 #content h1:first-child,
 #content h2:first-child,
 #content h3:first-child { margin-top: 0 }
