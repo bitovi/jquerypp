@@ -483,11 +483,10 @@ action or prevent it entirely.
 
 ### Example
 
-The following example implements a `tabs` jQuery plugin that triggers a `show` event when a tab is selected and, by default, shows that tab.
 
-A user of the plugin can intercept that `show` event to change that behavior. In this example the second tab should only show if the checkbox from the first step is checked and after the first tab has done some asynchronous processing (like saving its state to the server):
+The following example implements a `tabs` widget using [CanJS](http://canjs.us). Each tab panel contains a form to input data. When the form data changes and you go to another tab it will ask you to save these changes before moving on. This will pause the tabs `hide` event until you either confirmed or declined to save the form. On *cancel* the event will be prevented and the widget will stay in the current tab:
 
-<iframe style="width: 100%; height: 350px" src="http://jsfiddle.net/TPB8P/embedded/result,html,js,css" allowfullscreen="allowfullscreen" frameborder="0">JSFiddle</iframe>
+<iframe style="width: 100%; height: 350px" src="http://jsfiddle.net/4Bg3Z/embedded/result,html,js,css" allowfullscreen="allowfullscreen" frameborder="0">JSFiddle</iframe>
 
 ### triggerAsync `$(el).triggerAsync(event, [success], [prevented])`
 
