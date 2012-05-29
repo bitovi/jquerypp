@@ -1,5 +1,7 @@
-<form id="builder" method="get" action="http://bitbuilder.herokuapp.com/donejs" target="_blank">
-  <h4>Extensions</h4>
+<form id="builder" action="http://bitbuilder.herokuapp.com/donejs">
+  <h4><a href="#dom_helpers">DOM helpers</a></h4>
+
+  <p>jQuery++ DOM helpers make working with the DOM even easier and faster by adding useful plugins and extending existing ones.</p>
 
   <label>
     <input type="checkbox" value="jquery/dom/animate" name="plugins"/>
@@ -46,7 +48,9 @@
     <a href="#within">jQuery.within</a> - get elements within an area or at a point
   </label>
 
-  <h4>Events</h4>
+  <h4><a href="#events">Events</a></h4>
+
+  <p>Special events add rich functionality like drag&amp;drop as delegatable events that can be used with any library.</p>
 
   <label>
     <input type="checkbox" value="jquery/event/destroyed" name="plugins"/>
@@ -94,4 +98,5 @@
   </label>
 
   <button disabled="disabled" type="submit">Download</button>
+  <iframe name="builder-ifr" id="builder-ifr" style="display: none;">Builder</iframe>
 </form>

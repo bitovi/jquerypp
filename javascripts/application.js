@@ -312,4 +312,21 @@ $(function() {
 		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
 		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 	})();
+
+	can.Control('Builder', {
+		'[type="submit"] click' : function(el, ev) {
+			var url = this.element.attr('action') + '?' + this.element.serialize();
+			$(this.options.iframe).attr('src', url);
+			ev.preventDefault();
+		},
+
+		'{iframe} load' : function(el, ev) {
+			// Load event doesn't fire for content-dispositioned download in iFrame
+			console.log('iFrame loaded');
+		}
+	});
+
+	new Builder('#builder', {
+		iframe : '#builder-ifr'
+	});
 });

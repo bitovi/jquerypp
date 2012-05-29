@@ -1,30 +1,19 @@
 ---
 layout: default
+version: 1.0b
 ---
 
 # Welcome to jQuery++
 
-jQuery++ is a collection of useful DOM helpers and special events for jQuery 1.7 and later:
-
-- [DOM Helpers](#dom_helpers): jQuery++ DOM helpers make working with the DOM even easier and faster by adding useful plugins and
-extending existing ones.
-- [Events](#events): Special events add rich functionality like drag&drop as delegatable events that can be used with
-any library.
-
-Learn more about [why jQuery++](#why_jquery__) can be useful for you.
-
-## Get jQuery++
-
-### Download Builder
-
-Use the download builder to create a customized jQuery++ download.
-The builder will create a single *uncompressed* JavaScript file containing the plugins you selected and their dependencies.
+jQuery++ is a collection of useful DOM helpers and special events for jQuery 1.7 and later. Just select the plugins you want to create a customized download as an unminified JavaScript file:
 
 {% include builder.html %}
 
-### Full download
+Learn more about [why jQuery++](#why_jquery__) can be useful for you.
 
-You can also download the [full archive](https://github.com/downloads/jupiterjs/jquerypp/jquerypp-1.0.0b.zip) which contains
+## Full download
+
+You can also download the [full archive](https://github.com/downloads/jupiterjs/jquerypp/jquerypp-{{page.version}}.zip) which contains
 
 - `jquerypp.js`: The full version of jQuery++
 - Each plugin as a standalone JavaScript file
@@ -33,7 +22,7 @@ You can also download the [full archive](https://github.com/downloads/jupiterjs/
 
 ### Using Steal
 
-The files needed for using jQuery++ with [StealJS](http://javascriptmvc.com/docs.html#!stealjs) are located in the `steal/` folder of the [full download](https://github.com/downloads/jupiterjs/jquerypp/jquerypp-1.0.0b.zip).
+The files needed for using jQuery++ with [StealJS](http://javascriptmvc.com/docs.html#!stealjs) are located in the `steal/` folder of the [full download](https://github.com/downloads/jupiterjs/jquerypp/jquerypp-{{page.version}}.zip).
 Take the `jquery/` folder and put it in your steal root. Make sure to use `steal.map` to map any dependency of `jquery` to your jQuery library, if necessary. For example, when using jQuery++ with [CanJS](http://canjs.us) and Steal:
 
 {% highlight javascript %}
@@ -44,7 +33,7 @@ steal.map({
 
 ### Using AMD
 
-The files to load the jQuery++ plugins with an [AMD](https://github.com/amdjs/amdjs-api/wiki/AMD) module loader like [RequireJS](http://requirejs.org/), are located in the `amd/` folder of the [full download](https://github.com/downloads/jupiterjs/jquerypp/jquerypp-1.0.0b.zip).
+The files to load the jQuery++ plugins with an [AMD](https://github.com/amdjs/amdjs-api/wiki/AMD) module loader like [RequireJS](http://requirejs.org/), are located in the `amd/` folder of the [full download](https://github.com/downloads/jupiterjs/jquerypp/jquerypp-{{page.version}}.zip).
 Place the `jquerypp/` folder in your module directory and load a plugin like this:
 
 {% highlight javascript %}
@@ -70,20 +59,23 @@ require.config({
 
 ## animate `$(el).animate(properties, [speed], [callback]) -> jQuery`
 
-[jQuery.animate](http://donejs.com/docs.html#!jQuery.animate) overwrites `$.fn.animate` to use CSS 3 animations, if possible.
-It takes the same arguments as the original [$.fn.animate](http://api.jquery.com/animate) and will fall back to it if a CSS animation
-is not possible.
+[jQuery.animate](http://donejs.com/docs.html#!jQuery.animate) overwrites `$.fn.animate` to use CSS 3 animations if possible.
+It takes the same arguments as the original [$.fn.animate](http://api.jquery.com/animate) and will fall back to
+jQuery’s JavaScript animation if a CSS animation is not possible.
 
-A fade-in effect using a CSS animation can be implemented like this:
+A fade-in effect can be implemented like this:
 
-    $('#element').css({
-      opacity : 0
-    }).animate({
-      opacity : 1
-    }, 1000, function() {
-      console.log('Animation done');
-    });
+{% highlight javascript %}
+$('#element').css({
+  opacity : 0
+}).animate({
+  opacity : 1
+}, 1000, function() {
+  console.log('Animation done');
+});
+{% endhighlight %}
 
+Since CSS transitions are implemented natively in the browser and can make use of hardware acceleration, animations will perform a lot better, especially in Webkit based mobile browsers (iPhone, iPad, Android).
 
 ## compare `$(elA).compare(elB) -> Number`
 
@@ -485,9 +477,13 @@ The following key names are mapped by default:
 
 [jQuery.event.pause](http://donejs.com/docs.html#!jQuery.event.pause) adds a default event handler, `event.pause()` and `event.resume()` for pausing and resuming event propagation and `$.fn.triggerAsync` for triggering an event asynchronously and executing a callback when propagation is finished.
 
+This is very useful for creating event oriented jQuery widgets that provide default behavior for certain events.
+A widget user can intercept any of these events, pause it and perform other actions before resuming the default
+action or prevent it entirely.
+
 ### Example
 
-`event.pause()`, `event.resume()`, `$.fn.triggerAsync` and default events can be very helpful when creating event oriented widgets. The following example implements a `tabs` jQuery plugin that triggers a `show` event when a tab is selected and, by default, shows that tab.
+The following example implements a `tabs` jQuery plugin that triggers a `show` event when a tab is selected and, by default, shows that tab.
 
 A user of the plugin can intercept that `show` event to change that behavior. In this example the second tab should only show if the checkbox from the first step is checked and after the first tab has done some asynchronous processing (like saving its state to the server):
 
