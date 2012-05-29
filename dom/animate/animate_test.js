@@ -450,6 +450,7 @@ steal('jquery/dom/animate',
 
 		var divs = jQuery("div"), count = 0;
 
+		console.log('Animating with no props')
 		divs.animate({}, function () {
 			count++;
 		});

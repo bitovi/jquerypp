@@ -2,7 +2,6 @@ steal('jquery', 'jquery/dom/styles').then(function () {
 
 	var animationNum = 0,
 		//Animation events implies animations right?
-		supportsAnimations = !!window.WebKitAnimationEvent,
 		//gets the last editable stylesheet or creates one
 		getLastStyleSheet = function () {
 			var sheets = document.styleSheets,
@@ -58,7 +57,8 @@ steal('jquery', 'jquery/dom/styles').then(function () {
 					return true;
 				}
 			}
-			return !supportsAnimations ||
+
+			return browser === null ||
 				jQuery.isEmptyObject(props) || // Animating empty properties
 				jQuery.isPlainObject(ops) || // Second parameter is an object - anifast only handles numbers
 				typeof ops == 'string' || // Second parameter is a string like 'slow' TODO: remove
@@ -73,6 +73,54 @@ steal('jquery', 'jquery/dom/styles').then(function () {
 				return value += "px";
 			}
 			return value;
+		},
+
+
+		getBrowserProperties = function(){
+			var t,
+				el = document.createElement('fakeelement'),
+				transitions = {
+					'transition': {
+						transitionEnd : 'transitionEnd',
+						prefix : ''
+					},
+					'OTransition': {
+						transitionEnd : 'oTransitionEnd',
+						prefix : '-o-'
+					},
+					'MSTransition': {
+						transitionEnd : 'msTransitionEnd',
+						prefix : '-ms-'
+					},
+					'MozTransition': {
+						transitionEnd : 'animationend',
+						prefix : '-moz-'
+					},
+					'WebkitTransition': {
+						transitionEnd : 'webkitAnimationEnd',
+						prefix : '-webkit-'
+					}
+				}
+
+			for(t in transitions){
+				if( el.style[t] !== undefined ){
+					return transitions[t];
+				}
+			}
+			return null;
+		},
+
+		browser = getBrowserProperties(),
+
+		/**
+		 * Add browser specific prefix
+		 */
+		addPrefix = function(properties) {
+			var result = {};
+			jQuery.each(properties, function(name, value) {
+				result[browser.prefix + name] = value;
+			});
+			return result;
 		},
 
 		oldanimate = jQuery.fn.animate;
@@ -91,8 +139,6 @@ steal('jquery', 'jquery/dom/styles').then(function () {
 	 * @return {jQuery} The jQuery element
 	 */
 	jQuery.fn.animate = function (props, speed, callback) {
-		// console.log(arguments);
-
 		//default to normal animations if browser doesn't support them
 		if (passThrough.apply(this, arguments)) {
 			return oldanimate.apply(this, arguments);
@@ -102,10 +148,11 @@ steal('jquery', 'jquery/dom/styles').then(function () {
 			callback = speed;
 		}
 
-		// Most of of these calls need to happen once per element
-		this.each(function() {
+		var scoper = jQuery(this);
+		scoper.queue('fx', function() {
 			// Add everything to the animation queue
-			jQuery(this).queue('fx', function() {
+			// Most of of these calls need to happen once per element
+			scoper.each(function() {
 				var current, //current CSS values
 					properties = [], // The list of properties passed
 					to = "",
@@ -117,15 +164,15 @@ steal('jquery', 'jquery/dom/styles').then(function () {
 					// The key used to store the animation hook
 					dataKey = animationName + '.run',
 					//the text for the keyframe
-					style = "@-webkit-keyframes " + animationName + " { from {",
+					style = "@" + browser.prefix + "keyframes " + animationName + " { from {",
 					// The animation end event handler.
 					// Will be called both on animation end and after calling .stop()
 					animationEnd = function (currentCSS, exec) {
 
-						self.css(currentCSS).css({
-							"-webkit-animation-duration" : "",
-							"-webkit-animation-name" : ""
-						});
+						self.css(currentCSS).css(addPrefix({
+							"animation-duration" : "",
+							"animation-name" : ""
+						}));
 
 						// remove the animation keyframe
 						removeAnimation(lastSheet, animationName);
@@ -159,9 +206,11 @@ steal('jquery', 'jquery/dom/styles').then(function () {
 				jQuery._data(this, dataKey, {
 					stop : function(gotoEnd) {
 						// Pause the animation
-						self.css('-webkit-animation-play-state', 'paused');
+						self.css(addPrefix({
+							'animation-play-state' : 'paused'
+						}));
 						// Unbind the animation end handler
-						self.off('webkitAnimationEnd', animationEnd);
+						self.off(browser.transitionEnd, animationEnd);
 						if(!gotoEnd) { // We were told not to finish the animation
 							// Call animationEnd but set the CSS to the current computed style
 							animationEnd(self.styles.apply(self, properties), false);
@@ -173,12 +222,12 @@ steal('jquery', 'jquery/dom/styles').then(function () {
 				});
 
 				// set this element to point to that animation
-				self.css({
-					"-webkit-animation-duration" : duration + "ms",
-					"-webkit-animation-name" : animationName
-				});
+				self.css(addPrefix({
+					"animation-duration" : duration + "ms",
+					"animation-name" : animationName
+				}));
 
-				self.one('webkitAnimationEnd', function() {
+				self.one(browser.transitionEnd, function() {
 					// Call animationEnd using the current properties
 					animationEnd(props, true);
 					self.dequeue();
