@@ -53,7 +53,13 @@ steal('jquery', 'jquery/dom/styles').then(function () {
 				if (props[name] == 'show' || props[name] == 'hide' // jQuery does something with these two values
 					|| jQuery.isArray(props[name]) // Arrays for individual easing
 					|| props[name] < 0 // Negative values not handled the same
-					|| name == 'zIndex' || name == 'z-index') { // unit-less value
+					|| name == 'zIndex' || name == 'z-index'
+					// Firefox doesn't animate 'auto' properties
+					// https://bugzilla.mozilla.org/show_bug.cgi?id=571344 value
+					|| (browser.prefix == '-moz-' && (
+						(this.length && this[0].ownerDocument && this.css(name) == 'auto')
+						|| name == 'font-size' || name == 'fontSize'))
+					) {  // unit-less value
 					return true;
 				}
 			}
@@ -69,7 +75,7 @@ steal('jquery', 'jquery/dom/styles').then(function () {
 		 * Return the CSS number (with px added as the default unit if the value is a number)
 		 */
 		cssNumber = function(origName, value) {
-			if ( typeof value === "number" && !jQuery.cssNumber[ origName ] ) {
+			if (typeof value === "number" && !jQuery.cssNumber[ origName ]) {
 				return value += "px";
 			}
 			return value;

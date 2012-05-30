@@ -353,27 +353,6 @@ steal('jquery/dom/animate',
 			});
 	});
 
-	/* // This test ends up being flaky depending upon the CPU load
-	 test("animate option (queue === false)", function () {
-	 expect(1);
-	 stop();
-
-	 var order = [];
-
-	 var $foo = jQuery("#foo");
-	 $foo.animate({width:"100px"}, 3000, function () {
-	 // should finish after unqueued animation so second
-	 order.push(2);
-	 deepEqual( order, [ 1, 2 ], "Animations finished in the correct order" );
-	 start();
-	 });
-	 $foo.animate({fontSize:"2em"}, {queue:false, duration:10, complete:function () {
-	 // short duration and out of queue so should finish first
-	 order.push(1);
-	 }});
-	 });
-	 */
-
 	asyncTest("animate option { queue: false }", function () {
 		expect(2);
 		var foo = jQuery("#foo");
@@ -461,7 +440,7 @@ steal('jquery/dom/animate',
 		var foo = jQuery("#foo");
 
 		foo.animate({});
-		foo.animate({top : 10}, 100, function () {
+		foo.animate({ top : 10}, 100, function () {
 			ok(true, "Animation was properly dequeued.");
 			start();
 		});
@@ -1225,8 +1204,8 @@ steal('jquery/dom/animate',
 		setTimeout(function() {
 			// Clear the queue and stop
 			div.stop();
-			ok(div.height() < 90, 'Animation stopped before it reached full height');
-			ok(div.width() < 120, 'Animation stopped before it reached full width');
+			ok(div.height() < 100 * 0.95, 'Animation stopped before it reached full height');
+			ok(div.width() < 150 * 0.95, 'Animation stopped before it reached full width');
 			start();
 		}, 100);
 	});

@@ -7,7 +7,7 @@ If the browser doesn't support CSS animations, the original [jQuery.fn.animate()
 
 Using browser CSS animations, which can make use of hardware acceleration,
 can improve your application performance especially on mobile devices (like the Webkit based
-standard browsers for iPhone, iPad and Android devices).
+default browsers for iPhone, iPad and Android devices).
 
 ## Compatibility
 
