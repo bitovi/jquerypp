@@ -5,17 +5,15 @@ version: 1.0b
 
 # Welcome to jQuery++
 
-jQuery++ is a collection of useful DOM helpers and special events for jQuery 1.7 and 
-later. Just select the plugins you want to create a customized download as 
-an unminified JavaScript file:
+jQuery++ is a collection of useful DOM helpers and special events for jQuery 1.7 and later. You can download the [full version](#get_jquery__) for using all plugins, [StealJS](#get_jquery__-using_steal) and [AMD modules](#get_jquery__-using_amd) or use the download builder below to select the plugins you want and download a customized, unminified JavaScript file:
 
 {% include builder.html %}
 
 Learn more about [why jQuery++](#why_jquery__) can be useful for you.
 
-## Full download
+## Get jQuery++
 
-You can also download the [full archive](https://github.com/downloads/jupiterjs/jquerypp/jquerypp-{{page.version}}.zip) which contains
+Download the [full archive](https://github.com/downloads/jupiterjs/jquerypp/jquerypp-{{page.version}}.zip) which contains
 
 - `jquerypp.js`: The full version of jQuery++
 - Each plugin as a standalone JavaScript file
@@ -203,7 +201,7 @@ A `$.Range` instance offers the following methods:
   </li>
   <li><a href="http://donejs.com/docs.html#!jQuery.Range.prototype.collapse" class="code">range.collapse([toStart]) -> range</a> collapses a range
   </li>
-  <li><a href="http://donejs.com/docs.html#!jQuery.Range.prototype.compare" class="code">range.compare(other) -> Number</a>
+  <li><a href="http://donejs.com/docs.html#!jQuery.Range.prototype.compare" class="code">range.compare(type, other) -> Number</a>
   - compares one range to another range
   </li>
   <li><a href="http://donejs.com/docs.html#!jQuery.Range.prototype.end" class="code">range.end([val]) -> range|Object</a>
