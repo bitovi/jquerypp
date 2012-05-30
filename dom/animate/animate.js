@@ -156,7 +156,6 @@ steal('jquery', 'jquery/dom/styles').then(function () {
 
 			// Add everything to the animation queue
 			// Most of of these calls need to happen once per element
-<<<<<<< HEAD
 			var current, //current CSS values
 				properties = [], // The list of properties passed
 				to = "",
