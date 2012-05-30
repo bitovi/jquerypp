@@ -36,7 +36,7 @@ table {
 .cf:after { clear: both }
 .cf { zoom: 1 }
 body {
-	background-color: #A3ADB1;/*url(../images/body.png);*/
+	background: url(../images/pattern.gif);
 	background-attachment: fixed;
 	font-family: Helvetica,"Lucida Grande","Lucida Sans",Arial,Helvetica,sans-serif;
 	font-size: 10px;
@@ -46,8 +46,8 @@ em {
 	font-style: italic;
 }
 #bg {
-	height: 200px;
-	background: url(../images/body_top.png);
+	height: 162px;
+	background: url(../images/pattern_top.gif);
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -68,6 +68,7 @@ em {
 	-webkit-border-radius: 2px;
 	-moz-border-radius: 2px;
 	border-radius: 2px;
+	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1);
 }
 #logo-and-download {
 	height: 62px;
@@ -131,7 +132,7 @@ em {
 	width: 680px;
 	float: right;
 	background: white;
-	box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1);
 	-webkit-border-radius: 2px;
 	-moz-border-radius: 2px;
 	border-radius: 2px;
