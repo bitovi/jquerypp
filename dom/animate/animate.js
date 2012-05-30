@@ -58,7 +58,7 @@ steal('jquery', 'jquery/dom/styles').then(function () {
 				}
 			}
 
-			return browser === null ||
+			return props.jquery === true || browser === null ||
 				jQuery.isEmptyObject(props) || // Animating empty properties
 				jQuery.isPlainObject(ops) || // Second parameter is an object - anifast only handles numbers
 				typeof ops == 'string' || // Second parameter is a string like 'slow' TODO: remove
@@ -183,7 +183,7 @@ steal('jquery', 'jquery/dom/styles').then(function () {
 
 						if (callback && exec) {
 							// Call success, pass the DOM element as the this reference
-							callback.apply(self[0])
+							callback.apply(self[0], true)
 						}
 
 						jQuery.removeData(self, dataKey, true);
