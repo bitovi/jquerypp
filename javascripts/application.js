@@ -315,18 +315,17 @@ $(function() {
 
 	can.Control('Builder', {
 		'[type="submit"] click' : function(el, ev) {
-			var url = this.element.attr('action') + '?' + this.element.serialize();
-			$(this.options.iframe).attr('src', url);
+			el.attr('disabled', true);
+			var url = this.element.attr('action') + '?' + this.element.serialize(),
+				iframe = $('<iframe></iframe>').attr('src', url).hide().appendTo(this.element);
+			iframe.on('load', function() {
+				setTimeout(function() {
+					el.removeAttr('disabled');
+				}, 1000);
+			})
 			ev.preventDefault();
-		},
-
-		'{iframe} load' : function(el, ev) {
-			// Load event doesn't fire for content-dispositioned download in iFrame
-			console.log('iFrame loaded');
 		}
 	});
 
-	new Builder('#builder', {
-		iframe : '#builder-ifr'
-	});
+	new Builder('#builder');
 });
