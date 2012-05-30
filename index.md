@@ -16,7 +16,7 @@ Learn more about [why jQuery++](#why_jquery__) can be useful for you.
 
 There are serveral ways to get and setup jQuery++:
 
- - using the download builder single file
+ - using the download builder
  - using individual files
  - using Steal
  - using AMD
