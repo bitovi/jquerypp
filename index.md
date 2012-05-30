@@ -32,14 +32,40 @@ after jQuery 1.7 like:
 <script src="lib/jquerypp.custom.js"></script>
 {% endhighlight %}
 
+### Using individual files
+
+The [full download](https://github.com/downloads/jupiterjs/jquerypp/jquerypp-{{page.version}}.zip) contains
+each plugin as a separate file. At the top of each file you will find the dependencies listed that need to be included first.
+For example, `jquery.animate.js` epends on `jquery.styles.js` and should be included like this:
+
+{% highlight html %}
+<script src="lib/jquery.1.7.2.js"></script>
+<script src="lib/jquery.styles.js"></script>
+<script src="lib/jquery.animate.js"></script>
+{% endhighlight %}
+
+You can also use `jquerypp.js` which contains all jQuery++ plugins in a single file:
+
+{% highlight html %}
+<script src="lib/jquery.1.7.2.js"></script>
+<script src="lib/jquerypp.js"></script>
+{% endhighlight %}
 
 ### Using Steal
 
 The files needed for using jQuery++ with [StealJS](http://javascriptmvc.com/docs.html#!stealjs) are 
 located in the `steal/` folder of 
 the [full download](https://github.com/downloads/jupiterjs/jquerypp/jquerypp-{{page.version}}.zip).
-Take the `jquery/` folder and put it in your steal root. Make sure to use `steal.map` 
-to map any dependency of `jquery` to your jQuery library, if necessary. For example, when 
+Take the `jquery/` folder and put it in your steal root and load plugins like:
+
+{% highlight javascript %}
+define(['jquery', 'jquery/dom/dimensions', 'jquery/event/resize'],
+  function($) {
+    $('#element').outerWidth(500).trigger('resize');
+});
+{% endhighlight %}
+
+Make sure to use `steal.map`  to map any dependency of `jquery` to your jQuery library, if necessary. For example, when
 using jQuery++ with [CanJS](http://canjs.us) and Steal:
 
 {% highlight javascript %}
