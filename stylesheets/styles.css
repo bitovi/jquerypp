@@ -346,3 +346,12 @@ html.lt-ie7 .github-fork img {
 	line-height: 12px;
 	cursor: pointer;
 }
+
+#builder .button.disabled {
+	background-color: #BBC2C7;
+	cursor: auto;
+}
+
+#builder .button.disabled:hover {
+	background-color: #BBC2C7;
+}

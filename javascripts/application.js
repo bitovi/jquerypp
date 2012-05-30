@@ -314,14 +314,25 @@ $(function() {
 	})();
 
 	can.Control('Builder', {
+		'input[type="checkbox"] click' : function() {
+			var button = this.element.find('button'),
+				checked = this.element.find('input:checked').length !== 0;
+			button.attr('disabled', !checked);
+			if(checked) {
+				button.removeClass('disabled');
+			} else {
+				button.addClass('disabled');
+			}
+		},
+
 		'[type="submit"] click' : function(el, ev) {
-			el.attr('disabled', true).hide();
+			el.hide();
 			var url = this.element.attr('action') + '?' + this.element.serialize(),
 				iframe = $('<iframe></iframe>').attr('src', url).hide().appendTo(this.element);
 				loader = this.element.find('.loading').show();
 			iframe.on('load', function() {
 				setTimeout(function() {
-					el.removeAttr('disabled').show();
+					el.show();
 					loader.hide();
 				}, 1000);
 			})
