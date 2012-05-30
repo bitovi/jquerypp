@@ -1,3 +1,7 @@
+/** 
+ * jquery.styles.js
+ * 
+ */
 (function( $ ) {
 
 	var getComputedStyle = document.defaultView && document.defaultView.getComputedStyle,

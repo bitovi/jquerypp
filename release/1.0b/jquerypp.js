@@ -143,12 +143,18 @@
 				if (props[name] == 'show' || props[name] == 'hide' // jQuery does something with these two values
 					|| jQuery.isArray(props[name]) // Arrays for individual easing
 					|| props[name] < 0 // Negative values not handled the same
-					|| name == 'zIndex' || name == 'z-index') { // unit-less value
+					|| name == 'zIndex' || name == 'z-index'
+					// Firefox doesn't animate 'auto' properties
+					// https://bugzilla.mozilla.org/show_bug.cgi?id=571344 value
+					|| (browser.prefix == '-moz-' && (
+						(this.length && this[0].ownerDocument && this.css(name) == 'auto')
+						|| name == 'font-size' || name == 'fontSize'))
+					) {  // unit-less value
 					return true;
 				}
 			}
 
-			return browser === null ||
+			return props.jquery === true || browser === null ||
 				jQuery.isEmptyObject(props) || // Animating empty properties
 				jQuery.isPlainObject(ops) || // Second parameter is an object - anifast only handles numbers
 				typeof ops == 'string' || // Second parameter is a string like 'slow' TODO: remove
@@ -159,7 +165,7 @@
 		 * Return the CSS number (with px added as the default unit if the value is a number)
 		 */
 		cssNumber = function(origName, value) {
-			if ( typeof value === "number" && !jQuery.cssNumber[ origName ] ) {
+			if (typeof value === "number" && !jQuery.cssNumber[ origName ]) {
 				return value += "px";
 			}
 			return value;
@@ -185,11 +191,11 @@
 						transitionEnd : 'msTransitionEnd',
 						prefix : '-ms-'
 					},
+					*/
 					'MozTransition': {
 						transitionEnd : 'animationend',
 						prefix : '-moz-'
 					},
-					*/
 					'WebkitTransition': {
 						transitionEnd : 'webkitAnimationEnd',
 						prefix : '-webkit-'
@@ -237,47 +243,48 @@
 		if (passThrough.apply(this, arguments)) {
 			return oldanimate.apply(this, arguments);
 		}
-
 		if (jQuery.isFunction(speed)) {
 			callback = speed;
 		}
 
-		var scoper = jQuery(this);
-		scoper.queue('fx', function() {
+		this.queue('fx', function(done) {
+			
+
 			// Add everything to the animation queue
 			// Most of of these calls need to happen once per element
-			scoper.each(function() {
-				var current, //current CSS values
-					properties = [], // The list of properties passed
-					to = "",
-					prop,
-					self = jQuery(this),
-					duration = jQuery.fx.speeds[speed] || speed || jQuery.fx.speeds._default,
-					//the animation keyframe name
-					animationName = "animate" + (animationNum++),
-					// The key used to store the animation hook
-					dataKey = animationName + '.run',
-					//the text for the keyframe
-					style = "@" + browser.prefix + "keyframes " + animationName + " { from {",
-					// The animation end event handler.
-					// Will be called both on animation end and after calling .stop()
-					animationEnd = function (currentCSS, exec) {
+			var current, //current CSS values
+				properties = [], // The list of properties passed
+				to = "",
+				prop,
+				self = jQuery(this),
+				duration = jQuery.fx.speeds[speed] || speed || jQuery.fx.speeds._default,
+				//the animation keyframe name
+				animationName = "animate" + (animationNum++),
+				// The key used to store the animation hook
+				dataKey = animationName + '.run',
+				//the text for the keyframe
+				style = "@" + browser.prefix + "keyframes " + animationName + " { from {",
+				// The animation end event handler.
+				// Will be called both on animation end and after calling .stop()
+				animationEnd = function (currentCSS, exec) {
+					self.css(currentCSS);
+					
+					self.css(addPrefix({
+						"animation-duration" : "",
+						"animation-name" : "",
+						"animation-fill-mode" : ""
+					}));
 
-						self.css(currentCSS).css(addPrefix({
-							"animation-duration" : "",
-							"animation-name" : ""
-						}));
+					// remove the animation keyframe
+					removeAnimation(lastSheet, animationName);
 
-						// remove the animation keyframe
-						removeAnimation(lastSheet, animationName);
-
-						if (callback && exec) {
-							// Call success, pass the DOM element as the this reference
-							callback.apply(self[0])
-						}
-
-						jQuery.removeData(self, dataKey, true);
+					if (callback && exec) {
+						// Call success, pass the DOM element as the this reference
+						callback.call(self[0], true)
 					}
+
+					jQuery.removeData(self, dataKey, true);
+				}
 
 				for(prop in props) {
 					properties.push(prop);
@@ -318,15 +325,17 @@
 				// set this element to point to that animation
 				self.css(addPrefix({
 					"animation-duration" : duration + "ms",
-					"animation-name" : animationName
+					"animation-name" : animationName,
+					"animation-fill-mode": "forwards"
 				}));
+				
 
 				self.one(browser.transitionEnd, function() {
 					// Call animationEnd using the current properties
 					animationEnd(props, true);
-					self.dequeue();
+					done();
 				});
-			});
+
 		});
 
 		return this;
@@ -1049,10 +1058,9 @@ $.fn.range =
  * @function jQuery.fn.range
  * @parent jQuery.Range
  *
- * `jQuery.fn.range` returns a [jQuery.Range] instance for the selected element.
+ * `$.fn.range` returns a new [jQuery.Range] instance for the first selected element.
  *
- *     $('#content').range()
- *
+ *     $('#content').range() //-> range
  *
  * @return {$.Range} A $.Range instance for the selected element
  */
@@ -1084,7 +1092,7 @@ support = {};
  * @Class jQuery.Range
  * @parent jQuery.Range
  *
- * Creates a a new range object.
+ * Depending on the object passed, the selected text will be different.
  * 
  * @param {TextRange|HTMLElement|Point} [range] An object specifiying a 
  * range.  Depending on the object, the selected text will be different.  $.Range supports the
@@ -1176,6 +1184,20 @@ current = function(el){
 $.extend($.Range.prototype,
 /** @prototype **/
 {
+	/**
+	 * `range.moveToPoint(point)` moves the range end and start position to a specific point.
+	 * A point can be specified like:
+	 *
+	 *      //client coordinates
+	 *      {clientX: 200, clientY: 300}
+	 *
+	 *      //page coordinates
+	 *      {pageX: 200, pageY: 300}
+	 *      {top: 200, left: 300}
+	 *
+	 * @param point The point to move the range to
+	 * @return {$.Range}
+	 */
 	moveToPoint : function(point){
 		var clientX = point.clientX, clientY = point.clientY
 		if(!clientX){
@@ -1318,7 +1340,7 @@ $.extend($.Range.prototype,
 	 *
 	 *         $('#foo').range().start("+4")
 	 *
-	 * Note that end can return a text node. To get the containing element use this:
+	 * Note that `start` can return a text node. To get the containing element use this:
 	 *
 	 *     var startNode = range.start().container;
 	 *     if( startNode.nodeType === Node.TEXT_NODE ||
@@ -1382,8 +1404,8 @@ $.extend($.Range.prototype,
 
 	},
 	/**
-	 * `range.end([end])` or gets the end of the range.
-	 * It takes similar options as [jQuery.Range.prototype.start]:
+	 * `range.end([end])` gets or sets the end of the range.
+	 * It takes similar options as [jQuery.Range::start start]:
 	 *
 	 * - __Object__ - an object with the new end container and offset like
 	 *
@@ -1396,7 +1418,7 @@ $.extend($.Range.prototype,
 	 *
 	 *         $('#foo').range().end("+4")
 	 *
-	 * Note that end can return a text node. To get the containing element use this:
+	 * Note that `end` can return a text node. To get the containing element use this:
 	 *
 	 *     var startNode = range.end().container;
 	 *     if( startNode.nodeType === Node.TEXT_NODE ||
@@ -1583,7 +1605,7 @@ $.extend($.Range.prototype,
 	/**
 	 * @function compare
 	 *
-	 * `range.compare([compareRange])` compares one range to another range.
+	 * `range.compare(type, compareRange)` compares one range to another range.
 	 * 
 	 * ## Example
 	 * 
@@ -1595,13 +1617,13 @@ $.extend($.Range.prototype,
 	 * 
 	 * 
 	 *
-	 * @param {Object} type Specifies the boundry of the
+	 * @param {String} type Specifies the boundary of the
 	 * range and the <code>compareRange</code> to compare.
 	 * 
-	 *   - START\_TO\_START - the start of the range and the start of compareRange
-	 *   - START\_TO\_END - the start of the range and the end of compareRange
-	 *   - END\_TO\_END - the end of the range and the end of compareRange
-	 *   - END\_TO\_START - the end of the range and the start of compareRange
+	 *   - `"START_TO_START"` - the start of the range and the start of compareRange
+	 *   - `"START_TO_END"` - the start of the range and the end of compareRange
+	 *   - `"END_TO_END"` - the end of the range and the end of compareRange
+	 *   - `"END_TO_START"` - the end of the range and the start of compareRange
 	 *   
 	 * @param {$.Range} compareRange The other range
 	 * to compare against.
@@ -1636,10 +1658,10 @@ $.extend($.Range.prototype,
 	 * @param {String} type a string indicating the ranges boundary point
 	 * to move to which referenceRange boundary point where:
 	 * 
-	 *   - START\_TO\_START - the start of the range moves to the start of referenceRange
-	 *   - START\_TO\_END - the start of the range move to the end of referenceRange
-	 *   - END\_TO\_END - the end of the range moves to the end of referenceRange
-	 *   - END\_TO\_START - the end of the range moves to the start of referenceRange
+	 *   - `"START_TO_START"` - the start of the range moves to the start of referenceRange
+	 *   - `"START\_TO\_END"` - the start of the range move to the end of referenceRange
+	 *   - `"END_TO_END"` - the end of the range moves to the end of referenceRange
+	 *   - `"END_TO_START"` - the end of the range moves to the start of referenceRange
 	 *   
 	 * @param {jQuery.Range} referenceRange
 	 * @return {jQuery.Range} the original range for chaining
@@ -1675,7 +1697,12 @@ $.extend($.Range.prototype,
 	fn.
 	/**
 	 * `range.clone()` clones the range and returns a new $.Range
-	 * object.
+	 * object:
+	 *
+	 *      var range = new $.Range(document.getElementById('text'));
+	 *      var newRange = range.clone();
+	 *      range.start('+2');
+	 *      range.select();
 	 * 
 	 * @return {jQuery.Range} returns the range as a $.Range.
 	 */
@@ -1688,11 +1715,19 @@ $.extend($.Range.prototype,
 	 * @function
 	 *
 	 * `range.select([el])` selects an element with this range.  If nothing
-	 * is provided, makes the current
-	 * range appear as if the user has selected it.
+	 * is provided, makes the current range appear as if the user has selected it.
 	 * 
-	 * This works with text nodes.
-	 * 
+	 * This works with text nodes. For example with:
+	 *
+	 *      <div id="text">This is a text</div>
+	 *
+	 * $.Range can select `is a` like this:
+	 *
+	 *      var range = new $.Range(document.getElementById('text'));
+	 *      range.start('+5');
+	 *      range.end('-5');
+	 *      range.select();
+	 *
 	 * @param {HTMLElement} [el] The element in which this range should be selected
 	 * @return {jQuery.Range} the range for chaining.
 	 */
@@ -3263,51 +3298,67 @@ $event.trigger =  function defaultTriggerer( event, data, elem, onlyHandlers){
 			}
 		}
 	});
-
 	/**
-	 * @add jQuery.event.drag
+	 * @add jQuery.event.special
 	 */
 	event.setupHelper([
 	/**
 	 * @attribute dragdown
-	 *
+	 * @parent jQuery.event.drag
+	 * 
 	 * `dragdown` is called when a drag movement has started on a mousedown.
 	 * The event handler gets an instance of [jQuery.Drag] passed as the second
-	 * parameter.
-	 * If you listen to this, the mousedown's default event (preventing
-	 * text selection) is not prevented.  You are responsible for calling it
+	 * parameter.  Listening to `dragdown` allows you to customize 
+	 * the behavior of a drag motion, especially when `draginit` should be called.
+	 * 
+	 *     $(".handles").delegate("dragdown", function(ev, drag){
+	 *       // call draginit only when the mouse has moved 20 px
+	 *       drag.distance(20);
+	 *     })
+	 * 
+	 * Typically, when a drag motion is started, `event.preventDefault` is automatically
+	 * called, preventing text selection.  However, if you listen to 
+	 * `dragdown`, this default behavior is not called. You are responsible for calling it
 	 * if you want it (you probably do).
 	 *
-	 * ## Why might you not want it?
+	 * ### Why might you not want to call `preventDefault`?
 	 *
 	 * You might want it if you want to allow text selection on element
 	 * within the drag element.  Typically these are input elements.
 	 *
-	 *      $(".handles").delegate("dragdown", function(ev, drag){})
+	 *     $(".handles").delegate("dragdown", function(ev, drag){
+	 *       if(ev.target.nodeName === "input"){
+	 *         drag.cancel();
+	 *       } else {
+	 *         ev.preventDefault();
+	 *       }
+	 *     })
 	 */
 	'dragdown',
 	/**
 	 * @attribute draginit
+	 * @parent jQuery.event.drag
 	 *
 	 * `draginit` is triggered when the drag motion starts. Use it to customize the drag behavior
 	 * using the [jQuery.Drag] instance passed as the second parameter:
 	 *
-	 *      $(".draggable").on('draginit', function(ev, drag) {
-	 *          // Only allow vertical drags
-	 *          drag.vertical();
-	 *          // Create a draggable copy of the element
-	 *          drag.ghost();
-	 *      });
+	 *     $(".draggable").on('draginit', function(ev, drag) {
+	 *       // Only allow vertical drags
+	 *       drag.vertical();
+	 *       // Create a draggable copy of the element
+	 *       drag.ghost();
+	 *     });
 	 */
 	'draginit',
 	/**
 	 * @attribute dragover
+	 * @parent jQuery.event.drag
 	 *
 	 * `dragover` is triggered when a drag is over a [jQuery.event.drop drop element].
 	 * The event handler gets an instance of [jQuery.Drag] passed as the second
-	 * parameter.
+	 * parameter and an instance of [jQuery.Drop] passed as the third argument:
 	 *
-	 *      $('.draggable').on('dragover', function(ev, drag) {
+	 *      $('.draggable').on('dragover', function(ev, drag, drop) {
 	 *          // Add the drop-here class indicating that the drag
 	 *          // can be dropped here
 	 *          drag.element.addClass('drop-here');
@@ -3316,11 +3367,12 @@ $event.trigger =  function defaultTriggerer( event, data, elem, onlyHandlers){
 	'dragover',
 	/**
 	 * @attribute dragmove
+	 * @parent jQuery.event.drag
 	 *
 	 * `dragmove` is triggered when the drag element moves (similar to a mousemove).
 	 * The event handler gets an instance of [jQuery.Drag] passed as the second
 	 * parameter.
-	 * Use [jQuery.Drag.prototype.location] to determine the current position
+	 * Use [jQuery.Drag::location] to determine the current position
 	 * as a [jQuery.Vector vector].
 	 *
 	 * For example, `dragmove` can be used to create a draggable element to resize
@@ -3334,6 +3386,7 @@ $event.trigger =  function defaultTriggerer( event, data, elem, onlyHandlers){
 	'dragmove',
 	/**
 	 * @attribute dragout
+	 * @parent jQuery.event.drag
 	 *
 	 * `dragout` is called when the drag leaves a drop point.
 	 * The event handler gets an instance of [jQuery.Drag] passed as the second
@@ -3349,14 +3402,15 @@ $event.trigger =  function defaultTriggerer( event, data, elem, onlyHandlers){
 	'dragout',
 	/**
 	 * @attribute dragend
+	 * @parent jQuery.event.drag
 	 *
 	 * `dragend` is called when the drag motion is done.
 	 * The event handler gets an instance of [jQuery.Drag] passed as the second
 	 * parameter.
 	 *
-	 *      $('.draggable').on('dragend', function(ev, drag)
-	 *          // Clean up when the drag motion is done
-	 *      });
+	 *     $('.draggable').on('dragend', function(ev, drag)
+	 *       // Clean up when the drag motion is done
+	 *     });
 	 */
 	'dragend'], "mousedown", function( e ) {
 		$.Drag.mousedown.call($.Drag, e, this);
@@ -3442,12 +3496,13 @@ $event.trigger =  function defaultTriggerer( event, data, elem, onlyHandlers){
 	//somehow need to keep track of elements with selectors on them.  When element is removed, somehow we need to know that
 	//
 	/**
-	 * @add jQuery.event.drop
+	 * @add jQuery.event.special
 	 */
 	var eventNames = [
 	/**
 	 * @attribute dropover
-	 *
+	 * @parent jQuery.event.drop
+	 * 
 	 * `dropover` is triggered when a [jQuery.event.drag drag] is first moved onto this
 	 * drop element.
 	 * The event handler gets an instance of [jQuery.Drag] passed as the second and a
@@ -3461,7 +3516,8 @@ $event.trigger =  function defaultTriggerer( event, data, elem, onlyHandlers){
 	"dropover",
 	/**
 	 * @attribute dropon
-	 *
+	 * @parent jQuery.event.drop
+	 * 
 	 * `dropon` is triggered when a drag is dropped on a drop element.
 	 * The event handler gets an instance of [jQuery.Drag] passed as the second and a
 	 * [jQuery.Drop] as the third parameter.
@@ -3473,7 +3529,8 @@ $event.trigger =  function defaultTriggerer( event, data, elem, onlyHandlers){
 	"dropon",
 	/**
 	 * @attribute dropout
-	 *
+	 * @parent jQuery.event.drop
+	 * 
 	 * `dropout` is called when a drag is moved out of this drop element.
 	 * The event handler gets an instance of [jQuery.Drag] passed as the second and a
 	 * [jQuery.Drop] as the third parameter.
@@ -3486,7 +3543,8 @@ $event.trigger =  function defaultTriggerer( event, data, elem, onlyHandlers){
 	"dropout",
 	/**
 	 * @attribute dropinit
-	 *
+	 * @parent jQuery.event.drop
+	 * 
 	 * `dropinit` is called when a drag motion starts and the drop elements are initialized.
 	 * The event handler gets an instance of [jQuery.Drag] passed as the second and a
 	 * [jQuery.Drop] as the third parameter.
@@ -3502,7 +3560,8 @@ $event.trigger =  function defaultTriggerer( event, data, elem, onlyHandlers){
 	"dropinit",
 	/**
 	 * @attribute dropmove
-	 *
+	 * @parent jQuery.event.drop
+	 * 
 	 * `dropmove` is triggered repeatedly when a drag is moved over a drop
 	 * (similar to a mousemove).
 	 * The event handler gets an instance of [jQuery.Drag] passed as the second and a
@@ -3515,7 +3574,8 @@ $event.trigger =  function defaultTriggerer( event, data, elem, onlyHandlers){
 	"dropmove",
 	/**
 	 * @attribute dropend
-	 *
+	 * @parent jQuery.event.drop
+	 * 
 	 * `dropend` is called when the drag motion is done for this drop element.
 	 * The event handler gets an instance of [jQuery.Drag] passed as the second and a
 	 * [jQuery.Drop] as the third parameter.
@@ -4053,7 +4113,12 @@ $.extend($.Scrollable.prototype,{
 	 * 
 	 * @demo jquery/event/drag/step/step.html
 	 * 
-	 * @param {number|Object} amount make the drag move X amount in pixels from the top-left of container.
+	 * @param {number|Object} amount make the drag move the amount in pixels from the top-left of container.
+	 * 
+	 * If the amount is a `number`, the drag will move step-wise that number pixels in both 
+	 * dimensions.  If it's an object like `{x: 20, y: 10}` the drag will move in steps 20px from
+	 * left to right and 10px up and down.
+	 * 
 	 * @param {jQuery} [container] the container to move in reference to.  If not provided, the document is used.
 	 * @param {String} [center] Indicates how to position the drag element in relationship to the container.
 	 * 
@@ -4293,16 +4358,17 @@ var event = $.event,
 		}, hover._delay)
 		
 	};
-		
+
 /**
- * @add jQuery.event.hover
+ * @add jQuery.event.special
  */
 event.setupHelper( [
 /**
  * @attribute hoverinit
+ * @parent jQuery.event.hover
  *
  * `hoverinit` is called when a hover is about to start (on `mouseenter`). Listen for `hoverinit` events to configure
- * [jQuery.Hover.prototype.delay] and [jQuery.Hover.prototype.distance]
+ * [jQuery.Hover::delay delay] and [jQuery.Hover::distance distance]
  * for this specific event:
  *
  *      $(".option").on("hoverinit", function(ev, hover){
@@ -4317,9 +4383,10 @@ event.setupHelper( [
 "hoverinit", 
 /**
  * @attribute hoverenter
+ * @parent jQuery.event.hover
  *
  * `hoverenter` events are called when the mouses less than [jQuery.Hover.prototype.distance] pixels in
- * [jQuery.Hover.prototype.delay] milliseconds.
+ * [jQuery.Hover.prototype.delay delay] milliseconds.
  *
  *      $(".option").on("hoverenter", function(ev, hover){
  *          $(this).addClass("hovering");
@@ -4328,6 +4395,7 @@ event.setupHelper( [
 "hoverenter",
 /**
  * @attribute hoverleave
+ * @parent jQuery.event.hover
  *
  * `hoverleave` is called when the mouse leaves an element that has been hovered.
  *
@@ -4338,6 +4406,7 @@ event.setupHelper( [
 "hoverleave",
 /**
  * @attribute hovermove
+ * @parent jQuery.event.hover
  *
  * `hovermove` is called when a `mousemove` occurs on an element that has been hovered.
  *

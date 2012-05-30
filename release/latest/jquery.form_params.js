@@ -1,3 +1,7 @@
+/** 
+ * jquery.form_params.js
+ * 
+ */
 (function( $ ) {
 	var keyBreaker = /[^\[\]]+/g,
 		convertValue = function( value ) {

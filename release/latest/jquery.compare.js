@@ -1,3 +1,7 @@
+/** 
+ * jquery.compare.js
+ * 
+ */
 (function($){
 
 /**

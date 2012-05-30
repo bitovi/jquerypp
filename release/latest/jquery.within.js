@@ -1,3 +1,7 @@
+/** 
+ * jquery.within.js
+ * 
+ */
 (function($){
    var withinBox = function(x, y, left, top, width, height ){
         return (y >= top &&

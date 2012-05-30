@@ -1,3 +1,7 @@
+/** 
+ * jquery.event.resize.js
+ * 
+ */
 (function( $ ) {
 	var resizers = $(),
 		resizeCount = 0,
