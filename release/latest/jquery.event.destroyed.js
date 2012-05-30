@@ -1,3 +1,7 @@
+/** 
+ * jquery.event.destroyed.js
+ * 
+ */
 (function( $ ) {
 	/**
 	 * @attribute destroyed

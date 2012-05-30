@@ -1,93 +1,11 @@
-(function( $ ) {
-
-	var getComputedStyle = document.defaultView && document.defaultView.getComputedStyle,
-		rupper = /([A-Z])/g,
-		rdashAlpha = /-([a-z])/ig,
-		fcamelCase = function( all, letter ) {
-			return letter.toUpperCase();
-		},
-		getStyle = function( elem ) {
-			if ( getComputedStyle ) {
-				return getComputedStyle(elem, null);
-			}
-			else if ( elem.currentStyle ) {
-				return elem.currentStyle;
-			}
-		},
-		rfloat = /float/i,
-		rnumpx = /^-?\d+(?:px)?$/i,
-		rnum = /^-?\d/;
-
-	$.styles = function( el, styles ) {
-		if (!el ) {
-			return null;
-		}
-		var currentS = getStyle(el),
-			oldName, val, style = el.style,
-			results = {},
-			i = 0,
-			left, rsLeft, camelCase, name;
-
-		for (; i < styles.length; i++ ) {
-			name = styles[i];
-			oldName = name.replace(rdashAlpha, fcamelCase);
-
-			if ( rfloat.test(name) ) {
-				name = jQuery.support.cssFloat ? "float" : "styleFloat";
-				oldName = "cssFloat";
-			}
-
-			if ( getComputedStyle ) {
-				name = name.replace(rupper, "-$1").toLowerCase();
-				val = currentS.getPropertyValue(name);
-				if ( name === "opacity" && val === "" ) {
-					val = "1";
-				}
-				results[oldName] = val;
-			} else {
-				camelCase = name.replace(rdashAlpha, fcamelCase);
-				results[oldName] = currentS[name] || currentS[camelCase];
-
-
-				if (!rnumpx.test(results[oldName]) && rnum.test(results[oldName]) ) { //convert to px
-					// Remember the original values
-					left = style.left;
-					rsLeft = el.runtimeStyle.left;
-
-					// Put in the new values to get a computed value out
-					el.runtimeStyle.left = el.currentStyle.left;
-					style.left = camelCase === "fontSize" ? "1em" : (results[oldName] || 0);
-					results[oldName] = style.pixelLeft + "px";
-
-					// Revert the changed values
-					style.left = left;
-					el.runtimeStyle.left = rsLeft;
-				}
-
-			}
-		}
-
-		return results;
-	};
-
-	/**
-	 * @function jQuery.fn.styles
-	 * @parent jQuery.styles
-	 * @plugin jQuery.styles
-	 *
-	 * Returns a set of computed styles. Pass the names of the styles you want to
-	 * retrieve as arguments:
-	 *
-	 *      $("div").styles('float','display')
-	 *      // -> { cssFloat: "left", display: "block" }
-	 *
-	 * @param {String} style pass the names of the styles to retrieve as the argument list
-	 * @return {Object} an object of `style` : `value` pairs
-	 */
-	$.fn.styles = function() {
-		return $.styles(this[0], $.makeArray(arguments));
-	};
-})(jQuery);
+/** 
+ * jquery.animate.js
+ * 
+ * Dependencies:
+ * 
+ * - jquery.styles.js
+ * 
+ */
 (function () {
 
 	var animationNum = 0,
@@ -143,12 +61,18 @@
 				if (props[name] == 'show' || props[name] == 'hide' // jQuery does something with these two values
 					|| jQuery.isArray(props[name]) // Arrays for individual easing
 					|| props[name] < 0 // Negative values not handled the same
-					|| name == 'zIndex' || name == 'z-index') { // unit-less value
+					|| name == 'zIndex' || name == 'z-index'
+					// Firefox doesn't animate 'auto' properties
+					// https://bugzilla.mozilla.org/show_bug.cgi?id=571344 value
+					|| (browser.prefix == '-moz-' && (
+						(this.length && this[0].ownerDocument && this.css(name) == 'auto')
+						|| name == 'font-size' || name == 'fontSize'))
+					) {  // unit-less value
 					return true;
 				}
 			}
 
-			return browser === null ||
+			return props.jquery === true || browser === null ||
 				jQuery.isEmptyObject(props) || // Animating empty properties
 				jQuery.isPlainObject(ops) || // Second parameter is an object - anifast only handles numbers
 				typeof ops == 'string' || // Second parameter is a string like 'slow' TODO: remove
@@ -159,7 +83,7 @@
 		 * Return the CSS number (with px added as the default unit if the value is a number)
 		 */
 		cssNumber = function(origName, value) {
-			if ( typeof value === "number" && !jQuery.cssNumber[ origName ] ) {
+			if (typeof value === "number" && !jQuery.cssNumber[ origName ]) {
 				return value += "px";
 			}
 			return value;
@@ -185,11 +109,11 @@
 						transitionEnd : 'msTransitionEnd',
 						prefix : '-ms-'
 					},
+					*/
 					'MozTransition': {
 						transitionEnd : 'animationend',
 						prefix : '-moz-'
 					},
-					*/
 					'WebkitTransition': {
 						transitionEnd : 'webkitAnimationEnd',
 						prefix : '-webkit-'
@@ -237,47 +161,48 @@
 		if (passThrough.apply(this, arguments)) {
 			return oldanimate.apply(this, arguments);
 		}
-
 		if (jQuery.isFunction(speed)) {
 			callback = speed;
 		}
 
-		var scoper = jQuery(this);
-		scoper.queue('fx', function() {
+		this.queue('fx', function(done) {
+			
+
 			// Add everything to the animation queue
 			// Most of of these calls need to happen once per element
-			scoper.each(function() {
-				var current, //current CSS values
-					properties = [], // The list of properties passed
-					to = "",
-					prop,
-					self = jQuery(this),
-					duration = jQuery.fx.speeds[speed] || speed || jQuery.fx.speeds._default,
-					//the animation keyframe name
-					animationName = "animate" + (animationNum++),
-					// The key used to store the animation hook
-					dataKey = animationName + '.run',
-					//the text for the keyframe
-					style = "@" + browser.prefix + "keyframes " + animationName + " { from {",
-					// The animation end event handler.
-					// Will be called both on animation end and after calling .stop()
-					animationEnd = function (currentCSS, exec) {
+			var current, //current CSS values
+				properties = [], // The list of properties passed
+				to = "",
+				prop,
+				self = jQuery(this),
+				duration = jQuery.fx.speeds[speed] || speed || jQuery.fx.speeds._default,
+				//the animation keyframe name
+				animationName = "animate" + (animationNum++),
+				// The key used to store the animation hook
+				dataKey = animationName + '.run',
+				//the text for the keyframe
+				style = "@" + browser.prefix + "keyframes " + animationName + " { from {",
+				// The animation end event handler.
+				// Will be called both on animation end and after calling .stop()
+				animationEnd = function (currentCSS, exec) {
+					self.css(currentCSS);
+					
+					self.css(addPrefix({
+						"animation-duration" : "",
+						"animation-name" : "",
+						"animation-fill-mode" : ""
+					}));
 
-						self.css(currentCSS).css(addPrefix({
-							"animation-duration" : "",
-							"animation-name" : ""
-						}));
+					// remove the animation keyframe
+					removeAnimation(lastSheet, animationName);
 
-						// remove the animation keyframe
-						removeAnimation(lastSheet, animationName);
-
-						if (callback && exec) {
-							// Call success, pass the DOM element as the this reference
-							callback.apply(self[0])
-						}
-
-						jQuery.removeData(self, dataKey, true);
+					if (callback && exec) {
+						// Call success, pass the DOM element as the this reference
+						callback.call(self[0], true)
 					}
+
+					jQuery.removeData(self, dataKey, true);
+				}
 
 				for(prop in props) {
 					properties.push(prop);
@@ -318,15 +243,17 @@
 				// set this element to point to that animation
 				self.css(addPrefix({
 					"animation-duration" : duration + "ms",
-					"animation-name" : animationName
+					"animation-name" : animationName,
+					"animation-fill-mode": "forwards"
 				}));
+				
 
 				self.one(browser.transitionEnd, function() {
 					// Call animationEnd using the current properties
 					animationEnd(props, true);
-					self.dequeue();
+					done();
 				});
-			});
+
 		});
 
 		return this;

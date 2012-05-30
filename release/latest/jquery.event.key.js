@@ -1,3 +1,7 @@
+/** 
+ * jquery.event.key.js
+ * 
+ */
 (function($){
 	var keymap = {},
 		reverseKeyMap = {};

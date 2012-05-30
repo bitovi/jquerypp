@@ -1,385 +1,12 @@
-(function($){
-	var getSetZero = function(v){ return v !== undefined ? (this.array[0] = v) : this.array[0] },
-		getSetOne = function(v){ return v !== undefined ? (this.array[1] = v) : this.array[1]};
-
-/**
- * @class jQuery.Vector
- * @parent jquerypp
- *
- * `jQuery.Vector` represents a multi dimensional vector with shorthand methods for
- * working with two dimensions.
- *
- * It is mainly used in [jQuery.event.drag drag] & [jQuery.event.drop drop] events.
- *
- * @constructor creates a new vector instance from the arguments.  Example:
- *
- *      new jQuery.Vector(1,2)
+/** 
+ * jquery.event.drag.js
+ * 
+ * Dependencies:
+ * 
+ * - jquery.lang.vector.js
+ * - jquery.event.livehack.js
+ * 
  */
-	$.Vector = function(arr) {
-		var array = $.isArray(arr) ? arr : $.makeArray(arguments);
-		this.update(array);
-	};
-	$.Vector.prototype =
-	/* @Prototype*/
-	{
-		/**
-		 * Applys the function to every item in the vector and returns a new vector.
-		 *
-		 * @param {Function} f The function to apply
-		 * @return {jQuery.Vector} A new $.Vector instance
-		 */
-		app: function( f ) {
-			var i, newArr = [];
-
-			for ( i = 0; i < this.array.length; i++ ) {
-				newArr.push(f(this.array[i], i));
-			}
-			return new $.Vector(newArr);
-		},
-		/**
-		 * Adds two vectors together and returns a new instance. Example:
-		 *
-		 *      new $.Vector(1,2).plus(2,3) //-> (3, 5)
-		 *      new $.Vector(3,5).plus(new Vector(4,5)) //-> (7, 10)
-		 *
-		 * @return {$.Vector}
-		 */
-		plus: function() {
-			var i, args = arguments[0] instanceof $.Vector ? arguments[0].array : $.makeArray(arguments),
-				arr = this.array.slice(0),
-				vec = new $.Vector();
-			for ( i = 0; i < args.length; i++ ) {
-				arr[i] = (arr[i] ? arr[i] : 0) + args[i];
-			}
-			return vec.update(arr);
-		},
-		/**
-		 * Subtract one vector from another and returns a new instance. Example:
-		 *
-		 *      new $.Vector(4, 5).minus(2, 1) //-> (2, 4)
-		 *
-		 * @return {jQuery.Vector}
-		 */
-		minus: function() {
-			var i, args = arguments[0] instanceof $.Vector ? arguments[0].array : $.makeArray(arguments),
-				arr = this.array.slice(0),
-				vec = new $.Vector();
-			for ( i = 0; i < args.length; i++ ) {
-				arr[i] = (arr[i] ? arr[i] : 0) - args[i];
-			}
-			return vec.update(arr);
-		},
-		/**
-		 * Returns the current vector if it is equal to the vector passed in.
-		 *
-		 * `null` if otherwise.
-		 *
-		 * @return {jQuery.Vector}
-		 */
-		equals: function() {
-			var i, args = arguments[0] instanceof $.Vector ? arguments[0].array : $.makeArray(arguments),
-				arr = this.array.slice(0),
-				vec = new $.Vector();
-			for ( i = 0; i < args.length; i++ ) {
-				if ( arr[i] != args[i] ) {
-					return null;
-				}
-			}
-			return vec.update(arr);
-		},
-		/**
-		 * Returns the first value of the vector.
-		 * You can also access the same value through the following aliases the
-		 * [jQuery.Vector.prototype.left vector.left()] and [jQuery.Vector.prototype.left vector.width()]
-		 * aliases.
-		 *
-		 * For example:
-		 *
-		 *      var v = new $.Vector(2, 5);
-		 *      v.x() //-> 2
-		 *      v.left() //-> 2
-		 *      v.width() //-> 2
-		 *
-		 * @return {Number} The first value of the vector
-		 */
-		x: getSetZero,
-		/**
-		 * @hide
-		 * Alias for [jQuery.Vector.prototype.x].
-		 *
-		 * @return {Number}
-		 */
-		left: getSetZero,
-		/**
-		 * @hide
-		 * Alias for [jQuery.Vector.prototype.x].
-		 *
-		 * @return {Number}
-		 */
-		width: getSetZero,
-		/**
-		 * Returns the second value of the vector.
-		 * You can also access the same value through the [jQuery.Vector.prototype.top vector.top()]
-		 * and [jQuery.Vector.prototype.height vector.height()] aliases.
-		 *
-		 * For example:
-		 *
-		 *      var v = new $.Vector(2, 5);
-		 *      v.y() //-> 5
-		 *      v.top() //-> 5
-		 *      v.height() //-> 5
-		 *
-		 * @return {Number} The first value of the vector
-		 */
-		y: getSetOne,
-		/**
-		 * @hide
-		 * Alias for [jQuery.Vector.prototype.y].
-		 *
-		 * @return {Number}
-		 */
-		top: getSetOne,
-		/**
-		 * @hide
-		 * Alias for [jQuery.Vector.prototype.y].
-		 *
-		 * @return {Number}
-		 */
-		height: getSetOne,
-		/**
-		 * Returns a string representation of the vector in the form of (x,y,...)
-		 *
-		 *      var v = new $.Vector(4, 6, 1, 3);
-		 *      v.toString() //-> (4, 6, 1, 3)
-		 *
-		 * @return {String}
-		 */
-		toString: function() {
-			return "(" + this.array.join(', ') + ")";
-		},
-		/**
-		 * Replaces the vectors contents
-		 *
-		 *      var v = new $.Vector(2, 3);
-		 *
-		 * @param {Object} array
-		 */
-		update: function( array ) {
-			var i;
-			if ( this.array ) {
-				for ( i = 0; i < this.array.length; i++ ) {
-					delete this.array[i];
-				}
-			}
-			this.array = array;
-			for ( i = 0; i < array.length; i++ ) {
-				this[i] = this.array[i];
-			}
-			return this;
-		}
-	};
-
-	$.Event.prototype.vector = function() {
-		if ( this.originalEvent.synthetic ) {
-			var doc = document.documentElement,
-				body = document.body;
-			return new $.Vector(this.clientX + (doc && doc.scrollLeft || body && body.scrollLeft || 0) - (doc.clientLeft || 0), this.clientY + (doc && doc.scrollTop || body && body.scrollTop || 0) - (doc.clientTop || 0));
-		} else {
-			return new $.Vector(this.pageX, this.pageY);
-		}
-	};
-
-	$.fn.offsetv = function() {
-		if ( this[0] == window ) {
-			return new $.Vector(window.pageXOffset ? window.pageXOffset : document.documentElement.scrollLeft, window.pageYOffset ? window.pageYOffset : document.documentElement.scrollTop);
-		} else {
-			var offset = this.offset();
-			return new $.Vector(offset.left, offset.top);
-		}
-	};
-
-	$.fn.dimensionsv = function( which ) {
-		if ( this[0] == window || !which ) {
-			return new $.Vector(this.width(), this.height());
-		}
-		else {
-			return new $.Vector(this[which + "Width"](), this[which + "Height"]());
-		}
-	};
-})(jQuery);
-(function() {
-
-	var event = jQuery.event,
-
-		//helper that finds handlers by type and calls back a function, this is basically handle
-		// events - the events object
-		// types - an array of event types to look for
-		// callback(type, handlerFunc, selector) - a callback
-		// selector - an optional selector to filter with, if there, matches by selector
-		//     if null, matches anything, otherwise, matches with no selector
-		findHelper = function( events, types, callback, selector ) {
-			var t, type, typeHandlers, all, h, handle, 
-				namespaces, namespace,
-				match;
-			for ( t = 0; t < types.length; t++ ) {
-				type = types[t];
-				all = type.indexOf(".") < 0;
-				if (!all ) {
-					namespaces = type.split(".");
-					type = namespaces.shift();
-					namespace = new RegExp("(^|\\.)" + namespaces.slice(0).sort().join("\\.(?:.*\\.)?") + "(\\.|$)");
-				}
-				typeHandlers = (events[type] || []).slice(0);
-
-				for ( h = 0; h < typeHandlers.length; h++ ) {
-					handle = typeHandlers[h];
-					
-					match = (all || namespace.test(handle.namespace));
-					
-					if(match){
-						if(selector){
-							if (handle.selector === selector  ) {
-								callback(type, handle.origHandler || handle.handler);
-							}
-						} else if (selector === null){
-							callback(type, handle.origHandler || handle.handler, handle.selector);
-						}
-						else if (!handle.selector ) {
-							callback(type, handle.origHandler || handle.handler);
-							
-						} 
-					}
-					
-					
-				}
-			}
-		};
-
-	/**
-	 * Finds event handlers of a given type on an element.
-	 * @param {HTMLElement} el
-	 * @param {Array} types an array of event names
-	 * @param {String} [selector] optional selector
-	 * @return {Array} an array of event handlers
-	 */
-	event.find = function( el, types, selector ) {
-		var events = ( $._data(el) || {} ).events,
-			handlers = [],
-			t, liver, live;
-
-		if (!events ) {
-			return handlers;
-		}
-		findHelper(events, types, function( type, handler ) {
-			handlers.push(handler);
-		}, selector);
-		return handlers;
-	};
-	/**
-	 * Finds all events.  Group by selector.
-	 * @param {HTMLElement} el the element
-	 * @param {Array} types event types
-	 */
-	event.findBySelector = function( el, types ) {
-		var events = $._data(el).events,
-			selectors = {},
-			//adds a handler for a given selector and event
-			add = function( selector, event, handler ) {
-				var select = selectors[selector] || (selectors[selector] = {}),
-					events = select[event] || (select[event] = []);
-				events.push(handler);
-			};
-
-		if (!events ) {
-			return selectors;
-		}
-		//first check live:
-		/*$.each(events.live || [], function( i, live ) {
-			if ( $.inArray(live.origType, types) !== -1 ) {
-				add(live.selector, live.origType, live.origHandler || live.handler);
-			}
-		});*/
-		//then check straight binds
-		findHelper(events, types, function( type, handler, selector ) {
-			add(selector || "", type, handler);
-		}, null);
-
-		return selectors;
-	};
-	event.supportTouch = "ontouchend" in document;
-	
-	$.fn.respondsTo = function( events ) {
-		if (!this.length ) {
-			return false;
-		} else {
-			//add default ?
-			return event.find(this[0], $.isArray(events) ? events : [events]).length > 0;
-		}
-	};
-	$.fn.triggerHandled = function( event, data ) {
-		event = (typeof event == "string" ? $.Event(event) : event);
-		this.trigger(event, data);
-		return event.handled;
-	};
-	/**
-	 * Only attaches one event handler for all types ...
-	 * @param {Array} types llist of types that will delegate here
-	 * @param {Object} startingEvent the first event to start listening to
-	 * @param {Object} onFirst a function to call 
-	 */
-	event.setupHelper = function( types, startingEvent, onFirst ) {
-		if (!onFirst ) {
-			onFirst = startingEvent;
-			startingEvent = null;
-		}
-		var add = function( handleObj ) {
-
-			var bySelector, selector = handleObj.selector || "";
-			if ( selector ) {
-				bySelector = event.find(this, types, selector);
-				if (!bySelector.length ) {
-					$(this).delegate(selector, startingEvent, onFirst);
-				}
-			}
-			else {
-				//var bySelector = event.find(this, types, selector);
-				if (!event.find(this, types, selector).length ) {
-					event.add(this, startingEvent, onFirst, {
-						selector: selector,
-						delegate: this
-					});
-				}
-
-			}
-
-		},
-			remove = function( handleObj ) {
-				var bySelector, selector = handleObj.selector || "";
-				if ( selector ) {
-					bySelector = event.find(this, types, selector);
-					if (!bySelector.length ) {
-						$(this).undelegate(selector, startingEvent, onFirst);
-					}
-				}
-				else {
-					if (!event.find(this, types, selector).length ) {
-						event.remove(this, startingEvent, onFirst, {
-							selector: selector,
-							delegate: this
-						});
-					}
-				}
-			};
-		$.each(types, function() {
-			event.special[this] = {
-				add: add,
-				remove: remove,
-				setup: function() {},
-				teardown: function() {}
-			};
-		});
-	};
-})(jQuery);
 (function( $ ) {
 	//modify live
 	//steal the live handler ....
@@ -949,51 +576,67 @@
 			}
 		}
 	});
-
 	/**
-	 * @add jQuery.event.drag
+	 * @add jQuery.event.special
 	 */
 	event.setupHelper([
 	/**
 	 * @attribute dragdown
-	 *
+	 * @parent jQuery.event.drag
+	 * 
 	 * `dragdown` is called when a drag movement has started on a mousedown.
 	 * The event handler gets an instance of [jQuery.Drag] passed as the second
-	 * parameter.
-	 * If you listen to this, the mousedown's default event (preventing
-	 * text selection) is not prevented.  You are responsible for calling it
+	 * parameter.  Listening to `dragdown` allows you to customize 
+	 * the behavior of a drag motion, especially when `draginit` should be called.
+	 * 
+	 *     $(".handles").delegate("dragdown", function(ev, drag){
+	 *       // call draginit only when the mouse has moved 20 px
+	 *       drag.distance(20);
+	 *     })
+	 * 
+	 * Typically, when a drag motion is started, `event.preventDefault` is automatically
+	 * called, preventing text selection.  However, if you listen to 
+	 * `dragdown`, this default behavior is not called. You are responsible for calling it
 	 * if you want it (you probably do).
 	 *
-	 * ## Why might you not want it?
+	 * ### Why might you not want to call `preventDefault`?
 	 *
 	 * You might want it if you want to allow text selection on element
 	 * within the drag element.  Typically these are input elements.
 	 *
-	 *      $(".handles").delegate("dragdown", function(ev, drag){})
+	 *     $(".handles").delegate("dragdown", function(ev, drag){
+	 *       if(ev.target.nodeName === "input"){
+	 *         drag.cancel();
+	 *       } else {
+	 *         ev.preventDefault();
+	 *       }
+	 *     })
 	 */
 	'dragdown',
 	/**
 	 * @attribute draginit
+	 * @parent jQuery.event.drag
 	 *
 	 * `draginit` is triggered when the drag motion starts. Use it to customize the drag behavior
 	 * using the [jQuery.Drag] instance passed as the second parameter:
 	 *
-	 *      $(".draggable").on('draginit', function(ev, drag) {
-	 *          // Only allow vertical drags
-	 *          drag.vertical();
-	 *          // Create a draggable copy of the element
-	 *          drag.ghost();
-	 *      });
+	 *     $(".draggable").on('draginit', function(ev, drag) {
+	 *       // Only allow vertical drags
+	 *       drag.vertical();
+	 *       // Create a draggable copy of the element
+	 *       drag.ghost();
+	 *     });
 	 */
 	'draginit',
 	/**
 	 * @attribute dragover
+	 * @parent jQuery.event.drag
 	 *
 	 * `dragover` is triggered when a drag is over a [jQuery.event.drop drop element].
 	 * The event handler gets an instance of [jQuery.Drag] passed as the second
-	 * parameter.
+	 * parameter and an instance of [jQuery.Drop] passed as the third argument:
 	 *
-	 *      $('.draggable').on('dragover', function(ev, drag) {
+	 *      $('.draggable').on('dragover', function(ev, drag, drop) {
 	 *          // Add the drop-here class indicating that the drag
 	 *          // can be dropped here
 	 *          drag.element.addClass('drop-here');
@@ -1002,11 +645,12 @@
 	'dragover',
 	/**
 	 * @attribute dragmove
+	 * @parent jQuery.event.drag
 	 *
 	 * `dragmove` is triggered when the drag element moves (similar to a mousemove).
 	 * The event handler gets an instance of [jQuery.Drag] passed as the second
 	 * parameter.
-	 * Use [jQuery.Drag.prototype.location] to determine the current position
+	 * Use [jQuery.Drag::location] to determine the current position
 	 * as a [jQuery.Vector vector].
 	 *
 	 * For example, `dragmove` can be used to create a draggable element to resize
@@ -1020,6 +664,7 @@
 	'dragmove',
 	/**
 	 * @attribute dragout
+	 * @parent jQuery.event.drag
 	 *
 	 * `dragout` is called when the drag leaves a drop point.
 	 * The event handler gets an instance of [jQuery.Drag] passed as the second
@@ -1035,14 +680,15 @@
 	'dragout',
 	/**
 	 * @attribute dragend
+	 * @parent jQuery.event.drag
 	 *
 	 * `dragend` is called when the drag motion is done.
 	 * The event handler gets an instance of [jQuery.Drag] passed as the second
 	 * parameter.
 	 *
-	 *      $('.draggable').on('dragend', function(ev, drag)
-	 *          // Clean up when the drag motion is done
-	 *      });
+	 *     $('.draggable').on('dragend', function(ev, drag)
+	 *       // Clean up when the drag motion is done
+	 *     });
 	 */
 	'dragend'], "mousedown", function( e ) {
 		$.Drag.mousedown.call($.Drag, e, this);

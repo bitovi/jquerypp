@@ -5,7 +5,8 @@ version: 1.0b
 
 # Welcome to jQuery++
 
-jQuery++ is a collection of useful DOM helpers and special events for jQuery 1.7 and later. Select the plugins you want in the download builder below and click download to create a customized, unminified JavaScript file:
+jQuery++ is a collection of useful DOM helpers and special events for jQuery 1.7 and
+later. Select the plugins you want and click "Download" for a customized, unminified JavaScript file:
 
 {% include builder.html %}
 
@@ -13,25 +14,33 @@ Learn more about [why jQuery++](#why_jquery__) can be useful for you.
 
 ## Get jQuery++
 
-You can use the download builder above or [download the full archive](https://github.com/downloads/jupiterjs/jquerypp/jquerypp-{{page.version}}.zip) which contains:
+There are serveral ways to get and setup jQuery++:
 
-- `jquerypp.js`: The full version of jQuery++
-- Each plugin as a standalone JavaScript file
-- A `steal` folder for [using jQuery++ with StealJS](#get_jquery__-using_steal)
-- An `amd` folder to use the jQuery++ plugins as [AMD modules](#get_jquery__-using_amd)
+ - using the download builder
+ - using individual files
+ - using Steal
+ - using AMD
+
+### Using the download builder
+
+Simply select the files you want and click "Download".  This will create an download a __jquerypp.custom.js__
+with all the files you selected and their dependencies.  Load this script
+after jQuery 1.7 like:
+
+{% highlight html %}
+<script src="lib/jquery.1.7.2.js"></script>
+<script src="lib/jquerypp.custom.js"></script>
+{% endhighlight %}
+
 
 ### Using Steal
 
-The files needed for using jQuery++ with [StealJS](http://javascriptmvc.com/docs.html#!stealjs) are located in the `steal/` folder of the [full download](https://github.com/downloads/jupiterjs/jquerypp/jquerypp-{{page.version}}.zip).
-Take the `jquery/` folder and put it in your steal root and load the plugins like this:
-
-{% highlight javascript %}
-steal('jquery/dom/dimensions', 'jquery/event/resize').then(function() {
-  $('#element').outerWidth(500).trigger('resize');
-});
-{% endhighlight %}
-
-Make sure to use `steal.map` to map any dependency of `jquery` to your jQuery library. For example, when using jQuery++ with [CanJS](http://canjs.us) and Steal:
+The files needed for using jQuery++ with [StealJS](http://javascriptmvc.com/docs.html#!stealjs) are 
+located in the `steal/` folder of 
+the [full download](https://github.com/downloads/jupiterjs/jquerypp/jquerypp-{{page.version}}.zip).
+Take the `jquery/` folder and put it in your steal root. Make sure to use `steal.map` 
+to map any dependency of `jquery` to your jQuery library, if necessary. For example, when 
+using jQuery++ with [CanJS](http://canjs.us) and Steal:
 
 {% highlight javascript %}
 steal.map({
