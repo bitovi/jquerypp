@@ -5,7 +5,7 @@ version: 1.0b
 
 # Welcome to jQuery++
 
-jQuery++ is a collection of useful DOM helpers and special events for jQuery 1.7 and later. You can download the [full version](#get_jquery__) for using all plugins, [StealJS](#get_jquery__-using_steal) and [AMD modules](#get_jquery__-using_amd) or use the download builder below to select the plugins you want and download a customized, unminified JavaScript file:
+jQuery++ is a collection of useful DOM helpers and special events for jQuery 1.7 and later. Select the plugins you want in the download builder below and click download to create a customized, unminified JavaScript file:
 
 {% include builder.html %}
 
@@ -13,17 +13,25 @@ Learn more about [why jQuery++](#why_jquery__) can be useful for you.
 
 ## Get jQuery++
 
-Download the [full archive](https://github.com/downloads/jupiterjs/jquerypp/jquerypp-{{page.version}}.zip) which contains
+You can use the download builder above or [download the full archive](https://github.com/downloads/jupiterjs/jquerypp/jquerypp-{{page.version}}.zip) which contains:
 
 - `jquerypp.js`: The full version of jQuery++
 - Each plugin as a standalone JavaScript file
-- A `steal` folder containing the files for [using jQuery++ with StealJS](#get_jquery__-using_steal)
+- A `steal` folder for [using jQuery++ with StealJS](#get_jquery__-using_steal)
 - An `amd` folder to use the jQuery++ plugins as [AMD modules](#get_jquery__-using_amd)
 
 ### Using Steal
 
 The files needed for using jQuery++ with [StealJS](http://javascriptmvc.com/docs.html#!stealjs) are located in the `steal/` folder of the [full download](https://github.com/downloads/jupiterjs/jquerypp/jquerypp-{{page.version}}.zip).
-Take the `jquery/` folder and put it in your steal root. Make sure to use `steal.map` to map any dependency of `jquery` to your jQuery library, if necessary. For example, when using jQuery++ with [CanJS](http://canjs.us) and Steal:
+Take the `jquery/` folder and put it in your steal root and load the plugins like this:
+
+{% highlight javascript %}
+steal('jquery/dom/dimensions', 'jquery/event/resize').then(function() {
+  $('#element').outerWidth(500).trigger('resize');
+});
+{% endhighlight %}
+
+Make sure to use `steal.map` to map any dependency of `jquery` to your jQuery library. For example, when using jQuery++ with [CanJS](http://canjs.us) and Steal:
 
 {% highlight javascript %}
 steal.map({
