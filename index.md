@@ -23,8 +23,8 @@ There are serveral ways to get and setup jQuery++:
 
 ### Using the download builder
 
-Simply select the files you want and click "Download".  This will create an download a __jquerypp.custom.js__
-with all the files you selected and their dependencies.  Load this script
+Simply select the files you want and click "Download". This will create and download a `jquerypp.custom.js`
+with all the files you selected and their dependencies. Load this script
 after jQuery 1.7 like:
 
 {% highlight html %}
@@ -59,9 +59,10 @@ the [full download](https://github.com/downloads/jupiterjs/jquerypp/jquerypp-{{p
 Take the `jquery/` folder and put it in your steal root to load a plugin like this:
 
 {% highlight javascript %}
-steal('jquery', 'jquery/dom/dimensions', 'jquery/event/resize').then(function($) {
+steal('jquery', 'jquery/dom/dimensions', 'jquery/event/resize')
+  .then(function($) {
     $('#element').outerWidth(500).trigger('resize');
-});
+  });
 {% endhighlight %}
 
 Make sure to use `steal.map`  to map any dependency of `jquery` to your jQuery library, if necessary. For example, when
