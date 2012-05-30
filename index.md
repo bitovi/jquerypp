@@ -35,8 +35,8 @@ after jQuery 1.7 like:
 ### Using individual files
 
 The [full download](https://github.com/downloads/jupiterjs/jquerypp/jquerypp-{{page.version}}.zip) contains
-each plugin as a separate file. At the top of each file you will find the dependencies listed that need to be included first.
-For example, `jquery.animate.js` epends on `jquery.styles.js` and should be included like this:
+each plugin as a separate file. At the top of each file you will find a list of dependencies that need to be included first.
+For example, `jquery.animate.js` depends on `jquery.styles.js` so it needs to be loaded like this:
 
 {% highlight html %}
 <script src="lib/jquery.1.7.2.js"></script>
@@ -56,11 +56,10 @@ You can also use `jquerypp.js` which contains all jQuery++ plugins in a single f
 The files needed for using jQuery++ with [StealJS](http://javascriptmvc.com/docs.html#!stealjs) are 
 located in the `steal/` folder of 
 the [full download](https://github.com/downloads/jupiterjs/jquerypp/jquerypp-{{page.version}}.zip).
-Take the `jquery/` folder and put it in your steal root and load plugins like:
+Take the `jquery/` folder and put it in your steal root to load a plugin like this:
 
 {% highlight javascript %}
-define(['jquery', 'jquery/dom/dimensions', 'jquery/event/resize'],
-  function($) {
+steal('jquery', 'jquery/dom/dimensions', 'jquery/event/resize').then(function($) {
     $('#element').outerWidth(500).trigger('resize');
 });
 {% endhighlight %}
