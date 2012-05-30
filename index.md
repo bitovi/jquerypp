@@ -59,9 +59,10 @@ require.config({
 
 ## animate `$(el).animate(properties, [speed], [callback]) -> jQuery`
 
-[jQuery.animate](http://donejs.com/docs.html#!jQuery.animate) overwrites `$.fn.animate` to use CSS 3 animations if possible.
+[jQuery.animate](http://donejs.com/docs.html#!jQuery.animate) overwrites `$.fn.animate` to use 
+CSS 3 animations if possible.
 It takes the same arguments as the original [$.fn.animate](http://api.jquery.com/animate) and will fall back to
-jQuery’s JavaScript animation if a CSS animation is not possible.
+jQuery's JavaScript animation if a CSS animation is not possible.
 
 A fade-in effect can be implemented like this:
 
