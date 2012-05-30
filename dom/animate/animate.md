@@ -32,6 +32,21 @@ The following example creates a fade-in effect using CSS animations:
       console.log('Animation done');
     });
 
+If you want to force a jQuery animation pass the `jquery` option. The animation callback gets passed `true` if
+the animation has been done using CSS animations:
+
+    $('#element').css({
+      opacity : 0,
+      jquery : true
+    }).anifast({
+      opacity : 1
+    }, 1000, function(usedCss) {
+      console.log('Animation done');
+      if(!usedCss) {
+        console.log('Used jQuery animation');
+      }
+    });
+
 ## Demo
 
 The following demo is based on the [jQuery .animate reference](http://api.jquery.com/animate/) but uses CSS animations:

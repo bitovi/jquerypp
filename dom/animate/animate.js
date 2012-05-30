@@ -95,11 +95,11 @@ steal('jquery', 'jquery/dom/styles').then(function () {
 						transitionEnd : 'msTransitionEnd',
 						prefix : '-ms-'
 					},
+					*/
 					'MozTransition': {
 						transitionEnd : 'animationend',
 						prefix : '-moz-'
 					},
-					*/
 					'WebkitTransition': {
 						transitionEnd : 'webkitAnimationEnd',
 						prefix : '-webkit-'
@@ -183,7 +183,7 @@ steal('jquery', 'jquery/dom/styles').then(function () {
 
 						if (callback && exec) {
 							// Call success, pass the DOM element as the this reference
-							callback.apply(self[0], true)
+							callback.call(self[0], true)
 						}
 
 						jQuery.removeData(self, dataKey, true);
