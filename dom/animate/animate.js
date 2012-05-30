@@ -171,10 +171,12 @@ steal('jquery', 'jquery/dom/styles').then(function () {
 				// The animation end event handler.
 				// Will be called both on animation end and after calling .stop()
 				animationEnd = function (currentCSS, exec) {
-
-					self.css(currentCSS).css(addPrefix({
+					self.css(currentCSS);
+					
+					self.css(addPrefix({
 						"animation-duration" : "",
-						"animation-name" : ""
+						"animation-name" : "",
+						"animation-fill-mode" : ""
 					}));
 
 					// remove the animation keyframe
@@ -227,7 +229,8 @@ steal('jquery', 'jquery/dom/styles').then(function () {
 				// set this element to point to that animation
 				self.css(addPrefix({
 					"animation-duration" : duration + "ms",
-					"animation-name" : animationName
+					"animation-name" : animationName,
+					"animation-fill-mode": "forwards"
 				}));
 				
 
