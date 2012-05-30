@@ -456,15 +456,15 @@ steal('jquery/dom/animate',
 
 		equal(divs.length, count, "Make sure that callback is called for each element in the set.");
 
-		//stop();
+		stop();
 
 		var foo = jQuery("#foo");
 
 		foo.animate({});
-//		foo.animate({top : 10}, 100, function () {
-//			ok(true, "Animation was properly dequeued.");
-//			start();
-//		});
+		foo.animate({top : 10}, 100, function () {
+			ok(true, "Animation was properly dequeued.");
+			start();
+		});
 	});
 
 	test("animate duration 0", function () {
