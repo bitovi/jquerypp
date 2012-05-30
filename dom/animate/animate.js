@@ -147,47 +147,46 @@ steal('jquery', 'jquery/dom/styles').then(function () {
 		if (passThrough.apply(this, arguments)) {
 			return oldanimate.apply(this, arguments);
 		}
-
 		if (jQuery.isFunction(speed)) {
 			callback = speed;
 		}
 
-		var scoper = jQuery(this);
-		scoper.queue('fx', function() {
+		this.queue('fx', function(done) {
+			
+
 			// Add everything to the animation queue
 			// Most of of these calls need to happen once per element
-			scoper.each(function() {
-				var current, //current CSS values
-					properties = [], // The list of properties passed
-					to = "",
-					prop,
-					self = jQuery(this),
-					duration = jQuery.fx.speeds[speed] || speed || jQuery.fx.speeds._default,
-					//the animation keyframe name
-					animationName = "animate" + (animationNum++),
-					// The key used to store the animation hook
-					dataKey = animationName + '.run',
-					//the text for the keyframe
-					style = "@" + browser.prefix + "keyframes " + animationName + " { from {",
-					// The animation end event handler.
-					// Will be called both on animation end and after calling .stop()
-					animationEnd = function (currentCSS, exec) {
+			var current, //current CSS values
+				properties = [], // The list of properties passed
+				to = "",
+				prop,
+				self = jQuery(this),
+				duration = jQuery.fx.speeds[speed] || speed || jQuery.fx.speeds._default,
+				//the animation keyframe name
+				animationName = "animate" + (animationNum++),
+				// The key used to store the animation hook
+				dataKey = animationName + '.run',
+				//the text for the keyframe
+				style = "@" + browser.prefix + "keyframes " + animationName + " { from {",
+				// The animation end event handler.
+				// Will be called both on animation end and after calling .stop()
+				animationEnd = function (currentCSS, exec) {
 
-						self.css(currentCSS).css(addPrefix({
-							"animation-duration" : "",
-							"animation-name" : ""
-						}));
+					self.css(currentCSS).css(addPrefix({
+						"animation-duration" : "",
+						"animation-name" : ""
+					}));
 
-						// remove the animation keyframe
-						removeAnimation(lastSheet, animationName);
+					// remove the animation keyframe
+					removeAnimation(lastSheet, animationName);
 
-						if (callback && exec) {
-							// Call success, pass the DOM element as the this reference
-							callback.apply(self[0], true)
-						}
-
-						jQuery.removeData(self, dataKey, true);
+					if (callback && exec) {
+						// Call success, pass the DOM element as the this reference
+						callback.call(self[0], true)
 					}
+
+					jQuery.removeData(self, dataKey, true);
+				}
 
 				for(prop in props) {
 					properties.push(prop);
@@ -230,13 +229,14 @@ steal('jquery', 'jquery/dom/styles').then(function () {
 					"animation-duration" : duration + "ms",
 					"animation-name" : animationName
 				}));
+				
 
 				self.one(browser.transitionEnd, function() {
 					// Call animationEnd using the current properties
 					animationEnd(props, true);
-					self.dequeue();
+					done();
 				});
-			});
+
 		});
 
 		return this;
