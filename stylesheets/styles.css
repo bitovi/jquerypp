@@ -139,7 +139,8 @@ em {
 	margin: 20px 0 20px 0;
 }
 #buttons a,
-#logo-and-download a {
+#logo-and-download a,
+#builder .button {
 	width: 112px;
 	text-align: center;
 	display: block;
@@ -161,11 +162,13 @@ em {
 	box-shadow: none;
 }
 #buttons a.primary,
-#logo-and-download a.primary {
+#logo-and-download a.primary,
+#builder .button {
 	color: white;
 	background: #e12f39;
 }
-#logo-and-download a.primary:hover {
+#logo-and-download a.primary:hover,
+#builder .button:hover {
 	background: #0FA256;
 }
 #buttons {
@@ -328,4 +331,18 @@ html.lt-ie7 .github-fork img {
 	display: block;
 	padding-left: 15px;
 	text-indent: -15px;
+}
+
+#builder .loading, #builder .button {
+	margin: 10px 0;
+}
+
+#builder .loading {
+	color: #B5B6B5;
+}
+
+#builder .button {
+	border: none;
+	line-height: 12px;
+	cursor: pointer;
 }
