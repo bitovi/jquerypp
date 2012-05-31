@@ -151,6 +151,54 @@ steal('jquery', 'jquery/dom/styles').then(function ($) {
 			return result;
 		},
 
+		// The animation cache
+		cache = [],
+
+		/**
+		 * Returns the animation name for a given style. It either uses a cached
+		 * version or adds it to the stylesheet, removing the oldest style if the
+		 * cache has reached a certain size.
+		 */
+		getAnimation = function(style) {
+			var lastSheet, name, last;
+
+			// Look up the cached style, increment the age for any other animation
+			$.each(cache, function(i, animation) {
+				if(style === animation.style) {
+					name = animation.name;
+				} else {
+					animation.age += 1;
+				}
+			});
+
+			if(!name) { // Add a new style
+				lastSheet = getLastStyleSheet()
+				name = "animate" + (animationNum++);
+				// get the last sheet and insert this rule into it
+				lastSheet.insertRule("@" + browser.prefix + "keyframes " + name + ' ' + style,
+					lastSheet.cssRules.length);
+
+				cache.push({
+					name : name,
+					style : style,
+					age : 0
+				});
+
+				// Sort the cache by age
+				cache.sort(function(first, second) {
+					return first.age - second.age;
+				});
+
+				// Remove the last (oldest) item from the cache if it has more than 20 items
+				if(cache.length > 20) {
+					last = cache.pop();
+					removeAnimation(lastSheet, last.name);
+				}
+			}
+
+			return name;
+		},
+
 		oldanimate = jQuery.fn.animate;
 
 	/**
@@ -186,11 +234,11 @@ steal('jquery', 'jquery/dom/styles').then(function ($) {
 				self = $(this),
 				duration = jQuery.fx.speeds[speed] || speed || jQuery.fx.speeds._default,
 				//the animation keyframe name
-				animationName = "animate" + (animationNum++),
+				animationName,
 				// The key used to store the animation hook
 				dataKey = animationName + '.run',
 				//the text for the keyframe
-				style = "@" + browser.prefix + "keyframes " + animationName + " { from {",
+				style = "{ from {",
 				// The animation end event handler.
 				// Will be called both on animation end and after calling .stop()
 				animationEnd = function (currentCSS, exec) {
@@ -201,9 +249,6 @@ steal('jquery', 'jquery/dom/styles').then(function ($) {
 						"animation-name" : "",
 						"animation-fill-mode" : ""
 					}));
-
-					// remove the animation keyframe
-					removeAnimation(lastSheet, animationName);
 
 					if (callback && exec) {
 						// Call success, pass the DOM element as the this reference
@@ -238,9 +283,7 @@ steal('jquery', 'jquery/dom/styles').then(function ($) {
 
 			style += "} to {" + to + " }}";
 
-			// get the last sheet and insert this rule into it
-			var lastSheet = getLastStyleSheet();
-			lastSheet.insertRule(style, lastSheet.cssRules.length);
+			animationName = getAnimation(style);
 
 			// Add a hook which will be called when the animation stops
 			jQuery._data(this, dataKey, {
@@ -267,7 +310,6 @@ steal('jquery', 'jquery/dom/styles').then(function ($) {
 				"animation-name" : animationName,
 				"animation-fill-mode": "forwards"
 			}));
-
 
 			self.one(browser.transitionEnd, function() {
 				// Call animationEnd using the current properties
