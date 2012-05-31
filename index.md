@@ -53,8 +53,8 @@ You can also use `jquerypp.js` which contains all jQuery++ plugins in a single f
 
 ### Using Steal
 
-The files needed for using jQuery++ with [StealJS](http://javascriptmvc.com/docs.html#!stealjs) are 
-located in the `steal/` folder of 
+The files needed for using jQuery++ with [StealJS](http://javascriptmvc.com/docs.html#!stealjs) are
+located in the `steal/` folder of
 the [full download](https://github.com/downloads/jupiterjs/jquerypp/jquerypp-{{page.version}}.zip).
 Take the `jquery/` folder and put it in your steal root to load a plugin like this:
 
@@ -102,7 +102,7 @@ require.config({
 
 ## animate `$(el).animate(properties, [speed], [callback]) -> jQuery`
 
-[jQuery.animate](http://donejs.com/docs.html#!jQuery.animate) overwrites `$.fn.animate` to use 
+[jQuery.animate](http://donejs.com/docs.html#!jQuery.animate) overwrites `$.fn.animate` to use
 CSS 3 animations if possible.
 It takes the same arguments as the original [$.fn.animate](http://api.jquery.com/animate) and will fall back to
 jQuery's JavaScript animation if a CSS animation is not possible.
@@ -686,7 +686,7 @@ Some jQuery++ plugins can help to significantly speed up your applications. Use
 
 ### Supported
 
-jQuery++ is developed by [Bitovi](http://bitovi.com).  We're active on the forums, but should the need 
+jQuery++ is developed by [Bitovi](http://bitovi.com).  We're active on the forums, but should the need
 arise, can also be hired for paid support, training, and development.
 
 ## Developing jQuery++
