@@ -135,7 +135,6 @@ steal('steal/build', 'steal/build/pluginify', function(steal) {
 		var out = options.out;
 		print('Creating AMD modules for ' + source + " in " + options.out);
 		steal.File(out).mkdirs();
-		createModule(source, options.excludes || {}, options);
+		createModule(source, options.exclude || {}, options);
 	}
-
 });

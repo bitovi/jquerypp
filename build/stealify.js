@@ -27,7 +27,7 @@ steal('steal/build', function(steal) {
 			skipCallbacks: true
 		}, function(opener){
 			opener.each(function(stl){
-				if(!inexcludes(options.excludes || [], stl.rootSrc)) {
+				if(!inexcludes(options.exclude || [], stl.rootSrc)) {
 					var file = steal.File(stl.rootSrc),
 						outPath = steal.File(out + file.dir()),
 						copyTo = outPath.path + '/' + file.filename();
