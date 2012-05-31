@@ -162,10 +162,12 @@ steal('jquery', 'jquery/dom/styles').then(function ($) {
 		getAnimation = function(style) {
 			var lastSheet, name, last;
 
-			// Look up the cached style, increment the age for any other animation
+			// Look up the cached style, set it to that name and reset age if found
+			// increment the age for any other animation
 			$.each(cache, function(i, animation) {
 				if(style === animation.style) {
 					name = animation.name;
+					animation.age = 0;
 				} else {
 					animation.age += 1;
 				}
