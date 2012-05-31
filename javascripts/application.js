@@ -294,13 +294,11 @@ can.Control('Menu', {
 
 can.Control('Builder', {
 	'input[type="checkbox"] click' : function() {
-		var button = this.element.find('button'),
-			checked = this.element.find('input:checked').length !== 0;
-		button.attr('disabled', !checked);
-		if(checked) {
-			button.removeClass('disabled');
+		var button = this.element.find('button');
+		if(this.element.find('input:checked').length !== 0) {
+			button.removeAttr('disabled').removeClass('disabled');
 		} else {
-			button.addClass('disabled');
+			button.attr('disabled', true).addClass('disabled');
 		}
 	},
 
@@ -319,7 +317,7 @@ can.Control('Builder', {
 	}
 });
 
-// new Builder('#builder');
+new Builder('#builder');
 if($('.lt-ie7, .lt-ie8, .lt-ie9').length == 0){
 	new Menu($('#wrapper'));
 } else {
