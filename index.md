@@ -60,7 +60,7 @@ Take the `jquery/` folder and put it in your steal root to load a plugin like th
 
 {% highlight javascript %}
 steal('jquery/dom/dimensions', 'jquery/event/resize', function() {
-    $('#element').outerWidth(500).resize();
+  $('#element').outerWidth(500).resize();
 });
 {% endhighlight %}
 
