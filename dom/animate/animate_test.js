@@ -440,7 +440,7 @@ steal('jquery/dom/animate',
 		var foo = jQuery("#foo");
 
 		foo.animate({});
-		foo.animate({ top : 10}, 100, function () {
+		foo.animate({ top : 10 }, 100, function () {
 			ok(true, "Animation was properly dequeued.");
 			start();
 		});
