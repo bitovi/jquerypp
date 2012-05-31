@@ -59,10 +59,9 @@ the [full download](https://github.com/downloads/jupiterjs/jquerypp/jquerypp-{{p
 Take the `jquery/` folder and put it in your steal root to load a plugin like this:
 
 {% highlight javascript %}
-steal('jquery', 'jquery/dom/dimensions', 'jquery/event/resize')
-  .then(function($) {
-    $('#element').outerWidth(500).trigger('resize');
-  });
+steal('jquery/dom/dimensions', 'jquery/event/resize', function() {
+  $('#element').outerWidth(500).resize();
+});
 {% endhighlight %}
 
 Make sure to use `steal.map`  to map any dependency of `jquery` to your jQuery library, if necessary. For example, when
@@ -82,7 +81,7 @@ Place the `jquerypp/` folder in your module directory and load a plugin like thi
 {% highlight javascript %}
 define(['jquery', 'jquerypp/dimensions', 'jquerypp/event/resize'],
   function($) {
-    $('#element').outerWidth(500).trigger('resize');
+    $('#element').outerWidth(500).resize();
 });
 {% endhighlight %}
 
