@@ -763,3 +763,10 @@ To make a jQuery++ build, run:
 
 It puts the downloads in `jquery/dist`. To build a specific version check out the [git tag](https://github.com/jupiterjs/jquerypp/tags)
 you want to build and run the above command.
+
+
+### Change Log
+
+__1.0 Beta__ (June 1st 2012)
+
+Released!
