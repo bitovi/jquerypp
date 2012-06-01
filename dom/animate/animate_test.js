@@ -1204,10 +1204,10 @@ steal('jquery/dom/animate',
 		setTimeout(function() {
 			// Clear the queue and stop
 			div.stop();
-			ok(div.height() < 100 * 0.95, 'Animation stopped before it reached full height');
-			ok(div.width() < 150 * 0.95, 'Animation stopped before it reached full width');
+			ok(div.height() < 100 * 0.95, 'Animation stopped at ' + div.height() + ' before it reached full height of 100');
+			ok(div.width() < 150 * 0.95, 'Animation stopped at ' + div.width() + ' before it reached full width of 150');
 			start();
-		}, 100);
+		}, 50);
 	});
 
 	/* As mentioned, thoroughly abuses undocumented methods. Since the overwritten animate doesn't
