@@ -355,3 +355,18 @@ html.lt-ie7 .github-fork img {
 #builder .button.disabled:hover {
 	background-color: #BBC2C7;
 }
+@media only screen and (max-device-width: 480px) {
+	#wrapper {
+		width: auto;
+	}
+	#menu-wrapper {
+		width: auto;
+		position: static;
+		margin: 0;
+	}
+	#content-wrapper {
+		width: auto;
+		float: none;
+		margin: 0;
+	}
+}
