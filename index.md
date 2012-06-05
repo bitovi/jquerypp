@@ -9,7 +9,7 @@ I am collection of extremely useful DOM helpers and special events for jQuery 1.
 later. I'm not a UI project like [jQueryUI](http://jqueryui.com/) or 
 [jQueryTools](http://jquerytools.org/). Instead, I'm all about providing
 low-level utilities for things that jQuery doesn't support.  If [Underscore](http://underscorejs.org/) 
-is jQuery’s functional-programming tie, I am jQuery's bald-spot covering toupee.
+is jQuery's functional-programming tie, I am jQuery's bald-spot covering toupee.
 
 
 Select the plugins you want and click "Download" for a customized, unminified JavaScript file:
