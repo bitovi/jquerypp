@@ -6,9 +6,9 @@ version: 1.0b
 # Hi, I'm jQuery++.
 
 I am a collection of extremely useful DOM helpers and special events for jQuery 1.7 and
-later. I'm not a UI project like [jQueryUI](http://jqueryui.com/) or 
-[jQueryTools](http://jquerytools.org/). Instead, I'm all about providing
-low-level utilities for things that jQuery doesn't support.  If [Underscore](http://underscorejs.org/) 
+later. I'm not a UI project like [jQuery UI](http://jqueryui.com/) or 
+[jQuery Tools](http://jquerytools.org/). Instead, I'm all about providing
+low-level utilities for things that jQuery doesn't support.  If [Underscore](http://underscorejs.org/)
 is jQuery's functional-programming tie, I am jQuery's bald-spot covering toupee.
 
 
@@ -21,7 +21,7 @@ talking about myself in the third person from this point forward.
 
 ## Get jQuery++
 
-There are serveral ways to get and setup jQuery++:
+There are several ways to get and setup jQuery++:
 
  - using the download builder
  - using individual files
