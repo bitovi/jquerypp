@@ -3,7 +3,7 @@ layout: default
 version: 1.0b
 ---
 
-# Hi, I'm jQuery++
+# Hi, I'm jQuery++.
 
 I am collection of extremely useful DOM helpers and special events for jQuery 1.7 and
 later. I'm not a UI project like [jQueryUI](http://jqueryui.com/) or 
