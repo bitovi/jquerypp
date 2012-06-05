@@ -16,7 +16,7 @@ Select the plugins you want and click "Download" for a customized, unminified Ja
 
 {% include builder.html %}
 
-Learn more about [how I](#why_jquery__) can be useful to you. And, my appologies about
+Learn more about [how I](#why_jquery__) can be useful to you. And, my apologies about
 talking about myself in the third person from this point forward.
 
 ## Get jQuery++
