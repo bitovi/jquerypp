@@ -5,7 +5,7 @@ version: 1.0b
 
 # Hi, I'm jQuery++.
 
-I am a collection of extremely useful DOM helpers and special events for jQuery 1.7 and
+I am an [MIT licensed](#license) collection of extremely useful DOM helpers and special events for jQuery 1.7 and
 later. I'm not a UI project like [jQuery UI](http://jqueryui.com/) or 
 [jQuery Tools](http://jquerytools.org/). Instead, I'm all about providing
 low-level utilities for things that jQuery doesn't support.  If [Underscore](http://underscorejs.org/)
@@ -16,7 +16,7 @@ Select the plugins you want and click "Download" for a customized, unminified Ja
 
 {% include builder.html %}
 
-Learn more about [how I](#why_jquery__) can be useful to you. And, my apologies about
+Learn more about [how I](#why_jquery__) can be useful to you. And my apologies about
 talking about myself in the third person from this point forward.
 
 ## Get jQuery++
@@ -692,7 +692,7 @@ Some jQuery++ plugins can help to significantly speed up your applications. Use
 
 ### Supported
 
-jQuery++ is developed by [Bitovi](http://bitovi.com).  We're active on the forums, but should the need
+jQuery++ is developed by [Bitovi](http://bitovi.com). We're active on the forums, but should the need
 arise, can also be hired for paid support, training, and development.
 
 ## Developing jQuery++
