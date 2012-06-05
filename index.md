@@ -3,14 +3,21 @@ layout: default
 version: 1.0b
 ---
 
-# Welcome to jQuery++
+# Hi, I'm jQuery++
 
-jQuery++ is a collection of useful DOM helpers and special events for jQuery 1.7 and
-later. Select the plugins you want and click "Download" for a customized, unminified JavaScript file:
+I am collection of extremely useful DOM helpers and special events for jQuery 1.7 and
+later. I'm not a UI project like [jQueryUI](http://jqueryui.com/) or 
+[jQueryTools](http://jquerytools.org/). Instead, I'm all about providing
+low-level utilities for things that jQuery doesn't support.  If [Underscore](http://underscorejs.org/) 
+is jQuery’s functional-programming tie, I am jQuery’s bald-spot covering toupee.
+
+
+Select the plugins you want and click "Download" for a customized, unminified JavaScript file:
 
 {% include builder.html %}
 
-Learn more about [why jQuery++](#why_jquery__) can be useful for you.
+Learn more about [why jQuery++](#why_jquery__) can be useful for you. (And appologies about
+talking about myself in the third person from here on out).
 
 ## Get jQuery++
 
