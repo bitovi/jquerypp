@@ -355,7 +355,7 @@ html.lt-ie7 .github-fork img {
 #builder .button.disabled:hover {
 	background-color: #BBC2C7;
 }
-@media only screen and (max-device-width: 480px) {
+@media only screen and (max-width: 480px) {
 	#wrapper {
 		width: auto;
 	}
@@ -363,6 +363,9 @@ html.lt-ie7 .github-fork img {
 		width: auto;
 		position: static;
 		margin: 0;
+	}
+	#menu li ul li a, #menu li a {
+		font-size: 20px;
 	}
 	#content-wrapper {
 		width: auto;
