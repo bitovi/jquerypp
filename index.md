@@ -5,7 +5,7 @@ version: 1.0b
 
 # Hi, I'm jQuery++.
 
-I am an [MIT licensed](#license) collection of extremely useful DOM helpers and special events for jQuery 1.7 and
+I am an MIT licensed collection of extremely useful DOM helpers and special events for jQuery 1.7 and
 later. I'm not a UI project like [jQuery UI](http://jqueryui.com/) or 
 [jQuery Tools](http://jquerytools.org/). Instead, I'm all about providing
 low-level utilities for things that jQuery doesn't support.  If [Underscore](http://underscorejs.org/)
