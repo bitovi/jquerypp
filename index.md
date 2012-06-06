@@ -16,8 +16,10 @@ Select the plugins you want and click "Download" for a customized, unminified Ja
 
 {% include builder.html %}
 
-Learn more about [how I](#why_jquery__) can be useful to you. And my apologies about
-talking about myself in the third person from this point forward.
+Learn more about [how I](#why_jquery__) can be useful to you. If you think I should
+have other utilities, lets me know on the [forum](https://forum.javascriptmvc.com/#Forum/jquery). And,
+if you like me, check out my sister library [CanJS](http://canjs.us). Finally, my apologies 
+about talking about myself in the third person from this point forward.
 
 ## Get jQuery++
 
