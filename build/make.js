@@ -76,7 +76,7 @@ function() {
 			"jquery/dom/form_params/form_params.js" : "jquerypp/form_params",
 			"jquery/dom/range/range.js" : "jquerypp/range",
 			"jquery/dom/selection/selection.js" : "jquerypp/selection",
-			"jquery/dom/styles/styles.js" : "jquerypp/syles",
+			"jquery/dom/styles/styles.js" : "jquerypp/styles",
 			"jquery/dom/within/within.js" : "jquerypp/within",
 			"jquery/event/default/default.js" : "jquerypp/event/default",
 			"jquery/event/destroyed/destroyed.js" : "jquerypp/event/destroyed",
