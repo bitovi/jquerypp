@@ -36,7 +36,7 @@ function to normalize the value.
 
 ## Performance
 
-A [basic JSPerf](http://jsperf.com/jquery-event-fix/3) of `jQuery.event.fastfix` shows a
+A [basic JSPerf](http://jsperf.com/jquery-event-fix/6) of `jQuery.event.fastfix` shows a
 3 to 4 times performance improvement compared to the original `jQuery.event.fix`. Since event handling
 and `jQuery.event.fix` are usually a major part of the runtime of a jQuery application including `jQuery.event.fastfix`
 can bring you significant performance improvements in modern browsers.
