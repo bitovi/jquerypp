@@ -454,7 +454,7 @@ only when they are needed.
 
 Since `jQuery.event.fix` usually takes up a major portion of an applications runtime, using `jQuery.event.fastfix`
 can significantly improve overall performance - just by including this plugin. The following chart [compares the
-performance](http://jsperf.com/jquery-event-fix) of the original `jQuery.event.fix` and `jQuery.event.fastfix` in major browsers:
+performance](http://jsperf.com/jquery-event-fix/6) of the original `jQuery.event.fix` and `jQuery.event.fastfix` in major browsers:
 
 ![jQuery.event.fastfix performance](images/fastfix.png)
 
@@ -524,6 +524,10 @@ The following key names are mapped by default:
 * `num0-9` - number pad key pressed
 * `f1-12` - function keys pressed
 * Symbols: `/`, `;`, `:`, `=`, `,`, `-`, `.`, `/`, `[`, `\`, `]`, `'`, `"`
+
+The following example shows the keyname for `keydown`, `keyup` and `keypress` events on the input field:
+
+<iframe style="width: 100%; height: 300px" src="http://jsfiddle.net/9eE7D/embedded/result,html,js,css" allowfullscreen="allowfullscreen" frameborder="0">JSFiddle</iframe>
 
 ## pause
 
@@ -776,6 +780,10 @@ you want to build and run the above command.
 
 ### Change Log
 
+__1.0 Beta 2__
+
+- Fixed issue [#5](https://github.com/jupiterjs/jquerypp/issues/5): Security error in jQuery.animate
+
 __1.0 Beta__ (June 1st 2012)
 
-Released!
+- Released!
