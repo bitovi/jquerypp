@@ -157,7 +157,7 @@ This is useful to rapidly compare element positions which is common when widgets
 {% highlight javascript %}
 // Set a session cookie
 $.cookie('the_cookie', 'the_value');
-$.cookie('the_cookie') // -> 'the_value'
+$.cookie('the_cookie'); // -> 'the_value'
 // Set a cookie that expires in 7 days
 $.cookie('the_cookie', 'the_value', { expires: 7 });
 // delete the cookie
@@ -184,7 +184,7 @@ And use `$(el).animate({ innerHeight : 100 })` to animate them. This is useful w
 
 {% highlight javascript %}
 $('#foo').outerWidth(100).innerHeight(50);
-$('#bar').animate({outerWidth: 500});
+$('#bar').animate({ outerWidth: 500 });
 {% endhighlight %}
 
 The following example lets you change the different width properties used by `$(el).innerWidth([width])` and
@@ -239,7 +239,7 @@ range.start('+5');
 // Move the end 5 characters to the left
 range.end('-5');
 // Return the range text
-range.toString() // is some
+range.toString(); // is some
 // Select the current range
 range.select();
 {% endhighlight %}
