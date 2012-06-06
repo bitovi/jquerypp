@@ -1,32 +1,23 @@
 steal('jquery', 'jquery/dom/styles').then(function ($) {
 
 	var animationNum = 0,
-		//Animation events implies animations right?
-		//gets the last editable stylesheet or creates one
+		styleSheet = null,
+		// Create a new stylesheet where we store our animations
 		getLastStyleSheet = function () {
-			var sheets = document.styleSheets,
-				x = sheets.length - 1,
-				foundSheet = null,
-				style;
+			if(!styleSheet) {
+				var style = document.createElement('style');
+				style.setAttribute("type", "text/css");
+				style.setAttribute("media", "screen");
 
-			while (x >= 0 && !foundSheet) {
-				if (sheets[x].cssRules || sheets[x].rules) {
-					//any stylesheet which we can access cssRules is good
-					foundSheet = sheets[x];
-				}
-				x -= 1;
-			}
-
-			if (!foundSheet) {
-				style = document.createElement('style');
 				document.getElementsByTagName('head')[0].appendChild(style);
 				if (!window.createPopup) { /* For Safari */
 					style.appendChild(document.createTextNode(''));
 				}
-				foundSheet = sheets[sheets.length - 1];
+
+				styleSheet = style.sheet;
 			}
 
-			return foundSheet;
+			return styleSheet;
 		},
 
 		//removes an animation rule from a sheet
@@ -54,9 +45,6 @@ steal('jquery', 'jquery/dom/styles').then(function ($) {
 					|| jQuery.isArray(props[name]) // Arrays for individual easing
 					|| props[name] < 0 // Negative values not handled the same
 					|| name == 'zIndex' || name == 'z-index'
-					// Firefox doesn't animate 'auto' properties
-					// https://bugzilla.mozilla.org/show_bug.cgi?id=571344
-					// || (browser.prefix == '-moz-' && (name == 'font-size' || name == 'fontSize'))
 					) {  // unit-less value
 					return true;
 				}
@@ -79,9 +67,7 @@ steal('jquery', 'jquery/dom/styles').then(function ($) {
 			return value;
 		},
 
-		/**
-		 * Feature detection borrowed by Modernizr
-		 */
+		// Feature detection borrowed by http://modernizr.com/
 		getBrowserProperties = function(){
 			var t,
 				el = document.createElement('fakeelement'),
@@ -90,16 +76,14 @@ steal('jquery', 'jquery/dom/styles').then(function ($) {
 						transitionEnd : 'transitionEnd',
 						prefix : ''
 					},
-					/*
 					'OTransition': {
 						transitionEnd : 'oTransitionEnd',
 						prefix : '-o-'
 					},
-					'MSTransition': {
-						transitionEnd : 'msTransitionEnd',
-						prefix : '-ms-'
-					},
-					*/
+//					'MSTransition': {
+//						transitionEnd : 'msTransitionEnd',
+//						prefix : '-ms-'
+//					},
 					'MozTransition': {
 						transitionEnd : 'animationend',
 						prefix : '-moz-'
@@ -174,11 +158,11 @@ steal('jquery', 'jquery/dom/styles').then(function ($) {
 			});
 
 			if(!name) { // Add a new style
-				lastSheet = getLastStyleSheet()
+				lastSheet = getLastStyleSheet();
 				name = "animate" + (animationNum++);
 				// get the last sheet and insert this rule into it
 				lastSheet.insertRule("@" + browser.prefix + "keyframes " + name + ' ' + style,
-					lastSheet.cssRules.length);
+					(lastSheet.cssRules && lastSheet.cssRules.length) || 0);
 
 				cache.push({
 					name : name,
