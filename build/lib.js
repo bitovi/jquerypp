@@ -15,6 +15,7 @@ steal(
 	'jquery/event/drag/scroll',
 	'jquery/event/drag/step',
 	"jquery/event/drop",
+	"jquery/event/fastfix",
 	"jquery/event/hover",
 	"jquery/event/key",
 	"jquery/event/pause",
