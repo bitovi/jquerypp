@@ -51,17 +51,20 @@ steal('jquery/lang/json',function() {
      * @return {String} the value of the cookie or {undefined} when setting the cookie.
      */
     jQuery.cookie = function(name, value, options) {
-        if (typeof value != 'undefined') { // name and value given, set cookie
+        if (typeof value != 'undefined') {
+            // name and value given, set cookie
             options = options ||
             {};
             if (value === null) {
                 value = '';
                 options.expires = -1;
             }
+	        // convert value to JSON string
             if (typeof value == 'object' && jQuery.toJSON) {
                 value = jQuery.toJSON(value);
             }
             var expires = '';
+	        // Set expiry
             if (options.expires && (typeof options.expires == 'number' || options.expires.toUTCString)) {
                 var date;
                 if (typeof options.expires == 'number') {
@@ -79,6 +82,7 @@ steal('jquery/lang/json',function() {
             var path = options.path ? '; path=' + (options.path) : '';
             var domain = options.domain ? '; domain=' + (options.domain) : '';
             var secure = options.secure ? '; secure' : '';
+	        // Set the cookie name=value;expires=;path=;domain=;secure-
             document.cookie = [name, '=', encodeURIComponent(value), expires, path, domain, secure].join('');
         }
         else { // only name given, get cookie
@@ -89,11 +93,13 @@ steal('jquery/lang/json',function() {
                     var cookie = jQuery.trim(cookies[i]);
                     // Does this cookie string begin with the name we want?
                     if (cookie.substring(0, name.length + 1) == (name + '=')) {
+	                    // Get the cookie value
                         cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
                         break;
                     }
                 }
             }
+	        // Parse JSON from the cookie into an object
             if (jQuery.evalJSON && cookieValue && cookieValue.match(/^\s*\{/)) {
                 try {
                     cookieValue = jQuery.evalJSON(cookieValue);
