@@ -312,6 +312,11 @@ $("#foo").styles('float','display')
 // -> { cssFloat: "left", display: "block" }
 {% endhighlight %}
 
+The following example implements a `fastHeight` jQuery plugin which uses `$.fn.styles` to calculate the element height and compares
+the runtime to the equivalent [jQuery.height](http://api.jquery.com/height/):
+
+<iframe style="width: 100%; height: 250px" src="http://jsfiddle.net/6CcaG/embedded/result,html,js,css" allowfullscreen="allowfullscreen" frameborder="0">JSFiddle</iframe>
+
 ## within `$(el).within(left, top, [useOffsetCache]) -> jQuery`
 
 [jQuery.within](http://donejs.com/docs.html#!jQuery.within) adds `$.fn.within` and `$.fn.withinBox` that return all elements having a given position or area in common. The following example returns all `div` elements having the point 200px left and 200px from the top in common:
