@@ -3,8 +3,7 @@ load("steal/rhino/rhino.js");
 steal('steal/build/pluginify', 'jquery/build/stealify.js', 'jquery/build/amdify.js', 'jquery/build/extract.js',
 function() {
 
-	var extend = steal.extend,
-		out = "jquery/dist/",
+	var out = "jquery/dist/",
 		excludes = [ 'steal/dev',
 			"can/util/jquery/jquery.1.7.1.js",
 			"jquery/build/lib.js" ];

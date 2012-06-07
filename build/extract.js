@@ -26,22 +26,21 @@ steal('steal/build/pluginify', function(steal) {
 		var ops = steal.extend({ global : 'jQuery' }, options);
 		print('Extracting plugin files');
 		for(var file in plugins) {
-			var content = "/** \n" +
-				" * " + plugins[file] + "\n * \n";
+			var content = "";
 
 			getDependencies(file, ops, function(steals) {
 				if(steals.length > 1) {
-					content += " * Dependencies:\n * \n";
+					content += "// Dependencies:\n//\n";
 				}
 				steals.forEach(function(stl) {
 					if(stl.rootSrc !== file) {
-						content += " * - " + (plugins[stl.rootSrc] || stl.rootSrc) + "\n";
+						content += "//    - " + (plugins[stl.rootSrc] || stl.rootSrc) + "\n";
 					}
 				});
 				if(steals.length > 1) {
-					content += " * \n";
+					content += "\n";
 				}
-				content += " */\n" + steal.build.pluginify.content({ rootSrc : file }, ops);
+				content += steal.build.pluginify.content({ rootSrc : file }, ops);
 				new steal.File(options.out + plugins[file]).save(content);
 				print('  > ' + file + ' -> ' + plugins[file]);
 			});
