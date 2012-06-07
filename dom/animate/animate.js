@@ -1,5 +1,7 @@
 steal('jquery', 'jquery/dom/styles').then(function ($) {
 
+	// Overwrites `jQuery.fn.animate` to use CSS 3 animations if possible
+
 	var
 		// The global animation counter
 		animationNum = 0,
