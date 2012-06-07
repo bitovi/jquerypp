@@ -173,6 +173,12 @@ The following *options* are available:
 * `path` - the value of the path for the cookie
 * `secure` - if the cookie requires HTTPS
 
+The example uses `jQuery.cookie` and [formParams](#formParams) to persist a form to a cookie. You can save the form
+ or load it from the value stored in the cookie. At the bottom it shows the current cookie value after running it through
+ `decodeURIComponent`:
+
+<iframe style="width: 100%; height: 500px" src="http://jsfiddle.net/wMN7G/embedded/result,html,js,css" allowfullscreen="allowfullscreen" frameborder="0">JSFiddle</iframe>
+
 ## dimensions
 
 [jQuery.dimensions](http://donejs.com/docs.html#!jQuery.dimensions) overwrites `$.fn.innerWidth`, `$.fn.outerWidth`, `$.fn.innerHeight`, `$.fn.outerHeight` and enables `$.fn.animate` to animate these values. Inner dimensions include the padding where outer dimensions also take care of borders and margins (if *includeMargin* is set to `true`). Set and read these values using:
@@ -226,6 +232,10 @@ $('form').formParams({
   last : 'Smith'
 });
 {% endhighlight %}
+
+Update the form in the following example to see a JSON representation of the object returned by `$.fn.formParams`:
+
+<iframe style="width: 100%; height: 300px" src="http://jsfiddle.net/xJLvn/embedded/result,html,js,css" allowfullscreen="allowfullscreen" frameborder="0">JSFiddle</iframe>
 
 ## range `$.Range([el]) -> range` `$(el).range() -> range`
 
