@@ -1,7 +1,9 @@
 
 steal('jquery/dom/styles').then(function($) {
 
-var weird = /button|select/i, //margin is inside border
+var
+	//margin is inside border
+	weird = /button|select/i,
 	getBoxes = {},
     checks = {
         width: ["Left", "Right"],
@@ -119,6 +121,7 @@ height:
  * @return {jQuery|Number} Returns the inner height or the jQuery wrapped elements
  * if you are setting the inner height.
  */
+// for each 'height' and 'width'
 "Height" }, function(lower, Upper) {
 
     //used to get the padding and border for an element in a given direction
@@ -145,23 +148,28 @@ height:
     $.fn["outer" + Upper] = function(v, margin) {
         var first = this[0];
 		if (typeof v == 'number') {
+			// Setting the value
             first && this[lower](v - getBoxes[lower](first, {padding: true, border: true, margin: margin}))
             return this;
         } else {
+			// Return the old value
             return first ? checks["oldOuter" + Upper].call(this, v) : null;
         }
     }
     $.fn["inner" + Upper] = function(v) {
         var first = this[0];
 		if (typeof v == 'number') {
+			// Setting the value
             first&& this[lower](v - getBoxes[lower](first, { padding: true }))
             return this;
         } else {
+			// Return the old value
             return first ? checks["oldInner" + Upper].call(this, v) : null;
         }
     }
     //provides animations
 	var animate = function(boxes){
+		// Return the animation function
 		return function(fx){
 			if (fx.state == 0) {
 	            fx.start = $(fx.elem)[lower]();
@@ -171,9 +179,7 @@ height:
 		}
 	}
     $.fx.step["outer" + Upper] = animate({padding: true, border: true})
-	
 	$.fx.step["outer" + Upper+"Margin"] =  animate({padding: true, border: true, margin: true})
-	
 	$.fx.step["inner" + Upper] = animate({padding: true})
 
 })
