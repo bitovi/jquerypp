@@ -148,7 +148,9 @@ if( $('#foo').compare($('#bar')) & 4 ) {
 }
 {% endhighlight %}
 
-This is useful to rapidly compare element positions which is common when widgets can reorder themselves (drag-drop) or with nested widgets (trees).
+This is useful to rapidly compare element positions which is common when widgets can reorder themselves (drag-drop) or with nested widgets (trees). In the following example, select two elements to see how they compare to each other and what bitmask the result represents:
+
+<iframe style="width: 100%; height: 520px" src="http://jsfiddle.net/n5b5q/embedded/result,html,js,css" allowfullscreen="allowfullscreen" frameborder="0">JSFiddle</iframe>
 
 ## cookie `$.cookie(name, [value], [options]) -> Object|String`
 
@@ -527,7 +529,7 @@ The following key names are mapped by default:
 
 The following example shows the keyname for `keydown`, `keyup` and `keypress` events on the input field:
 
-<iframe style="width: 100%; height: 300px" src="http://jsfiddle.net/9eE7D/embedded/result,html,js,css" allowfullscreen="allowfullscreen" frameborder="0">JSFiddle</iframe>
+<iframe style="width: 100%; height: 230px" src="http://jsfiddle.net/9eE7D/embedded/result,html,js,css" allowfullscreen="allowfullscreen" frameborder="0">JSFiddle</iframe>
 
 ## pause
 
