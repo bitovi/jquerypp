@@ -834,12 +834,27 @@ To make a jQuery++ build, run:
 It puts the downloads in `jquery/dist`. To build a specific version check out the [git tag](https://github.com/jupiterjs/jquerypp/tags)
 you want to build and run the above command.
 
+<!--
+### List of heroes
+
+The following lists everyone who's contributed something to CanJS.  If we've forgotten you, please add yourself.
+
+First, thanks to everyone who's contributed to [JavaScriptMVC](https://github.com/jupiterjs/javascriptmvc/contributors)
+and [jQueryMX](https://github.com/jupiterjs/jquerymx/contributors), and the people at
+[Bitovi](http://bitovi.com/people/). This page is for contributors after jQuery++'s launch:
+
+[callumacrae](https://github.com/callumacrae) - [Width property for jQuery.selection](https://github.com/jupiterjs/jquerypp/pull/11) and documentation fixes.
+[fabianonunes](https://github.com/fabianonunes) - Fixed several errors in the build process.
+-->
 
 ### Change Log
 
+<!--
 __1.0 Beta 2__
 
-- Fixed issue [#5](https://github.com/jupiterjs/jquerypp/issues/5): Security error in jQuery.animate
+- change: [Added width property to jQuery.selection](https://github.com/jupiterjs/jquerypp/commit/38a3d76bed35684e5b9551f179d0772a908544db)
+- fix: [Security error in jQuery.animate](https://github.com/jupiterjs/jquerypp/commit/5896c02e16dbe3c331939c81d4fe942d38470c93)
+-->
 
 __1.0 Beta__ (June 1st 2012)
 
