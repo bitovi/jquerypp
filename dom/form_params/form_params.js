@@ -26,8 +26,7 @@ steal("jquery/dom").then(function( $ ) {
 				nestData( elem, type, data[ name ], parts, value, seen );
 			} else {
 
-				// Handle same name case, as well as "last checkbox checked"
-				// case
+				// Handle same name case, as well as "last checkbox checked" case
 				if ( name in seen && type != "radio" && ! $.isArray( data[ name ] )) {
 					if ( name in data ) {
 						data[ name ] = [ data[name] ];

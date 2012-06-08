@@ -124,7 +124,6 @@ select = function( el, start, end ) {
 			el.selectionEnd = end;
 		}
 	} else if (el.createTextRange) {
-		//el.focus();
 		var r = el.createTextRange();
 		r.moveStart('character', start);
 		end = end || start;
@@ -140,7 +139,7 @@ select = function( el, start, end ) {
 		range.setStart(ranges[0].el, ranges[0].count);
 		range.setEnd(ranges[1].el, ranges[1].count);
 		
-		// removeAllRanges is suprisingly necessary for webkit ... BOOO!
+		// removeAllRanges is necessary for webkit
         sel.removeAllRanges();
         sel.addRange(range);
 		
@@ -154,7 +153,6 @@ select = function( el, start, end ) {
 	}
 
 },
-// TODO: can this be removed?
 // If one of the range values is within start and len, replace the range
 // value with the element and its offset.
 replaceWithLess = function(start, len, range, el){
@@ -171,7 +169,6 @@ replaceWithLess = function(start, len, range, el){
 			};;
 	}
 },
-// TODO: can this be removed?
 getCharElement = function( elems , range, len ) {
 	var elem,
 		start;

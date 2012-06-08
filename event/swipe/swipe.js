@@ -1,8 +1,8 @@
 steal('jquery/event/livehack').then(function($){
-// TODO remove this, phantom supports touch AND click, but need to make funcunit support touch so its testable
 var isPhantom = /Phantom/.test(navigator.userAgent),
 	supportTouch = !isPhantom && "ontouchend" in document,
 	scrollEvent = "touchmove scroll",
+	// Use touch events or map it to mouse events
 	touchStartEvent = supportTouch ? "touchstart" : "mousedown",
 	touchStopEvent = supportTouch ? "touchend" : "mouseup",
 	touchMoveEvent = supportTouch ? "touchmove" : "mousemove",
@@ -67,8 +67,9 @@ $.event.setupHelper( [
  * @attribute swipedown
  */
 'swipedown'], touchStartEvent, function(ev){
-	//listen to mouseup
-	var start = data(ev),
+	var
+		// update with data when the event was started
+		start = data(ev),
 		stop,
 		delegate = ev.delegateTarget || ev.currentTarget,
 		selector = ev.handleObj.selector,
@@ -78,6 +79,7 @@ $.event.setupHelper( [
 		if ( !start ) {
 			return;
 		}
+		// update stop with the data from the current event
 		stop = data(event);
 
 		// prevent scrolling
@@ -85,32 +87,40 @@ $.event.setupHelper( [
 			event.preventDefault();
 		}
 	};
-	$(document.documentElement).bind(touchMoveEvent,moveHandler )
+
+	// Attach to the touch move events
+	$(document.documentElement).bind(touchMoveEvent, moveHandler)
 		.one(touchStopEvent, function(event){
-			$(this).unbind( touchMoveEvent, moveHandler );
+			$(this).unbind( touchMoveEvent, moveHandler);
+			// if start and stop contain data figure out if we have a swipe event
 			if ( start && stop ) {
+				// calculate the distance between start and stop data
 				var deltaX = Math.abs(start.coords[0] - stop.coords[0]),
 					deltaY = Math.abs(start.coords[1] - stop.coords[1]),
 					distance = Math.sqrt(deltaX*deltaX+deltaY*deltaY);
 
+				// check if the delay and distance are matched
 				if ( stop.time - start.time < swipe.delay && distance >= swipe.min ) {
-					
-					var events = ['swipe']
-					if( deltaX >= swipe.min &&  deltaY < swipe.min) {
+					var events = ['swipe'];
+					// check if we moved horizontally
+					if( deltaX >= swipe.min && deltaY < swipe.min) {
+						// based on the x coordinate check if we moved left or right
 						events.push( start.coords[0] > stop.coords[0] ? "swipeleft" : "swiperight" );
-					}else if(deltaY >= swipe.min && deltaX < swipe.min){
+					} else
+					// check if we moved vertically
+					if(deltaY >= swipe.min && deltaX < swipe.min){
+						// based on the y coordinate check if we moved up or down
 						events.push( start.coords[1] < stop.coords[1] ? "swipedown" : "swipeup" );
 					}
 
-					
-					
-					//trigger swipe events on this guy
+					// trigger swipe events on this guy
 					$.each($.event.find(delegate, events, selector), function(){
 						this.call(entered, ev, {start : start, end: stop})
 					})
 				
 				}
 			}
+			// reset start and stop
 			start = stop = undefined;
 		})
 });

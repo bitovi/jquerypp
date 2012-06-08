@@ -1,5 +1,4 @@
 steal('jquery/lang/json',function() {
-    // break
     /**
      * @function jQuery.cookie
      * @parent jquerypp
