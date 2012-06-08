@@ -35,11 +35,11 @@ steal('jquery/dom/dimensions', 'jquery/event/resize').then(function( $ ) {
 			}
 		},
 		/**
-		 * @function jQuery.fn.can_ui_layout_fill
-		 * @parent canui
-		 * @test canui/layout/fill/funcunit.html
-		 * @plugin canui/layout/fill
-		 * 
+		 * @function jQuery.fn.fills
+		 * @parent jquerypp
+		 * @test jquery/dom/fills/funcunit.html
+		 * @plugin jquery/dom/fills
+		 *
 		 * Fills a parent element's height with the another 
 		 * element.  This is extremely useful for complex layout,
 		 * especially when you want to account for line-wrapping.
