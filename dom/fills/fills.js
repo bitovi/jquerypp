@@ -39,6 +39,7 @@ steal('jquery/dom/dimensions', 'jquery/event/resize').then(function( $ ) {
 		 * @parent jquerypp
 		 * @test jquery/dom/fills/funcunit.html
 		 * @plugin jquery/dom/fills
+		 * @hide
 		 *
 		 * Fills a parent element's height with the another 
 		 * element.  This is extremely useful for complex layout,
