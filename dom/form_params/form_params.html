@@ -5,26 +5,32 @@
 		<title>Form Params</title>
         <style type='text/css'>
             body {font-family: verdana}
-            
         </style>
 	</head>
 	<body>
 <p>Change the inputs to change the object</p>
 <pre>Result = <span id='result'></span></pre>
 <div id="demo-html">
-<form id='fp' action="">
-  <label>People Count</label><br/>
-  <input name='talk[peopleCount]'/><br/>
-  <label>Audience Rating</label><br/>
-  <select name='talk[audienceRating]'>
-    <option value='3'>3</option>
-    <option value='2'>2</option>
-    <option value='1'>1</option>
-  </select><br/>
-  <label>Time Left</label><br/>
-  <input type='radio' name='talk[timeLeft]' value='1'/> 1 min<br/>
-  <input type='radio' name='talk[timeLeft]' value='5'/> 5 min<br/>
-  <input type='radio' name='talk[timeLeft]' value='10'/> 10 min<br/>
+<form id='fp' action=''>
+  <label>
+    People Count<br/><input name='talk[peopleCount]'/>
+  </label>
+  <br/><br/>
+  
+  <label>
+    Audience Rating<br/>
+    <select name='talk[audienceRating]'>
+      <option value='3'>3</option>
+      <option value='2'>2</option>
+      <option value='1'>1</option>
+    </select>
+  </label>
+  <br/><br/>
+  
+  Time Left<br/>
+  <label><input type='radio' name='talk[timeLeft]' value='1'/> 1 min</label><br/>
+  <label><input type='radio' name='talk[timeLeft]' value='5'/> 5 min</label><br/>
+  <label><input type='radio' name='talk[timeLeft]' value='10'/> 10 min</label><br/>
 </form>
 </div>
 		<script type='text/javascript' 
@@ -38,15 +44,16 @@ var update = function(){
   // get form data 
   var json = $('#fp').formParams(),
   
-      //convert it to JSON
+      // convert it to JSON
       jsonString = $.toJSON( json );
   
   // show JSON
-  $("#result").text( jsonString )
-}
+  $('#result').text( jsonString );
+};
 
 // listen for changes and update
 $('#fp').change(update);
+$('input[name="talk[peopleCount]"]').keyup(update);
 
 // show json right away
 update(); 
