@@ -1,0 +1,42 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+            "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+	<head>
+		<title>fill</title>
+        <link type="text/css" href="../resize/resize.css" rel="stylesheet" />
+		<style type='text/css'>
+            body {font-family: verdana}
+            #box {
+            	width: 520px;
+				height: 200px;
+				border: solid 2px green;
+            }
+			#child {
+				background-color: #fff0cf;
+				padding: 10px;
+				border: solid 5px orange;
+				overflow: auto;
+			}
+        </style>
+	</head>
+	<body>
+<div id="demo-html">
+<div id='box'>
+	<p>I am a long heading. If you make the box too narrow,
+	I wrap.</p>
+	<div id='child'>
+		I'm a child with a 10px padding and 5px border.
+	</div>
+</div>
+</div>
+<script type='text/javascript' 
+        src='../../../steal/steal.js'>   
+</script>
+<script type='text/javascript' id="demo-source">
+steal('canui/layout/fill','canui/layout/resize').then(function(){
+	$('#box').can_ui_layout_resize();
+	$('#child').can_ui_layout_fill("#box")
+})
+</script>
+	</body>
+</html>
