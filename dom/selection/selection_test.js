@@ -11,25 +11,15 @@ test("getCharElement", function(){
 	stop();
 	setTimeout(function(){
 		var types = ['textarea','#inp','#1','#2'];
-		for(var i =0; i< types.length; i++){
-			//console.log(types[i])
-			$(types[i]).selection(1,5);
-		}
 		/*
 		$('textarea').selection(1,5);
 		$('input').selection(1,5);
 		$('#1').selection(1,5);
 		$('#2').selection(1,5);
 		*/
-		var res = [];
-		for(var i =0; i< types.length; i++){
-			res.push( $(types[i]).selection() );
-		}
-		
-		
-		
-		for(var i =0; i< res.length; i++){
-			same(res[i],{start: 1, end: 5},types[i])
+		for(var i = 0; i < types.length; i++){
+			$(types[i]).selection(1, 5);
+			same($(types[i]).selection(), {start: 1, end: 5, width: 4}, types[i]);
 		}
 		
 		start();

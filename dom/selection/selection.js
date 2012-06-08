@@ -40,7 +40,8 @@ getElementsSelection = function(el, win){
 	}
 	return {
 		start: startPos,
-		end : endPos
+		end : endPos,
+		width : endPos - startPos
 	};
 },
 // Text selection works differently for selection in an input vs
@@ -56,9 +57,9 @@ getSelection = function(el){
 		 	&& document.activeElement != el 
 			&& el.selectionStart == el.selectionEnd 
 			&& el.selectionStart == 0){
-			return {start: el.value.length, end: el.value.length};
+			return {start: el.value.length, end: el.value.length, width: 0};
 		}
-		return  {start: el.selectionStart, end: el.selectionEnd}
+		return  {start: el.selectionStart, end: el.selectionEnd, width: el.selectionEnd - el.selectionStart};
 	} 
 	// getSelection means a 'normal' element in a standards browser.
 	else if(win.getSelection){
@@ -75,7 +76,8 @@ getSelection = function(el){
 				var start = r.text.length
 				return {
 					start: start,
-					end: start + real.text.length
+					end: start + real.text.length,
+					width: real.text.length
 				}
 			}
 			// This works on textareas and other elements
@@ -104,7 +106,7 @@ getSelection = function(el){
 				return res
 			}
 		}catch(e){
-			return {start: el.value.length, end: el.value.length};
+			return {start: el.value.length, end: el.value.length, width: 0};
 		}
 	} 
 },
@@ -199,7 +201,7 @@ getCharElement = function( elems , range, len ) {
  * Set or retrieve the currently selected text range. It works on all elements:
  *
  *      $('#text').selection(8, 12)
- *      $('#text').selection() // -> { start : 8, end : 12 }
+ *      $('#text').selection() // -> { start : 8, end : 12, width: 4 }
  *
  * @param {Number} [start] Start position of the selection range
  * @param {Number} [end] End position of the selection range
@@ -208,6 +210,7 @@ getCharElement = function( elems , range, len ) {
  *
  * - __start__ - The number of characters from the start of the element to the start of the selection.
  * - __end__ - The number of characters from the start of the element to the end of the selection.
+ * - __width__ - The width of the selection range.
  *
  * when no arguments are passed.
  */
