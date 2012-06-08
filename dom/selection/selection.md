@@ -17,12 +17,13 @@ Using `jQuery.fn.selection` by providing a start and end offset:
 
 A call without any parameters will return the current selection:
  
-	  $('#text').selection() // -> { start : 8, end : 12 }
+	  $('#text').selection() // -> { start : 8, end : 12, width : 4 }
 
 Where the returned object contains:
 
 - __start__ - The number of characters from the start of the element to the start of the selection.
 - __end__ - The number of characters from the start of the element to the end of the selection.
+- __width__ - The width of the selection range.
 
 The selected text can be retrieved like this:
 
