@@ -305,6 +305,17 @@ A `$.Range` instance offers the following methods:
   </li>
 </ul>
 
+The following example uses `jQuery.range` to
+
+- Show the start end end offset of the selection
+- Show the selected plain text
+- Add a green border on the left to the start element
+- Add a red border on the right to the end element
+- Put a dotted outline around the parent element
+
+<iframe style="width: 100%; height: 300px" src="http://jsfiddle.net/vKSzN/embedded/result,html,js,css" allowfullscreen="allowfullscreen" frameborder="0">JSFiddle</iframe>
+
+
 ## selection `$(el).selection([start], [end]) -> Object|jQuery`
 
 [Annotated source](http://donejs.com/jquery/docs/jquery.selection.html)
