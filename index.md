@@ -619,7 +619,7 @@ $('panel').triggerAsync('show', function(){
 
 [Annotated source](http://donejs.com/jquery/docs/jquery.event.default.html)
 
-[jQuery.even.default](http://donejs.com/docs.html#!jQuery.even.default) adds default event handlers. A default event runs when all other event handlers have been triggered and none has called `event.preventDefault()` or returned `false`. Default events are prefixed with the `default` namespace. The following example adds a default `toggle` event:
+[jQuery.event.default](http://donejs.com/docs.html#!jQuery.event.default) adds default event handlers. A default event runs when all other event handlers have been triggered and none has called `event.preventDefault()` or returned `false`. Default events are prefixed with the `default` namespace. The following example adds a default `toggle` event:
 
 {% highlight javascript %}
 $('#text').on('toggle.default', function(ev) {
