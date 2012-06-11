@@ -59,7 +59,7 @@ steal('jquery', 'jquery/dom/styles').then(function ($) {
 				}
 			}
 
-			return props.jquery === true || browser === null ||
+			return props.jquery === true || getBrowser() === null ||
 				// Animating empty properties
 				$.isEmptyObject(props) ||
 				// Second parameter is an object - we can only handle primitives
@@ -88,14 +88,14 @@ steal('jquery', 'jquery/dom/styles').then(function ($) {
 							transitionEnd : 'transitionEnd',
 							prefix : ''
 						},
-	//					'OTransition': {
-	//						transitionEnd : 'oAnimationEnd',
-	//						prefix : '-o-'
-	//					},
-	//					'MSTransition': {
-	//						transitionEnd : 'msTransitionEnd',
-	//						prefix : '-ms-'
-	//					},
+//						'OTransition': {
+//							transitionEnd : 'oTransitionEnd',
+//							prefix : '-o-'
+//						},
+//						'MSTransition': {
+//							transitionEnd : 'msTransitionEnd',
+//							prefix : '-ms-'
+//						},
 						'MozTransition': {
 							transitionEnd : 'animationend',
 							prefix : '-moz-'
@@ -140,7 +140,7 @@ steal('jquery', 'jquery/dom/styles').then(function ($) {
 		addPrefix = function(properties) {
 			var result = {};
 			$.each(properties, function(name, value) {
-				result[browser.prefix + name] = value;
+				result[getBrowser().prefix + name] = value;
 			});
 			return result;
 		},
@@ -166,7 +166,7 @@ steal('jquery', 'jquery/dom/styles').then(function ($) {
 				sheet = getStyleSheet();
 				name = "jquerypp_animation_" + (animationNum++);
 				// get the last sheet and insert this rule into it
-				sheet.insertRule("@" + browser.prefix + "keyframes " + name + ' ' + style,
+				sheet.insertRule("@" + getBrowser().prefix + "keyframes " + name + ' ' + style,
 					(sheet.cssRules && sheet.cssRules.length) || 0);
 				cache.push({
 					name : name,
@@ -251,7 +251,7 @@ steal('jquery', 'jquery/dom/styles').then(function ($) {
 				properties.push(prop);
 			}
 
-			if(browser.prefix === '-moz-') {
+			if(getBrowser().prefix === '-moz-') {
 				// Normalize 'auto' properties in FF
 				$.each(properties, function(i, prop) {
 					var converter = ffProps[$.camelCase(prop)];
@@ -283,7 +283,7 @@ steal('jquery', 'jquery/dom/styles').then(function ($) {
 						'animation-play-state' : 'paused'
 					}));
 					// Unbind the animation end handler
-					self.off(browser.transitionEnd, animationEnd);
+					self.off(getBrowser().transitionEnd, animationEnd);
 					if(!gotoEnd) {
 						// We were told not to finish the animation
 						// Call animationEnd but set the CSS to the current computed style
@@ -303,7 +303,7 @@ steal('jquery', 'jquery/dom/styles').then(function ($) {
 			}));
 
 			// Attach the transition end event handler to run only once
-			self.one(browser.transitionEnd, function() {
+			self.one(getBrowser().transitionEnd, function() {
 				// Call animationEnd using the passed properties
 				animationEnd(props, true);
 				done();
