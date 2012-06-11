@@ -48,7 +48,7 @@
                 src='../../../steal/steal.js'>   
         </script>
 		<script type='text/javascript'>
-			steal('canui/layout/fill').then(function($){
+			steal('jquery/dom/fills').then(function($){
 				$("button[name=adjustWidth]").click(function(ev) {
 					var w = $("#containerH").width();
 					w == 320 ? $("#containerH").width(480) : $("#containerH").width(320);
@@ -59,10 +59,9 @@
 					h == 320 ? $("#containerV").height(480) : $("#containerV").height(320);
 					$("#containerV").trigger("resize");
 				});				
-				$("#contentV").can_ui_layout_fill();
-				//$("#containerV").trigger("resize");	
-				
-				$("#contentH").can_ui_layout_fill( { width: true } );
+				$("#contentV").fills();
+
+				$("#contentH").fills( { width: true } );
 				$("#containerH").trigger("resize");				
 								
 			})

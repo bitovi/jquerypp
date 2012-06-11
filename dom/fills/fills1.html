@@ -26,9 +26,79 @@
 		pre {
 			margin: 0px;
 			padding: 0px;
-
 		}
-	</style>
+
+    body .grid {
+      overflow: auto;
+    }
+    .can_ui_filler {
+      overflow: hidden;
+    }
+
+    .grid th {
+      text-align: left;
+      overflow: hidden;
+    }
+    .grid th a {
+      display: block;
+    }
+    .grid .body  {
+      overflow: hidden;
+      width:100%;
+    }
+    .grid table {
+      width: 100%;
+      width:100%;
+
+    }
+    .grid .innerBody, .grid .scrollBody {
+      overflow: auto;
+    }
+    .header {
+      overflow: hidden;
+      border-bottom: solid 1px gray;
+      width: 100%;
+    }
+    .grid th {
+      padding: 2px;
+    }
+    .footer {
+      margin:0px;padding:0px;
+      border-top: solid 1px gray;
+      overflow: hidden;
+    }
+    .can_ui_data_grid div {
+      position: relative;
+    }
+    .pagelisting {
+      width: 35%;
+    }
+    .gridpages {
+      text-align:center;
+    }
+    .gridpages, .pagelisting {
+      padding: 3px 0px;
+    }
+    .pagelisting label {
+      padding: 0px 3px;
+    }
+    .gridpages {
+
+    }
+    .pageinput {
+      width: 35%;
+      margin: 0px;
+      padding: 3px 0px;
+      text-align: right;
+    }
+    .pageinput div {
+      padding: 0px 3px;
+
+    }
+    .pagenumber {
+      font-size: 10px;
+    }
+  </style>
 	<link type="text/css" href="../../data/grid/grid.css" rel="stylesheet"/>
 </head>
 <body>
@@ -92,11 +162,11 @@
 		$("#clear").after("<pre>" + text + "</pre>")
 	}
 
-	steal('canui/layout/fill').then(function () {
+	steal('jquery/dom/fills').then(function () {
 		$("#fill").click(function () {
 			$(function () {
-				$(".grid").can_ui_layout_fill();
-				$(".body").can_ui_layout_fill();
+				$(".grid").fills();
+				$(".body").fills();
 			})
 		});
 

@@ -3,7 +3,6 @@
 <html lang="en">
 <head>
 	<title>fill</title>
-	<link type="text/css" href="../resize/resize.css" rel="stylesheet"/>
 	<style type='text/css'>
 		body {
 			font-family: verdana
@@ -120,6 +119,7 @@
 			background-color: yellow;
 		}
 	</style>
+  <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/smoothness/jquery-ui.css" />
 </head>
 <body>
 <div id="demo-html">
@@ -210,28 +210,28 @@
 	</div>
 </div>
 
-
 <script type='text/javascript'
         src='../../../steal/steal.js'>
 </script>
 <script type='text/javascript' id="demo-source">
-	steal('canui/layout/fill', 'canui/layout/resize').then(function () {
+	steal('jquery/dom/fills', 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js').then(function () {
 		$(function () {
 			var out = [], affects = jQuery.support.containerSizeAdjustments;
 			for (var part in affects) {
 				out.push(part + "=" + affects[part])
 			}
-			$(".container").each(function () {
-				new can.ui.layout.Resize($(this));
-			});
+      $(".container").resizable({
+        resize : function() {
+          $(document).trigger('resize');
+        }
+      });
 			$("#log").html(out.join(", "));
 		});
 		// console.log('ADDING CLICK')
 		steal.clickReg = true;
 		$("#run").click(function () {
-			// console.log('HERE')
 			$(".container").each(function () {
-				$(this).find(".fill").can_ui_layout_fill({
+				$(this).find(".fill").fills({
 					parent : $(this),
 					adjust : true
 				})
@@ -243,7 +243,7 @@
 		}
 
 		$('#scrollfill').click(function () {
-			$('#fillthis').can_ui_layout_fill("#scrollable")
+			$('#fillthis').fills("#scrollable")
 		});
 	})
 </script>

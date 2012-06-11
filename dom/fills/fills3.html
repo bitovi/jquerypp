@@ -23,10 +23,9 @@
   </div>
 <script type='text/javascript' src='../../../steal/steal.js'></script>
 <script type='text/javascript'>
-	steal(
-    'canui/layout/fill').then(function(){
-		$("#panel").can_ui_layout_fill()
-		$('.filler').can_ui_layout_fill()
+	steal('jquery/dom/fills').then(function(){
+		$("#panel").fills()
+		$('.filler').fills()
 	})
 </script>
 	</body>
