@@ -14,28 +14,33 @@ steal("jquery/dom").then(function( $ ) {
 				return undefined;
 			}
 			return value;
-		}, 
-		nestData = function( elem, type, data, parts, value, seen ) {
+		},
+		// Access nested data
+		nestData = function( elem, type, data, parts, value, seen, fullName ) {
 			var name = parts.shift();
+			// Keep track of the dot separated fullname. Used to uniquely track seen values
+			// and if they should be converted to an array or not
+			fullName = fullName ? fullName + '.' + name : name;
 
-			if ( parts.length ) {
+			if (parts.length ) {
 				if ( ! data[ name ] ) {
 					data[ name ] = {};
 				}
+
 				// Recursive call
-				nestData( elem, type, data[ name ], parts, value, seen );
+				nestData( elem, type, data[ name ], parts, value, seen, fullName);
 			} else {
 
 				// Handle same name case, as well as "last checkbox checked"
 				// case
-				if ( name in seen && type != "radio" && ! $.isArray( data[ name ] )) {
+				if ( fullName in seen && type != "radio" && ! $.isArray( data[ name ] )) {
 					if ( name in data ) {
 						data[ name ] = [ data[name] ];
 					} else {
 						data[ name ] = [];
 					}
 				} else {
-					seen[ name ] = true;
+					seen[ fullName ] = true;
 				}
 
 				// Finally, assign data

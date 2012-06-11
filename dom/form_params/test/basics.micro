@@ -37,4 +37,7 @@
   <input type='text' name='param1' value='first' />
   <input type='text' name='param1' value='second' />
   <input type='text' name='param1' value='third' />
+
+  <input type='text' name='test[first]' value='test_first' />
+  <input type='text' name='bla[first]' value='bla_first' />
 </form>

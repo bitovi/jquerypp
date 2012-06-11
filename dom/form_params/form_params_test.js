@@ -81,4 +81,14 @@ test("same input names to array", function() {
 	same(formParams.param1, ['first', 'second', 'third']);
 });
 
+test("#17 duplicate sub-keys", function() {
+	$("#qunit-test-area").html("//jquery/dom/form_params/test/basics.micro",{});
+	var formParams =  $("#qunit-test-area form").formParams(true);
+	ok(!$.isArray(formParams.test.first), 'First value is not an array');
+	equals(formParams.test.first, 'test_first', 'First test value correct');
+	ok(!$.isArray(formParams.bla.first), 'Second value is not an array');
+	equals(formParams.bla.first, 'bla_first', 'Second test value correct');
+	console.log(formParams);
+});
+
 });
