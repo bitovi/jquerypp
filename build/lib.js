@@ -3,6 +3,7 @@ steal(
 	"jquery/dom/compare",
 	"jquery/dom/cookie",
 	"jquery/dom/dimensions",
+	"jquery/dom/fills",
 	"jquery/dom/form_params",
 	"jquery/dom/range",
 	"jquery/dom/selection",
