@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+		"http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+	<title>filler</title>
+	<link type="text/css" href="../resize/resize.css" rel="stylesheet"/>
+	<style type='text/css'>
+		.error {
+			border: solid 1px red;
+		}
+
+		.error_text {
+			color: red;
+			font-size: 10px;
+		}
+
+		td {
+			padding: 3px;
+		}
+
+		body {
+			padding: 0px;
+			margin: 0px;
+		}
+
+		pre {
+			margin: 0px;
+			padding: 0px;
+
+		}
+	</style>
+	<link type="text/css" href="../../data/grid/grid.css" rel="stylesheet"/>
+</head>
+<body>
+
+<div class="grid mxui_grid">
+	<div class="header">
+		<table>
+			<thead>
+			<tr>
+				<td><a href="javascript://" id='fill'>Fill</a> <a href="javascript://" id='height'>Height</a></td>
+			</tr>
+			</thead>
+		</table>
+	</div>
+
+	<div class="body" style="">
+		<a href='javascript://' id='clear'>clear</a>
+	</div>
+	<table class="footer">
+		<tbody>
+		<tr>
+			<td class="pagelisting"><label>Page 1 of 1 (50 records)</label></td>
+			<td class="gridpages mxui_paginator_page">
+				<div class="toolbar_button first_record ">
+					First
+				</div>
+				<div class="toolbar_button previous_record ">
+					Prev
+				</div>
+				<div class="pages">
+
+					<div class="page active">
+						<a>1</a>
+
+					</div>
+
+				</div>
+				<div class="toolbar_button next_record ">
+					Next
+				</div>
+				<div class="toolbar_button last_record ">
+					Last
+				</div>
+			</td>
+			<td class="pageinput">
+				<form action="">
+					Go to Page <input type="text" class="pagenumber" size="2">
+				</form>
+			</td>
+		</tr>
+		</tbody>
+	</table>
+</div>
+
+
+<script type='text/javascript'
+        src='../../../steal/steal.js'>
+</script>
+<script type='text/javascript'>
+	logg = function (text) {
+		$("#clear").after("<pre>" + text + "</pre>")
+	}
+
+	steal('canui/layout/fill').then(function () {
+		$("#fill").click(function () {
+			$(function () {
+				$(".grid").can_ui_layout_fill();
+				$(".body").can_ui_layout_fill();
+			})
+		});
+
+		$("#clear").click(function () {
+			$(this).siblings().remove();
+		});
+
+		$("#height").click(function () {
+			$(".grid").height(200)
+		});
+	});
+</script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+            "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+	<head>
+		<title>fill 4 </title>
+		<style type='text/css'>
+			body {
+				margin : 0px;
+				padding: 0px;
+			}
+      #panel{
+        border: 2px solid blue;
+        padding: 2em;
+      }
+      .filler{
+        border: 2px solid red;
+      }
+        </style>
+	</head>
+	<body>
+  <div id="panel">
+    <div class="filler"> <center>this element height lacks 2em</center></div>
+  </div>
+<script type='text/javascript' src='../../../steal/steal.js'></script>
+<script type='text/javascript'>
+	steal(
+    'canui/layout/fill').then(function(){
+		$("#panel").can_ui_layout_fill()
+		$('.filler').can_ui_layout_fill()
+	})
+</script>
+	</body>
+</html>
