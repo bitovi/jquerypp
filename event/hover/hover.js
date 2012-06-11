@@ -107,33 +107,41 @@ $.extend($.Hover.prototype,{
 var event = $.event, 
 	handle  = event.handle,
 	onmouseenter = function(ev){
-		//now start checking mousemoves to update location
+		// now start checking mousemoves to update location
 		var delegate = ev.delegateTarget || ev.currentTarget;
 		var selector = ev.handleObj.selector;
-		//prevents another mouseenter until current has run its course
-		if($.data(delegate,"_hover"+selector)){
+		// prevents another mouseenter until current has run its course
+		if($.data(delegate,"_hover"+selector)) {
 			return;
 		}
 		$.data(delegate,"_hover"+selector, true)
 		var loc = {
 				pageX : ev.pageX,
 				pageY : ev.pageY
-			}, 
-			dist = 0, 
-			timer, 
-			enteredEl = this, 
+			},
+			// The current distance
+			dist = 0,
+			// Timer that checks for the distance travelled
+			timer,
+			enteredEl = this,
+			// If we are hovered
 			hovered = false,
-			lastEv = ev, 
+			// The previous event
+			lastEv = ev,
+			// The $.Hover instance passed to events
 			hover = new $.Hover(),
+			// timer if hover.leave has been called
 			leaveTimer,
+			// Callback for triggering hoverleave
 			callHoverLeave = function(){
 				$.each(event.find(delegate, ["hoverleave"], selector), function(){
 					this.call(enteredEl, ev, hover)
 				})
 				cleanUp();
 			},
-			mouseenter = function(ev){
+			mousemove = function(ev){
 				clearTimeout(leaveTimer);
+				// Update the distance and location
 				dist += Math.pow( ev.pageX-loc.pageX, 2 ) + Math.pow( ev.pageY-loc.pageY, 2 ); 
 				loc = {
 					pageX : ev.pageX,
@@ -143,12 +151,13 @@ var event = $.event,
 			},
 			mouseleave = function(ev){
 				clearTimeout(timer);
-				// go right away
-				if(hovered){
+				if(hovered) {
+					// go right away
 					if(hover._leave === 0){
 						callHoverLeave();
 					}else{
 						clearTimeout(leaveTimer);
+						// leave the hover after the time set in hover.leave(time)
 						leaveTimer = setTimeout(function(){
 							callHoverLeave();
 						}, hover._leave)
@@ -158,18 +167,21 @@ var event = $.event,
 				}
 			},
 			cleanUp = function(){
+				// Unbind all events and data
 				$(enteredEl).unbind("mouseleave",mouseleave)
-				$(enteredEl).unbind("mousemove",mouseenter);
+				$(enteredEl).unbind("mousemove",mousemove);
 				$.removeData(delegate,"_hover"+selector)
 			};
-		
-		$(enteredEl).bind("mousemove",mouseenter).bind("mouseleave", mouseleave);
+
+		// Bind the mousemove event
+		$(enteredEl).bind("mousemove",mousemove).bind("mouseleave", mouseleave);
+		// call hoverinit for each element with the hover instance
 		$.each(event.find(delegate, ["hoverinit"], selector), function(){
 			this.call(enteredEl, ev, hover)
 		})
 		
 		timer = setTimeout(function(){
-			//check that we aren't moveing around
+			// check that we aren't moving around
 			if(dist < hover._distance && $(enteredEl).queue().length == 0){
 				$.each(event.find(delegate, ["hoverenter"], selector), function(){
 					this.call(enteredEl, lastEv, hover)
@@ -177,6 +189,7 @@ var event = $.event,
 				hovered = true;
 				return;
 			}else{
+				// Reset distance and timer
 				dist = 0;
 				timer = setTimeout(arguments.callee, hover._delay)
 			}
@@ -187,6 +200,7 @@ var event = $.event,
 /**
  * @add jQuery.event.special
  */
+// Attach events
 event.setupHelper( [
 /**
  * @attribute hoverinit

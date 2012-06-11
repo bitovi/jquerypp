@@ -1,8 +1,14 @@
 steal('funcunit').then(function(){
 	
+<<<<<<< HEAD
 module("jQuery.fn.can_ui_layout_fill",{
 	setup: function(){
         S.open("//canui/layout/fill/fill.html");
+=======
+module("jQuery.fn.fills",{
+	setup: function(){
+        S.open("//jquery/dom/fills/fills.html");
+>>>>>>> 90a679442e04780ae066af605e86b06728c40e39
 	}
 })
 

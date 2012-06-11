@@ -27,15 +27,15 @@ steal('steal/build', function(steal) {
 			skipCallbacks: true
 		}, function(opener){
 			opener.each(function(stl){
-				if(!inexcludes(options.exclude || [], stl.rootSrc)) {
-					var file = steal.File(stl.rootSrc),
+				if(!inexcludes(options.exclude || [], stl.rootSrc.toString())) {
+					var file = steal.File(stl.rootSrc.toString()),
 						outPath = steal.File(out + file.dir()),
 						copyTo = outPath.path + '/' + file.filename();
 					outPath.mkdirs();
 					print('  > ' + copyTo);
 					file.copyTo(copyTo);
 				} else {
-					print('  Ignoring ' + stl.rootSrc);
+					print('  Ignoring ' + stl.rootSrc.toString());
 				}
 			})
 		});

@@ -48,7 +48,7 @@ function() {
 		exclude : excludes.concat([
 			'jquery/dom/dom.js', 'jquery/event/event.js', 'jquery/jquery.js'
 		]),
-		out : out
+		out : out + 'lib/'
 	});
 
 	// Make Steal distributable

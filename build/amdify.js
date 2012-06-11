@@ -51,10 +51,10 @@ steal('steal/build', 'steal/build/pluginify', function(steal) {
 		}, function(opener){
 			var ret = [];
 			opener.each(function(stl, text){
-				if(!inexcludes(excludes || [], stl.rootSrc)) {
+				if(!inexcludes(excludes || [], stl.rootSrc.toString())) {
 					// Add the parsed content to cache
-					if(!contents[stl.rootSrc]) {
-						contents[stl.rootSrc] = steal.build.pluginify.content(stl, options, text);
+					if(!contents[stl.rootSrc.toString().toString()]) {
+						contents[stl.rootSrc.toString()] = steal.build.pluginify.content(stl, options, text);
 					}
 					ret.push(stl);
 				}
@@ -81,10 +81,10 @@ steal('steal/build', 'steal/build/pluginify', function(steal) {
 			print('  > ' + name + ' -> ' + (map[name] || name));
 
 			steals.forEach(function(stl) {
-				var current = (map[stl.rootSrc] || stl.rootSrc);
-				if(stl.rootSrc !== name) { // Don't include the current file
-					if(!modules[stl.rootSrc]) {
-						createModule(stl.rootSrc, excludes, options);
+				var current = (map[stl.rootSrc.toString()] || stl.rootSrc.toString());
+				if(stl.rootSrc.toString() !== name) { // Don't include the current file
+					if(!modules[stl.rootSrc.toString()]) {
+						createModule(stl.rootSrc.toString(), excludes, options);
 					}
 					dependencies.push("'" + current + "'");
 					names.push(nameMap[current] || variableName(current));

@@ -14,7 +14,7 @@ steal('steal/build/pluginify', function(steal) {
 			}, function(opener){
 				var ret = [];
 				opener.each(function(stl, text){
-					if(!inexcludes(options.exclude || [], stl.rootSrc)) {
+					if(!inexcludes(options.exclude || [], stl.rootSrc.toString())) {
 						ret.push(stl);
 					}
 				});
@@ -24,6 +24,7 @@ steal('steal/build/pluginify', function(steal) {
 
 	steal.build.extract = function(plugins, options) {
 		var ops = steal.extend({ global : 'jQuery' }, options);
+		steal.File(ops.out).mkdirs();
 		print('Extracting plugin files');
 		for(var file in plugins) {
 			var content = "";

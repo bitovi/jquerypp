@@ -76,12 +76,6 @@ $.Event.prototype.resume = function(){
 	// reset stuff
 	this.isPaused = this.isImmediatePropagationStopped = returnFalse;
 	
-	
-	// re-run dispatch
-	//$.event.dispatch.call(currentTarget, this)
-	
-	// with the events removed, dispatch
-	
 	if(!this.isPropagationStopped()){
 		// fire the event again, no events will get fired until
 		// same currentTarget / handler
@@ -89,15 +83,5 @@ $.Event.prototype.resume = function(){
 	}
 	
 };
-
-/*var oldDispatch = $.event.dispatch;
-$.event.dispatch = function(){
-	
-}*/
-// we need to finish handling
-
-// and then trigger on next element ...
-// can we fake the target ?
-
 
 });

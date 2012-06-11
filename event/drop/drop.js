@@ -1,7 +1,5 @@
 steal('jquery/event/drag','jquery/dom/within','jquery/dom/compare',function($){
 	var event = $.event;
-	//somehow need to keep track of elements with selectors on them.  When element is removed, somehow we need to know that
-	//
 	/**
 	 * @add jQuery.event.special
 	 */
@@ -148,7 +146,7 @@ steal('jquery/event/drag','jquery/dom/within','jquery/dom/compare',function($){
 		// adds an element as a 'root' element
 		// this element might have events that we need to respond to
 		addElement: function( el ) {
-			//check other elements
+			// check other elements
 			for(var i =0; i < this._rootElements.length ; i++  ){
 				if(el ==this._rootElements[i]) return;
 			}
@@ -167,6 +165,7 @@ steal('jquery/event/drag','jquery/dom/within','jquery/dom/compare',function($){
 		* For a list of affected drops, sorts them by which is deepest in the DOM first.
 		*/ 
 		sortByDeepestChild: function( a, b ) {
+			// Use jQuery.compare to compare two elements
 			var compare = a.element.compare(b.element);
 			if(compare & 16 || compare & 4) return 1;
 			if(compare & 8 || compare & 2) return -1;
@@ -199,7 +198,6 @@ steal('jquery/event/drag','jquery/dom/within','jquery/dom/compare',function($){
 		 */
 		activate: function( responder, mover, event ) { //this is where we should call over
 			mover.over(event, responder)
-			//this.last_active = responder;
 			responder.callHandlers(this.lowerName+'over',responder.element[0], event, mover);
 		},
 		move: function( responder, mover, event ) {
@@ -233,7 +231,6 @@ steal('jquery/event/drag','jquery/dom/within','jquery/dom/compare',function($){
 			}else if(!this.dragging){
 				this.dragging = drag;
 				this.last_active = [];
-				//this._elements = $();
 			}
 			var el, 
 				drops, 
@@ -251,8 +248,6 @@ steal('jquery/event/drag','jquery/dom/within','jquery/dom/compare',function($){
 
 				// get drop elements by selector
 				for(selector in drops){ 
-					
-					
 					dropResponders = selector ? jQuery(selector, el) : [el];
 					
 					// for each drop element
@@ -267,18 +262,16 @@ steal('jquery/event/drag','jquery/dom/within','jquery/dom/compare',function($){
 				}
 			}
 			// once all callbacks are added, call init on everything ...
-			// todo ... init could be called more than once?
 			this.add(newEls, event, dragging)
 		},
+
 		// adds the drag callbacks object to the element or merges other callbacks ...
 		// returns true or false if the element is new ...
 		// onlyNew lets only new elements add themselves
 		addCallbacks : function(el, callbacks, onlyNew){
-			
 			var origData = $.data(el,"_dropData");
 			if(!origData){
 				$.data(el,"_dropData", new $.Drop(callbacks, el));
-				//this._elements.push(el);
 				return true;
 			}else if(!onlyNew){
 				var origCbs = origData;
@@ -326,7 +319,7 @@ steal('jquery/event/drag','jquery/dom/within','jquery/dom/compare',function($){
 				self = this,
 				drag;
 				
-			//what's still affected ... we can also move element out here
+			// what's still affected ... we can also move element out here
 			while( i < this._elements.length){
 				drag = $.data(this._elements[i],"_dropData");
 				
@@ -340,10 +333,9 @@ steal('jquery/event/drag','jquery/dom/within','jquery/dom/compare',function($){
 					}
 				}
 			}
-			
 
-			
-			affected.sort(this.sortByDeepestChild); //we should only trigger on lowest children
+			// we should only trigger on lowest children
+			affected.sort(this.sortByDeepestChild);
 			event.stopRespondPropagate = function(){
 				propagate = false;
 			}
@@ -353,7 +345,7 @@ steal('jquery/event/drag','jquery/dom/within','jquery/dom/compare',function($){
 			// all these will be active
 			this.last_active = affected;
 			
-			//deactivate everything in last_active that isn't active
+			// deactivate everything in last_active that isn't active
 			for (j = 0; j < oldLastActive.length; j++) {
 				la = oldLastActive[j];
 				i = 0;
@@ -373,8 +365,8 @@ steal('jquery/event/drag','jquery/dom/within','jquery/dom/compare',function($){
 				this.activate(toBeActivated[i], moveable, event);
 				if(!propagate) return;
 			}
-			//activate everything in affected that isn't in last_active
-			
+
+			// activate everything in affected that isn't in last_active
 			for (i = 0; i < affected.length; i++) {
 				this.move(affected[i], moveable, event);
 				
@@ -387,7 +379,7 @@ steal('jquery/event/drag','jquery/dom/within','jquery/dom/compare',function($){
 				dropData;
 			
 			// call dropon
-			//go through the actives ... if you are over one, call dropped on it
+			// go through the actives ... if you are over one, call dropped on it
 			for(var i = 0; i < this.last_active.length; i++){
 				la = this.last_active[i]
 				if( this.isAffected(event.vector(), moveable, la)  && la[this.endName]){
@@ -408,11 +400,11 @@ steal('jquery/event/drag','jquery/dom/within','jquery/dom/compare',function($){
 		 */
 		clear: function() {
 		  this._elements.each(function(){
+			 // remove temporary drop data
 		  	$.removeData(this,"_dropData")
 		  })
 		  this._elements = $();
 		  delete this.dragging;
-		  //this._responders = [];
 		}
 	})
 	$.Drag.responder = $.Drop;
