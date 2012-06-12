@@ -236,7 +236,8 @@ steal('jquery', 'jquery/dom/styles').then(function ($) {
 					self.css(addPrefix({
 						"animation-duration" : "",
 						"animation-name" : "",
-						"animation-fill-mode" : ""
+						"animation-fill-mode" : "",
+						"animation-play-state" : ""
 					}));
 
 					if (callback && exec) {
