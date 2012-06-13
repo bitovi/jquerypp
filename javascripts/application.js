@@ -1,6 +1,6 @@
 var isMobile = false;
 
-if(window.matchMedia && window.matchMedia("(max-device-width: 480px)")){
+if(window.matchMedia && window.matchMedia("(max-device-width: 480px)").matches){
 	isMobile = true;
 }
 
@@ -364,7 +364,13 @@ if($('.lt-ie7, .lt-ie8, .lt-ie9').length == 0){
 } else {
 	new Menu($('#wrapper'), 'html,body');
 }
-new MobileMenu(document.documentElement)
+if(isMobile){
+	new MobileMenu(document.documentElement)
+	var header = $('#logo-and-download').clone();
+	header.find('a').remove();
+	header.append("<img src='/images/swipe.png' id='swipe' />")
+	$('#content-wrapper').prepend(header)
+}
 $('a[href$=#dom_helpers], a[href$=#events]').prepend('<span class="special">&#x2605;</span>');
 
 // google analytics
