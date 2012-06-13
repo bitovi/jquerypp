@@ -180,12 +180,16 @@ steal('jquery').then(function($){
 	};
 
 	$.Event.prototype.vector = function() {
+		var
+			// Get the first touch element for touch events
+			touches = "ontouchend" in document && this.originalEvent.touches.length ? this.originalEvent.touches[0] : this;
 		if ( this.originalEvent.synthetic ) {
 			var doc = document.documentElement,
 				body = document.body;
-			return new $.Vector(this.clientX + (doc && doc.scrollLeft || body && body.scrollLeft || 0) - (doc.clientLeft || 0), this.clientY + (doc && doc.scrollTop || body && body.scrollTop || 0) - (doc.clientTop || 0));
+			return new $.Vector(touches.clientX + (doc && doc.scrollLeft || body && body.scrollLeft || 0) - (doc.clientLeft || 0),
+				touches.clientY + (doc && doc.scrollTop || body && body.scrollTop || 0) - (doc.clientTop || 0));
 		} else {
-			return new $.Vector(this.pageX, this.pageY);
+			return new $.Vector(touches.pageX, touches.pageY);
 		}
 	};
 

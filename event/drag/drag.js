@@ -12,7 +12,17 @@ steal('jquery/event', 'jquery/lang/vector', 'jquery/event/livehack', function( $
 		// function to clear the window selection if there is one
 		clearSelection = window.getSelection ? function(){
 			window.getSelection().removeAllRanges()
-		} : function(){};
+		} : function(){},
+
+		supportTouch = "ontouchend" in document,
+		// Use touch events or map it to mouse events
+		startEvent = supportTouch ? "touchstart" : "mousedown",
+		stopEvent = supportTouch ? "touchend" : "mouseup",
+		moveEvent = supportTouch ? "touchmove" : "mousemove",
+		// On touchmove events the default (scrolling) event has to be prevented
+		preventTouchScroll = function(ev) {
+			ev.preventDefault();
+		};
 
 	/**
 	 * @class jQuery.Drag
@@ -43,8 +53,10 @@ steal('jquery/event', 'jquery/lang/vector', 'jquery/event/livehack', function( $
 		 * @hide
 		 */
 		mousedown: function( ev, element ) {
-			var isLeftButton = ev.button === 0 || ev.button == 1;
-			if (!isLeftButton || this.current ) {
+			var isLeftButton = ev.button === 0 || ev.button == 1,
+				doEvent = isLeftButton || supportTouch;
+
+			if (!doEvent || this.current ) {
 				return;
 			}
 
@@ -75,13 +87,14 @@ steal('jquery/event', 'jquery/lang/vector', 'jquery/event/livehack', function( $
 			}, ev);
 		}
 	});
-	
+
 	/**
 	 * @Prototype
 	 */
 	$.extend($.Drag.prototype, {
 		setup: function( options, ev ) {
 			$.extend(this, options);
+
 			this.element = $(this.element);
 			this.event = ev;
 			this.moved = false;
@@ -94,9 +107,13 @@ steal('jquery/event', 'jquery/lang/vector', 'jquery/event/livehack', function( $
 
 			//where the mouse is located
 			this.mouseStartPosition = ev.vector();
-			
-			$(document).bind('mousemove', mousemove);
-			$(document).bind('mouseup', mouseup);
+
+			$(document).bind(moveEvent, mousemove);
+			$(document).bind(stopEvent, mouseup);
+			if(supportTouch) {
+				// On touch devices we want to disable scrolling
+				$(document).bind(moveEvent, preventTouchScroll);
+			}
 
 			if (!this.callEvents('down', this.element, ev) ) {
 			    this.noSelection(this.delegate);
@@ -119,13 +136,20 @@ steal('jquery/event', 'jquery/lang/vector', 'jquery/event/livehack', function( $
 		 */
 		destroy: function() {
 			// Unbind the mouse handlers attached for dragging
-			$(document).unbind('mousemove', this._mousemove);
-			$(document).unbind('mouseup', this._mouseup);
+			$(document).unbind(moveEvent, this._mousemove);
+			$(document).unbind(stopEvent, this._mouseup);
+			if(supportTouch) {
+				// Enable scrolling again for touch devices when the drag is done
+				$(document).unbind(moveEvent, preventTouchScroll);
+			}
+
 			if (!this.moved ) {
 				this.event = this.element = null;
 			}
 
-            this.selection(this.delegate);
+			if(!supportTouch) {
+                this.selection(this.delegate);
+			}
 			this.destroyed();
 		},
 		mousemove: function( docEl, ev ) {
@@ -691,8 +715,7 @@ steal('jquery/event', 'jquery/lang/vector', 'jquery/event/livehack', function( $
 	 *       // Clean up when the drag motion is done
 	 *     });
 	 */
-	'dragend'], "mousedown", function( e ) {
+	'dragend'], startEvent, function( e ) {
 		$.Drag.mousedown.call($.Drag, e, this);
-
 	});
 });
