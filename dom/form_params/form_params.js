@@ -131,8 +131,7 @@ steal("jquery/dom").then(function( $ ) {
 				seen = {},
 				current;
 
-
-			this.find("[name]").each(function() {
+			this.find("[name]:not(:disabled)").each(function() {
 				var $this    = $(this),
 					type     = $this.attr("type"),
 					name     = $this.attr("name"),

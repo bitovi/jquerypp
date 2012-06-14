@@ -91,4 +91,12 @@ test("#17 duplicate sub-keys", function() {
 	console.log(formParams);
 });
 
+test("#24 disabled elements", function() {
+	$("#qunit-test-area").html("//jquery/dom/form_params/test/basics.micro",{});
+	var formParams =  $("#qunit-test-area form").formParams();
+	console.log(formParams);
+	ok(!formParams.is_disabled, 'Disabled field is not included');
+	equals(formParams.not_disabled, 'not disabled', 'Not disabled field');
+});
+
 });

@@ -40,4 +40,7 @@
 
   <input type='text' name='test[first]' value='test_first' />
   <input type='text' name='bla[first]' value='bla_first' />
+
+  <input type='text' name='is_disabled' disabled='disabled' value='disabled' />
+  <input type='text' name='not_disabled' value='not disabled' />
 </form>
