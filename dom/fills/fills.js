@@ -39,111 +39,111 @@ steal('jquery/dom/dimensions', 'jquery/event/resize').then(function( $ ) {
 		 * @parent jQuery.fills
 		 * @test jquery/dom/fills/funcunit.html
 		 * @plugin jquery/dom/fills
-		 * @hide
 		 *
-		 * Fills a parent element's height with the another
-		 * element.  This is extremely useful for complex layout,
-		 * especially when you want to account for line-wrapping.
-		 * 
+		 * Fills a parent element's height with the current element.
+		 * This is extremely useful for complex layout, especially when you want to account for line-wrapping.
+		 *
 		 * ## Basic Example
-		 * 
+		 *
 		 * If you have the following html:
-		 * 
+		 *
 		 *     <div id='box'>
 		 * 	    <p>I am a long heading.</p>
 		 * 	    <div id='child'>I'm a child.</div>
 		 *     </div>
-		 * 
+		 *
 		 * The follow makes `#child` fill up `#box`:
-		 * 
+		 *
 		 *     $('#child').can_ui_layout_fill("#box")
-		 * 
-		 * ## Demo
-		 * 
-		 * @demo canui/layout/fill/demo.html
-		 * 
+		 *
 		 * ## Limitations
-		 * 
+		 *
 		 * Fill currently does not well with:
-		 * 
+		 *
 		 *   - Bleeding margins - Where margins leak through parent elements
 		 *     because the parent elements do not have a padding or border.
-		 *     
-		 *   - Tables - You shouldn't be using tables to do layout anyway.  
-		 *   
+		 *
+		 *   - Tables - You shouldn't be using tables to do layout anyway.
+		 *
 		 *   - Floated Elements - the child element has `float: left` or `float: right`
-		 * 
-		 * 
-		 * @param {HTMLElement|selector} [parent] the parent element 
+		 *
+		 *
+		 * @param {HTMLElement|selector|Object} [parent] the parent element
 		 * to fill, defaults to the element's parent.
-		 * 
+		 *
 		 * The following fills the parent to `#child`:
-		 * 
-		 *     $('#child').can_ui_layout_fill()
-		 *    
+		 *
+		 *     $('#child').fills()
+		 *
 		 * A selector can also be pased.  This selector is passed to jQuery's
 		 * closet method.  The following matches the first `#parent` element that
 		 * is a parentNode of `#child`:
-		 * 
-		 *     $('#child').can_ui_layout_fill("#parent")
-		 *    
+		 *
+		 *     $('#child').fills("#parent")
+		 *
 		 * An element or window can also be passed.  The following will make
 		 * `#child` big enough so the entire window is filled:
-		 * 
-		 *     $('#child').can_ui_layout_fill(window)
-		 * 
+		 *
+		 *      $('#child').fills(window)
+		 *
+		 * If you pass an object, the following options are available:
+		 *
+		 * - __parent__ - The parent element selector or jQuery object
+		 * - __className__ - A class name to add to the element that fills
+		 * - __all__ - Reset the parents height when resizing
+		 *
 		 * @return {jQuery} the original jQuery collection for chaining.
 		 */
 		filler = $.fn.fills = function( parent ) {
-			// setup stuff on every element
-			this.addClass('can_ui_layout_fill')
-			
-			
 			var options = parent;
 			options || (options = {});
 			if(typeof options == 'string'){
 				options = this.closest(options)
 			}
 			if ( options.jquery || options.nodeName ) {
-				options = {parent: options};
+				options = {parent: options };
 			}
-			
-			options.parent || (options.parent = $(this).parent())
+			// Set the parent
+			options.parent || (options.parent = $(this).parent());
 			options.parent = $(options.parent)
-			
+
+			// setup stuff on every element
+			if(options.className) {
+				this.addClass(options.className)
+			}
+
 			var thePage = isThePage(options.parent[0]);
 			
 			if ( thePage ) {
 				options.parent = $(window)
 			}
-			
-			
+
 			this.each(function(){
-				
 				var evData = {
 					filler: $(this),
 					inFloat: inFloat(this, thePage ? document.body : options.parent[0]),
 					options: options
 				},
-				cb = function(){
+				cb = function() {
 					filler.parentResize.apply(this, arguments)
 				}
+				// Attach to the `resize` event
 				$(options.parent).bind('resize', evData, cb);
-				//if this element is removed, take it out
-	
+
 				$(this).bind('destroyed', evData, function( ev ) {
-					$(ev.target).removeClass('can_ui_layout_fill')
+					if(options.className) {
+						$(ev.target).removeClass(options.className)
+					}
 					$(options.parent).unbind('resize', cb)
 				});
 				
-			})
-			
+			});
 
-			
-			//add a resize to get things going
+			// resize to get things going
 			var func = function() {
 				options.parent.resize();
 			}
+
 			if ( $.isReady ) {
 				func();
 			} else {
@@ -154,7 +154,7 @@ steal('jquery/dom/dimensions', 'jquery/event/resize').then(function( $ ) {
 
 
 	$.extend(filler, {
-		parentResize: function( ev ) {
+		parentResize : function( ev ) {
 			if (ev.data.filler.is(':hidden')) {
 				return;
 			}
@@ -171,7 +171,8 @@ steal('jquery/dom/dimensions', 'jquery/event/resize').then(function( $ ) {
 					}
 
 					var get = $.styles(this, ['position', 'display']);
-					return get.position !== "absolute" && get.position !== "fixed" && get.display !== "none" && !jQuery.expr.filters.hidden(this)
+					return get.position !== "absolute" && get.position !== "fixed"
+						&& get.display !== "none" && !jQuery.expr.filters.hidden(this)
 				}),
 				last = children.eq(-1),
 				first,
@@ -185,7 +186,7 @@ steal('jquery/dom/dimensions', 'jquery/event/resize').then(function( $ ) {
 				last = $(div).appendTo(container);
 				
 			}
-			//console.log("?")
+
 			//for performance, we want to figure out the currently used height of the parent element
 			// as quick as possible
 			// we can use either offsetTop or offset depending ...
@@ -205,14 +206,8 @@ steal('jquery/dom/dimensions', 'jquery/event/resize').then(function( $ ) {
 				} else {
 					// add first so we know where to start from .. do not bleed in this case
 					first = $(div).prependTo(container);
-					/*console.log('last', last,'last-top', last.offset().top, 'last-height',last.outerHeight(),
-						'\nct',container, "container-top",container.offset().top,
-						'\nfirst',first, "first-top",
-						first.offset().top,
-						'parentMatch',
-						last.offsetParent()[0] === container.offsetParent()[0]);*/
-					
-					currentSize = ( last.offset().top + last.outerHeight() ) - first.offset().top //- container.offset().top
+
+					currentSize = ( last.offset().top + last.outerHeight() ) - first.offset().top;
 					first.remove();
 				}
 			}
@@ -224,9 +219,9 @@ steal('jquery/dom/dimensions', 'jquery/event/resize').then(function( $ ) {
 
 			//adjust the height
 			if ( ev.data.options.all ) {
-				// we don't care about anything else ... we are likely absolutely positioned
-				//we need to fill the parent width ...
-				// temporarily collapse ... then expand ...
+				// we don't care about anything else, we are likely absolutely positioned
+				// we need to fill the parent width
+				// temporarily collapse, then expand
 				ev.data.filler.height(0).width(0);
 				var parentWidth = parent.width(),
 					parentHeight = parent.height();
@@ -234,17 +229,13 @@ steal('jquery/dom/dimensions', 'jquery/event/resize').then(function( $ ) {
 				ev.data.filler.outerHeight(parentHeight);
 				ev.data.filler.outerWidth(parentWidth);
 			} else {
-				//console.log(ev.data.filler, "parentHeight",parentHeight, "currentSize",currentSize)
 				ev.data.filler.height(fillerHeight + delta)
 			}
-
 
 			//remove the temporary element
 			if ( isBleeder ) {
 				last.remove();
-				
 			}
 		}
 	});
-
 })

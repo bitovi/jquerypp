@@ -5,43 +5,9 @@
 	<title>fill</title>
 	<style type='text/css'>
 		body {
-			font-family: verdana
-		}
-
-		.error {
-			border: solid 1px red;
-		}
-
-		.error_text {
-			color: red;
-			font-size: 10px;
-		}
-
-		td {
-			border: solid 1px gray;
-			padding: 3px;
-			vertical-align: top;
-		}
-
-		body {
 			margin: 0px 0px 60px 0px;
-			padding: 0px;
-		}
-
-		#header, #content, #footer {
-			border: solid 1px green;
-			height: 100px;
-		}
-
-		#modal {
-			position: absolute;
-			background-color: green;
-		}
-
-		.container {
-
-			background-color: #cccccc;
-
+			padding: 10px;
+      font-family: verdana;
 		}
 
 		h4 {
@@ -57,50 +23,16 @@
 			margin: 18px 0;
 		}
 
-		.redBD {
-			border: dotted 2px red
-		}
-
-		.bluBD {
-			border: dotted 2px blue
-		}
-
-		.grnBD {
-			border: dotted 2px green
-		}
-
-		.marginB {
-			margin: 40px;
-		}
-
-		.marginS {
-			margin: 20px;
-		}
-
-		.redBack {
-			background-color: #ffdddd;
-		}
-
-		.grnBack {
-			background-color: #ddffdd;
-		}
-
-		#log {
-			font-weight: normal;
-		}
-
-		#myloggin {
-			height: 0px;
-			overflow: auto;
-
-		}
-
-		#scrollable {
+		#scrollable, #main {
 			width: 290px;
 			height: 290px;
 			border: solid 1px red;
 			padding: 10px;
 		}
+
+    #mainfiller {
+      background-color: green;
+    }
 
 		#fillthis {
 			overflow: auto
@@ -110,14 +42,6 @@
 			height: 400px;
 			background-color: yellow;
 		}
-
-		#wraping-container {
-			background-color: green;
-		}
-
-		#wrapping-inner {
-			background-color: yellow;
-		}
 	</style>
   <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/smoothness/jquery-ui.css" />
 </head>
@@ -125,122 +49,34 @@
 <div id="demo-html">
 	<h1>Filler</h1>
 
-	<a href="javascript://" id='run'>Run</a>
+  <div id="main">
+    <p>I am a longer paragraph with margin. I might wrap. Resize the area to see how #mainfiller adjusts.</p>
+    <div id="mainfiller">#mainfiller</div>
+    <p>Another paragraph</p>
+  </div>
 
-	<h3>jQuery.support.containerSizeAdjustments: <span id='log'></span></h3>
+  <h1>Areas with Scrollbars</h1>
 
-	<table>
-		<tr>
-			<td>
+  <div id='scrollable'>
+    <p>Hello World, How are You? <a href='javascript://' id='scrollfill'>Run</a></p>
 
-
-				<div class='container' id='fill1'>
-					<h3>Nothing &uarr;</h3>
-
-					<div class='redBack'>
-						<p class='grnBack'>No Pad & Bord &uarr;</p>
-
-						<div class='grnBack fill'><p>Some deep content</p></div>
-						<p class='grnBack'>No Pad & Bord &darr;</p>
-					</div>
-					<h4>Nothing &darr;</h4>
-				</div>
-
-			</td>
-			<td>
-
-				<div class='container' id='fill2'>
-					<h3>Nothing &uarr;</h3>
-
-					<div class='redBack redBD'>
-						<p class='grnBack'>Border &uarr;</p>
-
-						<div class='grnBack fill'><p>Some deep content</p></div>
-						<p class='grnBack'>Border &darr;</p>
-					</div>
-					<h4>Nothing &darr;</h4>
-				</div>
-
-			</td>
-			<td>
-
-				<div class='container bluBD' id='fill3'>
-					<h3>Border &uarr;</h3>
-
-					<div class='redBack' style="padding-top: 1px">
-						<p class='grnBack'>Padding &uarr;</p>
-
-						<div class='grnBack fill'><p>Some deep content</p></div>
-						<p class='grnBack'>No Pad & Bord &darr;</p>
-					</div>
-					<h4>Border &darr;</h4>
-				</div>
-
-			</td>
-		</tr>
-
-	</table>
-	<div id='myloggin'></div>
+    <div id='fillthis'>
+      <div id='long'>I am very long ...</div>
+    </div>
+  </div>
 </div>
 
-<h1>Areas with Scrollbars</h1>
-
-<div id='scrollable'>
-	<p>Hello World, How are You? <a href='javascript://' id='scrollfill'>Run</a></p>
-
-	<div id='fillthis'>
-		<div id='long'>I am very long ...</div>
-	</div>
-</div>
-
-<h1>Content</h1>
-
-<h1>Content</h1>
-
-<h1>Content</h1>
-
-<h1>Same container</h1>
-
-<div id='wraping-container'>
-	a
-	<div style="height: 0px; line-height:0px; overflow:hidden;"></div>
-	<div id='wrapping-inner'>
-		Foo Bar
-		<div style='position:absolute'>ab</div>
-	</div>
-</div>
 
 <script type='text/javascript'
         src='../../../steal/steal.js'>
 </script>
 <script type='text/javascript' id="demo-source">
-	steal('jquery/dom/fills', 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js').then(function () {
-		$(function () {
-			var out = [], affects = jQuery.support.containerSizeAdjustments;
-			for (var part in affects) {
-				out.push(part + "=" + affects[part])
-			}
-      $(".container").resizable({
-        resize : function() {
-          $(document).trigger('resize');
-        }
-      });
-			$("#log").html(out.join(", "));
-		});
-		// console.log('ADDING CLICK')
+	steal('jquery/dom/fills').then('https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js').then(function () {
 		steal.clickReg = true;
-		$("#run").click(function () {
-			$(".container").each(function () {
-				$(this).find(".fill").fills({
-					parent : $(this),
-					adjust : true
-				})
-			})
-		});
 
-		loggin = function (text) {
-			$("#myloggin").append("<p>" + text + "</p>")
-		}
+    $('#main').resizable();
+
+    $('#mainfiller').fills();
 
 		$('#scrollfill').click(function () {
 			$('#fillthis').fills("#scrollable")
