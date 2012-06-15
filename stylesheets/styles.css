@@ -78,7 +78,7 @@ em {
 #logo-and-download img {
 	display: block;
 	position: absolute;
-	top: 20px;
+	top: 15px;
 	left: 14px;
 }
 #logo-and-download a {
@@ -356,13 +356,26 @@ html.lt-ie7 .github-fork img {
 	background-color: #BBC2C7;
 }
 @media only screen and (max-device-width: 480px) {
+	body {
+		background: white;
+	}
+	#bg {
+		display: none;
+	}
+	#buttons, #developed-by {
+		display: none;
+	}
 	#wrapper {
 		width: auto;
 	}
 	#menu-wrapper {
-		width: auto;
-		position: static;
-		margin: 0;
+		width: 100%;
+		margin: 0 0 0 -100%;
+		z-index: 1000;
+		position: absolute;
+		top: 0;
+		left: 0;
+		-webkit-transform: translateZ(0);
 	}
 	#menu li ul li a, #menu li a {
 		font-size: 20px;
@@ -371,5 +384,32 @@ html.lt-ie7 .github-fork img {
 		width: auto;
 		float: none;
 		margin: 0;
+	}
+	#content pre, #content pre code {
+		width: auto; 
+		word-wrap: break-word; 
+		word-break: break-all;
+		white-space: pre-wrap;       /* css-3 */
+		white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+		white-space: -pre-wrap;      /* Opera 4-6 */
+		white-space: -o-pre-wrap;    /* Opera 7 */
+		word-wrap: break-word;       /* Internet Explorer 5.5+ */
+	}
+	#content pre {
+		margin: 20px -15px;
+	}
+	img {
+		max-width: 90%;
+	}
+	.github-fork {
+		display: none;
+	}
+	#content-wrapper #logo-and-download {
+		background-image: url(../images/menu_bg.png);
+		background-repeat: repeat-x;
+	}
+	#content-wrapper #swipe {
+		right: 15px;
+		left: auto;
 	}
 }

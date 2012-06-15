@@ -5,7 +5,7 @@ version: 1.0b2
 
 # Hi, I'm jQuery++.
 
-I am an MIT licensed collection of extremely useful DOM helpers and special events for jQuery 1.7 and
+I am a MIT licensed collection of extremely useful DOM helpers and special events for jQuery 1.7 and
 later. I'm not a UI project like [jQuery UI](http://jqueryui.com/) or 
 [jQuery Tools](http://jquerytools.org/). Instead, I'm all about providing
 low-level utilities for things that jQuery doesn't support.  If [Underscore](http://underscorejs.org/)
@@ -637,7 +637,7 @@ $('panel').triggerAsync('show', function(){
 
 [Annotated source](http://donejs.com/jquery/docs/jquery.event.default.html)
 
-[jQuery.even.default](http://donejs.com/docs.html#!jQuery.even.default) adds default event handlers. A default event runs when all other event handlers have been triggered and none has called `event.preventDefault()` or returned `false`. Default events are prefixed with the `default` namespace. The following example adds a default `toggle` event:
+[jQuery.event.default](http://donejs.com/docs.html#!jQuery.event.default) adds default event handlers. A default event runs when all other event handlers have been triggered and none has called `event.preventDefault()` or returned `false`. Default events are prefixed with the `default` namespace. The following example adds a default `toggle` event:
 
 {% highlight javascript %}
 $('#text').on('toggle.default', function(ev) {
