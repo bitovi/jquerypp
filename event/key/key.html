@@ -27,7 +27,7 @@
 
 		$('#key').on('keydown keypress keyup', function(ev){
       var key = ev.keyName();
-      $("#"+ev.type).html(readable[key] || key)
+      $("#"+ev.type).html(readable[key] || key + ' (' + ev.keyCode + ', ' + ev.charCode + ', ' + ev.which + ')')
     });
   });
 </script>
