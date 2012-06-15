@@ -1,17 +1,20 @@
 steal('funcunit/qunit', 'jquery/event/move').then(function() {
-	test('Event bubbling', 2, function() {
+	$.event.reverse('test');
+	
+	test('Event bubbling', 3, function() {
 		$('#qunit-test-area').html('<div id="outer">' +
 			'<div id="inner">' +
 			'<div id="innermost">Innermost div</div>' +
 			'</div>' +
 			'</div>');
 
-		$('#innermost').on('move', function(ev) {
+		$('#innermost').on('test', function(ev) {
 			ok(true, 'Event reached #innermost div');
 		});
 
-		$('#outer').trigger('move');
-		$('body').trigger('move');
+		$('#outer').trigger('test');
+		$('body').trigger('test');
+		$(window).trigger('test');
 	});
 
 	test('stopPropagation', 2, function() {
@@ -21,16 +24,16 @@ steal('funcunit/qunit', 'jquery/event/move').then(function() {
 			'</div>' +
 			'</div>');
 
-		$('#inner').on('move', function(ev) {
+		$('#inner').on('test', function(ev) {
 			ok(true, 'Event reached #inner div');
 			ev.stopPropagation();
 		});
 
-		$('#innermost').on('move', function(ev) {
+		$('#innermost').on('test', function(ev) {
 			ok(false, 'Event should not reach #innermost div');
 		});
 
-		$('#outer').trigger('move');
-		$('body').trigger('move');
+		$('#outer').trigger('test');
+		$('body').trigger('test');
 	});
 });

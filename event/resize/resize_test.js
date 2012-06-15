@@ -36,7 +36,7 @@ steal('funcunit/qunit', 'jquery/event/resize').then(function() {
 		var ids = []
 		record = function( ev ) {
 
-			ids.push(this.id ? this.id : this)
+			ids.push(this.id ? this.id : this.tagName.toLowerCase())
 			if ( this.id == '1' ) {
 				ev.stopPropagation();
 			}
