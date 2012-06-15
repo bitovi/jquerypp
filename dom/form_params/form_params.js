@@ -97,13 +97,11 @@ steal("jquery/dom").then(function( $ ) {
 
 			// Find all the inputs
 			this.find("[name]").each(function() {
-				
-				var value = params[ $(this).attr("name") ],
-					$this;
+				var $this = $(this),
+					value = params[ $this.attr("name") ];
 				
 				// Don't do all this work if there's no value
 				if ( value !== undefined ) {
-					$this = $(this);
 					
 					// Nested these if statements for performance
 					if ( $this.is(":radio") ) {
