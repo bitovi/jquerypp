@@ -89,6 +89,7 @@ function() {
 			"jquery/event/fastfix/fastfix.js" : "jquerypp/event/fastfix",
 			"jquery/event/hover/hover.js" : "jquerypp/event/hover",
 			"jquery/event/key/key.js" : "jquerypp/event/key",
+			"jquery/event/reverse/reverse.js" : "jquerypp/event/reverse",
 			"jquery/event/livehack/livehack.js" : "jquerypp/event/livehack",
 			"jquery/event/pause/pause.js" : "jquerypp/event/pause",
 			"jquery/event/resize/resize.js" : "jquerypp/event/resize",
