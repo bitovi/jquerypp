@@ -18,7 +18,8 @@
 	</head>
 	<body>
     <h1>jQuery.event.key keymap customizer</h1>
-    <label for='key'>Type in input:</label><input id='key' />
+    <p><label for='key'>Type in input:</label><input id='key' /></p>
+
     <table>
       <thead>
         <tr>
@@ -60,32 +61,15 @@
 
     <p id="lastKeyPress">Last character registered on keypress <span></span></p>
 
-    <table id="mapping" style="display: none;">
-      <thead>
-        <tr>
-          <th>keyName</th>
-          <th>Code</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
+    <p>Provide this customized key mapping with your application:</p>
 
-    <pre id="code">
-$.event.key({});
-    </pre>
+    <pre id="code"></pre>
 
     <script type='text/javascript'
             src='../../../steal/steal.js'>
     </script>
     <script id="demo-source" type='text/javascript'>
       steal('jquery/event/key').then(function(){
-        $.event.key({
-          "ö" : 214,
-          "ä" : 196,
-          "+" : 61,
-          "ß" : 223
-        });
-
         // converts a single character into a unicode character
         var readable = {
           "\r" : "\\r",
@@ -98,21 +82,34 @@ $.event.key({});
             updatedMap = {},
             update = function(name, which) {
               var code = [];
-              updatedMap[name] = which;
-              $.event.key(updatedMap);
-              $.each(updatedMap, function(name, current) {
-                code.push('\n    "' + name + '" : ' + current);
-              });
-              $('#code').text('$.event.key({' + code.join(',') + '\n});');
+              if(name && which) {
+                updatedMap[name] = which;
+                $.event.key(updatedMap);
+                $.each(updatedMap, function(name, current) {
+                  if(current !== undefined) {
+                    code.push('\n    "' + toUnicode(name) + '" : ' + current);
+                  }
+                });
+              }
+              $('#code').text('$.event.key("' + jQuery.uaMatch(navigator.userAgent).browser +
+                  '", {' + code.join(',') + '\n});');
             },
             setKeyPress = function(val) {
               lastKeyPress = (val && val.toLowerCase()) || null;
               $('#lastKeyPress span').html(val || '');
+            },
+            toUnicode = function(name) {
+              if(name.length > 1) {
+                return name;
+              }
+              var result = '\\u',
+                  hex = name.charCodeAt(0).toString(16),
+                  fill = 4 - hex.length;
+              for(var i = 0; i < fill; i++) {
+                result += '0';
+              }
+              return result + hex;
             };
-
-        $.each($.event.key(), function(name, code) {
-          list.append('<tr><td>' + (readable[name] || name) + '</td><td>' + code + '</td></tr>');
-        });
 
         $('#key').on('keydown keypress keyup', function(ev){
           var context = $('#' + ev.type), keyName = ev.keyName();
@@ -144,6 +141,7 @@ $.event.key({});
           }
         });
 
+        update();
       });
     </script>
 	</body>

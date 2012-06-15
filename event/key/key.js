@@ -1,6 +1,7 @@
 steal('jquery/event').then(function($){
 	var keymap = {},
-		reverseKeyMap = {};
+		reverseKeyMap = {},
+		currentBrowser = jQuery.uaMatch(navigator.userAgent).browser;
 		
 	/**
 	 * @hide
@@ -13,12 +14,27 @@ steal('jquery/event').then(function($){
 	 * 
 	 * @param {Object} map A map of character - keycode pairs.
 	 */
-	$.event.key = function(map){
-		// cxtend the keymap
-		$.extend(keymap, map);
+	$.event.key = function(browser, map){
+		if(browser === undefined) {
+			return keymap;
+		}
+
+		if(map === undefined) {
+			map = browser;
+			browser = currentBrowser;
+		}
+
+		// extend the keymap
+		if(!keymap[browser]) {
+			keymap[browser] = {};
+		}
+		$.extend(keymap[browser], map);
 		// and also update the reverse keymap
+		if(!reverseKeyMap[browser]) {
+			reverseKeyMap[browser] = {};
+		}
 		for(var name in map){
-			reverseKeyMap[map[name]] = name;
+			reverseKeyMap[browser][map[name]] = name;
 		}
 	};
 	
@@ -99,9 +115,9 @@ steal('jquery/event').then(function($){
 			test = /\w/,
 			// It can be either keyCode or charCode.
 			// Look both cases up in the reverse key map and converted to a string
-			key_Key =  reverseKeyMap[(event.keyCode || event.which)+""],
+			key_Key =  reverseKeyMap[currentBrowser][(event.keyCode || event.which)+""],
 			char_Key =  String.fromCharCode(event.keyCode || event.which),
-			key_Char =  event.charCode && reverseKeyMap[event.charCode+""],
+			key_Char =  event.charCode && reverseKeyMap[currentBrowser][event.charCode+""],
 			char_Char = event.charCode && String.fromCharCode(event.charCode);
 		
 		if( char_Char && test.test(char_Char) ) {
@@ -132,7 +148,7 @@ steal('jquery/event').then(function($){
 		}
 
 		// default
-		return reverseKeyMap[event.keyCode+""] 
+		return reverseKeyMap[currentBrowser][event.keyCode+""]
 	}
 	
 	
