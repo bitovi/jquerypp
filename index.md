@@ -1,6 +1,6 @@
 ---
 layout: default
-version: 1.0b
+version: 1.0b2
 ---
 
 # Hi, I'm jQuery++.
@@ -43,21 +43,21 @@ after jQuery 1.7 like:
 
 ### Using individual files
 
-The [full download](https://github.com/downloads/jupiterjs/jquerypp/jquerypp-{{page.version}}.zip) contains
-each plugin as a separate file. At the top of each file you will find a list of dependencies that need to be included first.
-For example, `jquery.animate.js` depends on `jquery.styles.js` so it needs to be loaded like this:
+The `jquerypp.js` file from the [full download](https://github.com/downloads/jupiterjs/jquerypp/jquerypp-{{page.version}}.zip)
+contains all jQuery++ plugins in a single file:
+
+{% highlight html %}
+<script src="lib/jquery.1.7.2.js"></script>
+<script src="lib/jquerypp.js"></script>
+{% endhighlight %}
+
+The `lib` folder contains each plugin as a separate file. There is a list of dependencies that need to be included first
+at the top of each file. For example, `jquery.animate.js` depends on `jquery.styles.js` so it needs to be loaded like this:
 
 {% highlight html %}
 <script src="lib/jquery.1.7.2.js"></script>
 <script src="lib/jquery.styles.js"></script>
 <script src="lib/jquery.animate.js"></script>
-{% endhighlight %}
-
-You can also use `jquerypp.js` which contains all jQuery++ plugins in a single file:
-
-{% highlight html %}
-<script src="lib/jquery.1.7.2.js"></script>
-<script src="lib/jquerypp.js"></script>
 {% endhighlight %}
 
 ### Using Steal
@@ -208,6 +208,24 @@ The following example lets you change the different width properties used by `$(
  values:
 
 <iframe style="width: 100%; height: 500px" src="http://jsfiddle.net/5ZbSH/embedded/result,html,js,css" allowfullscreen="allowfullscreen" frameborder="0">JSFiddle</iframe>
+
+## fills `$(element).fills([parent]) -> jQuery`
+
+[Annotated source](http://donejs.com/jquery/docs/jquery.fills.html)
+
+[jQuery.fills](http://donejs.com/docs.html#!jQuery.fills) adds `$.fn.fills` to make an element fill out a parent element.
+It takes care of any padding, margins and dimensions of other sibling elements and will update the dimensions when the parent
+[resizes](#resize). You can either pass a parent selector or jQuery element or an object with the following options:
+
+- __parent__ - The parent element selector or jQuery element
+- __className__ - The class name to add to the element. Not set by default
+- __all__ - Restore the parent element to its original size first
+
+`jQuery.fills` is extremely useful for complex layouts especially since it also takes care of elements that wrap automatically.
+Resize the container in the following example using the blue square to see how the `#fill` element adjusts its size correctly
+to fill out the remaining space:
+
+<iframe style="width: 100%; height: 350px" src="http://jsfiddle.net/HSWTA/embedded/result,html,js,css" allowfullscreen="allowfullscreen" frameborder="0">JSFiddle</iframe>
 
 ## formParams `$(form).formParams([convert]) -> Object|jQuery`
 
@@ -777,25 +795,24 @@ Steal as submodules that are used to generate the documentation and build the jQ
 
 ### Installing
 
- 1. `fork` [jquerypp on github](https://github.com/jupiterjs/jquerypp).
- 2. Clone DoneJS with:
+ 1. Clone DoneJS with:
 
-        git clone git@github.com:jupiterjs/donejs
+        git clone git://github.com/jupiterjs/donejs
 
- 3. Open the donejs folder's .gitmodule file and change the URL of the `"jquery"` submodule:
-
-        url = git://github.com/jupiterjs/jquerypp.git
-
-    to your `fork`ed URL like
-
-        url = git://github.com/justinbmeyer/jquerypp.git
-
- 4. Install all submodules by running
+ 2. Install all submodules by running
 
         cd donejs
         git submodule update --init --recursive
 
     Depending on your version of git, you might need to cd into each submodule and run `git checkout`.
+
+ 3. Fork [jquerypp](https://github.com/jupiterjs/jquerypp) on Github
+
+ 4. Add your own fork as a remote in the `jquery` submodule:
+
+        cd jquery
+        git checkout master
+        git remote add fork git@github.com:<username>/jquerypp.git
 
 ### Developing
 
@@ -816,6 +833,7 @@ To develop jQuery++:
  2. Add tests to the _plugin\_test.js_ test file.
  3. Open the plugin test page `qunit.html` or `funcunit.html` and make sure everything passes
  4. Open the big test page in `jquery/qunit.html` and make sure all tests pass
+ 5. Commit your changes and push to your fork (`git push fork <branch>`)
  5. Submit a pull request!
 
 ### Documentation
@@ -828,9 +846,9 @@ To edit the documentation at [DoneJS.com](http://doneJS.com/docs.html):
 
  1. [install](#developing_jquery__-installing) jQuery++ and DoneJS.
  2. Edit the markdown and js files in the `jquery` folder.
- 3. Generate the docs with:
+ 3. In the `donejs` root folder generate the docs with:
 
-        js site/scripts/doc.js
+        ./js site/scripts/doc.js
 
     View them at `site/docs.html`
 
@@ -845,7 +863,6 @@ To make a jQuery++ build, run:
 It puts the downloads in `jquery/dist`. To build a specific version check out the [git tag](https://github.com/jupiterjs/jquerypp/tags)
 you want to build and run the above command.
 
-<!--
 ### List of heroes
 
 The following lists everyone who's contributed something to CanJS.  If we've forgotten you, please add yourself.
@@ -856,16 +873,20 @@ and [jQueryMX](https://github.com/jupiterjs/jquerymx/contributors), and the peop
 
 [callumacrae](https://github.com/callumacrae) - [Width property for jQuery.selection](https://github.com/jupiterjs/jquerypp/pull/11) and documentation fixes.
 [fabianonunes](https://github.com/fabianonunes) - Fixed several errors in the build process.
--->
 
 ### Change Log
 
-<!--
 __1.0 Beta 2__
 
-- change: [Added width property to jQuery.selection](https://github.com/jupiterjs/jquerypp/commit/38a3d76bed35684e5b9551f179d0772a908544db)
-- fix: [Security error in jQuery.animate](https://github.com/jupiterjs/jquerypp/commit/5896c02e16dbe3c331939c81d4fe942d38470c93)
--->
+- feature: [Key mapping tool for jQuery.event.key for international characters](https://github.com/jupiterjs/jquerypp/issues/16)
+- fix: [jQuery.formParams converts disabled fields](https://github.com/jupiterjs/jquerypp/issues/24)
+- fix: [jQuery.animate supports all parameters](https://github.com/jupiterjs/jquerypp/issues/22)
+- change: [jQuery.event.drag supports touch events](https://github.com/jupiterjs/jquerypp/issues/23)
+- feature: [Added jQuery.fills](http://jquerypp.com/#fills)
+- fix: [jQuery.animate .stop() doesn't work](https://github.com/jupiterjs/jquerypp/issues/19)
+- fix: [Bug with duplicate sub keys](https://github.com/jupiterjs/jquerypp/issues/17)
+- change: [Added width property to jQuery.selection](https://github.com/jupiterjs/jquerypp/pull/11)
+- fix: [Security error in jQuery.animate](https://github.com/jupiterjs/jquerypp/issues/5)
 
 __1.0 Beta__ (June 1st 2012)
 
