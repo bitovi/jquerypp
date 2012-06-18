@@ -864,7 +864,6 @@ __1.0 Beta 2__
 - fix: [jQuery.formParams converts disabled fields](https://github.com/jupiterjs/jquerypp/issues/24)
 - fix: [jQuery.animate supports all parameters](https://github.com/jupiterjs/jquerypp/issues/22)
 - change: [jQuery.event.drag supports touch events](https://github.com/jupiterjs/jquerypp/issues/23)
-- feature: [Added jQuery.fills](#fills)
 - fix: [jQuery.animate .stop() doesn't work](https://github.com/jupiterjs/jquerypp/issues/19)
 - fix: [Bug with duplicate sub keys](https://github.com/jupiterjs/jquerypp/issues/17)
 - change: [Added width property to jQuery.selection](https://github.com/jupiterjs/jquerypp/pull/11)
