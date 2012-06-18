@@ -209,24 +209,6 @@ The following example lets you change the different width properties used by `$(
 
 <iframe style="width: 100%; height: 500px" src="http://jsfiddle.net/5ZbSH/embedded/result,html,js,css" allowfullscreen="allowfullscreen" frameborder="0">JSFiddle</iframe>
 
-## fills `$(element).fills([parent]) -> jQuery`
-
-[Annotated source](http://donejs.com/jquery/docs/jquery.fills.html)
-
-[jQuery.fills](http://donejs.com/docs.html#!jQuery.fills) adds `$.fn.fills` to make an element fill out a parent element.
-It takes care of any padding, margins and dimensions of other sibling elements and will update the dimensions when the parent
-[resizes](#resize). You can either pass a parent selector or jQuery element or an object with the following options:
-
-- __parent__ - The parent element selector or jQuery element
-- __className__ - The class name to add to the element. Not set by default
-- __all__ - Restore the parent element to its original size first
-
-`jQuery.fills` is extremely useful for complex layouts especially since it also takes care of elements that wrap automatically.
-Resize the container in the following example using the blue square to see how the `#fill` element adjusts its size correctly
-to fill out the remaining space:
-
-<iframe style="width: 100%; height: 350px" src="http://jsfiddle.net/HSWTA/embedded/result,html,js,css" allowfullscreen="allowfullscreen" frameborder="0">JSFiddle</iframe>
-
 ## formParams `$(form).formParams([convert]) -> Object|jQuery`
 
 [Annotated source](http://donejs.com/jquery/docs/jquery.form_params.html)
