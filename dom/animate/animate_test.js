@@ -1210,6 +1210,11 @@ steal('jquery/dom/animate',
 		}, 50);
 	});
 
+	test("#36 parameter compatibility", function () {
+		var foo = jQuery("#foo");
+		foo.animate({ top : 10 });
+	});
+
 	/* As mentioned, thoroughly abuses undocumented methods. Since the overwritten animate doesn't
 	 * use timers this doesn't need to be tested
 	asyncTest("callbacks that throw exceptions will be removed (#5684)", function () {
