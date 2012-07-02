@@ -1,4 +1,8 @@
-steal('jquery/event', 'jquery/lang/vector', 'jquery/event/livehack', function( $ ) {
+steal('jquery/event', 'jquery/lang/vector', 'jquery/event/livehack', 'jquery/event/reverse', function( $ ) {
+	if(!$.event.special.move) {
+		$.event.reverse('move');
+	}
+
 	//modify live
 	//steal the live handler ....
 	var bind = function( object, method ) {
@@ -164,6 +168,7 @@ steal('jquery/event', 'jquery/lang/vector', 'jquery/event/livehack', function( $
 				this.moved = true;
 			}
 
+			this.element.trigger('move', this);
 			var pointer = ev.vector();
 			if ( this._start_position && this._start_position.equals(pointer) ) {
 				return;

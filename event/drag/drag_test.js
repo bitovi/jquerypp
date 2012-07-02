@@ -110,10 +110,39 @@ test("dragging an element", function(){
 		//div.remove();
 		start();
 	})
-	
+})
 
+test("move event", function(){
+	var div = $("<div>"+
+			"<div id='drag-move'></div>"+
+			"<div id='move-to'></div>"+
+		"</div>"),
+		moved = false,
+		draginit = false;
+	$("#qunit-test-area").html(div);
+	var basicCss = {
+		width: "20px",
+		height: "20px",
+		position: "absolute",
+		border: "solid 1px black"
+	}
+	$("#drag-move").css(basicCss).css({top: "0px", left: "0px", zIndex: 1000, backgroundColor: "red"})
+	$("#move-to").css(basicCss).css({top: "0px", left: "100px"})
 
-	
+	stop();
+	$('#drag-move').on({
+		'draginit' : function() {
+			draginit = true;
+		},
+		'move' : function() {
+			moved = true;
+		}
+	});
+
+	Syn.drag({to: "#move-to"},"drag-move", function(){
+		ok(moved, 'Move event fired');
+		start();
+	});
 })
 
 test("drag position", function(){
