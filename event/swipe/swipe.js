@@ -100,7 +100,7 @@ $.event.setupHelper( [
 					distance = Math.sqrt(deltaX*deltaX+deltaY*deltaY);
 
 				// check if the delay and distance are matched
-				if ( stop.time - start.time < swipe.delay && distance >= swipe.min ) {
+				if ( stop.time - start.time < swipe.delay && distance >= swipe.min && distance <= swipe.max ) {
 					var events = ['swipe'];
 					// check if we moved horizontally
 					if( deltaX >= swipe.min && deltaY < swipe.min) {
