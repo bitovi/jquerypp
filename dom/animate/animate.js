@@ -244,7 +244,7 @@ steal('jquery', 'jquery/dom/styles').then(function ($) {
 					}));
 
 					// Call the original callback
-					if (optall.old && exec) {
+					if (jQuery.isFunction(optall.old) && exec) {
 						// Call success, pass the DOM element as the this reference
 						optall.old.call(self[0], true)
 					}
