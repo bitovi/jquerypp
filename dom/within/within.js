@@ -74,7 +74,7 @@ $.fn.withinBox = function(left, top, width, height, useOffsetCache){
         if(this == document.documentElement) return  ret.push(this);
 
 	    // use cached offset or .offset()
-        var offset = cache ? 
+        var offset = useOffsetCache ? 
 			jQuery.data(this,"offset") || 
 			jQuery.data(this,"offset", q.offset()) : 
 			q.offset();
