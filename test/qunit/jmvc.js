@@ -1,8 +1,8 @@
 // Tests for the JavaScriptMVC compatibility layer. Will be removed eventually
-steal('funcunit/qunit').then('jquery/controller/view/test/qunit')
-	.then('jquery/class/class_test.js')
-	.then('jquery/model/test/qunit')
-	.then('jquery/controller/controller_test.js')
-	.then('jquery/view/test/qunit')
-	.then('jquery/dom/route/route_test.js')
-	.then('./integration.js')
+steal('funcunit/qunit', 'jquery/controller/view/test/qunit'
+	, 'jquery/class/class_test.js'
+	, 'jquery/model/test/qunit'
+	, 'jquery/controller/controller_test.js'
+	, 'jquery/view/test/qunit'
+	, 'jquery/dom/route/route_test.js'
+	, './integration.js');
