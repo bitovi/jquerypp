@@ -277,10 +277,10 @@ test("auto methods",function(){
 	//turn off fixtures
 	$.fixture.on = false;
 	var School = $.Model.extend("Jquery.Model.Models.School",{
-	   findAll : steal.root.join("jquery/model/test")+"/{type}.json",
-	   findOne : steal.root.join("jquery/model/test")+"/{id}.json",
-	   create : steal.root.join("jquery/model/test")+"/create.json",
-	   update : "POST "+steal.root.join("jquery/model/test")+"/update{id}.json"
+	   findAll : steal.config().root.join("jquery/model/test")+"/{type}.json",
+	   findOne : steal.config().root.join("jquery/model/test")+"/{id}.json",
+	   create : steal.config().root.join("jquery/model/test")+"/create.json",
+	   update : "POST "+steal.config().root.join("jquery/model/test")+"/update{id}.json"
 	},{})
 	stop();
 	School.findAll({type:"schools"}, function(schools){
@@ -318,7 +318,7 @@ test("isNew", function(){
 test("findAll string", function(){
 	$.fixture.on = false;
 	$.Model("Test.Thing",{
-		findAll : steal.root.join("jquery/model/test/qunit/findAll.json")+''
+		findAll : steal.config().root.join("jquery/model/test/qunit/findAll.json")+''
 	},{});
 	stop();
 	Test.Thing.findAll({},function(things){
