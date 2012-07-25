@@ -1,4 +1,4 @@
-steal('jquery/event/livehack').then(function($){
+steal('jquery', 'jquery/event/livehack', function($){
 var supportTouch = "ontouchend" in document,
 	scrollEvent = "touchmove scroll",
 	touchStartEvent = supportTouch ? "touchstart" : "mousedown",
@@ -48,4 +48,5 @@ $.event.setupHelper( ["tap"], touchStartEvent, function(ev){
 	
 });
 
+	return $;
 });

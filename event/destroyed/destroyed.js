@@ -1,4 +1,4 @@
-steal('jquery/event').then(function( $ ) {
+steal('jquery', function( $ ) {
 	/**
 	 * @attribute destroyed
 	 * @download  http://jmvcsite.heroku.com/pluginify?plugins[]=jquery/dom/destroyed/destroyed.js
@@ -18,5 +18,5 @@ steal('jquery/event').then(function( $ ) {
 		// Call the old jQuery.cleanData
 		oldClean(elems);
 	};
-
+return $;
 });

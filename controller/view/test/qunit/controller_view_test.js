@@ -1,5 +1,4 @@
-steal('jquery/controller/view','jquery/view/micro','funcunit/qunit')  //load qunit
- .then(function(){
+steal('jquery', 'jquery/controller/view','jquery/view/micro','funcunit/qunit', function($) {
 	
 	module("jquery/controller/view");
 	
@@ -10,7 +9,7 @@ steal('jquery/controller/view','jquery/view/micro','funcunit/qunit')  //load qun
 				this.element.html(this.view())
 			}
 		})
-		jQuery.View.ext = ".micro";
+		$.View.ext = ".micro";
 		$("#qunit-test-area").append("<div id='cont_view'/>");
 		
 		new jquery.Controller.View.Test.Qunit( $('#cont_view') );
@@ -26,7 +25,7 @@ steal('jquery/controller/view','jquery/view/micro','funcunit/qunit')  //load qun
 			}
 		})
 		
-		jQuery.View.ext = ".ejs"; // Reset view extension to default
+		$.View.ext = ".ejs"; // Reset view extension to default
 		equal(".ejs", jQuery.View.ext); 
 		
 		$("#qunit-test-area").append("<div id='suffix_test_cont_view'/>");

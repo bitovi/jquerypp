@@ -1,4 +1,5 @@
-steal('jquery/event', 'jquery/lang/vector', 'jquery/event/livehack', 'jquery/event/reverse', function( $ ) {
+steal('jquery', 'jquery/lang/vector', 'jquery/event/livehack', 'jquery/event/reverse', function( $ ) {
+
 	if(!$.event.special.move) {
 		$.event.reverse('move');
 	}
@@ -723,4 +724,6 @@ steal('jquery/event', 'jquery/lang/vector', 'jquery/event/livehack', 'jquery/eve
 	'dragend'], startEvent, function( e ) {
 		$.Drag.mousedown.call($.Drag, e, this);
 	});
+
+	return $;
 });

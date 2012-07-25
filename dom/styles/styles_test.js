@@ -1,8 +1,6 @@
-steal("jquery/dom/dimensions",'jquery/view/micro')  //load your app
- .then('funcunit/qunit').then(function(){
+steal("jquery", "jquery/dom/dimensions",'jquery/view/micro', 'funcunit/qunit', function($) {
 
 module("jquery/dom/styles");
-
 
 test("reading", function(){
 	

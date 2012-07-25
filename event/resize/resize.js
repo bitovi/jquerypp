@@ -1,4 +1,4 @@
-steal('jquery/event/reverse').then(function( $ ) {
+steal('jquery', 'jquery/event/reverse').then(function( $ ) {
 	var
 		// bind on the window window resizes to happen
 		win = $(window),
@@ -39,4 +39,6 @@ steal('jquery/event/reverse').then(function( $ ) {
 			}
 		}
 	});
+
+	return $;
 });

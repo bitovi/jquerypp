@@ -1,3 +1,3 @@
-steal('can/util/fixture',function($){
-	$.fixture = can.fixture;
+steal('jquery', 'can/util/fixture', function($, fixture) {
+	$.fixture = fixture;
 })

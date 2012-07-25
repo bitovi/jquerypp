@@ -1,4 +1,4 @@
-steal('jquery/dom').then(function($){
+steal('jquery', function($) {
 
 /**
  * @function jQuery.fn.compare

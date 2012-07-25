@@ -1,4 +1,4 @@
-steal('jquery/event/default').then(function($){
+steal('jquery', 'jquery/event/default', function($) {
 
 
 var current,
@@ -84,4 +84,5 @@ $.Event.prototype.resume = function(){
 	
 };
 
+return $;
 });

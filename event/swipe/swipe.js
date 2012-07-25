@@ -1,4 +1,4 @@
-steal('jquery/event/livehack').then(function($){
+steal('jquery', 'jquery/event/livehack', function($) {
 var isPhantom = /Phantom/.test(navigator.userAgent),
 	supportTouch = !isPhantom && "ontouchend" in document,
 	scrollEvent = "touchmove scroll",
@@ -125,4 +125,5 @@ $.event.setupHelper( [
 		})
 });
 
+return $;
 });

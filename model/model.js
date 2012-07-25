@@ -1,5 +1,5 @@
 /*global OpenAjax: true */
 
-steal('jquery/class', 'can/model','can/observe/attributes','can/observe/setter','can/model/elements', function(){
-	$.Model = can.Model
+steal('jquery', 'can/util', 'can/model','can/observe/attributes','can/observe/setter','can/model/elements', function($, can){
+	$.Model = can.Model;
 });

@@ -1,6 +1,5 @@
-steal("jquery/dom/form_params")  //load your app
- .then('funcunit/qunit','jquery/view/micro')  //load qunit
- .then(function(){
+steal("jquery", "jquery/dom/form_params", 'funcunit/qunit', 'jquery/view/micro',
+function($) {
 
 $.ajaxSetup({
 	cache : false
@@ -11,7 +10,6 @@ test("with a form", function(){
 
 	$("#qunit-test-area").html("//jquery/dom/form_params/test/basics.micro",{})
 
-	
 	var formParams =  $("#qunit-test-area form").formParams() ;
 	ok(formParams.params.one === "1","one is right");
 	ok(formParams.params.two === "2","two is right");

@@ -75,7 +75,7 @@ $.Controller("Tabs",{
   // hides old active tab, shows new one
   "li click" : function(el, ev){
     ev.preventDefault();
-    this.tab(this.find('.active').removeClass('active')).hide()
+    this.tab(this.element.find('.active').removeClass('active')).hide()
     this.tab(el.addClass('active')).show();
   }
 })

@@ -1,6 +1,6 @@
 // a text selection event that is useful in mobile safari
 
-steal('jquery/dom/range', 'jquery/event/livehack').then(function($){
+steal('jquery', 'jquery/dom/range', 'jquery/event/livehack', function($){
 
 
 	var event = $.event;
@@ -92,5 +92,6 @@ steal('jquery/dom/range', 'jquery/event/livehack').then(function($){
 		$(delegate).bind('mousemove', mousemove)
 				   .bind('mouseup',mouseup)
 	});
-	
+
+	return $;
 });

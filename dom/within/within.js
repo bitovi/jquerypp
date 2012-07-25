@@ -1,4 +1,4 @@
-steal('jquery/dom').then(function($){
+steal('jquery', function($) {
 	// Checks if x and y coordinates are within a box with left, top, width and height
    var withinBox = function(x, y, left, top, width, height ){
         return (y >= top &&
@@ -89,5 +89,5 @@ $.fn.withinBox = function(left, top, width, height, useOffsetCache){
     });
     return this.pushStack( jQuery.unique( ret ), "withinBox", jQuery.makeArray(arguments).join(",") );
 }
-    
+ return $;
 })

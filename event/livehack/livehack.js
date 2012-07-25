@@ -1,4 +1,4 @@
-steal('jquery/event').then(function() {
+steal('jquery', function($) {
 
 	var event = jQuery.event,
 

@@ -1,6 +1,4 @@
-steal("jquery/event/destroyed")  //load your app
- .then('funcunit/qunit') 
- .then(function(){
+steal("jquery", "jquery/event/destroyed", 'funcunit/qunit', function($) {
 
 module("jquery/event/destroyed")
 test("removing an element", function(){

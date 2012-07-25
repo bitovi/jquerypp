@@ -1,4 +1,4 @@
-steal('jquery/event','jquery/event/livehack').then(function($){
+steal('jquery', 'jquery/event/livehack', function($) {
 /**
  * @class jQuery.Hover
  * @plugin jquery/event/hover
@@ -257,5 +257,5 @@ event.setupHelper( [
 "hovermove"], "mouseenter", onmouseenter )
 		
 
-	
+return $;
 })

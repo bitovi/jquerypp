@@ -1,5 +1,4 @@
-steal('jquery/dom').then(function( $ ) {
-
+steal('jquery', function( $ ) {
 	var getComputedStyle = document.defaultView && document.defaultView.getComputedStyle,
 		// The following variables are used to convert camelcased attribute names
 		// into dashed names, e.g. borderWidth to border-width
@@ -99,4 +98,6 @@ steal('jquery/dom').then(function( $ ) {
 		// Pass the arguments as an array to $.styles
 		return $.styles(this[0], $.makeArray(arguments));
 	};
+
+	return $;
 });

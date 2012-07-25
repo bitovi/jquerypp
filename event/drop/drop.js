@@ -1,4 +1,4 @@
-steal('jquery/event/drag','jquery/dom/within','jquery/dom/compare',function($){
+steal('jquery', 'jquery/event/drag', 'jquery/dom/within', 'jquery/dom/compare', function($){
 	var event = $.event;
 	/**
 	 * @add jQuery.event.special
@@ -444,5 +444,7 @@ steal('jquery/event/drag','jquery/dom/within','jquery/dom/compare',function($){
 		cancel: function() {
 			this._canceled = true;
 		}
-	} )
+	});
+
+	return $;
 });

@@ -1,5 +1,5 @@
 
-steal('jquery/event').then(function($){
+steal('jquery', function($){
 
 /**
  * @function jQuery.fn.triggerAsync
@@ -109,7 +109,5 @@ $event.trigger =  function defaultTriggerer( event, data, elem, onlyHandlers){
 	return res;
 };
 	
-	
-	
-	
+return $;
 });

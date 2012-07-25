@@ -1,4 +1,5 @@
-module("jquery/model", { 
+steal('can/util', 'jquery', 'jquery/model', function(can, $) {
+module("jquery/model", {
 	setup: function() {
         var ids = 0;
 	    $.Model("Person",{
@@ -98,7 +99,7 @@ test("save deferred", function(){
 				type : 'post',
 				dataType : "json",
 				fixture: function(){
-					return [{id: 5}]
+					return {id: 5}
 				},
 				success : success
 			})
@@ -111,8 +112,8 @@ test("save deferred", function(){
 	stop();
 	personD.then(function(person){
 		start()
+		console.log(person)
 		equals(person.id, 5, "we got an id")
-		
 	});
 	
 });
@@ -127,7 +128,7 @@ test("update deferred", function(){
 				type : 'post',
 				dataType : "json",
 				fixture: function(){
-					return [{thing: "er"}]
+					return {thing: "er"}
 				},
 				success : success
 			})
@@ -155,7 +156,7 @@ test("destroy deferred", function(){
 				type : 'post',
 				dataType : "json",
 				fixture: function(){
-					return [{thing: "er"}]
+					return {thing: "er"}
 				},
 				success : success
 			})
@@ -457,13 +458,13 @@ test("save error args", function(){
 	})
 	var st = '{type: "unauthorized"}';
 	
-	$.fixture("/testinmodelsfoos.json", function(){
-		return [401,st]
+	$.fixture("/testinmodelsfoos.json", function(headers, respond) {
+		respond(401,st);
 	});
 	stop();
-	var inst = new Foo({}).save(function(){
+	var inst = new Foo({}).save().done(function(){
 		ok(false, "success should not be called")
-	}, function(jQXHR){
+	}).fail(function(jQXHR){
 		ok(true, "error called")
 		ok(jQXHR.getResponseHeader,"jQXHR object")
 		start()
@@ -571,6 +572,4 @@ test("object definitions", function(){
 		start();
 	})
 })
-
-
-
+})

@@ -2,7 +2,7 @@
  * @add jQuery.Drag.prototype
  */
 
-steal('jquery/event/drag', 'jquery/dom/styles').then(function( $ ) {
+steal('jquery', 'jquery/event/drag', 'jquery/dom/styles', function( $ ) {
 
 
 	$.Drag.prototype
@@ -75,4 +75,5 @@ steal('jquery/event/drag', 'jquery/dom/styles').then(function( $ ) {
 		oldPosition.call(this, offsetPositionv);
 	};
 
+	return $;
 });

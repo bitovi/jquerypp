@@ -1,4 +1,4 @@
-steal('jquery/event').then(function($){
+steal('jquery', function($){
 	var keymap = {},
 		reverseKeyMap = {},
 		currentBrowser = jQuery.uaMatch(navigator.userAgent).browser;
@@ -151,5 +151,5 @@ steal('jquery/event').then(function($){
 		return reverseKeyMap[currentBrowser][event.keyCode+""]
 	}
 	
-	
+return $;
 })

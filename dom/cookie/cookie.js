@@ -1,4 +1,4 @@
-steal('jquery/lang/json',function() {
+steal('jquery', 'jquery/lang/json', function($) {
     /**
      * @function jQuery.cookie
      * @parent jquerypp
