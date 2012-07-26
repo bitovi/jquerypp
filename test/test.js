@@ -10,7 +10,7 @@ steal(
 	, 'jquery/event/default/default_pause_test.js'
 	, 'jquery/event/destroyed/destroyed_test.js'
 	, 'jquery/event/drag/drag_test.js'
-	, 'jquery/event/drop/drop_test.js'
+	,'jquery/event/drop/drop_test.js'
 	, 'jquery/event/hover/hover_test.js'
 	, 'jquery/event/key/key_test.js'
 	, 'jquery/event/pause/pause_test.js'
