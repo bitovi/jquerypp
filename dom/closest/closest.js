@@ -45,4 +45,6 @@ steal('jquery', function($) {
 		}
 		return res;
 	}
+
+	return $;
 })

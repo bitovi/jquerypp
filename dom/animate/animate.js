@@ -318,4 +318,6 @@ steal('jquery', 'jquery/dom/styles').then(function ($) {
 
 		return this;
 	};
+
+	return $;
 });

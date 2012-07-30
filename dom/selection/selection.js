@@ -223,4 +223,5 @@ $.fn.selection = function(start, end){
 // for testing
 $.fn.selection.getCharElement = getCharElement;
 
+return $;
 });

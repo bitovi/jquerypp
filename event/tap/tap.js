@@ -48,5 +48,5 @@ $.event.setupHelper( ["tap"], touchStartEvent, function(ev){
 	
 });
 
-	return $;
+return $;
 });

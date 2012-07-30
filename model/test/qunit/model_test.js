@@ -409,7 +409,8 @@ test("converters and serializes", function(){
 		}
 	},{});
 	var d = new Date();
-	d.setMonth(1)
+	d.setDate(1);
+	d.setMonth(1);
 	var task1=new Task1({
 		createdAt: d,
 		name:"Task1"

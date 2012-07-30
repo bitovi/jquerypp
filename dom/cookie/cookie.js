@@ -110,4 +110,5 @@ steal('jquery', 'jquery/lang/json', function($) {
         }
     };
 
+	return $;
 });

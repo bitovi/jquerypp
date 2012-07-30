@@ -266,5 +266,5 @@ steal('jquery', function($){
     return self;
   })();
 
-	return $;
+return $;
 })

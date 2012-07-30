@@ -170,4 +170,6 @@ steal('jquery', function($) {
 			};
 		});
 	};
+
+	return $;
 });

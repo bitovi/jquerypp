@@ -71,4 +71,5 @@ jQuery.fn.compare = function(element){ //usually
 	return number;
 }
 
+return $;
 });
