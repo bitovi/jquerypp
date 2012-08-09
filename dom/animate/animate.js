@@ -57,7 +57,7 @@ steal('jquery', 'jquery/dom/styles').then(function ($) {
 					// Negative values not handled the same
 					|| props[name] < 0
 					// unit-less value
-					|| name == 'zIndex' || name == 'z-index'
+					|| name == 'zIndex' || name == 'z-index' || name == 'scrollTop' || name == 'scrollLeft'
 					) {
 					return true;
 				}
