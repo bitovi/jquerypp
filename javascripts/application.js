@@ -375,7 +375,7 @@ $('a[href$=#dom_helpers], a[href$=#events]').prepend('<span class="special">&#x2
 
 // google analytics
 var _gaq = _gaq || [];
-_gaq.push(['_setAccount', 'UA-2302003-11']);
+_gaq.push(['_setAccount', 'UA-2302003-13']);
 _gaq.push(['_trackPageview']);
 
 (function() {
