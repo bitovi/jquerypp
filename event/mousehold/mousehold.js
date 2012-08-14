@@ -12,8 +12,8 @@ steal('jquery', 'jquery/event/livehack', function($) {
  * [jQuery.event.mousehold] event handler:
  *
  *      $('#button').on("mousehold", function(ev, mousehold) {
- *          // Set the mousehold delay to 500ms
- *          mousehold.delay(500);
+ *          // Set the mousehold delay to 100ms
+ *          mousehold.delay(100);
  *      });
  */
 $.Mousehold = function(){
@@ -82,21 +82,22 @@ $.extend($.Mousehold.prototype,{
 			}
 
 			fireStep = 0;
-			$(downEl).unbind("mouseout", clearMousehold)
+			$(downEl).unbind("mouseleave", clearMousehold)
 			  	     .unbind("mouseup", clearMousehold);
 		};
 
 		fireStep = 1;
-		timeout = setInterval(function() {
+		timeout = setTimeout(function() {
 			$.each(event.find(delegate, ["mousehold"], selector), function(){
 				mousehold.fireCount++;
 				this.call(downEl, ev, mousehold)
 			});
 
 			fireStep = 2;
+			timeout = setTimeout(arguments.callee, mousehold.delay)
 		}, mousehold.delay);
 
-		$(downEl).bind("mouseout", clearMousehold)
+		$(downEl).bind("mouseleave", clearMousehold)
 			  	 .bind("mouseup", clearMousehold);
 	};
 
