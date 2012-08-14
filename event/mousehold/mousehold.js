@@ -31,7 +31,7 @@ $.extend($.Mousehold,{
 	 * `$.Mousehold.delay` is the delay (in milliseconds) after which the hold is
 	 * activated by default.
 	 *
-	 * Set this value as a global default. The default is 100ms.
+	 * Set this value as a global default. The default is 500ms.
 	 *
 	 *      // Set the global hover delay to 1 second
 	 *      $.Mousehold.delay = 1000;
@@ -48,8 +48,8 @@ $.extend($.Mousehold.prototype,{
 	 * This method should only be used in [jQuery.event.mousehold mousehold]:
 	 *
 	 *      $('.holdable').on('mousehold', function(ev, mousehold) {
-	 *          // Set the delay to 500ms
-	 *          mousehold.delay(500);
+	 *          // Set the delay to 100ms
+	 *          mousehold.delay(100);
 	 *      });
 	 *
 	 * @param {Number} delay the number of milliseconds used to determine a mousehold
@@ -108,12 +108,7 @@ event.setupHelper([
 /**
  * @attribute mousehold
  * @parent jQuery.event.mousehold
- *
  * `mousehold` is called while the mouse is being held down.
- *
- * Additionally, the function, when executed, is passed a single
- * argument representing the count of times the event has been fired during
- * this session of the mouse hold.
  */
 "mousehold" ], "mousedown", onmousehold );
 
