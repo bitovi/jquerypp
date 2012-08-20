@@ -36,7 +36,7 @@ $.extend($.Mousehold,{
 	 *      // Set the global hover delay to 1 second
 	 *      $.Mousehold.delay = 1000;
 	 */
-	delay: 500
+	delay: 100
 });
 
 /**
@@ -68,10 +68,15 @@ $.extend($.Mousehold.prototype,{
 			fireStep = 0,
 			delegate = ev.delegateTarget || ev.currentTarget,
 			selector = ev.handleObj.selector,
-			downEl = this,
+			downEl = $(this),
+			offsetY = 0,
+			offsetX = 0,
 			timeout;
 
-		var clearMousehold = function() {
+		var updateCoordinates = function(ev){
+			offsetX = ev.offsetX;
+			offsetY = ev.offsetY;
+		}, clearMousehold = function() {
 			clearInterval(timeout);
 
 			if (fireStep == 1) {
@@ -82,23 +87,29 @@ $.extend($.Mousehold.prototype,{
 			}
 
 			fireStep = 0;
-			$(downEl).unbind("mouseleave", clearMousehold)
-			  	     .unbind("mouseup", clearMousehold);
+			downEl.unbind("mouseleave", clearMousehold)
+			  	  .unbind("mouseup", clearMousehold)
+			  	  .unbind("mousemove", updateCoordinates);
 		};
 
 		fireStep = 1;
 		timeout = setTimeout(function() {
 			$.each(event.find(delegate, ["mousehold"], selector), function(){
 				mousehold.fireCount++;
+
+				ev.offsetX = offsetX || ev.offsetX;
+				ev.offsetY = offsetY || ev.offsetY;
+
 				this.call(downEl, ev, mousehold)
 			});
 
 			fireStep = 2;
-			timeout = setTimeout(arguments.callee, mousehold.delay)
-		}, mousehold.delay);
+			timeout = setTimeout(arguments.callee, mousehold._delay)
+		}, mousehold._delay);
 
-		$(downEl).bind("mouseleave", clearMousehold)
-			  	 .bind("mouseup", clearMousehold);
+		downEl.bind("mouseleave", clearMousehold)
+			  .bind("mouseup", clearMousehold)
+			  .bind('mousemove', updateCoordinates)
 	};
 
  /**
@@ -109,7 +120,23 @@ event.setupHelper([
 /**
  * @attribute mousehold
  * @parent jQuery.event.mousehold
+ *
  * `mousehold` is called while the mouse is being held down.
+ *
+ * This is different from `mousedown` in the fact that `mousedown`
+ * will only fire once no matter how long you hold down the mouse.
+ *
+ * For example, if you were to create a 'button' and hold
+ * down the button, 'mousehold' would fire until you release
+ * your cursor.
+ *
+ * Optionally, can set the delay between the event triggering.
+ * The `mousehold` class will contain the current delay and
+ * the number of times the event has fired.
+ *
+ * The `mousehold` event also updates the `offsetX` and `offsetY`
+ * of the event since this would be for the original event mouse offset.
+ *
  */
 "mousehold" ], "mousedown", onmousehold );
 
