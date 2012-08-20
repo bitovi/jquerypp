@@ -69,13 +69,12 @@ $.extend($.Mousehold.prototype,{
 			delegate = ev.delegateTarget || ev.currentTarget,
 			selector = ev.handleObj.selector,
 			downEl = $(this),
-			offsetY = 0,
-			offsetX = 0,
 			timeout;
 
-		var updateCoordinates = function(ev){
-			offsetX = ev.offsetX;
-			offsetY = ev.offsetY;
+		var updateCoordinates = function(event){
+			ev.offsetX = event.offsetX;
+			ev.offsetY = event.offsetY;
+			ev.target = event.target;
 		}, clearMousehold = function() {
 			clearInterval(timeout);
 
@@ -96,10 +95,6 @@ $.extend($.Mousehold.prototype,{
 		timeout = setTimeout(function() {
 			$.each(event.find(delegate, ["mousehold"], selector), function(){
 				mousehold.fireCount++;
-
-				ev.offsetX = offsetX || ev.offsetX;
-				ev.offsetY = offsetY || ev.offsetY;
-
 				this.call(downEl, ev, mousehold)
 			});
 
