@@ -15,4 +15,10 @@ steal('jquery', 'can/util', 'can/model','can/observe/attributes','can/observe/se
 		this.prototype.Class = this;
 		this.callback = can.Construct.prototype.proxy;
 	};
+	// make defaults work again
+	var setup = $.Model.prototype.setup;
+	$.Model.prototype.setup = function(attrs) {
+		attrs = $.extend(true,{},this.Class.defaults,attrs);
+		return setup.apply(this,arguments);
+	};
 });
