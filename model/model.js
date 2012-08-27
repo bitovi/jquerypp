@@ -4,4 +4,8 @@ steal('jquery', 'can/util', 'can/model','can/observe/attributes','can/observe/se
 	$.Model = can.Model;
 	can.Model.prototype.callback = can.Model.prototype.proxy;
 	can.Model.callback = can.Construct.prototype.proxy;
+	$.Model.init = function() {
+		this.prototype.Class = this;
+		this.callback = can.Construct.prototype.proxy;
+	};
 });
