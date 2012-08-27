@@ -85,7 +85,7 @@ steal('jquery', 'jquery/lang/vector', 'jquery/event/livehack', 'jquery/event/rev
 					dragmove: event.find(delegate, ["dragmove"], selector),
 					dragout: event.find(delegate, ["dragout"], selector),
 					dragend: event.find(delegate, ["dragend"], selector),
-                                        dragcleanup: event.find(delegate, ["dragcleanup"], selector),
+					dragcleanup: event.find(delegate, ["dragcleanup"], selector)
 				},
 				destroyed: function() {
 					self.current = null;
@@ -428,8 +428,10 @@ steal('jquery', 'jquery/lang/vector', 'jquery/event/livehack', 'jquery/event/rev
 				// Remove the element when using drag.ghost()
 				this.movingElement.remove();
 			}
-                        
-                        this.callEvents('cleanup', this.element, event);
+
+			if(event) {
+				this.callEvents('cleanup', this.element, event);
+			}
 
 			this.movingElement = this.element = this.event = null;
 		},
