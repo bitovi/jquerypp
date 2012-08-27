@@ -251,7 +251,7 @@ steal('jquery', 'jquery/dom/styles').then(function ($) {
 
 					$.removeData(self, dataKey, true);
 				},
-				finisAnimation = function() {
+				finishAnimation = function() {
 					// Call animationEnd using the passed properties
 					animationEnd(props, true);
 					done();
@@ -293,7 +293,7 @@ steal('jquery', 'jquery/dom/styles').then(function ($) {
 						'animation-play-state' : 'paused'
 					}));
 					// Unbind the animation end handler
-					self.off(getBrowser().transitionEnd, finisAnimation());
+					self.off(getBrowser().transitionEnd, finishAnimation);
 					if(!gotoEnd) {
 						// We were told not to finish the animation
 						// Call animationEnd but set the CSS to the current computed style

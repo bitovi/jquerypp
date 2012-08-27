@@ -3,6 +3,7 @@
 __1.0.0__
 
 - fix: [pass through scrollTop in animate](https://github.com/jupiterjs/jquerypp/pull/40)
+- feature: [dragcleanup event](https://github.com/jupiterjs/jquerypp/pull/43)
 
 __1.0 Beta 2__
 
