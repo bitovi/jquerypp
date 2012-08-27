@@ -1,4 +1,4 @@
-steal("jquery", "jquery/dom/dimensions",'jquery/view/micro', 'funcunit/qunit', function($) {
+steal("jquery/dom/dimensions",'jquery/view/micro', 'funcunit/qunit', function() {
 
 module("jquery/dom/styles");
 

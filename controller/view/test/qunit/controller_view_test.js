@@ -1,4 +1,4 @@
-steal('jquery', 'jquery/controller/view','jquery/view/micro','funcunit/qunit', function($) {
+steal('jquery/controller/view','jquery/view/micro','funcunit/qunit', function() {
 	
 	module("jquery/controller/view");
 	
