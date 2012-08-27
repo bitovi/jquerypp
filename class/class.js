@@ -5,4 +5,5 @@
 //!steal-clean
 steal("jquery", "can/construct", "can/construct/proxy","can/construct/super", function($, Construct) {
 	$.Class = Construct;
+	can.Construct.prototype.callback = can.Construct.prototype.proxy;
 })();

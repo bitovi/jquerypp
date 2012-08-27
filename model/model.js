@@ -2,4 +2,6 @@
 
 steal('jquery', 'can/util', 'can/model','can/observe/attributes','can/observe/setter','can/model/elements', function($, can){
 	$.Model = can.Model;
+	can.Model.prototype.callback = can.Model.prototype.proxy;
+	can.Model.callback = can.Construct.prototype.proxy;
 });
