@@ -19,12 +19,20 @@ steal('jquery', function ($) {
 			// special converters
 			special = {
 				pageX : function (original) {
+					if(!original) {
+						return;
+					}
+
 					var eventDoc = this.target.ownerDocument || document;
 					doc = eventDoc.documentElement;
 					body = eventDoc.body;
 					return original.clientX + ( doc && doc.scrollLeft || body && body.scrollLeft || 0 ) - ( doc && doc.clientLeft || body && body.clientLeft || 0 );
 				},
 				pageY : function (original) {
+					if(!original) {
+						return;
+					}
+
 					var eventDoc = this.target.ownerDocument || document;
 					doc = eventDoc.documentElement;
 					body = eventDoc.body;
@@ -34,12 +42,20 @@ steal('jquery', function ($) {
 					if(!original) {
 						return;
 					}
+
 					return original.fromElement === this.target ? original.toElement : original.fromElement;
 				},
 				metaKey : function (originalEvent) {
+					if(!originalEvent) {
+						return;
+					}
 					return originalEvent.ctrlKey;
 				},
 				which : function (original) {
+					if(!original) {
+						return;
+					}
+
 					return original.charCode != null ? original.charCode : original.keyCode;
 				}
 			};
