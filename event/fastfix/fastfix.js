@@ -22,13 +22,13 @@ steal('jquery', function ($) {
 					var eventDoc = this.target.ownerDocument || document;
 					doc = eventDoc.documentElement;
 					body = eventDoc.body;
-					return original.clientX + ( doc && doc.scrollLeft || body && body.scrollLeft || 0 ) - ( doc && doc.clientLeft || body && body.clientLeft || 0 );
+					return original && original.clientX + ( doc && doc.scrollLeft || body && body.scrollLeft || 0 ) - ( doc && doc.clientLeft || body && body.clientLeft || 0 );
 				},
 				pageY : function (original) {
 					var eventDoc = this.target.ownerDocument || document;
 					doc = eventDoc.documentElement;
 					body = eventDoc.body;
-					return original.clientY + ( doc && doc.scrollTop || body && body.scrollTop || 0 ) - ( doc && doc.clientTop || body && body.clientTop || 0 );
+					return original && original.clientY + ( doc && doc.scrollTop || body && body.scrollTop || 0 ) - ( doc && doc.clientTop || body && body.clientTop || 0 );
 				},
 				relatedTarget : function (original) {
 					if(!original) {
@@ -40,7 +40,7 @@ steal('jquery', function ($) {
 					return originalEvent.ctrlKey;
 				},
 				which : function (original) {
-					return original.charCode != null ? original.charCode : original.keyCode;
+					return original && (original.charCode != null ? original.charCode : original.keyCode);
 				}
 			};
 
