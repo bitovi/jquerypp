@@ -2100,7 +2100,7 @@ $.Range = function(range){
 		this.win = getWindow(range)
 		if(this.win.document.createRange){
 			this.range = this.win.document.createRange()
-		}else{
+		} else if(this.win && this.win.document.body && this.win.document.body.createTextRange) {
 			this.range = this.win.document.body.createTextRange()
 		}
 		// if we have an element, make the range select it
