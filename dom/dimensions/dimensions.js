@@ -144,16 +144,16 @@ height:
 	var animate = function(boxes){
 		// Return the animation function
 		return function(fx){
-			if (fx.state == 0) {
+			if (fx.pos == 0) {
 	            fx.start = $(fx.elem)[lower]();
 	            fx.end = fx.end - getBoxes[lower](fx.elem,boxes);
 	        }
-	        fx.elem.style[lower] = (fx.pos * (fx.end - fx.start) + fx.start) + "px"
+	        fx.elem.style[lower] = (fx.pos * (fx.end - fx.start) + fx.start) + "px";
 		}
 	}
-    $.fx.step["outer" + Upper] = animate({padding: true, border: true})
-	$.fx.step["outer" + Upper+"Margin"] =  animate({padding: true, border: true, margin: true})
-	$.fx.step["inner" + Upper] = animate({padding: true})
+    $.fx.step["outer" + Upper] = animate({padding: true, border: true});
+	$.fx.step["outer" + Upper+"Margin"] =  animate({padding: true, border: true, margin: true});
+	$.fx.step["inner" + Upper] = animate({padding: true});
 
 })
 
