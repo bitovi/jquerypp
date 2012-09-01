@@ -2,4 +2,7 @@ steal('jquery', 'can/control', 'jquery/class','can/control/plugin',function($, C
 	$.Controller = Control;
 	$.fn.controller = $.fn.control;
 	$.fn.controllers = $.fn.controls;
+	can.Control.prototype.find = can.Control.prototype.find || function(s) {
+		return this.element.find(s);
+	};
 });
