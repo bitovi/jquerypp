@@ -22,4 +22,12 @@ steal('jquery', 'can/util', 'can/model','can/observe/attributes','can/observe/se
 		}
 		return getList.apply(this,arguments);
 	};
+	// restore the ability to push a list!arg
+	var push = $.Model.List.prototype.push;
+	$.Model.List.prototype.push = function(arg) {
+		if(arg instanceof $.Model.List) {
+			arg = can.makeArray(arg);
+		}
+		return push.apply(this,arguments);
+	};
 });
