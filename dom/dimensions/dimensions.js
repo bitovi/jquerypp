@@ -7,11 +7,7 @@ var
 	getBoxes = {},
     checks = {
         width: ["Left", "Right"],
-        height: ['Top', 'Bottom'],
-        oldOuterHeight: $.fn.outerHeight,
-        oldOuterWidth: $.fn.outerWidth,
-        oldInnerWidth: $.fn.innerWidth,
-        oldInnerHeight: $.fn.innerHeight
+        height: ['Top', 'Bottom']
     };
 
 $.each({ 
@@ -144,43 +140,20 @@ height:
         return val;
     }
 
-    //getter / setter
-    $.fn["outer" + Upper] = function(v, margin) {
-        var first = this[0];
-		if (typeof v == 'number') {
-			// Setting the value
-            first && this[lower](v - getBoxes[lower](first, {padding: true, border: true, margin: margin}))
-            return this;
-        } else {
-			// Return the old value
-            return first ? checks["oldOuter" + Upper].call(this, v) : null;
-        }
-    }
-    $.fn["inner" + Upper] = function(v) {
-        var first = this[0];
-		if (typeof v == 'number') {
-			// Setting the value
-            first&& this[lower](v - getBoxes[lower](first, { padding: true }))
-            return this;
-        } else {
-			// Return the old value
-            return first ? checks["oldInner" + Upper].call(this, v) : null;
-        }
-    }
     //provides animations
 	var animate = function(boxes){
 		// Return the animation function
 		return function(fx){
-			if (fx.state == 0) {
+			if (fx.pos == 0) {
 	            fx.start = $(fx.elem)[lower]();
 	            fx.end = fx.end - getBoxes[lower](fx.elem,boxes);
 	        }
-	        fx.elem.style[lower] = (fx.pos * (fx.end - fx.start) + fx.start) + "px"
+	        fx.elem.style[lower] = (fx.pos * (fx.end - fx.start) + fx.start) + "px";
 		}
 	}
-    $.fx.step["outer" + Upper] = animate({padding: true, border: true})
-	$.fx.step["outer" + Upper+"Margin"] =  animate({padding: true, border: true, margin: true})
-	$.fx.step["inner" + Upper] = animate({padding: true})
+    $.fx.step["outer" + Upper] = animate({padding: true, border: true});
+	$.fx.step["outer" + Upper+"Margin"] =  animate({padding: true, border: true, margin: true});
+	$.fx.step["inner" + Upper] = animate({padding: true});
 
 })
 
