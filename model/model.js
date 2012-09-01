@@ -30,4 +30,10 @@ steal('jquery', 'can/util', 'can/model','can/observe/attributes','can/observe/se
 		}
 		return push.apply(this,arguments);
 	};
+
+	$.Model.prototype.update = function( attrs, success, error ) {
+		steal.dev.log('$.Model.update is deprecated. You can use attr + save instead.');
+		this.attr(attrs);
+		return this.save(success, error);
+	};
 });
