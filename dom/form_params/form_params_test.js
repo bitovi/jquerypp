@@ -1,5 +1,5 @@
-steal("jquery", "jquery/dom/form_params", 'funcunit/qunit', 'jquery/view/micro',
-function($) {
+steal("jquery/dom/form_params", 'funcunit/qunit', 'jquery/view/micro',
+function() {
 
 $.ajaxSetup({
 	cache : false

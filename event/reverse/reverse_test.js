@@ -36,4 +36,19 @@ steal('funcunit/qunit', 'jquery/event/move').then(function() {
 		$('#outer').trigger('test');
 		$('body').trigger('test');
 	});
+
+	test('passing data', 1, function() {
+		$('#qunit-test-area').html('<div id="outer">' +
+			'<div id="inner">' +
+			'<div id="innermost">Innermost div</div>' +
+			'</div>' +
+			'</div>');
+
+		$('#inner').on('test', function(ev, data) {
+			equals(data.data, true, 'data passed!');
+		});
+
+		$('#outer').trigger('test', { data: true });
+		//$('body').trigger('test');
+	});
 });
