@@ -22,19 +22,13 @@
 </script>
 <script type='text/javascript' id="demo-source">
 steal('jquery/dom/animate').then(function(){
-  var old = jQuery.fx.prototype.custom;
-  jQuery.fx.prototype.custom = function( from, to, unit ) {
-    console.log(arguments, this);
-    old.apply(this, arguments);
-  }
   $("#go").click(function() {
     $('#block').animate({
-      width: "70%",
       opacity: 0.4,
-      marginLeft: "0.6in",
-      fontSize: "3em",
       borderWidth: "10px"
-    }, 1500);
+    }, 1500, function() {
+      console.log('Done')
+    });
   });
 });
 </script>

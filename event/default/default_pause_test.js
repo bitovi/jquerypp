@@ -1,4 +1,4 @@
-steal('jquery', 'funcunit/qunit','jquery/event/default','jquery/event/pause', function($) {
+steal('funcunit/qunit','jquery/event/default','jquery/event/pause', function() {
 
 module("jquery/event/default_pause");
 

@@ -1,4 +1,4 @@
-steal("jquery", "jquery/event/destroyed", 'funcunit/qunit', function($) {
+steal("jquery/event/destroyed", 'funcunit/qunit', function() {
 
 module("jquery/event/destroyed")
 test("removing an element", function(){

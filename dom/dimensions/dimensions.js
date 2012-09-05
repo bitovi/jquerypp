@@ -153,7 +153,7 @@ height:
             return this;
         } else {
 			// Return the old value
-            return first ? checks["oldOuter" + Upper].call(this, v) : null;
+            return first ? checks["oldOuter" + Upper].apply(this, arguments) : null;
         }
     }
     $.fn["inner" + Upper] = function(v) {

@@ -62,6 +62,10 @@ test("dragging an element", function(){
 		.live("dragout", function(){
 			drags.dragout = true;
 		})
+		.live("dragcleanup", function() {
+			drags.dragcleanup = true;
+		})
+
 	$('#drop')
 		.live("dropinit", function(){ 
 			drops.dropinit = true;
@@ -89,6 +93,7 @@ test("dragging an element", function(){
 		ok(drags.draginit, "draginit fired correctly")
 		ok(drags.dragmove, "dragmove fired correctly")
 		ok(drags.dragend, 	"dragend fired correctly")
+		ok(drags.dragcleanup, "dragcleanup fired correctly")
 		ok(!drags.dragover,"dragover not fired yet")
 		ok(!drags.dragout, "dragout not fired yet")
 		//console.log(drags, drags.dragout)
@@ -104,7 +109,8 @@ test("dragging an element", function(){
 		ok(drops.dropmove, "dropmove fired correctly")
 		ok(drops.dropon,	"dropon fired correctly")
 	}).drag({to: "#midpoint"}, function(){
-		ok(drags.dragout, 	"dragout fired correctly")
+		ok(drags.dragout, "dragout fired correctly")
+		ok(drags.dragcleanup, "dragcleanup fired correctly")
 	
 		ok(drops.dropout, 	"dropout fired correctly")
 		//div.remove();
