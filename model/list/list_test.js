@@ -173,11 +173,15 @@ test("events - add", 4, function(){
 	
 	// check that we are listening to updates on person ...
 	
-	ok( $(person).data("events"), "person has events" );
+	// events are hooked internally now
+	// ok( $(person).data("events"), "person has events" );
+	ok(jQuery._data(person, 'events'), "person has events" );
 	
 	list.pop()
 	
-	ok( !$(person).data("events"), "person has no events" );
+	// events are hooked internally now
+	// ok( !$(person).data("events"), "person has no events" );
+	ok( !jQuery._data(person, 'events'), "person has no events" );
 	
 });
 
