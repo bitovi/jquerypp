@@ -2,15 +2,15 @@ steal('can/model/list','jquery/model').then(function() {
 	// List.get used to take a model or list of models
 	var getList = $.Model.List.prototype.get;
 	$.Model.List.prototype.get = function(arg) {
-		var ids;
+		var ids, id;
 		if(arg instanceof $.Model.List) {
 			ids = [];
 			$.each(arg,function() {
 				ids.push(this.attr('id'));
 			});
 			arg = ids;
-		} else if(arg.attr && arg.attr('id')) {
-			arg = arg.attr('id');
+		} else if(arg.attr && arg.constructor && (id = arg.attr(arg.constructor.id))) {
+			arg = id;
 		}
 		return getList.apply(this,arguments);
 	};
