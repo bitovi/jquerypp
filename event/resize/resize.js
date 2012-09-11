@@ -1,4 +1,4 @@
-steal('jquery', 'jquery/event/reverse').then(function( $ ) {
+steal('jquery/event/reverse', function() {
 	var
 		// bind on the window window resizes to happen
 		win = $(window),

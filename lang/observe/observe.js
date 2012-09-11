@@ -1,3 +1,3 @@
-steal('jquery', 'can/util','can/observe').then(function($, can) {
+steal('can/util', 'jquery', 'can/observe', function(can) {
  $.Observe = can.Observe;
 });
