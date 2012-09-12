@@ -1,4 +1,4 @@
-steal('jquery', 'jquery/event/reverse').then(function() {
+steal('jquery', 'jquery/event/reverse', function() {
 	$.event.reverse('move');
 	return $;
 });
