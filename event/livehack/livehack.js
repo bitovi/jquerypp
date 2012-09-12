@@ -124,18 +124,20 @@ steal('jquery', function($) {
 			startingEvent = null;
 		}
 		var add = function( handleObj ) {
-
-			var bySelector, selector = handleObj.selector || "";
+			var bySelector, 
+                            selector = handleObj.selector || "",
+                            namespace  = handleObj.namespace ? '.'+handleObj.namespace : '';
+                            
 			if ( selector ) {
 				bySelector = event.find(this, types, selector);
 				if (!bySelector.length ) {
-					$(this).delegate(selector, startingEvent, onFirst);
+					$(this).delegate(selector, startingEvent + namespace, onFirst);
 				}
 			}
 			else {
 				//var bySelector = event.find(this, types, selector);
 				if (!event.find(this, types, selector).length ) {
-					event.add(this, startingEvent, onFirst, {
+					event.add(this, startingEvent + namespace, onFirst, {
 						selector: selector,
 						delegate: this
 					});
