@@ -1,5 +1,5 @@
 
-steal('jquery', 'jquery/dom/styles', function($) {
+steal('jquery', 'jquery/dom/styles', function() {
 
 var
 	//margin is inside border
@@ -12,7 +12,8 @@ var
         oldOuterWidth: $.fn.outerWidth,
         oldInnerWidth: $.fn.innerWidth,
         oldInnerHeight: $.fn.innerHeight
-    };
+    },
+	supportsSetter = $.fn.jquery >= '1.8.0';
 
 $.each({ 
 
@@ -145,33 +146,36 @@ height:
     }
 
     //getter / setter
-    $.fn["outer" + Upper] = function(v, margin) {
-        var first = this[0];
-		if (typeof v == 'number') {
-			// Setting the value
-            first && this[lower](v - getBoxes[lower](first, {padding: true, border: true, margin: margin}))
-            return this;
-        } else {
-			// Return the old value
-            return first ? checks["oldOuter" + Upper].apply(this, arguments) : null;
-        }
-    }
-    $.fn["inner" + Upper] = function(v) {
-        var first = this[0];
-		if (typeof v == 'number') {
-			// Setting the value
-            first&& this[lower](v - getBoxes[lower](first, { padding: true }))
-            return this;
-        } else {
-			// Return the old value
-            return first ? checks["oldInner" + Upper].call(this, v) : null;
-        }
-    }
+	if(!supportsSetter) {
+	    $.fn["outer" + Upper] = function(v, margin) {
+	        var first = this[0];
+			if (typeof v == 'number') {
+				// Setting the value
+	            first && this[lower](v - getBoxes[lower](first, {padding: true, border: true, margin: margin}))
+	            return this;
+	        } else {
+				// Return the old value
+	            return first ? checks["oldOuter" + Upper].apply(this, arguments) : null;
+	        }
+	    }
+	    $.fn["inner" + Upper] = function(v) {
+	        var first = this[0];
+			if (typeof v == 'number') {
+				// Setting the value
+	            first&& this[lower](v - getBoxes[lower](first, { padding: true }))
+	            return this;
+	        } else {
+				// Return the old value
+	            return first ? checks["oldInner" + Upper].apply(this, arguments) : null;
+	        }
+	    }
+	}
+
     //provides animations
 	var animate = function(boxes){
 		// Return the animation function
 		return function(fx){
-			if (fx.state == 0) {
+			if (fx[supportsSetter ? 'pos' : 'state'] == 0) {
 	            fx.start = $(fx.elem)[lower]();
 	            fx.end = fx.end - getBoxes[lower](fx.elem,boxes);
 	        }
