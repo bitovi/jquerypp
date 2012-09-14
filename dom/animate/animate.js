@@ -1,4 +1,4 @@
-steal('jquery', 'jquery/dom/styles').then(function ($) {
+steal('jquery', 'jquery/dom/styles', function () {
 
 	// Overwrites `jQuery.fn.animate` to use CSS 3 animations if possible
 
@@ -244,7 +244,7 @@ steal('jquery', 'jquery/dom/styles').then(function ($) {
 					}));
 
 					// Call the original callback
-					if (optall.old && exec) {
+					if ($.isFunction(optall.old) && exec) {
 						// Call success, pass the DOM element as the this reference
 						optall.old.call(self[0], true)
 					}
