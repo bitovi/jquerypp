@@ -43,6 +43,7 @@ test("new drop added", 3, function(){
 	});
 	stop();
 	Syn.drag({to: "#drop"},"drag", function(){
+		$('body').off('dropon');
 		start();
 	});
 });
