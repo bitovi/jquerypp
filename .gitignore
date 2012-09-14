@@ -5,3 +5,4 @@ dist
 *node_modules*
 build/github/jquerypp
 docs/*
+npm-debug.log

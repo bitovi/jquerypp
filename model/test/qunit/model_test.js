@@ -280,7 +280,7 @@ test("auto methods",function(){
 	   findAll : steal.config().root.join("jquery/model/test")+"/{type}.json",
 	   findOne : steal.config().root.join("jquery/model/test")+"/{id}.json",
 	   create : steal.config().root.join("jquery/model/test")+"/create.json",
-	   update : "POST "+steal.config().root.join("jquery/model/test")+"/update{id}.json"
+	   update : "GET "+steal.config().root.join("jquery/model/test")+"/update{id}.json"
 	},{})
 	stop();
 	School.findAll({type:"schools"}, function(schools){
