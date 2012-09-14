@@ -3,7 +3,7 @@ steal("jquery/event/drop",'funcunit/syn')  //load your app
 	
 module("jquery/event/drop");
 
-test("new drop added",2, function(){
+test("new drop added", 3, function(){
 	var div = $("<div>"+
 			"<div id='drag'></div>"+
 			"<div id='midpoint'></div>"+
@@ -29,6 +29,16 @@ test("new drop added",2, function(){
 		$("#drop").bind("dropover", function(){
 			ok(true, "drop called");
 		});
+
+		$('body').on("dropon", function(ev) {
+			ok(false, 'parent dropon should not be called');
+		});
+
+		$('#drop').on("dropon", function(ev) {
+			ok(true, 'dropon called');
+			ev.stopPropagation();
+		});
+
 		$.Drop.compile();
 	});
 	stop();
