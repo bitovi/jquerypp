@@ -374,17 +374,22 @@ steal('jquery', 'jquery/event/drag', 'jquery/dom/within', 'jquery/dom/compare', 
 			}
 		},
 		end: function( event, moveable ) {
-			var responder, la, 
-				endName = this.lowerName+'end',
-				dropData;
+			var la, 
+			    endName = this.lowerName+'end',
+                            onEvent = $.Event(this.endName, event),
+			    dropData;
 			
 			// call dropon
 			// go through the actives ... if you are over one, call dropped on it
 			for(var i = 0; i < this.last_active.length; i++){
 				la = this.last_active[i]
 				if( this.isAffected(event.vector(), moveable, la)  && la[this.endName]){
-					la.callHandlers(this.endName, null, event, moveable);
+					la.callHandlers(this.endName, null, onEvent, moveable);
 				}
+                                
+                                if (onEvent.isPropagationStopped()) {
+                                    break;
+                                }
 			}
 			// call dropend
 			for(var r =0; r<this._elements.length; r++){
