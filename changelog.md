@@ -2,9 +2,9 @@
 
 __1.0.0__
 
+- feature: jQuery 1.8.0+ compatibility
 - feature: [dragcleanup event](https://github.com/jupiterjs/jquerypp/pull/43)
 - feature: [Reverse and move event](https://github.com/jupiterjs/jquerypp/issues/25)
-- feature: jQuery 1.8.0 compatibility
 - fix: [pass through scrollTop in animate](https://github.com/jupiterjs/jquerypp/pull/40)
 - fix: [Fastfix: Original can be undefined](https://github.com/jupiterjs/jquerypp/pull/45)
 - fix: [Animate Scroll not working](https://github.com/jupiterjs/jquerypp/issues/35)

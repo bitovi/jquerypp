@@ -1,4 +1,4 @@
-steal('steal/build/pluginify', function(steal) {
+steal('steal/build/pluginify', function() {
 	var inexcludes = function(excludes, src) {
 			for(var i = 0; i < excludes.length; i++) {
 				if(src.indexOf(excludes[i]) !== -1) {
@@ -13,9 +13,10 @@ steal('steal/build/pluginify', function(steal) {
 				skipCallbacks: true
 			}, function(opener){
 				var ret = [];
-				opener.each(function(stl, text){
-					if(!inexcludes(options.exclude || [], stl.rootSrc.toString())) {
-						ret.push(stl);
+				opener.each(function(stl, text) {
+					var src = stl.src.toString();
+					if(!inexcludes(options.exclude || [], src)) {
+						ret.push(src);
 					}
 				});
 				callback(ret);
@@ -30,20 +31,21 @@ steal('steal/build/pluginify', function(steal) {
 			var content = "";
 
 			getDependencies(file, ops, function(steals) {
-				if(steals.length > 1) {
-					content += "// Dependencies:\n//\n";
-				}
-				steals.forEach(function(stl) {
-					if(stl.rootSrc !== file) {
-						content += "//    - " + (plugins[stl.rootSrc] || stl.rootSrc) + "\n";
-					}
-				});
-				if(steals.length > 1) {
-					content += "\n";
-				}
-				content += steal.build.pluginify.content({ rootSrc : file }, ops);
-				new steal.File(options.out + plugins[file]).save(content);
-				print('  > ' + file + ' -> ' + plugins[file]);
+				console.log(steals);
+//				if(steals.length > 1) {
+//					content += "// Dependencies:\n//\n";
+//				}
+//				steals.forEach(function(stl) {
+//					if(stl.rootSrc !== file) {
+//						content += "//    - " + (plugins[stl.rootSrc] || stl.rootSrc) + "\n";
+//					}
+//				});
+//				if(steals.length > 1) {
+//					content += "\n";
+//				}
+//				content += steal.build.pluginify.content({ rootSrc : file }, ops);
+//				new steal.File(options.out + plugins[file]).save(content);
+//				print('  > ' + file + ' -> ' + plugins[file]);
 			});
 		}
 	}
