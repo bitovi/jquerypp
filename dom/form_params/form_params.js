@@ -10,7 +10,7 @@ steal("jquery", function( $ ) {
 				return true;
 			} else if ( value === 'false' ) {
 				return false;
-			} else if ( value === '' ) {
+			} else if ( value === '' || value === null ) {
 				return undefined;
 			}
 			return value;
