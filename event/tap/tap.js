@@ -25,6 +25,7 @@ steal('jquery', 'jquery/event/livehack', function( $ ) {
 			stop,
 			delegate = ev.delegateTarget || ev.currentTarget,
 			$delegate = $(delegate),
+			originalEvent = ev,
 			selector = ev.handleObj.selector,
 			entered = this,
 			moved = false,
@@ -37,7 +38,7 @@ steal('jquery', 'jquery/event/livehack', function( $ ) {
 			if (( Math.abs( start.coords[0] - stop.coords[0] ) < 10) &&
 				( Math.abs( start.coords[1] - stop.coords[1] ) < 10 )) {
 				$.each($.event.find( delegate, ["tap"], selector ), function() {
-					var ev = this.call( entered, ev, {
+					var ev = this.call( entered, originalEvent, {
 						start : start, 
 						end: stop
 					});
