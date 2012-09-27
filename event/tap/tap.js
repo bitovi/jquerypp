@@ -14,15 +14,23 @@ steal('jquery', 'jquery/event/livehack', function( $ ) {
 				coords: [ d.pageX, d.pageY ],
 				origin: $( event.target )
 			};
-		};
+		},
+		touchStartTime = Date.now(),
+		touchStart = {};
+
+	// Listen and record information on touch start
+	$(document.body).on(touchStartEvent, function(ev) {
+		touchStart = data(ev);
+		touchStartTime = Date.now();
+	});
 
 	/**
 	* @add jQuery.event.special
 	*/
-	$.event.setupHelper( ["tap"], touchStartEvent, function( ev ) {
+	$.event.setupHelper( ["tap"], touchStopEvent, function( ev ) {
 		//listen to mouseup
-		var start = data(ev),
-			stop,
+		var stop = data(ev),
+			start = touchStart,
 			delegate = ev.delegateTarget || ev.currentTarget,
 			$delegate = $(delegate),
 			originalEvent = ev,
@@ -30,27 +38,34 @@ steal('jquery', 'jquery/event/livehack', function( $ ) {
 			entered = this,
 			moved = false,
 			touching = true,
-			timer;
+			timer,
+			now = new Date();
 		
-		
-		function upHandler(event){
-			stop = data(event);
-			if (( Math.abs( start.coords[0] - stop.coords[0] ) < 10) &&
+
+		// If the time between touch up and down was small and user's finger
+		// didn't move far, find all the tap events and trigger.
+		if(now - touchStartTime < 500 && ( Math.abs( start.coords[0] - stop.coords[0] ) < 10) &&
 				( Math.abs( start.coords[1] - stop.coords[1] ) < 10 )) {
-				$.each($.event.find( delegate, ["tap"], selector ), function() {
-					var ev = this.call( entered, originalEvent, {
-						start : start, 
-						end: stop
-					});
+			$.each($.event.find( delegate, ["tap"], selector ), function() {
+
+				var tap = new $.Event('tap');
+
+				var result = this.call( entered, tap, {
+					start : start, 
+					end: stop
 				});
-			}
+
+				if(result == false || tap.isDefaultPrevented()) {
+					originalEvent.preventDefault();
+				}
+				if(result == false || tap.isPropagationStopped()) {
+					originalEvent.stopPropagation();
+				}
+				if(tap.isImmediatePropagationStopped()) {
+					originalEvent.stopImmediatePropagation();
+				}
+			});
 		}
-		
-		timer = setTimeout(function() {
-			$delegate.unbind(touchStopEvent, upHandler);
-		}, 500 );
-		
-		$delegate.one(touchStopEvent, upHandler);
 		
 	});
 
