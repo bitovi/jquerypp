@@ -362,10 +362,10 @@ steal('jquery', 'jquery/lang/vector', 'jquery/event/livehack', 'jquery/event/rev
 			this.offsetv = newOffsetv;
 			style = this.movingElement[0].style;
 			if (!this._cancelled && !this._horizontal ) {
-				style.top = this.required_css_position.top() + "px";
+				style.top = Math.round(this.required_css_position.top()) + (style.top.match(/px/) ? "px" : "%");
 			}
 			if (!this._cancelled && !this._vertical ) {
-				style.left = this.required_css_position.left() + "px";
+				style.left = Math.round(this.required_css_position.left()) + (style.top.match(/px/) ? "px" : "%");
 			}
 		},
 		move: function( event ) {
