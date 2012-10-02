@@ -1,6 +1,4 @@
-
 steal('jquery', function($){
-
 /**
  * @function jQuery.fn.triggerAsync
  * @parent jQuery.event.pause
@@ -29,25 +27,24 @@ steal('jquery', function($){
  */
 $.fn.triggerAsync = function(type, data, success, prevented){
 	if(typeof data == 'function'){
+		prevented=success;
 		success = data;
 		data = undefined;
 	}
 	
-	if ( this[0] ) {
-		// Create a new jQuery event object and store the original preventDefault
-		var event = $.Event( type ),
-			old = event.preventDefault;
-
-		event.preventDefault = function(){
-			old.apply(this, arguments);
-			// call the prevented callback when event.preventDefault is called
-			prevented && prevented(this)
-		}
+	if ( this.length ) {
+		var el=this;
 		// Trigger the event with the success callback as the success handler
-		jQuery.event.trigger( {type: type, _success: success}, data, this[0]  );
+		// when triggerAsync called within another triggerAsync,it's the same tick time so we should use timeout
+		// http://javascriptweblog.wordpress.com/2010/06/28/understanding-javascript-timers/
+		setTimeout(function(){
+			el.trigger( {type: type, _success: success,_prevented:prevented}, data);
+		},0);
+	
 	} else{
 		// If we have no elements call the success callback right away
-		success.call(this);
+		if(success)
+			success.call(this);
 	}
 	return this;
 }
@@ -79,6 +76,7 @@ $event.special["default"] = {
 var oldTrigger = $event.trigger;
 
 $event.trigger =  function defaultTriggerer( event, data, elem, onlyHandlers){
+
 	// Event object or event type
 	var type = event.type || event,
 		// Caller can pass in an Event, Object, or just an event type string
@@ -89,8 +87,9 @@ $event.trigger =  function defaultTriggerer( event, data, elem, onlyHandlers){
 			new jQuery.Event( type, event ) :
 			// Just the event type (string)
 			new jQuery.Event( type),
-		res = oldTrigger.call($.event, event, data, elem, onlyHandlers);
-	
+			res=oldTrigger.call($.event,event, data, elem, onlyHandlers),
+			paused=event.isPaused && event.isPaused();
+		
 	if(!onlyHandlers && !event.isDefaultPrevented() && event.type.indexOf("default") !== 0) {
 		// Trigger the default. event
 		oldTrigger("default."+event.type, data, elem)
@@ -98,8 +97,15 @@ $event.trigger =  function defaultTriggerer( event, data, elem, onlyHandlers){
 			event._success(event)
 		}
 	}
+	
+	if(!onlyHandlers && event.isDefaultPrevented() && event.type.indexOf("default") !== 0 && !paused ){
+		if(event._prevented){
+			event._prevented(event);
+		}
+	}
+
 	// code for paused
-	if( event.isPaused && event.isPaused() ){
+	if( paused ){
 		// set back original stuff
 		event.isDefaultPrevented = 
 			event.pausedState.isDefaultPrevented;
