@@ -32,13 +32,13 @@ $.fn.triggerAsync = function(type, data, success, prevented){
 		data = undefined;
 	}
 	
-	if ( this[0] ) {
+	if ( this.length ) {
+		var el=this;
 		// Trigger the event with the success callback as the success handler
-		var el=this[0];
 		// when triggerAsync called within another triggerAsync,it's the same tick time so we should use timeout
 		// http://javascriptweblog.wordpress.com/2010/06/28/understanding-javascript-timers/
 		setTimeout(function(){
-			jQuery.event.trigger( {type: type, _success: success,_prevented:prevented}, data, el );
+			el.trigger( {type: type, _success: success,_prevented:prevented}, data);
 		},0);
 	
 	} else{
