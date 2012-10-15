@@ -11,6 +11,7 @@ __1.0.0__
 - fix: [.stop() does not stop callbacks from being executed](https://github.com/jupiterjs/jquerypp/issues/28)
 - fix: [jQuery.event.swipe.max isn't actually being used](https://github.com/jupiterjs/jquerypp/issues/33)
 - fix: [Range triggers error on IE8](https://github.com/jupiterjs/jquerypp/issues/39)
+- fix: [[FormParams] convertValue function: Null value to undefined (Internet Explorer Fix)](https://github.com/jupiterjs/jquerypp/pull/51)
 
 __1.0 Beta 2__
 

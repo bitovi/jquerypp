@@ -1,7 +1,9 @@
-steal('steal/build', function(steal) {
+steal('steal/build', function() {
 	var inexcludes = function(excludes, src) {
+		console.log(excludes, src.toString());
 		for(var i = 0; i < excludes.length; i++) {
-			if(src.indexOf(excludes[i]) !== -1) {
+			console.log(src.toString().indexOf(excludes[i]), src.toString());
+			if(src.toString().indexOf(excludes[i]) !== -1) {
 				return true;
 			}
 		}
@@ -27,15 +29,20 @@ steal('steal/build', function(steal) {
 			skipCallbacks: true
 		}, function(opener){
 			opener.each(function(stl){
-				if(!inexcludes(options.exclude || [], stl.rootSrc.toString())) {
-					var file = steal.File(stl.rootSrc.toString()),
+				if(!inexcludes(options.exclude || [], stl.id)) {
+					console.log(stl.id, stl.src);
+					var file = steal.File(stl.src.toString())
+					// console.log(steal.File(out + file.dir()))
+				/*
+					var file = steal.File(stl.src.toString()),
 						outPath = steal.File(out + file.dir()),
 						copyTo = outPath.path + '/' + file.filename();
 					outPath.mkdirs();
 					print('  > ' + copyTo);
 					file.copyTo(copyTo);
+				*/
 				} else {
-					print('  Ignoring ' + stl.rootSrc.toString());
+					print('  Ignoring ' + stl.id);
 				}
 			})
 		});
