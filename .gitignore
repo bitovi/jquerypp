@@ -6,3 +6,7 @@ dist
 build/github/jquerypp
 docs/*
 npm-debug.log
+build/ci/can
+build/ci/jquery
+build/ci/funcunit
+build/ci/steal
