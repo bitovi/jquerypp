@@ -3,7 +3,7 @@ steal('jquery/build/extract.js', 'steal/clean', function() {
 
 	var out = "jquery/build/docco/standalone/",
 		excludes = [ 'steal/dev',
-			"can/util/jquery/jquery.1.7.1.js",
+			"can/util/jquery/jquery.1.8.2.js",
 			"jquery/build/lib.js" ],
 		plugins = {
 			"jquery/dom/animate/animate.js" : "jquery.animate.js",
