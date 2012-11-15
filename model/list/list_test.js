@@ -28,7 +28,7 @@ test("hookup with list", function(){
 		p.hookup( child[0] );
 		div.append(child)
 	}
-	var models = div.children().models();
+	var models = div.children().instances();
 	ok(models.constructor === Person.List, "correct type");
 	equals(models.length, 20,  "Got 20 people")
 
