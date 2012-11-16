@@ -210,4 +210,6 @@ steal('jquery', function($){
 			return new $.Vector(this[which + "Width"](), this[which + "Height"]());
 		}
 	};
+
+	return $;
 });
