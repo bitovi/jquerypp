@@ -1,14 +1,14 @@
 module.exports = function (grunt) {
-
 	var _ = grunt.utils._;
-	var excludes = [/\.min\./, /qunit\.js/];
 	var outFiles = {
 		edge : '<%= meta.out %>/edge/**/*.js',
-		latest : '<%= meta.out %>/<%= pkg.version %>/**/*.js',
-		_options : {
-			exclude : excludes
-		}
+		latest : '<%= meta.out %>/<%= pkg.version %>/**/*.js'
 	};
+	var withExclude = _.extend({
+		_options : {
+			exclude : [/\.min\./, /qunit\.js/]
+		}
+	}, outFiles);
 
 	grunt.initConfig({
 		pkg : '<json:package.json>',
@@ -21,11 +21,11 @@ module.exports = function (grunt) {
 				},
 				exclude : [/\.min\./, /qunit\.js/]
 			},
-			banner : '/*! <%= pkg.title || pkg.name %> - <%= pkg.version %> - ' +
-				'<%= grunt.template.today("yyyy-mm-dd") %>\n' +
+			banner : '/*\n* <%= pkg.title || pkg.name %> - <%= pkg.version %> ' +
+				'(<%= grunt.template.today("yyyy-mm-dd") %>)\n' +
 				'<%= pkg.homepage ? "* " + pkg.homepage + "\n" : "" %>' +
-				'* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' +
-				' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */'
+				'* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>\n' +
+				'* Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %>\n*/'
 		},
 		beautifier : {
 			codebase : '<config:meta.beautifier>',
@@ -70,11 +70,12 @@ module.exports = function (grunt) {
 		},
 		downloads : '<json:build/downloads.json>',
 		*/
-		docco : outFiles,
-		strip : outFiles
+		bannerize : outFiles,
+		docco : withExclude,
+		strip : withExclude
 	});
 
 	grunt.loadTasks("../build/tasks");
-	grunt.registerTask('edge', 'build:edge strip:edge beautify:dist');
-	grunt.registerTask('latest', 'build:latest strip:latest beautify:dist');
+	grunt.registerTask('edge', 'build:edge strip:edge beautify:dist bannerize:edge');
+	grunt.registerTask('latest', 'build:latest strip:latest beautify:dist bannerize:latest');
 };

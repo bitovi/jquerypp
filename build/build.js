@@ -37,7 +37,10 @@ steal('steal/build/pluginify', 'steal/build/amdify', function () {
 	var buildAmd = function () {
 		steal.build.amdify(buildFile, {
 			out : outFolder + '/amd',
-			exclude : options.exclude
+			exclude : options.exclude,
+			map : {
+				'jquery/' : 'jquerypp/'
+			}
 		});
 	};
 
