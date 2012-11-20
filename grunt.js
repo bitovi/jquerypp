@@ -50,9 +50,8 @@ module.exports = function (grunt) {
 				out : 'jquery/<%= meta.out %>'
 			}
 		},
-		/*
 		shell : {
-			bundleLatest : 'cd <%= meta.out %> && zip -r can.js.<%= pkg.version %>.zip <%= pkg.version %>/',
+			bundleLatest : 'cd <%= meta.out %> && zip -r jquerypp.<%= pkg.version %>.zip <%= pkg.version %>/',
 			getGhPages : 'git clone -b gh-pages <%= pkg.repository.url %> build/gh-pages',
 			copyLatest : 'rm -rf build/gh-pages/release/<%= pkg.version %> && ' +
 				'cp -R <%= meta.out %>/<%= pkg.version %> build/gh-pages/release/<%= pkg.version %> && ' +
@@ -69,7 +68,6 @@ module.exports = function (grunt) {
 			}
 		},
 		downloads : '<json:build/downloads.json>',
-		*/
 		bannerize : outFiles,
 		docco : withExclude,
 		strip : withExclude
@@ -78,4 +76,6 @@ module.exports = function (grunt) {
 	grunt.loadTasks("../build/tasks");
 	grunt.registerTask('edge', 'build:edge strip:edge beautify:dist bannerize:edge');
 	grunt.registerTask('latest', 'build:latest strip:latest beautify:dist bannerize:latest');
+	grunt.registerTask("ghpages", "shell:cleanup shell:getGhPages shell:copyLatest shell:updateGhPages shell:cleanup");
+	grunt.registerTask("deploy", "latest ghpages shell:bundleLatest downloads");
 };
