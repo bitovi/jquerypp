@@ -846,15 +846,15 @@ and [jQueryMX](https://github.com/jupiterjs/jquerymx/contributors), and the peop
 __1.0.0__ (November 20th 2012)
 
 - feature: jQuery 1.8.0+ compatibility
-- feature: [dragcleanup event](https://github.com/jupiterjs/jquerypp/pull/43)
-- feature: [Reverse and move event](https://github.com/jupiterjs/jquerypp/issues/25)
-- fix: [pass through scrollTop in animate](https://github.com/jupiterjs/jquerypp/pull/40)
-- fix: [Fastfix: Original can be undefined](https://github.com/jupiterjs/jquerypp/pull/45)
-- fix: [Animate Scroll not working](https://github.com/jupiterjs/jquerypp/issues/35)
-- fix: [.stop() does not stop callbacks from being executed](https://github.com/jupiterjs/jquerypp/issues/28)
-- fix: [jQuery.event.swipe.max isn't actually being used](https://github.com/jupiterjs/jquerypp/issues/33)
-- fix: [Range triggers error on IE8](https://github.com/jupiterjs/jquerypp/issues/39)
-- fix: [[FormParams] convertValue function: Null value to undefined (Internet Explorer Fix)](https://github.com/jupiterjs/jquerypp/pull/51)
+- feature: [dragcleanup event](https://github.com/bitovi/jquerypp/pull/43)
+- feature: [Reverse and move event](https://github.com/bitovi/jquerypp/issues/25)
+- fix: [pass through scrollTop in animate](https://github.com/bitovi/jquerypp/pull/40)
+- fix: [Fastfix: Original can be undefined](https://github.com/bitovi/jquerypp/pull/45)
+- fix: [Animate Scroll not working](https://github.com/bitovi/jquerypp/issues/35)
+- fix: [.stop() does not stop callbacks from being executed](https://github.com/bitovi/jquerypp/issues/28)
+- fix: [jQuery.event.swipe.max isn't actually being used](https://github.com/bitovi/jquerypp/issues/33)
+- fix: [Range triggers error on IE8](https://github.com/bitovi/jquerypp/issues/39)
+- fix: [[FormParams] convertValue function: Null value to undefined (Internet Explorer Fix)](https://github.com/bitovi/jquerypp/pull/51)
 - fix: [HoverInit delay 0 does not trigger hoverenter if immediately moused out](https://github.com/bitovi/jquerypp/issues/57)
 
 __1.0 Beta 2__
