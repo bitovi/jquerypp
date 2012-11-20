@@ -763,7 +763,7 @@ Steal as submodules that are used to generate the documentation and build the jQ
 
  1. Clone DoneJS with:
 
-        git clone git://github.com/jupiterjs/donejs
+        git clone git://github.com/bitovi/donejs
 
  2. Install all submodules by running
 
@@ -833,7 +833,7 @@ you want to build and run the above command.
 
 The following lists everyone who's contributed something to CanJS.  If we've forgotten you, please add yourself.
 
-First, thanks to everyone who's contributed to [JavaScriptMVC](https://github.com/jupiterjs/javascriptmvc/contributors)
+First, thanks to everyone who's contributed to [JavaScriptMVC](https://github.com/bitovi/javascriptmvc/contributors)
 and [jQueryMX](https://github.com/jupiterjs/jquerymx/contributors), and the people at
 [Bitovi](http://bitovi.com/people/). This page is for contributors after jQuery++'s launch:
 
