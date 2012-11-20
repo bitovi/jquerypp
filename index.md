@@ -722,7 +722,7 @@ Bitovi _(developers of jQuery++)_ offers [training](http://bitovi.com/training/)
 jQuery++ does things the jQuery way, which makes it really easy to learn if you are already familiar with jQuery.
 Get functionality that was always tricky to implement from one coherent library:
 
-- Set and animte outer and inner dimensions with [dimensions](#dimensions)
+- Set and animate outer and inner dimensions with [dimensions](#dimensions)
 - Serialize forms into objects with [formParams](#formparams)
 - [Drag](#drag) & [drop](#drop) events - no need for jQuery UI
 - [Resize](#resize) elements the right way
