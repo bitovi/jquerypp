@@ -68,7 +68,7 @@ steal.map({
 
 ### Using AMD
 
-The files to load the jQuery++ plugins with an [AMD](https://github.com/amdjs/amdjs-api/wiki/AMD) module loader like [RequireJS](http://requirejs.org/), are located in the `amd/` folder of the [full download](https://github.com/downloads/bitovi/jquerypp/jquerypp.{{page.version}}.zip).
+The files to load the jQuery++ plugins with an [AMD](https://github.com/amdjs/amdjs-api/wiki/AMD) module loader like [RequireJS](http://requirejs.org/), are located in the `amd/` folder of the [full download](https://github.com/downloads/bitovi/jquerypp/jquerypp-{{page.version}}.zip).
 Place the `jquerypp/` folder in your module directory and load a plugin like this:
 
 {% highlight javascript %}
