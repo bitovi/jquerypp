@@ -10,7 +10,7 @@
     "filename": "jquerypp-<%= pkg.version %>.min.js"
   },
   "dist": {
-    "src": "dist/jquerypp.<%= pkg.version %>.js",
+    "src": "dist/jquerypp.<%= pkg.version %>.zip",
     "description": "jQuery++ <%= pkg.version %> - Full Download",
     "filename": "jquerypp-<%= pkg.version %>.zip",
     "content_type" : "application/zip"
