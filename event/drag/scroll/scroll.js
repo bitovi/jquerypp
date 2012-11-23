@@ -107,14 +107,17 @@ $.extend($.Scrollable.prototype,{
 			distance =  this.options.distance;
 
 		//check if we should scroll
-		if(bottom < distance && this.y)
+		if(bottom < distance && this.y) {
 			dy = this.options.delta(bottom,distance);
-		else if(top < distance && this.y)
-			dy = -this.options.delta(top,distance)
-		if(right < distance && this.options && this.x)
+		} else if(top < distance && this.y) {
+			dy = -this.options.delta(top,distance);
+		}
+
+		if(right < distance && this.options && this.x) {
 			dx = this.options.delta(right,distance);
-		else if(left < distance && this.x)
+		} else if(left < distance && this.x) {
 			dx = -this.options.delta(left,distance);
+		}
 		
 		//if we should scroll
 		if(dx || dy){
