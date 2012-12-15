@@ -1,4 +1,4 @@
-steal('jquery/model/service').then(function(){
+steal('jquery', 'jquery/model/service').then(function($){
 
 $.Model.service.jsonRest = $.Model.service({
 	url : "",

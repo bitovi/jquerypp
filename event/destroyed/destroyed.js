@@ -6,7 +6,7 @@ steal('jquery', function( $ ) {
 	 */
 
 	// Store the old jQuery.cleanData
-	var oldClean = jQuery.cleanData;
+	var oldClean = $.cleanData;
 
 	// Overwrites cleanData which is called by jQuery on manipulation methods
 	$.cleanData = function( elems ) {

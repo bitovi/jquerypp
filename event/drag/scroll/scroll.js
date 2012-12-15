@@ -39,7 +39,7 @@ $.Drag.prototype.
 	},
 	
 $.Scrollable = function(element, options){
-	this.element = jQuery(element);
+	this.element = $(element);
 	this.options = $.extend({
 		// when  we should start scrolling
 		distance : 30,
@@ -54,7 +54,7 @@ $.Scrollable = function(element, options){
 }
 $.extend($.Scrollable.prototype,{
 	init: function( element ) {
-		this.element = jQuery(element);
+		this.element = $(element);
 	},
 	callHandlers: function( method, el, ev, drag ) {
 		this[method](el || this.element[0], ev, this, drag)

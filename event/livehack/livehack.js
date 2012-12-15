@@ -1,6 +1,6 @@
 steal('jquery', function($) {
 
-	var event = jQuery.event,
+	var event = $.event,
 
 		//helper that finds handlers by type and calls back a function, this is basically handle
 		// events - the events object

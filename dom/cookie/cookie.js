@@ -49,7 +49,7 @@ steal('jquery', 'jquery/lang/json', function($) {
      *
      * @return {String} the value of the cookie or {undefined} when setting the cookie.
      */
-    jQuery.cookie = function(name, value, options) {
+    $.cookie = function(name, value, options) {
         if (typeof value != 'undefined') {
             // name and value given, set cookie
             options = options ||
@@ -59,8 +59,8 @@ steal('jquery', 'jquery/lang/json', function($) {
                 options.expires = -1;
             }
 	        // convert value to JSON string
-            if (typeof value == 'object' && jQuery.toJSON) {
-                value = jQuery.toJSON(value);
+            if (typeof value == 'object' && $.toJSON) {
+                value = $.toJSON(value);
             }
             var expires = '';
 	        // Set expiry
@@ -89,7 +89,7 @@ steal('jquery', 'jquery/lang/json', function($) {
             if (document.cookie && document.cookie != '') {
                 var cookies = document.cookie.split(';');
                 for (var i = 0; i < cookies.length; i++) {
-                    var cookie = jQuery.trim(cookies[i]);
+                    var cookie = $.trim(cookies[i]);
                     // Does this cookie string begin with the name we want?
                     if (cookie.substring(0, name.length + 1) == (name + '=')) {
 	                    // Get the cookie value
@@ -99,9 +99,9 @@ steal('jquery', 'jquery/lang/json', function($) {
                 }
             }
 	        // Parse JSON from the cookie into an object
-            if (jQuery.evalJSON && cookieValue && cookieValue.match(/^\s*\{/)) {
+            if ($.evalJSON && cookieValue && cookieValue.match(/^\s*\{/)) {
                 try {
-                    cookieValue = jQuery.evalJSON(cookieValue);
+                    cookieValue = $.evalJSON(cookieValue);
                 }
                 catch (e) {
                 }

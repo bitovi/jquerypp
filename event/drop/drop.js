@@ -110,7 +110,7 @@ steal('jquery', 'jquery/event/drag', 'jquery/dom/within', 'jquery/dom/compare', 
 	 *      });
 	 */
 	$.Drop = function(callbacks, element){
-		jQuery.extend(this,callbacks);
+		$.extend(this,callbacks);
 		this.element = $(element);
 	}
 	// add the elements ...
@@ -248,7 +248,7 @@ steal('jquery', 'jquery/event/drag', 'jquery/dom/within', 'jquery/dom/compare', 
 
 				// get drop elements by selector
 				for(selector in drops){ 
-					dropResponders = selector ? jQuery(selector, el) : [el];
+					dropResponders = selector ? $(selector, el) : [el];
 					
 					// for each drop element
 					for(var e= 0; e < dropResponders.length; e++){ 
