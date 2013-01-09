@@ -67,7 +67,6 @@ module.exports = function (grunt) {
 				failOnError : true
 			}
 		},
-		downloads : '<json:build/downloads.json>',
 		bannerize : outFiles,
 		docco : withExclude,
 		strip : withExclude
@@ -77,5 +76,4 @@ module.exports = function (grunt) {
 	grunt.registerTask('edge', 'build:edge strip:edge beautify:dist bannerize:edge');
 	grunt.registerTask('latest', 'build:latest strip:latest beautify:dist bannerize:latest');
 	grunt.registerTask("ghpages", "shell:cleanup shell:getGhPages shell:copyLatest shell:updateGhPages shell:cleanup docco:latest");
-	grunt.registerTask("deploy", "latest ghpages shell:bundleLatest downloads");
 };
