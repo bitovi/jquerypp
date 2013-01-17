@@ -2,7 +2,7 @@ load("build/underscore.js");
 var _ = this._;
 
 load("steal/rhino/rhino.js");
-steal('steal/build/pluginify', 'steal/build/amdify', function () {
+steal('steal/build/pluginify', 'steal/build/amdify', 'steal/build/extract', function () {
 	// Use with ./js can/build/dist.js <outputfolder> <version> <library1> <library2>
 	var version = _args[1] || 'edge';
 	var outFolder = (_args[0] || 'jquery/dist/') + version + '/';
@@ -44,8 +44,16 @@ steal('steal/build/pluginify', 'steal/build/amdify', function () {
 		});
 	};
 
+	var extractFiles = function() {
+		steal.build.extract(buildFile, {
+			out : outFolder + 'raw',
+			exclude : options.exclude
+		});
+	}
+
 	steal.File(outFolder).mkdirs();
 
 	build();
 	buildAmd();
+	extractFiles();
 });
