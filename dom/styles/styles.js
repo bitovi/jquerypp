@@ -38,7 +38,7 @@ steal('jquery', function( $ ) {
 			oldName = name.replace(rdashAlpha, fcamelCase);
 
 			if ( rfloat.test(name) ) {
-				name = jQuery.support.cssFloat ? "float" : "styleFloat";
+				name = $.support.cssFloat ? "float" : "styleFloat";
 				oldName = "cssFloat";
 			}
 

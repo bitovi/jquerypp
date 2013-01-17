@@ -50,7 +50,7 @@ steal('jquery', 'can/util', 'jquery/view').then(function($, can){
 		if ( fn ) {
 			// Build the hierarchical content to be used during insertion into DOM
 			newItem.tmpl = fn;
-			newItem._ctnt = newItem._ctnt || newItem.tmpl( jQuery, newItem );
+			newItem._ctnt = newItem._ctnt || newItem.tmpl( $, newItem );
 			newItem.key = ++itemKey;
 			// Keep track of new template item, until it is stored as jQuery Data on DOM element
 			(stack.length ? wrappedItems : newTmplItems)[itemKey] = newItem;
@@ -67,7 +67,7 @@ steal('jquery', 'can/util', 'jquery/view').then(function($, can){
 		replaceAll: "replaceWith"
 	}, function( name, original ) {
 		$.fn[ name ] = function( selector ) {
-			var ret = [], insert = jQuery( selector ), elems, i, l, tmplItems,
+			var ret = [], insert = $( selector ), elems, i, l, tmplItems,
 				parent = this.length === 1 && this[0].parentNode;
 
 			appendToTmplItems = newTmplItems || {};
@@ -78,7 +78,7 @@ steal('jquery', 'can/util', 'jquery/view').then(function($, can){
 				for ( i = 0, l = insert.length; i < l; i++ ) {
 					cloneIndex = i;
 					elems = (i > 0 ? this.clone(true) : this).get();
-					$.fn[ original ].apply( jQuery(insert[i]), elems );
+					$.fn[ original ].apply( $(insert[i]), elems );
 					ret = ret.concat( elems );
 				}
 				cloneIndex = 0;
@@ -154,7 +154,7 @@ steal('jquery', 'can/util', 'jquery/view').then(function($, can){
 					updateWrapped( parentItem, parentItem.wrapped );
 				}
 				// Rebuild, without creating a new template item
-				return jQuery( build( parentItem, null, parentItem.tmpl( jQuery, parentItem ) ));
+				return $( build( parentItem, null, parentItem.tmpl( $, parentItem ) ));
 			}
 			if ( !tmpl ) {
 				return []; // Could throw...
@@ -170,13 +170,13 @@ steal('jquery', 'can/util', 'jquery/view').then(function($, can){
 					return dataItem ? newTmplItem( options, parentItem, tmpl, dataItem ) : null;
 				}) :
 				[ newTmplItem( options, parentItem, tmpl, data ) ];
-			return topLevel ? jQuery( build( parentItem, null, ret ) ) : ret;
+			return topLevel ? $( build( parentItem, null, ret ) ) : ret;
 		},
 
 		// Return rendered template item for an element.
 		tmplItem: function( elem ) {
 			var tmplItem;
-			if ( elem instanceof jQuery ) {
+			if ( elem instanceof $ ) {
 				elem = elem[0];
 			}
 			while ( elem && elem.nodeType === 1 && !(tmplItem = $.data( elem, "tmplItem" )) && (elem = elem.parentNode) ) {}
@@ -200,7 +200,7 @@ steal('jquery', 'can/util', 'jquery/view').then(function($, can){
 				if ( typeof tmpl === "string" ) {
 					// This is an HTML string being passed directly in.
 					tmpl = buildTmplFn( tmpl )
-				} else if ( tmpl instanceof jQuery ) {
+				} else if ( tmpl instanceof $ ) {
 					tmpl = tmpl[0] || {};
 				}
 				if ( tmpl.nodeType ) {
@@ -213,7 +213,7 @@ steal('jquery', 'can/util', 'jquery/view').then(function($, can){
 			return name ? (typeof name !== "string" ? $.template( null, name ): 
 				($.template[name] || 
 					// If not in map, treat as a selector. (If integrated with core, use quickExpr.exec) 
-					$.template( null, htmlExpr.test( name ) ? name : jQuery( name )))) : null; 
+					$.template( null, htmlExpr.test( name ) ? name : $( name )))) : null; 
 		},
 
 		encode: function( text ) {
@@ -310,7 +310,7 @@ steal('jquery', 'can/util', 'jquery/view').then(function($, can){
 		// Support templates which have initial or final text nodes, or consist only of text
 		// Also support HTML entities within the HTML markup.
 		ret.replace( /^\s*([^<\s][^<]*)?(<[\w\W]+>)([^>]*[^>\s])?\s*$/, function( all, before, middle, after) {
-			frag = jQuery( middle ).get();
+			frag = $( middle ).get();
 
 			storeTmplItems( frag );
 			if ( before ) {
@@ -386,7 +386,7 @@ steal('jquery', 'can/util', 'jquery/view').then(function($, can){
 		// Build the wrapped content. 
 		options._wrap = build( options, true, 
 			// Suport imperative scenario in which options.wrapped can be set to a selector or an HTML string.
-			$.isArray( wrapped ) ? wrapped : [htmlExpr.test( wrapped ) ? wrapped : jQuery( wrapped ).html()]
+			$.isArray( wrapped ) ? wrapped : [htmlExpr.test( wrapped ) ? wrapped : $( wrapped ).html()]
 		).join("");
 	}
 
@@ -491,7 +491,7 @@ steal('jquery', 'can/util', 'jquery/view').then(function($, can){
 	function tiHtml( filter, textOnly ) {
 		var wrapped = this._wrap;
 		return $.map(
-			jQuery( $.isArray( wrapped ) ? wrapped.join("") : wrapped ).filter( filter || "*" ),
+			$( $.isArray( wrapped ) ? wrapped.join("") : wrapped ).filter( filter || "*" ),
 			function(e) {
 				return textOnly ?
 					e.innerText || e.textContent :
@@ -502,7 +502,7 @@ steal('jquery', 'can/util', 'jquery/view').then(function($, can){
 	function tiUpdate() {
 		var coll = this.nodes;
 		$.tmpl( null, null, null, this).insertBefore( coll[0] );
-		jQuery( coll ).remove();
+		$( coll ).remove();
 	}
 	
 	$.View.register({

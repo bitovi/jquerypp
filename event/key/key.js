@@ -1,7 +1,7 @@
 steal('jquery', function($){
 	var keymap = {},
 		reverseKeyMap = {},
-		currentBrowser = jQuery.uaMatch(navigator.userAgent).browser;
+		currentBrowser = $.uaMatch(navigator.userAgent).browser;
 		
 	/**
 	 * @hide
@@ -110,7 +110,7 @@ steal('jquery', function($){
 	 *
 	 * @return {String} The string representation of of the key pressed.
 	 */
-	jQuery.Event.prototype.keyName  = function(){
+	$.Event.prototype.keyName  = function(){
 		var event = this,
 			test = /\w/,
 			// It can be either keyCode or charCode.
