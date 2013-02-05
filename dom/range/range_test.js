@@ -201,5 +201,17 @@ steal("funcunit/qunit", "jquery/dom/range", "jquery/dom/selection").then(functio
 		equals(pos, -1, "pos works")
 	});
 
+	test("move across boundaries", function(){
+		
+		var div = document.createElement('div');
+		div.innerHTML = 'I\'ve been writing up example widgets on bitovi.com. Here\'s the first three:'+
+						'<a>THE TEXT</a>'
+		$("#qunit-test-area").html(div)
+		 
+		equals( $(div).range().start("+79").toString(), "TEXT")
+		$("#qunit-test-area").empty()
+	})
+
+
 })
 

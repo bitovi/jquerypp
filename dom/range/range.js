@@ -790,7 +790,7 @@ steal('jquery', 'jquery/dom/compare', function ($) {
 				from = mover(from)
 			}
 			while (from && howMany >= from.nodeValue.length) {
-				hasMany = howMany - from.nodeValue.length;
+				howMany = howMany - from.nodeValue.length;
 				from = mover(from)
 			}
 			return {
