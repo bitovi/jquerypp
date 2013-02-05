@@ -16,7 +16,7 @@ steal("funcunit/qunit", "jquery/dom/range", "jquery/dom/selection").then(functio
 		range.start("+2");
 		range.end("-2");
 		range.select();
-		equals(range.toString(), "llo Wor")
+		equals(range.toString(), "llo Worl")
 	})
 
 
@@ -212,6 +212,20 @@ steal("funcunit/qunit", "jquery/dom/range", "jquery/dom/selection").then(functio
 		$("#qunit-test-area").empty()
 	})
 
+	test("moving left from text node", function(){
+		var div = document.createElement('div');
+		div.innerHTML = 'a<a>THE TEXT</a>de';
+		div.id= "foo"
+		$("#qunit-test-area").html(div);
+		// move to d
+		var range = $(div).range().collapse(false)
+		
+		range.start("-1").start("-1").end("-1").start("-1");
+		
+
+		
+		equal(range.toString(),"Td")
+	})
 
 })
 

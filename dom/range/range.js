@@ -771,24 +771,38 @@ steal('jquery', 'jquery/dom/compare', function ($) {
 		getNextTextNode = iteratorMaker("firstChild", "nextSibling"),
 		getPrevTextNode = iteratorMaker("lastChild", "previousSibling"),
 		callMove = function (container, offset, howMany) {
-			if (isText(container)) {
-				return move(container, offset + howMany)
+			var mover = howMany < 0 ?
+				getPrevTextNode : getNextTextNode;
+			
+			// find the text element
+			if( !isText(container) ){
+				// sometimes offset isn't actually an element
+				container = container.childNodes[offset] ? 
+					container.childNodes[offset] :
+					// if this happens, use the last child
+					container.lastChild;
+					
+				if( !isText(container) ) {
+					container = mover(container)
+				}
+				return move(container, howMany)
 			} else {
-				return container.childNodes[offset] ?
-					move(container.childNodes[offset], howMany) :
-					move(container.lastChild, howMany, true)
-				return
+				if(offset+howMany < 0){
+					return move(mover(container), offset + howMany)
+				} else {
+					return move(container, offset + howMany)
+				}
+				
 			}
 		},
+		// Moves howMany characters from the start of
+		// from
 		move = function (from, howMany) {
 			var mover = howMany < 0 ?
 				getPrevTextNode : getNextTextNode;
 
 			howMany = Math.abs(howMany);
 
-			if (!isText(from)) {
-				from = mover(from)
-			}
 			while (from && howMany >= from.nodeValue.length) {
 				howMany = howMany - from.nodeValue.length;
 				from = mover(from)
