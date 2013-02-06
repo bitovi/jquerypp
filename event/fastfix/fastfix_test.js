@@ -73,7 +73,7 @@ steal("jquery/event/fastfix",
 			};
 			jQuery("#firstp").bind("click", {"foo" : "bar"}, handler).click().unbind("click", handler);
 
-			ok(!jQuery._data(jQuery("#firstp")[0], "events"), "Event handler unbound when using data.");
+			ok(!$._data(jQuery("#firstp")[0], "events"), "Event handler unbound when using data.");
 
 			var test = function () {
 			};
@@ -91,7 +91,7 @@ steal("jquery/event/fastfix",
 			};
 			jQuery("#firstp").click({"foo" : "bar"}, handler).click().unbind("click", handler);
 
-			ok(!jQuery._data(jQuery("#firstp")[0], "events"), "Event handler unbound when using data.");
+			ok(!$._data(jQuery("#firstp")[0], "events"), "Event handler unbound when using data.");
 		});
 
 		test("bind(), with data, trigger with data", function () {
@@ -193,7 +193,7 @@ steal("jquery/event/fastfix",
 
 			var i = 0;
 
-			jQuery.event.special["test"] = {
+			$.event.special["test"] = {
 				_default : function (e, data) {
 					equal(this, document, "Make sure we're at the top of the chain.");
 					equal(e.type, "test", "And that we're still dealing with a test event.");
@@ -246,7 +246,7 @@ steal("jquery/event/fastfix",
 			// Should trigger 2
 			div.appendTo("#qunit-fixture").remove();
 
-			delete jQuery.event.special["test"];
+			delete $.event.special["test"];
 		});
 
 		test("bind(), no data", function () {
@@ -586,7 +586,7 @@ steal("jquery/event/fastfix",
 
 			var elem = jQuery("#firstp"), log = [], check = [];
 
-			jQuery.each(new Array(100), function (i) {
+			$.each(new Array(100), function (i) {
 				elem.bind("click", function () {
 					log.push(i);
 				});
@@ -615,10 +615,10 @@ steal("jquery/event/fastfix",
 				};
 
 			jQuery("#firstp")
-				.bind("click", jQuery.proxy(handler1, thisObject)).click().unbind("click", handler1)
-				.bind("click", data, jQuery.proxy(handler2, thisObject)).click().unbind("click", handler2);
+				.bind("click", $.proxy(handler1, thisObject)).click().unbind("click", handler1)
+				.bind("click", data, $.proxy(handler2, thisObject)).click().unbind("click", handler2);
 
-			ok(!jQuery._data(jQuery("#firstp")[0], "events"), "Event handler unbound when using different this object and data.");
+			ok(!$._data(jQuery("#firstp")[0], "events"), "Event handler unbound when using different this object and data.");
 		});
 
 		test("bind(name, false), unbind(name, false)", function () {
@@ -710,7 +710,7 @@ steal("jquery/event/fastfix",
 				}
 			});
 
-			var events = jQuery._data(obj, "events");
+			var events = $._data(obj, "events");
 			ok(events, "Object has events bound.");
 			equal(obj["events"], undefined, "Events object on plain objects is not events");
 			equal(obj["test"], undefined, "Make sure that test event is not on the plain object.");
@@ -729,9 +729,9 @@ steal("jquery/event/fastfix",
 			// Make sure it doesn't complain when no events are found
 			jQuery(obj).unbind("test");
 
-			equal(obj && obj[ jQuery.expando ] &&
-				obj[ jQuery.expando ][ jQuery.expando ] &&
-				obj[ jQuery.expando ][ jQuery.expando ]["events"], undefined, "Make sure events object is removed");
+			equal(obj && obj[ $.expando ] &&
+				obj[ $.expando ][ $.expando ] &&
+				obj[ $.expando ][ $.expando ]["events"], undefined, "Make sure events object is removed");
 		});
 
 		test("unbind(type)", function () {
@@ -880,7 +880,7 @@ steal("jquery/event/fastfix",
 			elem.remove();
 		});
 
-		test("withinElement implemented with jQuery.contains()", function () {
+		test("withinElement implemented with $.contains()", function () {
 
 			expect(1);
 
@@ -1194,8 +1194,8 @@ steal("jquery/event/fastfix",
 
 			$parent.get(0).style.display = "none";
 
-			var event = jQuery.Event("noNew");
-			ok(event != window, "Instantiate jQuery.Event without the 'new' keyword");
+			var event = $.Event("noNew");
+			ok(event != window, "Instantiate $.Event without the 'new' keyword");
 			equal(event.type, "noNew", "Verify its type");
 
 			equal(event.isDefaultPrevented(), false, "Verify isDefaultPrevented");
@@ -1223,7 +1223,7 @@ steal("jquery/event/fastfix",
 			});
 
 			// test with an event object
-			event = new jQuery.Event("foo");
+			event = new $.Event("foo");
 			event.secret = "boo!";
 			$child.trigger(event);
 
@@ -1258,7 +1258,7 @@ steal("jquery/event/fastfix",
 			// in which event handlers are iterated.
 			//$child.bind("foo", error );
 
-			event = new jQuery.Event("foo");
+			event = new $.Event("foo");
 			$child.trigger(event, [1, 2, 3]).unbind();
 			equal(event.result, "result", "Check event.result attribute");
 
@@ -1269,7 +1269,7 @@ steal("jquery/event/fastfix",
 			$parent.unbind().remove();
 
 			// Ensure triggerHandler doesn't molest its event object (#xxx)
-			event = jQuery.Event("zowie");
+			event = $.Event("zowie");
 			jQuery(document).triggerHandler(event);
 			equal(event.type, "zowie", "Verify its type");
 			equal(event.isPropagationStopped(), false, "propagation not stopped");
@@ -1455,21 +1455,21 @@ steal("jquery/event/fastfix",
 			equal(window.onbeforeunload, null, "window property has been unset to null/undefined");
 		});
 
-		test("jQuery.Event( type, props )", function () {
+		test("$.Event( type, props )", function () {
 
 			expect(5);
 
-			var event = jQuery.Event("keydown", { keyCode : 64 }),
+			var event = $.Event("keydown", { keyCode : 64 }),
 				handler = function (event) {
 					ok("keyCode" in event, "Special property 'keyCode' exists");
 					equal(event.keyCode, 64, "event.keyCode has explicit value '64'");
 				};
 
-			// Supports jQuery.Event implementation
+			// Supports $.Event implementation
 			equal(event.type, "keydown", "Verify type");
 
 			// ensure "type" in props won't clobber the one set by constructor
-			equal(jQuery.inArray("type", jQuery.event.props), -1, "'type' property not in props (#10375)");
+			equal($.inArray("type", $.event.props), -1, "'type' property not in props (#10375)");
 
 			ok("keyCode" in event, "Special 'keyCode' property exists");
 
@@ -1479,7 +1479,7 @@ steal("jquery/event/fastfix",
 
 		});
 
-		test("jQuery.Event.currentTarget", function () {
+		test("$.Event.currentTarget", function () {
 			expect(2);
 
 			jQuery("<div><p><button>shiny</button></p></div>")
@@ -1555,7 +1555,7 @@ steal("jquery/event/fastfix",
 			equal(turn, 2, "Trying toggle with 3 functions, attempt 5 yields 2");
 
 			$div.unbind("click", fns[0]);
-			var data = jQuery._data($div[0], "events");
+			var data = $._data($div[0], "events");
 			ok(!data, "Unbinding one function from toggle unbinds them all");
 
 			// manually clean up detached elements
@@ -1702,7 +1702,7 @@ steal("jquery/event/fastfix",
 			div = 0;
 			livea = 0;
 			liveb = 0;
-			var event = jQuery.Event("click");
+			var event = $.Event("click");
 			event.button = 1;
 			jQuery("div#nothiddendiv").trigger(event);
 
@@ -1742,13 +1742,13 @@ steal("jquery/event/fastfix",
 			jQuery("#foo").trigger("click", true).die("click");
 
 			// Test binding with different this object
-			jQuery("#foo").live("click", jQuery.proxy(function (e) {
+			jQuery("#foo").live("click", $.proxy(function (e) {
 				equal(this.foo, "bar", "live with event scope");
 			}, { foo : "bar" }));
 			jQuery("#foo").trigger("click").die("click");
 
 			// Test binding with different this object, event data, and trigger data
-			jQuery("#foo").live("click", true, jQuery.proxy(function (e, data) {
+			jQuery("#foo").live("click", true, $.proxy(function (e, data) {
 				equal(e.data, true, "live with with different this object, event data, and trigger data");
 				equal(this["foo"], "bar", "live with with different this object, event data, and trigger data");
 				equal(data, true, "live with with different this object, event data, and trigger data");
@@ -2156,7 +2156,7 @@ steal("jquery/event/fastfix",
 		test("live with special events", function () {
 			expect(13);
 
-			jQuery.event.special["foo"] = {
+			$.event.special["foo"] = {
 				setup : function (data, namespaces, handler) {
 					ok(true, "Setup run.");
 				},
@@ -2199,7 +2199,7 @@ steal("jquery/event/fastfix",
 			// Run: remove, teardown
 			jQuery("#liveSpan1").die("foo");
 
-			delete jQuery.event.special["foo"];
+			delete $.event.special["foo"];
 		});
 
 		test(".delegate()/.undelegate()", function () {
@@ -2315,7 +2315,7 @@ steal("jquery/event/fastfix",
 			div = 0;
 			livea = 0;
 			liveb = 0;
-			var event = jQuery.Event("click");
+			var event = $.Event("click");
 			event.button = 1;
 			jQuery("div#nothiddendiv").trigger(event);
 
@@ -2357,14 +2357,14 @@ steal("jquery/event/fastfix",
 			jQuery("#body").undelegate("#foo", "click");
 
 			// Test binding with different this object
-			jQuery("#body").delegate("#foo", "click", jQuery.proxy(function (e) {
+			jQuery("#body").delegate("#foo", "click", $.proxy(function (e) {
 				equal(this["foo"], "bar", "delegate with event scope");
 			}, { "foo" : "bar" }));
 			jQuery("#foo").trigger("click");
 			jQuery("#body").undelegate("#foo", "click");
 
 			// Test binding with different this object, event data, and trigger data
-			jQuery("#body").delegate("#foo", "click", true, jQuery.proxy(function (e, data) {
+			jQuery("#body").delegate("#foo", "click", true, $.proxy(function (e, data) {
 				equal(e.data, true, "delegate with with different this object, event data, and trigger data");
 				equal(this.foo, "bar", "delegate with with different this object, event data, and trigger data");
 				equal(data, true, "delegate with with different this object, event data, and trigger data");
@@ -2548,7 +2548,7 @@ steal("jquery/event/fastfix",
 			jQuery("#body").undelegate("#nothiddendiv div", "click");
 		});
 
-		test("jQuery.off using dispatched jQuery.Event", function () {
+		test("$.off using dispatched $.Event", function () {
 			expect(1);
 
 			var markup = jQuery('<p><a href="#">target</a></p>'),
@@ -2811,7 +2811,7 @@ steal("jquery/event/fastfix",
 				ok(true, "Resize event fired.");
 			}).resize().unbind("resize");
 
-			ok(!jQuery._data(window, "__events__"), "Make sure all the events are gone.");
+			ok(!$._data(window, "__events__"), "Make sure all the events are gone.");
 		});
 
 		test("focusin bubbles", function () {
@@ -2956,7 +2956,7 @@ steal("jquery/event/fastfix",
 				.off("click cluck");
 
 			// We should have removed all the event handlers ... kinda hacky way to check this
-			var data = jQuery.data[ jQuery("#onandoff")[0].expando ] || {};
+			var data = $.data[ jQuery("#onandoff")[0].expando ] || {};
 			equal(data["events"], undefined, "no events left");
 
 			$onandoff.remove();
@@ -2965,7 +2965,7 @@ steal("jquery/event/fastfix",
 		test("special bind/delegate name mapping", function () {
 			expect(7);
 
-			jQuery.event.special["slap"] = {
+			$.event.special["slap"] = {
 				bindType : "click",
 				delegateType : "swing",
 				handle : function (event) {
@@ -2978,10 +2978,10 @@ steal("jquery/event/fastfix",
 			};
 
 			jQuery("<div><button id=\"mammy\">Are We Not Men?</button></div>")
-				.on("slap", "button", jQuery.noop)
+				.on("slap", "button", $.noop)
 				.on("swing", "button", comeback)
 				.find("button")
-				.on("slap", jQuery.noop)
+				.on("slap", $.noop)
 				.on("click", comeback)
 				.trigger("click")// bindType-slap and click
 				.off("slap")
@@ -2996,9 +2996,9 @@ steal("jquery/event/fastfix",
 				.trigger("swing")
 				.end()
 				.remove();
-			delete jQuery.event.special["slap"];
+			delete $.event.special["slap"];
 
-			jQuery.event.special["gutfeeling"] = {
+			$.event.special["gutfeeling"] = {
 				bindType : "click",
 				delegateType : "click",
 				handle : function (event) {
@@ -3010,27 +3010,27 @@ steal("jquery/event/fastfix",
 
 			// Ensure a special event isn't removed by its mapped type
 			jQuery('<p>Gut Feeling</p>')
-				.on("click", jQuery.noop)
-				.on("gutfeeling", jQuery.noop)
+				.on("click", $.noop)
+				.on("gutfeeling", $.noop)
 				.off("click")
 				.trigger("gutfeeling")
 				.remove();
 
 			// Ensure special events are removed when only a namespace is provided
 			jQuery('<p>Gut Feeling</p>')
-				.on("gutfeeling.Devo", jQuery.noop)
+				.on("gutfeeling.Devo", $.noop)
 				.off(".Devo")
 				.trigger("gutfeeling")
 				.remove();
 
 			// Ensure .one() events are removed after their maiden voyage
 			jQuery('<p>Gut Feeling</p>')
-				.one("gutfeeling", jQuery.noop)
+				.one("gutfeeling", $.noop)
 				.trigger("gutfeeling")// This one should
 				.trigger("gutfeeling")// This one should not
 				.remove();
 
-			delete jQuery.event.special["gutfeeling"];
+			delete $.event.special["gutfeeling"];
 		});
 
 		test(".on and .off, selective mixed removal (#10705)", function () {
@@ -3101,13 +3101,13 @@ steal("jquery/event/fastfix",
 				order = [],
 				args = {};
 
-			notYetReady = !jQuery.isReady;
+			notYetReady = !$.isReady;
 
-			test("jQuery.isReady", function () {
+			test("$.isReady", function () {
 				expect(2);
 
-				equal(notYetReady, true, "jQuery.isReady should not be true before DOM ready");
-				equal(jQuery.isReady, true, "jQuery.isReady should be true once DOM is ready");
+				equal(notYetReady, true, "$.isReady should not be true before DOM ready");
+				equal($.isReady, true, "$.isReady should be true once DOM is ready");
 			});
 
 			// Create an event handler.
@@ -3145,7 +3145,7 @@ steal("jquery/event/fastfix",
 				// Ensure handler argument is correct.
 				equal(args["a"], jQuery, "Argument passed to fn in jQuery( fn ) should be jQuery");
 				equal(args["b"], jQuery, "Argument passed to fn in jQuery(document).ready( fn ) should be jQuery");
-				ok(args["c"] instanceof jQuery.Event, "Argument passed to fn in jQuery(document).bind( 'ready', fn ) should be an event object");
+				ok(args["c"] instanceof $.Event, "Argument passed to fn in jQuery(document).bind( 'ready', fn ) should be an event object");
 
 				order = [];
 
@@ -3173,7 +3173,7 @@ steal("jquery/event/fastfix",
 
 			var $fixture = jQuery("<input type='text' id='change-ie-leak' />").appendTo("body");
 
-			var originRemoveEvent = jQuery.removeEvent;
+			var originRemoveEvent = $.removeEvent;
 
 			var wrapperRemoveEvent = function (elem, type, handle) {
 				equal("change", type, "Event handler for 'change' event should be removed");
@@ -3181,7 +3181,7 @@ steal("jquery/event/fastfix",
 				originRemoveEvent(elem, type, handle);
 			};
 
-			jQuery.removeEvent = wrapperRemoveEvent;
+			$.removeEvent = wrapperRemoveEvent;
 
 			$fixture.bind("change", function (event) {
 			});
@@ -3189,7 +3189,7 @@ steal("jquery/event/fastfix",
 
 			$fixture.remove();
 
-			jQuery.removeEvent = originRemoveEvent;
+			$.removeEvent = originRemoveEvent;
 		});
 
 		asyncTest("trigger click on checkbox, fires change event", function () {

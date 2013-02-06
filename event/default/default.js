@@ -82,11 +82,11 @@ $event.trigger =  function defaultTriggerer( event, data, elem, onlyHandlers){
 		// Caller can pass in an Event, Object, or just an event type string
 		event = typeof event === "object" ?
 			// jQuery.Event object
-			event[ jQuery.expando ] ? event :
+			event[ $.expando ] ? event :
 			// Object literal
-			new jQuery.Event( type, event ) :
+			new $.Event( type, event ) :
 			// Just the event type (string)
-			new jQuery.Event( type),
+			new $.Event( type),
 			res=oldTrigger.call($.event,event, data, elem, onlyHandlers),
 			paused=event.isPaused && event.isPaused();
 		

@@ -11,8 +11,8 @@ steal('jquery', function($) {
 	 * 
 	 *     ">li click" : function( el, ev ) { ... }
 	 */
-	var oldClosest = jQuery.fn.closest;
-	jQuery.fn.closest = function(selectors, context){
+	var oldClosest = $.fn.closest;
+	$.fn.closest = function(selectors, context){
 		var rooted = {}, res, result, thing, i, j, selector, rootedIsEmpty = true, selector, selectorsArr = selectors;
 		if(typeof selectors == "string") selectorsArr = [selectors];
 		

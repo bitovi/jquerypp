@@ -2,7 +2,7 @@ steal('jquery', 'jquery/dom/animate', 'funcunit/qunit', 'qunit.css', function ($
 
 	module("jquery/dom/animate");
 
-	if ( jQuery.fx ) {
+	if ( $.fx ) {
 		test("sanity check", function() {
 			expect(1);
 			ok( jQuery("#dl:visible, #qunit-fixture:visible, #foo:visible").length === 3, "QUnit state is correct for testing effects" );
@@ -25,13 +25,13 @@ steal('jquery', 'jquery/dom/animate', 'funcunit/qunit', 'qunit.css', function ($
 
 			hiddendiv = jQuery("div.hidden");
 
-			equal(jQuery.css( hiddendiv[0], "display"), "none", "hiddendiv is display: none");
+			equal($.css( hiddendiv[0], "display"), "none", "hiddendiv is display: none");
 
 			hiddendiv.css("display", "block");
-			equal(jQuery.css( hiddendiv[0], "display"), "block", "hiddendiv is display: block");
+			equal($.css( hiddendiv[0], "display"), "block", "hiddendiv is display: block");
 
 			hiddendiv.show();
-			equal(jQuery.css( hiddendiv[0], "display"), "block", "hiddendiv is display: block");
+			equal($.css( hiddendiv[0], "display"), "block", "hiddendiv is display: block");
 
 			hiddendiv.css("display","");
 
@@ -50,7 +50,7 @@ steal('jquery', 'jquery/dom/animate', 'funcunit/qunit', 'qunit.css', function ($
 				"false speed": false
 			};
 
-			jQuery.each(speeds, function(name, speed) {
+			$.each(speeds, function(name, speed) {
 				pass = true;
 				div.hide().show(speed).each(function() {
 					if ( this.style.display == "none" ) {
@@ -60,7 +60,7 @@ steal('jquery', 'jquery/dom/animate', 'funcunit/qunit', 'qunit.css', function ($
 				ok( pass, "Show with " + name);
 			});
 
-			jQuery.each(speeds, function(name, speed) {
+			$.each(speeds, function(name, speed) {
 				pass = true;
 				div.hide().show(speed, function() {
 					pass = false;
@@ -91,7 +91,7 @@ steal('jquery', 'jquery/dom/animate', 'funcunit/qunit', 'qunit.css', function ($
 				"li"       : old ? "block" : "list-item"
 			};
 
-			jQuery.each(test, function(selector, expected) {
+			$.each(test, function(selector, expected) {
 				var elem = jQuery(selector, "#show-tests").show();
 				equal( elem.css("display"), expected, "Show using correct display type for " + selector );
 			});
@@ -132,7 +132,7 @@ steal('jquery', 'jquery/dom/animate', 'funcunit/qunit', 'qunit.css', function ($
 				"li"       : old ? "block" : "list-item"
 			};
 
-			jQuery.each(test, function(selector, expected) {
+			$.each(test, function(selector, expected) {
 				var elem = jQuery(selector, "#show-tests").show(1, function() {
 					equal( elem.css("display"), expected, "Show using correct display type for " + selector );
 					if ( ++num === 15 ) {
@@ -181,7 +181,7 @@ steal('jquery', 'jquery/dom/animate', 'funcunit/qunit', 'qunit.css', function ($
 			expect(1);
 			stop();
 			var hash = {opacity: "show"};
-			var hashCopy = jQuery.extend({}, hash);
+			var hashCopy = $.extend({}, hash);
 			jQuery("#foo").animate(hash, 0, function() {
 				equal( hash.opacity, hashCopy.opacity, "Check if animate changed the hash parameter" );
 				start();
@@ -232,11 +232,11 @@ steal('jquery', 'jquery/dom/animate', 'funcunit/qunit', 'qunit.css', function ($
 
 			span.remove();
 
-			if ( jQuery.support.inlineBlockNeedsLayout || expected === "inline-block" ) {
+			if ( $.support.inlineBlockNeedsLayout || expected === "inline-block" ) {
 				stop();
 
 				jQuery("#foo").css({ display: "inline", width: "", height: "" }).animate({ width: 42, height: 42 }, 100, function() {
-					equal( jQuery(this).css("display"), jQuery.support.inlineBlockNeedsLayout ? "inline" : "inline-block", "inline-block was set on non-floated inline element when animating width/height" );
+					equal( jQuery(this).css("display"), $.support.inlineBlockNeedsLayout ? "inline" : "inline-block", "inline-block was set on non-floated inline element when animating width/height" );
 					equal( this.offsetWidth, 42, "width was animated" );
 					equal( this.offsetHeight, 42, "height was animated" );
 					start();
@@ -258,7 +258,7 @@ steal('jquery', 'jquery/dom/animate', 'funcunit/qunit', 'qunit.css', function ($
 
 			span.remove();
 
-			if ( jQuery.support.inlineBlockNeedsLayout || expected === "inline-block" ) {
+			if ( $.support.inlineBlockNeedsLayout || expected === "inline-block" ) {
 				stop();
 				jQuery("#foo").css({ display: "", width: "", height: "" })
 					.append("<span>text</span>")
@@ -486,7 +486,7 @@ steal('jquery', 'jquery/dom/animate', 'funcunit/qunit', 'qunit.css', function ($
 
 			var $elems = jQuery([{ a:0 },{ a:0 }]), counter = 0;
 
-			equal( jQuery.timers.length, 0, "Make sure no animation was running from another test" );
+			equal( $.timers.length, 0, "Make sure no animation was running from another test" );
 
 			$elems.eq(0).animate( {a:1}, 0, function(){
 				ok( true, "Animate a simple property." );
@@ -494,7 +494,7 @@ steal('jquery', 'jquery/dom/animate', 'funcunit/qunit', 'qunit.css', function ($
 			});
 
 			// Failed until [6115]
-			equal( jQuery.timers.length, 0, "Make sure synchronic animations are not left on jQuery.timers" );
+			equal( $.timers.length, 0, "Make sure synchronic animations are not left on $.timers" );
 
 			equal( counter, 1, "One synchronic animations" );
 
@@ -731,17 +731,17 @@ steal('jquery', 'jquery/dom/animate', 'funcunit/qunit', 'qunit.css', function ($
 			ok( x.is(":visible"), "is visible again" );
 		});
 
-		jQuery.checkOverflowDisplay = function(){
-			var o = jQuery.css( this, "overflow" );
+		$.checkOverflowDisplay = function(){
+			var o = $.css( this, "overflow" );
 
 			equal(o, "visible", "Overflow should be visible: " + o);
-			equal(jQuery.css( this, "display" ), "inline", "Display shouldn't be tampered with.");
+			equal($.css( this, "display" ), "inline", "Display shouldn't be tampered with.");
 
 			jQuery(this).remove();
 			start();
 		};
 
-		test( "jQuery.fx.prototype.cur() - <1.8 Back Compat", 7, function() {
+		test( "$.fx.prototype.cur() - <1.8 Back Compat", 7, function() {
 			var div = jQuery( "<div></div>" ).appendTo( "#qunit-fixture" ).css({
 				color: "#ABC",
 				border: "5px solid black",
@@ -750,13 +750,13 @@ steal('jquery', 'jquery/dom/animate', 'funcunit/qunit', 'qunit.css', function ($
 			})[0];
 
 			equal(
-				( new jQuery.fx( div, {}, "color" ) ).cur(),
-				jQuery.css( div, "color" ),
-				"Return the same value as jQuery.css for complex properties (bug #7912)"
+				( new $.fx( div, {}, "color" ) ).cur(),
+				$.css( div, "color" ),
+				"Return the same value as $.css for complex properties (bug #7912)"
 			);
 
 			strictEqual(
-				( new jQuery.fx( div, {}, "borderLeftWidth" ) ).cur(),
+				( new $.fx( div, {}, "borderLeftWidth" ) ).cur(),
 				5,
 				"Return simple values parsed as Float"
 			);
@@ -765,7 +765,7 @@ steal('jquery', 'jquery/dom/animate', 'funcunit/qunit', 'qunit.css', function ($
 			// this fakes a "" return
 			// hook now gets called twice because Tween will grab the current
 			// value as it is being newed
-			jQuery.cssHooks.backgroundPosition = {
+			$.cssHooks.backgroundPosition = {
 				get: function() {
 					ok( true, "hook used" );
 					return "";
@@ -773,21 +773,21 @@ steal('jquery', 'jquery/dom/animate', 'funcunit/qunit', 'qunit.css', function ($
 			};
 
 			strictEqual(
-				( new jQuery.fx( div, {}, "backgroundPosition" ) ).cur(),
+				( new $.fx( div, {}, "backgroundPosition" ) ).cur(),
 				0,
-				"Return 0 when jQuery.css returns an empty string"
+				"Return 0 when $.css returns an empty string"
 			);
 
-			delete jQuery.cssHooks.backgroundPosition;
+			delete $.cssHooks.backgroundPosition;
 
 			strictEqual(
-				( new jQuery.fx( div, {}, "left" ) ).cur(),
+				( new $.fx( div, {}, "left" ) ).cur(),
 				0,
-				"Return 0 when jQuery.css returns 'auto'"
+				"Return 0 when $.css returns 'auto'"
 			);
 
 			equal(
-				( new jQuery.fx( div, {}, "marginBottom" ) ).cur(),
+				( new $.fx( div, {}, "marginBottom" ) ).cur(),
 				-11000,
 				"support negative values < -10000 (bug #7193)"
 			);
@@ -798,29 +798,29 @@ steal('jquery', 'jquery/dom/animate', 'funcunit/qunit', 'qunit.css', function ($
 		test("JS Overflow and Display", function() {
 			expect(2);
 			stop();
-			jQuery.makeTest( "JS Overflow and Display" )
+			$.makeTest( "JS Overflow and Display" )
 				.addClass("widewidth")
 				.css({ overflow: "visible", display: "inline" })
 				.addClass("widewidth")
 				.text("Some sample text.")
 				.before("text before")
 				.after("text after")
-				.animate({ opacity: 0.5 }, "slow", jQuery.checkOverflowDisplay);
+				.animate({ opacity: 0.5 }, "slow", $.checkOverflowDisplay);
 		});
 
 		test("CSS Overflow and Display", function() {
 			expect(2);
 			stop();
-			jQuery.makeTest( "CSS Overflow and Display" )
+			$.makeTest( "CSS Overflow and Display" )
 				.addClass("overflow inline")
 				.addClass("widewidth")
 				.text("Some sample text.")
 				.before("text before")
 				.after("text after")
-				.animate({ opacity: 0.5 }, "slow", jQuery.checkOverflowDisplay);
+				.animate({ opacity: 0.5 }, "slow", $.checkOverflowDisplay);
 		});
 
-		jQuery.each({
+		$.each({
 			"CSS Auto": function( elem, prop ) {
 				jQuery( elem ).addClass( "auto" + prop )
 					.text( "This is a long string of text." );
@@ -856,7 +856,7 @@ steal('jquery', 'jquery/dom/animate', 'funcunit/qunit', 'qunit.css', function ($
 				return 0;
 			}
 		}, function( fn, f ) {
-			jQuery.each({
+			$.each({
 				"show": function( elem, prop ) {
 					jQuery( elem ).hide( ).addClass( "wide" + prop );
 					return "show";
@@ -878,7 +878,7 @@ steal('jquery', 'jquery/dom/animate', 'funcunit/qunit', 'qunit.css', function ($
 				}
 			}, function( tn, t ) {
 				test(fn + " to " + tn, function() {
-					var elem = jQuery.makeTest( fn + " to " + tn );
+					var elem = $.makeTest( fn + " to " + tn );
 
 					var t_w = t( elem, "width" );
 					var f_w = f( elem, "width" );
@@ -910,7 +910,7 @@ steal('jquery', 'jquery/dom/animate', 'funcunit/qunit', 'qunit.css', function ($
 
 					elem.animate(anim, 50);
 
-					jQuery.when( elem ).done(function( elem ) {
+					$.when( elem ).done(function( elem ) {
 
 						elem = elem[ 0 ];
 
@@ -926,9 +926,9 @@ steal('jquery', 'jquery/dom/animate', 'funcunit/qunit', 'qunit.css', function ($
 							ok( f_h === "" ? elem.style.height === f_h : elem.style.height.indexOf( f_h ) === 0, "Height must be reset to " + f_h + ": " + elem.style.height );
 						}
 
-						var cur_o = jQuery.style(elem, "opacity");
+						var cur_o = $.style(elem, "opacity");
 
-						if ( f_o !== jQuery.css(elem, "opacity") ) {
+						if ( f_o !== $.css(elem, "opacity") ) {
 							f_o = f( elem, "opacity" );
 						}
 
@@ -953,13 +953,13 @@ steal('jquery', 'jquery/dom/animate', 'funcunit/qunit', 'qunit.css', function ($
 						if ( t_o.constructor == Number ) {
 							equal( cur_o, t_o, "Final opacity should be " + t_o + ": " + cur_o );
 
-							ok( jQuery.css(elem, "opacity") !== "" || cur_o == t_o, "Opacity should be explicitly set to " + t_o + ", is instead: " + cur_o );
+							ok( $.css(elem, "opacity") !== "" || cur_o == t_o, "Opacity should be explicitly set to " + t_o + ", is instead: " + cur_o );
 						}
 
 						if ( t_w.constructor == Number ) {
 							equal( elem.style.width, t_w + "px", "Final width should be " + t_w + ": " + elem.style.width );
 
-							var cur_w = jQuery.css( elem,"width" );
+							var cur_w = $.css( elem,"width" );
 
 							ok( elem.style.width !== "" || cur_w == t_w, "Width should be explicitly set to " + t_w + ", is instead: " + cur_w );
 						}
@@ -967,19 +967,19 @@ steal('jquery', 'jquery/dom/animate', 'funcunit/qunit', 'qunit.css', function ($
 						if ( t_h.constructor == Number ) {
 							equal( elem.style.height, t_h + "px", "Final height should be " + t_h + ": " + elem.style.height );
 
-							var cur_h = jQuery.css( elem,"height" );
+							var cur_h = $.css( elem,"height" );
 
 							ok( elem.style.height !== "" || cur_h == t_h, "Height should be explicitly set to " + t_h + ", is instead: " + cur_h );
 						}
 
 						if ( t_h == "show" ) {
-							var old_h = jQuery.css( elem, "height" );
+							var old_h = $.css( elem, "height" );
 							jQuery( elem ).append("<br/>Some more text<br/>and some more...");
 
 							if ( /Auto/.test( fn ) ) {
-								notEqual( jQuery.css( elem, "height" ), old_h, "Make sure height is auto." );
+								notEqual( $.css( elem, "height" ), old_h, "Make sure height is auto." );
 							} else {
-								equal( jQuery.css( elem, "height" ), old_h, "Make sure height is not auto." );
+								equal( $.css( elem, "height" ), old_h, "Make sure height is not auto." );
 							}
 						}
 
@@ -992,7 +992,7 @@ steal('jquery', 'jquery/dom/animate', 'funcunit/qunit', 'qunit.css', function ($
 			});
 		});
 
-		jQuery.fn.saveState = function( hiddenOverflow ) {
+		$.fn.saveState = function( hiddenOverflow ) {
 			var check = ["opacity", "height", "width", "display", "overflow"];
 			expect(check.length);
 
@@ -1000,84 +1000,84 @@ steal('jquery', 'jquery/dom/animate', 'funcunit/qunit', 'qunit.css', function ($
 			return this.each(function(){
 				var self = this;
 				self.save = {};
-				jQuery.each(check, function( i, c ) {
-					self.save[ c ] = c === "overflow" && hiddenOverflow ? "hidden" : self.style[ c ] || jQuery.css( self, c );
+				$.each(check, function( i, c ) {
+					self.save[ c ] = c === "overflow" && hiddenOverflow ? "hidden" : self.style[ c ] || $.css( self, c );
 				});
 			});
 		};
 
 		/** @expose */
-		jQuery.checkState = function() {
+		$.checkState = function() {
 			var self = this;
-			jQuery.each(this.save, function( c, v ) {
-				var cur = self.style[ c ] || jQuery.css( self, c );
+			$.each(this.save, function( c, v ) {
+				var cur = self.style[ c ] || $.css( self, c );
 				equal( cur, v, "Make sure that " + c + " is reset (Old: " + v + " Cur: " + cur + ")");
 			});
 
 			// manually clean data on modified element
-			jQuery.removeData( this, "olddisplay", true );
+			$.removeData( this, "olddisplay", true );
 
 			start();
 		};
 
 // Chaining Tests
 		test("Chain fadeOut fadeIn", function() {
-			jQuery("#fadein div").saveState().fadeOut("fast").fadeIn("fast", jQuery.checkState );
+			jQuery("#fadein div").saveState().fadeOut("fast").fadeIn("fast", $.checkState );
 		});
 		test("Chain fadeIn fadeOut", function() {
-			jQuery("#fadeout div").saveState().fadeIn("fast").fadeOut("fast", jQuery.checkState );
+			jQuery("#fadeout div").saveState().fadeIn("fast").fadeOut("fast", $.checkState );
 		});
 
 		test("Chain hide show", function() {
-			jQuery("#show div").saveState( jQuery.support.shrinkWrapBlocks ).hide("fast").show("fast", jQuery.checkState );
+			jQuery("#show div").saveState( $.support.shrinkWrapBlocks ).hide("fast").show("fast", $.checkState );
 		});
 		test("Chain show hide", function() {
-			jQuery("#hide div").saveState( jQuery.support.shrinkWrapBlocks ).show("fast").hide("fast", jQuery.checkState );
+			jQuery("#hide div").saveState( $.support.shrinkWrapBlocks ).show("fast").hide("fast", $.checkState );
 		});
 		test("Chain show hide with easing and callback", function() {
-			jQuery("#hide div").saveState().show("fast").hide("fast","linear", jQuery.checkState );
+			jQuery("#hide div").saveState().show("fast").hide("fast","linear", $.checkState );
 		});
 
 		test("Chain toggle in", function() {
-			jQuery("#togglein div").saveState( jQuery.support.shrinkWrapBlocks ).toggle("fast").toggle("fast", jQuery.checkState );
+			jQuery("#togglein div").saveState( $.support.shrinkWrapBlocks ).toggle("fast").toggle("fast", $.checkState );
 		});
 		test("Chain toggle out", function() {
-			jQuery("#toggleout div").saveState( jQuery.support.shrinkWrapBlocks ).toggle("fast").toggle("fast", jQuery.checkState );
+			jQuery("#toggleout div").saveState( $.support.shrinkWrapBlocks ).toggle("fast").toggle("fast", $.checkState );
 		});
 		test("Chain toggle out with easing and callback", function() {
-			jQuery("#toggleout div").saveState( jQuery.support.shrinkWrapBlocks ).toggle("fast").toggle("fast","linear", jQuery.checkState );
+			jQuery("#toggleout div").saveState( $.support.shrinkWrapBlocks ).toggle("fast").toggle("fast","linear", $.checkState );
 		});
 		test("Chain slideDown slideUp", function() {
-			jQuery("#slidedown div").saveState( jQuery.support.shrinkWrapBlocks ).slideDown("fast").slideUp("fast", jQuery.checkState );
+			jQuery("#slidedown div").saveState( $.support.shrinkWrapBlocks ).slideDown("fast").slideUp("fast", $.checkState );
 		});
 		test("Chain slideUp slideDown", function() {
-			jQuery("#slideup div").saveState( jQuery.support.shrinkWrapBlocks ).slideUp("fast").slideDown("fast", jQuery.checkState );
+			jQuery("#slideup div").saveState( $.support.shrinkWrapBlocks ).slideUp("fast").slideDown("fast", $.checkState );
 		});
 		test("Chain slideUp slideDown with easing and callback", function() {
-			jQuery("#slideup div").saveState( jQuery.support.shrinkWrapBlocks ).slideUp("fast").slideDown("fast","linear", jQuery.checkState );
+			jQuery("#slideup div").saveState( $.support.shrinkWrapBlocks ).slideUp("fast").slideDown("fast","linear", $.checkState );
 		});
 
 		test("Chain slideToggle in", function() {
-			jQuery("#slidetogglein div").saveState( jQuery.support.shrinkWrapBlocks ).slideToggle("fast").slideToggle("fast", jQuery.checkState );
+			jQuery("#slidetogglein div").saveState( $.support.shrinkWrapBlocks ).slideToggle("fast").slideToggle("fast", $.checkState );
 		});
 		test("Chain slideToggle out", function() {
-			jQuery("#slidetoggleout div").saveState( jQuery.support.shrinkWrapBlocks ).slideToggle("fast").slideToggle("fast", jQuery.checkState );
+			jQuery("#slidetoggleout div").saveState( $.support.shrinkWrapBlocks ).slideToggle("fast").slideToggle("fast", $.checkState );
 		});
 
 		test("Chain fadeToggle in", function() {
-			jQuery("#fadetogglein div").saveState().fadeToggle("fast").fadeToggle("fast", jQuery.checkState );
+			jQuery("#fadetogglein div").saveState().fadeToggle("fast").fadeToggle("fast", $.checkState );
 		});
 		test("Chain fadeToggle out", function() {
-			jQuery("#fadetoggleout div").saveState().fadeToggle("fast").fadeToggle("fast", jQuery.checkState );
+			jQuery("#fadetoggleout div").saveState().fadeToggle("fast").fadeToggle("fast", $.checkState );
 		});
 
 		test("Chain fadeTo 0.5 1.0 with easing and callback)", function() {
-			jQuery("#fadeto div").saveState().fadeTo("fast",0.5).fadeTo("fast",1.0,"linear", jQuery.checkState );
+			jQuery("#fadeto div").saveState().fadeTo("fast",0.5).fadeTo("fast",1.0,"linear", $.checkState );
 		});
 
-		jQuery.makeTest = function( text ){
+		$.makeTest = function( text ){
 			var elem = jQuery("<div></div>")
-				.attr( "id", "test" + jQuery.makeTest.id++ )
+				.attr( "id", "test" + $.makeTest.id++ )
 				.addClass("box");
 
 			jQuery("<h4></h4>")
@@ -1088,9 +1088,9 @@ steal('jquery', 'jquery/dom/animate', 'funcunit/qunit', 'qunit.css', function ($
 			return elem;
 		};
 
-		jQuery.makeTest.id = 1;
+		$.makeTest.id = 1;
 
-		test("jQuery.show('fast') doesn't clear radio buttons (bug #1095)", function () {
+		test("$.show('fast') doesn't clear radio buttons (bug #1095)", function () {
 			expect(4);
 			stop();
 
@@ -1105,8 +1105,8 @@ steal('jquery', 'jquery/dom/animate', 'funcunit/qunit', 'qunit.css', function ($
 			});
 		});
 
-		jQuery.expandedEach = jQuery.each;
-		jQuery.expandedEach({
+		$.expandedEach = $.each;
+		$.expandedEach({
 				"slideToggle": function( $elem ) {
 					return parseFloat( $elem.css("height") );
 				},
@@ -1123,7 +1123,7 @@ steal('jquery', 'jquery/dom/animate', 'funcunit/qunit', 'qunit.css', function ($
 
 					var animTime = 2000;
 
-					jQuery.each([ "in", "out" ], function( i, type ) {
+					$.each([ "in", "out" ], function( i, type ) {
 						var $elem = jQuery( "#" + method.toLowerCase() + type ),
 							startVal = defProp( $elem );
 
@@ -1149,7 +1149,7 @@ steal('jquery', 'jquery/dom/animate', 'funcunit/qunit', 'qunit.css', function ($
 										equal( defProp( $elem ), startVal, "After doing .stop() halfway through show, check that state has been saved for returning to original property value." );
 
 										// Remove olddisplay data from .hide() call
-										jQuery.removeData( this, "olddisplay", true );
+										$.removeData( this, "olddisplay", true );
 										start();
 									});
 								}, animTime / 2);
@@ -1174,17 +1174,17 @@ steal('jquery', 'jquery/dom/animate', 'funcunit/qunit', 'qunit.css', function ($
 					c: 100
 				};
 
-			jQuery.easing["_test1"] = function(p) {
+			$.easing["_test1"] = function(p) {
 				_test1_called = true;
 				return p;
 			};
 
-			jQuery.easing["_test2"] = function(p) {
+			$.easing["_test2"] = function(p) {
 				_test2_called = true;
 				return p;
 			};
 
-			jQuery.easing["_default_test"] = function(p) {
+			$.easing["_default_test"] = function(p) {
 				_default_test_called = true;
 				return p;
 			};
@@ -1210,14 +1210,14 @@ steal('jquery', 'jquery/dom/animate', 'funcunit/qunit', 'qunit.css', function ($
 				propsBasic = { "padding": "10 20 30" },
 				propsSpecial = { "padding": [ "1 2 3", "_special" ] };
 
-			jQuery.easing._default = function(p) {
+			$.easing._default = function(p) {
 				if ( p >= 1 ) {
 					_default_count++;
 				}
 				return p;
 			};
 
-			jQuery.easing._special = function(p) {
+			$.easing._special = function(p) {
 				if ( p >= 1 ) {
 					_special_count++;
 				}
@@ -1242,8 +1242,8 @@ steal('jquery', 'jquery/dom/animate', 'funcunit/qunit', 'qunit.css', function ($
 					equal( _special_count, 4, "special easing called for each property" );
 
 					jQuery(this).css("padding", "0");
-					delete jQuery.easing._default;
-					delete jQuery.easing._special;
+					delete $.easing._default;
+					delete $.easing._special;
 					start();
 				});
 		});
@@ -1256,7 +1256,7 @@ steal('jquery', 'jquery/dom/animate', 'funcunit/qunit', 'qunit.css', function ($
 			var div = jQuery("<div style='display:none'></div>").appendTo("#qunit-fixture");
 			equal( div.css("display"), "none", "Element is hidden by default" );
 			div.hide(1, function () {
-				ok( !jQuery._data(div, "olddisplay"), "olddisplay is undefined after hiding an already-hidden element" );
+				ok( !$._data(div, "olddisplay"), "olddisplay is undefined after hiding an already-hidden element" );
 				div.show(1, function () {
 					equal( div.css("display"), "block", "Show a double-hidden element" );
 					start();
@@ -1333,15 +1333,15 @@ steal('jquery', 'jquery/dom/animate', 'funcunit/qunit', 'qunit.css', function ($
 			// with any changes internally to these functions.
 
 			// make sure that the standard timer loop will NOT run.
-			jQuery.fx.stop();
+			$.fx.stop();
 
 			setTimeout(function() {
 
 				// the first call to fx.tick should raise the callback exception
-				raises( jQuery.fx.tick, testException, "Exception was thrown" );
+				raises( $.fx.tick, testException, "Exception was thrown" );
 
 				// the second call shouldn't
-				jQuery.fx.tick();
+				$.fx.tick();
 
 				ok( true, "Test completed without throwing a second exception" );
 
@@ -1386,7 +1386,7 @@ steal('jquery', 'jquery/dom/animate', 'funcunit/qunit', 'qunit.css', function ($
 		});
 
 // Start 1.8 Animation tests
-		asyncTest( "jQuery.Animation( object, props, opts )", 4, function() {
+		asyncTest( "$.Animation( object, props, opts )", 4, function() {
 			var testObject = {
 					"foo": 0,
 					"bar": 1,
@@ -1398,7 +1398,7 @@ steal('jquery', 'jquery/dom/animate', 'funcunit/qunit', 'qunit.css', function ($
 					"width": 200
 				};
 
-			var animation = jQuery.Animation( testObject, testDest, { "duration": 1 });
+			var animation = $.Animation( testObject, testDest, { "duration": 1 });
 			animation.done(function() {
 				for ( var prop in testDest ) {
 					equal( testObject[ prop ], testDest[ prop ], "Animated: " + prop );
@@ -1452,13 +1452,13 @@ steal('jquery', 'jquery/dom/animate', 'funcunit/qunit', 'qunit.css', function ($
 
 		asyncTest( "User supplied callback called after show when fx off (#8892)", 2, function() {
 			var foo = jQuery( "#foo" );
-			jQuery.fx.off = true;
+			$.fx.off = true;
 			foo.hide();
 			foo.fadeIn( 500, function() {
 				ok( jQuery( this ).is( ":visible" ), "Element is visible in callback" );
 				foo.fadeOut( 500, function() {
 					ok( jQuery( this ).is( ":hidden" ), "Element is hidden in callback" );
-					jQuery.fx.off = false;
+					$.fx.off = false;
 					start();
 				});
 			});
@@ -1496,13 +1496,13 @@ steal('jquery', 'jquery/dom/animate', 'funcunit/qunit', 'qunit.css', function ($
 			strictEqual( elems[ 3 ].show()[ 0 ].style.display, "block", "show() should change display if it already set to none" );
 
 			// cleanup
-			jQuery.each( elems, function() {
-				jQuery.removeData( this[ 0 ], "olddisplay", true );
+			$.each( elems, function() {
+				$.removeData( this[ 0 ], "olddisplay", true );
 			});
 
 			stop();
-			jQuery.each( methods, function( name, opt ) {
-				jQuery.each([
+			$.each( methods, function( name, opt ) {
+				$.each([
 
 					// parentNode = document fragment
 					jQuery("<div>test</div>"),
@@ -1514,13 +1514,13 @@ steal('jquery', 'jquery/dom/animate', 'funcunit/qunit', 'qunit.css', function ($
 					var callback = [function () {
 						strictEqual( this.style.display, "block", "set display to block with " + name );
 
-						jQuery.removeData( this, "olddisplay", true );
+						$.removeData( this, "olddisplay", true );
 
 						if ( ++i === 14 ) {
 							start();
 						}
 					}];
-					jQuery.fn[ name ].apply( this, opt.concat( callback ) );
+					$.fn[ name ].apply( this, opt.concat( callback ) );
 				});
 			});
 		});
@@ -1542,7 +1542,7 @@ steal('jquery', 'jquery/dom/animate', 'funcunit/qunit', 'qunit.css', function ($
 
 			hidden.append( elems );
 
-			jQuery.when(
+			$.when(
 				elems.eq( 0 ).hide(),
 				elems.eq( 1 ).hide( 0 ),
 				elems.eq( 2 ).hide( 1 )
@@ -1567,16 +1567,16 @@ steal('jquery', 'jquery/dom/animate', 'funcunit/qunit', 'qunit.css', function ($
 
 			foo.append( elems );
 
-			jQuery.when(
+			$.when(
 				elems.eq( 0 ).hide(),
-				elems.eq( 1 ).hide( jQuery.noop ),
+				elems.eq( 1 ).hide( $.noop ),
 				elems.eq( 2 ).hide( 1 ),
 				elems.eq( 3 ).fadeOut(),
 				elems.eq( 4 ).slideUp()
 			).done(function() {
 					strictEqual( elems.get( 0 ).style.display, "none", "hide() called on element width height and width = 0 should set display to none" );
 					strictEqual( elems.get( 1 ).style.display, "none",
-						"hide( jQuery.noop ) called on element width height and width = 0 should set display to none" );
+						"hide( $.noop ) called on element width height and width = 0 should set display to none" );
 					strictEqual( elems.get( 2 ).style.display, "none", "hide( 1 ) called on element width height and width = 0 should set display to none" );
 					strictEqual( elems.get( 3 ).style.display, "none", "fadeOut() called on element width height and width = 0 should set display to none" );
 					strictEqual( elems.get( 4 ).style.display, "none", "slideUp() called on element width height and width = 0 should set display to none" );
@@ -1705,13 +1705,13 @@ steal('jquery', 'jquery/dom/animate', 'funcunit/qunit', 'qunit.css', function ($
 					}
 
 					if ( parseFloat( initial ) ) {
-						equal( jQuery.style( this, "backgroundPositionX" ), initial, "Numeric start preserved" );
+						equal( $.style( this, "backgroundPositionX" ), initial, "Numeric start preserved" );
 					} else {
-						equal( jQuery.style( this, "backgroundPositionX" ), "0%", "Non-numeric start zeroed" );
+						equal( $.style( this, "backgroundPositionX" ), "0%", "Non-numeric start zeroed" );
 					}
 				},
 				done: function() {
-					equal( jQuery.style( this, "backgroundPositionX" ), "42%", "End reached" );
+					equal( $.style( this, "backgroundPositionX" ), "42%", "End reached" );
 					start();
 				}
 			});
@@ -1799,8 +1799,8 @@ steal('jquery', 'jquery/dom/animate', 'funcunit/qunit', 'qunit.css', function ($
 		});
 
 		test( "Animate properly sets overflow hidden when animating width/height (#12117)", 4, function() {
-			jQuery.each( [ "height", "width" ], function( _, prop ) {
-				jQuery.each( [ 100, 0 ], function( _, value ) {
+			$.each( [ "height", "width" ], function( _, prop ) {
+				$.each( [ 100, 0 ], function( _, value ) {
 					var div = jQuery("<div>"),
 						props = {};
 					props[ prop ] = value;
@@ -1813,7 +1813,7 @@ steal('jquery', 'jquery/dom/animate', 'funcunit/qunit', 'qunit.css', function ($
 		});
 
 		test( "Animations with 0 duration don't ease (#12273)", 1, function() {
-			jQuery.easing.test = function() {
+			$.easing.test = function() {
 				ok( false, "Called easing" );
 			};
 
@@ -1827,8 +1827,8 @@ steal('jquery', 'jquery/dom/animate', 'funcunit/qunit', 'qunit.css', function ($
 				}
 			});
 
-			delete jQuery.easing.test;
+			delete $.easing.test;
 		});
 
-	} // if ( jQuery.fx )
+	} // if ( $.fx )
 });
