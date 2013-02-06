@@ -7,8 +7,9 @@ __1.0.1__
 - fix: [hover.leave != 0 prevents hover of next element with same selecto](https://github.com/bitovi/jquerypp/issues/63)
 - fix: [Changing jQuery references to local $](https://github.com/bitovi/jquerypp/pull/71)
 - fix: [Breaks in jQuery.noConflict(true) Scenario](https://github.com/bitovi/jquerypp/issues/67)
+- fix: [Can't download drag.limit, drag.step, and drag.scroll from downloader on website](https://github.com/bitovi/jquerypp/pull/66)
 - feature: [jQuery 1.9.x support](https://github.com/bitovi/jquerypp/commit/692ed50a7b43fb2c6bfb9d89c5e0505ddcbd6595)
-
+- feature: Added to the new [jQuery plugin repository](http://plugins.jquery.com/jquerypp)
 
 __1.0.0__
 
