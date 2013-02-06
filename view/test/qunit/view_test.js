@@ -19,12 +19,20 @@ test("multiple template types work", function(){
 
 
 test("async templates, and caching work", function(){
+	can.fixture("jquery/view/test/qunit/temp.ejs",function(request, response){
+		setTimeout(function(){
+			response(200,"success",'<h3><%= message %></h3>',{})
+		},20)
+		
+	})
+	
+	
 	$("#qunit-test-area").html("");
 	stop();
 	var i = 0;
-	$("#qunit-test-area").html("//jquery/view/test/qunit/temp.ejs",{"message" :"helloworld"}, function(text){
+	$("#qunit-test-area").html("//jquery/view/test/qunit/temp.ejs",{"message" :"helloworld"}, function(frag){
 		ok( /helloworld\s*/.test( $("#qunit-test-area").text()))
-		ok(/helloworld\s*/.test(text), "we got a rendered template");
+		equal(frag.nodeType, 11, "we got a documentFragment");
 		i++;
 		equals(i, 2, "Ajax is not synchronous");
 		equals(this.attr("id"), "qunit-test-area" )

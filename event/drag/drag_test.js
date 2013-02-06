@@ -41,46 +41,46 @@ test("dragging an element", function(){
 	
 	var drags = {}, drops ={};
 	
-	$('#drag')
-		.live("dragdown", function(){
+	$("#qunit-test-area")
+		.on("dragdown", '#drag',function(){
 			drags.dragdown = true;
 		})
-		.live("draginit", function(){
+		.on("draginit", '#drag', function(){
 			drags.draginit = true;
 		})
-		.live("dragmove", function(){
+		.on("dragmove", '#drag', function(){
 			drags.dragmove = true;
 		})
-		.live("dragend", function(){
+		.on("dragend", '#drag', function(){
 			drags.dragend = true;
 		})
-		.live("dragover", function(){
+		.on("dragover", '#drag', function(){
 			drags.dragover = true;
 		})
-		.live("dragout", function(){
+		.on("dragout", '#drag', function(){
 			drags.dragout = true;
 		})
-		.live("dragcleanup", function() {
+		.on("dragcleanup", '#drag', function() {
 			drags.dragcleanup = true;
 		})
 
-	$('#drop')
-		.live("dropinit", function(){ 
+	$("#qunit-test-area")
+		.on("dropinit",'#drop', function(){ 
 			drops.dropinit = true;
 		})
-		.live("dropover", function(){ 
+		.on("dropover",'#drop', function(){ 
 			drops.dropover = true;
 		})
-		.live("dropout", function(){ 
+		.on("dropout",'#drop', function(){ 
 			drops.dropout = true;
 		})
-		.live("dropmove", function(){ 
+		.on("dropmove",'#drop', function(){ 
 			drops.dropmove = true;
 		})
-		.live("dropon", function(){ 
+		.on("dropon",'#drop', function(){ 
 			drops.dropon = true;
 		})
-		.live("dropend", function(){ 
+		.on("dropend",'#drop', function(){ 
 			drops.dropend = true;
 		})
 
@@ -113,6 +113,7 @@ test("dragging an element", function(){
 		ok(drops.dropout, 	"dropout fired correctly")
 		//div.remove();
 		start();
+		$("#qunit-test-area").off()
 	})
 })
 
@@ -155,7 +156,7 @@ test("drag position", function(){
 	
 	var drags = {}, drops ={};
 	
-	$('#drag').live("draginit", function(){
+	$("#qunit-test-area").on("draginit",'#drag', function(){
 		drags.draginit = true;
 	})
 	var offset = $('#drag').offset();
@@ -167,6 +168,7 @@ test("drag position", function(){
 		equals(offset.top+20, Math.ceil(offset2.top), "top")
 		equals(offset.left+20, Math.ceil(offset2.left), "left")
 		start();
+		$("#qunit-test-area").off()
 	})
 });
 
@@ -219,8 +221,10 @@ test("dragdown" , function(){
 		equals(offset.top+20, Math.ceil(offset2.top), "top")
 		equals(offset.left+20, Math.ceil(offset2.left), "left")
 		// IE doesn't respect preventDefault on text inputs (http://www.quirksmode.org/dom/events/click.html)
-		if(!$.browser.msie)
+		if(!document.body.attachEvent) {
 			ok(draginpfocused, "First input was allowed to be focused correctly");
+		}
+			
 		//ok(!dragnopreventfocused, "Second input was not allowed to focus");
 		start();
 	})

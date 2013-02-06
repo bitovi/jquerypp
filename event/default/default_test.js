@@ -64,7 +64,7 @@ test("triggering defaults", function(){
 
 
 
-test("live on default events", function(){
+test("on default events", function(){
 	
 	$("#qunit-test-area").html(
 	
@@ -76,16 +76,13 @@ test("live on default events", function(){
 		count3 = 0;
 	var jq = $();
 	jq.context = bw[0];
-	jq.selector = "#wrap1"
-	jq.live("default.touch", function(){
+	jq.selector = "#wrap1";
+	
+	$("#qunit-test-area").on("default.touch","#wrap1", function(){
 		count1++;
 	});
 	
-	//2nd selector
-	var jq2 = $();
-	jq2.context = bw[0];
-	jq2.selector = "#wrap2"
-	jq2.live("default.touching", function(){
+	$("#qunit-test-area").on("default.touching", "#wrap2",function(){
 		count2++;
 	});
 	
@@ -113,17 +110,17 @@ test("default and live order", function(){
 	var order = [];
 	$("#qunit-test-area").html("<div id='foo'></div>")
 	
-	$("#foo").live("default.show", function(){
+	$(document.body).on("default.show", "#foo",function(){
 		order.push("default")
 	});
-	$("#foo").live("show", function(){
+	$(document.body).on("show","#foo", function(){
 		order.push("show")
 	});
 	
 	$("#foo").trigger("show")
 	
 	same(order, ['show','default'],"show then default")
-	$("#foo").die()
+	$(document.body).off()
 });
 
 

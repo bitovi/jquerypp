@@ -1,4 +1,7 @@
 steal('funcunit/qunit', 'jquery/event/move').then(function() {
+	
+	module('jquery/event/reverse')
+	
 	$.event.reverse('test');
 	
 	test('Event bubbling', 3, function() {

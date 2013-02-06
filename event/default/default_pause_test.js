@@ -30,28 +30,43 @@ test("default and pause with delegate", function(){
 
 });
 
-test("default and pause with live", function(){
+test("default and pause with live or on", function(){
 	$("#qunit-test-area").html("<div id='foo_default_pause'>hello</div>")
 
-	var order = [];
+	var order = [],
+		defaultShow = function(){
+			order.push("default")
+		},
+		show = function(ev){
+			order.push('show')
+			ev.pause();
+			setTimeout(function(){
+				ev.resume();
+				setTimeout(function(){
+					start();
+					same(order,['show','default']);
+					if($.fn.live){
+						$("#foo_default_pause").die("show");
+						$("#foo_default_pause").die("default.show");
+					} else {
+						$(document.body).off("default.show");
+						$(document.body).off("show");
+					}
+					
+				},30)
+			},50)
+		};
 	stop();
 
-	$("#foo_default_pause").live("default.show", function(){
-		order.push("default")
-	});
-	$("#foo_default_pause").live("show", function(ev){
-		order.push('show')
-		ev.pause();
-		setTimeout(function(){
-			ev.resume();
-			setTimeout(function(){
-				start();
-				same(order,['show','default'])
-				$("#foo_default_pause").die("show");
-				$("#foo_default_pause").die("default.show");
-			},30)
-		},50)
-	});
+	if( $.fn.live ){
+		$("#foo_default_pause").live("default.show", defaultShow);
+		$("#foo_default_pause").live("show", show);
+	} else {
+		$(document.body).on("default.show", "#foo_default_pause",defaultShow);
+		$(document.body).on("show", "#foo_default_pause",show);
+	}
+
+	
 
 
 	$("#foo_default_pause").trigger("show")
@@ -62,26 +77,37 @@ test("default and pause with live", function(){
 test("triggerAsync", function(){
 	$("#qunit-test-area").html("<div id='foo_default_pause'>hello</div>")
 
-	var order = [];
+	var order = [],
+		defaultShow = function(){
+			order.push("default")
+		},
+		show = function(ev){
+			order.push('show')
+			ev.pause();
+			setTimeout(function(){
+				ev.resume();
+				setTimeout(function(){
+					start();
+					if( $.fn.die ) {
+						$("#foo_default_pause").die();
+					} else {
+						$(document.body).off();
+					}
+					
+					same(order,['show','default','async'])
+				},30)
+			},50)
+		};
+		
 	stop();
 
-	$("#foo_default_pause").live("default.show", function(){
-		order.push("default")
-	});
-
-	$("#foo_default_pause").live("show", function(ev){
-		order.push('show')
-		ev.pause();
-		setTimeout(function(){
-			ev.resume();
-			setTimeout(function(){
-				start();
-				$("#foo_default_pause").die()
-				same(order,['show','default','async'])
-			},30)
-		},50)
-	});
-
+	if( $.fn.live ){
+		$("#foo_default_pause").live("default.show", defaultShow);
+		$("#foo_default_pause").live("show", show);
+	} else {
+		$(document.body).on("default.show", "#foo_default_pause",defaultShow);
+		$(document.body).on("show", "#foo_default_pause",show);
+	}
 
 	$("#foo_default_pause").triggerAsync("show", function(){
 		order.push("async")
@@ -94,11 +120,11 @@ test("triggerAsync with prevented callback when ev.preventDefault() is called be
 	var order = [];
 	stop();
 
-	$("#foo_default_pause").live("default.show", function(){
+	$(document.body).on("default.show","#foo_default_pause", function(){
 		order.push("default")
 	});
 
-	$("#foo_default_pause").live("show", function(ev){
+	$(document.body).on("show", "#foo_default_pause", function(ev){
 		order.push('show');
 		ev.preventDefault();
 		ev.pause();
@@ -106,7 +132,8 @@ test("triggerAsync with prevented callback when ev.preventDefault() is called be
 			ev.resume();
 			setTimeout(function(){
 				start();
-				$("#foo_default_pause").die()
+				$(document.body).off("show");
+				$(document.body).off("default.show")
 				same(order,['show','prevented'])
 			},30)
 		},50)
@@ -125,11 +152,11 @@ test("triggerAsync with prevented callback when ev.preventDefault() is called af
 	var order = [];
 	stop();
 
-	$("#foo_default_pause").live("default.show", function(){
+	$(document.body).on("default.show", "#foo_default_pause",function(){
 		order.push("default")
 	});
 
-	$("#foo_default_pause").live("show", function(ev){
+	$(document.body).on("show", "#foo_default_pause",function(ev){
 		order.push('show');
 		
 		ev.pause();
@@ -138,7 +165,7 @@ test("triggerAsync with prevented callback when ev.preventDefault() is called af
 			ev.resume();
 			setTimeout(function(){
 				start();
-				$("#foo_default_pause").die()
+				$(document.body).off("show").off("default.show")
 				same(order,['show','prevented'])
 			},30)
 		},50)
@@ -158,16 +185,16 @@ test("triggerAsync within another triggerAsync", function(){
 	var order = [];
 	stop();
 
-	$("#foo_default_pause").live("default.show", function(){
+	$(document.body).on("default.show", "#foo_default_pause",function(){
 		order.push("show default")
 	});
-	$("#foo_default_pause").live("default.hide", function(){
+	$(document.body).on("default.hide", "#foo_default_pause", function(){
 		order.push("hide default")
 	});
-	$("#foo_default_pause").live("hide", function(){
+	$(document.body).on("hide", "#foo_default_pause",function(){
 		order.push("hide")
 	});
-	$("#foo_default_pause").live("show", function(ev){
+	$(document.body).on("show", "#foo_default_pause",function(ev){
 		order.push('show');
 		ev.pause();
 		$("#foo_default_pause").triggerAsync("hide",function(){
@@ -176,7 +203,7 @@ test("triggerAsync within another triggerAsync", function(){
 				setTimeout(function(){
 					
 					start();
-					$("#foo_default_pause").die()
+					$(document.body).off()
 					same(order,['show','hide','hide default',"hide async","show default","show async"])
 				},30)
 				
@@ -199,16 +226,16 @@ test("triggerAsync within another triggerAsync with prevented callback", functio
 	var order = [];
 	stop();
 
-	$("#foo_default_pause").live("default.show", function(){
+	$(document.body).on("default.show", "#foo_default_pause",function(){
 		order.push("show default")
 	});
-	$("#foo_default_pause").live("default.hide", function(){
+	$(document.body).on("default.hide", "#foo_default_pause", function(){
 		order.push("hide default")
 	});
-	$("#foo_default_pause").live("hide", function(){
+	$(document.body).on("hide", "#foo_default_pause",function(){
 		order.push("hide")
 	});
-	$("#foo_default_pause").live("show", function(ev){
+	$(document.body).on("show", "#foo_default_pause", function(ev){
 		order.push('show');
 		ev.preventDefault();
 		ev.pause();
@@ -217,7 +244,7 @@ test("triggerAsync within another triggerAsync with prevented callback", functio
 				ev.resume();
 				setTimeout(function(){
 					start();
-					$("#foo_default_pause").die()
+					$(document.body).off()
 					same(order,['show','hide','hide default',"hide async","show prevented"])
 				},30)
 				
