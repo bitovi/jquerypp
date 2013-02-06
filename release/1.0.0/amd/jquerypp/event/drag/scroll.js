@@ -1,5 +1,5 @@
 /*
-* jQuery++ - 1.0.0 (2012-11-20)
+* jQuery++ - 1.0.0 (2012-11-23)
 * http://jquerypp.com
 * Copyright (c) 2012 Bitovi
 * Licensed MIT
@@ -85,9 +85,17 @@ define(['jquery', 'jquerypp/event/drop'], function ($) { //needs drop to determi
 				distance = this.options.distance;
 
 			//check if we should scroll
-			if (bottom < distance && this.y) dy = this.options.delta(bottom, distance);
-			else if (top < distance && this.y) dy = -this.options.delta(top, distance) if (right < distance && this.options && this.x) dx = this.options.delta(right, distance);
-			else if (left < distance && this.x) dx = -this.options.delta(left, distance);
+			if (bottom < distance && this.y) {
+				dy = this.options.delta(bottom, distance);
+			} else if (top < distance && this.y) {
+				dy = -this.options.delta(top, distance);
+			}
+
+			if (right < distance && this.options && this.x) {
+				dx = this.options.delta(right, distance);
+			} else if (left < distance && this.x) {
+				dx = -this.options.delta(left, distance);
+			}
 
 			//if we should scroll
 			if (dx || dy) {

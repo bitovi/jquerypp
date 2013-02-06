@@ -1,5 +1,5 @@
 /*
-* jQuery++ - 1.0.0 (2012-11-20)
+* jQuery++ - 1.0.0 (2012-11-23)
 * http://jquerypp.com
 * Copyright (c) 2012 Bitovi
 * Licensed MIT

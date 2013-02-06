@@ -1,5 +1,5 @@
 /*
-* jQuery++ - 1.0.0 (2012-11-20)
+* jQuery++ - 1.0.0 (2012-11-23)
 * http://jquerypp.com
 * Copyright (c) 2012 Bitovi
 * Licensed MIT
@@ -31,26 +31,28 @@ define(['jquery', 'jquerypp/event/drag', 'jquerypp/dom/styles'], function ($) {
 		return this;
 	};
 
-	var oldPosition = $.Drag.prototype.position;
-	$.Drag.prototype.position = function (offsetPositionv) {
-		//adjust required_css_position accordingly
-		if (this._step) {
-			var step = this._step,
-				center = step.center && step.center.toLowerCase(),
-				movingSize = this.movingElement.dimensionsv('outer'),
-				lot = step.offset.top() - (center && center != 'x' ? movingSize.height() / 2 : 0),
-				lof = step.offset.left() - (center && center != 'y' ? movingSize.width() / 2 : 0);
+	(function () {
+		var oldPosition = $.Drag.prototype.position;
+		$.Drag.prototype.position = function (offsetPositionv) {
+			//adjust required_css_position accordingly
+			if (this._step) {
+				var step = this._step,
+					center = step.center && step.center.toLowerCase(),
+					movingSize = this.movingElement.dimensionsv('outer'),
+					lot = step.offset.top() - (center && center != 'x' ? movingSize.height() / 2 : 0),
+					lof = step.offset.left() - (center && center != 'y' ? movingSize.width() / 2 : 0);
 
-			if (this._step.x) {
-				offsetPositionv.left(Math.round(lof + round(offsetPositionv.left() - lof, this._step.x)))
+				if (this._step.x) {
+					offsetPositionv.left(Math.round(lof + round(offsetPositionv.left() - lof, this._step.x)))
+				}
+				if (this._step.y) {
+					offsetPositionv.top(Math.round(lot + round(offsetPositionv.top() - lot, this._step.y)))
+				}
 			}
-			if (this._step.y) {
-				offsetPositionv.top(Math.round(lot + round(offsetPositionv.top() - lot, this._step.y)))
-			}
+
+			oldPosition.call(this, offsetPositionv)
 		}
-
-		oldPosition.call(this, offsetPositionv)
-	}
+	})();
 
 	return $;
 });

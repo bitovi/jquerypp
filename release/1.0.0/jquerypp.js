@@ -1,5 +1,5 @@
 /*
-* jQuery++ - 1.0.0 (2012-11-20)
+* jQuery++ - 1.0.0 (2012-11-23)
 * http://jquerypp.com
 * Copyright (c) 2012 Bitovi
 * Licensed MIT
@@ -3044,9 +3044,17 @@
 				distance = this.options.distance;
 
 			//check if we should scroll
-			if (bottom < distance && this.y) dy = this.options.delta(bottom, distance);
-			else if (top < distance && this.y) dy = -this.options.delta(top, distance) if (right < distance && this.options && this.x) dx = this.options.delta(right, distance);
-			else if (left < distance && this.x) dx = -this.options.delta(left, distance);
+			if (bottom < distance && this.y) {
+				dy = this.options.delta(bottom, distance);
+			} else if (top < distance && this.y) {
+				dy = -this.options.delta(top, distance);
+			}
+
+			if (right < distance && this.options && this.x) {
+				dx = this.options.delta(right, distance);
+			} else if (left < distance && this.x) {
+				dx = -this.options.delta(left, distance);
+			}
 
 			//if we should scroll
 			if (dx || dy) {
@@ -3103,26 +3111,28 @@
 		return this;
 	};
 
-	var oldPosition = $.Drag.prototype.position;
-	$.Drag.prototype.position = function (offsetPositionv) {
-		//adjust required_css_position accordingly
-		if (this._step) {
-			var step = this._step,
-				center = step.center && step.center.toLowerCase(),
-				movingSize = this.movingElement.dimensionsv('outer'),
-				lot = step.offset.top() - (center && center != 'x' ? movingSize.height() / 2 : 0),
-				lof = step.offset.left() - (center && center != 'y' ? movingSize.width() / 2 : 0);
+	(function () {
+		var oldPosition = $.Drag.prototype.position;
+		$.Drag.prototype.position = function (offsetPositionv) {
+			//adjust required_css_position accordingly
+			if (this._step) {
+				var step = this._step,
+					center = step.center && step.center.toLowerCase(),
+					movingSize = this.movingElement.dimensionsv('outer'),
+					lot = step.offset.top() - (center && center != 'x' ? movingSize.height() / 2 : 0),
+					lof = step.offset.left() - (center && center != 'y' ? movingSize.width() / 2 : 0);
 
-			if (this._step.x) {
-				offsetPositionv.left(Math.round(lof + round(offsetPositionv.left() - lof, this._step.x)))
+				if (this._step.x) {
+					offsetPositionv.left(Math.round(lof + round(offsetPositionv.left() - lof, this._step.x)))
+				}
+				if (this._step.y) {
+					offsetPositionv.top(Math.round(lot + round(offsetPositionv.top() - lot, this._step.y)))
+				}
 			}
-			if (this._step.y) {
-				offsetPositionv.top(Math.round(lot + round(offsetPositionv.top() - lot, this._step.y)))
-			}
+
+			oldPosition.call(this, offsetPositionv)
 		}
-
-		oldPosition.call(this, offsetPositionv)
-	}
+	})();
 
 	// ## jquery/event/fastfix/fastfix.js
 	// http://bitovi.com/blog/2012/04/faster-jquery-event-fix.html
