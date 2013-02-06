@@ -27,19 +27,19 @@ $.event.trigger = function(event, data, elem, onlyHandlers){
 			namespaces.sort();
 		}
 
-		if ( (!elem || jQuery.event.customEvent[ type ]) && !jQuery.event.global[ type ] ) {
+		if ( (!elem || $.event.customEvent[ type ]) && !$.event.global[ type ] ) {
 			// No jQuery handlers for this event type, and it can't have inline handlers
 			return;
 		}
 
 		// Caller can pass in an Event, Object, or just an event type string
 		event = typeof event === "object" ?
-			// jQuery.Event object
-			event[ jQuery.expando ] ? event :
+			// $.Event object
+			event[ $.expando ] ? event :
 			// Object literal
-			new jQuery.Event( type, event ) :
+			new $.Event( type, event ) :
 			// Just the event type (string)
-			new jQuery.Event( type );
+			new $.Event( type );
 
 		event.type = type;
 		event.exclusive = exclusive;
@@ -55,14 +55,14 @@ $.event.trigger = function(event, data, elem, onlyHandlers){
 		// Handle a global trigger
 		if ( !elem ) {
 			// TODO: Stop taunting the data cache; remove global events and always attach to document
-			jQuery.each( jQuery.cache, function() {
+			$.each( $.cache, function() {
 				// internalKey variable is just used to make it easier to find
 				// and potentially change this stuff later; currently it just
-				// points to jQuery.expando
-				var internalKey = jQuery.expando,
+				// points to $.expando
+				var internalKey = $.expando,
 					internalCache = this[ internalKey ];
 				if ( internalCache && internalCache.events && internalCache.events[ type ] ) {
-					jQuery.event.trigger( event, data, internalCache.handle.elem );
+					$.event.trigger( event, data, internalCache.handle.elem );
 				}
 			});
 			return;
@@ -78,7 +78,7 @@ $.event.trigger = function(event, data, elem, onlyHandlers){
 		event.target = elem;
 
 		// Clone any incoming data and prepend the event, creating the handler arg list
-		data = data ? jQuery.makeArray( data ) : [];
+		data = data ? $.makeArray( data ) : [];
 		data.unshift( event );
 
 		var cur = elem,
@@ -87,7 +87,7 @@ $.event.trigger = function(event, data, elem, onlyHandlers){
 
 		// Fire event on the current element, then bubble up the DOM tree
 		do {
-			var handle = jQuery._data( cur, "handle" );
+			var handle = $._data( cur, "handle" );
 
 			event.currentTarget = cur;
 			if ( handle ) {
@@ -95,7 +95,7 @@ $.event.trigger = function(event, data, elem, onlyHandlers){
 			}
 
 			// Trigger an inline bound script
-			if ( ontype && jQuery.acceptData( cur ) && cur[ ontype ] && cur[ ontype ].apply( cur, data ) === false ) {
+			if ( ontype && $.acceptData( cur ) && cur[ ontype ] && cur[ ontype ].apply( cur, data ) === false ) {
 				event.result = false;
 				event.preventDefault();
 			}
@@ -107,10 +107,10 @@ $.event.trigger = function(event, data, elem, onlyHandlers){
 		// If nobody prevented the default action, do it now
 		if ( !event.isDefaultPrevented() ) {
 			var old,
-				special = jQuery.event.special[ type ] || {};
+				special = $.event.special[ type ] || {};
 
 			if ( (!special._default || special._default.call( elem.ownerDocument, event ) === false) &&
-				!(type === "click" && jQuery.nodeName( elem, "a" )) && jQuery.acceptData( elem ) ) {
+				!(type === "click" && $.nodeName( elem, "a" )) && $.acceptData( elem ) ) {
 
 				// Call a native DOM method on the target with the same name name as the event.
 				// Can't use an .isFunction)() check here because IE6/7 fails that test.
@@ -124,7 +124,7 @@ $.event.trigger = function(event, data, elem, onlyHandlers){
 							elem[ ontype ] = null;
 						}
 
-						jQuery.event.triggered = type;
+						$.event.triggered = type;
 						elem[ type ]();
 					}
 				} catch ( ieError ) {}
@@ -133,7 +133,7 @@ $.event.trigger = function(event, data, elem, onlyHandlers){
 					elem[ ontype ] = old;
 				}
 
-				jQuery.event.triggered = undefined;
+				$.event.triggered = undefined;
 			}
 		}
 		
@@ -142,9 +142,9 @@ $.event.trigger = function(event, data, elem, onlyHandlers){
 // a copy of $'s handle function that goes until it finds 
 $.event.handle = function( event ) {
 	
-	event = jQuery.event.fix( event || window.event );
+	event = $.event.fix( event || window.event );
 	// Snapshot the handlers list since a called handler may add/remove events.
-	var handlers = ((jQuery._data( this, "events" ) || {})[ event.type ] || []).slice(0),
+	var handlers = (($._data( this, "events" ) || {})[ event.type ] || []).slice(0),
 		run_all = !event.exclusive && !event.namespace,
 		args = Array.prototype.slice.call( arguments, 0 );
 

@@ -173,7 +173,7 @@ test("events - add", 3, function(){
 
 	// events are hooked internally now
 	// ok( $(person).data("events"), "person has events" );
-	ok(jQuery._data(person, 'events'), "person has events" );
+	ok($._data(person, 'events'), "person has events" );
 
 	list.pop()
 
