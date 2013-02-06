@@ -840,8 +840,21 @@ and [jQueryMX](https://github.com/jupiterjs/jquerymx/contributors), and the peop
 [callumacrae](https://github.com/callumacrae) - [Width property for jQuery.selection](https://github.com/bitovi/jquerypp/pull/11) and documentation fixes.
 [fabianonunes](https://github.com/fabianonunes) - Fixed several errors in the build process.
 [jbrumwell](https://github.com/jbrumwell) - Added several useful features for drag/drop events and
+[jeffrose](https://github.com/jeffrose) - [1](https://github.com/bitovi/jquerypp/pull/68)
+[iamnoah](https://github.com/iamnoah) - [1](https://github.com/bitovi/jquerypp/pull/65)
 
 ### Change Log
+
+__1.0.1__ (February 6th 2013)
+
+- fix: [Force hover leave on new mouseenter](https://github.com/bitovi/jquerypp/pull/65)
+- fix: [Removing the element being hovered prevents all future hoverenter](https://github.com/bitovi/jquerypp/issues/64)
+- fix: [hover.leave != 0 prevents hover of next element with same selecto](https://github.com/bitovi/jquerypp/issues/63)
+- fix: [Changing jQuery references to local $](https://github.com/bitovi/jquerypp/pull/71)
+- fix: [Breaks in jQuery.noConflict(true) Scenario](https://github.com/bitovi/jquerypp/issues/67)
+- fix: [Can't download drag.limit, drag.step, and drag.scroll from downloader on website](https://github.com/bitovi/jquerypp/pull/66)
+- feature: [jQuery 1.9.x support](https://github.com/bitovi/jquerypp/commit/692ed50a7b43fb2c6bfb9d89c5e0505ddcbd6595)
+- feature: Added to the new [jQuery plugin repository](http://plugins.jquery.com/jquerypp)
 
 __1.0.0__ (November 20th 2012)
 
