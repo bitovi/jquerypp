@@ -1,4 +1,4 @@
-steal('jquery', 'jquery/event/drag', 'jquery/dom/within', 'jquery/dom/compare', function($){
+steal('jquery', 'jquery/event/drag/core', 'jquery/dom/within', 'jquery/dom/compare', function($){
 	var event = $.event;
 	/**
 	 * @add jQuery.event.special
