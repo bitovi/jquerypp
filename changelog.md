@@ -1,5 +1,15 @@
 ### Change Log
 
+__1.0.1__
+
+- fix: [Force hover leave on new mouseenter](https://github.com/bitovi/jquerypp/pull/65)
+- fix: [Removing the element being hovered prevents all future hoverenter](https://github.com/bitovi/jquerypp/issues/64)
+- fix: [hover.leave != 0 prevents hover of next element with same selecto](https://github.com/bitovi/jquerypp/issues/63)
+- fix: [Changing jQuery references to local $](https://github.com/bitovi/jquerypp/pull/71)
+- fix: [Breaks in jQuery.noConflict(true) Scenario](https://github.com/bitovi/jquerypp/issues/67)
+- feature: [jQuery 1.9.x support](https://github.com/bitovi/jquerypp/commit/692ed50a7b43fb2c6bfb9d89c5e0505ddcbd6595)
+
+
 __1.0.0__
 
 - feature: jQuery 1.8.0+ compatibility
