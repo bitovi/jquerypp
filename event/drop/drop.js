@@ -110,7 +110,7 @@ steal('jquery', 'jquery/event/drag', 'jquery/dom/within', 'jquery/dom/compare', 
 	 *      });
 	 */
 	$.Drop = function(callbacks, element){
-		jQuery.extend(this,callbacks);
+		$.extend(this,callbacks);
 		this.element = $(element);
 	}
 	// add the elements ...

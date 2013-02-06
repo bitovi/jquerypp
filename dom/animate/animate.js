@@ -212,7 +212,7 @@ steal('jquery', 'jquery/dom/styles', function ($) {
 			return oldanimate.apply(this, arguments);
 		}
 
-		var optall = jQuery.speed(speed, easing, callback);
+		var optall = $.speed(speed, easing, callback);
 
 		// Add everything to the animation queue
 		this.queue(optall.queue, function(done) {
