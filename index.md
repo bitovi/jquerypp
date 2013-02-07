@@ -5,7 +5,7 @@ version: 1.0.1
 
 # Hi, I'm jQuery++.
 
-I am a MIT licensed collection of extremely useful DOM helpers and special events for jQuery 1.7 and
+I am a MIT licensed collection of extremely useful DOM helpers and special events for jQuery 1.8 and
 later. I'm not a UI project like [jQuery UI](http://jqueryui.com/) or 
 [jQuery Tools](http://jquerytools.org/). Instead, I'm all about providing
 low-level utilities for things that jQuery doesn't support.  If [Underscore](http://underscorejs.org/)
@@ -33,31 +33,14 @@ There are several ways to get and setup jQuery++:
 
 Simply select the files you want and click "Download". This will create and download a `jquerypp.custom.js`
 with all the files you selected and their dependencies. Load this script
-after jQuery 1.7 like:
+after jQuery 1.8 like:
 
 {% highlight html %}
-<script src="lib/jquery.1.7.2.js"></script>
+<script src="lib/jquery.1.8.2.js"></script>
 <script src="lib/jquerypp.custom.js"></script>
 {% endhighlight %}
 
-### Using individual files
-
-The `jquerypp.js` file from the [full download](http://jquerypp.com/downloads/jquerypp-{{page.version}}.zip)
-contains all jQuery++ plugins in a single file:
-
-{% highlight html %}
-<script src="lib/jquery.1.7.2.js"></script>
-<script src="lib/jquerypp.js"></script>
-{% endhighlight %}
-
-The `lib` folder contains each plugin as a separate file. There is a list of dependencies that need to be included first
-at the top of each file. For example, `jquery.animate.js` depends on `jquery.styles.js` so it needs to be loaded like this:
-
-{% highlight html %}
-<script src="lib/jquery.1.7.2.js"></script>
-<script src="lib/jquery.styles.js"></script>
-<script src="lib/jquery.animate.js"></script>
-{% endhighlight %}
+<!--
 
 ### Using Steal
 
@@ -77,13 +60,15 @@ using jQuery++ with [CanJS](http://canjs.us) and Steal:
 
 {% highlight javascript %}
 steal.map({
-  "jquery/jquery.js" : "can/util/jquery/jquery.1.7.1.js"
+  "jquery/jquery.js" : "can/util/jquery/jquery.1.8.2.js"
 });
 {% endhighlight %}
 
+-->
+
 ### Using AMD
 
-The files to load the jQuery++ plugins with an [AMD](https://github.com/amdjs/amdjs-api/wiki/AMD) module loader like [RequireJS](http://requirejs.org/), are located in the `amd/` folder of the [full download](http://jquerypp.com/downloads/jquerypp-{{page.version}}.zip).
+The files to load the jQuery++ plugins with an [AMD](https://github.com/amdjs/amdjs-api/wiki/AMD) module loader like [RequireJS](http://requirejs.org/), are located in the `amd/` folder of the [full download](https://github.com/downloads/bitovi/jquerypp/jquerypp-{{page.version}}.zip).
 Place the `jquerypp/` folder in your module directory and load a plugin like this:
 
 {% highlight javascript %}
@@ -98,7 +83,7 @@ You might have to map the `jquery` module name to the name of your jQuery AMD mo
 {% highlight javascript %}
 require.config({
   paths: {
-    "jquery": "./jquery-1.7.2"
+    "jquery" : "http://code.jquery.com/jquery-1.8.2"
   }
 });
 {% endhighlight %}
@@ -737,7 +722,7 @@ Bitovi _(developers of jQuery++)_ offers [training](http://bitovi.com/training/)
 jQuery++ does things the jQuery way, which makes it really easy to learn if you are already familiar with jQuery.
 Get functionality that was always tricky to implement from one coherent library:
 
-- Set and animte outer and inner dimensions with [dimensions](#dimensions)
+- Set and animate outer and inner dimensions with [dimensions](#dimensions)
 - Serialize forms into objects with [formParams](#formparams)
 - [Drag](#drag) & [drop](#drop) events - no need for jQuery UI
 - [Resize](#resize) elements the right way
@@ -778,7 +763,7 @@ Steal as submodules that are used to generate the documentation and build the jQ
 
  1. Clone DoneJS with:
 
-        git clone git://github.com/jupiterjs/donejs
+        git clone git://github.com/bitovi/donejs
 
  2. Install all submodules by running
 
@@ -787,7 +772,7 @@ Steal as submodules that are used to generate the documentation and build the jQ
 
     Depending on your version of git, you might need to cd into each submodule and run `git checkout`.
 
- 3. Fork [jquerypp](https://github.com/jupiterjs/jquerypp) on Github
+ 3. Fork [jquerypp](https://github.com/bitovi/jquerypp) on Github
 
  4. Add your own fork as a remote in the `jquery` submodule:
 
@@ -820,7 +805,7 @@ To develop jQuery++:
 ### Documentation
 
 To edit jquerypp.com, installing jQuery++ and DoneJS is not necessary. Simply *fork* and edit the
-github pages's [index.md page](https://github.com/jupiterjs/jquerypp/blob/gh-pages/index.md) online. Don't forget to
+github pages's [index.md page](https://github.com/bitovi/jquerypp/blob/gh-pages/index.md) online. Don't forget to
 submit a pull request.
 
 To edit the documentation at [DoneJS.com](http://doneJS.com/docs.html):
@@ -841,32 +826,60 @@ To make a jQuery++ build, run:
 
     js jquery/build/make.js
 
-It puts the downloads in `jquery/dist`. To build a specific version check out the [git tag](https://github.com/jupiterjs/jquerypp/tags)
+It puts the downloads in `jquery/dist`. To build a specific version check out the [git tag](https://github.com/bitovi/jquerypp/tags)
 you want to build and run the above command.
 
 ### List of heroes
 
 The following lists everyone who's contributed something to CanJS.  If we've forgotten you, please add yourself.
 
-First, thanks to everyone who's contributed to [JavaScriptMVC](https://github.com/jupiterjs/javascriptmvc/contributors)
+First, thanks to everyone who's contributed to [JavaScriptMVC](https://github.com/bitovi/javascriptmvc/contributors)
 and [jQueryMX](https://github.com/jupiterjs/jquerymx/contributors), and the people at
 [Bitovi](http://bitovi.com/people/). This page is for contributors after jQuery++'s launch:
 
-[callumacrae](https://github.com/callumacrae) - [Width property for jQuery.selection](https://github.com/jupiterjs/jquerypp/pull/11) and documentation fixes.
+[callumacrae](https://github.com/callumacrae) - [Width property for jQuery.selection](https://github.com/bitovi/jquerypp/pull/11) and documentation fixes.
 [fabianonunes](https://github.com/fabianonunes) - Fixed several errors in the build process.
+[jbrumwell](https://github.com/jbrumwell) - Added several useful features for drag/drop events and
+[jeffrose](https://github.com/jeffrose) - [1](https://github.com/bitovi/jquerypp/pull/68)
+[iamnoah](https://github.com/iamnoah) - [1](https://github.com/bitovi/jquerypp/pull/65)
 
 ### Change Log
 
+__1.0.1__ (February 6th 2013)
+
+- fix: [Force hover leave on new mouseenter](https://github.com/bitovi/jquerypp/pull/65)
+- fix: [Removing the element being hovered prevents all future hoverenter](https://github.com/bitovi/jquerypp/issues/64)
+- fix: [hover.leave != 0 prevents hover of next element with same selecto](https://github.com/bitovi/jquerypp/issues/63)
+- fix: [Changing jQuery references to local $](https://github.com/bitovi/jquerypp/pull/71)
+- fix: [Breaks in jQuery.noConflict(true) Scenario](https://github.com/bitovi/jquerypp/issues/67)
+- fix: [Can't download drag.limit, drag.step, and drag.scroll from downloader on website](https://github.com/bitovi/jquerypp/pull/66)
+- feature: [jQuery 1.9.x support](https://github.com/bitovi/jquerypp/commit/692ed50a7b43fb2c6bfb9d89c5e0505ddcbd6595)
+- feature: Added to the new [jQuery plugin repository](http://plugins.jquery.com/jquerypp)
+
+__1.0.0__ (November 20th 2012)
+
+- feature: jQuery 1.8.0+ compatibility
+- feature: [dragcleanup event](https://github.com/bitovi/jquerypp/pull/43)
+- feature: [Reverse and move event](https://github.com/bitovi/jquerypp/issues/25)
+- fix: [pass through scrollTop in animate](https://github.com/bitovi/jquerypp/pull/40)
+- fix: [Fastfix: Original can be undefined](https://github.com/bitovi/jquerypp/pull/45)
+- fix: [Animate Scroll not working](https://github.com/bitovi/jquerypp/issues/35)
+- fix: [.stop() does not stop callbacks from being executed](https://github.com/bitovi/jquerypp/issues/28)
+- fix: [jQuery.event.swipe.max isn't actually being used](https://github.com/bitovi/jquerypp/issues/33)
+- fix: [Range triggers error on IE8](https://github.com/bitovi/jquerypp/issues/39)
+- fix: [[FormParams] convertValue function: Null value to undefined (Internet Explorer Fix)](https://github.com/bitovi/jquerypp/pull/51)
+- fix: [HoverInit delay 0 does not trigger hoverenter if immediately moused out](https://github.com/bitovi/jquerypp/issues/57)
+
 __1.0 Beta 2__
 
-- feature: [Key mapping tool for jQuery.event.key for international characters](https://github.com/jupiterjs/jquerypp/issues/16)
-- fix: [jQuery.formParams converts disabled fields](https://github.com/jupiterjs/jquerypp/issues/24)
-- fix: [jQuery.animate supports all parameters](https://github.com/jupiterjs/jquerypp/issues/22)
-- change: [jQuery.event.drag supports touch events](https://github.com/jupiterjs/jquerypp/issues/23)
-- fix: [jQuery.animate .stop() doesn't work](https://github.com/jupiterjs/jquerypp/issues/19)
-- fix: [Bug with duplicate sub keys](https://github.com/jupiterjs/jquerypp/issues/17)
-- change: [Added width property to jQuery.selection](https://github.com/jupiterjs/jquerypp/pull/11)
-- fix: [Security error in jQuery.animate](https://github.com/jupiterjs/jquerypp/issues/5)
+- feature: [Key mapping tool for jQuery.event.key for international characters](https://github.com/bitovi/jquerypp/issues/16)
+- fix: [jQuery.formParams converts disabled fields](https://github.com/bitovi/jquerypp/issues/24)
+- fix: [jQuery.animate supports all parameters](https://github.com/bitovi/jquerypp/issues/22)
+- change: [jQuery.event.drag supports touch events](https://github.com/bitovi/jquerypp/issues/23)
+- fix: [jQuery.animate .stop() doesn't work](https://github.com/bitovi/jquerypp/issues/19)
+- fix: [Bug with duplicate sub keys](https://github.com/bitovi/jquerypp/issues/17)
+- change: [Added width property to jQuery.selection](https://github.com/bitovi/jquerypp/pull/11)
+- fix: [Security error in jQuery.animate](https://github.com/bitovi/jquerypp/issues/5)
 - *jquerypp.com*
   - jsFiddle examples for [cookie](#cookie), [compare](#compare), [range](#range), [styles](#styles) and [key](#key)
   - Links to annotated sources ([e.g. jQuery.animate](http://donejs.com/jquery/docs/jquery.animate.html))
