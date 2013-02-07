@@ -92,7 +92,7 @@ module.exports = function (grunt) {
 
 	grunt.loadTasks("../build/tasks");
 	grunt.registerTask('edge', 'build:edge strip:edge beautify:dist bannerize:edge');
-	grunt.registerTask('latest', 'build:latest strip:latest beautify:dist bannerize:latest shell:makeSteal shell:bundleLatest docco:latest');
+	grunt.registerTask('latest', 'build:latest docco:latest strip:latest beautify:dist bannerize:latest shell:makeSteal shell:bundleLatest');
 	grunt.registerTask("ghpages", "shell:cleanup shell:getGhPages shell:copyLatest shell:updateGhPages shell:cleanup");
 	grunt.registerTask('deploy', 'latest ghpages');
 };
