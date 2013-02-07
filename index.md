@@ -94,7 +94,7 @@ require.config({
 
 ## animate `$(el).animate(properties, [speed], [callback]) -> jQuery`
 
-[Annotated source](http://donejs.com/jquery/docs/jquery.animate.html)
+[Annotated source](http://jquerypp.com/release/latest/docs/animate.html)
 
 [jQuery.animate](http://donejs.com/docs.html#!jQuery.animate) overwrites `$.fn.animate` to use
 CSS 3 animations if possible.
@@ -117,7 +117,7 @@ Since CSS transitions are implemented natively in the browser and can make use o
 
 ## compare `$(elA).compare(elB) -> Number`
 
-[Annotated source](http://donejs.com/jquery/docs/jquery.compare.html)
+[Annotated source](http://jquerypp.com/release/latest/docs/compare.html)
 
 [jQuery.compare](http://donejs.com/docs.html#!jQuery.compare) adds `$.fn.compare` to compare the position of two nodes. It returns a number that represents a bitmask showing how they are positioned relative to each other. The following list shows the `bitmask`, the __number__ and what it means for a `$.fn.compare` call like `$('#foo').compare($('#bar'))`:
 
@@ -142,7 +142,7 @@ This is useful to rapidly compare element positions which is common when widgets
 
 ## cookie `$.cookie(name, [value], [options]) -> Object|String`
 
-[Annotated source](http://donejs.com/jquery/docs/jquery.cookie.html)
+[Annotated source](http://jquerypp.com/release/latest/docs/cookie.html)
 
 [jQuery.cookie](http://donejs.com/docs.html#!jQuery.cookie) packages Klaus Hartl's [jQuery cookie](https://github.com/carhartl/jquery-cookie) plugin for manipulating cookies. Use it like:
 
@@ -171,7 +171,7 @@ The example uses `jQuery.cookie` and [formParams](#formParams) to persist a form
 
 ## dimensions
 
-[Annotated source](http://donejs.com/jquery/docs/jquery.dimensions.html)
+[Annotated source](http://jquerypp.com/release/latest/docs/dimensions.html)
 
 [jQuery.dimensions](http://donejs.com/docs.html#!jQuery.dimensions) overwrites `$.fn.innerWidth`, `$.fn.outerWidth`, `$.fn.innerHeight`, `$.fn.outerHeight` and enables `$.fn.animate` to animate these values. Inner dimensions include the padding where outer dimensions also take care of borders and margins (if *includeMargin* is set to `true`). Set and read these values using:
 
@@ -195,7 +195,7 @@ The following example lets you change the different width properties used by `$(
 
 ## formParams `$(form).formParams([convert]) -> Object|jQuery`
 
-[Annotated source](http://donejs.com/jquery/docs/jquery.form_params.html)
+[Annotated source](http://jquerypp.com/release/latest/docs/form_params.html)
 
 [jQuery.formParams](http://donejs.com/docs.html#!jQuery.formParams) adds `$.fn.formParams` which serializes a form into a JavaScript object. It creates nested objects by using bracket notation in the form element name. If *convert* is `true`, values that look like numbers or booleans will be converted and empty strings won't be added to the object. For a form like this:
 
@@ -233,7 +233,7 @@ Update the form in the following example to see a JSON representation of the obj
 
 ## range `$.Range([el]) -> range` `$(el).range() -> range`
 
-[Annotated source](http://donejs.com/jquery/docs/jquery.range.html)
+[Annotated source](http://jquerypp.com/release/latest/docs/range.html)
 
 Use [jQuery.Range](http://donejs.com/docs.html#!jQuery.Range) to create, move and compare text ranges. Use `$.Range.current()` to get the currently selected text range. `$(el).range()` returns a text range on an element.
 
@@ -302,7 +302,7 @@ The following example uses `jQuery.range` to
 
 ## selection `$(el).selection([start], [end]) -> Object|jQuery`
 
-[Annotated source](http://donejs.com/jquery/docs/jquery.selection.html)
+[Annotated source](http://jquerypp.com/release/latest/docs/selection.html)
 
 [jQuery.selection](http://donejs.com/docs.html#!jQuery.selection) adds `$.fn.selection` to set or retrieve the currently selected text range. It works on all elements:
 
@@ -324,7 +324,7 @@ The following example shows how `$.fn.selection` can be used. Initially the sele
 
 ## styles `$(el).styles() -> Object`
 
-[Annotated source](http://donejs.com/jquery/docs/jquery.styles.html)
+[Annotated source](http://jquerypp.com/release/latest/docs/styles.html)
 
 [jQuery.styles](http://donejs.com/docs.html#!jQuery.styles) adds `$.fn.styles` as a fast way of getting a set of computed styles from an element. It performs much faster than retrieving them individually e.g. by using [jQuery.css()](http://api.jquery.com/css/). Computed styles reflect the actual current style of an element, including browser defaults and CSS settings.
 
@@ -340,7 +340,7 @@ the runtime to the equivalent [jQuery.height](http://api.jquery.com/height/):
 
 ## within `$(el).within(left, top, [useOffsetCache]) -> jQuery`
 
-[Annotated source](http://donejs.com/jquery/docs/jquery.within.html)
+[Annotated source](http://jquerypp.com/release/latest/docs/within.html)
 
 [jQuery.within](http://donejs.com/docs.html#!jQuery.within) adds `$.fn.within` and `$.fn.withinBox` that return all elements having a given position or area in common. The following example returns all `div` elements having the point 200px left and 200px from the top in common:
 
@@ -364,7 +364,7 @@ Move the mouse in the following example and it will show the ids for `div` eleme
 
 ## destroyed `destroyed`
 
-[Annotated source](http://donejs.com/jquery/docs/jquery.event.destroyed.html)
+[Annotated source](http://jquerypp.com/release/latest/docs/destroyed.html)
 
 The `destroyed` event is triggered by [jQuery.event.destroyed](http://donejs.com/docs.html#!jQuery.event.destroyed) when the element is removed from the DOM using one of the jQuery [manipulation methods](http://api.jquery.com/category/manipulation/).
 
@@ -378,7 +378,7 @@ $('form').on('destroyed', function() {
 
 ## drag `dragdown` `draginit` `dragmove` `dragend` `dragover` `dragout`
 
-[Annotated source](http://donejs.com/jquery/docs/jquery.event.drag.html)
+[Annotated source](http://jquerypp.com/release/latest/docs/drag.html)
 
 [jQuery.event.drag](http://donejs.com/docs.html#!jQuery.event.drag) adds *delegatable* drag events to jQuery:
 
@@ -439,7 +439,7 @@ The `drag` object (passed to the event handler as the second parameter) can be u
 
 ## drop `dropinit` `dropover` `dropout` `dropmove` `dropon` `dropend`
 
-[Annotated source](http://donejs.com/jquery/docs/jquery.event.drop.html)
+[Annotated source](http://jquerypp.com/release/latest/docs/drop.html)
 
 [jQuery.event.drop](http://donejs.com/docs.html#!jQuery.event.drop) complements `jQuery.event.drag` with *delegatable* drop events:
 
@@ -482,7 +482,7 @@ The following example shows two draggable elements and a drop area. When a drag 
 
 ## fastfix
 
-[Annotated source](http://donejs.com/jquery/docs/jquery.event.fastfix.html)
+[Annotated source](http://jquerypp.com/release/latest/docs/fastfix.html)
 
 [jQuery.event.fastfix](http://donejs.com/docs.html#!jQuery.event.fastfix) speeds up `jQuery.event.fix` by using ECMAScript 5
 getters. `jQuery.event.fix` is used to normalize a DOM event before it gets passed as a
@@ -498,7 +498,7 @@ performance](http://jsperf.com/jquery-event-fix/6) of the original `jQuery.event
 
 ## hover `hoverinit` `hoverenter` `hovermove` `hoverleave`
 
-[Annotated source](http://donejs.com/jquery/docs/jquery.event.hover.html)
+[Annotated source](http://jquerypp.com/release/latest/docs/hover.html)
 
 [jQuery.event.hover](http://donejs.com/docs.html#!jQuery.event.hover) provides the following hover events:
 
@@ -536,7 +536,7 @@ The following example shows `jQuery.event.hover` with different settings for dis
 
 ## key `event.keyName()`
 
-[Annotated source](http://donejs.com/jquery/docs/jquery.event.key.html)
+[Annotated source](http://jquerypp.com/release/latest/docs/key.html)
 
 [jQuery.event.key](http://donejs.com/docs.html#!jQuery.event.key) adds a `.keyName()` method to the event object that returns a string representation of the current key:
 
@@ -587,7 +587,7 @@ The following example implements a `tabs` widget using [CanJS](http://canjs.us).
 
 ### triggerAsync `$(el).triggerAsync(event, [success], [prevented])`
 
-[Annotated source](http://donejs.com/jquery/docs/jquery.event.default.html)
+[Annotated source](http://jquerypp.com/release/latest/docs/default.html)
 
 [jQuery.fn.triggerAsync](http://donejs.com/docs.html#!jQuery.fn.triggerAsync) triggers an event and calls a *success* handler when it has finished propagating through the DOM and no handler called `event.preventDefault()` or returned `false`. The *prevented* callback will be used otherwise:
 
@@ -601,7 +601,7 @@ $('panel').triggerAsync('show', function(){
 
 ### default events `eventname.default`
 
-[Annotated source](http://donejs.com/jquery/docs/jquery.event.default.html)
+[Annotated source](http://jquerypp.com/release/latest/docs/default.html)
 
 [jQuery.event.default](http://donejs.com/docs.html#!jQuery.event.default) adds default event handlers. A default event runs when all other event handlers have been triggered and none has called `event.preventDefault()` or returned `false`. Default events are prefixed with the `default` namespace. The following example adds a default `toggle` event:
 
@@ -620,7 +620,7 @@ $('#text').on('toggle', function(ev, animation) {
 
 ### pause and resume `event.pause()` `event.resume()`
 
-[Annotated source](http://donejs.com/jquery/docs/jquery.event.pause.html)
+[Annotated source](http://jquerypp.com/release/latest/docs/pause.html)
 
 Pausing an event works similar to [.stopImmediatePropagation()](http://api.jquery.com/event.stopImmediatePropagation/) by calling `event.pause()`. Calling `event.resume()` will continue propagation. This is great when doing asynchronous processing in an event handler:
 
@@ -636,7 +636,7 @@ $('#todos').on('show', function(ev){
 
 ## resize `resize`
 
-[Annotated source](http://donejs.com/jquery/docs/jquery.event.resize.html)
+[Annotated source](http://jquerypp.com/release/latest/docs/resize.html)
 
 [jQuery.event.resize](http://donejs.com/docs.html#!jQuery.event.resize) allows you to listen to `resize` events on arbitrary elements. Unlike other events that bubble from the target element to the document the `resize` event will propagate from the outside-in.
 This means that outside elements will always resize first. Trigger the `resize` event whenever the dimensions of an element change and inside elements should adjust as well.
@@ -658,7 +658,7 @@ The `resize` event makes creating application like layouts a lot easier. The fol
 
 ## swipe `swipeleft` `swiperight` `swipeup` `swipedown` `swipe`
 
-[Annotated source](http://donejs.com/jquery/docs/jquery.event.swipe.html)
+[Annotated source](http://jquerypp.com/release/latest/docs/swipe.html)
 
 [jQuery.event.swipe](http://donejs.com/docs.html#!jQuery.event.swipe) adds support for swipe motions providing the *delegatable* `swipeleft`, `swiperight`, `swipedown`, `swipeup` and `swipe` events:
 
@@ -882,7 +882,7 @@ __1.0 Beta 2__
 - fix: [Security error in jQuery.animate](https://github.com/bitovi/jquerypp/issues/5)
 - *jquerypp.com*
   - jsFiddle examples for [cookie](#cookie), [compare](#compare), [range](#range), [styles](#styles) and [key](#key)
-  - Links to annotated sources ([e.g. jQuery.animate](http://donejs.com/jquery/docs/jquery.animate.html))
+  - Links to annotated sources ([e.g. jQuery.animate](http://jquerypp.com/release/latest/docs/animate.html))
   - Changelog and list of heroes section
 
 __1.0 Beta__ (June 1st 2012)
