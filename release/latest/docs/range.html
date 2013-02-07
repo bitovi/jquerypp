@@ -1,0 +1,754 @@
+<!DOCTYPE html>  <html> <head>   <title>range.js</title>   <meta http-equiv="content-type" content="text/html; charset=UTF-8">   <link rel="stylesheet" media="all" href="docco.css" /> </head> <body>   <div id="container">     <div id="background"></div>            <div id="jump_to">         Jump To &hellip;         <div id="jump_wrapper">           <div id="jump_page">                                           <a class="source" href="jquerypp.html">                 jquerypp.js               </a>                                           <a class="source" href="animate.html">                 animate.js               </a>                                           <a class="source" href="compare.html">                 compare.js               </a>                                           <a class="source" href="cookie.html">                 cookie.js               </a>                                           <a class="source" href="dimensions.html">                 dimensions.js               </a>                                           <a class="source" href="form_params.html">                 form_params.js               </a>                                           <a class="source" href="range.html">                 range.js               </a>                                           <a class="source" href="selection.html">                 selection.js               </a>                                           <a class="source" href="styles.html">                 styles.js               </a>                                           <a class="source" href="within.html">                 within.js               </a>                                           <a class="source" href="default.html">                 default.js               </a>                                           <a class="source" href="destroyed.html">                 destroyed.js               </a>                                           <a class="source" href="drag.html">                 drag.js               </a>                                           <a class="source" href="core.html">                 core.js               </a>                                           <a class="source" href="limit.html">                 limit.js               </a>                                           <a class="source" href="scroll.html">                 scroll.js               </a>                                           <a class="source" href="step.html">                 step.js               </a>                                           <a class="source" href="drop.html">                 drop.js               </a>                                           <a class="source" href="fastfix.html">                 fastfix.js               </a>                                           <a class="source" href="hover.html">                 hover.js               </a>                                           <a class="source" href="key.html">                 key.js               </a>                                           <a class="source" href="livehack.html">                 livehack.js               </a>                                           <a class="source" href="pause.html">                 pause.js               </a>                                           <a class="source" href="resize.html">                 resize.js               </a>                                           <a class="source" href="reverse.html">                 reverse.js               </a>                                           <a class="source" href="swipe.html">                 swipe.js               </a>                                           <a class="source" href="json.html">                 json.js               </a>                                           <a class="source" href="vector.html">                 vector.js               </a>                        </div>         </div>       </div>          <table cellpadding="0" cellspacing="0">       <thead>         <tr>           <th class="docs">             <h1>               range.js             </h1>           </th>           <th class="code">           </th>         </tr>       </thead>       <tbody>                               <tr id="section-1">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-1">&#182;</a>               </div>                            </td>             <td class="code">               <div class="highlight"><pre><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">$</span><span class="p">)</span> <span class="p">{</span>
+
+  <span class="nx">$</span><span class="p">.</span><span class="nx">fn</span><span class="p">.</span><span class="nx">range</span> <span class="o">=</span>
+    <span class="cm">/**</span>
+<span class="cm">     * @function jQuery.fn.range</span>
+<span class="cm">     * @parent jQuery.Range</span>
+<span class="cm">     *</span>
+<span class="cm">     * `$.fn.range` returns a new [jQuery.Range] instance for the first selected element.</span>
+<span class="cm">     *</span>
+<span class="cm">     *     $(&#39;#content&#39;).range() //-&gt; range</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return {$.Range} A $.Range instance for the selected element</span>
+<span class="cm">     */</span>
+      <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">$</span><span class="p">.</span><span class="nx">Range</span><span class="p">(</span><span class="k">this</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="p">}</span>
+
+  <span class="kd">var</span> <span class="nx">convertType</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">type</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span>  <span class="nx">type</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/([a-z])([a-z]+)/gi</span><span class="p">,</span><span class="kd">function</span> <span class="p">(</span><span class="nx">all</span><span class="p">,</span> <span class="nx">first</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">first</span> <span class="o">+</span> <span class="nx">next</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()</span>
+      <span class="p">}).</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/_/g</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">);</span>
+    <span class="p">},</span></pre></div>             </td>           </tr>                               <tr id="section-2">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-2">&#182;</a>               </div>               <p>reverses things like START<em>TO</em>END into END<em>TO</em>START</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="nx">reverse</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">type</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">type</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/^([a-z]+)_TO_([a-z]+)/i</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">all</span><span class="p">,</span> <span class="nx">first</span><span class="p">,</span> <span class="nx">last</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">last</span> <span class="o">+</span> <span class="s2">&quot;_TO_&quot;</span> <span class="o">+</span> <span class="nx">first</span><span class="p">;</span>
+      <span class="p">});</span>
+    <span class="p">},</span>
+    <span class="nx">getWindow</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">element</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">element</span> <span class="o">?</span> <span class="nx">element</span><span class="p">.</span><span class="nx">ownerDocument</span><span class="p">.</span><span class="nx">defaultView</span> <span class="o">||</span> <span class="nx">element</span><span class="p">.</span><span class="nx">ownerDocument</span><span class="p">.</span><span class="nx">parentWindow</span> <span class="o">:</span> <span class="nb">window</span>
+    <span class="p">},</span>
+    <span class="nx">bisect</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">el</span><span class="p">,</span> <span class="nx">start</span><span class="p">,</span> <span class="nx">end</span><span class="p">)</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-3">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-3">&#182;</a>               </div>               <p>split the start and end ... figure out who is touching ...</p>             </td>             <td class="code">               <div class="highlight"><pre>      <span class="k">if</span> <span class="p">(</span><span class="nx">end</span> <span class="o">-</span> <span class="nx">start</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span>
+      <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="nx">support</span> <span class="o">=</span> <span class="p">{};</span>
+  <span class="cm">/**</span>
+<span class="cm">   * @Class jQuery.Range</span>
+<span class="cm">   * @parent jQuery.Range</span>
+<span class="cm">   *</span>
+<span class="cm">   * Depending on the object passed, the selected text will be different.</span>
+<span class="cm">   *</span>
+<span class="cm">   * @param {TextRange|HTMLElement|Point} [range] An object specifiying a</span>
+<span class="cm">   * range.  Depending on the object, the selected text will be different.  $.Range supports the</span>
+<span class="cm">   * following types</span>
+<span class="cm">   *</span>
+<span class="cm">   *   - __undefined or null__ - returns a range with nothing selected</span>
+<span class="cm">   *   - __HTMLElement__ - returns a range with the node&#39;s text selected</span>
+<span class="cm">   *   - __Point__ - returns a range at the point on the screen.  The point can be specified like:</span>
+<span class="cm">   *</span>
+<span class="cm">   *         //client coordinates</span>
+<span class="cm">   *         {clientX: 200, clientY: 300}</span>
+<span class="cm">   *</span>
+<span class="cm">   *         //page coordinates</span>
+<span class="cm">   *         {pageX: 200, pageY: 300}</span>
+<span class="cm">   *         {top: 200, left: 300}</span>
+<span class="cm">   *</span>
+<span class="cm">   *   - __TextRange__ a raw text range object.</span>
+<span class="cm">   */</span>
+  <span class="nx">$</span><span class="p">.</span><span class="nx">Range</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">range</span><span class="p">)</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-4">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-4">&#182;</a>               </div>               <p>If it's called w/o new, call it with new!</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">constructor</span> <span class="o">!==</span> <span class="nx">$</span><span class="p">.</span><span class="nx">Range</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="k">new</span> <span class="nx">$</span><span class="p">.</span><span class="nx">Range</span><span class="p">(</span><span class="nx">range</span><span class="p">);</span>
+    <span class="p">}</span></pre></div>             </td>           </tr>                               <tr id="section-5">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-5">&#182;</a>               </div>               <p>If we are passed a jQuery-wrapped element, get the raw element</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="k">if</span> <span class="p">(</span><span class="nx">range</span> <span class="o">&amp;&amp;</span> <span class="nx">range</span><span class="p">.</span><span class="nx">jquery</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">range</span> <span class="o">=</span> <span class="nx">range</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+    <span class="p">}</span></pre></div>             </td>           </tr>                               <tr id="section-6">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-6">&#182;</a>               </div>               <p>If we have an element, or nothing</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">range</span> <span class="o">||</span> <span class="nx">range</span><span class="p">.</span><span class="nx">nodeType</span><span class="p">)</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-7">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-7">&#182;</a>               </div>               <p>create a range</p>             </td>             <td class="code">               <div class="highlight"><pre>      <span class="k">this</span><span class="p">.</span><span class="nx">win</span> <span class="o">=</span> <span class="nx">getWindow</span><span class="p">(</span><span class="nx">range</span><span class="p">)</span>
+      <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">win</span><span class="p">.</span><span class="nb">document</span><span class="p">.</span><span class="nx">createRange</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">range</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">win</span><span class="p">.</span><span class="nb">document</span><span class="p">.</span><span class="nx">createRange</span><span class="p">()</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">win</span> <span class="o">&amp;&amp;</span> <span class="k">this</span><span class="p">.</span><span class="nx">win</span><span class="p">.</span><span class="nb">document</span><span class="p">.</span><span class="nx">body</span> <span class="o">&amp;&amp;</span> <span class="k">this</span><span class="p">.</span><span class="nx">win</span><span class="p">.</span><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">createTextRange</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">range</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">win</span><span class="p">.</span><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">createTextRange</span><span class="p">()</span>
+      <span class="p">}</span></pre></div>             </td>           </tr>                               <tr id="section-8">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-8">&#182;</a>               </div>               <p>if we have an element, make the range select it</p>             </td>             <td class="code">               <div class="highlight"><pre>      <span class="k">if</span> <span class="p">(</span><span class="nx">range</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="nx">range</span><span class="p">)</span>
+      <span class="p">}</span>
+    <span class="p">}</span></pre></div>             </td>           </tr>                               <tr id="section-9">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-9">&#182;</a>               </div>               <p>if we are given a point</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">range</span><span class="p">.</span><span class="nx">clientX</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">||</span> <span class="nx">range</span><span class="p">.</span><span class="nx">pageX</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">||</span> <span class="nx">range</span><span class="p">.</span><span class="nx">left</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">moveToPoint</span><span class="p">(</span><span class="nx">range</span><span class="p">);</span>
+    <span class="p">}</span></pre></div>             </td>           </tr>                               <tr id="section-10">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-10">&#182;</a>               </div>               <p>if we are given a touch event</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">range</span><span class="p">.</span><span class="nx">originalEvent</span> <span class="o">&amp;&amp;</span> <span class="nx">range</span><span class="p">.</span><span class="nx">originalEvent</span><span class="p">.</span><span class="nx">touches</span> <span class="o">&amp;&amp;</span> <span class="nx">range</span><span class="p">.</span><span class="nx">originalEvent</span><span class="p">.</span><span class="nx">touches</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">moveToPoint</span><span class="p">(</span><span class="nx">range</span><span class="p">.</span><span class="nx">originalEvent</span><span class="p">.</span><span class="nx">touches</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+    <span class="p">}</span></pre></div>             </td>           </tr>                               <tr id="section-11">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-11">&#182;</a>               </div>               <p>if we are a normal event</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">range</span><span class="p">.</span><span class="nx">originalEvent</span> <span class="o">&amp;&amp;</span> <span class="nx">range</span><span class="p">.</span><span class="nx">originalEvent</span><span class="p">.</span><span class="nx">changedTouches</span> <span class="o">&amp;&amp;</span> <span class="nx">range</span><span class="p">.</span><span class="nx">originalEvent</span><span class="p">.</span><span class="nx">changedTouches</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">moveToPoint</span><span class="p">(</span><span class="nx">range</span><span class="p">.</span><span class="nx">originalEvent</span><span class="p">.</span><span class="nx">changedTouches</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="p">}</span></pre></div>             </td>           </tr>                               <tr id="section-12">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-12">&#182;</a>               </div>               <p>given a TextRange or something else?</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="k">else</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">range</span> <span class="o">=</span> <span class="nx">range</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+  <span class="cm">/**</span>
+<span class="cm">   * @static</span>
+<span class="cm">   */</span>
+  <span class="nx">$</span><span class="p">.</span><span class="nx">Range</span><span class="p">.</span>
+  <span class="cm">/**</span>
+<span class="cm">   * `$.Range.current([element])` returns the currently selected range</span>
+<span class="cm">   * (using [window.getSelection](https://developer.mozilla.org/en/nsISelection)).</span>
+<span class="cm">   *</span>
+<span class="cm">   *     var range = $.Range.current()</span>
+<span class="cm">   *     range.start().offset // -&gt; selection start offset</span>
+<span class="cm">   *     range.end().offset // -&gt; selection end offset</span>
+<span class="cm">   *</span>
+<span class="cm">   * @param {HTMLElement} [el] an optional element used to get selection for a given window.</span>
+<span class="cm">   * @return {jQuery.Range} The range instance.</span>
+<span class="cm">   */</span>
+    <span class="nx">current</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">el</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">win</span> <span class="o">=</span> <span class="nx">getWindow</span><span class="p">(</span><span class="nx">el</span><span class="p">),</span>
+      <span class="nx">selection</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">win</span><span class="p">.</span><span class="nx">getSelection</span><span class="p">)</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-13">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-13">&#182;</a>               </div>               <p>If we can get the selection</p>             </td>             <td class="code">               <div class="highlight"><pre>      <span class="nx">selection</span> <span class="o">=</span> <span class="nx">win</span><span class="p">.</span><span class="nx">getSelection</span><span class="p">()</span>
+      <span class="k">return</span> <span class="k">new</span> <span class="nx">$</span><span class="p">.</span><span class="nx">Range</span><span class="p">(</span><span class="nx">selection</span><span class="p">.</span><span class="nx">rangeCount</span> <span class="o">?</span> <span class="nx">selection</span><span class="p">.</span><span class="nx">getRangeAt</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">:</span> <span class="nx">win</span><span class="p">.</span><span class="nb">document</span><span class="p">.</span><span class="nx">createRange</span><span class="p">())</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-14">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-14">&#182;</a>               </div>               <p>Otherwise use document.selection</p>             </td>             <td class="code">               <div class="highlight"><pre>      <span class="k">return</span>  <span class="k">new</span> <span class="nx">$</span><span class="p">.</span><span class="nx">Range</span><span class="p">(</span><span class="nx">win</span><span class="p">.</span><span class="nb">document</span><span class="p">.</span><span class="nx">selection</span><span class="p">.</span><span class="nx">createRange</span><span class="p">());</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+
+
+  <span class="nx">$</span><span class="p">.</span><span class="nx">extend</span><span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">Range</span><span class="p">.</span><span class="nx">prototype</span><span class="p">,</span>
+    <span class="cm">/** @prototype **/</span>
+    <span class="p">{</span>
+      <span class="cm">/**</span>
+<span class="cm">       * `range.moveToPoint(point)` moves the range end and start position to a specific point.</span>
+<span class="cm">       * A point can be specified like:</span>
+<span class="cm">       *</span>
+<span class="cm">       *      //client coordinates</span>
+<span class="cm">       *      {clientX: 200, clientY: 300}</span>
+<span class="cm">       *</span>
+<span class="cm">       *      //page coordinates</span>
+<span class="cm">       *      {pageX: 200, pageY: 300}</span>
+<span class="cm">       *      {top: 200, left: 300}</span>
+<span class="cm">       *</span>
+<span class="cm">       * @param point The point to move the range to</span>
+<span class="cm">       * @return {$.Range}</span>
+<span class="cm">       */</span>
+      <span class="nx">moveToPoint</span> <span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">point</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">clientX</span> <span class="o">=</span> <span class="nx">point</span><span class="p">.</span><span class="nx">clientX</span><span class="p">,</span> <span class="nx">clientY</span> <span class="o">=</span> <span class="nx">point</span><span class="p">.</span><span class="nx">clientY</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">clientX</span><span class="p">)</span> <span class="p">{</span>
+          <span class="kd">var</span> <span class="nx">off</span> <span class="o">=</span> <span class="nx">scrollOffset</span><span class="p">();</span>
+          <span class="nx">clientX</span> <span class="o">=</span> <span class="p">(</span><span class="nx">point</span><span class="p">.</span><span class="nx">pageX</span> <span class="o">||</span> <span class="nx">point</span><span class="p">.</span><span class="nx">left</span> <span class="o">||</span> <span class="mi">0</span> <span class="p">)</span> <span class="o">-</span> <span class="nx">off</span><span class="p">.</span><span class="nx">left</span><span class="p">;</span>
+          <span class="nx">clientY</span> <span class="o">=</span> <span class="p">(</span><span class="nx">point</span><span class="p">.</span><span class="nx">pageY</span> <span class="o">||</span> <span class="nx">point</span><span class="p">.</span><span class="nx">top</span> <span class="o">||</span> <span class="mi">0</span> <span class="p">)</span> <span class="o">-</span> <span class="nx">off</span><span class="p">.</span><span class="nx">top</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">support</span><span class="p">.</span><span class="nx">moveToPoint</span><span class="p">)</span> <span class="p">{</span>
+          <span class="k">this</span><span class="p">.</span><span class="nx">range</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">Range</span><span class="p">().</span><span class="nx">range</span>
+          <span class="k">this</span><span class="p">.</span><span class="nx">range</span><span class="p">.</span><span class="nx">moveToPoint</span><span class="p">(</span><span class="nx">clientX</span><span class="p">,</span> <span class="nx">clientY</span><span class="p">);</span>
+          <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+        <span class="p">}</span></pre></div>             </td>           </tr>                               <tr id="section-15">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-15">&#182;</a>               </div>               <p>it's some text node in this range ...</p>             </td>             <td class="code">               <div class="highlight"><pre>        <span class="kd">var</span> <span class="nx">parent</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">elementFromPoint</span><span class="p">(</span><span class="nx">clientX</span><span class="p">,</span> <span class="nx">clientY</span><span class="p">);</span></pre></div>             </td>           </tr>                               <tr id="section-16">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-16">&#182;</a>               </div>               <p>typically it will be 'on' text</p>             </td>             <td class="code">               <div class="highlight"><pre>        <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">n</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">n</span> <span class="o">&lt;</span> <span class="nx">parent</span><span class="p">.</span><span class="nx">childNodes</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">n</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+          <span class="kd">var</span> <span class="nx">node</span> <span class="o">=</span> <span class="nx">parent</span><span class="p">.</span><span class="nx">childNodes</span><span class="p">[</span><span class="nx">n</span><span class="p">];</span>
+          <span class="k">if</span> <span class="p">(</span><span class="nx">node</span><span class="p">.</span><span class="nx">nodeType</span> <span class="o">===</span> <span class="mi">3</span> <span class="o">||</span> <span class="nx">node</span><span class="p">.</span><span class="nx">nodeType</span> <span class="o">===</span> <span class="mi">4</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kd">var</span> <span class="nx">range</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">Range</span><span class="p">(</span><span class="nx">node</span><span class="p">),</span>
+              <span class="nx">length</span> <span class="o">=</span> <span class="nx">range</span><span class="p">.</span><span class="nx">toString</span><span class="p">().</span><span class="nx">length</span><span class="p">;</span></pre></div>             </td>           </tr>                               <tr id="section-17">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-17">&#182;</a>               </div>               <p>now lets start moving the end until the boundingRect is within our range</p>             </td>             <td class="code">               <div class="highlight"><pre>            <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">length</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+              <span class="kd">var</span> <span class="nx">rect</span> <span class="o">=</span> <span class="nx">range</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="nx">i</span><span class="p">).</span><span class="nx">rect</span><span class="p">();</span>
+              <span class="k">if</span> <span class="p">(</span><span class="nx">rect</span><span class="p">.</span><span class="nx">left</span> <span class="o">&lt;=</span> <span class="nx">clientX</span> <span class="o">&amp;&amp;</span> <span class="nx">rect</span><span class="p">.</span><span class="nx">left</span> <span class="o">+</span> <span class="nx">rect</span><span class="p">.</span><span class="nx">width</span> <span class="o">&gt;=</span> <span class="nx">clientX</span> <span class="o">&amp;&amp;</span>
+                <span class="nx">rect</span><span class="p">.</span><span class="nx">top</span> <span class="o">&lt;=</span> <span class="nx">clientY</span> <span class="o">&amp;&amp;</span> <span class="nx">rect</span><span class="p">.</span><span class="nx">top</span> <span class="o">+</span> <span class="nx">rect</span><span class="p">.</span><span class="nx">height</span> <span class="o">&gt;=</span> <span class="nx">clientY</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">range</span><span class="p">.</span><span class="nx">start</span><span class="p">(</span><span class="nx">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+                <span class="k">this</span><span class="p">.</span><span class="nx">range</span> <span class="o">=</span> <span class="nx">range</span><span class="p">.</span><span class="nx">range</span><span class="p">;</span>
+                <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+              <span class="p">}</span>
+            <span class="p">}</span>
+          <span class="p">}</span>
+        <span class="p">}</span></pre></div>             </td>           </tr>                               <tr id="section-18">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-18">&#182;</a>               </div>               <p>if not 'on' text, recursively go through and find out when we shift to next
+'line'</p>             </td>             <td class="code">               <div class="highlight"><pre>        <span class="kd">var</span> <span class="nx">previous</span><span class="p">;</span>
+        <span class="nx">iterate</span><span class="p">(</span><span class="nx">parent</span><span class="p">.</span><span class="nx">childNodes</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">textNode</span><span class="p">)</span> <span class="p">{</span>
+          <span class="kd">var</span> <span class="nx">range</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">Range</span><span class="p">(</span><span class="nx">textNode</span><span class="p">);</span>
+          <span class="k">if</span> <span class="p">(</span><span class="nx">range</span><span class="p">.</span><span class="nx">rect</span><span class="p">().</span><span class="nx">top</span> <span class="o">&gt;</span> <span class="nx">point</span><span class="p">.</span><span class="nx">clientY</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+          <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="nx">previous</span> <span class="o">=</span> <span class="nx">range</span><span class="p">;</span>
+          <span class="p">}</span>
+        <span class="p">});</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="nx">previous</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">previous</span><span class="p">.</span><span class="nx">start</span><span class="p">(</span><span class="nx">previous</span><span class="p">.</span><span class="nx">toString</span><span class="p">().</span><span class="nx">length</span><span class="p">);</span>
+          <span class="k">this</span><span class="p">.</span><span class="nx">range</span> <span class="o">=</span> <span class="nx">previous</span><span class="p">.</span><span class="nx">range</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+          <span class="k">this</span><span class="p">.</span><span class="nx">range</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">Range</span><span class="p">(</span><span class="nx">parent</span><span class="p">).</span><span class="nx">range</span>
+        <span class="p">}</span>
+      <span class="p">},</span>
+
+      <span class="nb">window</span> <span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">win</span> <span class="o">||</span> <span class="nb">window</span><span class="p">;</span>
+      <span class="p">},</span>
+      <span class="cm">/**</span>
+<span class="cm">       * `range.overlaps([elRange])` returns `true` if any portion of these two ranges overlap.</span>
+<span class="cm">       *</span>
+<span class="cm">       *     var foo = document.getElementById(&#39;foo&#39;);</span>
+<span class="cm">       *</span>
+<span class="cm">       *     $.Range(foo.childNodes[0]).overlaps(foo.childNodes[1]) //-&gt; false</span>
+<span class="cm">       *</span>
+<span class="cm">       * @param {jQuery.Range} elRange The range to compare</span>
+<span class="cm">       * @return {Boolean} true if part of the ranges overlap, false if otherwise.</span>
+<span class="cm">       */</span>
+      <span class="nx">overlaps</span> <span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">elRange</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">elRange</span><span class="p">.</span><span class="nx">nodeType</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">elRange</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">Range</span><span class="p">(</span><span class="nx">elRange</span><span class="p">).</span><span class="nx">select</span><span class="p">(</span><span class="nx">elRange</span><span class="p">);</span>
+        <span class="p">}</span></pre></div>             </td>           </tr>                               <tr id="section-19">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-19">&#182;</a>               </div>               <p>if the start is within the element ...</p>             </td>             <td class="code">               <div class="highlight"><pre>        <span class="kd">var</span> <span class="nx">startToStart</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">compare</span><span class="p">(</span><span class="s2">&quot;START_TO_START&quot;</span><span class="p">,</span> <span class="nx">elRange</span><span class="p">),</span>
+          <span class="nx">endToEnd</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">compare</span><span class="p">(</span><span class="s2">&quot;END_TO_END&quot;</span><span class="p">,</span> <span class="nx">elRange</span><span class="p">)</span></pre></div>             </td>           </tr>                               <tr id="section-20">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-20">&#182;</a>               </div>               <p>if we wrap elRange</p>             </td>             <td class="code">               <div class="highlight"><pre>        <span class="k">if</span> <span class="p">(</span><span class="nx">startToStart</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="nx">endToEnd</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+          <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+        <span class="p">}</span></pre></div>             </td>           </tr>                               <tr id="section-21">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-21">&#182;</a>               </div>               <p>if our start is inside of it</p>             </td>             <td class="code">               <div class="highlight"><pre>        <span class="k">if</span> <span class="p">(</span><span class="nx">startToStart</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span>
+          <span class="k">this</span><span class="p">.</span><span class="nx">compare</span><span class="p">(</span><span class="s2">&quot;START_TO_END&quot;</span><span class="p">,</span> <span class="nx">elRange</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+          <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+        <span class="p">}</span></pre></div>             </td>           </tr>                               <tr id="section-22">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-22">&#182;</a>               </div>               <p>if our end is inside of elRange</p>             </td>             <td class="code">               <div class="highlight"><pre>        <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">compare</span><span class="p">(</span><span class="s2">&quot;END_TO_START&quot;</span><span class="p">,</span> <span class="nx">elRange</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span>
+          <span class="nx">endToEnd</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+          <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+      <span class="p">},</span>
+      <span class="cm">/**</span>
+<span class="cm">       * `range.collapse([toStart])` collapses a range to one of its boundary points.</span>
+<span class="cm">       * See [range.collapse](https://developer.mozilla.org/en/DOM/range.collapse).</span>
+<span class="cm">       *</span>
+<span class="cm">       *     $(&#39;#foo&#39;).range().collapse()</span>
+<span class="cm">       *</span>
+<span class="cm">       * @param {Boolean} [toStart] true if to the start of the range, false if to the</span>
+<span class="cm">       *  end.  Defaults to false.</span>
+<span class="cm">       * @return {jQuery.Range} returns the range for chaining.</span>
+<span class="cm">       */</span>
+      <span class="nx">collapse</span> <span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">toStart</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">range</span><span class="p">.</span><span class="nx">collapse</span><span class="p">(</span><span class="nx">toStart</span> <span class="o">===</span> <span class="kc">undefined</span> <span class="o">?</span> <span class="kc">true</span> <span class="o">:</span> <span class="nx">toStart</span><span class="p">);</span>
+        <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+      <span class="p">},</span>
+      <span class="cm">/**</span>
+<span class="cm">       * `range.toString()` returns the text of the range.</span>
+<span class="cm">       *</span>
+<span class="cm">       *     currentText = $.Range.current().toString()</span>
+<span class="cm">       *</span>
+<span class="cm">       * @return {String} The text content of this range</span>
+<span class="cm">       */</span>
+      <span class="nx">toString</span> <span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">typeof</span> <span class="k">this</span><span class="p">.</span><span class="nx">range</span><span class="p">.</span><span class="nx">text</span> <span class="o">==</span> <span class="s2">&quot;string&quot;</span> <span class="o">?</span> <span class="k">this</span><span class="p">.</span><span class="nx">range</span><span class="p">.</span><span class="nx">text</span> <span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">range</span><span class="p">.</span><span class="nx">toString</span><span class="p">();</span>
+      <span class="p">},</span>
+      <span class="cm">/**</span>
+<span class="cm">       * `range.start([start])` gets or sets the start of the range.</span>
+<span class="cm">       *</span>
+<span class="cm">       * If a value is not provided, start returns the range&#39;s starting container and offset like:</span>
+<span class="cm">       *</span>
+<span class="cm">       *     $(&#39;#foo&#39;).range().start()</span>
+<span class="cm">       *     //-&gt; {container: fooElement, offset: 0 }</span>
+<span class="cm">       *</span>
+<span class="cm">       * If a set value is provided, it can set the range.  The start of the range is set differently</span>
+<span class="cm">       * depending on the type of set value:</span>
+<span class="cm">       *</span>
+<span class="cm">       *   - __Object__ - an object with the new starting container and offset like</span>
+<span class="cm">       *</span>
+<span class="cm">       *         $.Range().start({container:  $(&#39;#foo&#39;)[0], offset: 20})</span>
+<span class="cm">       *</span>
+<span class="cm">       *   - __Number__ - the new offset value.  The container is kept the same.</span>
+<span class="cm">       *</span>
+<span class="cm">       *   - __String__ - adjusts the offset by converting the string offset to a number and adding it to the current</span>
+<span class="cm">       *     offset.  For example, the following moves the offset forward four characters:</span>
+<span class="cm">       *</span>
+<span class="cm">       *         $(&#39;#foo&#39;).range().start(&quot;+4&quot;)</span>
+<span class="cm">       *</span>
+<span class="cm">       * Note that `start` can return a text node. To get the containing element use this:</span>
+<span class="cm">       *</span>
+<span class="cm">       *     var startNode = range.start().container;</span>
+<span class="cm">       *     if( startNode.nodeType === Node.TEXT_NODE ||</span>
+<span class="cm">       *      startNode.nodeType === Node.CDATA_SECTION_NODE ) {</span>
+<span class="cm">       *          startNode = startNode.parentNode;</span>
+<span class="cm">       *     }</span>
+<span class="cm">       *     $(startNode).addClass(&#39;highlight&#39;);</span>
+<span class="cm">       *</span>
+<span class="cm">       * @param {Object|String|Number} [set] a set value if setting the start of the range or nothing if reading it.</span>
+<span class="cm">       * @return {jQuery.Range|Object} if setting the start, the range is returned for chaining, otherwise, the</span>
+<span class="cm">       *   start offset and container are returned.</span>
+<span class="cm">       */</span>
+      <span class="nx">start</span> <span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">set</span><span class="p">)</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-23">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-23">&#182;</a>               </div>               <p>return start</p>             </td>             <td class="code">               <div class="highlight"><pre>        <span class="k">if</span> <span class="p">(</span><span class="nx">set</span> <span class="o">===</span> <span class="kc">undefined</span><span class="p">)</span> <span class="p">{</span>
+          <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">range</span><span class="p">.</span><span class="nx">startContainer</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="p">{</span>
+              <span class="nx">container</span> <span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">range</span><span class="p">.</span><span class="nx">startContainer</span><span class="p">,</span>
+              <span class="nx">offset</span> <span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">range</span><span class="p">.</span><span class="nx">startOffset</span>
+            <span class="p">}</span>
+          <span class="p">}</span> <span class="k">else</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-24">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-24">&#182;</a>               </div>               <p>Get the start parent element</p>             </td>             <td class="code">               <div class="highlight"><pre>            <span class="kd">var</span> <span class="nx">start</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">clone</span><span class="p">().</span><span class="nx">collapse</span><span class="p">().</span><span class="nx">parent</span><span class="p">();</span></pre></div>             </td>           </tr>                               <tr id="section-25">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-25">&#182;</a>               </div>               <p>used to get the start element offset</p>             </td>             <td class="code">               <div class="highlight"><pre>            <span class="kd">var</span> <span class="nx">startRange</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">Range</span><span class="p">(</span><span class="nx">start</span><span class="p">).</span><span class="nx">select</span><span class="p">(</span><span class="nx">start</span><span class="p">).</span><span class="nx">collapse</span><span class="p">();</span>
+            <span class="nx">startRange</span><span class="p">.</span><span class="nx">move</span><span class="p">(</span><span class="s2">&quot;END_TO_START&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
+            <span class="k">return</span> <span class="p">{</span>
+              <span class="nx">container</span> <span class="o">:</span> <span class="nx">start</span><span class="p">,</span>
+              <span class="nx">offset</span> <span class="o">:</span> <span class="nx">startRange</span><span class="p">.</span><span class="nx">toString</span><span class="p">().</span><span class="nx">length</span>
+            <span class="p">}</span>
+          <span class="p">}</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+          <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">range</span><span class="p">.</span><span class="nx">setStart</span><span class="p">)</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-26">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-26">&#182;</a>               </div>               <p>supports setStart</p>             </td>             <td class="code">               <div class="highlight"><pre>            <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">set</span> <span class="o">==</span> <span class="s1">&#39;number&#39;</span><span class="p">)</span> <span class="p">{</span>
+              <span class="k">this</span><span class="p">.</span><span class="nx">range</span><span class="p">.</span><span class="nx">setStart</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">range</span><span class="p">.</span><span class="nx">startContainer</span><span class="p">,</span> <span class="nx">set</span><span class="p">)</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">set</span> <span class="o">==</span> <span class="s1">&#39;string&#39;</span><span class="p">)</span> <span class="p">{</span>
+              <span class="kd">var</span> <span class="nx">res</span> <span class="o">=</span> <span class="nx">callMove</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">range</span><span class="p">.</span><span class="nx">startContainer</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">range</span><span class="p">.</span><span class="nx">startOffset</span><span class="p">,</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">set</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+              <span class="k">this</span><span class="p">.</span><span class="nx">range</span><span class="p">.</span><span class="nx">setStart</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">node</span><span class="p">,</span> <span class="nx">res</span><span class="p">.</span><span class="nx">offset</span><span class="p">);</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+              <span class="k">this</span><span class="p">.</span><span class="nx">range</span><span class="p">.</span><span class="nx">setStart</span><span class="p">(</span><span class="nx">set</span><span class="p">.</span><span class="nx">container</span><span class="p">,</span> <span class="nx">set</span><span class="p">.</span><span class="nx">offset</span><span class="p">)</span>
+            <span class="p">}</span>
+          <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">set</span> <span class="o">==</span> <span class="s2">&quot;string&quot;</span><span class="p">)</span> <span class="p">{</span>
+              <span class="k">this</span><span class="p">.</span><span class="nx">range</span><span class="p">.</span><span class="nx">moveStart</span><span class="p">(</span><span class="s1">&#39;character&#39;</span><span class="p">,</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">set</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-27">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-27">&#182;</a>               </div>               <p>get the current end container</p>             </td>             <td class="code">               <div class="highlight"><pre>              <span class="kd">var</span> <span class="nx">container</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">start</span><span class="p">().</span><span class="nx">container</span><span class="p">,</span>
+                <span class="nx">offset</span>
+              <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">set</span> <span class="o">==</span> <span class="s2">&quot;number&quot;</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">offset</span> <span class="o">=</span> <span class="nx">set</span>
+              <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="nx">container</span> <span class="o">=</span> <span class="nx">set</span><span class="p">.</span><span class="nx">container</span>
+                <span class="nx">offset</span> <span class="o">=</span> <span class="nx">set</span><span class="p">.</span><span class="nx">offset</span>
+              <span class="p">}</span>
+              <span class="kd">var</span> <span class="nx">newPoint</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">Range</span><span class="p">(</span><span class="nx">container</span><span class="p">).</span><span class="nx">collapse</span><span class="p">();</span></pre></div>             </td>           </tr>                               <tr id="section-28">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-28">&#182;</a>               </div>               <p>move it over offset characters</p>             </td>             <td class="code">               <div class="highlight"><pre>              <span class="nx">newPoint</span><span class="p">.</span><span class="nx">range</span><span class="p">.</span><span class="nx">move</span><span class="p">(</span><span class="nx">offset</span><span class="p">);</span>
+              <span class="k">this</span><span class="p">.</span><span class="nx">move</span><span class="p">(</span><span class="s2">&quot;START_TO_START&quot;</span><span class="p">,</span> <span class="nx">newPoint</span><span class="p">);</span>
+            <span class="p">}</span>
+          <span class="p">}</span>
+          <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+        <span class="p">}</span>
+
+
+      <span class="p">},</span>
+      <span class="cm">/**</span>
+<span class="cm">       * `range.end([end])` gets or sets the end of the range.</span>
+<span class="cm">       * It takes similar options as [jQuery.Range::start start]:</span>
+<span class="cm">       *</span>
+<span class="cm">       * - __Object__ - an object with the new end container and offset like</span>
+<span class="cm">       *</span>
+<span class="cm">       *         $.Range().end({container:  $(&#39;#foo&#39;)[0], offset: 20})</span>
+<span class="cm">       *</span>
+<span class="cm">       * - __Number__ - the new offset value. The container is kept the same.</span>
+<span class="cm">       *</span>
+<span class="cm">       * - __String__ - adjusts the offset by converting the string offset to a number and adding it to the current</span>
+<span class="cm">       * offset. For example, the following moves the offset forward four characters:</span>
+<span class="cm">       *</span>
+<span class="cm">       *         $(&#39;#foo&#39;).range().end(&quot;+4&quot;)</span>
+<span class="cm">       *</span>
+<span class="cm">       * Note that `end` can return a text node. To get the containing element use this:</span>
+<span class="cm">       *</span>
+<span class="cm">       *     var startNode = range.end().container;</span>
+<span class="cm">       *     if( startNode.nodeType === Node.TEXT_NODE ||</span>
+<span class="cm">       *      startNode.nodeType === Node.CDATA_SECTION_NODE ) {</span>
+<span class="cm">       *          startNode = startNode.parentNode;</span>
+<span class="cm">       *     }</span>
+<span class="cm">       *     $(startNode).addClass(&#39;highlight&#39;);</span>
+<span class="cm">       *</span>
+<span class="cm">       * @param {Object|String|Number} [set] a set value if setting the end of the range or nothing if reading it.</span>
+<span class="cm">       */</span>
+      <span class="nx">end</span> <span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">set</span><span class="p">)</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-29">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-29">&#182;</a>               </div>               <p>read end</p>             </td>             <td class="code">               <div class="highlight"><pre>        <span class="k">if</span> <span class="p">(</span><span class="nx">set</span> <span class="o">===</span> <span class="kc">undefined</span><span class="p">)</span> <span class="p">{</span>
+          <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">range</span><span class="p">.</span><span class="nx">startContainer</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="p">{</span>
+              <span class="nx">container</span> <span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">range</span><span class="p">.</span><span class="nx">endContainer</span><span class="p">,</span>
+              <span class="nx">offset</span> <span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">range</span><span class="p">.</span><span class="nx">endOffset</span>
+            <span class="p">}</span>
+          <span class="p">}</span>
+          <span class="k">else</span> <span class="p">{</span>
+            <span class="kd">var</span></pre></div>             </td>           </tr>                               <tr id="section-30">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-30">&#182;</a>               </div>               <p>Get the end parent element</p>             </td>             <td class="code">               <div class="highlight"><pre>              <span class="nx">end</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">clone</span><span class="p">().</span><span class="nx">collapse</span><span class="p">(</span><span class="kc">false</span><span class="p">).</span><span class="nx">parent</span><span class="p">(),</span></pre></div>             </td>           </tr>                               <tr id="section-31">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-31">&#182;</a>               </div>               <p>used to get the end elements offset</p>             </td>             <td class="code">               <div class="highlight"><pre>              <span class="nx">endRange</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">Range</span><span class="p">(</span><span class="nx">end</span><span class="p">).</span><span class="nx">select</span><span class="p">(</span><span class="nx">end</span><span class="p">).</span><span class="nx">collapse</span><span class="p">();</span>
+            <span class="nx">endRange</span><span class="p">.</span><span class="nx">move</span><span class="p">(</span><span class="s2">&quot;END_TO_END&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
+            <span class="k">return</span> <span class="p">{</span>
+              <span class="nx">container</span> <span class="o">:</span> <span class="nx">end</span><span class="p">,</span>
+              <span class="nx">offset</span> <span class="o">:</span> <span class="nx">endRange</span><span class="p">.</span><span class="nx">toString</span><span class="p">().</span><span class="nx">length</span>
+            <span class="p">}</span>
+          <span class="p">}</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+          <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">range</span><span class="p">.</span><span class="nx">setEnd</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">set</span> <span class="o">==</span> <span class="s1">&#39;number&#39;</span><span class="p">)</span> <span class="p">{</span>
+              <span class="k">this</span><span class="p">.</span><span class="nx">range</span><span class="p">.</span><span class="nx">setEnd</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">range</span><span class="p">.</span><span class="nx">endContainer</span><span class="p">,</span> <span class="nx">set</span><span class="p">)</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">set</span> <span class="o">==</span> <span class="s1">&#39;string&#39;</span><span class="p">)</span> <span class="p">{</span>
+              <span class="kd">var</span> <span class="nx">res</span> <span class="o">=</span> <span class="nx">callMove</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">range</span><span class="p">.</span><span class="nx">endContainer</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">range</span><span class="p">.</span><span class="nx">endOffset</span><span class="p">,</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">set</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+              <span class="k">this</span><span class="p">.</span><span class="nx">range</span><span class="p">.</span><span class="nx">setEnd</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">node</span><span class="p">,</span> <span class="nx">res</span><span class="p">.</span><span class="nx">offset</span><span class="p">);</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+              <span class="k">this</span><span class="p">.</span><span class="nx">range</span><span class="p">.</span><span class="nx">setEnd</span><span class="p">(</span><span class="nx">set</span><span class="p">.</span><span class="nx">container</span><span class="p">,</span> <span class="nx">set</span><span class="p">.</span><span class="nx">offset</span><span class="p">)</span>
+            <span class="p">}</span>
+          <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">set</span> <span class="o">==</span> <span class="s2">&quot;string&quot;</span><span class="p">)</span> <span class="p">{</span>
+              <span class="k">this</span><span class="p">.</span><span class="nx">range</span><span class="p">.</span><span class="nx">moveEnd</span><span class="p">(</span><span class="s1">&#39;character&#39;</span><span class="p">,</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">set</span><span class="p">,</span> <span class="mi">10</span><span class="p">));</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-32">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-32">&#182;</a>               </div>               <p>get the current end container</p>             </td>             <td class="code">               <div class="highlight"><pre>              <span class="kd">var</span> <span class="nx">container</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">end</span><span class="p">().</span><span class="nx">container</span><span class="p">,</span>
+                <span class="nx">offset</span>
+              <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">set</span> <span class="o">==</span> <span class="s2">&quot;number&quot;</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">offset</span> <span class="o">=</span> <span class="nx">set</span>
+              <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="nx">container</span> <span class="o">=</span> <span class="nx">set</span><span class="p">.</span><span class="nx">container</span>
+                <span class="nx">offset</span> <span class="o">=</span> <span class="nx">set</span><span class="p">.</span><span class="nx">offset</span>
+              <span class="p">}</span>
+              <span class="kd">var</span> <span class="nx">newPoint</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">Range</span><span class="p">(</span><span class="nx">container</span><span class="p">).</span><span class="nx">collapse</span><span class="p">();</span></pre></div>             </td>           </tr>                               <tr id="section-33">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-33">&#182;</a>               </div>               <p>move it over offset characters</p>             </td>             <td class="code">               <div class="highlight"><pre>              <span class="nx">newPoint</span><span class="p">.</span><span class="nx">range</span><span class="p">.</span><span class="nx">move</span><span class="p">(</span><span class="nx">offset</span><span class="p">);</span>
+              <span class="k">this</span><span class="p">.</span><span class="nx">move</span><span class="p">(</span><span class="s2">&quot;END_TO_START&quot;</span><span class="p">,</span> <span class="nx">newPoint</span><span class="p">);</span>
+            <span class="p">}</span>
+          <span class="p">}</span>
+          <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+        <span class="p">}</span>
+      <span class="p">},</span>
+      <span class="cm">/**</span>
+<span class="cm">       * `range.parent()` returns the most common ancestor element of</span>
+<span class="cm">       * the endpoints in the range. This will return a text element if the range is</span>
+<span class="cm">       * within a text element. In this case, to get the containing element use this:</span>
+<span class="cm">       *</span>
+<span class="cm">       *     var parent = range.parent();</span>
+<span class="cm">       *     if( parent.nodeType === Node.TEXT_NODE ||</span>
+<span class="cm">       *      parent.nodeType === Node.CDATA_SECTION_NODE ) {</span>
+<span class="cm">       *          parent = startNode.parentNode;</span>
+<span class="cm">       *     }</span>
+<span class="cm">       *     $(parent).addClass(&#39;highlight&#39;);</span>
+<span class="cm">       *</span>
+<span class="cm">       * @return {HTMLNode} the TextNode or HTMLElement</span>
+<span class="cm">       * that fully contains the range</span>
+<span class="cm">       */</span>
+      <span class="nx">parent</span> <span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">range</span><span class="p">.</span><span class="nx">commonAncestorContainer</span><span class="p">)</span> <span class="p">{</span>
+          <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">range</span><span class="p">.</span><span class="nx">commonAncestorContainer</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+
+          <span class="kd">var</span> <span class="nx">parentElement</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">range</span><span class="p">.</span><span class="nx">parentElement</span><span class="p">(),</span>
+            <span class="nx">range</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">range</span><span class="p">;</span></pre></div>             </td>           </tr>                               <tr id="section-34">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-34">&#182;</a>               </div>               <p>IE's parentElement will always give an element, we want text ranges</p>             </td>             <td class="code">               <div class="highlight"><pre>          <span class="nx">iterate</span><span class="p">(</span><span class="nx">parentElement</span><span class="p">.</span><span class="nx">childNodes</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">txtNode</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">Range</span><span class="p">(</span><span class="nx">txtNode</span><span class="p">).</span><span class="nx">range</span><span class="p">.</span><span class="nx">inRange</span><span class="p">(</span><span class="nx">range</span><span class="p">))</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-35">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-35">&#182;</a>               </div>               <p>swap out the parentElement</p>             </td>             <td class="code">               <div class="highlight"><pre>              <span class="nx">parentElement</span> <span class="o">=</span> <span class="nx">txtNode</span><span class="p">;</span>
+              <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+            <span class="p">}</span>
+          <span class="p">});</span>
+
+          <span class="k">return</span> <span class="nx">parentElement</span><span class="p">;</span>
+        <span class="p">}</span>
+      <span class="p">},</span>
+      <span class="cm">/**</span>
+<span class="cm">       * `range.rect([from])` returns the bounding rectangle of this range.</span>
+<span class="cm">       *</span>
+<span class="cm">       * @param {String} [from] - where the coordinates should be</span>
+<span class="cm">       * positioned from.  By default, coordinates are given from the client viewport.</span>
+<span class="cm">       * But if &#39;page&#39; is given, they are provided relative to the page.</span>
+<span class="cm">       *</span>
+<span class="cm">       * @return {TextRectangle} - The client rects.</span>
+<span class="cm">       */</span>
+      <span class="nx">rect</span> <span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">from</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">rect</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">range</span><span class="p">.</span><span class="nx">getBoundingClientRect</span><span class="p">();</span></pre></div>             </td>           </tr>                               <tr id="section-36">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-36">&#182;</a>               </div>               <p>for some reason in webkit this gets a better value</p>             </td>             <td class="code">               <div class="highlight"><pre>        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">rect</span><span class="p">.</span><span class="nx">height</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nx">rect</span><span class="p">.</span><span class="nx">width</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">rect</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">range</span><span class="p">.</span><span class="nx">getClientRects</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">from</span> <span class="o">===</span> <span class="s1">&#39;page&#39;</span><span class="p">)</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-37">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-37">&#182;</a>               </div>               <p>Add the scroll offset</p>             </td>             <td class="code">               <div class="highlight"><pre>          <span class="kd">var</span> <span class="nx">off</span> <span class="o">=</span> <span class="nx">scrollOffset</span><span class="p">();</span>
+          <span class="nx">rect</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">extend</span><span class="p">({},</span> <span class="nx">rect</span><span class="p">);</span>
+          <span class="nx">rect</span><span class="p">.</span><span class="nx">top</span> <span class="o">+=</span> <span class="nx">off</span><span class="p">.</span><span class="nx">top</span><span class="p">;</span>
+          <span class="nx">rect</span><span class="p">.</span><span class="nx">left</span> <span class="o">+=</span> <span class="nx">off</span><span class="p">.</span><span class="nx">left</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="nx">rect</span><span class="p">;</span>
+      <span class="p">},</span>
+      <span class="cm">/**</span>
+<span class="cm">       * `range.rects(from)` returns the client rects.</span>
+<span class="cm">       *</span>
+<span class="cm">       * @param {String} [from] how the rects coordinates should be given (viewport or page).  Provide &#39;page&#39; for</span>
+<span class="cm">       * rect coordinates from the page.</span>
+<span class="cm">       * @return {Array} The client rects</span>
+<span class="cm">       */</span>
+      <span class="nx">rects</span> <span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">from</span><span class="p">)</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-38">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-38">&#182;</a>               </div>               <p>order rects by size</p>             </td>             <td class="code">               <div class="highlight"><pre>        <span class="kd">var</span> <span class="nx">rects</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">makeArray</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">range</span><span class="p">.</span><span class="nx">getClientRects</span><span class="p">()).</span><span class="nx">sort</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">rect1</span><span class="p">,</span> <span class="nx">rect2</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span>  <span class="nx">rect2</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="nx">rect2</span><span class="p">.</span><span class="nx">height</span> <span class="o">-</span> <span class="nx">rect1</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="nx">rect1</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span>
+          <span class="p">}),</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">rect</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nx">$</span><span class="p">.</span><span class="nx">extend</span><span class="p">({},</span> <span class="nx">rect</span><span class="p">)</span>
+          <span class="p">}),</span>
+          <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">j</span><span class="p">,</span>
+          <span class="nx">len</span> <span class="o">=</span> <span class="nx">rects</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span></pre></div>             </td>           </tr>                               <tr id="section-39">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-39">&#182;</a>               </div>               <p>safari returns overlapping client rects</p>
+
+<pre><code>- big rects can contain 2 smaller rects
+- some rects can contain 0 - width rects
+- we don't want these 0 width rects
+</code></pre>             </td>             <td class="code">               <div class="highlight"><pre>        <span class="k">while</span> <span class="p">(</span><span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">rects</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
+          <span class="kd">var</span> <span class="nx">cur</span> <span class="o">=</span> <span class="nx">rects</span><span class="p">[</span><span class="nx">i</span><span class="p">],</span>
+            <span class="nx">found</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+
+          <span class="nx">j</span> <span class="o">=</span> <span class="nx">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+          <span class="k">while</span> <span class="p">(</span><span class="nx">j</span> <span class="o">&lt;</span> <span class="nx">rects</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">withinRect</span><span class="p">(</span><span class="nx">cur</span><span class="p">,</span> <span class="nx">rects</span><span class="p">[</span><span class="nx">j</span><span class="p">]))</span> <span class="p">{</span>
+              <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">rects</span><span class="p">[</span><span class="nx">j</span><span class="p">].</span><span class="nx">width</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">rects</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="nx">j</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+              <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="nx">found</span> <span class="o">=</span> <span class="nx">rects</span><span class="p">[</span><span class="nx">j</span><span class="p">];</span>
+                <span class="k">break</span><span class="p">;</span>
+              <span class="p">}</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+              <span class="nx">j</span><span class="o">++</span><span class="p">;</span>
+            <span class="p">}</span>
+          <span class="p">}</span>
+
+
+          <span class="k">if</span> <span class="p">(</span><span class="nx">found</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">rects</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+          <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="nx">i</span><span class="o">++</span><span class="p">;</span>
+          <span class="p">}</span>
+
+        <span class="p">}</span></pre></div>             </td>           </tr>                               <tr id="section-40">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-40">&#182;</a>               </div>               <p>safari will be return overlapping ranges ...</p>             </td>             <td class="code">               <div class="highlight"><pre>        <span class="k">if</span> <span class="p">(</span><span class="nx">from</span> <span class="o">==</span> <span class="s1">&#39;page&#39;</span><span class="p">)</span> <span class="p">{</span>
+          <span class="kd">var</span> <span class="nx">off</span> <span class="o">=</span> <span class="nx">scrollOffset</span><span class="p">();</span>
+          <span class="k">return</span> <span class="nx">$</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">rects</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">ith</span><span class="p">,</span> <span class="nx">item</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">item</span><span class="p">.</span><span class="nx">top</span> <span class="o">+=</span> <span class="nx">off</span><span class="p">.</span><span class="nx">top</span><span class="p">;</span>
+            <span class="nx">item</span><span class="p">.</span><span class="nx">left</span> <span class="o">+=</span> <span class="nx">off</span><span class="p">.</span><span class="nx">left</span><span class="p">;</span>
+          <span class="p">})</span>
+        <span class="p">}</span>
+
+
+        <span class="k">return</span> <span class="nx">rects</span><span class="p">;</span>
+      <span class="p">}</span>
+
+    <span class="p">});</span>
+  <span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-41">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-41">&#182;</a>               </div>               <p>method branching ....</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="kd">var</span> <span class="nx">fn</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">Range</span><span class="p">.</span><span class="nx">prototype</span><span class="p">,</span>
+      <span class="nx">range</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">Range</span><span class="p">().</span><span class="nx">range</span><span class="p">;</span>
+
+    <span class="cm">/**</span>
+<span class="cm">     * @function compare</span>
+<span class="cm">     *</span>
+<span class="cm">     * `range.compare(type, compareRange)` compares one range to another range.</span>
+<span class="cm">     *</span>
+<span class="cm">     * ## Example</span>
+<span class="cm">     *</span>
+<span class="cm">     *     // compare the highlight element&#39;s start position</span>
+<span class="cm">     *     // to the start of the current range</span>
+<span class="cm">     *     $(&#39;#highlight&#39;)</span>
+<span class="cm">     *         .range()</span>
+<span class="cm">     *         .compare(&#39;START_TO_START&#39;, $.Range.current())</span>
+<span class="cm">     *</span>
+<span class="cm">     *</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param {String} type Specifies the boundary of the</span>
+<span class="cm">     * range and the &lt;code&gt;compareRange&lt;/code&gt; to compare.</span>
+<span class="cm">     *</span>
+<span class="cm">     *   - `&quot;START_TO_START&quot;` - the start of the range and the start of compareRange</span>
+<span class="cm">     *   - `&quot;START_TO_END&quot;` - the start of the range and the end of compareRange</span>
+<span class="cm">     *   - `&quot;END_TO_END&quot;` - the end of the range and the end of compareRange</span>
+<span class="cm">     *   - `&quot;END_TO_START&quot;` - the end of the range and the start of compareRange</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param {$.Range} compareRange The other range</span>
+<span class="cm">     * to compare against.</span>
+<span class="cm">     * @return {Number} a number indicating if the range</span>
+<span class="cm">     * boundary is before,</span>
+<span class="cm">     * after, or equal to &lt;code&gt;compareRange&lt;/code&gt;&#39;s</span>
+<span class="cm">     * boundary where:</span>
+<span class="cm">     *</span>
+<span class="cm">     *   - -1 - the range boundary comes before the compareRange boundary</span>
+<span class="cm">     *   - 0 - the boundaries are equal</span>
+<span class="cm">     *   - 1 - the range boundary comes after the compareRange boundary</span>
+<span class="cm">     */</span>
+    <span class="nx">fn</span><span class="p">.</span><span class="nx">compare</span> <span class="o">=</span> <span class="nx">range</span><span class="p">.</span><span class="nx">compareBoundaryPoints</span> <span class="o">?</span>
+      <span class="kd">function</span> <span class="p">(</span><span class="nx">type</span><span class="p">,</span> <span class="nx">range</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">range</span><span class="p">.</span><span class="nx">compareBoundaryPoints</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nb">window</span><span class="p">().</span><span class="nx">Range</span><span class="p">[</span><span class="nx">reverse</span><span class="p">(</span><span class="nx">type</span><span class="p">)],</span> <span class="nx">range</span><span class="p">.</span><span class="nx">range</span><span class="p">)</span>
+      <span class="p">}</span> <span class="o">:</span>
+      <span class="kd">function</span> <span class="p">(</span><span class="nx">type</span><span class="p">,</span> <span class="nx">range</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">range</span><span class="p">.</span><span class="nx">compareEndPoints</span><span class="p">(</span><span class="nx">convertType</span><span class="p">(</span><span class="nx">type</span><span class="p">),</span> <span class="nx">range</span><span class="p">.</span><span class="nx">range</span><span class="p">)</span>
+      <span class="p">}</span>
+
+    <span class="cm">/**</span>
+<span class="cm">     * @function move</span>
+<span class="cm">     *</span>
+<span class="cm">     * `range.move([referenceRange])` moves the endpoints of a range relative to another range.</span>
+<span class="cm">     *</span>
+<span class="cm">     *     // Move the current selection&#39;s end to the</span>
+<span class="cm">     *     // end of the #highlight element</span>
+<span class="cm">     *     $.Range.current().move(&#39;END_TO_END&#39;,</span>
+<span class="cm">     *       $(&#39;#highlight&#39;).range() )</span>
+<span class="cm">     *</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param {String} type a string indicating the ranges boundary point</span>
+<span class="cm">     * to move to which referenceRange boundary point where:</span>
+<span class="cm">     *</span>
+<span class="cm">     *   - `&quot;START_TO_START&quot;` - the start of the range moves to the start of referenceRange</span>
+<span class="cm">     *   - `&quot;START\_TO\_END&quot;` - the start of the range move to the end of referenceRange</span>
+<span class="cm">     *   - `&quot;END_TO_END&quot;` - the end of the range moves to the end of referenceRange</span>
+<span class="cm">     *   - `&quot;END_TO_START&quot;` - the end of the range moves to the start of referenceRange</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param {jQuery.Range} referenceRange</span>
+<span class="cm">     * @return {jQuery.Range} the original range for chaining</span>
+<span class="cm">     */</span>
+    <span class="nx">fn</span><span class="p">.</span><span class="nx">move</span> <span class="o">=</span> <span class="nx">range</span><span class="p">.</span><span class="nx">setStart</span> <span class="o">?</span>
+      <span class="kd">function</span> <span class="p">(</span><span class="nx">type</span><span class="p">,</span> <span class="nx">range</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="kd">var</span> <span class="nx">rangesRange</span> <span class="o">=</span> <span class="nx">range</span><span class="p">.</span><span class="nx">range</span><span class="p">;</span>
+        <span class="k">switch</span> <span class="p">(</span><span class="nx">type</span><span class="p">)</span> <span class="p">{</span>
+          <span class="k">case</span> <span class="s2">&quot;START_TO_END&quot;</span> <span class="o">:</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">range</span><span class="p">.</span><span class="nx">setStart</span><span class="p">(</span><span class="nx">rangesRange</span><span class="p">.</span><span class="nx">endContainer</span><span class="p">,</span> <span class="nx">rangesRange</span><span class="p">.</span><span class="nx">endOffset</span><span class="p">)</span>
+            <span class="k">break</span><span class="p">;</span>
+          <span class="k">case</span> <span class="s2">&quot;START_TO_START&quot;</span> <span class="o">:</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">range</span><span class="p">.</span><span class="nx">setStart</span><span class="p">(</span><span class="nx">rangesRange</span><span class="p">.</span><span class="nx">startContainer</span><span class="p">,</span> <span class="nx">rangesRange</span><span class="p">.</span><span class="nx">startOffset</span><span class="p">)</span>
+            <span class="k">break</span><span class="p">;</span>
+          <span class="k">case</span> <span class="s2">&quot;END_TO_END&quot;</span> <span class="o">:</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">range</span><span class="p">.</span><span class="nx">setEnd</span><span class="p">(</span><span class="nx">rangesRange</span><span class="p">.</span><span class="nx">endContainer</span><span class="p">,</span> <span class="nx">rangesRange</span><span class="p">.</span><span class="nx">endOffset</span><span class="p">)</span>
+            <span class="k">break</span><span class="p">;</span>
+          <span class="k">case</span> <span class="s2">&quot;END_TO_START&quot;</span> <span class="o">:</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">range</span><span class="p">.</span><span class="nx">setEnd</span><span class="p">(</span><span class="nx">rangesRange</span><span class="p">.</span><span class="nx">startContainer</span><span class="p">,</span> <span class="nx">rangesRange</span><span class="p">.</span><span class="nx">startOffset</span><span class="p">)</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+      <span class="p">}</span> <span class="o">:</span>
+      <span class="kd">function</span> <span class="p">(</span><span class="nx">type</span><span class="p">,</span> <span class="nx">range</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">range</span><span class="p">.</span><span class="nx">setEndPoint</span><span class="p">(</span><span class="nx">convertType</span><span class="p">(</span><span class="nx">type</span><span class="p">),</span> <span class="nx">range</span><span class="p">.</span><span class="nx">range</span><span class="p">)</span>
+        <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+      <span class="p">};</span>
+    <span class="kd">var</span> <span class="nx">cloneFunc</span> <span class="o">=</span> <span class="nx">range</span><span class="p">.</span><span class="nx">cloneRange</span> <span class="o">?</span> <span class="s2">&quot;cloneRange&quot;</span> <span class="o">:</span> <span class="s2">&quot;duplicate&quot;</span><span class="p">,</span>
+      <span class="nx">selectFunc</span> <span class="o">=</span> <span class="nx">range</span><span class="p">.</span><span class="nx">selectNodeContents</span> <span class="o">?</span> <span class="s2">&quot;selectNodeContents&quot;</span> <span class="o">:</span> <span class="s2">&quot;moveToElementText&quot;</span><span class="p">;</span>
+
+    <span class="nx">fn</span><span class="p">.</span>
+    <span class="cm">/**</span>
+<span class="cm">     * `range.clone()` clones the range and returns a new $.Range</span>
+<span class="cm">     * object:</span>
+<span class="cm">     *</span>
+<span class="cm">     *      var range = new $.Range(document.getElementById(&#39;text&#39;));</span>
+<span class="cm">     *      var newRange = range.clone();</span>
+<span class="cm">     *      range.start(&#39;+2&#39;);</span>
+<span class="cm">     *      range.select();</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return {jQuery.Range} returns the range as a $.Range.</span>
+<span class="cm">     */</span>
+      <span class="nx">clone</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">$</span><span class="p">.</span><span class="nx">Range</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">range</span><span class="p">[</span><span class="nx">cloneFunc</span><span class="p">]());</span>
+    <span class="p">};</span>
+
+    <span class="nx">fn</span><span class="p">.</span>
+    <span class="cm">/**</span>
+<span class="cm">     * @function</span>
+<span class="cm">     *</span>
+<span class="cm">     * `range.select([el])` selects an element with this range.  If nothing</span>
+<span class="cm">     * is provided, makes the current range appear as if the user has selected it.</span>
+<span class="cm">     *</span>
+<span class="cm">     * This works with text nodes. For example with:</span>
+<span class="cm">     *</span>
+<span class="cm">     *      &lt;div id=&quot;text&quot;&gt;This is a text&lt;/div&gt;</span>
+<span class="cm">     *</span>
+<span class="cm">     * $.Range can select `is a` like this:</span>
+<span class="cm">     *</span>
+<span class="cm">     *      var range = new $.Range(document.getElementById(&#39;text&#39;));</span>
+<span class="cm">     *      range.start(&#39;+5&#39;);</span>
+<span class="cm">     *      range.end(&#39;-5&#39;);</span>
+<span class="cm">     *      range.select();</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param {HTMLElement} [el] The element in which this range should be selected</span>
+<span class="cm">     * @return {jQuery.Range} the range for chaining.</span>
+<span class="cm">     */</span>
+      <span class="nx">select</span> <span class="o">=</span> <span class="nx">range</span><span class="p">.</span><span class="nx">selectNodeContents</span> <span class="o">?</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">el</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">el</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">selection</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nb">window</span><span class="p">().</span><span class="nx">getSelection</span><span class="p">();</span>
+        <span class="nx">selection</span><span class="p">.</span><span class="nx">removeAllRanges</span><span class="p">();</span>
+        <span class="nx">selection</span><span class="p">.</span><span class="nx">addRange</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">range</span><span class="p">);</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">range</span><span class="p">.</span><span class="nx">selectNodeContents</span><span class="p">(</span><span class="nx">el</span><span class="p">);</span>
+      <span class="p">}</span>
+      <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+    <span class="p">}</span> <span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">el</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">el</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">range</span><span class="p">.</span><span class="nx">select</span><span class="p">()</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">el</span><span class="p">.</span><span class="nx">nodeType</span> <span class="o">===</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-42">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-42">&#182;</a>               </div>               <p>select this node in the element ...</p>             </td>             <td class="code">               <div class="highlight"><pre>        <span class="kd">var</span> <span class="nx">parent</span> <span class="o">=</span> <span class="nx">el</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">,</span>
+          <span class="nx">start</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+          <span class="nx">end</span><span class="p">;</span>
+        <span class="nx">iterate</span><span class="p">(</span><span class="nx">parent</span><span class="p">.</span><span class="nx">childNodes</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">txtNode</span><span class="p">)</span> <span class="p">{</span>
+          <span class="k">if</span> <span class="p">(</span><span class="nx">txtNode</span> <span class="o">===</span> <span class="nx">el</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">end</span> <span class="o">=</span> <span class="nx">start</span> <span class="o">+</span> <span class="nx">txtNode</span><span class="p">.</span><span class="nx">nodeValue</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+            <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+          <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="nx">start</span> <span class="o">=</span> <span class="nx">start</span> <span class="o">+</span> <span class="nx">txtNode</span><span class="p">.</span><span class="nx">nodeValue</span><span class="p">.</span><span class="nx">length</span>
+          <span class="p">}</span>
+        <span class="p">})</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">range</span><span class="p">.</span><span class="nx">moveToElementText</span><span class="p">(</span><span class="nx">parent</span><span class="p">);</span>
+
+        <span class="k">this</span><span class="p">.</span><span class="nx">range</span><span class="p">.</span><span class="nx">moveEnd</span><span class="p">(</span><span class="s1">&#39;character&#39;</span><span class="p">,</span> <span class="nx">end</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">range</span><span class="p">.</span><span class="nx">text</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">range</span><span class="p">.</span><span class="nx">moveStart</span><span class="p">(</span><span class="s1">&#39;character&#39;</span><span class="p">,</span> <span class="nx">start</span><span class="p">);</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">range</span><span class="p">.</span><span class="nx">moveToElementText</span><span class="p">(</span><span class="nx">el</span><span class="p">);</span>
+      <span class="p">}</span>
+      <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+    <span class="p">};</span>
+
+  <span class="p">})();</span></pre></div>             </td>           </tr>                               <tr id="section-43">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-43">&#182;</a>               </div>               <p>helpers  -----------------</p>             </td>             <td class="code">               <div class="highlight"><pre></pre></div>             </td>           </tr>                               <tr id="section-44">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-44">&#182;</a>               </div>               <p>iterates through a list of elements, calls cb on every text node
+if cb returns false, exits the iteration</p>             </td>             <td class="code">               <div class="highlight"><pre>  <span class="kd">var</span> <span class="nx">iterate</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">elems</span><span class="p">,</span> <span class="nx">cb</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">elem</span><span class="p">,</span> <span class="nx">start</span><span class="p">;</span>
+      <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">elems</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">elem</span> <span class="o">=</span> <span class="nx">elems</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span></pre></div>             </td>           </tr>                               <tr id="section-45">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-45">&#182;</a>               </div>               <p>Get the text from text nodes and CDATA nodes</p>             </td>             <td class="code">               <div class="highlight"><pre>        <span class="k">if</span> <span class="p">(</span><span class="nx">elem</span><span class="p">.</span><span class="nx">nodeType</span> <span class="o">===</span> <span class="mi">3</span> <span class="o">||</span> <span class="nx">elem</span><span class="p">.</span><span class="nx">nodeType</span> <span class="o">===</span> <span class="mi">4</span><span class="p">)</span> <span class="p">{</span>
+          <span class="k">if</span> <span class="p">(</span><span class="nx">cb</span><span class="p">(</span><span class="nx">elem</span><span class="p">)</span> <span class="o">===</span> <span class="kc">false</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+          <span class="p">}</span></pre></div>             </td>           </tr>                               <tr id="section-46">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-46">&#182;</a>               </div>               <p>Traverse everything else, except comment nodes</p>             </td>             <td class="code">               <div class="highlight"><pre>        <span class="p">}</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">elem</span><span class="p">.</span><span class="nx">nodeType</span> <span class="o">!==</span> <span class="mi">8</span><span class="p">)</span> <span class="p">{</span>
+          <span class="k">if</span> <span class="p">(</span><span class="nx">iterate</span><span class="p">(</span><span class="nx">elem</span><span class="p">.</span><span class="nx">childNodes</span><span class="p">,</span> <span class="nx">cb</span><span class="p">)</span> <span class="o">===</span> <span class="kc">false</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+
+    <span class="p">},</span>
+    <span class="nx">isText</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">node</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">node</span><span class="p">.</span><span class="nx">nodeType</span> <span class="o">===</span> <span class="mi">3</span> <span class="o">||</span> <span class="nx">node</span><span class="p">.</span><span class="nx">nodeType</span> <span class="o">===</span> <span class="mi">4</span>
+    <span class="p">},</span>
+    <span class="nx">iteratorMaker</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">toChildren</span><span class="p">,</span> <span class="nx">toNext</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">node</span><span class="p">,</span> <span class="nx">mustMoveRight</span><span class="p">)</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-47">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-47">&#182;</a>               </div>               <p>first try down</p>             </td>             <td class="code">               <div class="highlight"><pre>        <span class="k">if</span> <span class="p">(</span><span class="nx">node</span><span class="p">[</span><span class="nx">toChildren</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nx">mustMoveRight</span><span class="p">)</span> <span class="p">{</span>
+          <span class="k">return</span> <span class="nx">isText</span><span class="p">(</span><span class="nx">node</span><span class="p">[</span><span class="nx">toChildren</span><span class="p">])</span> <span class="o">?</span>
+            <span class="nx">node</span><span class="p">[</span><span class="nx">toChildren</span><span class="p">]</span> <span class="o">:</span>
+            <span class="nx">arguments</span><span class="p">.</span><span class="nx">callee</span><span class="p">(</span><span class="nx">node</span><span class="p">[</span><span class="nx">toChildren</span><span class="p">])</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">node</span><span class="p">[</span><span class="nx">toNext</span><span class="p">])</span> <span class="p">{</span>
+          <span class="k">return</span> <span class="nx">isText</span><span class="p">(</span><span class="nx">node</span><span class="p">[</span><span class="nx">toNext</span><span class="p">])</span> <span class="o">?</span>
+            <span class="nx">node</span><span class="p">[</span><span class="nx">toNext</span><span class="p">]</span> <span class="o">:</span>
+            <span class="nx">arguments</span><span class="p">.</span><span class="nx">callee</span><span class="p">(</span><span class="nx">node</span><span class="p">[</span><span class="nx">toNext</span><span class="p">])</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">node</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">)</span> <span class="p">{</span>
+          <span class="k">return</span> <span class="nx">arguments</span><span class="p">.</span><span class="nx">callee</span><span class="p">(</span><span class="nx">node</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">,</span> <span class="kc">true</span><span class="p">)</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="nx">getNextTextNode</span> <span class="o">=</span> <span class="nx">iteratorMaker</span><span class="p">(</span><span class="s2">&quot;firstChild&quot;</span><span class="p">,</span> <span class="s2">&quot;nextSibling&quot;</span><span class="p">),</span>
+    <span class="nx">getPrevTextNode</span> <span class="o">=</span> <span class="nx">iteratorMaker</span><span class="p">(</span><span class="s2">&quot;lastChild&quot;</span><span class="p">,</span> <span class="s2">&quot;previousSibling&quot;</span><span class="p">),</span>
+    <span class="nx">callMove</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">container</span><span class="p">,</span> <span class="nx">offset</span><span class="p">,</span> <span class="nx">howMany</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">mover</span> <span class="o">=</span> <span class="nx">howMany</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">?</span>
+        <span class="nx">getPrevTextNode</span> <span class="o">:</span> <span class="nx">getNextTextNode</span><span class="p">;</span>
+      </pre></div>             </td>           </tr>                               <tr id="section-48">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-48">&#182;</a>               </div>               <p>find the text element</p>             </td>             <td class="code">               <div class="highlight"><pre>      <span class="k">if</span><span class="p">(</span> <span class="o">!</span><span class="nx">isText</span><span class="p">(</span><span class="nx">container</span><span class="p">)</span> <span class="p">){</span></pre></div>             </td>           </tr>                               <tr id="section-49">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-49">&#182;</a>               </div>               <p>sometimes offset isn't actually an element</p>             </td>             <td class="code">               <div class="highlight"><pre>        <span class="nx">container</span> <span class="o">=</span> <span class="nx">container</span><span class="p">.</span><span class="nx">childNodes</span><span class="p">[</span><span class="nx">offset</span><span class="p">]</span> <span class="o">?</span> 
+          <span class="nx">container</span><span class="p">.</span><span class="nx">childNodes</span><span class="p">[</span><span class="nx">offset</span><span class="p">]</span> <span class="o">:</span></pre></div>             </td>           </tr>                               <tr id="section-50">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-50">&#182;</a>               </div>               <p>if this happens, use the last child</p>             </td>             <td class="code">               <div class="highlight"><pre>          <span class="nx">container</span><span class="p">.</span><span class="nx">lastChild</span><span class="p">;</span>
+          
+        <span class="k">if</span><span class="p">(</span> <span class="o">!</span><span class="nx">isText</span><span class="p">(</span><span class="nx">container</span><span class="p">)</span> <span class="p">)</span> <span class="p">{</span>
+          <span class="nx">container</span> <span class="o">=</span> <span class="nx">mover</span><span class="p">(</span><span class="nx">container</span><span class="p">)</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="nx">move</span><span class="p">(</span><span class="nx">container</span><span class="p">,</span> <span class="nx">howMany</span><span class="p">)</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="nx">offset</span><span class="o">+</span><span class="nx">howMany</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">){</span>
+          <span class="k">return</span> <span class="nx">move</span><span class="p">(</span><span class="nx">mover</span><span class="p">(</span><span class="nx">container</span><span class="p">),</span> <span class="nx">offset</span> <span class="o">+</span> <span class="nx">howMany</span><span class="p">)</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+          <span class="k">return</span> <span class="nx">move</span><span class="p">(</span><span class="nx">container</span><span class="p">,</span> <span class="nx">offset</span> <span class="o">+</span> <span class="nx">howMany</span><span class="p">)</span>
+        <span class="p">}</span>
+        
+      <span class="p">}</span>
+    <span class="p">},</span></pre></div>             </td>           </tr>                               <tr id="section-51">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-51">&#182;</a>               </div>               <p>Moves howMany characters from the start of
+from</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="nx">move</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">from</span><span class="p">,</span> <span class="nx">howMany</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">mover</span> <span class="o">=</span> <span class="nx">howMany</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">?</span>
+        <span class="nx">getPrevTextNode</span> <span class="o">:</span> <span class="nx">getNextTextNode</span><span class="p">;</span>
+
+      <span class="nx">howMany</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">abs</span><span class="p">(</span><span class="nx">howMany</span><span class="p">);</span>
+
+      <span class="k">while</span> <span class="p">(</span><span class="nx">from</span> <span class="o">&amp;&amp;</span> <span class="nx">howMany</span> <span class="o">&gt;=</span> <span class="nx">from</span><span class="p">.</span><span class="nx">nodeValue</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">howMany</span> <span class="o">=</span> <span class="nx">howMany</span> <span class="o">-</span> <span class="nx">from</span><span class="p">.</span><span class="nx">nodeValue</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+        <span class="nx">from</span> <span class="o">=</span> <span class="nx">mover</span><span class="p">(</span><span class="nx">from</span><span class="p">)</span>
+      <span class="p">}</span>
+      <span class="k">return</span> <span class="p">{</span>
+        <span class="nx">node</span> <span class="o">:</span> <span class="nx">from</span><span class="p">,</span>
+        <span class="nx">offset</span> <span class="o">:</span> <span class="nx">mover</span> <span class="o">===</span> <span class="nx">getNextTextNode</span> <span class="o">?</span>
+          <span class="nx">howMany</span> <span class="o">:</span>
+          <span class="nx">from</span><span class="p">.</span><span class="nx">nodeValue</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="nx">howMany</span>
+      <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="nx">supportWhitespace</span><span class="p">,</span>
+    <span class="nx">isWhitespace</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">el</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">supportWhitespace</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">supportWhitespace</span> <span class="o">=</span> <span class="s1">&#39;isElementContentWhitespace&#39;</span> <span class="k">in</span> <span class="nx">el</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="k">return</span> <span class="p">(</span><span class="nx">supportWhitespace</span> <span class="o">?</span> <span class="nx">el</span><span class="p">.</span><span class="nx">isElementContentWhitespace</span> <span class="o">:</span>
+        <span class="p">(</span><span class="nx">el</span><span class="p">.</span><span class="nx">nodeType</span> <span class="o">===</span> <span class="mi">3</span> <span class="o">&amp;&amp;</span> <span class="s1">&#39;&#39;</span> <span class="o">==</span> <span class="nx">el</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">trim</span><span class="p">()));</span>
+
+    <span class="p">},</span></pre></div>             </td>           </tr>                               <tr id="section-52">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-52">&#182;</a>               </div>               <p>if a point is within a rectangle</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="nx">within</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">rect</span><span class="p">,</span> <span class="nx">point</span><span class="p">)</span> <span class="p">{</span>
+
+      <span class="k">return</span> <span class="nx">rect</span><span class="p">.</span><span class="nx">left</span> <span class="o">&lt;=</span> <span class="nx">point</span><span class="p">.</span><span class="nx">clientX</span> <span class="o">&amp;&amp;</span> <span class="nx">rect</span><span class="p">.</span><span class="nx">left</span> <span class="o">+</span> <span class="nx">rect</span><span class="p">.</span><span class="nx">width</span> <span class="o">&gt;=</span> <span class="nx">point</span><span class="p">.</span><span class="nx">clientX</span> <span class="o">&amp;&amp;</span>
+        <span class="nx">rect</span><span class="p">.</span><span class="nx">top</span> <span class="o">&lt;=</span> <span class="nx">point</span><span class="p">.</span><span class="nx">clientY</span> <span class="o">&amp;&amp;</span>
+        <span class="nx">rect</span><span class="p">.</span><span class="nx">top</span> <span class="o">+</span> <span class="nx">rect</span><span class="p">.</span><span class="nx">height</span> <span class="o">&gt;=</span> <span class="nx">point</span><span class="p">.</span><span class="nx">clientY</span>
+    <span class="p">},</span></pre></div>             </td>           </tr>                               <tr id="section-53">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-53">&#182;</a>               </div>               <p>if a rectangle is within another rectangle</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="nx">withinRect</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">outer</span><span class="p">,</span> <span class="nx">inner</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">within</span><span class="p">(</span><span class="nx">outer</span><span class="p">,</span> <span class="p">{</span>
+        <span class="nx">clientX</span> <span class="o">:</span> <span class="nx">inner</span><span class="p">.</span><span class="nx">left</span><span class="p">,</span>
+        <span class="nx">clientY</span> <span class="o">:</span> <span class="nx">inner</span><span class="p">.</span><span class="nx">top</span>
+      <span class="p">})</span> <span class="o">&amp;&amp;</span> <span class="c1">//top left</span>
+        <span class="nx">within</span><span class="p">(</span><span class="nx">outer</span><span class="p">,</span> <span class="p">{</span>
+          <span class="nx">clientX</span> <span class="o">:</span> <span class="nx">inner</span><span class="p">.</span><span class="nx">left</span> <span class="o">+</span> <span class="nx">inner</span><span class="p">.</span><span class="nx">width</span><span class="p">,</span>
+          <span class="nx">clientY</span> <span class="o">:</span> <span class="nx">inner</span><span class="p">.</span><span class="nx">top</span>
+        <span class="p">})</span> <span class="o">&amp;&amp;</span> <span class="c1">//top right</span>
+        <span class="nx">within</span><span class="p">(</span><span class="nx">outer</span><span class="p">,</span> <span class="p">{</span>
+          <span class="nx">clientX</span> <span class="o">:</span> <span class="nx">inner</span><span class="p">.</span><span class="nx">left</span><span class="p">,</span>
+          <span class="nx">clientY</span> <span class="o">:</span> <span class="nx">inner</span><span class="p">.</span><span class="nx">top</span> <span class="o">+</span> <span class="nx">inner</span><span class="p">.</span><span class="nx">height</span>
+        <span class="p">})</span> <span class="o">&amp;&amp;</span> <span class="c1">//bottom left</span>
+        <span class="nx">within</span><span class="p">(</span><span class="nx">outer</span><span class="p">,</span> <span class="p">{</span>
+          <span class="nx">clientX</span> <span class="o">:</span> <span class="nx">inner</span><span class="p">.</span><span class="nx">left</span> <span class="o">+</span> <span class="nx">inner</span><span class="p">.</span><span class="nx">width</span><span class="p">,</span>
+          <span class="nx">clientY</span> <span class="o">:</span> <span class="nx">inner</span><span class="p">.</span><span class="nx">top</span> <span class="o">+</span> <span class="nx">inner</span><span class="p">.</span><span class="nx">height</span>
+        <span class="p">})</span> <span class="c1">//bottom right</span>
+    <span class="p">},</span></pre></div>             </td>           </tr>                               <tr id="section-54">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-54">&#182;</a>               </div>               <p>gets the scroll offset from a window</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="nx">scrollOffset</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">win</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">win</span> <span class="o">=</span> <span class="nx">win</span> <span class="o">||</span> <span class="nb">window</span><span class="p">;</span>
+      <span class="nx">doc</span> <span class="o">=</span> <span class="nx">win</span><span class="p">.</span><span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">,</span> <span class="nx">body</span> <span class="o">=</span> <span class="nx">win</span><span class="p">.</span><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">;</span>
+
+      <span class="k">return</span> <span class="p">{</span>
+        <span class="nx">left</span> <span class="o">:</span> <span class="p">(</span><span class="nx">doc</span> <span class="o">&amp;&amp;</span> <span class="nx">doc</span><span class="p">.</span><span class="nx">scrollLeft</span> <span class="o">||</span> <span class="nx">body</span> <span class="o">&amp;&amp;</span> <span class="nx">body</span><span class="p">.</span><span class="nx">scrollLeft</span> <span class="o">||</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="nx">doc</span><span class="p">.</span><span class="nx">clientLeft</span> <span class="o">||</span> <span class="mi">0</span><span class="p">),</span>
+        <span class="nx">top</span> <span class="o">:</span> <span class="p">(</span><span class="nx">doc</span> <span class="o">&amp;&amp;</span> <span class="nx">doc</span><span class="p">.</span><span class="nx">scrollTop</span> <span class="o">||</span> <span class="nx">body</span> <span class="o">&amp;&amp;</span> <span class="nx">body</span><span class="p">.</span><span class="nx">scrollTop</span> <span class="o">||</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="nx">doc</span><span class="p">.</span><span class="nx">clientTop</span> <span class="o">||</span> <span class="mi">0</span><span class="p">)</span>
+      <span class="p">};</span>
+    <span class="p">};</span>
+
+
+  <span class="nx">support</span><span class="p">.</span><span class="nx">moveToPoint</span> <span class="o">=</span> <span class="o">!!</span><span class="nx">$</span><span class="p">.</span><span class="nx">Range</span><span class="p">().</span><span class="nx">range</span><span class="p">.</span><span class="nx">moveToPoint</span>
+
+  <span class="k">return</span> <span class="nx">$</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="p">)(</span><span class="nx">jQuery</span><span class="p">);</span>
+
+</pre></div>             </td>           </tr>                </tbody>     </table>   </div> </body> </html> 

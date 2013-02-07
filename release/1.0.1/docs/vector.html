@@ -1,0 +1,216 @@
+<!DOCTYPE html>  <html> <head>   <title>vector.js</title>   <meta http-equiv="content-type" content="text/html; charset=UTF-8">   <link rel="stylesheet" media="all" href="docco.css" /> </head> <body>   <div id="container">     <div id="background"></div>            <div id="jump_to">         Jump To &hellip;         <div id="jump_wrapper">           <div id="jump_page">                                           <a class="source" href="jquerypp.html">                 jquerypp.js               </a>                                           <a class="source" href="animate.html">                 animate.js               </a>                                           <a class="source" href="compare.html">                 compare.js               </a>                                           <a class="source" href="cookie.html">                 cookie.js               </a>                                           <a class="source" href="dimensions.html">                 dimensions.js               </a>                                           <a class="source" href="form_params.html">                 form_params.js               </a>                                           <a class="source" href="range.html">                 range.js               </a>                                           <a class="source" href="selection.html">                 selection.js               </a>                                           <a class="source" href="styles.html">                 styles.js               </a>                                           <a class="source" href="within.html">                 within.js               </a>                                           <a class="source" href="default.html">                 default.js               </a>                                           <a class="source" href="destroyed.html">                 destroyed.js               </a>                                           <a class="source" href="drag.html">                 drag.js               </a>                                           <a class="source" href="core.html">                 core.js               </a>                                           <a class="source" href="limit.html">                 limit.js               </a>                                           <a class="source" href="scroll.html">                 scroll.js               </a>                                           <a class="source" href="step.html">                 step.js               </a>                                           <a class="source" href="drop.html">                 drop.js               </a>                                           <a class="source" href="fastfix.html">                 fastfix.js               </a>                                           <a class="source" href="hover.html">                 hover.js               </a>                                           <a class="source" href="key.html">                 key.js               </a>                                           <a class="source" href="livehack.html">                 livehack.js               </a>                                           <a class="source" href="pause.html">                 pause.js               </a>                                           <a class="source" href="resize.html">                 resize.js               </a>                                           <a class="source" href="reverse.html">                 reverse.js               </a>                                           <a class="source" href="swipe.html">                 swipe.js               </a>                                           <a class="source" href="json.html">                 json.js               </a>                                           <a class="source" href="vector.html">                 vector.js               </a>                        </div>         </div>       </div>          <table cellpadding="0" cellspacing="0">       <thead>         <tr>           <th class="docs">             <h1>               vector.js             </h1>           </th>           <th class="code">           </th>         </tr>       </thead>       <tbody>                               <tr id="section-1">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-1">&#182;</a>               </div>                            </td>             <td class="code">               <div class="highlight"><pre><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">){</span>
+  <span class="kd">var</span> <span class="nx">getSetZero</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">v</span><span class="p">){</span> <span class="k">return</span> <span class="nx">v</span> <span class="o">!==</span> <span class="kc">undefined</span> <span class="o">?</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">array</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="nx">v</span><span class="p">)</span> <span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">array</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">},</span>
+    <span class="nx">getSetOne</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">v</span><span class="p">){</span> <span class="k">return</span> <span class="nx">v</span> <span class="o">!==</span> <span class="kc">undefined</span> <span class="o">?</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">array</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nx">v</span><span class="p">)</span> <span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">array</span><span class="p">[</span><span class="mi">1</span><span class="p">]};</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * @class jQuery.Vector</span>
+<span class="cm"> * @parent jquerypp</span>
+<span class="cm"> *</span>
+<span class="cm"> * `jQuery.Vector` represents a multi dimensional vector with shorthand methods for</span>
+<span class="cm"> * working with two dimensions.</span>
+<span class="cm"> *</span>
+<span class="cm"> * It is mainly used in [jQuery.event.drag drag] &amp; [jQuery.event.drop drop] events.</span>
+<span class="cm"> *</span>
+<span class="cm"> * @constructor creates a new vector instance from the arguments.  Example:</span>
+<span class="cm"> *</span>
+<span class="cm"> *      new jQuery.Vector(1,2)</span>
+<span class="cm"> */</span>
+  <span class="nx">$</span><span class="p">.</span><span class="nx">Vector</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">arr</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">array</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">isArray</span><span class="p">(</span><span class="nx">arr</span><span class="p">)</span> <span class="o">?</span> <span class="nx">arr</span> <span class="o">:</span> <span class="nx">$</span><span class="p">.</span><span class="nx">makeArray</span><span class="p">(</span><span class="nx">arguments</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">update</span><span class="p">(</span><span class="nx">array</span><span class="p">);</span>
+  <span class="p">};</span>
+  <span class="nx">$</span><span class="p">.</span><span class="nx">Vector</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span>
+  <span class="cm">/* @Prototype*/</span>
+  <span class="p">{</span>
+    <span class="cm">/**</span>
+<span class="cm">     * Applys the function to every item in the vector and returns a new vector.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param {Function} f The function to apply</span>
+<span class="cm">     * @return {jQuery.Vector} A new $.Vector instance</span>
+<span class="cm">     */</span>
+    <span class="nx">app</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">f</span> <span class="p">)</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">newArr</span> <span class="o">=</span> <span class="p">[];</span>
+
+      <span class="k">for</span> <span class="p">(</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">array</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="nx">newArr</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">f</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">array</span><span class="p">[</span><span class="nx">i</span><span class="p">],</span> <span class="nx">i</span><span class="p">));</span>
+      <span class="p">}</span>
+      <span class="k">return</span> <span class="k">new</span> <span class="nx">$</span><span class="p">.</span><span class="nx">Vector</span><span class="p">(</span><span class="nx">newArr</span><span class="p">);</span>
+    <span class="p">},</span>
+    <span class="cm">/**</span>
+<span class="cm">     * Adds two vectors together and returns a new instance. Example:</span>
+<span class="cm">     *</span>
+<span class="cm">     *      new $.Vector(1,2).plus(2,3) //-&gt; (3, 5)</span>
+<span class="cm">     *      new $.Vector(3,5).plus(new Vector(4,5)) //-&gt; (7, 10)</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return {$.Vector}</span>
+<span class="cm">     */</span>
+    <span class="nx">plus</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">args</span> <span class="o">=</span> <span class="nx">arguments</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">instanceof</span> <span class="nx">$</span><span class="p">.</span><span class="nx">Vector</span> <span class="o">?</span> <span class="nx">arguments</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">array</span> <span class="o">:</span> <span class="nx">$</span><span class="p">.</span><span class="nx">makeArray</span><span class="p">(</span><span class="nx">arguments</span><span class="p">),</span>
+        <span class="nx">arr</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">array</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span>
+        <span class="nx">vec</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">$</span><span class="p">.</span><span class="nx">Vector</span><span class="p">();</span>
+      <span class="k">for</span> <span class="p">(</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">args</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="nx">arr</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="nx">arr</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">?</span> <span class="nx">arr</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">:</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="nx">args</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+      <span class="p">}</span>
+      <span class="k">return</span> <span class="nx">vec</span><span class="p">.</span><span class="nx">update</span><span class="p">(</span><span class="nx">arr</span><span class="p">);</span>
+    <span class="p">},</span>
+    <span class="cm">/**</span>
+<span class="cm">     * Subtract one vector from another and returns a new instance. Example:</span>
+<span class="cm">     *</span>
+<span class="cm">     *      new $.Vector(4, 5).minus(2, 1) //-&gt; (2, 4)</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return {jQuery.Vector}</span>
+<span class="cm">     */</span>
+    <span class="nx">minus</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">args</span> <span class="o">=</span> <span class="nx">arguments</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">instanceof</span> <span class="nx">$</span><span class="p">.</span><span class="nx">Vector</span> <span class="o">?</span> <span class="nx">arguments</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">array</span> <span class="o">:</span> <span class="nx">$</span><span class="p">.</span><span class="nx">makeArray</span><span class="p">(</span><span class="nx">arguments</span><span class="p">),</span>
+        <span class="nx">arr</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">array</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span>
+        <span class="nx">vec</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">$</span><span class="p">.</span><span class="nx">Vector</span><span class="p">();</span>
+      <span class="k">for</span> <span class="p">(</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">args</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="nx">arr</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="nx">arr</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">?</span> <span class="nx">arr</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">:</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="nx">args</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+      <span class="p">}</span>
+      <span class="k">return</span> <span class="nx">vec</span><span class="p">.</span><span class="nx">update</span><span class="p">(</span><span class="nx">arr</span><span class="p">);</span>
+    <span class="p">},</span>
+    <span class="cm">/**</span>
+<span class="cm">     * Returns the current vector if it is equal to the vector passed in.</span>
+<span class="cm">     *</span>
+<span class="cm">     * `null` if otherwise.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return {jQuery.Vector}</span>
+<span class="cm">     */</span>
+    <span class="nx">equals</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">args</span> <span class="o">=</span> <span class="nx">arguments</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">instanceof</span> <span class="nx">$</span><span class="p">.</span><span class="nx">Vector</span> <span class="o">?</span> <span class="nx">arguments</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">array</span> <span class="o">:</span> <span class="nx">$</span><span class="p">.</span><span class="nx">makeArray</span><span class="p">(</span><span class="nx">arguments</span><span class="p">),</span>
+        <span class="nx">arr</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">array</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span>
+        <span class="nx">vec</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">$</span><span class="p">.</span><span class="nx">Vector</span><span class="p">();</span>
+      <span class="k">for</span> <span class="p">(</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">args</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span> <span class="nx">arr</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">!=</span> <span class="nx">args</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="p">)</span> <span class="p">{</span>
+          <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+      <span class="k">return</span> <span class="nx">vec</span><span class="p">.</span><span class="nx">update</span><span class="p">(</span><span class="nx">arr</span><span class="p">);</span>
+    <span class="p">},</span>
+    <span class="cm">/**</span>
+<span class="cm">     * Returns the first value of the vector.</span>
+<span class="cm">     * You can also access the same value through the following aliases the</span>
+<span class="cm">     * [jQuery.Vector.prototype.left vector.left()] and [jQuery.Vector.prototype.left vector.width()]</span>
+<span class="cm">     * aliases.</span>
+<span class="cm">     *</span>
+<span class="cm">     * For example:</span>
+<span class="cm">     *</span>
+<span class="cm">     *      var v = new $.Vector(2, 5);</span>
+<span class="cm">     *      v.x() //-&gt; 2</span>
+<span class="cm">     *      v.left() //-&gt; 2</span>
+<span class="cm">     *      v.width() //-&gt; 2</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return {Number} The first value of the vector</span>
+<span class="cm">     */</span>
+    <span class="nx">x</span><span class="o">:</span> <span class="nx">getSetZero</span><span class="p">,</span>
+    <span class="cm">/**</span>
+<span class="cm">     * @hide</span>
+<span class="cm">     * Alias for [jQuery.Vector.prototype.x].</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return {Number}</span>
+<span class="cm">     */</span>
+    <span class="nx">left</span><span class="o">:</span> <span class="nx">getSetZero</span><span class="p">,</span>
+    <span class="cm">/**</span>
+<span class="cm">     * @hide</span>
+<span class="cm">     * Alias for [jQuery.Vector.prototype.x].</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return {Number}</span>
+<span class="cm">     */</span>
+    <span class="nx">width</span><span class="o">:</span> <span class="nx">getSetZero</span><span class="p">,</span>
+    <span class="cm">/**</span>
+<span class="cm">     * Returns the second value of the vector.</span>
+<span class="cm">     * You can also access the same value through the [jQuery.Vector.prototype.top vector.top()]</span>
+<span class="cm">     * and [jQuery.Vector.prototype.height vector.height()] aliases.</span>
+<span class="cm">     *</span>
+<span class="cm">     * For example:</span>
+<span class="cm">     *</span>
+<span class="cm">     *      var v = new $.Vector(2, 5);</span>
+<span class="cm">     *      v.y() //-&gt; 5</span>
+<span class="cm">     *      v.top() //-&gt; 5</span>
+<span class="cm">     *      v.height() //-&gt; 5</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return {Number} The first value of the vector</span>
+<span class="cm">     */</span>
+    <span class="nx">y</span><span class="o">:</span> <span class="nx">getSetOne</span><span class="p">,</span>
+    <span class="cm">/**</span>
+<span class="cm">     * @hide</span>
+<span class="cm">     * Alias for [jQuery.Vector.prototype.y].</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return {Number}</span>
+<span class="cm">     */</span>
+    <span class="nx">top</span><span class="o">:</span> <span class="nx">getSetOne</span><span class="p">,</span>
+    <span class="cm">/**</span>
+<span class="cm">     * @hide</span>
+<span class="cm">     * Alias for [jQuery.Vector.prototype.y].</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return {Number}</span>
+<span class="cm">     */</span>
+    <span class="nx">height</span><span class="o">:</span> <span class="nx">getSetOne</span><span class="p">,</span>
+    <span class="cm">/**</span>
+<span class="cm">     * Returns a string representation of the vector in the form of (x,y,...)</span>
+<span class="cm">     *</span>
+<span class="cm">     *      var v = new $.Vector(4, 6, 1, 3);</span>
+<span class="cm">     *      v.toString() //-&gt; (4, 6, 1, 3)</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return {String}</span>
+<span class="cm">     */</span>
+    <span class="nx">toString</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="s2">&quot;(&quot;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">array</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;)&quot;</span><span class="p">;</span>
+    <span class="p">},</span>
+    <span class="cm">/**</span>
+<span class="cm">     * Replaces the vectors contents</span>
+<span class="cm">     *</span>
+<span class="cm">     *      var v = new $.Vector(2, 3);</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param {Object} array</span>
+<span class="cm">     */</span>
+    <span class="nx">update</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">array</span> <span class="p">)</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">i</span><span class="p">;</span>
+      <span class="k">if</span> <span class="p">(</span> <span class="k">this</span><span class="p">.</span><span class="nx">array</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">array</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">)</span> <span class="p">{</span>
+          <span class="k">delete</span> <span class="k">this</span><span class="p">.</span><span class="nx">array</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">array</span> <span class="o">=</span> <span class="nx">array</span><span class="p">;</span>
+      <span class="k">for</span> <span class="p">(</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">array</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">array</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+      <span class="p">}</span>
+      <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+
+  <span class="nx">$</span><span class="p">.</span><span class="nx">Event</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">vector</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-2">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-2">&#182;</a>               </div>               <p>Get the first touch element for touch events</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="kd">var</span> <span class="nx">touches</span> <span class="o">=</span> <span class="s2">&quot;ontouchend&quot;</span> <span class="k">in</span> <span class="nb">document</span> <span class="o">&amp;&amp;</span> <span class="k">this</span><span class="p">.</span><span class="nx">originalEvent</span><span class="p">.</span><span class="nx">touches</span> <span class="o">&amp;&amp;</span> <span class="k">this</span><span class="p">.</span><span class="nx">originalEvent</span><span class="p">.</span><span class="nx">touches</span><span class="p">.</span><span class="nx">length</span>
+        <span class="o">?</span> <span class="k">this</span><span class="p">.</span><span class="nx">originalEvent</span><span class="p">.</span><span class="nx">changedTouches</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">:</span> <span class="k">this</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span> <span class="k">this</span><span class="p">.</span><span class="nx">originalEvent</span><span class="p">.</span><span class="nx">synthetic</span> <span class="p">)</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">doc</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">,</span>
+        <span class="nx">body</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">;</span>
+      <span class="k">return</span> <span class="k">new</span> <span class="nx">$</span><span class="p">.</span><span class="nx">Vector</span><span class="p">(</span><span class="nx">touches</span><span class="p">.</span><span class="nx">clientX</span> <span class="o">+</span> <span class="p">(</span><span class="nx">doc</span> <span class="o">&amp;&amp;</span> <span class="nx">doc</span><span class="p">.</span><span class="nx">scrollLeft</span> <span class="o">||</span> <span class="nx">body</span> <span class="o">&amp;&amp;</span> <span class="nx">body</span><span class="p">.</span><span class="nx">scrollLeft</span> <span class="o">||</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="nx">doc</span><span class="p">.</span><span class="nx">clientLeft</span> <span class="o">||</span> <span class="mi">0</span><span class="p">),</span>
+        <span class="nx">touches</span><span class="p">.</span><span class="nx">clientY</span> <span class="o">+</span> <span class="p">(</span><span class="nx">doc</span> <span class="o">&amp;&amp;</span> <span class="nx">doc</span><span class="p">.</span><span class="nx">scrollTop</span> <span class="o">||</span> <span class="nx">body</span> <span class="o">&amp;&amp;</span> <span class="nx">body</span><span class="p">.</span><span class="nx">scrollTop</span> <span class="o">||</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="nx">doc</span><span class="p">.</span><span class="nx">clientTop</span> <span class="o">||</span> <span class="mi">0</span><span class="p">));</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="k">new</span> <span class="nx">$</span><span class="p">.</span><span class="nx">Vector</span><span class="p">(</span><span class="nx">touches</span><span class="p">.</span><span class="nx">pageX</span><span class="p">,</span> <span class="nx">touches</span><span class="p">.</span><span class="nx">pageY</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+
+  <span class="nx">$</span><span class="p">.</span><span class="nx">fn</span><span class="p">.</span><span class="nx">offsetv</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span> <span class="k">this</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="nb">window</span> <span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="k">new</span> <span class="nx">$</span><span class="p">.</span><span class="nx">Vector</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">pageXOffset</span> <span class="o">?</span> <span class="nb">window</span><span class="p">.</span><span class="nx">pageXOffset</span> <span class="o">:</span> <span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">scrollLeft</span><span class="p">,</span> <span class="nb">window</span><span class="p">.</span><span class="nx">pageYOffset</span> <span class="o">?</span> <span class="nb">window</span><span class="p">.</span><span class="nx">pageYOffset</span> <span class="o">:</span> <span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">scrollTop</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">offset</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">offset</span><span class="p">();</span>
+      <span class="k">return</span> <span class="k">new</span> <span class="nx">$</span><span class="p">.</span><span class="nx">Vector</span><span class="p">(</span><span class="nx">offset</span><span class="p">.</span><span class="nx">left</span><span class="p">,</span> <span class="nx">offset</span><span class="p">.</span><span class="nx">top</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+
+  <span class="nx">$</span><span class="p">.</span><span class="nx">fn</span><span class="p">.</span><span class="nx">dimensionsv</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">which</span> <span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span> <span class="k">this</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="nb">window</span> <span class="o">||</span> <span class="o">!</span><span class="nx">which</span> <span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="k">new</span> <span class="nx">$</span><span class="p">.</span><span class="nx">Vector</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">width</span><span class="p">(),</span> <span class="k">this</span><span class="p">.</span><span class="nx">height</span><span class="p">());</span>
+    <span class="p">}</span>
+    <span class="k">else</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="k">new</span> <span class="nx">$</span><span class="p">.</span><span class="nx">Vector</span><span class="p">(</span><span class="k">this</span><span class="p">[</span><span class="nx">which</span> <span class="o">+</span> <span class="s2">&quot;Width&quot;</span><span class="p">](),</span> <span class="k">this</span><span class="p">[</span><span class="nx">which</span> <span class="o">+</span> <span class="s2">&quot;Height&quot;</span><span class="p">]());</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+
+  <span class="k">return</span> <span class="nx">$</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="p">)(</span><span class="nx">jQuery</span><span class="p">);</span>
+
+</pre></div>             </td>           </tr>                </tbody>     </table>   </div> </body> </html> 

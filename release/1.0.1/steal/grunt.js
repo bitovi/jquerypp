@@ -52,11 +52,11 @@ module.exports = function (grunt) {
 		},
 		shell : {
 			makeSteal: 'rm -rf mkdir <%= meta.out %>/<%= pkg.version %>/steal && mkdir <%= meta.out %>/<%= pkg.version %>/steal && git archive HEAD | tar -x -C <%= meta.out %>/<%= pkg.version %>/steal',
-			bundleLatest : 'cd <%= meta.out %> && zip -r jquerypp.<%= pkg.version %>.zip <%= pkg.version %>/',
+			bundleLatest : 'cd <%= meta.out %> && zip -r jquerypp-<%= pkg.version %>.zip <%= pkg.version %>/',
 			getGhPages : 'git clone -b gh-pages <%= pkg.repository.url %> build/gh-pages',
 			copyLatest : 'rm -rf build/gh-pages/release/<%= pkg.version %> && ' +
 				'cp -R <%= meta.out %>/<%= pkg.version %> build/gh-pages/release/<%= pkg.version %> && ' +
-				'cp <%= meta.out %>/jquerypp.<%= pkg.version %>.zip build/gh-pages/downloads/ &&' +
+				'cp <%= meta.out %>/jquerypp-<%= pkg.version %>.zip build/gh-pages/downloads/ &&' +
 				'rm -rf build/gh-pages/release/latest && ' +
 				'cp -R <%= meta.out %>/<%= pkg.version %> build/gh-pages/release/latest',
 			copyEdge : 'rm -rf build/gh-pages/release/edge && ' +
@@ -92,6 +92,7 @@ module.exports = function (grunt) {
 
 	grunt.loadTasks("../build/tasks");
 	grunt.registerTask('edge', 'build:edge strip:edge beautify:dist bannerize:edge');
-	grunt.registerTask('latest', 'build:latest strip:latest beautify:dist bannerize:latest shell:makeSteal docco:latest');
+	grunt.registerTask('latest', 'build:latest strip:latest beautify:dist bannerize:latest shell:makeSteal shell:bundleLatest docco:latest');
 	grunt.registerTask("ghpages", "shell:cleanup shell:getGhPages shell:copyLatest shell:updateGhPages shell:cleanup");
+	grunt.registerTask('deploy', 'latest ghpages');
 };
