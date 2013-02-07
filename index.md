@@ -1,6 +1,6 @@
 ---
 layout: default
-version: 1.0b2
+version: 1.0.1
 ---
 
 # Hi, I'm jQuery++.
@@ -42,7 +42,7 @@ after jQuery 1.7 like:
 
 ### Using individual files
 
-The `jquerypp.js` file from the [full download](https://github.com/downloads/jupiterjs/jquerypp/jquerypp-{{page.version}}.zip)
+The `jquerypp.js` file from the [full download](http://jquerypp.com/downloads/jquerypp-{{page.version}}.zip)
 contains all jQuery++ plugins in a single file:
 
 {% highlight html %}
@@ -63,7 +63,7 @@ at the top of each file. For example, `jquery.animate.js` depends on `jquery.sty
 
 The files needed for using jQuery++ with [StealJS](http://javascriptmvc.com/docs.html#!stealjs) are
 located in the `steal/` folder of
-the [full download](https://github.com/downloads/jupiterjs/jquerypp/jquerypp-{{page.version}}.zip).
+the [full download](http://jquerypp.com/downloads/jquerypp-{{page.version}}.zip).
 Take the `jquery/` folder and put it in your steal root to load a plugin like this:
 
 {% highlight javascript %}
@@ -83,7 +83,7 @@ steal.map({
 
 ### Using AMD
 
-The files to load the jQuery++ plugins with an [AMD](https://github.com/amdjs/amdjs-api/wiki/AMD) module loader like [RequireJS](http://requirejs.org/), are located in the `amd/` folder of the [full download](https://github.com/downloads/jupiterjs/jquerypp/jquerypp-{{page.version}}.zip).
+The files to load the jQuery++ plugins with an [AMD](https://github.com/amdjs/amdjs-api/wiki/AMD) module loader like [RequireJS](http://requirejs.org/), are located in the `amd/` folder of the [full download](http://jquerypp.com/downloads/jquerypp-{{page.version}}.zip).
 Place the `jquerypp/` folder in your module directory and load a plugin like this:
 
 {% highlight javascript %}
