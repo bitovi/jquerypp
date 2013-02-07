@@ -1,0 +1,12 @@
+.tmp*
+dist
+*.swp
+.DS_store
+*node_modules*
+build/github/jquerypp
+docs/*
+npm-debug.log
+build/ci/can
+build/ci/jquery
+build/ci/funcunit
+build/ci/steal
