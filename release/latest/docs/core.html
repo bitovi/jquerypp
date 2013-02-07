@@ -1,58 +1,40 @@
-<!DOCTYPE html>  <html> <head>   <title>core.js</title>   <meta http-equiv="content-type" content="text/html; charset=UTF-8">   <link rel="stylesheet" media="all" href="docco.css" /> </head> <body>   <div id="container">     <div id="background"></div>            <div id="jump_to">         Jump To &hellip;         <div id="jump_wrapper">           <div id="jump_page">                                           <a class="source" href="jquerypp.html">                 jquerypp.js               </a>                                           <a class="source" href="animate.html">                 animate.js               </a>                                           <a class="source" href="compare.html">                 compare.js               </a>                                           <a class="source" href="cookie.html">                 cookie.js               </a>                                           <a class="source" href="dimensions.html">                 dimensions.js               </a>                                           <a class="source" href="form_params.html">                 form_params.js               </a>                                           <a class="source" href="range.html">                 range.js               </a>                                           <a class="source" href="selection.html">                 selection.js               </a>                                           <a class="source" href="styles.html">                 styles.js               </a>                                           <a class="source" href="within.html">                 within.js               </a>                                           <a class="source" href="default.html">                 default.js               </a>                                           <a class="source" href="destroyed.html">                 destroyed.js               </a>                                           <a class="source" href="drag.html">                 drag.js               </a>                                           <a class="source" href="core.html">                 core.js               </a>                                           <a class="source" href="limit.html">                 limit.js               </a>                                           <a class="source" href="scroll.html">                 scroll.js               </a>                                           <a class="source" href="step.html">                 step.js               </a>                                           <a class="source" href="drop.html">                 drop.js               </a>                                           <a class="source" href="fastfix.html">                 fastfix.js               </a>                                           <a class="source" href="hover.html">                 hover.js               </a>                                           <a class="source" href="key.html">                 key.js               </a>                                           <a class="source" href="livehack.html">                 livehack.js               </a>                                           <a class="source" href="pause.html">                 pause.js               </a>                                           <a class="source" href="resize.html">                 resize.js               </a>                                           <a class="source" href="reverse.html">                 reverse.js               </a>                                           <a class="source" href="swipe.html">                 swipe.js               </a>                                           <a class="source" href="json.html">                 json.js               </a>                                           <a class="source" href="vector.html">                 vector.js               </a>                        </div>         </div>       </div>          <table cellpadding="0" cellspacing="0">       <thead>         <tr>           <th class="docs">             <h1>               core.js             </h1>           </th>           <th class="code">           </th>         </tr>       </thead>       <tbody>                               <tr id="section-1">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-1">&#182;</a>               </div>                            </td>             <td class="code">               <div class="highlight"><pre><span class="p">(</span><span class="kd">function</span><span class="p">(</span> <span class="nx">$</span> <span class="p">)</span> <span class="p">{</span>
+<!DOCTYPE html>  <html> <head>   <title>core.js</title>   <meta http-equiv="content-type" content="text/html; charset=UTF-8">   <link rel="stylesheet" media="all" href="docco.css" /> </head> <body>   <div id="container">     <div id="background"></div>            <div id="jump_to">         Jump To &hellip;         <div id="jump_wrapper">           <div id="jump_page">                                           <a class="source" href="jquerypp.html">                 jquerypp.js               </a>                                           <a class="source" href="animate.html">                 animate.js               </a>                                           <a class="source" href="compare.html">                 compare.js               </a>                                           <a class="source" href="cookie.html">                 cookie.js               </a>                                           <a class="source" href="dimensions.html">                 dimensions.js               </a>                                           <a class="source" href="form_params.html">                 form_params.js               </a>                                           <a class="source" href="range.html">                 range.js               </a>                                           <a class="source" href="selection.html">                 selection.js               </a>                                           <a class="source" href="styles.html">                 styles.js               </a>                                           <a class="source" href="within.html">                 within.js               </a>                                           <a class="source" href="default.html">                 default.js               </a>                                           <a class="source" href="destroyed.html">                 destroyed.js               </a>                                           <a class="source" href="drag.html">                 drag.js               </a>                                           <a class="source" href="core.html">                 core.js               </a>                                           <a class="source" href="limit.html">                 limit.js               </a>                                           <a class="source" href="scroll.html">                 scroll.js               </a>                                           <a class="source" href="step.html">                 step.js               </a>                                           <a class="source" href="drop.html">                 drop.js               </a>                                           <a class="source" href="fastfix.html">                 fastfix.js               </a>                                           <a class="source" href="hover.html">                 hover.js               </a>                                           <a class="source" href="key.html">                 key.js               </a>                                           <a class="source" href="livehack.html">                 livehack.js               </a>                                           <a class="source" href="pause.html">                 pause.js               </a>                                           <a class="source" href="resize.html">                 resize.js               </a>                                           <a class="source" href="reverse.html">                 reverse.js               </a>                                           <a class="source" href="swipe.html">                 swipe.js               </a>                                           <a class="source" href="json.html">                 json.js               </a>                                           <a class="source" href="vector.html">                 vector.js               </a>                        </div>         </div>       </div>          <table cellpadding="0" cellspacing="0">       <thead>         <tr>           <th class="docs">             <h1>               core.js             </h1>           </th>           <th class="code">           </th>         </tr>       </thead>       <tbody>                               <tr id="section-1">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-1">&#182;</a>               </div>                            </td>             <td class="code">               <div class="highlight"><pre><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">$</span><span class="p">)</span> <span class="p">{</span>
 
-  <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">$</span><span class="p">.</span><span class="nx">event</span><span class="p">.</span><span class="nx">special</span><span class="p">.</span><span class="nx">move</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">$</span><span class="p">.</span><span class="nx">event</span><span class="p">.</span><span class="nx">special</span><span class="p">.</span><span class="nx">move</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">$</span><span class="p">.</span><span class="nx">event</span><span class="p">.</span><span class="nx">reverse</span><span class="p">(</span><span class="s1">&#39;move&#39;</span><span class="p">);</span>
   <span class="p">}</span></pre></div>             </td>           </tr>                               <tr id="section-2">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-2">&#182;</a>               </div>               <p>modify live
-steal the live handler ....</p>             </td>             <td class="code">               <div class="highlight"><pre>  <span class="kd">var</span> <span class="nx">bind</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">object</span><span class="p">,</span> <span class="nx">method</span> <span class="p">)</span> <span class="p">{</span>
-      <span class="kd">var</span> <span class="nx">args</span> <span class="o">=</span> <span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">slice</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">arguments</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
-      <span class="k">return</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-        <span class="kd">var</span> <span class="nx">args2</span> <span class="o">=</span> <span class="p">[</span><span class="k">this</span><span class="p">].</span><span class="nx">concat</span><span class="p">(</span><span class="nx">args</span><span class="p">,</span> <span class="nx">$</span><span class="p">.</span><span class="nx">makeArray</span><span class="p">(</span><span class="nx">arguments</span><span class="p">));</span>
-        <span class="k">return</span> <span class="nx">method</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">object</span><span class="p">,</span> <span class="nx">args2</span><span class="p">);</span>
-      <span class="p">};</span>
-    <span class="p">},</span>
-    <span class="nx">event</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">event</span><span class="p">,</span></pre></div>             </td>           </tr>                               <tr id="section-3">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-3">&#182;</a>               </div>               <p>function to clear the window selection if there is one</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="nx">clearSelection</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">getSelection</span> <span class="o">?</span> <span class="kd">function</span><span class="p">(){</span>
+steal the live handler ....</p>             </td>             <td class="code">               <div class="highlight"><pre>  <span class="kd">var</span> <span class="nx">bind</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">object</span><span class="p">,</span> <span class="nx">method</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">args</span> <span class="o">=</span> <span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">slice</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">arguments</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+    <span class="k">return</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">args2</span> <span class="o">=</span> <span class="p">[</span><span class="k">this</span><span class="p">].</span><span class="nx">concat</span><span class="p">(</span><span class="nx">args</span><span class="p">,</span> <span class="nx">$</span><span class="p">.</span><span class="nx">makeArray</span><span class="p">(</span><span class="nx">arguments</span><span class="p">));</span>
+      <span class="k">return</span> <span class="nx">method</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">object</span><span class="p">,</span> <span class="nx">args2</span><span class="p">);</span>
+    <span class="p">};</span>
+  <span class="p">},</span>
+    <span class="nx">event</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">event</span><span class="p">,</span></pre></div>             </td>           </tr>                               <tr id="section-3">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-3">&#182;</a>               </div>               <p>function to clear the window selection if there is one</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="nx">clearSelection</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">getSelection</span> <span class="o">?</span>
+    <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
       <span class="nb">window</span><span class="p">.</span><span class="nx">getSelection</span><span class="p">().</span><span class="nx">removeAllRanges</span><span class="p">()</span>
-    <span class="p">}</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(){},</span>
+    <span class="p">}</span> <span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{},</span>
 
     <span class="nx">supportTouch</span> <span class="o">=</span> <span class="s2">&quot;ontouchend&quot;</span> <span class="k">in</span> <span class="nb">document</span><span class="p">,</span></pre></div>             </td>           </tr>                               <tr id="section-4">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-4">&#182;</a>               </div>               <p>Use touch events or map it to mouse events</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="nx">startEvent</span> <span class="o">=</span> <span class="nx">supportTouch</span> <span class="o">?</span> <span class="s2">&quot;touchstart&quot;</span> <span class="o">:</span> <span class="s2">&quot;mousedown&quot;</span><span class="p">,</span>
     <span class="nx">stopEvent</span> <span class="o">=</span> <span class="nx">supportTouch</span> <span class="o">?</span> <span class="s2">&quot;touchend&quot;</span> <span class="o">:</span> <span class="s2">&quot;mouseup&quot;</span><span class="p">,</span>
-    <span class="nx">moveEvent</span> <span class="o">=</span> <span class="nx">supportTouch</span> <span class="o">?</span> <span class="s2">&quot;touchmove&quot;</span> <span class="o">:</span> <span class="s2">&quot;mousemove&quot;</span><span class="p">,</span></pre></div>             </td>           </tr>                               <tr id="section-5">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-5">&#182;</a>               </div>               <p>On touchmove events the default (scrolling) event has to be prevented</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="nx">preventTouchScroll</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">ev</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">moveEvent</span> <span class="o">=</span> <span class="nx">supportTouch</span> <span class="o">?</span> <span class="s2">&quot;touchmove&quot;</span> <span class="o">:</span> <span class="s2">&quot;mousemove&quot;</span><span class="p">,</span></pre></div>             </td>           </tr>                               <tr id="section-5">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-5">&#182;</a>               </div>               <p>On touchmove events the default (scrolling) event has to be prevented</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="nx">preventTouchScroll</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">ev</span><span class="p">)</span> <span class="p">{</span>
       <span class="nx">ev</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
     <span class="p">};</span>
 
-  <span class="cm">/**</span>
-<span class="cm">   * @class jQuery.Drag</span>
-<span class="cm">   * @parent jQuery.event.drag</span>
-<span class="cm">   * @plugin jquery/event/drag</span>
-<span class="cm">   * @download  http://jmvcsite.heroku.com/pluginify?plugins[]=jquery/event/drag/drag.js</span>
-<span class="cm">   * @test jquery/event/drag/qunit.html</span>
-<span class="cm">   *</span>
-<span class="cm">   * The `$.Drag` constructor is never called directly but an instance of `$.Drag` is passed as the second argument</span>
-<span class="cm">   * to the `dragdown`, `draginit`, `dragmove`, `dragend`, `dragover` and `dragout` event handlers:</span>
-<span class="cm">   *</span>
-<span class="cm">   *      $(&#39;#dragger&#39;).on(&#39;draginit&#39;, function(el, drag) {</span>
-<span class="cm">   *          // drag -&gt; $.Drag</span>
-<span class="cm">   *      });</span>
-<span class="cm">   */</span>
-  <span class="nx">$</span><span class="p">.</span><span class="nx">Drag</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{};</span>
 
-  <span class="cm">/**</span>
-<span class="cm">   * @Static</span>
-<span class="cm">   */</span>
+  <span class="nx">$</span><span class="p">.</span><span class="nx">Drag</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{};</span>
+
+
   <span class="nx">$</span><span class="p">.</span><span class="nx">extend</span><span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">Drag</span><span class="p">,</span> <span class="p">{</span>
     <span class="nx">lowerName</span><span class="o">:</span> <span class="s2">&quot;drag&quot;</span><span class="p">,</span>
     <span class="nx">current</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
     <span class="nx">distance</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="cm">/**</span>
-<span class="cm">     * Called when someone mouses down on a draggable object.</span>
-<span class="cm">     * Gathers all callback functions and creates a new Draggable.</span>
-<span class="cm">     * @hide</span>
-<span class="cm">     */</span>
-    <span class="nx">mousedown</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">ev</span><span class="p">,</span> <span class="nx">element</span> <span class="p">)</span> <span class="p">{</span>
+
+    <span class="nx">mousedown</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">ev</span><span class="p">,</span> <span class="nx">element</span><span class="p">)</span> <span class="p">{</span>
       <span class="kd">var</span> <span class="nx">isLeftButton</span> <span class="o">=</span> <span class="nx">ev</span><span class="p">.</span><span class="nx">button</span> <span class="o">===</span> <span class="mi">0</span> <span class="o">||</span> <span class="nx">ev</span><span class="p">.</span><span class="nx">button</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span>
         <span class="nx">doEvent</span> <span class="o">=</span> <span class="nx">isLeftButton</span> <span class="o">||</span> <span class="nx">supportTouch</span><span class="p">;</span>
 
-      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">doEvent</span> <span class="o">||</span> <span class="k">this</span><span class="p">.</span><span class="nx">current</span> <span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">doEvent</span> <span class="o">||</span> <span class="k">this</span><span class="p">.</span><span class="nx">current</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">return</span><span class="p">;</span>
       <span class="p">}</span></pre></div>             </td>           </tr>                               <tr id="section-6">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-6">&#182;</a>               </div>               <p>create Drag</p>             </td>             <td class="code">               <div class="highlight"><pre>      <span class="kd">var</span> <span class="nx">drag</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">$</span><span class="p">.</span><span class="nx">Drag</span><span class="p">(),</span>
         <span class="nx">delegate</span> <span class="o">=</span> <span class="nx">ev</span><span class="p">.</span><span class="nx">delegateTarget</span> <span class="o">||</span> <span class="nx">element</span><span class="p">,</span>
@@ -75,18 +57,16 @@ steal the live handler ....</p>             </td>             <td class="code"> 
           <span class="nx">dragend</span><span class="o">:</span> <span class="nx">event</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="nx">delegate</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;dragend&quot;</span><span class="p">],</span> <span class="nx">selector</span><span class="p">),</span>
           <span class="nx">dragcleanup</span><span class="o">:</span> <span class="nx">event</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="nx">delegate</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;dragcleanup&quot;</span><span class="p">],</span> <span class="nx">selector</span><span class="p">)</span>
         <span class="p">},</span>
-        <span class="nx">destroyed</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">destroyed</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
           <span class="nx">self</span><span class="p">.</span><span class="nx">current</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
         <span class="p">}</span>
       <span class="p">},</span> <span class="nx">ev</span><span class="p">);</span>
     <span class="p">}</span>
   <span class="p">});</span>
 
-  <span class="cm">/**</span>
-<span class="cm">   * @Prototype</span>
-<span class="cm">   */</span>
+
   <span class="nx">$</span><span class="p">.</span><span class="nx">extend</span><span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">Drag</span><span class="p">.</span><span class="nx">prototype</span><span class="p">,</span> <span class="p">{</span>
-    <span class="nx">setup</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">options</span><span class="p">,</span> <span class="nx">ev</span> <span class="p">)</span> <span class="p">{</span>
+    <span class="nx">setup</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">ev</span><span class="p">)</span> <span class="p">{</span>
       <span class="nx">$</span><span class="p">.</span><span class="nx">extend</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
 
       <span class="k">this</span><span class="p">.</span><span class="nx">element</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">element</span><span class="p">);</span>
@@ -101,43 +81,33 @@ steal the live handler ....</p>             </td>             <td class="code"> 
 
       <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">bind</span><span class="p">(</span><span class="nx">moveEvent</span><span class="p">,</span> <span class="nx">mousemove</span><span class="p">);</span>
       <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">bind</span><span class="p">(</span><span class="nx">stopEvent</span><span class="p">,</span> <span class="nx">mouseup</span><span class="p">);</span>
-      <span class="k">if</span><span class="p">(</span><span class="nx">supportTouch</span><span class="p">)</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-8">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-8">&#182;</a>               </div>               <p>On touch devices we want to disable scrolling</p>             </td>             <td class="code">               <div class="highlight"><pre>        <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">bind</span><span class="p">(</span><span class="nx">moveEvent</span><span class="p">,</span> <span class="nx">preventTouchScroll</span><span class="p">);</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">supportTouch</span><span class="p">)</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-8">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-8">&#182;</a>               </div>               <p>On touch devices we want to disable scrolling</p>             </td>             <td class="code">               <div class="highlight"><pre>        <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">bind</span><span class="p">(</span><span class="nx">moveEvent</span><span class="p">,</span> <span class="nx">preventTouchScroll</span><span class="p">);</span>
       <span class="p">}</span>
 
-      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">callEvents</span><span class="p">(</span><span class="s1">&#39;down&#39;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">element</span><span class="p">,</span> <span class="nx">ev</span><span class="p">)</span> <span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">callEvents</span><span class="p">(</span><span class="s1">&#39;down&#39;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">element</span><span class="p">,</span> <span class="nx">ev</span><span class="p">))</span> <span class="p">{</span>
         <span class="k">this</span><span class="p">.</span><span class="nx">noSelection</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">delegate</span><span class="p">);</span></pre></div>             </td>           </tr>                               <tr id="section-9">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-9">&#182;</a>               </div>               <p>this is for firefox</p>             </td>             <td class="code">               <div class="highlight"><pre>        <span class="nx">clearSelection</span><span class="p">();</span>
       <span class="p">}</span>
     <span class="p">},</span>
-    <span class="cm">/**</span>
-<span class="cm">     * @attribute element</span>
-<span class="cm">     * A reference to the element that is being dragged. For example:</span>
-<span class="cm">     *</span>
-<span class="cm">     *      $(&#39;.draggable&#39;).on(&#39;draginit&#39;, function(ev, drag) {</span>
-<span class="cm">     *          drag.element.html(&#39;I am the drag element&#39;);</span>
-<span class="cm">     *      });</span>
-<span class="cm">     */</span>
 
-    <span class="cm">/**</span>
-<span class="cm">     * Unbinds listeners and allows other drags ...</span>
-<span class="cm">     * @hide</span>
-<span class="cm">     */</span>
-    <span class="nx">destroy</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-10">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-10">&#182;</a>               </div>               <p>Unbind the mouse handlers attached for dragging</p>             </td>             <td class="code">               <div class="highlight"><pre>      <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">unbind</span><span class="p">(</span><span class="nx">moveEvent</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_mousemove</span><span class="p">);</span>
+
+
+    <span class="nx">destroy</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-10">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-10">&#182;</a>               </div>               <p>Unbind the mouse handlers attached for dragging</p>             </td>             <td class="code">               <div class="highlight"><pre>      <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">unbind</span><span class="p">(</span><span class="nx">moveEvent</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_mousemove</span><span class="p">);</span>
       <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">unbind</span><span class="p">(</span><span class="nx">stopEvent</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_mouseup</span><span class="p">);</span>
-      <span class="k">if</span><span class="p">(</span><span class="nx">supportTouch</span><span class="p">)</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-11">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-11">&#182;</a>               </div>               <p>Enable scrolling again for touch devices when the drag is done</p>             </td>             <td class="code">               <div class="highlight"><pre>        <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">unbind</span><span class="p">(</span><span class="nx">moveEvent</span><span class="p">,</span> <span class="nx">preventTouchScroll</span><span class="p">);</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">supportTouch</span><span class="p">)</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-11">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-11">&#182;</a>               </div>               <p>Enable scrolling again for touch devices when the drag is done</p>             </td>             <td class="code">               <div class="highlight"><pre>        <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">unbind</span><span class="p">(</span><span class="nx">moveEvent</span><span class="p">,</span> <span class="nx">preventTouchScroll</span><span class="p">);</span>
       <span class="p">}</span>
 
-      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">moved</span> <span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">moved</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">this</span><span class="p">.</span><span class="nx">event</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">element</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
       <span class="p">}</span>
 
-      <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">supportTouch</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">supportTouch</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">this</span><span class="p">.</span><span class="nx">selection</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">delegate</span><span class="p">);</span>
       <span class="p">}</span>
       <span class="k">this</span><span class="p">.</span><span class="nx">destroyed</span><span class="p">();</span>
     <span class="p">},</span>
-    <span class="nx">mousemove</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">docEl</span><span class="p">,</span> <span class="nx">ev</span> <span class="p">)</span> <span class="p">{</span>
-      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">moved</span> <span class="p">)</span> <span class="p">{</span>
-        <span class="kd">var</span> <span class="nx">dist</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">sqrt</span><span class="p">(</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">pow</span><span class="p">(</span> <span class="nx">ev</span><span class="p">.</span><span class="nx">pageX</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">event</span><span class="p">.</span><span class="nx">pageX</span><span class="p">,</span> <span class="mi">2</span> <span class="p">)</span> <span class="o">+</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">pow</span><span class="p">(</span> <span class="nx">ev</span><span class="p">.</span><span class="nx">pageY</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">event</span><span class="p">.</span><span class="nx">pageY</span><span class="p">,</span> <span class="mi">2</span> <span class="p">));</span></pre></div>             </td>           </tr>                               <tr id="section-12">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-12">&#182;</a>               </div>               <p>Don't initialize the drag if it hasn't been moved the minimum distance</p>             </td>             <td class="code">               <div class="highlight"><pre>        <span class="k">if</span><span class="p">(</span><span class="nx">dist</span> <span class="o">&lt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">_distance</span><span class="p">){</span>
+    <span class="nx">mousemove</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">docEl</span><span class="p">,</span> <span class="nx">ev</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">moved</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">dist</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">sqrt</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">pow</span><span class="p">(</span><span class="nx">ev</span><span class="p">.</span><span class="nx">pageX</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">event</span><span class="p">.</span><span class="nx">pageX</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">pow</span><span class="p">(</span><span class="nx">ev</span><span class="p">.</span><span class="nx">pageY</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">event</span><span class="p">.</span><span class="nx">pageY</span><span class="p">,</span> <span class="mi">2</span><span class="p">));</span></pre></div>             </td>           </tr>                               <tr id="section-12">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-12">&#182;</a>               </div>               <p>Don't initialize the drag if it hasn't been moved the minimum distance</p>             </td>             <td class="code">               <div class="highlight"><pre>        <span class="k">if</span> <span class="p">(</span><span class="nx">dist</span> <span class="o">&lt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">_distance</span><span class="p">)</span> <span class="p">{</span>
           <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
         <span class="p">}</span></pre></div>             </td>           </tr>                               <tr id="section-13">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-13">&#182;</a>               </div>               <p>Otherwise call init and indicate that the drag has moved</p>             </td>             <td class="code">               <div class="highlight"><pre>        <span class="k">this</span><span class="p">.</span><span class="nx">init</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">element</span><span class="p">,</span> <span class="nx">ev</span><span class="p">);</span>
         <span class="k">this</span><span class="p">.</span><span class="nx">moved</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
@@ -145,195 +115,128 @@ steal the live handler ....</p>             </td>             <td class="code"> 
 
       <span class="k">this</span><span class="p">.</span><span class="nx">element</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s1">&#39;move&#39;</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
       <span class="kd">var</span> <span class="nx">pointer</span> <span class="o">=</span> <span class="nx">ev</span><span class="p">.</span><span class="nx">vector</span><span class="p">();</span>
-      <span class="k">if</span> <span class="p">(</span> <span class="k">this</span><span class="p">.</span><span class="nx">_start_position</span> <span class="o">&amp;&amp;</span> <span class="k">this</span><span class="p">.</span><span class="nx">_start_position</span><span class="p">.</span><span class="nx">equals</span><span class="p">(</span><span class="nx">pointer</span><span class="p">)</span> <span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_start_position</span> <span class="o">&amp;&amp;</span> <span class="k">this</span><span class="p">.</span><span class="nx">_start_position</span><span class="p">.</span><span class="nx">equals</span><span class="p">(</span><span class="nx">pointer</span><span class="p">))</span> <span class="p">{</span>
         <span class="k">return</span><span class="p">;</span>
       <span class="p">}</span>
       <span class="k">this</span><span class="p">.</span><span class="nx">draw</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">ev</span><span class="p">);</span>
     <span class="p">},</span>
 
-    <span class="nx">mouseup</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">docEl</span><span class="p">,</span> <span class="nx">event</span> <span class="p">)</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-14">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-14">&#182;</a>               </div>               <p>if there is a current, we should call its dragstop</p>             </td>             <td class="code">               <div class="highlight"><pre>      <span class="k">if</span> <span class="p">(</span> <span class="k">this</span><span class="p">.</span><span class="nx">moved</span> <span class="p">)</span> <span class="p">{</span>
+    <span class="nx">mouseup</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">docEl</span><span class="p">,</span> <span class="nx">event</span><span class="p">)</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-14">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-14">&#182;</a>               </div>               <p>if there is a current, we should call its dragstop</p>             </td>             <td class="code">               <div class="highlight"><pre>      <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">moved</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">this</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="nx">event</span><span class="p">);</span>
       <span class="p">}</span>
       <span class="k">this</span><span class="p">.</span><span class="nx">destroy</span><span class="p">();</span>
     <span class="p">},</span>
 
-    <span class="cm">/**</span>
-<span class="cm">     * The `drag.noSelection(element)` method turns off text selection during a drag event.</span>
-<span class="cm">     * This method is called by default unless a event is listening to the &#39;dragdown&#39; event.</span>
-<span class="cm">     *</span>
-<span class="cm">     * ## Example</span>
-<span class="cm">     *</span>
-<span class="cm">     *      $(&#39;div.drag&#39;).bind(&#39;dragdown&#39;, function(elm,event,drag){</span>
-<span class="cm">     *          drag.noSelection();</span>
-<span class="cm">     *      });</span>
-<span class="cm">     *</span>
-<span class="cm">     * @param [elm] an element to prevent selection on.  Defaults to the dragable element.</span>
-<span class="cm">     */</span>
-    <span class="nx">noSelection</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">elm</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="nx">noSelection</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">elm</span><span class="p">)</span> <span class="p">{</span>
       <span class="nx">elm</span> <span class="o">=</span> <span class="nx">elm</span> <span class="o">||</span> <span class="k">this</span><span class="p">.</span><span class="nx">delegate</span>
-      <span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">onselectstart</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-15">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-15">&#182;</a>               </div>               <p>Disables selection</p>             </td>             <td class="code">               <div class="highlight"><pre>        <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+      <span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">onselectstart</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-15">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-15">&#182;</a>               </div>               <p>Disables selection</p>             </td>             <td class="code">               <div class="highlight"><pre>        <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
       <span class="p">};</span>
       <span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">unselectable</span> <span class="o">=</span> <span class="s2">&quot;on&quot;</span><span class="p">;</span>
       <span class="k">this</span><span class="p">.</span><span class="nx">selectionDisabled</span> <span class="o">=</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">selectionDisabled</span> <span class="o">?</span> <span class="k">this</span><span class="p">.</span><span class="nx">selectionDisabled</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">elm</span><span class="p">)</span> <span class="o">:</span> <span class="nx">$</span><span class="p">(</span><span class="nx">elm</span><span class="p">));</span>
       <span class="k">this</span><span class="p">.</span><span class="nx">selectionDisabled</span><span class="p">.</span><span class="nx">css</span><span class="p">(</span><span class="s1">&#39;-moz-user-select&#39;</span><span class="p">,</span> <span class="s1">&#39;-moz-none&#39;</span><span class="p">);</span>
     <span class="p">},</span>
 
-    <span class="cm">/**</span>
-<span class="cm">     * @hide</span>
-<span class="cm">     * `drag.selection()` method turns on text selection that was previously turned off during the drag event.</span>
-<span class="cm">     * This method is always called.</span>
-<span class="cm">     *</span>
-<span class="cm">     * ## Example</span>
-<span class="cm">     *</span>
-<span class="cm">     *     $(&#39;div.drag&#39;).bind(&#39;dragdown&#39;, function(elm,event,drag){</span>
-<span class="cm">     *       drag.selection();</span>
-<span class="cm">     *     });</span>
-<span class="cm">     */</span>
-    <span class="nx">selection</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-      <span class="k">if</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">selectionDisabled</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">onselectstart</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{};</span>
+
+    <span class="nx">selection</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">selectionDisabled</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">onselectstart</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{};</span>
         <span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">unselectable</span> <span class="o">=</span> <span class="s2">&quot;off&quot;</span><span class="p">;</span>
         <span class="k">this</span><span class="p">.</span><span class="nx">selectionDisabled</span><span class="p">.</span><span class="nx">css</span><span class="p">(</span><span class="s1">&#39;-moz-user-select&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">);</span>
       <span class="p">}</span>
     <span class="p">},</span>
 
-    <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">element</span><span class="p">,</span> <span class="nx">event</span> <span class="p">)</span> <span class="p">{</span>
+    <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
       <span class="nx">element</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nx">element</span><span class="p">);</span></pre></div>             </td>           </tr>                               <tr id="section-16">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-16">&#182;</a>               </div>               <p>the element that has been clicked on</p>             </td>             <td class="code">               <div class="highlight"><pre>      <span class="kd">var</span> <span class="nx">startElement</span> <span class="o">=</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">movingElement</span> <span class="o">=</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">element</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nx">element</span><span class="p">)));</span></pre></div>             </td>           </tr>                               <tr id="section-17">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-17">&#182;</a>               </div>               <p>if a mousemove has come after the click
 if the drag has been cancelled</p>             </td>             <td class="code">               <div class="highlight"><pre>      <span class="k">this</span><span class="p">.</span><span class="nx">_cancelled</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
       <span class="k">this</span><span class="p">.</span><span class="nx">event</span> <span class="o">=</span> <span class="nx">event</span><span class="p">;</span>
 
-      <span class="cm">/**</span>
-<span class="cm">       * @attribute mouseElementPosition</span>
-<span class="cm">       * The position of start of the cursor on the element</span>
-<span class="cm">       */</span>
+
       <span class="k">this</span><span class="p">.</span><span class="nx">mouseElementPosition</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">mouseStartPosition</span><span class="p">.</span><span class="nx">minus</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">element</span><span class="p">.</span><span class="nx">offsetv</span><span class="p">());</span> <span class="c1">//where the mouse is on the Element</span>
-      <span class="k">this</span><span class="p">.</span><span class="nx">callEvents</span><span class="p">(</span><span class="s1">&#39;init&#39;</span><span class="p">,</span> <span class="nx">element</span><span class="p">,</span> <span class="nx">event</span><span class="p">);</span></pre></div>             </td>           </tr>                               <tr id="section-18">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-18">&#182;</a>               </div>               <p>Check what they have set and respond accordingly if they canceled</p>             </td>             <td class="code">               <div class="highlight"><pre>      <span class="k">if</span> <span class="p">(</span> <span class="k">this</span><span class="p">.</span><span class="nx">_cancelled</span> <span class="o">===</span> <span class="kc">true</span> <span class="p">)</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">callEvents</span><span class="p">(</span><span class="s1">&#39;init&#39;</span><span class="p">,</span> <span class="nx">element</span><span class="p">,</span> <span class="nx">event</span><span class="p">);</span></pre></div>             </td>           </tr>                               <tr id="section-18">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-18">&#182;</a>               </div>               <p>Check what they have set and respond accordingly if they canceled</p>             </td>             <td class="code">               <div class="highlight"><pre>      <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_cancelled</span> <span class="o">===</span> <span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">return</span><span class="p">;</span>
       <span class="p">}</span></pre></div>             </td>           </tr>                               <tr id="section-19">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-19">&#182;</a>               </div>               <p>if they set something else as the element</p>             </td>             <td class="code">               <div class="highlight"><pre>      <span class="k">this</span><span class="p">.</span><span class="nx">startPosition</span> <span class="o">=</span> <span class="nx">startElement</span> <span class="o">!=</span> <span class="k">this</span><span class="p">.</span><span class="nx">movingElement</span> <span class="o">?</span> <span class="k">this</span><span class="p">.</span><span class="nx">movingElement</span><span class="p">.</span><span class="nx">offsetv</span><span class="p">()</span> <span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">currentDelta</span><span class="p">();</span>
 
       <span class="k">this</span><span class="p">.</span><span class="nx">makePositioned</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">movingElement</span><span class="p">);</span></pre></div>             </td>           </tr>                               <tr id="section-20">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-20">&#182;</a>               </div>               <p>Adjust the drag elements z-index to a high value</p>             </td>             <td class="code">               <div class="highlight"><pre>      <span class="k">this</span><span class="p">.</span><span class="nx">oldZIndex</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">movingElement</span><span class="p">.</span><span class="nx">css</span><span class="p">(</span><span class="s1">&#39;zIndex&#39;</span><span class="p">);</span>
       <span class="k">this</span><span class="p">.</span><span class="nx">movingElement</span><span class="p">.</span><span class="nx">css</span><span class="p">(</span><span class="s1">&#39;zIndex&#39;</span><span class="p">,</span> <span class="mi">1000</span><span class="p">);</span>
-      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">_only</span> <span class="o">&amp;&amp;</span> <span class="k">this</span><span class="p">.</span><span class="nx">constructor</span><span class="p">.</span><span class="nx">responder</span> <span class="p">)</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-21">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-21">&#182;</a>               </div>               <p>calls $.Drop.prototype.compile if there is a drop element</p>             </td>             <td class="code">               <div class="highlight"><pre>        <span class="k">this</span><span class="p">.</span><span class="nx">constructor</span><span class="p">.</span><span class="nx">responder</span><span class="p">.</span><span class="nx">compile</span><span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
+      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">_only</span> <span class="o">&amp;&amp;</span> <span class="k">this</span><span class="p">.</span><span class="nx">constructor</span><span class="p">.</span><span class="nx">responder</span><span class="p">)</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-21">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-21">&#182;</a>               </div>               <p>calls $.Drop.prototype.compile if there is a drop element</p>             </td>             <td class="code">               <div class="highlight"><pre>        <span class="k">this</span><span class="p">.</span><span class="nx">constructor</span><span class="p">.</span><span class="nx">responder</span><span class="p">.</span><span class="nx">compile</span><span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
       <span class="p">}</span>
     <span class="p">},</span>
-    <span class="nx">makePositioned</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">that</span> <span class="p">)</span> <span class="p">{</span>
-      <span class="kd">var</span> <span class="nx">style</span><span class="p">,</span> <span class="nx">pos</span> <span class="o">=</span> <span class="nx">that</span><span class="p">.</span><span class="nx">css</span><span class="p">(</span><span class="s1">&#39;position&#39;</span><span class="p">);</span></pre></div>             </td>           </tr>                               <tr id="section-22">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-22">&#182;</a>               </div>               <p>Position properly, set top and left to 0px for Opera</p>             </td>             <td class="code">               <div class="highlight"><pre>      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">pos</span> <span class="o">||</span> <span class="nx">pos</span> <span class="o">==</span> <span class="s1">&#39;static&#39;</span> <span class="p">)</span> <span class="p">{</span>
+    <span class="nx">makePositioned</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">that</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">style</span><span class="p">,</span> <span class="nx">pos</span> <span class="o">=</span> <span class="nx">that</span><span class="p">.</span><span class="nx">css</span><span class="p">(</span><span class="s1">&#39;position&#39;</span><span class="p">);</span></pre></div>             </td>           </tr>                               <tr id="section-22">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-22">&#182;</a>               </div>               <p>Position properly, set top and left to 0px for Opera</p>             </td>             <td class="code">               <div class="highlight"><pre>      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">pos</span> <span class="o">||</span> <span class="nx">pos</span> <span class="o">==</span> <span class="s1">&#39;static&#39;</span><span class="p">)</span> <span class="p">{</span>
         <span class="nx">style</span> <span class="o">=</span> <span class="p">{</span>
           <span class="nx">position</span><span class="o">:</span> <span class="s1">&#39;relative&#39;</span>
         <span class="p">};</span>
 
-        <span class="k">if</span> <span class="p">(</span> <span class="nb">window</span><span class="p">.</span><span class="nx">opera</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">opera</span><span class="p">)</span> <span class="p">{</span>
           <span class="nx">style</span><span class="p">.</span><span class="nx">top</span> <span class="o">=</span> <span class="s1">&#39;0px&#39;</span><span class="p">;</span>
           <span class="nx">style</span><span class="p">.</span><span class="nx">left</span> <span class="o">=</span> <span class="s1">&#39;0px&#39;</span><span class="p">;</span>
         <span class="p">}</span>
         <span class="nx">that</span><span class="p">.</span><span class="nx">css</span><span class="p">(</span><span class="nx">style</span><span class="p">);</span>
       <span class="p">}</span>
     <span class="p">},</span>
-    <span class="nx">callEvents</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">type</span><span class="p">,</span> <span class="nx">element</span><span class="p">,</span> <span class="nx">event</span><span class="p">,</span> <span class="nx">drop</span> <span class="p">)</span> <span class="p">{</span>
+    <span class="nx">callEvents</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">type</span><span class="p">,</span> <span class="nx">element</span><span class="p">,</span> <span class="nx">event</span><span class="p">,</span> <span class="nx">drop</span><span class="p">)</span> <span class="p">{</span>
       <span class="kd">var</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">cbs</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">callbacks</span><span class="p">[</span><span class="k">this</span><span class="p">.</span><span class="nx">constructor</span><span class="p">.</span><span class="nx">lowerName</span> <span class="o">+</span> <span class="nx">type</span><span class="p">];</span>
-      <span class="k">for</span> <span class="p">(</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">cbs</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">)</span> <span class="p">{</span>
+      <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">cbs</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
         <span class="nx">cbs</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">call</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="nx">event</span><span class="p">,</span> <span class="k">this</span><span class="p">,</span> <span class="nx">drop</span><span class="p">);</span>
       <span class="p">}</span>
       <span class="k">return</span> <span class="nx">cbs</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
     <span class="p">},</span>
-    <span class="cm">/**</span>
-<span class="cm">     * Returns the position of the movingElement by taking its top and left.</span>
-<span class="cm">     * @hide</span>
-<span class="cm">     * @return {$.Vector}</span>
-<span class="cm">     */</span>
-    <span class="nx">currentDelta</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="nx">currentDelta</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
       <span class="k">return</span> <span class="k">new</span> <span class="nx">$</span><span class="p">.</span><span class="nx">Vector</span><span class="p">(</span><span class="nb">parseInt</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">movingElement</span><span class="p">.</span><span class="nx">css</span><span class="p">(</span><span class="s1">&#39;left&#39;</span><span class="p">),</span> <span class="mi">10</span><span class="p">)</span> <span class="o">||</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">parseInt</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">movingElement</span><span class="p">.</span><span class="nx">css</span><span class="p">(</span><span class="s1">&#39;top&#39;</span><span class="p">),</span> <span class="mi">10</span><span class="p">)</span> <span class="o">||</span> <span class="mi">0</span><span class="p">);</span>
-    <span class="p">},</span></pre></div>             </td>           </tr>                               <tr id="section-23">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-23">&#182;</a>               </div>               <p>draws the position of the dragmove object</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="nx">draw</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">pointer</span><span class="p">,</span> <span class="nx">event</span> <span class="p">)</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-24">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-24">&#182;</a>               </div>               <p>only drag if we haven't been cancelled;</p>             </td>             <td class="code">               <div class="highlight"><pre>      <span class="k">if</span> <span class="p">(</span> <span class="k">this</span><span class="p">.</span><span class="nx">_cancelled</span> <span class="p">)</span> <span class="p">{</span>
+    <span class="p">},</span></pre></div>             </td>           </tr>                               <tr id="section-23">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-23">&#182;</a>               </div>               <p>draws the position of the dragmove object</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="nx">draw</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">event</span><span class="p">)</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-24">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-24">&#182;</a>               </div>               <p>only drag if we haven't been cancelled;</p>             </td>             <td class="code">               <div class="highlight"><pre>      <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_cancelled</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">return</span><span class="p">;</span>
       <span class="p">}</span>
-      <span class="nx">clearSelection</span><span class="p">();</span>
-      <span class="cm">/**</span>
-<span class="cm">       * @attribute location</span>
-<span class="cm">       * `drag.location` is a [jQuery.Vector] specifying where the element should be in the page.  This</span>
-<span class="cm">       * takes into account the start position of the cursor on the element.</span>
-<span class="cm">       *</span>
-<span class="cm">       * If the drag is going to be moved to an unacceptable location, you can call preventDefault in</span>
-<span class="cm">       * dragmove to prevent it from being moved there.</span>
-<span class="cm">       *</span>
-<span class="cm">       *     $(&#39;.mover&#39;).bind(&quot;dragmove&quot;, function(ev, drag){</span>
-<span class="cm">       *       if(drag.location.top() &lt; 100){</span>
-<span class="cm">       *         ev.preventDefault()</span>
-<span class="cm">       *       }</span>
-<span class="cm">       *     });</span>
-<span class="cm">       *</span>
-<span class="cm">       * You can also set the location to where it should be on the page.</span>
-<span class="cm">       *</span>
-<span class="cm">       */</span></pre></div>             </td>           </tr>                               <tr id="section-25">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-25">&#182;</a>               </div>               <p>the offset between the mouse pointer and the representative that the user asked for</p>             </td>             <td class="code">               <div class="highlight"><pre>      <span class="k">this</span><span class="p">.</span><span class="nx">location</span> <span class="o">=</span> <span class="nx">pointer</span><span class="p">.</span><span class="nx">minus</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">mouseElementPosition</span><span class="p">);</span></pre></div>             </td>           </tr>                               <tr id="section-26">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-26">&#182;</a>               </div>               <p>call move events</p>             </td>             <td class="code">               <div class="highlight"><pre>      <span class="k">this</span><span class="p">.</span><span class="nx">move</span><span class="p">(</span><span class="nx">event</span><span class="p">);</span>
-      <span class="k">if</span> <span class="p">(</span> <span class="k">this</span><span class="p">.</span><span class="nx">_cancelled</span> <span class="p">)</span> <span class="p">{</span>
+      <span class="nx">clearSelection</span><span class="p">();</span></pre></div>             </td>           </tr>                               <tr id="section-25">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-25">&#182;</a>               </div>               <p>the offset between the mouse pointer and the representative that the user asked for</p>             </td>             <td class="code">               <div class="highlight"><pre>      <span class="k">this</span><span class="p">.</span><span class="nx">location</span> <span class="o">=</span> <span class="nx">pointer</span><span class="p">.</span><span class="nx">minus</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">mouseElementPosition</span><span class="p">);</span></pre></div>             </td>           </tr>                               <tr id="section-26">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-26">&#182;</a>               </div>               <p>call move events</p>             </td>             <td class="code">               <div class="highlight"><pre>      <span class="k">this</span><span class="p">.</span><span class="nx">move</span><span class="p">(</span><span class="nx">event</span><span class="p">);</span>
+      <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_cancelled</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">return</span><span class="p">;</span>
       <span class="p">}</span>
-      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">event</span><span class="p">.</span><span class="nx">isDefaultPrevented</span><span class="p">()</span> <span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">event</span><span class="p">.</span><span class="nx">isDefaultPrevented</span><span class="p">())</span> <span class="p">{</span>
         <span class="k">this</span><span class="p">.</span><span class="nx">position</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">location</span><span class="p">);</span>
-      <span class="p">}</span></pre></div>             </td>           </tr>                               <tr id="section-27">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-27">&#182;</a>               </div>               <p>fill in</p>             </td>             <td class="code">               <div class="highlight"><pre>      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">_only</span> <span class="o">&amp;&amp;</span> <span class="k">this</span><span class="p">.</span><span class="nx">constructor</span><span class="p">.</span><span class="nx">responder</span> <span class="p">)</span> <span class="p">{</span>
+      <span class="p">}</span></pre></div>             </td>           </tr>                               <tr id="section-27">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-27">&#182;</a>               </div>               <p>fill in</p>             </td>             <td class="code">               <div class="highlight"><pre>      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">_only</span> <span class="o">&amp;&amp;</span> <span class="k">this</span><span class="p">.</span><span class="nx">constructor</span><span class="p">.</span><span class="nx">responder</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">this</span><span class="p">.</span><span class="nx">constructor</span><span class="p">.</span><span class="nx">responder</span><span class="p">.</span><span class="nx">show</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="k">this</span><span class="p">,</span> <span class="nx">event</span><span class="p">);</span>
       <span class="p">}</span>
     <span class="p">},</span>
-    <span class="cm">/**</span>
-<span class="cm">     * `drag.position( newOffsetVector )` sets the position of the movingElement.  This is overwritten by</span>
-<span class="cm">     * the [$.Drag::scrolls], [$.Drag::limit] and [$.Drag::step] plugins</span>
-<span class="cm">     * to make sure the moving element scrolls some element</span>
-<span class="cm">     * or stays within some boundary.  This function is exposed and documented so you could do the same.</span>
-<span class="cm">     *</span>
-<span class="cm">     * The following approximates how step does it:</span>
-<span class="cm">     *</span>
-<span class="cm">     *     var oldPosition = $.Drag.prototype.position;</span>
-<span class="cm">     *     $.Drag.prototype.position = function( offsetPositionv ) {</span>
-<span class="cm">     *       if(this._step){</span>
-<span class="cm">     *         // change offsetPositionv to be on the step value</span>
-<span class="cm">     *       }</span>
-<span class="cm">     *</span>
-<span class="cm">     *       oldPosition.call(this, offsetPosition)</span>
-<span class="cm">     *     }</span>
-<span class="cm">     *</span>
-<span class="cm">     * @param {jQuery.Vector} newOffsetv the new [$.Drag::location] of the element.</span>
-<span class="cm">     */</span>
-    <span class="nx">position</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">newOffsetv</span> <span class="p">)</span> <span class="p">{</span> <span class="c1">//should draw it on the page</span>
+
+    <span class="nx">position</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">newOffsetv</span><span class="p">)</span> <span class="p">{</span> <span class="c1">//should draw it on the page</span>
       <span class="kd">var</span> <span class="nx">style</span><span class="p">,</span> <span class="nx">dragged_element_css_offset</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">currentDelta</span><span class="p">(),</span></pre></div>             </td>           </tr>                               <tr id="section-28">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-28">&#182;</a>               </div>               <p>the drag element's current left + top css attributes
 the vector between the movingElement's page and css positions
-this can be thought of as the original offset</p>             </td>             <td class="code">               <div class="highlight"><pre>        <span class="nx">dragged_element_position_vector</span> <span class="o">=</span>   <span class="k">this</span><span class="p">.</span><span class="nx">movingElement</span><span class="p">.</span><span class="nx">offsetv</span><span class="p">().</span><span class="nx">minus</span><span class="p">(</span><span class="nx">dragged_element_css_offset</span><span class="p">);</span>
+this can be thought of as the original offset</p>             </td>             <td class="code">               <div class="highlight"><pre>        <span class="nx">dragged_element_position_vector</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">movingElement</span><span class="p">.</span><span class="nx">offsetv</span><span class="p">().</span><span class="nx">minus</span><span class="p">(</span><span class="nx">dragged_element_css_offset</span><span class="p">);</span>
       <span class="k">this</span><span class="p">.</span><span class="nx">required_css_position</span> <span class="o">=</span> <span class="nx">newOffsetv</span><span class="p">.</span><span class="nx">minus</span><span class="p">(</span><span class="nx">dragged_element_position_vector</span><span class="p">);</span>
 
       <span class="k">this</span><span class="p">.</span><span class="nx">offsetv</span> <span class="o">=</span> <span class="nx">newOffsetv</span><span class="p">;</span>
       <span class="nx">style</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">movingElement</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">style</span><span class="p">;</span>
-      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">_cancelled</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">_horizontal</span> <span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">_cancelled</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">_horizontal</span><span class="p">)</span> <span class="p">{</span>
         <span class="nx">style</span><span class="p">.</span><span class="nx">top</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">required_css_position</span><span class="p">.</span><span class="nx">top</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;px&quot;</span><span class="p">;</span>
       <span class="p">}</span>
-      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">_cancelled</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">_vertical</span> <span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">_cancelled</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">_vertical</span><span class="p">)</span> <span class="p">{</span>
         <span class="nx">style</span><span class="p">.</span><span class="nx">left</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">required_css_position</span><span class="p">.</span><span class="nx">left</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;px&quot;</span><span class="p">;</span>
       <span class="p">}</span>
     <span class="p">},</span>
-    <span class="nx">move</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">event</span> <span class="p">)</span> <span class="p">{</span>
+    <span class="nx">move</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
       <span class="k">this</span><span class="p">.</span><span class="nx">callEvents</span><span class="p">(</span><span class="s1">&#39;move&#39;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">element</span><span class="p">,</span> <span class="nx">event</span><span class="p">);</span>
     <span class="p">},</span>
-    <span class="nx">over</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">event</span><span class="p">,</span> <span class="nx">drop</span> <span class="p">)</span> <span class="p">{</span>
+    <span class="nx">over</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="nx">drop</span><span class="p">)</span> <span class="p">{</span>
       <span class="k">this</span><span class="p">.</span><span class="nx">callEvents</span><span class="p">(</span><span class="s1">&#39;over&#39;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">element</span><span class="p">,</span> <span class="nx">event</span><span class="p">,</span> <span class="nx">drop</span><span class="p">);</span>
     <span class="p">},</span>
-    <span class="nx">out</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">event</span><span class="p">,</span> <span class="nx">drop</span> <span class="p">)</span> <span class="p">{</span>
+    <span class="nx">out</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="nx">drop</span><span class="p">)</span> <span class="p">{</span>
       <span class="k">this</span><span class="p">.</span><span class="nx">callEvents</span><span class="p">(</span><span class="s1">&#39;out&#39;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">element</span><span class="p">,</span> <span class="nx">event</span><span class="p">,</span> <span class="nx">drop</span><span class="p">);</span>
     <span class="p">},</span>
-    <span class="cm">/**</span>
-<span class="cm">     * Called on drag up</span>
-<span class="cm">     * @hide</span>
-<span class="cm">     * @param {Event} event a mouseup event signalling drag/drop has completed</span>
-<span class="cm">     */</span>
-    <span class="nx">end</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">event</span> <span class="p">)</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-29">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-29">&#182;</a>               </div>               <p>If canceled do nothing</p>             </td>             <td class="code">               <div class="highlight"><pre>      <span class="k">if</span> <span class="p">(</span> <span class="k">this</span><span class="p">.</span><span class="nx">_cancelled</span> <span class="p">)</span> <span class="p">{</span>
+
+    <span class="nx">end</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-29">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-29">&#182;</a>               </div>               <p>If canceled do nothing</p>             </td>             <td class="code">               <div class="highlight"><pre>      <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_cancelled</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">return</span><span class="p">;</span>
-      <span class="p">}</span></pre></div>             </td>           </tr>                               <tr id="section-30">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-30">&#182;</a>               </div>               <p>notify the responder - usually a $.Drop instance</p>             </td>             <td class="code">               <div class="highlight"><pre>      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">_only</span> <span class="o">&amp;&amp;</span> <span class="k">this</span><span class="p">.</span><span class="nx">constructor</span><span class="p">.</span><span class="nx">responder</span> <span class="p">)</span> <span class="p">{</span>
+      <span class="p">}</span></pre></div>             </td>           </tr>                               <tr id="section-30">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-30">&#182;</a>               </div>               <p>notify the responder - usually a $.Drop instance</p>             </td>             <td class="code">               <div class="highlight"><pre>      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">_only</span> <span class="o">&amp;&amp;</span> <span class="k">this</span><span class="p">.</span><span class="nx">constructor</span><span class="p">.</span><span class="nx">responder</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">this</span><span class="p">.</span><span class="nx">constructor</span><span class="p">.</span><span class="nx">responder</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
       <span class="p">}</span>
 
       <span class="k">this</span><span class="p">.</span><span class="nx">callEvents</span><span class="p">(</span><span class="s1">&#39;end&#39;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">element</span><span class="p">,</span> <span class="nx">event</span><span class="p">);</span>
 
-      <span class="k">if</span> <span class="p">(</span> <span class="k">this</span><span class="p">.</span><span class="nx">_revert</span> <span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_revert</span><span class="p">)</span> <span class="p">{</span>
         <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span></pre></div>             </td>           </tr>                               <tr id="section-31">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-31">&#182;</a>               </div>               <p>animate moving back to original position</p>             </td>             <td class="code">               <div class="highlight"><pre>        <span class="k">this</span><span class="p">.</span><span class="nx">movingElement</span><span class="p">.</span><span class="nx">animate</span><span class="p">({</span>
           <span class="nx">top</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">startPosition</span><span class="p">.</span><span class="nx">top</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;px&quot;</span><span class="p">,</span>
           <span class="nx">left</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">startPosition</span><span class="p">.</span><span class="nx">left</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;px&quot;</span>
-        <span class="p">},</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="p">},</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
           <span class="nx">self</span><span class="p">.</span><span class="nx">cleanup</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">self</span><span class="p">,</span> <span class="nx">arguments</span><span class="p">);</span>
         <span class="p">});</span>
       <span class="p">}</span>
@@ -342,64 +245,36 @@ this can be thought of as the original offset</p>             </td>             
       <span class="p">}</span>
       <span class="k">this</span><span class="p">.</span><span class="nx">event</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
     <span class="p">},</span>
-    <span class="cm">/**</span>
-<span class="cm">     * Cleans up drag element after drag drop.</span>
-<span class="cm">     * @hide</span>
-<span class="cm">     */</span>
-    <span class="nx">cleanup</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="nx">cleanup</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
       <span class="k">this</span><span class="p">.</span><span class="nx">movingElement</span><span class="p">.</span><span class="nx">css</span><span class="p">({</span>
         <span class="nx">zIndex</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">oldZIndex</span>
       <span class="p">});</span>
-      <span class="k">if</span> <span class="p">(</span> <span class="k">this</span><span class="p">.</span><span class="nx">movingElement</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!==</span> <span class="k">this</span><span class="p">.</span><span class="nx">element</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&amp;&amp;</span>
-        <span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">movingElement</span><span class="p">.</span><span class="nx">has</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">element</span><span class="p">[</span><span class="mi">0</span><span class="p">]).</span><span class="nx">length</span> <span class="o">&amp;&amp;</span>
-        <span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">element</span><span class="p">.</span><span class="nx">has</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">movingElement</span><span class="p">[</span><span class="mi">0</span><span class="p">]).</span><span class="nx">length</span> <span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">movingElement</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!==</span> <span class="k">this</span><span class="p">.</span><span class="nx">element</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">movingElement</span><span class="p">.</span><span class="nx">has</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">element</span><span class="p">[</span><span class="mi">0</span><span class="p">]).</span><span class="nx">length</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">element</span><span class="p">.</span><span class="nx">has</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">movingElement</span><span class="p">[</span><span class="mi">0</span><span class="p">]).</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">this</span><span class="p">.</span><span class="nx">movingElement</span><span class="p">.</span><span class="nx">css</span><span class="p">({</span>
           <span class="nx">display</span><span class="o">:</span> <span class="s1">&#39;none&#39;</span>
         <span class="p">});</span>
       <span class="p">}</span>
-      <span class="k">if</span> <span class="p">(</span> <span class="k">this</span><span class="p">.</span><span class="nx">_removeMovingElement</span> <span class="p">)</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-32">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-32">&#182;</a>               </div>               <p>Remove the element when using drag.ghost()</p>             </td>             <td class="code">               <div class="highlight"><pre>        <span class="k">this</span><span class="p">.</span><span class="nx">movingElement</span><span class="p">.</span><span class="nx">remove</span><span class="p">();</span>
+      <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_removeMovingElement</span><span class="p">)</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-32">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-32">&#182;</a>               </div>               <p>Remove the element when using drag.ghost()</p>             </td>             <td class="code">               <div class="highlight"><pre>        <span class="k">this</span><span class="p">.</span><span class="nx">movingElement</span><span class="p">.</span><span class="nx">remove</span><span class="p">();</span>
       <span class="p">}</span>
 
-      <span class="k">if</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">this</span><span class="p">.</span><span class="nx">callEvents</span><span class="p">(</span><span class="s1">&#39;cleanup&#39;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">element</span><span class="p">,</span> <span class="nx">event</span><span class="p">);</span>
       <span class="p">}</span>
 
       <span class="k">this</span><span class="p">.</span><span class="nx">movingElement</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">element</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">event</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
     <span class="p">},</span>
-    <span class="cm">/**</span>
-<span class="cm">     * `drag.cancel()` stops a drag motion from from running.  This also stops any other events from firing, meaning</span>
-<span class="cm">     * that &quot;dragend&quot; will not be called.</span>
-<span class="cm">     *</span>
-<span class="cm">     *     $(&quot;#todos&quot;).on(&quot;.handle&quot;, &quot;draginit&quot;, function( ev, drag ) {</span>
-<span class="cm">     *       if(drag.movingElement.hasClass(&quot;evil&quot;)){</span>
-<span class="cm">     *         drag.cancel();</span>
-<span class="cm">     *       }</span>
-<span class="cm">     *     })</span>
-<span class="cm">     *</span>
-<span class="cm">     */</span>
-    <span class="nx">cancel</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="nx">cancel</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
       <span class="k">this</span><span class="p">.</span><span class="nx">_cancelled</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">_only</span> <span class="o">&amp;&amp;</span> <span class="k">this</span><span class="p">.</span><span class="nx">constructor</span><span class="p">.</span><span class="nx">responder</span> <span class="p">)</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-33">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-33">&#182;</a>               </div>               <p>clear the drops</p>             </td>             <td class="code">               <div class="highlight"><pre>        <span class="k">this</span><span class="p">.</span><span class="nx">constructor</span><span class="p">.</span><span class="nx">responder</span><span class="p">.</span><span class="nx">clear</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">event</span><span class="p">.</span><span class="nx">vector</span><span class="p">(),</span> <span class="k">this</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">event</span><span class="p">);</span>
+      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">_only</span> <span class="o">&amp;&amp;</span> <span class="k">this</span><span class="p">.</span><span class="nx">constructor</span><span class="p">.</span><span class="nx">responder</span><span class="p">)</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-33">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-33">&#182;</a>               </div>               <p>clear the drops</p>             </td>             <td class="code">               <div class="highlight"><pre>        <span class="k">this</span><span class="p">.</span><span class="nx">constructor</span><span class="p">.</span><span class="nx">responder</span><span class="p">.</span><span class="nx">clear</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">event</span><span class="p">.</span><span class="nx">vector</span><span class="p">(),</span> <span class="k">this</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">event</span><span class="p">);</span>
       <span class="p">}</span>
       <span class="k">this</span><span class="p">.</span><span class="nx">destroy</span><span class="p">();</span>
 
     <span class="p">},</span>
-    <span class="cm">/**</span>
-<span class="cm">     * `drag.ghost( [parent] )` clones the element and uses it as the</span>
-<span class="cm">     * moving element, leaving the original dragged element in place.  The `parent` option can</span>
-<span class="cm">     * be used to specify where the ghost element should be temporarily added into the</span>
-<span class="cm">     * DOM.  This method should be called in &quot;draginit&quot;.</span>
-<span class="cm">     *</span>
-<span class="cm">     *     $(&quot;#todos&quot;).on(&quot;.handle&quot;, &quot;draginit&quot;, function( ev, drag ) {</span>
-<span class="cm">     *       drag.ghost();</span>
-<span class="cm">     *     })</span>
-<span class="cm">     *</span>
-<span class="cm">     * @param {HTMLElement} [parent] the parent element of the newly created ghost element. If not provided the</span>
-<span class="cm">     * ghost element is added after the moving element.</span>
-<span class="cm">     * @return {jQuery.fn} the ghost element to do whatever you want with it.</span>
-<span class="cm">     */</span>
-    <span class="nx">ghost</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">parent</span> <span class="p">)</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-34">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-34">&#182;</a>               </div>               <p>create a ghost by cloning the source element and attach the clone to the dom after the source element</p>             </td>             <td class="code">               <div class="highlight"><pre>      <span class="kd">var</span> <span class="nx">ghost</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">movingElement</span><span class="p">.</span><span class="nx">clone</span><span class="p">().</span><span class="nx">css</span><span class="p">(</span><span class="s1">&#39;position&#39;</span><span class="p">,</span> <span class="s1">&#39;absolute&#39;</span><span class="p">);</span>
-      <span class="k">if</span><span class="p">(</span> <span class="nx">parent</span> <span class="p">)</span> <span class="p">{</span>
+
+    <span class="nx">ghost</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">parent</span><span class="p">)</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-34">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-34">&#182;</a>               </div>               <p>create a ghost by cloning the source element and attach the clone to the dom after the source element</p>             </td>             <td class="code">               <div class="highlight"><pre>      <span class="kd">var</span> <span class="nx">ghost</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">movingElement</span><span class="p">.</span><span class="nx">clone</span><span class="p">().</span><span class="nx">css</span><span class="p">(</span><span class="s1">&#39;position&#39;</span><span class="p">,</span> <span class="s1">&#39;absolute&#39;</span><span class="p">);</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">parent</span><span class="p">)</span> <span class="p">{</span>
         <span class="nx">$</span><span class="p">(</span><span class="nx">parent</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="nx">ghost</span><span class="p">);</span>
       <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
         <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">movingElement</span><span class="p">).</span><span class="nx">after</span><span class="p">(</span><span class="nx">ghost</span><span class="p">)</span>
@@ -409,29 +284,8 @@ this can be thought of as the original offset</p>             </td>             
       <span class="k">this</span><span class="p">.</span><span class="nx">_removeMovingElement</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
       <span class="k">return</span> <span class="nx">ghost</span><span class="p">;</span>
     <span class="p">},</span>
-    <span class="cm">/**</span>
-<span class="cm">     * `drag.representative( element, [offsetX], [offsetY])` tells the drag motion to use</span>
-<span class="cm">     * a different element than the one that began the drag motion.</span>
-<span class="cm">     *</span>
-<span class="cm">     * For example, instead of</span>
-<span class="cm">     * dragging an drag-icon of a todo element, you want to move some other representation of</span>
-<span class="cm">     * the todo element (or elements).  To do this you might:</span>
-<span class="cm">     *</span>
-<span class="cm">     *     $(&quot;#todos&quot;).on(&quot;.handle&quot;, &quot;draginit&quot;, function( ev, drag ) {</span>
-<span class="cm">     *       // create what we&#39;ll drag</span>
-<span class="cm">     *       var rep = $(&#39;&lt;div/&gt;&#39;).text(&quot;todos&quot;)</span>
-<span class="cm">     *         .appendTo(document.body)</span>
-<span class="cm">     *       // indicate we want our mouse on the top-right of it</span>
-<span class="cm">     *       drag.representative(rep, rep.width(), 0);</span>
-<span class="cm">     *     })</span>
-<span class="cm">     *</span>
-<span class="cm">     * @param {HTMLElement} element the element you want to actually drag.  This should be</span>
-<span class="cm">     * already in the DOM.</span>
-<span class="cm">     * @param {Number} offsetX the x position where you want your mouse on the representative element (defaults to 0)</span>
-<span class="cm">     * @param {Number} offsetY the y position where you want your mouse on the representative element (defaults to 0)</span>
-<span class="cm">     * @return {drag} returns the drag object for chaining.</span>
-<span class="cm">     */</span>
-    <span class="nx">representative</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">element</span><span class="p">,</span> <span class="nx">offsetX</span><span class="p">,</span> <span class="nx">offsetY</span> <span class="p">)</span> <span class="p">{</span>
+
+    <span class="nx">representative</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="nx">offsetX</span><span class="p">,</span> <span class="nx">offsetY</span><span class="p">)</span> <span class="p">{</span>
       <span class="k">this</span><span class="p">.</span><span class="nx">_offsetX</span> <span class="o">=</span> <span class="nx">offsetX</span> <span class="o">||</span> <span class="mi">0</span><span class="p">;</span>
       <span class="k">this</span><span class="p">.</span><span class="nx">_offsetY</span> <span class="o">=</span> <span class="nx">offsetY</span> <span class="o">||</span> <span class="mi">0</span><span class="p">;</span>
 
@@ -446,225 +300,56 @@ this can be thought of as the original offset</p>             </td>             
       <span class="k">this</span><span class="p">.</span><span class="nx">mouseElementPosition</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">$</span><span class="p">.</span><span class="nx">Vector</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_offsetX</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_offsetY</span><span class="p">);</span>
       <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
     <span class="p">},</span>
-    <span class="cm">/**</span>
-<span class="cm">     * `drag.revert([val])` makes the [$.Drag::representative representative] element revert back to it</span>
-<span class="cm">     * original position after the drag motion has completed.  The revert is done with an animation.</span>
-<span class="cm">     *</span>
-<span class="cm">     *     $(&quot;#todos&quot;).on(&quot;.handle&quot;,&quot;dragend&quot;,function( ev, drag ) {</span>
-<span class="cm">     *       drag.revert();</span>
-<span class="cm">     *     })</span>
-<span class="cm">     *</span>
-<span class="cm">     * @param {Boolean} [val] optional, set to false if you don&#39;t want to revert.</span>
-<span class="cm">     * @return {drag} the drag object for chaining</span>
-<span class="cm">     */</span>
-    <span class="nx">revert</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">val</span> <span class="p">)</span> <span class="p">{</span>
+
+    <span class="nx">revert</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">val</span><span class="p">)</span> <span class="p">{</span>
       <span class="k">this</span><span class="p">.</span><span class="nx">_revert</span> <span class="o">=</span> <span class="nx">val</span> <span class="o">===</span> <span class="kc">undefined</span> <span class="o">?</span> <span class="kc">true</span> <span class="o">:</span> <span class="nx">val</span><span class="p">;</span>
       <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
     <span class="p">},</span>
-    <span class="cm">/**</span>
-<span class="cm">     * `drag.vertical()` isolates the drag to vertical movement.  For example:</span>
-<span class="cm">     *</span>
-<span class="cm">     *     $(&quot;#images&quot;).on(&quot;.thumbnail&quot;,&quot;draginit&quot;, function(ev, drag){</span>
-<span class="cm">     *       drag.vertical();</span>
-<span class="cm">     *     });</span>
-<span class="cm">     *</span>
-<span class="cm">     * Call `vertical()` in &quot;draginit&quot; or &quot;dragdown&quot;.</span>
-<span class="cm">     *</span>
-<span class="cm">     * @return {drag} the drag object for chaining.</span>
-<span class="cm">     */</span>
-    <span class="nx">vertical</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="nx">vertical</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
       <span class="k">this</span><span class="p">.</span><span class="nx">_vertical</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
       <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
     <span class="p">},</span>
-    <span class="cm">/**</span>
-<span class="cm">     * `drag.horizontal()` isolates the drag to horizontal movement.  For example:</span>
-<span class="cm">     *</span>
-<span class="cm">     *     $(&quot;#images&quot;).on(&quot;.thumbnail&quot;,&quot;draginit&quot;, function(ev, drag){</span>
-<span class="cm">     *       drag.horizontal();</span>
-<span class="cm">     *     });</span>
-<span class="cm">     *</span>
-<span class="cm">     * Call `horizontal()` in &quot;draginit&quot; or &quot;dragdown&quot;.</span>
-<span class="cm">     *</span>
-<span class="cm">     * @return {drag} the drag object for chaining.</span>
-<span class="cm">     */</span>
-    <span class="nx">horizontal</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="nx">horizontal</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
       <span class="k">this</span><span class="p">.</span><span class="nx">_horizontal</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
       <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
     <span class="p">},</span>
-    <span class="cm">/**</span>
-<span class="cm">     * `drag.only([only])` indicates if you __only__ want a drag motion and the drag should</span>
-<span class="cm">     * not notify drops.  The default value is `false`.  Call it with no arguments or pass it true</span>
-<span class="cm">     * to prevent drop events.</span>
-<span class="cm">     *</span>
-<span class="cm">     *     $(&quot;#images&quot;).on(&quot;.thumbnail&quot;,&quot;dragdown&quot;, function(ev, drag){</span>
-<span class="cm">     *       drag.only();</span>
-<span class="cm">     *     });</span>
-<span class="cm">     *</span>
-<span class="cm">     * @param {Boolean} [only] true if you want to prevent drops, false if otherwise.</span>
-<span class="cm">     * @return {Boolean} the current value of only.</span>
-<span class="cm">     */</span>
-    <span class="nx">only</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">only</span> <span class="p">)</span> <span class="p">{</span>
+
+    <span class="nx">only</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">only</span><span class="p">)</span> <span class="p">{</span>
       <span class="k">return</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_only</span> <span class="o">=</span> <span class="p">(</span><span class="nx">only</span> <span class="o">===</span> <span class="kc">undefined</span> <span class="o">?</span> <span class="kc">true</span> <span class="o">:</span> <span class="nx">only</span><span class="p">));</span>
     <span class="p">},</span>
 
-    <span class="cm">/**</span>
-<span class="cm">     * `distance([val])` sets or reads the distance the mouse must move before a drag motion is started.  This should be set in</span>
-<span class="cm">     * &quot;dragdown&quot; and delays &quot;draginit&quot; being called until the distance is covered.  The distance</span>
-<span class="cm">     * is measured in pixels.  The default distance is 0 pixels meaning the drag motion starts on the first</span>
-<span class="cm">     * mousemove after a mousedown.</span>
-<span class="cm">     *</span>
-<span class="cm">     * Set this to make drag motion a little &quot;stickier&quot; to start.</span>
-<span class="cm">     *</span>
-<span class="cm">     *     $(&quot;#images&quot;).on(&quot;.thumbnail&quot;,&quot;dragdown&quot;, function(ev, drag){</span>
-<span class="cm">     *       drag.distance(10);</span>
-<span class="cm">     *     });</span>
-<span class="cm">     *</span>
-<span class="cm">     * @param {Number} [val] The number of pixels the mouse must move before &quot;draginit&quot; is called.</span>
-<span class="cm">     * @return {drag|Number} returns the drag instance for chaining if the drag value is being set or the</span>
-<span class="cm">     * distance value if the distance is being read.</span>
-<span class="cm">     */</span>
-    <span class="nx">distance</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">val</span><span class="p">){</span>
-      <span class="k">if</span><span class="p">(</span><span class="nx">val</span> <span class="o">!==</span> <span class="kc">undefined</span><span class="p">){</span>
+
+    <span class="nx">distance</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">val</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">val</span> <span class="o">!==</span> <span class="kc">undefined</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">this</span><span class="p">.</span><span class="nx">_distance</span> <span class="o">=</span> <span class="nx">val</span><span class="p">;</span>
         <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
-      <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
         <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">_distance</span>
       <span class="p">}</span>
     <span class="p">}</span>
   <span class="p">});</span>
-  <span class="cm">/**</span>
-<span class="cm">   * @add jQuery.event.special</span>
-<span class="cm">   */</span>
+
   <span class="nx">event</span><span class="p">.</span><span class="nx">setupHelper</span><span class="p">([</span>
-  <span class="cm">/**</span>
-<span class="cm">   * @attribute dragdown</span>
-<span class="cm">   * @parent jQuery.event.drag</span>
-<span class="cm">   *</span>
-<span class="cm">   * `dragdown` is called when a drag movement has started on a mousedown.</span>
-<span class="cm">   * The event handler gets an instance of [jQuery.Drag] passed as the second</span>
-<span class="cm">   * parameter.  Listening to `dragdown` allows you to customize</span>
-<span class="cm">   * the behavior of a drag motion, especially when `draginit` should be called.</span>
-<span class="cm">   *</span>
-<span class="cm">   *     $(&quot;.handles&quot;).delegate(&quot;dragdown&quot;, function(ev, drag){</span>
-<span class="cm">   *       // call draginit only when the mouse has moved 20 px</span>
-<span class="cm">   *       drag.distance(20);</span>
-<span class="cm">   *     })</span>
-<span class="cm">   *</span>
-<span class="cm">   * Typically, when a drag motion is started, `event.preventDefault` is automatically</span>
-<span class="cm">   * called, preventing text selection.  However, if you listen to</span>
-<span class="cm">   * `dragdown`, this default behavior is not called. You are responsible for calling it</span>
-<span class="cm">   * if you want it (you probably do).</span>
-<span class="cm">   *</span>
-<span class="cm">   * ### Why might you not want to call `preventDefault`?</span>
-<span class="cm">   *</span>
-<span class="cm">   * You might want it if you want to allow text selection on element</span>
-<span class="cm">   * within the drag element.  Typically these are input elements.</span>
-<span class="cm">   *</span>
-<span class="cm">   *     $(&quot;.handles&quot;).delegate(&quot;dragdown&quot;, function(ev, drag){</span>
-<span class="cm">   *       if(ev.target.nodeName === &quot;input&quot;){</span>
-<span class="cm">   *         drag.cancel();</span>
-<span class="cm">   *       } else {</span>
-<span class="cm">   *         ev.preventDefault();</span>
-<span class="cm">   *       }</span>
-<span class="cm">   *     })</span>
-<span class="cm">   */</span>
-    <span class="s1">&#39;dragdown&#39;</span><span class="p">,</span>
-  <span class="cm">/**</span>
-<span class="cm">   * @attribute draginit</span>
-<span class="cm">   * @parent jQuery.event.drag</span>
-<span class="cm">   *</span>
-<span class="cm">   * `draginit` is triggered when the drag motion starts. Use it to customize the drag behavior</span>
-<span class="cm">   * using the [jQuery.Drag] instance passed as the second parameter:</span>
-<span class="cm">   *</span>
-<span class="cm">   *     $(&quot;.draggable&quot;).on(&#39;draginit&#39;, function(ev, drag) {</span>
-<span class="cm">   *       // Only allow vertical drags</span>
-<span class="cm">   *       drag.vertical();</span>
-<span class="cm">   *       // Create a draggable copy of the element</span>
-<span class="cm">   *       drag.ghost();</span>
-<span class="cm">   *     });</span>
-<span class="cm">   */</span>
-    <span class="s1">&#39;draginit&#39;</span><span class="p">,</span>
-  <span class="cm">/**</span>
-<span class="cm">   * @attribute dragover</span>
-<span class="cm">   * @parent jQuery.event.drag</span>
-<span class="cm">   *</span>
-<span class="cm">   * `dragover` is triggered when a drag is over a [jQuery.event.drop drop element].</span>
-<span class="cm">   * The event handler gets an instance of [jQuery.Drag] passed as the second</span>
-<span class="cm">   * parameter and an instance of [jQuery.Drop] passed as the third argument:</span>
-<span class="cm">   *</span>
-<span class="cm">   *      $(&#39;.draggable&#39;).on(&#39;dragover&#39;, function(ev, drag, drop) {</span>
-<span class="cm">   *          // Add the drop-here class indicating that the drag</span>
-<span class="cm">   *          // can be dropped here</span>
-<span class="cm">   *          drag.element.addClass(&#39;drop-here&#39;);</span>
-<span class="cm">   *      });</span>
-<span class="cm">   */</span>
-    <span class="s1">&#39;dragover&#39;</span><span class="p">,</span>
-  <span class="cm">/**</span>
-<span class="cm">   * @attribute dragmove</span>
-<span class="cm">   * @parent jQuery.event.drag</span>
-<span class="cm">   *</span>
-<span class="cm">   * `dragmove` is triggered when the drag element moves (similar to a mousemove).</span>
-<span class="cm">   * The event handler gets an instance of [jQuery.Drag] passed as the second</span>
-<span class="cm">   * parameter.</span>
-<span class="cm">   * Use [jQuery.Drag::location] to determine the current position</span>
-<span class="cm">   * as a [jQuery.Vector vector].</span>
-<span class="cm">   *</span>
-<span class="cm">   * For example, `dragmove` can be used to create a draggable element to resize</span>
-<span class="cm">   * a container:</span>
-<span class="cm">   *</span>
-<span class="cm">   *      $(&#39;.resizer&#39;).on(&#39;dragmove&#39;, function(ev, drag) {</span>
-<span class="cm">   *          $(&#39;#container&#39;).width(drag.location.x())</span>
-<span class="cm">   *              .height(drag.location.y());</span>
-<span class="cm">   *      });</span>
-<span class="cm">   */</span>
-    <span class="s1">&#39;dragmove&#39;</span><span class="p">,</span>
-  <span class="cm">/**</span>
-<span class="cm">   * @attribute dragout</span>
-<span class="cm">   * @parent jQuery.event.drag</span>
-<span class="cm">   *</span>
-<span class="cm">   * `dragout` is called when the drag leaves a drop point.</span>
-<span class="cm">   * The event handler gets an instance of [jQuery.Drag] passed as the second</span>
-<span class="cm">   * parameter.</span>
-<span class="cm">   *</span>
-<span class="cm">   *      $(&#39;.draggable&#39;).on(&#39;dragout&#39;, function(ev, drag) {</span>
-<span class="cm">   *         // Remove the drop-here class</span>
-<span class="cm">   *         // (e.g. crossing the drag element out indicating that it</span>
-<span class="cm">   *         // can&#39;t be dropped here</span>
-<span class="cm">   *          drag.element.removeClass(&#39;drop-here&#39;);</span>
-<span class="cm">   *      });</span>
-<span class="cm">   */</span>
-    <span class="s1">&#39;dragout&#39;</span><span class="p">,</span>
-  <span class="cm">/**</span>
-<span class="cm">   * @attribute dragend</span>
-<span class="cm">   * @parent jQuery.event.drag</span>
-<span class="cm">   *</span>
-<span class="cm">   * `dragend` is called when the drag operation is completed.</span>
-<span class="cm">   * The event handler gets an instance of [jQuery.Drag] passed as the second</span>
-<span class="cm">   * parameter.</span>
-<span class="cm">   *</span>
-<span class="cm">   *     $(&#39;.draggable&#39;).on(&#39;dragend&#39;, function(ev, drag)</span>
-<span class="cm">   *       // Calculation on whether revert should be invoked, alterations based on position of the end event</span>
-<span class="cm">   *     });</span>
-<span class="cm">   */</span>
-    <span class="s1">&#39;dragend&#39;</span><span class="p">,</span>
-  <span class="cm">/**</span>
-<span class="cm">   * @attribute dragcleanup</span>
-<span class="cm">   * @parent jQuery.event.drag</span>
-<span class="cm">   *</span>
-<span class="cm">   * `dragcleanup` is called after dragend and revert (if applied)</span>
-<span class="cm">   * The event handler gets an instance of [jQuery.Drag] passed as the second</span>
-<span class="cm">   * parameter.</span>
-<span class="cm">   *</span>
-<span class="cm">   *     $(&#39;.draggable&#39;).on(&#39;dragcleanup&#39;, function(ev, drag)</span>
-<span class="cm">   *         // cleanup</span>
-<span class="cm">   *     });</span>
-<span class="cm">   */</span>
-    <span class="s1">&#39;dragcleanup&#39;</span><span class="p">],</span> <span class="nx">startEvent</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">e</span> <span class="p">)</span> <span class="p">{</span>
+
+  <span class="s1">&#39;dragdown&#39;</span><span class="p">,</span>
+
+  <span class="s1">&#39;draginit&#39;</span><span class="p">,</span>
+
+  <span class="s1">&#39;dragover&#39;</span><span class="p">,</span>
+
+  <span class="s1">&#39;dragmove&#39;</span><span class="p">,</span>
+
+  <span class="s1">&#39;dragout&#39;</span><span class="p">,</span>
+
+  <span class="s1">&#39;dragend&#39;</span><span class="p">,</span>
+
+  <span class="s1">&#39;dragcleanup&#39;</span><span class="p">],</span> <span class="nx">startEvent</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">$</span><span class="p">.</span><span class="nx">Drag</span><span class="p">.</span><span class="nx">mousedown</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">Drag</span><span class="p">,</span> <span class="nx">e</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
   <span class="p">});</span>
 
   <span class="k">return</span> <span class="nx">$</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="p">)(</span><span class="nx">jQuery</span><span class="p">);</span>
+<span class="p">})(</span><span class="nx">jQuery</span><span class="p">);</span>
 
 </pre></div>             </td>           </tr>                </tbody>     </table>   </div> </body> </html> 
