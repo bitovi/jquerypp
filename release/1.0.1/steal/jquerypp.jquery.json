@@ -1,0 +1,26 @@
+{
+  "name" : "jquerypp",
+  "title" : "jQuery++",
+  "description" : "I am a MIT licensed collection of extremely useful DOM helpers and special events for jQuery 1.8 and later.",
+  "keywords" : [ "drag", "drop", "ui", "animation", "events", "form", "jquery", "utility" ],
+  "version" : "1.0.1",
+  "author" : {
+    "name" : "Bitovi",
+    "email" : "contact@bitovi.com",
+    "web" : "http://bitovi.com/"
+  },
+  "licenses" : [
+    {
+      "type" : "MIT",
+      "url" : "https://github.com/bitovi/jquerypp/blob/master/license.md"
+    }
+  ],
+  "bugs" : "https://github.com/bitovi/jquerypp/issues",
+  "homepage" : "http://jquerypp.com",
+  "demo" : "http://jquerypp.com",
+  "docs" : "http://donejs.com/docs.html#!jquerypp",
+  "download" : "http://jquerypp.com/downloads/jquerypp.1.0.1.zip",
+  "dependencies" : {
+    "jquery" : ">=1.8"
+  }
+}

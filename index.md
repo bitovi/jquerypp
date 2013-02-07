@@ -1,6 +1,6 @@
 ---
 layout: default
-version: 1.0.0
+version: 1.0.1
 ---
 
 # Hi, I'm jQuery++.
@@ -46,7 +46,7 @@ after jQuery 1.8 like:
 
 The files needed for using jQuery++ with [StealJS](http://javascriptmvc.com/docs.html#!stealjs) are
 located in the `steal/` folder of
-the [full download](https://github.com/downloads/bitovi/jquerypp/jquerypp-{{page.version}}.zip).
+the [full download](http://jquerypp.com/downloads/jquerypp-{{page.version}}.zip).
 Take the `jquery/` folder and put it in your steal root to load a plugin like this:
 
 {% highlight javascript %}

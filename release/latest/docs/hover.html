@@ -1,0 +1,254 @@
+<!DOCTYPE html>  <html> <head>   <title>hover.js</title>   <meta http-equiv="content-type" content="text/html; charset=UTF-8">   <link rel="stylesheet" media="all" href="docco.css" /> </head> <body>   <div id="container">     <div id="background"></div>            <div id="jump_to">         Jump To &hellip;         <div id="jump_wrapper">           <div id="jump_page">                                           <a class="source" href="jquerypp.html">                 jquerypp.js               </a>                                           <a class="source" href="animate.html">                 animate.js               </a>                                           <a class="source" href="compare.html">                 compare.js               </a>                                           <a class="source" href="cookie.html">                 cookie.js               </a>                                           <a class="source" href="dimensions.html">                 dimensions.js               </a>                                           <a class="source" href="form_params.html">                 form_params.js               </a>                                           <a class="source" href="range.html">                 range.js               </a>                                           <a class="source" href="selection.html">                 selection.js               </a>                                           <a class="source" href="styles.html">                 styles.js               </a>                                           <a class="source" href="within.html">                 within.js               </a>                                           <a class="source" href="default.html">                 default.js               </a>                                           <a class="source" href="destroyed.html">                 destroyed.js               </a>                                           <a class="source" href="drag.html">                 drag.js               </a>                                           <a class="source" href="core.html">                 core.js               </a>                                           <a class="source" href="limit.html">                 limit.js               </a>                                           <a class="source" href="scroll.html">                 scroll.js               </a>                                           <a class="source" href="step.html">                 step.js               </a>                                           <a class="source" href="drop.html">                 drop.js               </a>                                           <a class="source" href="fastfix.html">                 fastfix.js               </a>                                           <a class="source" href="hover.html">                 hover.js               </a>                                           <a class="source" href="key.html">                 key.js               </a>                                           <a class="source" href="livehack.html">                 livehack.js               </a>                                           <a class="source" href="pause.html">                 pause.js               </a>                                           <a class="source" href="resize.html">                 resize.js               </a>                                           <a class="source" href="reverse.html">                 reverse.js               </a>                                           <a class="source" href="swipe.html">                 swipe.js               </a>                                           <a class="source" href="json.html">                 json.js               </a>                                           <a class="source" href="vector.html">                 vector.js               </a>                        </div>         </div>       </div>          <table cellpadding="0" cellspacing="0">       <thead>         <tr>           <th class="docs">             <h1>               hover.js             </h1>           </th>           <th class="code">           </th>         </tr>       </thead>       <tbody>                               <tr id="section-1">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-1">&#182;</a>               </div>                            </td>             <td class="code">               <div class="highlight"><pre><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">$</span><span class="p">)</span> <span class="p">{</span>
+  <span class="cm">/**</span>
+<span class="cm">   * @class jQuery.Hover</span>
+<span class="cm">   * @plugin jquery/event/hover</span>
+<span class="cm">   * @download  http://jmvcsite.heroku.com/pluginify?plugins[]=jquery/event/hover/hover.js</span>
+<span class="cm">   * @parent jQuery.event.hover</span>
+<span class="cm">   *</span>
+<span class="cm">   * Creates a new hover. The constructor should not be called directly.</span>
+<span class="cm">   *</span>
+<span class="cm">   * An instance of `$.Hover` is passed as the second argument to each</span>
+<span class="cm">   * [jQuery.event.hover] event handler:</span>
+<span class="cm">   *</span>
+<span class="cm">   *      $(&#39;#menu&#39;).on(&quot;hoverinit&quot;, function(ev, hover) {</span>
+<span class="cm">   *          // Set the hover distance to 20px</span>
+<span class="cm">   *          hover.distance(20);</span>
+<span class="cm">   *      });</span>
+<span class="cm">   */</span>
+  <span class="nx">$</span><span class="p">.</span><span class="nx">Hover</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">_delay</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">Hover</span><span class="p">.</span><span class="nx">delay</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">_distance</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">Hover</span><span class="p">.</span><span class="nx">distance</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">_leave</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">Hover</span><span class="p">.</span><span class="nx">leave</span>
+  <span class="p">};</span>
+  <span class="cm">/**</span>
+<span class="cm">   * @Static</span>
+<span class="cm">   */</span>
+  <span class="nx">$</span><span class="p">.</span><span class="nx">extend</span><span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">Hover</span><span class="p">,</span> <span class="p">{</span>
+    <span class="cm">/**</span>
+<span class="cm">     * @attribute delay</span>
+<span class="cm">     *</span>
+<span class="cm">     * `$.Hover.delay` is the delay (in milliseconds) after which the hover is</span>
+<span class="cm">     * activated by default.</span>
+<span class="cm">     *</span>
+<span class="cm">     * Set this value as a global default. The default is 100ms.</span>
+<span class="cm">     *</span>
+<span class="cm">     *      // Set the global hover delay to 1 second</span>
+<span class="cm">     *      $.Hover.delay = 1000;</span>
+<span class="cm">     */</span>
+    <span class="nx">delay</span> <span class="o">:</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="cm">/**</span>
+<span class="cm">     * @attribute distance</span>
+<span class="cm">     *</span>
+<span class="cm">     * `$.Hover.distance` is the maximum distance (in pixels) that the mouse is allowed to</span>
+<span class="cm">     * travel within the time of [jQuery.Hover.delay] in order to activate a hover.</span>
+<span class="cm">     *</span>
+<span class="cm">     * Set this value as a global default. The default is 10px.</span>
+<span class="cm">     *</span>
+<span class="cm">     *      // Set the global hover distance to 1 pixel</span>
+<span class="cm">     *      $.Hover.distance = 1;</span>
+<span class="cm">     */</span>
+    <span class="nx">distance</span> <span class="o">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="nx">leave</span> <span class="o">:</span> <span class="mi">0</span>
+  <span class="p">})</span>
+
+  <span class="cm">/**</span>
+<span class="cm">   * @Prototype</span>
+<span class="cm">   */</span>
+  <span class="nx">$</span><span class="p">.</span><span class="nx">extend</span><span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">Hover</span><span class="p">.</span><span class="nx">prototype</span><span class="p">,</span> <span class="p">{</span>
+    <span class="cm">/**</span>
+<span class="cm">     * `hover.delay(time)` sets the delay (in ms) for this hover.</span>
+<span class="cm">     * This method should only be used in [jQuery.event.hover.hoverinit hoverinit]:</span>
+<span class="cm">     *</span>
+<span class="cm">     *      $(&#39;.hoverable&#39;).on(&#39;hoverinit&#39;, function(ev, hover) {</span>
+<span class="cm">     *          // Set the delay to 500ms</span>
+<span class="cm">     *          hover.delay(500);</span>
+<span class="cm">     *      });</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param {Number} delay the number of milliseconds used to determine a hover</span>
+<span class="cm">     * @return {$.Hover} The hover object</span>
+<span class="cm">     */</span>
+    <span class="nx">delay</span> <span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">delay</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">_delay</span> <span class="o">=</span> <span class="nx">delay</span><span class="p">;</span>
+      <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+    <span class="p">},</span>
+    <span class="cm">/**</span>
+<span class="cm">     * `hover.distance(px) sets the maximum distance (in pixels) the mouse is allowed to travel in order to activate</span>
+<span class="cm">     * the hover. This method should only be used in [jQuery.event.hover.hoverinit hoverinit]:</span>
+<span class="cm">     *</span>
+<span class="cm">     *      $(&#39;.hoverable&#39;).on(&#39;hoverinit&#39;, function(ev, hover) {</span>
+<span class="cm">     *          // Set the distance to 1px</span>
+<span class="cm">     *          hover.distance(1);</span>
+<span class="cm">     *      });</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param {Number} distance the max distance in pixels a mouse can move to be considered a hover</span>
+<span class="cm">     * @return {$.Hover} The hover object</span>
+<span class="cm">     */</span>
+    <span class="nx">distance</span> <span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">distance</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">_distance</span> <span class="o">=</span> <span class="nx">distance</span><span class="p">;</span>
+      <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+    <span class="p">},</span>
+    <span class="cm">/**</span>
+<span class="cm">     * `hover.leave(delay)` sets a delay for how long the hover should stay active after the mouse left.</span>
+<span class="cm">     * This method should only be used in [jQuery.event.hover.hoverinit hoverinit]:</span>
+<span class="cm">     *</span>
+<span class="cm">     *      $(&#39;.hoverable&#39;).on(&#39;hoverinit&#39;, function(ev, hover) {</span>
+<span class="cm">     *          // Stay active for another second after the mouse left</span>
+<span class="cm">     *          hover.leave(1000);</span>
+<span class="cm">     *      });</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param {Number} delay the number of milliseconds the hover should stay active after the mouse leaves</span>
+<span class="cm">     * @return {$.Hover} The hover object</span>
+<span class="cm">     */</span>
+    <span class="nx">leave</span> <span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">leave</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">_leave</span> <span class="o">=</span> <span class="nx">leave</span><span class="p">;</span>
+      <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">})</span>
+  <span class="kd">var</span> <span class="nx">event</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">event</span><span class="p">,</span>
+    <span class="nx">handle</span> <span class="o">=</span> <span class="nx">event</span><span class="p">.</span><span class="nx">handle</span><span class="p">,</span>
+    <span class="nx">onmouseenter</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">ev</span><span class="p">)</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-2">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-2">&#182;</a>               </div>               <p>now start checking mousemoves to update location</p>             </td>             <td class="code">               <div class="highlight"><pre>      <span class="kd">var</span> <span class="nx">delegate</span> <span class="o">=</span> <span class="nx">ev</span><span class="p">.</span><span class="nx">delegateTarget</span> <span class="o">||</span> <span class="nx">ev</span><span class="p">.</span><span class="nx">currentTarget</span><span class="p">;</span>
+      <span class="kd">var</span> <span class="nx">selector</span> <span class="o">=</span> <span class="nx">ev</span><span class="p">.</span><span class="nx">handleObj</span><span class="p">.</span><span class="nx">selector</span><span class="p">;</span>
+      <span class="kd">var</span> <span class="nx">pending</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">data</span><span class="p">(</span><span class="nx">delegate</span><span class="p">,</span><span class="s2">&quot;_hover&quot;</span><span class="o">+</span><span class="nx">selector</span><span class="p">);</span></pre></div>             </td>           </tr>                               <tr id="section-3">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-3">&#182;</a>               </div>               <p>prevents another mouseenter until current has run its course</p>             </td>             <td class="code">               <div class="highlight"><pre>      <span class="k">if</span><span class="p">(</span><span class="nx">pending</span><span class="p">)</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-4">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-4">&#182;</a>               </div>               <p>Under some  circumstances, mouseleave may never fire
+(e.g., the element is removed while hovered)
+so if we've entered another element, wait the leave time,
+then force it to release.</p>             </td>             <td class="code">               <div class="highlight"><pre>        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">pending</span><span class="p">.</span><span class="nx">forcing</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">pending</span><span class="p">.</span><span class="nx">forcing</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+          <span class="nx">clearTimeout</span><span class="p">(</span><span class="nx">pending</span><span class="p">.</span><span class="nx">leaveTimer</span><span class="p">);</span>
+          <span class="kd">var</span> <span class="nx">leaveTime</span> <span class="o">=</span> <span class="nx">pending</span><span class="p">.</span><span class="nx">leaving</span> <span class="o">?</span>
+            <span class="nb">Math</span><span class="p">.</span><span class="nx">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nx">pending</span><span class="p">.</span><span class="nx">hover</span><span class="p">.</span><span class="nx">leave</span> <span class="o">-</span> <span class="p">(</span><span class="k">new</span> <span class="nb">Date</span><span class="p">()</span> <span class="o">-</span> <span class="nx">pending</span><span class="p">.</span><span class="nx">leaving</span><span class="p">))</span> <span class="o">:</span>
+            <span class="nx">pending</span><span class="p">.</span><span class="nx">hover</span><span class="p">.</span><span class="nx">leave</span><span class="p">;</span>
+          <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+
+          <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+            <span class="nx">pending</span><span class="p">.</span><span class="nx">callHoverLeave</span><span class="p">();</span>
+            <span class="nx">onmouseenter</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">self</span><span class="p">,</span><span class="nx">ev</span><span class="p">);</span>
+          <span class="p">},</span><span class="nx">leaveTime</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">return</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="kd">var</span> <span class="nx">loc</span> <span class="o">=</span> <span class="p">{</span>
+          <span class="nx">pageX</span> <span class="o">:</span> <span class="nx">ev</span><span class="p">.</span><span class="nx">pageX</span><span class="p">,</span>
+          <span class="nx">pageY</span> <span class="o">:</span> <span class="nx">ev</span><span class="p">.</span><span class="nx">pageY</span>
+        <span class="p">},</span></pre></div>             </td>           </tr>                               <tr id="section-5">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-5">&#182;</a>               </div>               <p>The current distance</p>             </td>             <td class="code">               <div class="highlight"><pre>      <span class="nx">dist</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span></pre></div>             </td>           </tr>                               <tr id="section-6">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-6">&#182;</a>               </div>               <p>Timer that checks for the distance travelled</p>             </td>             <td class="code">               <div class="highlight"><pre>      <span class="nx">timer</span><span class="p">,</span>
+      <span class="nx">enteredEl</span> <span class="o">=</span> <span class="k">this</span><span class="p">,</span></pre></div>             </td>           </tr>                               <tr id="section-7">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-7">&#182;</a>               </div>               <p>If we are hovered</p>             </td>             <td class="code">               <div class="highlight"><pre>      <span class="nx">hovered</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span></pre></div>             </td>           </tr>                               <tr id="section-8">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-8">&#182;</a>               </div>               <p>The previous event</p>             </td>             <td class="code">               <div class="highlight"><pre>      <span class="nx">lastEv</span> <span class="o">=</span> <span class="nx">ev</span><span class="p">,</span></pre></div>             </td>           </tr>                               <tr id="section-9">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-9">&#182;</a>               </div>               <p>The $.Hover instance passed to events</p>             </td>             <td class="code">               <div class="highlight"><pre>      <span class="nx">hover</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">$</span><span class="p">.</span><span class="nx">Hover</span><span class="p">(),</span></pre></div>             </td>           </tr>                               <tr id="section-10">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-10">&#182;</a>               </div>               <p>timer if hover.leave has been called</p>             </td>             <td class="code">               <div class="highlight"><pre>      <span class="nx">leaveTimer</span><span class="p">,</span></pre></div>             </td>           </tr>                               <tr id="section-11">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-11">&#182;</a>               </div>               <p>Callback for triggering hoverleave</p>             </td>             <td class="code">               <div class="highlight"><pre>      <span class="nx">callHoverLeave</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="nx">$</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="nx">delegate</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;hoverleave&quot;</span><span class="p">],</span> <span class="nx">selector</span><span class="p">),</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+          <span class="k">this</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">enteredEl</span><span class="p">,</span> <span class="nx">ev</span><span class="p">,</span> <span class="nx">hover</span><span class="p">)</span>
+        <span class="p">})</span>
+        <span class="nx">cleanUp</span><span class="p">();</span>
+      <span class="p">},</span>
+      <span class="nx">mousemove</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">ev</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">clearTimeout</span><span class="p">(</span><span class="nx">leaveTimer</span><span class="p">);</span></pre></div>             </td>           </tr>                               <tr id="section-12">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-12">&#182;</a>               </div>               <p>Update the distance and location</p>             </td>             <td class="code">               <div class="highlight"><pre>        <span class="nx">dist</span> <span class="o">+=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">pow</span><span class="p">(</span><span class="nx">ev</span><span class="p">.</span><span class="nx">pageX</span> <span class="o">-</span> <span class="nx">loc</span><span class="p">.</span><span class="nx">pageX</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">pow</span><span class="p">(</span><span class="nx">ev</span><span class="p">.</span><span class="nx">pageY</span> <span class="o">-</span> <span class="nx">loc</span><span class="p">.</span><span class="nx">pageY</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+        <span class="nx">loc</span> <span class="o">=</span> <span class="p">{</span>
+          <span class="nx">pageX</span> <span class="o">:</span> <span class="nx">ev</span><span class="p">.</span><span class="nx">pageX</span><span class="p">,</span>
+          <span class="nx">pageY</span> <span class="o">:</span> <span class="nx">ev</span><span class="p">.</span><span class="nx">pageY</span>
+        <span class="p">}</span>
+        <span class="nx">lastEv</span> <span class="o">=</span> <span class="nx">ev</span>
+      <span class="p">},</span>
+      <span class="nx">mouseleave</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">ev</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">clearTimeout</span><span class="p">(</span><span class="nx">timer</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">hovered</span><span class="p">)</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-13">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-13">&#182;</a>               </div>               <p>go right away</p>             </td>             <td class="code">               <div class="highlight"><pre>          <span class="k">if</span> <span class="p">(</span><span class="nx">hover</span><span class="p">.</span><span class="nx">_leave</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">callHoverLeave</span><span class="p">();</span>
+          <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="nx">clearTimeout</span><span class="p">(</span><span class="nx">leaveTimer</span><span class="p">);</span></pre></div>             </td>           </tr>                               <tr id="section-14">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-14">&#182;</a>               </div>               <p>leave the hover after the time set in hover.leave(time)</p>             </td>             <td class="code">               <div class="highlight"><pre>            <span class="nx">pending</span><span class="p">.</span><span class="nx">leaving</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">();</span>
+            <span class="nx">leaveTimer</span> <span class="o">=</span> <span class="nx">pending</span><span class="p">.</span><span class="nx">leaveTimer</span> <span class="o">=</span> <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+              <span class="nx">callHoverLeave</span><span class="p">();</span>
+            <span class="p">},</span> <span class="nx">hover</span><span class="p">.</span><span class="nx">_leave</span><span class="p">)</span>
+          <span class="p">}</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+          <span class="nx">cleanUp</span><span class="p">();</span>
+        <span class="p">}</span>
+      <span class="p">},</span>
+      <span class="nx">cleanUp</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-15">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-15">&#182;</a>               </div>               <p>Unbind all events and data</p>             </td>             <td class="code">               <div class="highlight"><pre>        <span class="nx">$</span><span class="p">(</span><span class="nx">enteredEl</span><span class="p">).</span><span class="nx">unbind</span><span class="p">(</span><span class="s2">&quot;mouseleave&quot;</span><span class="p">,</span> <span class="nx">mouseleave</span><span class="p">)</span>
+        <span class="nx">$</span><span class="p">(</span><span class="nx">enteredEl</span><span class="p">).</span><span class="nx">unbind</span><span class="p">(</span><span class="s2">&quot;mousemove&quot;</span><span class="p">,</span> <span class="nx">mousemove</span><span class="p">);</span>
+        <span class="nx">$</span><span class="p">.</span><span class="nx">removeData</span><span class="p">(</span><span class="nx">delegate</span><span class="p">,</span> <span class="s2">&quot;_hover&quot;</span> <span class="o">+</span> <span class="nx">selector</span><span class="p">)</span>
+      <span class="p">},</span>
+      <span class="nx">hoverenter</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">$</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="nx">delegate</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;hoverenter&quot;</span><span class="p">],</span> <span class="nx">selector</span><span class="p">),</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+          <span class="k">this</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">enteredEl</span><span class="p">,</span> <span class="nx">lastEv</span><span class="p">,</span> <span class="nx">hover</span><span class="p">)</span>
+        <span class="p">})</span>
+        <span class="nx">hovered</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+      <span class="p">};</span>
+      <span class="nx">pending</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="nx">callHoverLeave</span><span class="o">:</span> <span class="nx">callHoverLeave</span><span class="p">,</span>
+        <span class="nx">hover</span><span class="o">:</span> <span class="nx">hover</span>
+      <span class="p">};</span>
+      <span class="nx">$</span><span class="p">.</span><span class="nx">data</span><span class="p">(</span><span class="nx">delegate</span><span class="p">,</span><span class="s2">&quot;_hover&quot;</span><span class="o">+</span><span class="nx">selector</span><span class="p">,</span> <span class="nx">pending</span><span class="p">);</span></pre></div>             </td>           </tr>                               <tr id="section-16">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-16">&#182;</a>               </div>               <p>Bind the mousemove event</p>             </td>             <td class="code">               <div class="highlight"><pre>      <span class="nx">$</span><span class="p">(</span><span class="nx">enteredEl</span><span class="p">).</span><span class="nx">bind</span><span class="p">(</span><span class="s2">&quot;mousemove&quot;</span><span class="p">,</span> <span class="nx">mousemove</span><span class="p">).</span><span class="nx">bind</span><span class="p">(</span><span class="s2">&quot;mouseleave&quot;</span><span class="p">,</span> <span class="nx">mouseleave</span><span class="p">);</span></pre></div>             </td>           </tr>                               <tr id="section-17">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-17">&#182;</a>               </div>               <p>call hoverinit for each element with the hover instance</p>             </td>             <td class="code">               <div class="highlight"><pre>      <span class="nx">$</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="nx">delegate</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;hoverinit&quot;</span><span class="p">],</span> <span class="nx">selector</span><span class="p">),</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">enteredEl</span><span class="p">,</span> <span class="nx">ev</span><span class="p">,</span> <span class="nx">hover</span><span class="p">)</span>
+      <span class="p">})</span>
+
+      <span class="k">if</span> <span class="p">(</span><span class="nx">hover</span><span class="p">.</span><span class="nx">_delay</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">hoverenter</span><span class="p">();</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">timer</span> <span class="o">=</span> <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-18">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-18">&#182;</a>               </div>               <p>check that we aren't moving around</p>             </td>             <td class="code">               <div class="highlight"><pre>          <span class="k">if</span> <span class="p">(</span><span class="nx">dist</span> <span class="o">&lt;</span> <span class="nx">hover</span><span class="p">.</span><span class="nx">_distance</span> <span class="o">&amp;&amp;</span> <span class="nx">$</span><span class="p">(</span><span class="nx">enteredEl</span><span class="p">).</span><span class="nx">queue</span><span class="p">().</span><span class="nx">length</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">hoverenter</span><span class="p">();</span>
+            <span class="k">return</span><span class="p">;</span>
+          <span class="p">}</span> <span class="k">else</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-19">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-19">&#182;</a>               </div>               <p>Reset distance and timer</p>             </td>             <td class="code">               <div class="highlight"><pre>            <span class="nx">dist</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+            <span class="nx">timer</span> <span class="o">=</span> <span class="nx">setTimeout</span><span class="p">(</span><span class="nx">arguments</span><span class="p">.</span><span class="nx">callee</span><span class="p">,</span> <span class="nx">hover</span><span class="p">.</span><span class="nx">_delay</span><span class="p">)</span>
+          <span class="p">}</span>
+        <span class="p">},</span> <span class="nx">hover</span><span class="p">.</span><span class="nx">_delay</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">};</span>
+
+  <span class="cm">/**</span>
+<span class="cm">   * @add jQuery.event.special</span>
+<span class="cm">   */</span></pre></div>             </td>           </tr>                               <tr id="section-20">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-20">&#182;</a>               </div>               <p>Attach events</p>             </td>             <td class="code">               <div class="highlight"><pre>  <span class="nx">event</span><span class="p">.</span><span class="nx">setupHelper</span><span class="p">([</span>
+  <span class="cm">/**</span>
+<span class="cm">   * @attribute hoverinit</span>
+<span class="cm">   * @parent jQuery.event.hover</span>
+<span class="cm">   *</span>
+<span class="cm">   * `hoverinit` is called when a hover is about to start (on `mouseenter`). Listen for `hoverinit` events to configure</span>
+<span class="cm">   * [jQuery.Hover::delay delay] and [jQuery.Hover::distance distance]</span>
+<span class="cm">   * for this specific event:</span>
+<span class="cm">   *</span>
+<span class="cm">   *      $(&quot;.option&quot;).on(&quot;hoverinit&quot;, function(ev, hover){</span>
+<span class="cm">   *          //set the distance to 10px</span>
+<span class="cm">   *          hover.distance(10);</span>
+<span class="cm">   *          //set the delay to 200ms</span>
+<span class="cm">   *          hover.delay(10);</span>
+<span class="cm">   *          // End the hover one second after the mouse leaves</span>
+<span class="cm">   *          hover.leave(1000);</span>
+<span class="cm">   *      })</span>
+<span class="cm">   */</span>
+    <span class="s2">&quot;hoverinit&quot;</span><span class="p">,</span>
+  <span class="cm">/**</span>
+<span class="cm">   * @attribute hoverenter</span>
+<span class="cm">   * @parent jQuery.event.hover</span>
+<span class="cm">   *</span>
+<span class="cm">   * `hoverenter` events are called when the mouses less than [jQuery.Hover.prototype.distance] pixels in</span>
+<span class="cm">   * [jQuery.Hover.prototype.delay delay] milliseconds.</span>
+<span class="cm">   *</span>
+<span class="cm">   *      $(&quot;.option&quot;).on(&quot;hoverenter&quot;, function(ev, hover){</span>
+<span class="cm">   *          $(this).addClass(&quot;hovering&quot;);</span>
+<span class="cm">   *      })</span>
+<span class="cm">   */</span>
+    <span class="s2">&quot;hoverenter&quot;</span><span class="p">,</span>
+  <span class="cm">/**</span>
+<span class="cm">   * @attribute hoverleave</span>
+<span class="cm">   * @parent jQuery.event.hover</span>
+<span class="cm">   *</span>
+<span class="cm">   * `hoverleave` is called when the mouse leaves an element that has been hovered.</span>
+<span class="cm">   *</span>
+<span class="cm">   *      $(&quot;.option&quot;).on(&quot;hoverleave&quot;, function(ev, hover){</span>
+<span class="cm">   *          $(this).removeClass(&quot;hovering&quot;);</span>
+<span class="cm">   *      })</span>
+<span class="cm">   */</span>
+    <span class="s2">&quot;hoverleave&quot;</span><span class="p">,</span>
+  <span class="cm">/**</span>
+<span class="cm">   * @attribute hovermove</span>
+<span class="cm">   * @parent jQuery.event.hover</span>
+<span class="cm">   *</span>
+<span class="cm">   * `hovermove` is called when a `mousemove` occurs on an element that has been hovered.</span>
+<span class="cm">   *</span>
+<span class="cm">   *      $(&quot;.option&quot;).on(&quot;hovermove&quot;, function(ev, hover){</span>
+<span class="cm">   *          // not sure why you would want to listen for this</span>
+<span class="cm">   *          // but we provide it just in case</span>
+<span class="cm">   *      })</span>
+<span class="cm">   */</span>
+    <span class="s2">&quot;hovermove&quot;</span><span class="p">],</span> <span class="s2">&quot;mouseenter&quot;</span><span class="p">,</span> <span class="nx">onmouseenter</span><span class="p">)</span>
+
+
+  <span class="k">return</span> <span class="nx">$</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="p">)(</span><span class="nx">jQuery</span><span class="p">);</span>
+
+</pre></div>             </td>           </tr>                </tbody>     </table>   </div> </body> </html> 
