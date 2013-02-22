@@ -197,7 +197,7 @@ steal('jquery', function($){
 		if ( this[0] == window ) {
 			return new $.Vector(window.pageXOffset ? window.pageXOffset : document.documentElement.scrollLeft, window.pageYOffset ? window.pageYOffset : document.documentElement.scrollTop);
 		} else {
-			var offset = this.offset();
+			var offset = this.offset() || {};
 			return new $.Vector(offset.left, offset.top);
 		}
 	};
