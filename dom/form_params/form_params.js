@@ -95,6 +95,24 @@ steal("jquery", function( $ ) {
 		},
 		setParams: function( params ) {
 
+			/**
+			 * Converts nested objects to string representations
+			 *
+			 * Before: { "foo" : { "bar" : { "baz" : "value" } } }
+			 * After:  { "foo[bar][baz]" : "value" }
+			 */
+			var resolveNesting = function(params) {
+				var temp, result = {};
+				var keyValuePairs = decodeURIComponent( jQuery.param(params) ).split('&');
+
+				for (var i = 0, len = keyValuePairs.length; i < len; i++) {
+					temp = keyValuePairs[i].split('=');
+					result[ temp[0] ] = temp[1];
+				}
+				return result;
+			};
+			params = resolveNesting(params);
+
 			// Find all the inputs
 			this.find("[name]").each(function() {
 				var $this = $(this),
