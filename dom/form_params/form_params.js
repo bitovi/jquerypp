@@ -45,7 +45,7 @@ steal("jquery", function( $ ) {
 
 				// Finally, assign data
 				if ( ( type == "radio" || type == "checkbox" ) && ! elem.is(":checked") ) {
-					return
+					return;
 				}
 
 				if ( ! data[ name ] ) {
@@ -122,14 +122,18 @@ steal("jquery", function( $ ) {
 			});
 		},
 		getParams: function( convert ) {
-			var data = {},
+			var elements = this,
+				data = {},
 				// This is used to keep track of the checkbox names that we've
 				// already seen, so we know that we should return an array if
 				// we see it multiple times. Fixes last checkbox checked bug.
 				seen = {},
 				current;
 
-			this.find("[name]:not(:disabled)").each(function() {
+			if (elements.children().length) {
+				elements = this.find("[name]:not(:disabled)");
+			}
+			elements.each(function() {
 				var $this    = $(this),
 					type     = $this.attr("type"),
 					name     = $this.attr("name"),
