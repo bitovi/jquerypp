@@ -2,7 +2,7 @@ steal('jquery', function($){
 /**
  * @function jQuery.fn.triggerAsync
  * @parent jQuery.event.pause
- * @plugin jquery/event/default
+ * @plugin jquerypp/event/default
  *
  * `jQuery.fn.triggerAsync(type, [data], [success], [prevented]` triggers an event and calls success
  * when the event has finished propagating through the DOM and no other handler
@@ -59,9 +59,9 @@ var types = {}, rnamespaces= /\.(.*)$/, $event = $.event;
 /**
  * @attribute default
  * @parent specialevents
- * @plugin jquery/event/default
- * @download  http://jmvcsite.heroku.com/pluginify?plugins[]=jquery/event/default/default.js
- * @test jquery/event/default/qunit.html
+ * @plugin jquerypp/event/default
+ * @download  http://jmvcsite.heroku.com/pluginify?plugins[]=jquerypp/event/default/default.js
+ * @test jquerypp/event/default/qunit.html
  *
  */
 $event.special["default"] = {

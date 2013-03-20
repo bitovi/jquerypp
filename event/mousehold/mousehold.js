@@ -1,9 +1,9 @@
-steal('jquery', 'jquery/event/livehack', function($) {
+steal('jquery', 'jquerypp/event/livehack', function($) {
 
 /**
  * @class jQuery.Mousehold
- * @plugin jquery/event/mousehold
- * @download  http://jmvcsite.heroku.com/pluginify?plugins[]=jquery/event/mousehold/mousehold.js
+ * @plugin jquerypp/event/mousehold
+ * @download  http://jmvcsite.heroku.com/pluginify?plugins[]=jquerypp/event/mousehold/mousehold.js
  * @parent jQuery.event.mousehold
  *
  * Creates a new mousehold. The constructor should not be called directly.

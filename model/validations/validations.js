@@ -1,1 +1,1 @@
-steal('jquery/model','can/observe/validations');
+steal('jquerypp/model','can/observe/validations');

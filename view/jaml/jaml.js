@@ -1,10 +1,10 @@
-steal("jquery/view").then(function(){
+steal("jquerypp/view").then(function(){
 	
 
 
 /**
  * @class Jaml
- * @plugin jquery/view/jaml
+ * @plugin jquerypp/view/jaml
  * @parent jQuery.View
  * @author Ed Spencer (http://edspencer.net)
  * Jaml is a simple JavaScript library which makes 

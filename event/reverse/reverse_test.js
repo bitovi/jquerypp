@@ -1,6 +1,6 @@
-steal('funcunit/qunit', 'jquery/event/move').then(function() {
+steal('funcunit/qunit', 'jquerypp/event/move').then(function() {
 	
-	module('jquery/event/reverse')
+	module('jquerypp/event/reverse')
 	
 	$.event.reverse('test');
 	

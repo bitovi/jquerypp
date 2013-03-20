@@ -1,6 +1,6 @@
-steal('funcunit/qunit', 'funcunit/syn', 'jquery/event/key', function(QUnit, Syn) {
+steal('funcunit/qunit', 'funcunit/syn', 'jquerypp/event/key', function(QUnit, Syn) {
 	
-module('jquery/event/key');
+module('jquerypp/event/key');
 
 test("type some things", function(){
 	$("#qunit-test-area").append("<input id='key' />")

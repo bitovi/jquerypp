@@ -1,7 +1,7 @@
 steal('funcunit/qunit',
-	'jquery/model',
-	'jquery/controller',
-	'jquery/view/ejs',
+	'jquerypp/model',
+	'jquerypp/controller',
+	'jquerypp/view/ejs',
 	'can/util/fixture')
 	.then(function(){
 	
@@ -63,9 +63,9 @@ test("Model and Views", function(){
 		findOne : "/thing"
 	},{})
 	
-	$.fixture("/thing","//jquery/test/thing.json")
+	$.fixture("/thing","//jquerypp/test/thing.json")
 	
-	var res = $.View("//jquery/test/template.ejs",
+	var res = $.View("//jquerypp/test/template.ejs",
 		Test.Thing.findOne());
 		
 	res.done(function(resolved){

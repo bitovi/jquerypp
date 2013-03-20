@@ -1,8 +1,8 @@
 // loads all of jquerymx's command line tests
 
-//load("jquery/download/test/run.js");
+//load("jquerypp/download/test/run.js");
 
-load('jquery/view/test/compression/run.js');
+load('jquerypp/view/test/compression/run.js');
 
-load("jquery/generate/test/run.js");
+load("jquerypp/generate/test/run.js");
 

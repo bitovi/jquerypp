@@ -2,14 +2,14 @@
  * @add jQuery.Drag.prototype
  */
 
-steal('jquery', 'jquery/event/drag/core', 'jquery/dom/styles', function( $ ) {
+steal('jquery', 'jquerypp/event/drag/core', 'jquerypp/dom/styles', function( $ ) {
 
 
 	$.Drag.prototype
 	/**
 	 * @function limit
-	 * @plugin jquery/event/drag/limit
-	 * @download  http://jmvcsite.heroku.com/pluginify?plugins[]=jquery/event/event/drag/limit/limit.js
+	 * @plugin jquerypp/event/drag/limit
+	 * @download  http://jmvcsite.heroku.com/pluginify?plugins[]=jquerypp/event/event/drag/limit/limit.js
 	 * `drag.limit(container, [center])` limits a drag to a containing element.
 	 * 
 	 *     $("#todos").on(".todo","draginit", function( ev, drag ) {

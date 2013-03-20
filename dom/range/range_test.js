@@ -1,6 +1,6 @@
-steal("funcunit/qunit", "jquery/dom/range", "jquery/dom/selection").then(function () {
+steal("funcunit/qunit", "jquerypp/dom/range", "jquerypp/dom/selection").then(function () {
 
-	module("jquery/dom/range");
+	module("jquerypp/dom/range");
 
 	test("basic range", function () {
 		$("#qunit-test-area")

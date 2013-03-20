@@ -52,7 +52,7 @@ new Contact({name: "Alex"}).save();
 
 The Grid demo shows using two different models with the same widget.
 
-@demo jquery/model/demo-encapsulate.html
+@demo jquerypp/model/demo-encapsulate.html
 
 ## How to Encapsulate
 

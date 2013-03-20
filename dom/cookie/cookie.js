@@ -1,8 +1,8 @@
-steal('jquery', 'jquery/lang/json', function($) {
+steal('jquery', 'jquerypp/lang/json', function($) {
     /**
      * @function jQuery.cookie
      * @parent jquerypp
-     * @plugin jquery/dom/cookie
+     * @plugin jquerypp/dom/cookie
      * @author Klaus Hartl/klaus.hartl@stilbuero.de
      *
      * `jQuery.cookie(name, [value], [options])` lets you create, read and remove cookies. It is the

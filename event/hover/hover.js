@@ -1,8 +1,8 @@
-steal('jquery', 'jquery/event/livehack', function ($) {
+steal('jquery', 'jquerypp/event/livehack', function ($) {
 	/**
 	 * @class jQuery.Hover
-	 * @plugin jquery/event/hover
-	 * @download  http://jmvcsite.heroku.com/pluginify?plugins[]=jquery/event/hover/hover.js
+	 * @plugin jquerypp/event/hover
+	 * @download  http://jmvcsite.heroku.com/pluginify?plugins[]=jquerypp/event/hover/hover.js
 	 * @parent jQuery.event.hover
 	 *
 	 * Creates a new hover. The constructor should not be called directly.

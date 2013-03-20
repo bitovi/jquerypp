@@ -170,7 +170,7 @@ object.  Instead it uses [jQuery.String.getObject].
 
 ## Subscribing to OpenAjax messages and custom bindings
 
-The jquery/controller/subscribe plugin allows controllers to listen
+The jquerypp/controller/subscribe plugin allows controllers to listen
 to OpenAjax.hub messages like:
 
     $.Controller("Listener",{

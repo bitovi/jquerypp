@@ -62,8 +62,8 @@ steal("jquery", function( $ ) {
 	/**
 	 * @function jQuery.fn.formParams
 	 * @parent jQuery.formParams
-	 * @plugin jquery/dom/form_params
-	 * @test jquery/dom/form_params/qunit.html
+	 * @plugin jquerypp/dom/form_params
+	 * @test jquerypp/dom/form_params/qunit.html
 	 *
 	 * Returns a JavaScript object for values in a form.
 	 * It creates nested objects by using bracket notation in the form element name.

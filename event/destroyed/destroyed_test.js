@@ -1,6 +1,6 @@
-steal("jquery/event/destroyed", 'funcunit/qunit', function() {
+steal("jquerypp/event/destroyed", 'funcunit/qunit', function() {
 
-module("jquery/event/destroyed")
+module("jquerypp/event/destroyed")
 test("removing an element", function(){
 	var div = $("<div/>").data("testData",5)
 	div.appendTo($("#qunit-test-area"))

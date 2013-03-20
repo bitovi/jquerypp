@@ -1,11 +1,11 @@
-steal("jquery/dom/dimensions",
-	'jquery/view/micro',
+steal("jquerypp/dom/dimensions",
+	'jquerypp/view/micro',
 	'funcunit/qunit').then(function () {
 
-	module("jquery/dom/dimensions");
+	module("jquerypp/dom/dimensions");
 
 	test("outerHeight and width", function () {
-		$("#qunit-test-area").html("//jquery/dom/dimensions/styles.micro", {});
+		$("#qunit-test-area").html("//jquerypp/dom/dimensions/styles.micro", {});
 		var div = $("#qunit-test-area div"),
 			baseHeight = div.height();
 		equals(div.outerHeight(), baseHeight + 4, 'outerHeight() is adding border width');
@@ -15,7 +15,7 @@ steal("jquery/dom/dimensions",
 	});
 
 	test("animate", function () {
-		$("#qunit-test-area").html("//jquery/dom/dimensions/styles.micro", {});
+		$("#qunit-test-area").html("//jquerypp/dom/dimensions/styles.micro", {});
 		var div = $("#qunit-test-area div");
 		stop();
 		div.animate({ outerHeight : 50 }, 100, function() {

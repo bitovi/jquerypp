@@ -1,14 +1,14 @@
-steal("jquery/dom/form_params", 'funcunit/qunit', 'jquery/view/micro',
+steal("jquerypp/dom/form_params", 'funcunit/qunit', 'jquerypp/view/micro',
 function() {
 
 $.ajaxSetup({
 	cache : false
 });
      
-module("jquery/dom/form_params")
+module("jquerypp/dom/form_params")
 test("with a form", function(){
 
-	$("#qunit-test-area").html("//jquery/dom/form_params/test/basics.micro",{})
+	$("#qunit-test-area").html("//jquerypp/dom/form_params/test/basics.micro",{})
 
 	var formParams =  $("#qunit-test-area form").formParams() ;
 	ok(formParams.params.one === "1","one is right");
@@ -28,7 +28,7 @@ test("with a form", function(){
 
 test("With a non-form element", function() {
 
-	$("#qunit-test-area").html("//jquery/dom/form_params/test/non-form.micro",{})
+	$("#qunit-test-area").html("//jquerypp/dom/form_params/test/non-form.micro",{})
 
 	var formParams =  $("#divform").formParams() ;
 
@@ -38,7 +38,7 @@ test("With a non-form element", function() {
 
 
 test("with true false", function(){
-	$("#qunit-test-area").html("//jquery/dom/form_params/test/truthy.micro",{});
+	$("#qunit-test-area").html("//jquerypp/dom/form_params/test/truthy.micro",{});
 	
 	var formParams =  $("#qunit-test-area form").formParams(true);
 	ok(formParams.foo === undefined, "foo is undefined")
@@ -49,7 +49,7 @@ test("with true false", function(){
 });
 
 test("just strings",function(){
-	$("#qunit-test-area").html("//jquery/dom/form_params/test/basics.micro",{});
+	$("#qunit-test-area").html("//jquerypp/dom/form_params/test/basics.micro",{});
 	var formParams =  $("#qunit-test-area form").formParams(false) ;
 	ok(formParams.params.one === "1","one is right");
 	ok(formParams.params.two === '2',"two is right");
@@ -60,7 +60,7 @@ test("just strings",function(){
 });
 
 test("empty string conversion",function() {
-	$("#qunit-test-area").html("//jquery/dom/form_params/test/basics.micro",{});
+	$("#qunit-test-area").html("//jquerypp/dom/form_params/test/basics.micro",{});
 	var formParams =  $("#qunit-test-area form").formParams(false) ;
 	ok('' === formParams.empty, 'Default empty string conversion');
 	formParams =  $("#qunit-test-area form").formParams(true);
@@ -68,19 +68,19 @@ test("empty string conversion",function() {
 });
 
 test("missing names",function(){
-	$("#qunit-test-area").html("//jquery/dom/form_params/test/checkbox.micro",{});
+	$("#qunit-test-area").html("//jquerypp/dom/form_params/test/checkbox.micro",{});
 	var formParams =  $("#qunit-test-area form").formParams() ;
 	ok(true, "does not break")
 });
 
 test("same input names to array", function() {
-	$("#qunit-test-area").html("//jquery/dom/form_params/test/basics.micro",{});
+	$("#qunit-test-area").html("//jquerypp/dom/form_params/test/basics.micro",{});
 	var formParams =  $("#qunit-test-area form").formParams(true);
 	same(formParams.param1, ['first', 'second', 'third']);
 });
 
 test("#17 duplicate sub-keys", function() {
-	$("#qunit-test-area").html("//jquery/dom/form_params/test/basics.micro",{});
+	$("#qunit-test-area").html("//jquerypp/dom/form_params/test/basics.micro",{});
 	var formParams =  $("#qunit-test-area form").formParams(true);
 	ok(!$.isArray(formParams.test.first), 'First value is not an array');
 	equals(formParams.test.first, 'test_first', 'First test value correct');
@@ -90,7 +90,7 @@ test("#17 duplicate sub-keys", function() {
 });
 
 test("#24 disabled elements", function() {
-	$("#qunit-test-area").html("//jquery/dom/form_params/test/basics.micro",{});
+	$("#qunit-test-area").html("//jquerypp/dom/form_params/test/basics.micro",{});
 	var formParams =  $("#qunit-test-area form").formParams();
 	console.log(formParams);
 	ok(!formParams.is_disabled, 'Disabled field is not included');

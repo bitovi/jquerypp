@@ -1,4 +1,4 @@
-steal('can/model/list','jquery/model').then(function() {
+steal('can/model/list','jquerypp/model').then(function() {
 	// List.get used to take a model or list of models
 	var getList = $.Model.List.prototype.get;
 	$.Model.List.prototype.get = function(arg) {

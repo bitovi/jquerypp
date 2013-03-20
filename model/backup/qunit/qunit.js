@@ -1,8 +1,8 @@
 steal('funcunit/qunit')
- .then("jquery/model/backup").then(function(){
+ .then("jquerypp/model/backup").then(function(){
  	
 	
-module("jquery/model/backup",{
+module("jquerypp/model/backup",{
 	setup : function(){
 		$.Model.extend("Recipe")
 	}

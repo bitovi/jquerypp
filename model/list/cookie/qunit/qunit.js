@@ -1,6 +1,6 @@
-steal('funcunit/qunit','jquery/model/list/cookie').then(function($){
+steal('funcunit/qunit','jquerypp/model/list/cookie').then(function($){
 	
-module("jquery/model/list/cookie",{
+module("jquerypp/model/list/cookie",{
 	setup: function(){
 		// clear any existing cookie ... 
 		$.cookie("list", "", {expires: -1})

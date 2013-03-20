@@ -1,8 +1,8 @@
 steal('jquery', function( $ ) {
 	/**
 	 * @attribute destroyed
-	 * @download  http://jmvcsite.heroku.com/pluginify?plugins[]=jquery/dom/destroyed/destroyed.js
-	 * @test jquery/event/destroyed/qunit.html
+	 * @download  http://jmvcsite.heroku.com/pluginify?plugins[]=jquerypp/dom/destroyed/destroyed.js
+	 * @test jquerypp/event/destroyed/qunit.html
 	 */
 
 	// Store the old jQuery.cleanData

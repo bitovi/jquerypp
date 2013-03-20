@@ -5,7 +5,7 @@ steal('jquery', function($) {
 	/**
 	 * @function closest
 	 * @parent dom
-	 * @plugin jquery/dom/closest
+	 * @plugin jquerypp/dom/closest
 	 * Overwrites closest to allow open > selectors.  This allows controller 
 	 * actions such as:
 	 * 

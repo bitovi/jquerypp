@@ -1,6 +1,6 @@
-steal("jquery/model/list",'funcunit/qunit', 'can/util/fixture', function(){
+steal("jquerypp/model/list",'funcunit/qunit', 'can/util/fixture', function(){
 	 
-module("jquery/model/list", {
+module("jquerypp/model/list", {
 	setup: function() {
 		$.Model.extend("Person")
 	

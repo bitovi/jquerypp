@@ -1,7 +1,7 @@
-steal("jquery/class")  //load your app
+steal("jquerypp/class")  //load your app
  .then('funcunit/qunit').then(function(){
 
-module("jquery/class");
+module("jquerypp/class");
 
 test("Creating", function(){
         

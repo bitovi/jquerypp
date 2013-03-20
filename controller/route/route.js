@@ -1,1 +1,1 @@
-steal('jquery/controller', 'can/control/route')
+steal('jquerypp/controller', 'can/control/route')

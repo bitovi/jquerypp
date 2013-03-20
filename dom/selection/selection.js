@@ -1,4 +1,4 @@
-steal('jquery','jquery/dom/range',function($){
+steal('jquery','jquerypp/dom/range',function($){
 
 var getWindow = function( element ) {
 	return element ? element.ownerDocument.defaultView || element.ownerDocument.parentWindow : window

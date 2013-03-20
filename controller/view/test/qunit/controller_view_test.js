@@ -1,6 +1,6 @@
-steal('jquery/controller/view','jquery/view/micro','funcunit/qunit', function() {
+steal('jquerypp/controller/view','jquerypp/view/micro','funcunit/qunit', function() {
 	
-	module("jquery/controller/view");
+	module("jquerypp/controller/view");
 	
 	test("this.view", function(){
 		

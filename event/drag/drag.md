@@ -59,4 +59,4 @@ The drag properties and methods:
 
 Now lets see some examples:
 
-@demo jquery/event/drag/drag.html 1000
+@demo jquerypp/event/drag/drag.html 1000
