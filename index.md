@@ -6,7 +6,7 @@ version: 1.0.1
 # Hi, I'm jQuery++.
 
 I am a MIT licensed collection of extremely useful DOM helpers and special events for jQuery 1.8 and
-later. I'm not a UI project like [jQuery UI](http://jqueryui.com/) or 
+later. I'm not a UI project like [jQuery UI](http://jqueryui.com/) or
 [jQuery Tools](http://jquerytools.org/). Instead, I'm all about providing
 low-level utilities for things that jQuery doesn't support.  If [Underscore](http://underscorejs.org/)
 is jQuery's functional-programming tie, I am jQuery's bald-spot covering toupee.
@@ -17,7 +17,7 @@ Select the plugins you want and click "Download" for a customized, unminified Ja
 {% include builder.html %}
 
 Learn more about [how I](#why_jquery__) can be useful to you. If you think I should
-have other utilities, let me know on the [forum](https://forum.javascriptmvc.com/#Forum/jquery). If you like me, check out my sister library [CanJS](http://canjs.us). Finally, my apologies 
+have other utilities, let me know on the [forum](https://forum.javascriptmvc.com/#Forum/jquery). If you like me, check out my sister library [CanJS](http://canjs.us). Finally, my apologies
 about talking about myself in the third person from this point forward.
 
 ## Get jQuery++
@@ -68,7 +68,7 @@ steal.map({
 
 ### Using AMD
 
-The files to load the jQuery++ plugins with an [AMD](https://github.com/amdjs/amdjs-api/wiki/AMD) module loader like [RequireJS](http://requirejs.org/), are located in the `amd/` folder of the [full download](https://github.com/downloads/bitovi/jquerypp/jquerypp-{{page.version}}.zip).
+The files to load the jQuery++ plugins with an [AMD](https://github.com/amdjs/amdjs-api/wiki/AMD) module loader like [RequireJS](http://requirejs.org/), are located in the `amd/` folder of the [full download](http://jquerypp.com/downloads/jquerypp-{{page.version}}.zip).
 Place the `jquerypp/` folder in your module directory and load a plugin like this:
 
 {% highlight javascript %}
