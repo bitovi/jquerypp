@@ -9,8 +9,10 @@
     "web" : "http://bitovi.com/"
   },
   "devDependencies" : {
-    "grunt" : "~0.3.11",
-    "http-server" : "0.5.1"
+    "http-server" : "0.5.1",
+    "grunt" : "0.4.0",
+    "grunt-string-replace" : "0.2.2",
+    "grunt-shell" : "0.2.1"
   },
   "homepage" : "http://jquerypp.com",
   "repository" : {
