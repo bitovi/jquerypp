@@ -40,7 +40,7 @@ The following tool generates a `$.event.key` mapping from your current keyboard 
 Just press the keys that don't get recognized properly and they will be added to the code block
 which you can copy and provide in your application:
 
-@iframe jquery/event/key/customizer.html 600
+@iframe jquerypp/event/key/customizer.html 600
 
 Generally it is recommended to use `keypress` to retrieve the actual character being pressed.
 
@@ -49,4 +49,4 @@ characters on *keydown* and *keyup*.
 
 ## Demo
 
-@demo jquery/event/key/key.html
+@demo jquerypp/event/key/key.html

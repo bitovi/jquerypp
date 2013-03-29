@@ -2,7 +2,7 @@
  * @add jQuery.Drag.prototype
  */
 
-steal('jquery', 'jquery/event/drag/core', 'jquery/dom/styles', function( $ ) {
+steal('jquery', 'jquerypp/event/drag/core', 'jquerypp/dom/styles', function( $ ) {
 	var round = function( x, m ) {
 		return Math.round(x / m) * m;
 	}
@@ -10,15 +10,15 @@ steal('jquery', 'jquery/event/drag/core', 'jquery/dom/styles', function( $ ) {
 	$.Drag.prototype.
 	/**
 	 * @function step
-	 * @plugin jquery/event/drag/step
-	 * @download  http://jmvcsite.heroku.com/pluginify?plugins[]=jquery/event/drag/step/step.js
+	 * @plugin jquerypp/event/drag/step
+	 * @download  http://jmvcsite.heroku.com/pluginify?plugins[]=jquerypp/event/drag/step/step.js
 	 * makes the drag move in steps of amount pixels.
 	 * 
 	 *     drag.step({x: 5}, $('foo'), "xy")
 	 * 
 	 * ## Demo
 	 * 
-	 * @demo jquery/event/drag/step/step.html
+	 * @demo jquerypp/event/drag/step/step.html
 	 * 
 	 * @param {number|Object} amount make the drag move the amount in pixels from the top-left of container.
 	 * 

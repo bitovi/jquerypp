@@ -1,5 +1,5 @@
-steal('funcunit/qunit','jquery/view/ejs', function(){
-module("jquery/view/ejs, rendering",{
+steal('funcunit/qunit','jquerypp/view/ejs', function(){
+module("jquerypp/view/ejs, rendering",{
 	setup : function(){
 
 		this.animals = ['sloth', 'bear', 'monkey']
@@ -81,7 +81,7 @@ test("returning blocks", function(){
 		return cb([1,2,3,4])
 	}
 	
-	var res = $.View("//jquery/view/ejs/test_template.ejs",{something: somethingHelper, 
+	var res = $.View("//jquerypp/view/ejs/test_template.ejs",{something: somethingHelper, 
 		items: ['a','b']});
 	// make sure expected values are in res
 	//ok(/\s4\s/.test(res), "first block called" );
@@ -89,7 +89,7 @@ test("returning blocks", function(){
 });
 
 test("easy hookup", function(){
-	var div = $('<div/>').html("//jquery/view/ejs/easyhookup.ejs",{text: "yes"})
+	var div = $('<div/>').html("//jquerypp/view/ejs/easyhookup.ejs",{text: "yes"})
 	ok( div.find('div').hasClass('yes'), "has yes" )
 });
 

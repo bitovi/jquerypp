@@ -34,7 +34,7 @@ Here's how to listen for when a drag moves over a drop:
 
 A bit more complex example:
 
-@demo jquery/event/drop/drop.html 1000
+@demo jquerypp/event/drop/drop.html 1000
 
 
 ## How it works

@@ -1,10 +1,10 @@
-steal('jquery/dom/cookie','jquery/model/list').then(function($){
+steal('jquerypp/dom/cookie','jquerypp/model/list').then(function($){
 
 /**
  * @class jQuery.Model.List.Cookie
- * @plugin jquery/model/list/cookie
- * @test jquery/model/list/cookie/qunit.html
- * @download  http://jmvcsite.heroku.com/pluginify?plugins[]=jquery/model/list/cookie/cookie.js
+ * @plugin jquerypp/model/list/cookie
+ * @test jquerypp/model/list/cookie/qunit.html
+ * @download  http://jmvcsite.heroku.com/pluginify?plugins[]=jquerypp/model/list/cookie/cookie.js
  * @parent jQuery.Model.List
  * 
  * Provides a store-able list of model instances.  The following 
@@ -41,7 +41,7 @@ steal('jquery/dom/cookie','jquery/model/list').then(function($){
  * You can see this in action in the following demo.  Create a contact, then
  * refresh the page.
  * 
- * @demo jquery/model/list/cookie/cookie.html
+ * @demo jquerypp/model/list/cookie/cookie.html
  */
 $.Model.List("jQuery.Model.List.Cookie",
 /**

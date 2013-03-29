@@ -1,10 +1,10 @@
-steal("jquery/dom/dimensions",'jquery/view/micro', 'funcunit/qunit', function() {
+steal("jquerypp/dom/dimensions",'jquerypp/view/micro', 'funcunit/qunit', function() {
 
-module("jquery/dom/styles");
+module("jquerypp/dom/styles");
 
 test("reading", function(){
 	
-	$("#qunit-test-area").html("//jquery/dom/styles/test/styles.micro",{})
+	$("#qunit-test-area").html("//jquerypp/dom/styles/test/styles.micro",{})
 
 	var res = $.styles( $("#styled")[0],
 	   ["padding-left",

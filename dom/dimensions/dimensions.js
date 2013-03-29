@@ -1,5 +1,5 @@
 
-steal('jquery', 'jquery/dom/styles', function($) {
+steal('jquery', 'jquerypp/dom/styles', function($) {
 
 var
 	//margin is inside border

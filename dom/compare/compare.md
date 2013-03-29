@@ -1,6 +1,6 @@
 @page jQuery.compare
 @parent jquerypp
-@test jquery/dom/compare/qunit.html
+@test jquerypp/dom/compare/qunit.html
 @plugin dom/compare
 
 `jQuery.compare` adds `[jQuery.fn.compare jQuery.fn.compare(element)]` which compares the position of two nodes and returns a number representing
@@ -39,4 +39,4 @@ You can tests if the number returned by `$.fn.compare` matches any of these cond
 
 ## Demo
 
-@demo jquery/dom/compare/compare.html
+@demo jquerypp/dom/compare/compare.html

@@ -1,4 +1,4 @@
-steal('jquery', 'jquery/event/drag/core', 'jquery/dom/within', 'jquery/dom/compare', function($){
+steal('jquery', 'jquerypp/event/drag/core', 'jquerypp/dom/within', 'jquerypp/dom/compare', function($){
 	var event = $.event;
 	/**
 	 * @add jQuery.event.special
@@ -96,9 +96,9 @@ steal('jquery', 'jquery/event/drag/core', 'jquery/dom/within', 'jquery/dom/compa
 	/**
 	 * @class jQuery.Drop
 	 * @parent jQuery.event.drop
-	 * @plugin jquery/event/drop
-	 * @download  http://jmvcsite.heroku.com/pluginify?plugins[]=jquery/event/drop/drop.js
-	 * @test jquery/event/drag/qunit.html
+	 * @plugin jquerypp/event/drop
+	 * @download  http://jmvcsite.heroku.com/pluginify?plugins[]=jquerypp/event/drop/drop.js
+	 * @test jquerypp/event/drag/qunit.html
 	 *
 	 * The `jQuery.Drop` constructor is never called directly but an instance is passed to the
 	 * to the `dropinit`, `dropover`, `dropmove`, `dropon`, and `dropend` event handlers as the

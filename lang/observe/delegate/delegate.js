@@ -1,4 +1,4 @@
-steal('jquery/lang/observe','can/observe/delegate',function(){
+steal('jquerypp/lang/observe','can/observe/delegate',function(){
 
 
 })

@@ -1,6 +1,6 @@
-steal('funcunit/qunit','jquery/event/default','jquery/event/pause', function() {
+steal('funcunit/qunit','jquerypp/event/default','jquerypp/event/pause', function() {
 
-module("jquery/event/default_pause");
+module("jquerypp/event/default_pause");
 
 
 test("default and pause with delegate", function(){

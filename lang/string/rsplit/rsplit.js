@@ -1,4 +1,4 @@
-steal('jquery/lang/string', function() {
+steal('jquerypp/lang/string', function() {
 	/**
 	 * @add jQuery.String
 	 */

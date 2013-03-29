@@ -1,5 +1,5 @@
-steal('can/util', 'jquery', 'jquery/model', function(can, $) {
-module("jquery/model", {
+steal('can/util', 'jquery', 'jquerypp/model', function(can, $) {
+module("jquerypp/model", {
 	setup: function() {
         var ids = 0;
 	    $.Model("Person",{
@@ -55,7 +55,7 @@ test("findAll deferred", function(){
 				url : "/people",
 				data : params,
 				dataType : "json",
-				fixture: "//jquery/model/test/people.json"
+				fixture: "//jquerypp/model/test/people.json"
 			})
 		}
 	},{});
@@ -76,7 +76,7 @@ test("findOne deferred", function(){
 				url : "/people/5",
 				data : params,
 				dataType : "json",
-				fixture: "//jquery/model/test/person.json"
+				fixture: "//jquerypp/model/test/person.json"
 			})
 		}
 	},{});
@@ -277,8 +277,8 @@ test("auto methods",function(){
 	//turn off fixtures
 	$.fixture.on = false;
 	var School = $.Model.extend("Jquery.Model.Models.School",{
-	   findAll : steal.config().root.join("jquery/model/test")+"/{type}.json",
-	   findOne : steal.config().root.join("jquery/model/test")+"/{id}.json",
+	   findAll : steal.config().root.join("jquerypp/model/test")+"/{type}.json",
+	   findOne : steal.config().root.join("jquerypp/model/test")+"/{id}.json",
 		create : "GET " + steal.config().root.join("can/model/test")+"/create.json",
 		update : "GET "+steal.config().root.join("can/model/test")+"/update{id}.json"
 	},{})
@@ -318,7 +318,7 @@ test("isNew", function(){
 test("findAll string", function(){
 	$.fixture.on = false;
 	$.Model("Test.Thing",{
-		findAll : steal.config().root.join("jquery/model/test/qunit/findAll.json")+''
+		findAll : steal.config().root.join("jquerypp/model/test/qunit/findAll.json")+''
 	},{});
 	stop();
 	Test.Thing.findAll({},function(things){

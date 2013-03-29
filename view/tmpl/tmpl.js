@@ -1,5 +1,5 @@
 // jQuery Templates Plugin
-// http://github.com/jquery/jquery-tmpl
+// http://github.com/jquerypp/jquery-tmpl
 // 
 // Copyright Software Freedom Conservancy, Inc.
 // Dual licensed under the MIT or GPL Version 2 licenses.
@@ -8,7 +8,7 @@
 /**
  * @class $.tmpl
  * @parent $.View
- * @plugin jquery/view/tmpl
+ * @plugin jquerypp/view/tmpl
  * Provides basic templating with magic tags that look like:
  * @codestart
  * ${value}
@@ -23,7 +23,7 @@
  * For more information on $.tmpl read 
  * [http://api.$.com/category/plugins/templates/ it's documentation].
  */
-steal('jquery', 'can/util', 'jquery/view').then(function($, can){
+steal('jquery', 'can/util', 'jquerypp/view').then(function($, can){
 		// Override the DOM manipulation function
 	var oldManip = $.fn.domManip, tmplItmAtt = "_tmplitem", htmlExpr = /^[^<]*(<[\w\W]+>)[^>]*$|\{\{\! /,
 		newTmplItems = {}, wrappedItems = {}, appendToTmplItems, topTmplItem = { key: 0, data: {} }, itemKey = 0, cloneIndex = 0, stack = [];

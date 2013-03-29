@@ -1,7 +1,7 @@
-steal("jquery/event/drop", 'funcunit/qunit', 'funcunit/syn', "jquery/event/drop/drop_test.js",
+steal("jquerypp/event/drop", 'funcunit/qunit', 'funcunit/syn', "jquerypp/event/drop/drop_test.js",
 function($, QUnit, Syn) {
 
-module("jquery/event/drag",{
+module("jquerypp/event/drag",{
 	makePoints : function(){
 		var div = $("<div>"+
 			"<div id='drag'></div>"+

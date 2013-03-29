@@ -1,4 +1,4 @@
-module("jquery/model/associations",{
+module("jquerypp/model/associations",{
 	setup: function() {
 		
 		$.Model("MyTest.Person", {

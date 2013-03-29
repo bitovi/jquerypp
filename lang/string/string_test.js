@@ -1,6 +1,6 @@
 steal('funcunit/qunit','./string').then(function(){
 	
-module("jquery/lang/string")
+module("jquerypp/lang/string")
 
 test("$.String.sub", function(){
 	equals($.String.sub("a{b}",{b: "c"}),"ac")

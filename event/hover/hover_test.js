@@ -1,6 +1,6 @@
-steal("jquery/event/hover", 'funcunit/syn', 'funcunit/qunit', function ($, Syn) {
+steal("jquerypp/event/hover", 'funcunit/syn', 'funcunit/qunit', function ($, Syn) {
 
-	module("jquery/dom/hover")
+	module("jquerypp/dom/hover")
 
 	test("hovering", function () {
 		$("#qunit-test-area").append("<div id='hover'>Content<div>")

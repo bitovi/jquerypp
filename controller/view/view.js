@@ -1,1 +1,1 @@
-steal('jquery/controller', 'can/control/view');
+steal('jquerypp/controller', 'can/control/view');

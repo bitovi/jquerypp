@@ -1,4 +1,4 @@
-steal('jquery', 'jquery/event/livehack', function( $ ) {
+steal('jquery', 'jquerypp/event/livehack', function( $ ) {
 
 	var supportTouch = "ontouchend" in document,
 		scrollEvent = "touchmove scroll",

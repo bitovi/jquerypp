@@ -1,6 +1,6 @@
 steal('funcunit/qunit','./vector.js').then(function(){
 	
-	module("jquery/lang/vector")
+	module("jquerypp/lang/vector")
 
 	test("Init", function(){
 		var v = new $.Vector(1,4, 2, 3);

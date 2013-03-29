@@ -1,6 +1,6 @@
-steal('funcunit/qunit', 'funcunit/syn', 'jquery/event/pause').then(function (QUnit, Syn) {
+steal('funcunit/qunit', 'funcunit/syn', 'jquerypp/event/pause').then(function (QUnit, Syn) {
 
-	module("jquery/event/pause", {setup : function () {
+	module("jquerypp/event/pause", {setup : function () {
 		$("#qunit-test-area").html("")
 		var div = $("<div id='wrapper_pause_test'><ul id='ul_pause_test'>" +
 			"<li><p>Hello</p>" +

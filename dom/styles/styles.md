@@ -26,5 +26,5 @@ This plugin retrieves all needed style properties at once.
 The following demo illustrates the performance improvement `jQuery.fn.styles` provides by implementing
 a faster 'height' jQuery function called 'fastHeight'.
 
-@demo jquery/dom/styles/styles.html
+@demo jquerypp/dom/styles/styles.html
 

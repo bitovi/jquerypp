@@ -1,7 +1,7 @@
 steal('funcunit/qunit','./store.js',
-	'jquery/model',
-	'jquery/model/list',
-	'jquery/dom/fixture',function(){
+	'jquerypp/model',
+	'jquerypp/model/list',
+	'jquerypp/dom/fixture',function(){
 
 module("store", {
 	setup : function(){

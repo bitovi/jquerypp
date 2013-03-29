@@ -30,4 +30,4 @@ to avoid showing the tab.
 In this case, the application developer doesn't want to show the second 
 tab until the checkbox is checked. 
 
-@demo jquery/event/default/defaultjquery.html
+@demo jquerypp/event/default/defaultjquery.html

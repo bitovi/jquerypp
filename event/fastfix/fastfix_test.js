@@ -1,7 +1,7 @@
-steal("jquery/event/fastfix",
+steal("jquerypp/event/fastfix",
 	'funcunit/qunit').then(function () {
 
-		module("jquery/event/fastfix");
+		module("jquerypp/event/fastfix");
 
 		test("null or undefined handler", function () {
 			expect(2);

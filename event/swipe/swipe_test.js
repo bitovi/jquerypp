@@ -1,6 +1,6 @@
-steal('funcunit/qunit', 'funcunit/syn', 'jquery/event/swipe', function (QUnit, Syn) {
+steal('funcunit/qunit', 'funcunit/syn', 'jquerypp/event/swipe', function (QUnit, Syn) {
 
-	module("jquery/swipe", {setup : function () {
+	module("jquerypp/swipe", {setup : function () {
 		$("#qunit-test-area").html("")
 		var div = $("<div id='outer'>" +
 			"<div id='inner1'>one</div>" +

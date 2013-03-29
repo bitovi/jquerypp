@@ -1,4 +1,4 @@
-steal('jquery/model').then(function(){
+steal('jquerypp/model').then(function(){
 	var convert = function(method, func){
 		
 		return typeof method == 'function' ? function(){

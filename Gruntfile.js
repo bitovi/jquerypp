@@ -41,13 +41,13 @@ module.exports = function (grunt) {
 		},
 		build : {
 			edge : {
-				src : "jquery/build/build.js",
-				out : 'jquery/<%= meta.out %>'
+				src : "jquerypp/build/build.js",
+				out : 'jquerypp/<%= meta.out %>'
 			},
 			latest : {
-				src : 'jquery/build/build.js',
+				src : 'jquerypp/build/build.js',
 				version : '<%= pkg.version %>',
-				out : 'jquery/<%= meta.out %>'
+				out : 'jquerypp/<%= meta.out %>'
 			}
 		},
 		shell : {

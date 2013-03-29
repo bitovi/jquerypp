@@ -9,7 +9,7 @@ steal('jquery', function($) {
 /**
  * @function jQuery.fn.within
  * @parent jQuery.within
- * @plugin jquery/dom/within
+ * @plugin jquerypp/dom/within
  * 
  * Returns all elements matching the selector that touch a given point:
  * 
