@@ -5,12 +5,12 @@ load("steal/rhino/rhino.js");
 steal('steal/build/pluginify', 'steal/build/amdify', 'steal/build/extract', function () {
 	// Use with ./js can/build/dist.js <outputfolder> <version> <library1> <library2>
 	var version = _args[1] || 'edge';
-	var outFolder = (_args[0] || 'jquery/dist/') + version + '/';
+	var outFolder = (_args[0] || 'jquerypp/dist/') + version + '/';
 	var outFile = outFolder + 'jquerypp';
-	var buildFile = 'jquery/build/lib.js';
+	var buildFile = 'jquerypp/build/lib.js';
 	var options = {
-		exclude : ["jquery", "jquery/jquery.js", "jquery/build/lib.js"],
-		wrapInner : ['(function(window, $, undefined) {\n', '\n})(this, jQuery);']
+		exclude: ["jquery", "jquery/jquery.js", "jquerypp/build/lib.js"],
+		wrapInner: ['(function(window, $, undefined) {\n', '\n})(this, jQuery);']
 	};
 
 	/**
@@ -18,16 +18,16 @@ steal('steal/build/pluginify', 'steal/build/amdify', 'steal/build/extract', func
 	 */
 	var build = function () {
 		var defaults = {
-			out : outFile + '.js',
-			onefunc : true,
-			compress : false,
-			skipAll : true
+			out: outFile + '.js',
+			onefunc: true,
+			compress: false,
+			skipAll: true
 		};
 
-		steal.build.pluginify(buildFile , _.extend(defaults, options));
+		steal.build.pluginify(buildFile, _.extend(defaults, options));
 		steal.build.pluginify(buildFile, _.extend(defaults, options, {
-			compress : true,
-			out : outFile + '.min.js'
+			minify: true,
+			out: outFile + '.min.js'
 		}));
 	};
 
@@ -36,18 +36,15 @@ steal('steal/build/pluginify', 'steal/build/amdify', 'steal/build/extract', func
 	 */
 	var buildAmd = function () {
 		steal.build.amdify(buildFile, {
-			out : outFolder + '/amd',
-			exclude : options.exclude,
-			map : {
-				'jquery/' : 'jquerypp/'
-			}
+			out: outFolder + '/amd',
+			exclude: options.exclude
 		});
 	};
 
-	var extractFiles = function() {
+	var extractFiles = function () {
 		steal.build.extract(buildFile, {
-			out : outFolder + 'raw',
-			exclude : options.exclude
+			out: outFolder + 'raw',
+			exclude: options.exclude
 		});
 	}
 
