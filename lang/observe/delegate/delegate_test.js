@@ -1,7 +1,7 @@
-steal('funcunit/qunit','jquery/lang/observe',function(){
+steal('funcunit/qunit','jquerypp/lang/observe',function(){
 
 
-module('jquery/lang/observe/delegate')
+module('jquerypp/lang/observe/delegate')
 
 var matches = $.Observe.prototype.delegate.matches;
 

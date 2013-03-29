@@ -1,6 +1,6 @@
-steal("jquery/event/drop",'funcunit/syn', 'funcunit/qunit', function($, Syn) {
+steal("jquerypp/event/drop",'funcunit/syn', 'funcunit/qunit', function($, Syn) {
 	
-module("jquery/event/drop");
+module("jquerypp/event/drop");
 
 test("new drop added", 3, function(){
 	var div = $("<div>"+

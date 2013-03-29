@@ -1,4 +1,4 @@
-steal('jquery', 'jquery/dom/compare', function ($) {
+steal('jquery', 'jquerypp/dom/compare', function ($) {
 
 	$.fn.range =
 		/**

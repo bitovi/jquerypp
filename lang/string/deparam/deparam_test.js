@@ -1,6 +1,6 @@
 steal('funcunit/qunit','./deparam').then(function(){
 	
-module('jquery/lang/deparam')
+module('jquerypp/lang/deparam')
 
 test("Basic deparam",function(){
 	

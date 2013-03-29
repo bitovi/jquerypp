@@ -1,4 +1,4 @@
-steal('jquery/model/list','jquery/lang/object', function($){
+steal('jquerypp/model/list','jquerypp/lang/object', function($){
 
 var same = $.Object.same,
 	trigger = function(obj, event, args){

@@ -1,6 +1,6 @@
-steal('funcunit/qunit','jquery/lang/observe/delegate',function(){
+steal('funcunit/qunit','jquerypp/lang/observe/delegate',function(){
 	
-module('jquery/lang/observe')
+module('jquerypp/lang/observe')
 
 test("Basic Observe",9,function(){
 	

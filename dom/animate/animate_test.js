@@ -1,6 +1,6 @@
-steal('jquery', 'jquery/dom/animate', 'funcunit/qunit', 'qunit.css', function ($) {
+steal('jquery', 'jquerypp/dom/animate', 'funcunit/qunit', 'qunit.css', function ($) {
 
-	module("jquery/dom/animate");
+	module("jquerypp/dom/animate");
 
 	if ( $.fx ) {
 		test("sanity check", function() {

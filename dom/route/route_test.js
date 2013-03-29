@@ -1,6 +1,6 @@
 steal('funcunit/qunit').then('./route.js',function(){
 
-module("jquery/dom/route")
+module("jquerypp/dom/route")
 
 test("deparam", function(){
 	$.route.routes = {};

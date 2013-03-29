@@ -51,4 +51,4 @@ the animation has been done using CSS animations:
 
 The following demo is based on the [jQuery .animate reference](http://api.jquery.com/animate/) but uses CSS animations:
 
-@demo jquery/dom/animate/animate.html 400
+@demo jquerypp/dom/animate/animate.html 400

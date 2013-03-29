@@ -1,4 +1,4 @@
-steal('jquery', 'jquery/event/drag/core', 'jquery/event/drag/step', 'jquery/event/drag/limit',
-	'jquery/event/drag/scroll', function( $ ) {
+steal('jquery', 'jquerypp/event/drag/core', 'jquerypp/event/drag/step', 'jquerypp/event/drag/limit',
+	'jquerypp/event/drag/scroll', function( $ ) {
 		return $;
 });

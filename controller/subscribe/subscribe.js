@@ -1,10 +1,10 @@
 /*global OpenAjax: true */
-steal('jquery/controller', 'jquery/lang/openajax').then(function() {
+steal('jquerypp/controller', 'jquerypp/lang/openajax').then(function() {
 
 	/**
 	 * @function jQuery.Controller.static.processors.subscribe
 	 * @parent jQuery.Controller.static.processors
-	 * @plugin jquery/controller/subscribe
+	 * @plugin jquerypp/controller/subscribe
 	 * Adds OpenAjax.Hub subscribing to controllers.
 	 * 
 	 *     $.Controller("Subscriber",{

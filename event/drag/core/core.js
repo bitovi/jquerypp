@@ -1,4 +1,4 @@
-steal('jquery', 'jquery/lang/vector', 'jquery/event/livehack', 'jquery/event/reverse', function( $ ) {
+steal('jquery', 'jquerypp/lang/vector', 'jquerypp/event/livehack', 'jquerypp/event/reverse', function( $ ) {
 
 	if(!$.event.special.move) {
 		$.event.reverse('move');
@@ -32,9 +32,9 @@ steal('jquery', 'jquery/lang/vector', 'jquery/event/livehack', 'jquery/event/rev
 	/**
 	 * @class jQuery.Drag
 	 * @parent jQuery.event.drag
-	 * @plugin jquery/event/drag
-	 * @download  http://jmvcsite.heroku.com/pluginify?plugins[]=jquery/event/drag/drag.js
-	 * @test jquery/event/drag/qunit.html
+	 * @plugin jquerypp/event/drag
+	 * @download  http://jmvcsite.heroku.com/pluginify?plugins[]=jquerypp/event/drag/drag.js
+	 * @test jquerypp/event/drag/qunit.html
 	 *
 	 * The `$.Drag` constructor is never called directly but an instance of `$.Drag` is passed as the second argument
 	 * to the `dragdown`, `draginit`, `dragmove`, `dragend`, `dragover` and `dragout` event handlers:

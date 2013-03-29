@@ -1,7 +1,7 @@
 
-steal('funcunit/qunit', 'jquery/event/resize').then(function() {
+steal('funcunit/qunit', 'jquerypp/event/resize').then(function() {
 
-	module("jquery/event/resize")
+	module("jquerypp/event/resize")
 
 
 	test("resize hits only children in order", function() {

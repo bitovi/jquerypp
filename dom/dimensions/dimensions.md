@@ -1,7 +1,7 @@
 @page jQuery.dimensions
 @parent jquerypp
 
-@plugin jquery/dom/dimensions
+@plugin jquerypp/dom/dimensions
 
 `jQuery.dimensions` adds support for animating and setting inner and outer dimensions.
 It overwrites
@@ -31,4 +31,4 @@ allow custom styling.
 
 ## Demo
 
-@demo jquery/dom/dimensions/dimensions.html
+@demo jquerypp/dom/dimensions/dimensions.html

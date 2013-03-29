@@ -1,6 +1,6 @@
-steal('funcunit/qunit','jquery/event/default').then(function(){
+steal('funcunit/qunit','jquerypp/event/default').then(function(){
 
-module("jquery/event/default")
+module("jquerypp/event/default")
 test("namespaced with same function", function(){
 
 	var count = 0 ,  func = function(){

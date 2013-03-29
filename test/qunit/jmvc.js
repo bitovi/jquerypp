@@ -1,8 +1,8 @@
 // Tests for the JavaScriptMVC compatibility layer. Will be removed eventually
-steal('funcunit/qunit', 'jquery/controller/view/test/qunit'
-	, 'jquery/class/class_test.js'
-	, 'jquery/model/test/qunit'
-	, 'jquery/controller/controller_test.js'
-	, 'jquery/view/test/qunit'
-	, 'jquery/dom/route/route_test.js'
+steal('funcunit/qunit', 'jquerypp/controller/view/test/qunit'
+	, 'jquerypp/class/class_test.js'
+	, 'jquerypp/model/test/qunit'
+	, 'jquerypp/controller/controller_test.js'
+	, 'jquerypp/view/test/qunit'
+	, 'jquerypp/dom/route/route_test.js'
 	, './integration.js');

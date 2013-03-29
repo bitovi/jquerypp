@@ -1,7 +1,7 @@
-steal("jquery/dom/compare")  //load your app
+steal("jquerypp/dom/compare")  //load your app
  .then('funcunit/qunit').then(function(){
 
-module("jquery/dom/compare")
+module("jquerypp/dom/compare")
 test("Compare cases", function(){
     $(document.body).append("<div id='outer'><div class='first'></div><div class='second'></div>")
     var outer = $("#outer"), 

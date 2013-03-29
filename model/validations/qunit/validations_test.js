@@ -1,8 +1,8 @@
-steal('funcunit/qunit','jquery/model/validations').then(function(){
+steal('funcunit/qunit','jquerypp/model/validations').then(function(){
 
 var Person;
 
-module("jquery/model/validations",{
+module("jquerypp/model/validations",{
 	setup : function(){
 		Person = jQuery.Model({},{});
 	}

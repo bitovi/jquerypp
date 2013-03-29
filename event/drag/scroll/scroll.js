@@ -1,12 +1,12 @@
-steal("jquery", "jquery/event/drop", function($) { //needs drop to determine if respondable
+steal("jquery", "jquerypp/event/drop", function($) { //needs drop to determine if respondable
 
 /**
  * @add jQuery.Drag.prototype
  */
 $.Drag.prototype.
 	/**
-	 * @plugin jquery/event/drag/scroll
-	 * @download  http://jmvcsite.heroku.com/pluginify?plugins[]=jquery/event/drag/scroll/scroll.js
+	 * @plugin jquerypp/event/drag/scroll
+	 * @download  http://jmvcsite.heroku.com/pluginify?plugins[]=jquerypp/event/drag/scroll/scroll.js
 	 * 
 	 * `drag.scrolls(elements, [options])` scroll elements with 
 	 * a scroll bar as the drag moves to borders.

@@ -21,7 +21,7 @@ use attrs and attr) automatically convert server data.
 The following demo shows converting a contact's birthday into
 a string.
 
-@demo jquery/model/demo-setter.html
+@demo jquerypp/model/demo-setter.html
 
 
 ## Way 2: Convert
@@ -57,7 +57,7 @@ $.Model("Contact",
 })
 @codeend
 
-@demo jquery/model/demo-convert.html
+@demo jquerypp/model/demo-convert.html
 
 # Serialization
 

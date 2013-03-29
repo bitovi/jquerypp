@@ -1,8 +1,8 @@
-steal("jquery/controller",'jquery/controller/subscribe')  //load your app
+steal("jquerypp/controller",'jquerypp/controller/subscribe')  //load your app
  .then('funcunit/qunit')  //load qunit
  .then(function(){
  	
-module("jquery/controller")
+module("jquerypp/controller")
 test("subscribe testing works", function(){
 	
 	var ta = $("<div/>").appendTo( $("#qunit-test-area") )

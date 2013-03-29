@@ -1,6 +1,6 @@
-steal("jquery", "funcunit/qunit", "jquery/dom/selection").then(function($) {
+steal("jquery", "funcunit/qunit", "jquerypp/dom/selection").then(function($) {
   	
-module("jquery/dom/selection");
+module("jquerypp/dom/selection");
 
 test("getCharElement", function(){
 	$("#qunit-test-area")

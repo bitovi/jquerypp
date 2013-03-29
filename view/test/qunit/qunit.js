@@ -1,5 +1,5 @@
 //we probably have to have this only describing where the tests are
-steal("jquery/view",
+steal("jquerypp/view",
 	"can/view/micro",
 	"can/view/ejs",
 	"can/view/jaml",

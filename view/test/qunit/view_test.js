@@ -1,5 +1,5 @@
 
-module("jquery/view");
+module("jquerypp/view");
 
 
 
@@ -10,7 +10,7 @@ test("multiple template types work", function(){
 		$("#qunit-test-area").html("");
 		ok($("#qunit-test-area").children().length == 0,this+ ": Empty To Start")
 		
-		$("#qunit-test-area").html("//jquery/view/test/qunit/template."+this,{"message" :"helloworld"})
+		$("#qunit-test-area").html("//jquerypp/view/test/qunit/template."+this,{"message" :"helloworld"})
 		ok($("#qunit-test-area").find('h3').length, this+": h3 written for ")
 		ok( /helloworld\s*/.test( $("#qunit-test-area").text()), this+": hello world present for ")
 	})
@@ -19,7 +19,7 @@ test("multiple template types work", function(){
 
 
 test("async templates, and caching work", function(){
-	can.fixture("jquery/view/test/qunit/temp.ejs",function(request, response){
+	can.fixture("jquerypp/view/test/qunit/temp.ejs",function(request, response){
 		setTimeout(function(){
 			response(200,"success",'<h3><%= message %></h3>',{})
 		},20)
@@ -30,7 +30,7 @@ test("async templates, and caching work", function(){
 	$("#qunit-test-area").html("");
 	stop();
 	var i = 0;
-	$("#qunit-test-area").html("//jquery/view/test/qunit/temp.ejs",{"message" :"helloworld"}, function(frag){
+	$("#qunit-test-area").html("//jquerypp/view/test/qunit/temp.ejs",{"message" :"helloworld"}, function(frag){
 		ok( /helloworld\s*/.test( $("#qunit-test-area").text()))
 		equal(frag.nodeType, 11, "we got a documentFragment");
 		i++;
@@ -48,13 +48,13 @@ test("caching works", function(){
 	stop();
 	var startT = new Date(),
 		first;
-	$("#qunit-test-area").html("//jquery/view/test/qunit/large.ejs",{"message" :"helloworld"}, function(text){
+	$("#qunit-test-area").html("//jquerypp/view/test/qunit/large.ejs",{"message" :"helloworld"}, function(text){
 		first = new Date();
 		ok(text, "we got a rendered template");
 		
 		
 		$("#qunit-test-area").html("");
-		$("#qunit-test-area").html("//jquery/view/test/qunit/large.ejs",{"message" :"helloworld"}, function(text){
+		$("#qunit-test-area").html("//jquerypp/view/test/qunit/large.ejs",{"message" :"helloworld"}, function(text){
 			var lap2 = (new Date()) - first,
 				lap1 =  first-startT;
 			// ok( lap1 > lap2, "faster this time "+(lap1 - lap2) )
@@ -68,7 +68,7 @@ test("caching works", function(){
 test("hookup", function(){
 	$("#qunit-test-area").html("");
 	
-	$("#qunit-test-area").html("//jquery/view/test/qunit/hookup.ejs",{}); //makes sure no error happens
+	$("#qunit-test-area").html("//jquerypp/view/test/qunit/hookup.ejs",{}); //makes sure no error happens
 })
 
 test("inline templates other than 'tmpl' like ejs", function(){
@@ -85,7 +85,7 @@ test("object of deferreds", function(){
 	var foo = $.Deferred(),
 		bar = $.Deferred();
 	stop();
-	$.View("//jquery/view/test/qunit/deferreds.ejs",{
+	$.View("//jquerypp/view/test/qunit/deferreds.ejs",{
 		foo : foo.promise(),
 		bar : bar
 	}).then(function(result){
@@ -102,7 +102,7 @@ test("object of deferreds", function(){
 test("deferred", function(){
 	var foo = $.Deferred();
 	stop();
-	$.View("//jquery/view/test/qunit/deferred.ejs",foo).then(function(result){
+	$.View("//jquerypp/view/test/qunit/deferred.ejs",foo).then(function(result){
 		ok(result, "FOO");
 		start();
 	});
@@ -120,7 +120,7 @@ test("modifier with a deferred", function(){
 	stop();
 	
 	var foo = $.Deferred();
-	$("#qunit-test-area").html("//jquery/view/test/qunit/deferred.ejs", foo );
+	$("#qunit-test-area").html("//jquerypp/view/test/qunit/deferred.ejs", foo );
 	setTimeout(function(){
 		foo.resolve({
 			foo: "FOO"
@@ -133,7 +133,7 @@ test("modifier with a deferred", function(){
 
 test("jQuery.fn.hookup", function(){
 	$("#qunit-test-area").html("");
-	var els = $($.View("//jquery/view/test/qunit/hookup.ejs",{})).hookup();
+	var els = $($.View("//jquerypp/view/test/qunit/hookup.ejs",{})).hookup();
 	$("#qunit-test-area").html(els); //makes sure no error happens
 });
 
@@ -158,7 +158,7 @@ test("html takes promise", function(){
 });
 
 test("val set with a template within a hookup within another template", function(){
-	$("#qunit-test-area").html("//jquery/view/test/qunit/hookupvalcall.ejs",{});
+	$("#qunit-test-area").html("//jquerypp/view/test/qunit/hookupvalcall.ejs",{});
 })
 
 /*test("bad url", function(){
