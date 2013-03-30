@@ -45,7 +45,7 @@ steal("jquery", function( $ ) {
 
 				// Finally, assign data
 				if ( ( type == "radio" || type == "checkbox" ) && ! elem.is(":checked") ) {
-					return
+					return;
 				}
 
 				if ( ! data[ name ] ) {
@@ -95,6 +95,24 @@ steal("jquery", function( $ ) {
 		},
 		setParams: function( params ) {
 
+			/**
+			 * Converts nested objects to string representations
+			 *
+			 * Before: { "foo" : { "bar" : { "baz" : "value" } } }
+			 * After:  { "foo[bar][baz]" : "value" }
+			 */
+			var resolveNesting = function(params) {
+				var temp, result = {};
+				var keyValuePairs = decodeURIComponent( jQuery.param(params) ).split('&');
+
+				for (var i = 0, len = keyValuePairs.length; i < len; i++) {
+					temp = keyValuePairs[i].split('=');
+					result[ temp[0] ] = temp[1];
+				}
+				return result;
+			};
+			params = resolveNesting(params);
+
 			// Find all the inputs
 			this.find("[name]").each(function() {
 				var $this = $(this),
@@ -122,14 +140,18 @@ steal("jquery", function( $ ) {
 			});
 		},
 		getParams: function( convert ) {
-			var data = {},
+			var elements = this,
+				data = {},
 				// This is used to keep track of the checkbox names that we've
 				// already seen, so we know that we should return an array if
 				// we see it multiple times. Fixes last checkbox checked bug.
 				seen = {},
 				current;
 
-			this.find("[name]:not(:disabled)").each(function() {
+			if (elements.children().length) {
+				elements = this.find("[name]:not(:disabled)");
+			}
+			elements.each(function() {
 				var $this    = $(this),
 					type     = $this.attr("type"),
 					name     = $this.attr("name"),

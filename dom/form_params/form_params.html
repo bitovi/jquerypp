@@ -10,13 +10,14 @@
 	<body>
 <p>Change the inputs to change the object</p>
 <pre>Result = <span id='result'></span></pre>
+<pre>Change = <span id='change'></span></pre>
 <div id="demo-html">
 <form id='fp' action=''>
   <label>
     People Count<br/><input name='talk[peopleCount]'/>
   </label>
   <br/><br/>
-  
+
   <label>
     Audience Rating<br/>
     <select name='talk[audienceRating]'>
@@ -26,29 +27,32 @@
     </select>
   </label>
   <br/><br/>
-  
+
   Time Left<br/>
   <label><input type='radio' name='talk[timeLeft]' value='1'/> 1 min</label><br/>
   <label><input type='radio' name='talk[timeLeft]' value='5'/> 5 min</label><br/>
   <label><input type='radio' name='talk[timeLeft]' value='10'/> 10 min</label><br/>
 </form>
 </div>
-		<script type='text/javascript' 
-                src='../../../steal/steal.js'>   
-        </script>
+<script type='text/javascript' src='../../../steal/steal.js'></script>
 <script type='text/javascript' id="demo-source">
 steal('jquerypp/dom/form_params','jquerypp/lang/json').then(function(){
 // updates the JSON text
-var update = function(){
-  
-  // get form data 
-  var json = $('#fp').formParams(),
-  
-      // convert it to JSON
-      jsonString = $.toJSON( json );
-  
+var update = function(event) {
+
+  var json       = $('#fp').formParams(),    // get form data
+      jsonString = $.toJSON( json );         // convert it to JSON
+
   // show JSON
   $('#result').text( jsonString );
+
+  // Get changed element
+  if (event && event.target) {
+    var jsonChanged       = $(event.target).formParams(),
+        jsonStringChanged = $.toJSON( jsonChanged );
+
+    $('#change').text( jsonStringChanged );
+  }
 };
 
 // listen for changes and update
@@ -56,7 +60,7 @@ $('#fp').change(update);
 $('input[name="talk[peopleCount]"]').keyup(update);
 
 // show json right away
-update(); 
+update();
 })
 </script>
 	</body>
