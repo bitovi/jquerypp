@@ -97,4 +97,19 @@ test("#24 disabled elements", function() {
 	equals(formParams.not_disabled, 'not disabled', 'Not disabled field');
 });
 
+test("Write nested values", function() {
+	$("#qunit-test-area").html("//jquerypp/dom/form_params/test/basics.micro",{});
+	$("#qunit-test-area form").formParams({ test: { first: 'test_first_nested' } } );
+	var formParams =  $("#qunit-test-area form").formParams();
+	console.log(formParams);
+	equals(formParams.test.first, 'test_first_nested', 'Nested value written to form');
+});
+
+test("Read single value", function() {
+	$("#qunit-test-area").html("//jquerypp/dom/form_params/test/basics.micro",{});
+	var formParams = $("#qunit-test-area input[name='test[first]']").formParams();
+	console.log(formParams);
+	equals(formParams.test.first, 'test_first', 'Read value of single form element');
+});
+
 });
