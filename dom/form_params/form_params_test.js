@@ -4,11 +4,11 @@ function() {
 $.ajaxSetup({
 	cache : false
 });
-     
-module("jquerypp/dom/form_params")
+
+module("jquerypp/dom/form_params");
 test("with a form", function(){
 
-	$("#qunit-test-area").html("//jquerypp/dom/form_params/test/basics.micro",{})
+	$("#qunit-test-area").html("//jquerypp/dom/form_params/test/basics.micro",{});
 
 	var formParams =  $("#qunit-test-area form").formParams() ;
 	ok(formParams.params.one === "1","one is right");
@@ -23,12 +23,12 @@ test("with a form", function(){
 
 	ok( $.isArray(formParams.lastOneChecked), "Type of checkbox with last option checked is array" );
 	equal( formParams.lastOneChecked, "4", "Value of checkbox with the last option checked is 4" );
-	
+
 });
 
 test("With a non-form element", function() {
 
-	$("#qunit-test-area").html("//jquerypp/dom/form_params/test/non-form.micro",{})
+	$("#qunit-test-area").html("//jquerypp/dom/form_params/test/non-form.micro",{});
 
 	var formParams =  $("#divform").formParams() ;
 
@@ -39,9 +39,9 @@ test("With a non-form element", function() {
 
 test("with true false", function(){
 	$("#qunit-test-area").html("//jquerypp/dom/form_params/test/truthy.micro",{});
-	
+
 	var formParams =  $("#qunit-test-area form").formParams(true);
-	ok(formParams.foo === undefined, "foo is undefined")
+	ok(formParams.foo === undefined, "foo is undefined");
 	ok(formParams.bar.abc === true, "form bar is true");
 	ok(formParams.bar.def === true, "form def is true");
 	ok(formParams.bar.ghi === undefined, "form def is undefined");
@@ -56,7 +56,7 @@ test("just strings",function(){
 	ok(formParams.params.three === '3',"three is right");
 	same(formParams.params.four,["4","1"],"four is right");
 	same(formParams.params.five,['2','3'],"five is right");
-	$("#qunit-test-area").html('')
+	$("#qunit-test-area").html('');
 });
 
 test("empty string conversion",function() {
@@ -70,7 +70,7 @@ test("empty string conversion",function() {
 test("missing names",function(){
 	$("#qunit-test-area").html("//jquerypp/dom/form_params/test/checkbox.micro",{});
 	var formParams =  $("#qunit-test-area form").formParams() ;
-	ok(true, "does not break")
+	ok(true, "does not break");
 });
 
 test("same input names to array", function() {
