@@ -89,23 +89,15 @@ steal('jquery', 'jquerypp/dom/styles', function ($) {
 					el = document.createElement('fakeelement'),
 					transitions = {
 						'transition': {
-							transitionEnd : 'transitionEnd',
+							transitionEnd : 'transitionend',
 							prefix : ''
 						},
-//						'OTransition': {
-//							transitionEnd : 'oTransitionEnd',
-//							prefix : '-o-'
-//						},
-//						'MSTransition': {
-//							transitionEnd : 'msTransitionEnd',
-//							prefix : '-ms-'
-//						},
 						'MozTransition': {
-							transitionEnd : 'animationend',
+							transitionEnd : 'transitionend',
 							prefix : '-moz-'
 						},
 						'WebkitTransition': {
-							transitionEnd : 'webkitAnimationEnd',
+							transitionEnd : 'webkitTransitionEnd',
 							prefix : '-webkit-'
 						}
 					}
