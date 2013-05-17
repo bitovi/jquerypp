@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>pinch</title>
+        <style type='text/css'>
+            body {font-family: verdana}
+            .error {border: solid 1px red;}
+            .error_text { color: red; font-size: 10px;}
+            td {padding: 3px;}
+            #pinch {
+                width: 500px;
+                height: 100px;
+                background-color: green;
+            }
+            li {
+                border: solid 5px green;
+                width: 200px;
+                height: 200px;
+                margin-left: 400px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id='pinch'>Pinch Me</div>
+        <div id='pinches'>Pinches
+            <ul>
+                <li>Pinch Me</li>
+                <li>Pinch Me</li>
+                <li>Pinch Me</li>
+                <li>Pinch Me</li>
+            </ul>
+        </div>
+        <script type='text/javascript' src='../../../steal/steal.js'></script>
+        <script>
+        steal('jquery', 'jquerypp/event/pinch', function($) {
+            $('#pinch').bind('pinch', function(){
+                console.log('pinch1')
+            }).bind("pinchin", function(){
+                console.log('in')
+            }).bind('pinchout', function(){
+                console.log('out')
+            })
+            $('#pinches').delegate('li','pinch', function(){
+                console.log('pinch2')
+            }) 
+        })
+        </script>
+    </body>
+</html>
