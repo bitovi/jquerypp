@@ -117,8 +117,9 @@
 	},
 	"pluginify": {
 		"shim": {
-			"jquery": "jQuery"
-		}
+			"jquery/jquery.js": "$"
+		},
+		"wrapper": "(function($) {\n<%= content %>\n})(jQuery);\n"
 	},
 	"configurations": {
 		"default": {
