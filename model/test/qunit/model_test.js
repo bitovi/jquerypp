@@ -28,7 +28,7 @@ module("jquerypp/model", {
 
 
 test("CRUD", function(){
-   
+
 	Person.findAll({}, function(response){
 		equals("foo", response[0].name)
 	})
@@ -90,7 +90,7 @@ test("findOne deferred", function(){
 });
 
 test("save deferred", function(){
-	
+
 	$.Model("Person",{
 		create : function(attrs, success, error){
 			return $.ajax({
@@ -105,21 +105,21 @@ test("save deferred", function(){
 			})
 		}
 	},{});
-	
+
 	var person = new Person({name: "Justin"}),
 		personD = person.save();
-	
+
 	stop();
 	personD.then(function(person){
 		start()
 		console.log(person)
 		equals(person.id, 5, "we got an id")
 	});
-	
+
 });
 
 test("update deferred", function(){
-	
+
 	$.Model("Person",{
 		update : function(id, attrs, success, error){
 			return $.ajax({
@@ -134,21 +134,21 @@ test("update deferred", function(){
 			})
 		}
 	},{});
-	
+
 	var person = new Person({name: "Justin", id:5}),
 		personD = person.save();
-	
+
 	stop();
 	personD.then(function(person){
 		start()
 		equals(person.thing, "er", "we got updated")
-		
+
 	});
-	
+
 });
 
 test("destroy deferred", function(){
-	
+
 	$.Model("Person",{
 		destroy : function(id, success, error){
 			return $.ajax({
@@ -162,15 +162,15 @@ test("destroy deferred", function(){
 			})
 		}
 	},{});
-	
+
 	var person = new Person({name: "Justin", id:5}),
 		personD = person.destroy();
-	
+
 	stop();
 	personD.then(function(person){
 		start()
 		equals(person.thing, "er", "we got destroyed")
-		
+
 	});
 });
 
@@ -185,18 +185,29 @@ test("hookup and model", function(){
 })
 // test that models returns an array of unique instances
 test("unique models", function(){
-	var div1 = $("<div/>")
-	var div2 = $("<div/>")
-	var div3 = $("<div/>")
-	var p = new Person({foo: "bar2", id: 5});
-	var p2 = new Person({foo: "bar3", id: 4});
+	var div1 = $("<div/>"),
+		div2 = $("<div/>"),
+		div3 = $("<div/>");
+
+	// append this to the dom so that the order is consistent across browsers
+	// after executing the add function
+	$("#qunit-test-area").append(div1).append(div2).append(div3);
+
+	var p = new Person({foo: "bar2", id: 5}),
+		p2 = new Person({foo: "bar3", id: 4});
+
 	p.hookup( div1[0] );
 	p.hookup( div2[0] );
 	p2.hookup( div3[0] );
-	var models = div1.add(div2).add(div3).instances();
+
+	var divs = div1.add(div2).add(div3),
+		models = divs.instances();
+
 	equals(p, models[0], "gets models" )
 	equals(p2, models[1], "gets models" )
 	equals(2, models.length, "gets models" )
+
+	$("#qunit-test-area").empty()
 })
 
 
@@ -210,28 +221,28 @@ test("models", function(){
 
 
 test("async setters", function(){
-	
+
 	/*
 	$.Model("Test.AsyncModel",{
 		setName : function(newVal, success, error){
-			
-			
+
+
 			setTimeout(function(){
 				success(newVal)
 			}, 100)
 		}
 	});
-	
+
 	var model = new Test.AsyncModel({
 		name : "justin"
 	});
 	equals(model.name, "justin","property set right away")
-	
+
 	//makes model think it is no longer new
 	model.id = 1;
-	
+
 	var count = 0;
-	
+
 	model.bind('name', function(ev, newName){
 		equals(newName, "Brian",'new name');
 		equals(++count, 1, "called once");
@@ -245,14 +256,14 @@ test("async setters", function(){
 
 test("binding", 2,function(){
 	var inst = new Person({foo: "bar"});
-	
+
 	inst.bind("foo", function(ev, val){
-		ok(true,"updated")	
+		ok(true,"updated")
 		equals(val, "baz", "values match")
 	});
-	
+
 	inst.attr("foo","baz");
-	
+
 });
 
 test("error binding", 1, function(){
@@ -269,8 +280,8 @@ test("error binding", 1, function(){
 		equals(error, "no name", "error message provided")
 	})
 	school.attr("name","");
-	
-	
+
+
 })
 
 test("auto methods",function(){
@@ -286,24 +297,24 @@ test("auto methods",function(){
 	School.findAll({type:"schools"}, function(schools){
 		ok(schools,"findAll Got some data back");
 		equals(schools[0].constructor.shortName,"School","there are schools")
-		
+
 		School.findOne({id : "4"}, function(school){
 			ok(school,"findOne Got some data back");
 			equals(school.constructor.shortName,"School","a single school");
-			
-			
+
+
 			new School({name: "Highland"}).save(function(school){
 				equals(school.name,"Highland","create gets the right name")
 				school.attr({name: "LHS"}).save(function(school){
 					start();
 					equals(school.name,"LHS","create gets the right name")
-					
+
 					$.fixture.on = true;
 				})
 			})
-			
+
 		})
-		
+
 	})
 })
 
@@ -342,34 +353,34 @@ test("Model events" , function(){
 			return $.Deferred().resolve()
 		}
 	},{});
-	
+
 	stop();
 	$([Test.Event]).bind('created',function(ev, passedItem){
-		
+
 		ok(this === Test.Event, "got model")
 		ok(passedItem === item, "got instance")
 		equals(++order, 1, "order");
 		passedItem.attr({}).save();
-		
+
 	}).bind('updated', function(ev, passedItem){
 		equals(++order, 2, "order");
 		ok(this === Test.Event, "got model")
 		ok(passedItem === item, "got instance")
-		
+
 		passedItem.destroy({});
-		
+
 	}).bind('destroyed', function(ev, passedItem){
 		equals(++order, 3, "order");
 		ok(this === Test.Event, "got model")
 		ok(passedItem === item, "got instance")
-		
+
 		start();
-		
+
 	})
-	
+
 	var item = new Test.Event();
 	item.save();
-	
+
 });
 
 
@@ -437,7 +448,7 @@ test("removeAttr test", function(){
 	var person = new Person({foo: "bar"})
 	equals(person.foo, "bar", "property set");
 	person.removeAttr('foo')
-	
+
 	equals(person.foo, undefined, "property removed");
 	var attrs = person.attr()
 	equals(attrs.foo, undefined, "attrs removed");
@@ -455,10 +466,10 @@ test("save error args", function(){
 	var Foo = $.Model('Testin.Models.Foo',{
 		create : "/testinmodelsfoos.json"
 	},{
-		
+
 	})
 	var st = '{type: "unauthorized"}';
-	
+
 	$.fixture("/testinmodelsfoos.json", function(headers, respond) {
 		respond(401,st);
 	});
@@ -470,25 +481,25 @@ test("save error args", function(){
 		ok(jQXHR.getResponseHeader,"jQXHR object")
 		start()
 	})
-	
-	
-	
+
+
+
 });
 
 test("hookup and elements", function(){
 	$.Model('Escaper',{
 		escapeIdentity : true
 	},{});
-	
+
 	var ul = $('<ul><li></li></ul>'),
 		li = ul.find('li');
-	
+
 	var esc = new Escaper({id: " some crazy #/ %ing stuff"});
-	
+
 	li.instance(esc);
-	
+
 	var res  = esc.elements(ul);
-	
+
 	equals(res.length,1, "1 item")
 	ok(res[0] === li[0], "items are equal")
 })
@@ -497,41 +508,41 @@ test('aborting create update and destroy', function(){
 	stop();
 	var delay = $.fixture.delay;
 	$.fixture.delay = 1000;
-	
+
 	$.fixture("POST /abort", function(){
 		ok(false, "we should not be calling the fixture");
 		return {};
 	})
-	
+
 	$.Model('Abortion',{
 		create : "POST /abort",
 		update : "POST /abort",
 		destroy: "POST /abort"
 	},{});
-	
+
 	var deferred = new Abortion({name: "foo"}).save(function(){
 		ok(false, "success create")
 	}, function(){
 		ok(true, "create error called");
-		
-		
+
+
 		deferred = new Abortion({name: "foo",id: 5})
 			.save(function(){},function(){
 				ok(true, "error called in update")
-				
+
 				deferred = new Abortion({name: "foo",id: 5}).destroy(function(){},
 					function(){
 						ok(true,"destroy error called")
 						$.fixture.delay = delay;
 						start();
 					})
-				
+
 				setTimeout(function(){
 					deferred.abort();
 				},10)
-				
+
 			})
-		
+
 		setTimeout(function(){
 		deferred.abort();
 	},10)
@@ -539,12 +550,12 @@ test('aborting create update and destroy', function(){
 	setTimeout(function(){
 		deferred.abort();
 	},10)
-	
-	
+
+
 });
 
 test("object definitions", function(){
-	
+
 	$.Model('ObjectDef',{
 		findAll : {
 			url : "/test/place"
@@ -554,16 +565,16 @@ test("object definitions", function(){
 			timeout : 1000
 		},
 		create : {
-			
+
 		},
 		update : {
-			
+
 		},
 		destroy : {
-			
+
 		}
 	},{})
-	
+
 	$.fixture("GET /objectdef/{id}", function(original){
 		equals(original.timeout,1000,"timeout set");
 		return {yes: true}
