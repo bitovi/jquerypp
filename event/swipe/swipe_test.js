@@ -38,23 +38,25 @@ steal('funcunit/qunit', 'funcunit/syn', 'jquerypp/event/swipe', function (QUnit,
 
 
 	test("swipe left event", 2, function () {
+		var swipe = {};
 
 		$("#outer").bind("swipe",function () {
-			ok(true, "swipe called");
+			swipe.general = true;
 		}).bind("swipeleft",function () {
-				ok(true, "swipe left")
-			}).bind("swiperight", function () {
-				ok(false, "swiperight")
-			});
+			swipe.left = true;
+		});
+
 		stop();
+
 		Syn.drag({
 			from : "50x20",
 			to : "20x20",
 			duration : 100
 		}, "outer", function () {
 			start();
+			ok(swipe.general, 'swipe')
+			ok(swipe.left, "swipe left")
 		})
-
 	});
 
 
