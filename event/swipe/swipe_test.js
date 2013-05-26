@@ -21,23 +21,18 @@ steal('funcunit/qunit', 'funcunit/syn', 'jquerypp/event/swipe', function (QUnit,
 			swipe = {};
 
 			$("#outer").bind("swipe",function () {
-				console.log('swipe')
 				swipe.general = true;
 			})
 			.bind("swipeleft",function () {
-				console.log('left')
 				swipe.left = true;
 			})
 			.bind("swiperight", function () {
-				console.log('right')
 				swipe.right = true;
 			})
 			.bind("swipeup", function () {
-				console.log('up')
 				swipe.up = true;
 			})
 			.bind("swipedown", function () {
-				console.log('down')
 				swipe.down = true;
 			});
 		}
