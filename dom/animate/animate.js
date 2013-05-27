@@ -212,7 +212,15 @@ steal('jquery', 'jquerypp/dom/styles', function ($) {
 			return oldanimate.apply(this, arguments);
 		}
 
-		var optall = $.speed(speed, easing, callback);
+		var optall = $.speed(speed, easing, callback),
+			overflow = [];
+
+		// if we are animating height and width properties, set overflow to hidden, and save
+		// the previous overflow information to replace with when done.
+		if("height" in props || "width" in props) {
+			overflow = [this[0].style.overflow, this[0].style.overflowX, this[0].style.overflowY];
+			this.css('overflow', 'hidden');
+		}
 
 		// Add everything to the animation queue
 		this.queue(optall.queue, function(done) {
@@ -234,6 +242,14 @@ steal('jquery', 'jquerypp/dom/styles', function ($) {
 				// The animation end event handler.
 				// Will be called both on animation end and after calling .stop()
 				animationEnd = function (currentCSS, exec) {
+					// As long as we don't stop mid animation, then we will replace 
+					// the overflow values of the element being animated.
+					if(!exec) {
+						self[0].style.overflow = overflow[0];
+						self[0].style.overflowX = overflow[1];
+						self[0].style.overflowY = overflow[2];
+					}
+
 					self.css(currentCSS);
 					
 					self.css(addPrefix({
