@@ -12,7 +12,7 @@ var isPhantom = /Phantom/.test(navigator.userAgent),
 			event;
 		return {
 			time: (new Date).getTime(),
-			coords: [ d.pageX, d.pageY ],
+			coords: [ d.clientX, d.clientY ],
 			origin: $( event.target )
 		};
 	};
@@ -24,7 +24,7 @@ var swipe = $.event.swipe = {
 	/**
 	 * @attribute delay
 	 * Delay is the upper limit of time the swipe motion can take in milliseconds.  This defaults to 500.
-	 * 
+	 *
 	 * A user must perform the swipe motion in this much time.
 	 */
 	delay : 500,
@@ -74,7 +74,7 @@ $.event.setupHelper( [
 		delegate = ev.delegateTarget || ev.currentTarget,
 		selector = ev.handleObj.selector,
 		entered = this;
-	
+
 	function moveHandler(event){
 		if ( !start ) {
 			return;
@@ -117,7 +117,7 @@ $.event.setupHelper( [
 					$.each($.event.find(delegate, events, selector), function(){
 						this.call(entered, ev, {start : start, end: stop})
 					})
-				
+
 				}
 			}
 			// reset start and stop
