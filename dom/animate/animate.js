@@ -194,8 +194,9 @@ steal('jquery', 'jquerypp/dom/styles', function ($) {
 		};
 
 	/**
-	 * @function $.fn.animate
-	 * @parent $.animate
+	 * @parent jQuery.animate
+	 * @function jQuery.fn.animate
+	 * @signature $(element).animate(options)
 	 *
 	 * Animate CSS properties using native CSS animations, if possible.
 	 * Uses the original [$.fn.animate()](http://api.$.com/animate/) otherwise.
@@ -235,7 +236,7 @@ steal('jquery', 'jquerypp/dom/styles', function ($) {
 				// Will be called both on animation end and after calling .stop()
 				animationEnd = function (currentCSS, exec) {
 					self.css(currentCSS);
-					
+
 					self.css(addPrefix({
 						"animation-duration" : "",
 						"animation-name" : "",

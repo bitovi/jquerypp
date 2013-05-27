@@ -1,5 +1,17 @@
-@page jQuery.animate
+@function jQuery.fn.animate jQuery.animate
 @parent jquerypp
+@signature `$(element).animate(options)`
+
+Animate CSS properties using native CSS animations, if possible.
+Uses the original [$.fn.animate()](http://api.$.com/animate/) otherwise.
+
+@param {Object} props The CSS properties to animate
+@param {Integer|String|Object} [speed=400] The animation duration in ms.
+Will use $.fn.animate if a string or object is passed
+@param {Function} [callback] A callback to execute once the animation is complete
+@return {jQuery} The jQuery element
+
+@body
 
 `jQuery.animate` overwrites `[jQuery.fn.animate jQuery.fn.animate(properties, duration, callback)]`
 and enables it to animate properties using CSS 3 animations, if supported.
@@ -46,9 +58,3 @@ the animation has been done using CSS animations:
         console.log('Used jQuery animation');
       }
     });
-
-## Demo
-
-The following demo is based on the [jQuery .animate reference](http://api.jquery.com/animate/) but uses CSS animations:
-
-@demo jquerypp/dom/animate/animate.html 400
