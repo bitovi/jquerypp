@@ -45,9 +45,10 @@ steal('jquery', 'jquerypp/dom/styles', function ($) {
 		},
 
 		// Returns whether the animation should be passed to the original $.fn.animate.
-		passThrough = function (props, ops) {
+		passThrough = function (props, ops, easing, callback) {
 			var nonElement = !(this[0] && this[0].nodeType),
-				isInline = !nonElement && $(this).css("display") === "inline" && $(this).css("float") === "none";
+				isInline = !nonElement && $(this).css("display") === "inline" && $(this).css("float") === "none",
+				browser = getBrowser();
 
 			for (var name in props) {
 				// jQuery does something with these values
@@ -63,11 +64,11 @@ steal('jquery', 'jquerypp/dom/styles', function ($) {
 				}
 			}
 
-			return props.jquery === true || getBrowser() === null ||
+			return props.jquery === true || browser === null || browser.prefix === '-o-' || 
 				// Animating empty properties
 				$.isEmptyObject(props) ||
 				// We can't do custom easing
-				(ops && ops.length == 4) || (ops && typeof ops[2] == 'string') ||
+				(easing || easing && typeof easing == 'string') ||
 				// Second parameter is an object - we can only handle primitives
 				$.isPlainObject(ops) ||
 				// Inline and non elements
@@ -92,10 +93,6 @@ steal('jquery', 'jquerypp/dom/styles', function ($) {
 							transitionEnd : 'transitionEnd',
 							prefix : ''
 						},
-//						'OTransition': {
-//							transitionEnd : 'oTransitionEnd',
-//							prefix : '-o-'
-//						},
 //						'MSTransition': {
 //							transitionEnd : 'msTransitionEnd',
 //							prefix : '-ms-'
@@ -107,15 +104,20 @@ steal('jquery', 'jquerypp/dom/styles', function ($) {
 						'WebkitTransition': {
 							transitionEnd : 'webkitAnimationEnd',
 							prefix : '-webkit-'
+						},
+						'OTransition': {
+							transitionEnd : 'oTransitionEnd',
+							prefix : '-o-'
 						}
 					}
 
 				for(t in transitions){
-					if( el.style[t] !== undefined ){
+					if( t in el.style ){
 						browser = transitions[t];
 					}
 				}
 			}
+
 			return browser;
 		},
 
@@ -213,7 +215,15 @@ steal('jquery', 'jquerypp/dom/styles', function ($) {
 			return oldanimate.apply(this, arguments);
 		}
 
-		var optall = $.speed(speed, easing, callback);
+		var optall = $.speed(speed, easing, callback),
+			overflow = [];
+
+		// if we are animating height and width properties, set overflow to hidden, and save
+		// the previous overflow information to replace with when done.
+		if("height" in props || "width" in props) {
+			overflow = [this[0].style.overflow, this[0].style.overflowX, this[0].style.overflowY];
+			this.css('overflow', 'hidden');
+		}
 
 		// Add everything to the animation queue
 		this.queue(optall.queue, function(done) {
@@ -235,6 +245,17 @@ steal('jquery', 'jquerypp/dom/styles', function ($) {
 				// The animation end event handler.
 				// Will be called both on animation end and after calling .stop()
 				animationEnd = function (currentCSS, exec) {
+					// As long as we don't stop mid animation, then we will replace 
+					// the overflow values of the element being animated.
+					if(!exec) {
+						self[0].style.overflow = overflow[0];
+						self[0].style.overflowX = overflow[1];
+						self[0].style.overflowY = overflow[2];
+					}
+					else {
+						self.css('overflow', '');
+					}
+
 					self.css(currentCSS);
 
 					self.css(addPrefix({
