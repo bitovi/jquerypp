@@ -45,7 +45,7 @@ steal('jquery', 'jquerypp/dom/styles', function ($) {
 		},
 
 		// Returns whether the animation should be passed to the original $.fn.animate.
-		passThrough = function (props, ops) {
+		passThrough = function (props, ops, easing, callback) {
 			var nonElement = !(this[0] && this[0].nodeType),
 				isInline = !nonElement && $(this).css("display") === "inline" && $(this).css("float") === "none";
 
@@ -67,7 +67,7 @@ steal('jquery', 'jquerypp/dom/styles', function ($) {
 				// Animating empty properties
 				$.isEmptyObject(props) ||
 				// We can't do custom easing
-				(ops && ops.length == 4) || (ops && typeof ops[2] == 'string') ||
+				(easing || easing && typeof easing == 'string') ||
 				// Second parameter is an object - we can only handle primitives
 				$.isPlainObject(ops) ||
 				// Inline and non elements
