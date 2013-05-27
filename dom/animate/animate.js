@@ -249,6 +249,9 @@ steal('jquery', 'jquerypp/dom/styles', function ($) {
 						self[0].style.overflowX = overflow[1];
 						self[0].style.overflowY = overflow[2];
 					}
+					else {
+						self.css('overflow', '');
+					}
 
 					self.css(currentCSS);
 					
