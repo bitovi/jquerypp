@@ -47,7 +47,8 @@ steal('jquery', 'jquerypp/dom/styles', function ($) {
 		// Returns whether the animation should be passed to the original $.fn.animate.
 		passThrough = function (props, ops, easing, callback) {
 			var nonElement = !(this[0] && this[0].nodeType),
-				isInline = !nonElement && $(this).css("display") === "inline" && $(this).css("float") === "none";
+				isInline = !nonElement && $(this).css("display") === "inline" && $(this).css("float") === "none",
+				browser = getBrowser();
 
 			for (var name in props) {
 				// jQuery does something with these values
@@ -63,7 +64,7 @@ steal('jquery', 'jquerypp/dom/styles', function ($) {
 				}
 			}
 
-			return props.jquery === true || getBrowser() === null ||
+			return props.jquery === true || browser === null || browser.prefix === '-o-' || 
 				// Animating empty properties
 				$.isEmptyObject(props) ||
 				// We can't do custom easing
@@ -92,10 +93,6 @@ steal('jquery', 'jquerypp/dom/styles', function ($) {
 							transitionEnd : 'transitionEnd',
 							prefix : ''
 						},
-//						'OTransition': {
-//							transitionEnd : 'oTransitionEnd',
-//							prefix : '-o-'
-//						},
 //						'MSTransition': {
 //							transitionEnd : 'msTransitionEnd',
 //							prefix : '-ms-'
@@ -107,15 +104,20 @@ steal('jquery', 'jquerypp/dom/styles', function ($) {
 						'WebkitTransition': {
 							transitionEnd : 'webkitAnimationEnd',
 							prefix : '-webkit-'
+						},
+						'OTransition': {
+							transitionEnd : 'oTransitionEnd',
+							prefix : '-o-'
 						}
 					}
 
 				for(t in transitions){
-					if( el.style[t] !== undefined ){
+					if( t in el.style ){
 						browser = transitions[t];
 					}
 				}
 			}
+
 			return browser;
 		},
 
