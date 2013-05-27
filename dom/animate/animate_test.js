@@ -1,4 +1,4 @@
-steal('jquery', 'jquerypp/dom/animate', 'funcunit/qunit', 'qunit.css', function ($) {
+steal('jquery', 'jquerypp/dom/animate', 'funcunit/qunit', './qunit.css', function ($) {
 
 	module("jquerypp/dom/animate");
 
