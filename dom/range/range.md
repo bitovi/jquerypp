@@ -1,6 +1,7 @@
-@page jQuery.Range
+@constructor jQuery.Range JQuery.Range
 @parent jquerypp
 
+@body
 `jQuery.Range` provides text range helpers for creating, moving, and comparing ranges cross browser. You can get the currently selected range by calling [$.Range.current()](jQuery.Range.static.current) a new range can be created by passing
 
 - __undefined or null__ - returns a range with nothing selected
@@ -70,6 +71,6 @@ Consider an HTML element like
 
      //get the most common ancestor element
      var parent = range.parent();
-     
+
      //select the parent
      var range2 = new $.Range(parent);

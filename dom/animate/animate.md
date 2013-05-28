@@ -1,6 +1,7 @@
-@function jQuery.fn.animate jQuery.animate
+@function jQuery.fn.animate jQuery.fn.animate
 @parent jquerypp
-@signature `$(element).animate(options)`
+
+@signature `jQuery(element).animate(options)`
 
 Animate CSS properties using native CSS animations, if possible.
 Uses the original [$.fn.animate()](http://api.$.com/animate/) otherwise.

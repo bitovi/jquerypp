@@ -1,16 +1,18 @@
 steal('jquery', 'jquerypp/dom/compare', function ($) {
 
+	/**
+	 * @page jQuery.fn.range
+	 * @parent jQuery.Range
+	 * @signature `jQuery.fn.range()`
+	 *
+	 * @body
+	 * Returns a new [jQuery.Range] instance for the first selected element.
+	 *
+	 *     $('#content').range() //-> range
+	 *
+	 * @return {jQuery.Range} A jQuery.Range instance for the selected element
+	 */
 	$.fn.range =
-		/**
-		 * @function jQuery.fn.range
-		 * @parent jQuery.Range
-		 *
-		 * `$.fn.range` returns a new [jQuery.Range] instance for the first selected element.
-		 *
-		 *     $('#content').range() //-> range
-		 *
-		 * @return {$.Range} A $.Range instance for the selected element
-		 */
 			function () {
 			return $.Range(this[0])
 		}
@@ -37,8 +39,6 @@ steal('jquery', 'jquerypp/dom/compare', function ($) {
 		},
 		support = {};
 	/**
-	 * @Class jQuery.Range
-	 * @parent jQuery.Range
 	 *
 	 * Depending on the object passed, the selected text will be different.
 	 *
@@ -101,10 +101,18 @@ steal('jquery', 'jquerypp/dom/compare', function ($) {
 		}
 	};
 	/**
+	 * @add jQuery.Range
+	 */
+	//
+	/**
 	 * @static
 	 */
 	$.Range.
 	/**
+	 * @function jQuery.Range.static.current current
+	 * @signature `jQuery.Range.current([el])`
+	 *
+	 * @body
 	 * `$.Range.current([element])` returns the currently selected range
 	 * (using [window.getSelection](https://developer.mozilla.org/en/nsISelection)).
 	 *
@@ -133,7 +141,11 @@ steal('jquery', 'jquerypp/dom/compare', function ($) {
 		/** @prototype **/
 		{
 			/**
-			 * `range.moveToPoint(point)` moves the range end and start position to a specific point.
+			 * @function jQuery.Range.prototype.moveToPoint moveToPoint
+			 * @signature `range.moveToPoint([point])`
+			 *
+			 * @body
+			 * Moves the range end and start position to a specific point.
 			 * A point can be specified like:
 			 *
 			 *      //client coordinates
@@ -143,8 +155,8 @@ steal('jquery', 'jquerypp/dom/compare', function ($) {
 			 *      {pageX: 200, pageY: 300}
 			 *      {top: 200, left: 300}
 			 *
-			 * @param point The point to move the range to
-			 * @return {$.Range}
+			 * @param {Point} point The point to move the range to
+			 * @return {jQuery.Range}
 			 */
 			moveToPoint : function (point) {
 				var clientX = point.clientX, clientY = point.clientY
@@ -208,7 +220,11 @@ steal('jquery', 'jquerypp/dom/compare', function ($) {
 				return this.win || window;
 			},
 			/**
-			 * `range.overlaps([elRange])` returns `true` if any portion of these two ranges overlap.
+			 * @function jQuery.Range.prototype.overlaps overlaps
+			 * @signature `jQuery.range.overlaps([elRange])`
+			 *
+			 * @body
+			 * returns `true` if any portion of these two ranges overlap.
 			 *
 			 *     var foo = document.getElementById('foo');
 			 *
@@ -242,7 +258,11 @@ steal('jquery', 'jquerypp/dom/compare', function ($) {
 				return false;
 			},
 			/**
-			 * `range.collapse([toStart])` collapses a range to one of its boundary points.
+			 * @function jQuery.Range.prototype.collapse collapse
+			 * @signature `jQuery(el).range.collapse([toStart])`
+			 *
+			 * @body
+			 * Collapses a range to one of its boundary points.
 			 * See [range.collapse](https://developer.mozilla.org/en/DOM/range.collapse).
 			 *
 			 *     $('#foo').range().collapse()
@@ -256,7 +276,11 @@ steal('jquery', 'jquerypp/dom/compare', function ($) {
 				return this;
 			},
 			/**
-			 * `range.toString()` returns the text of the range.
+			 * @function jQuery.Range.prototype.toString toString
+			 * @signature `jQuery.range.toString()`
+			 *
+			 * @body
+			 * Returns the text of the range.
 			 *
 			 *     currentText = $.Range.current().toString()
 			 *
@@ -266,7 +290,11 @@ steal('jquery', 'jquerypp/dom/compare', function ($) {
 				return typeof this.range.text == "string" ? this.range.text : this.range.toString();
 			},
 			/**
-			 * `range.start([start])` gets or sets the start of the range.
+			 * @function jQuery.Range.prototype.start start
+			 * @signature `jQuery(el).range().start()`
+			 *
+			 * @body
+			 * Gets or sets the start of the range.
 			 *
 			 * If a value is not provided, start returns the range's starting container and offset like:
 			 *
@@ -355,7 +383,11 @@ steal('jquery', 'jquerypp/dom/compare', function ($) {
 
 			},
 			/**
-			 * `range.end([end])` gets or sets the end of the range.
+			 * @function jQuery.Range.prototype.end end
+			 * @signature `jQuery.range.end([end])`
+			 *
+			 * @body
+			 * Gets or sets the end of the range.
 			 * It takes similar options as [jQuery.Range::start start]:
 			 *
 			 * - __Object__ - an object with the new end container and offset like
@@ -434,7 +466,11 @@ steal('jquery', 'jquerypp/dom/compare', function ($) {
 				}
 			},
 			/**
-			 * `range.parent()` returns the most common ancestor element of
+			 * @function jQuery.Range.prototype.parent parent
+			 * @signature `jQuery.range.parent()`
+			 *
+			 * @body
+			 * Returns the most common ancestor element of
 			 * the endpoints in the range. This will return a text element if the range is
 			 * within a text element. In this case, to get the containing element use this:
 			 *
@@ -469,7 +505,11 @@ steal('jquery', 'jquerypp/dom/compare', function ($) {
 				}
 			},
 			/**
-			 * `range.rect([from])` returns the bounding rectangle of this range.
+			 * @function jQuery.Range.prototype.rect rect
+			 * @signature `jQuery.range.rect([from])`
+			 *
+			 * @body
+			 * Returns the bounding rectangle of this range.
 			 *
 			 * @param {String} [from] - where the coordinates should be
 			 * positioned from.  By default, coordinates are given from the client viewport.
@@ -493,7 +533,11 @@ steal('jquery', 'jquerypp/dom/compare', function ($) {
 				return rect;
 			},
 			/**
-			 * `range.rects(from)` returns the client rects.
+			 * @function jQuery.Range.prototype.rects rects
+			 * @signature `jQuery.range.rects([from])`
+			 *
+			 * @body
+			 * returns the client rects.
 			 *
 			 * @param {String} [from] how the rects coordinates should be given (viewport or page).  Provide 'page' for
 			 * rect coordinates from the page.
@@ -560,9 +604,11 @@ steal('jquery', 'jquerypp/dom/compare', function ($) {
 			range = $.Range().range;
 
 		/**
-		 * @function compare
+		 * @function jQuery.Range.prototype.compare compare
+		 * @signature `jQuery.range.compare([type], [compareRange])`
 		 *
-		 * `range.compare(type, compareRange)` compares one range to another range.
+		 * @body
+		 * Compares one range to another range.
 		 *
 		 * ## Example
 		 *
@@ -602,9 +648,11 @@ steal('jquery', 'jquerypp/dom/compare', function ($) {
 			}
 
 		/**
-		 * @function move
+		 * @function jQuery.Range.prototype.move move
+		 * @signature `jQuery.range.move([referenceRange])`
 		 *
-		 * `range.move([referenceRange])` moves the endpoints of a range relative to another range.
+		 * @body
+		 * Moves the endpoints of a range relative to another range.
 		 *
 		 *     // Move the current selection's end to the
 		 *     // end of the #highlight element
@@ -653,7 +701,11 @@ steal('jquery', 'jquerypp/dom/compare', function ($) {
 
 		fn.
 		/**
-		 * `range.clone()` clones the range and returns a new $.Range
+		 * @function jQuery.Range.prototype.clone clone
+		 * @signature `jQuery.range.clone()`
+		 *
+		 * @body
+		 * Clones the range and returns a new $.Range
 		 * object:
 		 *
 		 *      var range = new $.Range(document.getElementById('text'));
@@ -669,9 +721,11 @@ steal('jquery', 'jquerypp/dom/compare', function ($) {
 
 		fn.
 		/**
-		 * @function
+		 * @function jQuery.Range.prototype.select select
+		 * @signature `jQuery.range.select([el])`
 		 *
-		 * `range.select([el])` selects an element with this range.  If nothing
+		 * @body
+		 * Selects an element with this range.  If nothing
 		 * is provided, makes the current range appear as if the user has selected it.
 		 *
 		 * This works with text nodes. For example with:
@@ -773,15 +827,15 @@ steal('jquery', 'jquerypp/dom/compare', function ($) {
 		callMove = function (container, offset, howMany) {
 			var mover = howMany < 0 ?
 				getPrevTextNode : getNextTextNode;
-			
+
 			// find the text element
 			if( !isText(container) ){
 				// sometimes offset isn't actually an element
-				container = container.childNodes[offset] ? 
+				container = container.childNodes[offset] ?
 					container.childNodes[offset] :
 					// if this happens, use the last child
 					container.lastChild;
-					
+
 				if( !isText(container) ) {
 					container = mover(container)
 				}
@@ -792,7 +846,7 @@ steal('jquery', 'jquerypp/dom/compare', function ($) {
 				} else {
 					return move(container, offset + howMany)
 				}
-				
+
 			}
 		},
 		// Moves howMany characters from the start of
