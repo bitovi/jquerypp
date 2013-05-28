@@ -1,9 +1,9 @@
-@function jQuery.fn.selection jQuery.selection
+@function jQuery.selection jQuery.selection
 @parent jquerypp
 @signature `jQuery(el).selection()`
 
 @body
-`jQuery.selection` adds `[jQuery.fn.selection]` to get or set the current selection.
+`jQuery.selection` adds `[jQuery.selection]` to get or set the current selection.
 
 ## Setting
 
@@ -41,4 +41,4 @@ Selection works with all elements. If you want to get selection information of t
 
 This demo shows setting the selection in various elements
 
-@demo jquerypp/dom/selection/selection.html
+@demo jquerypp/dom/selection/selection.html 300

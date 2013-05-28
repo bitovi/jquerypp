@@ -32,4 +32,4 @@ allow custom styling.
 
 ## Demo
 
-@demo jquerypp/dom/dimensions/dimensions.html
+@demo jquerypp/dom/dimensions/dimensions.html 550

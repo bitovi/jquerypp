@@ -27,4 +27,4 @@ It is also possible to set form values by passing an object:
 
 ## Demo
 
-@demo jquerypp/dom/form_params/form_params.html
+@demo jquerypp/dom/form_params/form_params.html 350

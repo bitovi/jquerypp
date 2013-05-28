@@ -21,8 +21,8 @@ that do not leak.
 
 ## Quick Demo
 
-@demo jquerypp/event/destroyed/destroyed.html 
+@demo jquerypp/event/destroyed/destroyed.html 200
 
 ## More Involved Demo
 
-@demo jquerypp/event/destroyed/destroyed_menu.html
+@demo jquerypp/event/destroyed/destroyed_menu.html 

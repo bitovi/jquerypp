@@ -84,4 +84,4 @@ Each tab panel contains a form to input data and has a `Dirtybit` control attach
       }
     });
 
-@demo jquerypp/event/pause/pause.html
+@demo jquerypp/event/pause/pause.html 300

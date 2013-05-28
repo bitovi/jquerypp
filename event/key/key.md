@@ -49,4 +49,4 @@ characters on *keydown* and *keyup*.
 
 ## Demo
 
-@demo jquerypp/event/key/key.html
+@demo jquerypp/event/key/key.html 200
