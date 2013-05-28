@@ -1,4 +1,4 @@
-@function jQuery.fn.animate jQuery.fn.animate
+@function jQuery.animate jQuery.animate
 @parent jquerypp
 
 @signature `jQuery(element).animate(options)`

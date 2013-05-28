@@ -1,4 +1,4 @@
-@page jQuery.formParams
+@page jQuery.formParams jQuery.formParams
 @parent jquerypp
 
 `jQuery.formParams` adds `[jQuery.fn.formParams jQuery.fn.formParams(convert)]` which serializes a form into a JavaScript object. It creates nested objects by using bracket notation in the form element name. If *convert* is `true`, values that look like numbers or booleans will be converted and empty strings won't be added to the object. For a form like this:
