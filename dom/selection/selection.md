@@ -1,6 +1,8 @@
-@page jQuery.selection
+@function jQuery.fn.selection jQuery.selection
 @parent jquerypp
+@signature `jQuery(el).selection()`
 
+@body
 `jQuery.selection` adds `[jQuery.fn.selection]` to get or set the current selection.
 
 ## Setting
@@ -16,7 +18,7 @@ Using `jQuery.fn.selection` by providing a start and end offset:
 ## Getting
 
 A call without any parameters will return the current selection:
- 
+
 	  $('#text').selection() // -> { start : 8, end : 12, width : 4 }
 
 Where the returned object contains:
@@ -32,11 +34,11 @@ The selected text can be retrieved like this:
 	  selected // -> some
 
 Selection works with all elements. If you want to get selection information of the document:
- 
+
     $(document.body).selection();
-     
+
 ## Demo
- 
+
 This demo shows setting the selection in various elements
- 
-@demo jquerypp/dom/selection/selection.html
+
+@demo jmvc/jquerypp/dom/selection/selection.html

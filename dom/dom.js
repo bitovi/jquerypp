@@ -1,10 +1,8 @@
 /**
-@page dom DOM Helpers
-@parent jquerypp
 @description jQuery DOM extension.
 
-JavaScriptMVC adds a bunch of useful 
-jQuery extensions for the dom.  Check them out on the left. 
+JavaScriptMVC adds a bunch of useful
+jQuery extensions for the dom.  Check them out on the left.
 
 ## [dimensions Dimensions]
 
@@ -21,13 +19,13 @@ setting the dimensions of elements.
 Set and get cookie values:
 
     $.cookie('cookie','value');
-    
+
 ## [jQuery.fixture Fixture]
 
 Simulate Ajax responses.
 
     $.fixture("/services/tasks.php','fixtures/tasks.json');
-    
+
 Works with jQuery's Ajax converters!
 
 ## [jQuery.fn.compare Compare]
@@ -35,7 +33,7 @@ Works with jQuery's Ajax converters!
 Compare the location of two elements rapidly.
 
     $('#foo').compare($('#bar')) & 2 // true if #bar is before #foo
-    
+
 ## [jQuery.fn.styles CurStyles]
 
 Get multiple css properties quickly.
@@ -47,14 +45,14 @@ Get multiple css properties quickly.
 Serializes a form into a JSON-like object:
 
     $('form').formParams() //-> {name: 'Justin', favs: ['JS','Ruby']}
-    
+
 ## [jQuery.fn.selection Selection]
 
 Gets or sets the current text selection.
 
     // gets selection info
     $('pre').selection() //-> {start: 22, end: 57, range: range}
-    
+
     // sets the selection
     $('div').selection(20,22)
 
@@ -63,13 +61,13 @@ Gets or sets the current text selection.
 Returns elements that have a point within their boundaries.
 
     $('.drop').within(200,200) //-> drops that touch 200,200
-    
+
 ## [jQuery.Range Range]
 
 Text range utilities.
 
     $('#copy').range() //-> text range that has copy selected
-    
+
 ## [jQuery.route]
 
 Hash routes mapped to an [jQuery.Observe $.Observe].
