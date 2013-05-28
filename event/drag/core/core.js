@@ -30,13 +30,13 @@ steal('jquery', 'jquerypp/lang/vector', 'jquerypp/event/livehack', 'jquerypp/eve
 		};
 
 	/**
-	 * @class jQuery.Drag
+	 * @constructor jQuery.Drag
 	 * @parent jQuery.event.drag
 	 * @plugin jquerypp/event/drag
 	 * @download  http://jmvcsite.heroku.com/pluginify?plugins[]=jquerypp/event/drag/drag.js
 	 * @test jquerypp/event/drag/qunit.html
 	 *
-	 * The `$.Drag` constructor is never called directly but an instance of `$.Drag` is passed as the second argument
+	 * The `jQuery.Drag` constructor is never called directly but an instance of `jQuery.Drag` is passed as the second argument
 	 * to the `dragdown`, `draginit`, `dragmove`, `dragend`, `dragover` and `dragout` event handlers:
 	 *
 	 *      $('#dragger').on('draginit', function(el, drag) {
@@ -46,13 +46,18 @@ steal('jquery', 'jquerypp/lang/vector', 'jquerypp/event/livehack', 'jquerypp/eve
 	$.Drag = function() {};
 
 	/**
-	 * @Static
+	 * @static
 	 */
 	$.extend($.Drag, {
 		lowerName: "drag",
 		current: null,
 		distance: 0,
 		/**
+		 * @function jQuery.Drag.mousedown
+		 * @parent jQuery.Drag.static
+		 * 
+		 * @body
+		 * 
 		 * Called when someone mouses down on a draggable object.
 		 * Gathers all callback functions and creates a new Draggable.
 		 * @hide
@@ -128,7 +133,10 @@ steal('jquery', 'jquerypp/lang/vector', 'jquerypp/event/livehack', 'jquerypp/eve
 			}
 		},
 		/**
-		 * @attribute element
+		 * @property jQuery.Drag.prototype.element element
+		 * @parent jQuery.Drag.prototype
+		 *
+		 * @body
 		 * A reference to the element that is being dragged. For example:
 		 *
 		 *      $('.draggable').on('draginit', function(ev, drag) {
@@ -238,7 +246,10 @@ steal('jquery', 'jquerypp/lang/vector', 'jquerypp/event/livehack', 'jquerypp/eve
 			this.event = event;
 
 			/**
-			 * @attribute mouseElementPosition
+			 * @property jQuery.Drag.prototype.mouseElementPosition mouseElementPosition
+			 * @parent jQuery.Drag.prototype
+			 *
+			 * @body
 			 * The position of start of the cursor on the element
 			 */
 			this.mouseElementPosition = this.mouseStartPosition.minus(this.element.offsetv()); //where the mouse is on the Element
@@ -299,7 +310,8 @@ steal('jquery', 'jquerypp/lang/vector', 'jquerypp/event/livehack', 'jquerypp/eve
 			}
 			clearSelection();
 			/**
-			 * @attribute location
+			 * @property {[jQuery.Vector]} jQuery.Drag.location location
+			 * @property location
 			 * `drag.location` is a [jQuery.Vector] specifying where the element should be in the page.  This
 			 * takes into account the start position of the cursor on the element.
 			 *
@@ -617,8 +629,10 @@ steal('jquery', 'jquerypp/lang/vector', 'jquerypp/event/livehack', 'jquerypp/eve
 	 */
 	event.setupHelper([
 	/**
-	 * @attribute dragdown
+	 * @function jQuery.event.special.dragdown dragdown
 	 * @parent jQuery.event.drag
+	 *
+	 * @body
 	 *
 	 * `dragdown` is called when a drag movement has started on a mousedown.
 	 * The event handler gets an instance of [jQuery.Drag] passed as the second
@@ -650,8 +664,10 @@ steal('jquery', 'jquerypp/lang/vector', 'jquerypp/event/livehack', 'jquerypp/eve
 	 */
 		'dragdown',
 	/**
-	 * @attribute draginit
+	 * @function jQuery.event.special.draginit draginit
 	 * @parent jQuery.event.drag
+	 *
+	 * @body
 	 *
 	 * `draginit` is triggered when the drag motion starts. Use it to customize the drag behavior
 	 * using the [jQuery.Drag] instance passed as the second parameter:
@@ -665,8 +681,10 @@ steal('jquery', 'jquerypp/lang/vector', 'jquerypp/event/livehack', 'jquerypp/eve
 	 */
 		'draginit',
 	/**
-	 * @attribute dragover
+	 * @function jQuery.event.special.dragover dragover
 	 * @parent jQuery.event.drag
+	 *
+	 * @body
 	 *
 	 * `dragover` is triggered when a drag is over a [jQuery.event.drop drop element].
 	 * The event handler gets an instance of [jQuery.Drag] passed as the second
@@ -680,8 +698,10 @@ steal('jquery', 'jquerypp/lang/vector', 'jquerypp/event/livehack', 'jquerypp/eve
 	 */
 		'dragover',
 	/**
-	 * @attribute dragmove
+	 * @function jQuery.event.special.dragmove dragmove
 	 * @parent jQuery.event.drag
+	 *
+	 * @body
 	 *
 	 * `dragmove` is triggered when the drag element moves (similar to a mousemove).
 	 * The event handler gets an instance of [jQuery.Drag] passed as the second
@@ -699,8 +719,10 @@ steal('jquery', 'jquerypp/lang/vector', 'jquerypp/event/livehack', 'jquerypp/eve
 	 */
 		'dragmove',
 	/**
-	 * @attribute dragout
+	 * @function jQuery.event.special.dragout dragout
 	 * @parent jQuery.event.drag
+	 *
+	 * @body
 	 *
 	 * `dragout` is called when the drag leaves a drop point.
 	 * The event handler gets an instance of [jQuery.Drag] passed as the second
@@ -715,8 +737,10 @@ steal('jquery', 'jquerypp/lang/vector', 'jquerypp/event/livehack', 'jquerypp/eve
 	 */
 		'dragout',
 	/**
-	 * @attribute dragend
+	 * @function jQuery.event.special.dragend dragend
 	 * @parent jQuery.event.drag
+	 *
+	 * @body
 	 *
 	 * `dragend` is called when the drag operation is completed.
 	 * The event handler gets an instance of [jQuery.Drag] passed as the second
@@ -728,8 +752,10 @@ steal('jquery', 'jquerypp/lang/vector', 'jquerypp/event/livehack', 'jquerypp/eve
 	 */
 		'dragend',
 	/**
-	 * @attribute dragcleanup
+	 * @function jQuery.event.special.dragcleanup dragcleanup
 	 * @parent jQuery.event.drag
+	 *
+	 * @body
 	 *
 	 * `dragcleanup` is called after dragend and revert (if applied)
 	 * The event handler gets an instance of [jQuery.Drag] passed as the second

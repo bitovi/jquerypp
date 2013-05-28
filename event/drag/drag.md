@@ -1,4 +1,4 @@
-@constructor jQuery.event.drag
+@page jQuery.event.drag jQuery.event.drag
 @parent jquerypp
 
 `jQuery.event.drag` provides drag events for jQuery.
@@ -59,4 +59,4 @@ The drag properties and methods:
 
 Now lets see some examples:
 
-@demo jmvc/jquerypp/event/drag/drag.html 1000
+@demo jquerypp/event/drag/drag.html 1000
