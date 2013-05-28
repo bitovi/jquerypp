@@ -39,7 +39,7 @@ The following example creates a fade-in effect using CSS animations:
 
     $('#element').css({
       opacity : 0
-    }).anifast({
+    }).animate({
       opacity : 1
     }, 1000, function() {
       console.log('Animation done');
@@ -51,7 +51,7 @@ the animation has been done using CSS animations:
     $('#element').css({
       opacity : 0,
       jquery : true
-    }).anifast({
+    }).animate({
       opacity : 1
     }, 1000, function(usedCss) {
       console.log('Animation done');
