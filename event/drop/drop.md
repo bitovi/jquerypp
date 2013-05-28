@@ -1,5 +1,5 @@
 @page jQuery.event.drop
-@parent jquerypp
+@parent events
 
 `jQuery.event.drop` provides drop events for [jQuery.event.drag]. By binding to a 
 drop event, callback functions will be called during the corresponding phase of the drag motion.

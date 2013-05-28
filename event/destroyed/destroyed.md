@@ -1,5 +1,5 @@
 @page jQuery.event.destroyed
-@parent jquerypp
+@parent events
 
 `jQuery.event.destroyed` adds a `destroyed` event that is triggered when an element has been removed.
 

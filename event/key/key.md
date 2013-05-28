@@ -1,5 +1,5 @@
 @page jQuery.event.key
-@parent jquerypp
+@parent events
 
 `jQuery.event.key` adds a [jQuery.Event.prototype.keyName keyName()] method to the
 [jQuery event object](http://api.jquery.com/category/events/event-object/)
