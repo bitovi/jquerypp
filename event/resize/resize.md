@@ -1,5 +1,5 @@
 @page jQuery.event.resize
-@parent jquerypp
+@parent events
 
 `jQuery.event.resize` allows you to listen to `resize` events on arbitrary elements.
 Unlike other events that bubble from the target element to the document the `resize` event will propagate from the outside-in.
