@@ -1,4 +1,4 @@
-@constructor jQuery.event.drop
+@page jQuery.event.drop jQuery.event.drop
 @parent jquerypp
 
 `jQuery.event.drop` provides drop events for [jQuery.event.drag]. By binding to a 
@@ -18,8 +18,8 @@ drop events are supported:
 
 A drop instance supports the following methods:
 
-* [$.Drop::cache cache] - cache the position of the drop for faster hit detection
-* [$.Drop::cancel cancel] - cancel this drop point from responding to drags
+* [jQuery.Drop::cache cache] - cache the position of the drop for faster hit detection
+* [jQuery.Drop::cancel cancel] - cancel this drop point from responding to drags
 
 If you are adding drop points after the start of a drag motion, call [$.Drop.compile] to
 re-calculate all drop points.
@@ -34,7 +34,7 @@ Here's how to listen for when a drag moves over a drop:
 
 A bit more complex example:
 
-@demo jmvc/jquerypp/event/drop/drop.html 1000
+@demo jquerypp/event/drop/drop.html 1000
 
 
 ## How it works
