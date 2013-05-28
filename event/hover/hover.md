@@ -1,4 +1,4 @@
-@constructor jQuery.event.hover
+@page jQuery.event.hover jQuery.event.hover
 @parent jquerypp
 
 `jQuery.event.hover` provides delegate-able hover events.
@@ -41,4 +41,4 @@ Or you can adjust [jQuery.Hover.prototype.delay] and [jQuery.Hover.prototype.dis
 
 ## Demo
 
-@demo jmvc/jquerypp/event/hover/hover.html
+@demo jquerypp/event/hover/hover.html
