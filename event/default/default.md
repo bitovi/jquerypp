@@ -1,5 +1,6 @@
+@constructor jQuery.event.default
 @page jQuery.event.default
-@parent events
+@parent jquerypp
 
 `jQuery.event.default` allows you to perform default actions as a result of an event.
 
@@ -29,4 +30,4 @@ from being shown for some reason, they can call preventDefault to avoid showing 
 In this case, the application developer doesn't want to show the second 
 tab until the checkbox is checked. 
 
-@demo jquerypp/event/default/defaultjquery.html
+@demo jmvc/jquerypp/event/default/defaultjquery.html

@@ -1,5 +1,6 @@
+@constructor jQuery.event.pause
 @page jQuery.event.pause
-@parent events
+@parent jquerypp
 
 `jQuery.event.pause` adds the ability to pause and  resume events.
 
@@ -84,4 +85,4 @@ Each tab panel contains a form to input data and has a `Dirtybit` control attach
       }
     });
 
-@demo jquerypp/event/pause/pause.html
+@demo jmvc/jquerypp/event/pause/pause.html
