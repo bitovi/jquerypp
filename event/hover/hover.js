@@ -247,7 +247,7 @@ steal('jquery', 'jquerypp/event/livehack', function ($) {
 // Attach events
 	event.setupHelper([
 	/**
-	 * @function jQuery.event.hover.hoverinit hoverinit
+	 * @function jQuery.event.special.hoverinit hoverinit
 	 * @parent jQuery.event.hover
 	 *
 	 * @body
@@ -267,7 +267,7 @@ steal('jquery', 'jquerypp/event/livehack', function ($) {
 	 */
 		"hoverinit",
 	/**
-	 * @function jQuery.event.hover.hoverenter hoverenter
+	 * @function jQuery.event.special.hoverenter hoverenter
 	 * @parent jQuery.event.hover
 	 *
 	 * @body
@@ -281,7 +281,7 @@ steal('jquery', 'jquerypp/event/livehack', function ($) {
 	 */
 		"hoverenter",
 	/**
-	 * @function jQuery.event.hover.hoverleave hoverleave
+	 * @function jQuery.event.special.hoverleave hoverleave
 	 * @parent jQuery.event.hover
 	 *
 	 * @body
@@ -294,7 +294,7 @@ steal('jquery', 'jquerypp/event/livehack', function ($) {
 	 */
 		"hoverleave",
 	/**
-	 * @function jQuery.event.hover.hovermove hovermove
+	 * @function jQuery.event.special.hovermove hovermove
 	 * @parent jQuery.event.hover
 	 *
 	 * @body
