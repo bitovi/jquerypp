@@ -109,7 +109,7 @@ steal('jquery', function($){
 		 * @body
 		 * Returns the first value of the vector.
 		 * You can also access the same value through the following aliases the
-		 * [jQuery.Vector.prototype.left vector.left()] and [jQuery.Vector.prototype.left vector.width()]
+		 * vector.left() and vector.width()
 		 * aliases.
 		 *
 		 * For example:

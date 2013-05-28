@@ -195,20 +195,6 @@ steal('jquery', 'jquerypp/dom/styles', function ($) {
 			return name;
 		};
 
-	/**
-	 * @parent jQuery.animate
-	 * @function jQuery.fn.animate
-	 * @signature $(element).animate(options)
-	 *
-	 * Animate CSS properties using native CSS animations, if possible.
-	 * Uses the original [$.fn.animate()](http://api.$.com/animate/) otherwise.
-	 *
-	 * @param {Object} props The CSS properties to animate
-	 * @param {Integer|String|Object} [speed=400] The animation duration in ms.
-	 * Will use $.fn.animate if a string or object is passed
-	 * @param {Function} [callback] A callback to execute once the animation is complete
-	 * @return {jQuery} The jQuery element
-	 */
 	$.fn.animate = function (props, speed, easing, callback) {
 		//default to normal animations if browser doesn't support them
 		if (passThrough.apply(this, arguments)) {

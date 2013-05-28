@@ -11,12 +11,12 @@ behavior.
 
 The drag plugin allows you to listen to the following events:
 
-* `dragdown` - the mouse cursor is pressed down
-* `draginit` - the drag motion is started
-* `dragmove` - the drag is moved
-* `dragend` - the drag has ended
-* `dragover` - the drag is over a drop point
-* `dragout` - the drag moved out of a drop point
+* `[jQuery.event.special.dragdown dragdown]` - the mouse cursor is pressed down
+* `[jQuery.event.special.draginit draginit]` - the drag motion is started
+* `[jQuery.event.special.dragmove dragmove]` - the drag is moved
+* `[jQuery.event.special.dragend dragend]` - the drag has ended
+* `[jQuery.event.special.dragover dragover]` - the drag is over a drop point
+* `[jQuery.event.special.dragout dragout]` - the drag moved out of a drop point
 
 Just by binding on one of these events, you make
 the element dragable.  You can change the behavior of the drag

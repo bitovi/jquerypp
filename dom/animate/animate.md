@@ -4,7 +4,7 @@
 @signature `jQuery(element).animate(options)`
 
 Animate CSS properties using native CSS animations, if possible.
-Uses the original [$.fn.animate()](http://api.$.com/animate/) otherwise.
+Uses the original [$.fn.animate()](http://api.jquery.com/animate/) otherwise.
 
 @param {Object} props The CSS properties to animate
 @param {Integer|String|Object} [speed=400] The animation duration in ms.
