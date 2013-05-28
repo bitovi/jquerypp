@@ -49,8 +49,8 @@ var remove = function(ev){
 };
 
 // delegate on hover
-$('.hover').live('hoverenter',add);
-$('.hover').live('hoverleave', remove);
+$('.hover').on('hoverenter',add);
+$('.hover').on('hoverleave', remove);
 
 $('.hovers').bind('hoverinit',function(ev, hovered){
   hovered.delay(1000);
