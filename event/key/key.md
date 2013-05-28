@@ -1,5 +1,5 @@
-@page jQuery.event.key
-@parent events
+@constructor jQuery.event.key
+@parent jquerypp
 
 `jQuery.event.key` adds a [jQuery.Event.prototype.keyName keyName()] method to the
 [jQuery event object](http://api.jquery.com/category/events/event-object/)
@@ -49,4 +49,4 @@ characters on *keydown* and *keyup*.
 
 ## Demo
 
-@demo jquerypp/event/key/key.html
+@demo jmvc/jquerypp/event/key/key.html
