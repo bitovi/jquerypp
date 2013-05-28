@@ -1,5 +1,5 @@
 @page jQuery.event.hover
-@parent jquerypp
+@parent events
 
 `jQuery.event.hover` provides delegate-able hover events.
 A hover happens when the mouse stops moving over an element for a period of time.

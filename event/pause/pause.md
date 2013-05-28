@@ -1,5 +1,5 @@
 @page jQuery.event.pause
-@parent jquerypp
+@parent events
 
 `jQuery.event.pause` adds the ability to pause and  resume events.
 

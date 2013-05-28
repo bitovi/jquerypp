@@ -1,6 +1,6 @@
 /**
- * @page specialevents Special Events
- * @parent jquerymx
+ * @page events Special Events
+ * @parent jquerypp
  * @description Special events like drag-drop.
  * 
  * JavaScriptMVC provides a bunch of useful special events.  Find out more info on the left.  The following is a 

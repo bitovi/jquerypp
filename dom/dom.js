@@ -1,6 +1,6 @@
 /**
 @page dom DOM Helpers
-@parent jquerymx
+@parent jquerypp
 @description jQuery DOM extension.
 
 JavaScriptMVC adds a bunch of useful 
