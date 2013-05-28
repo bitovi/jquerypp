@@ -1,5 +1,4 @@
 @constructor jQuery.event.resize
-@page jQuery.event.resize
 @parent jquerypp
 
 `jQuery.event.resize` allows you to listen to `resize` events on arbitrary elements.

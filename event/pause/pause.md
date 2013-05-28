@@ -1,5 +1,4 @@
 @constructor jQuery.event.pause
-@page jQuery.event.pause
 @parent jquerypp
 
 `jQuery.event.pause` adds the ability to pause and  resume events.

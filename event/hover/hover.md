@@ -1,5 +1,4 @@
 @constructor jQuery.event.hover
-@page jQuery.event.hover
 @parent jquerypp
 
 `jQuery.event.hover` provides delegate-able hover events.

@@ -1,5 +1,4 @@
 @constructor jQuery.event.key
-@page jQuery.event.key
 @parent jquerypp
 
 `jQuery.event.key` adds a [jQuery.Event.prototype.keyName keyName()] method to the

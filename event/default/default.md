@@ -1,5 +1,4 @@
 @constructor jQuery.event.default
-@page jQuery.event.default
 @parent jquerypp
 
 `jQuery.event.default` allows you to perform default actions as a result of an event.

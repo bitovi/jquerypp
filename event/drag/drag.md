@@ -1,5 +1,4 @@
 @constructor jQuery.event.drag
-@page jQuery.event.drag
 @parent jquerypp
 
 `jQuery.event.drag` provides drag events for jQuery.

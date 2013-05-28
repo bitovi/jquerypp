@@ -1,5 +1,4 @@
 @constructor jQuery.event.drop
-@page jQuery.event.drop
 @parent jquerypp
 
 `jQuery.event.drop` provides drop events for [jQuery.event.drag]. By binding to a 
