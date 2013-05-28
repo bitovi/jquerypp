@@ -10,7 +10,7 @@ steal('jquery', 'jquerypp/dom/compare', function ($) {
 	 *
 	 *     $('#content').range() //-> range
 	 *
-	 * @return {$.Range} A $.Range instance for the selected element
+	 * @return {jQuery.Range} A jQuery.Range instance for the selected element
 	 */
 	$.fn.range =
 			function () {
@@ -142,7 +142,7 @@ steal('jquery', 'jquerypp/dom/compare', function ($) {
 		{
 			/**
 			 * @function jQuery.Range.prototype.moveToPoint moveToPoint
-			 * @signature `jQuery.range.moveToPoint([point])`
+			 * @signature `range.moveToPoint([point])`
 			 *
 			 * @body
 			 * Moves the range end and start position to a specific point.
@@ -155,8 +155,8 @@ steal('jquery', 'jquerypp/dom/compare', function ($) {
 			 *      {pageX: 200, pageY: 300}
 			 *      {top: 200, left: 300}
 			 *
-			 * @param point The point to move the range to
-			 * @return {$.Range}
+			 * @param {Point} point The point to move the range to
+			 * @return {jQuery.Range}
 			 */
 			moveToPoint : function (point) {
 				var clientX = point.clientX, clientY = point.clientY

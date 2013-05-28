@@ -25,7 +25,7 @@ steal('jquery', function($){
 		 * @signature `jQuery.vector.app([f])`
 		 *
 		 * @body
-		 * Applys the function to every item in the vector and returns a new vector.
+		 * Applies the function to every item in the vector and returns a new vector.
 		 *
 		 * @param {Function} f The function to apply
 		 * @return {jQuery.Vector} A new $.Vector instance
