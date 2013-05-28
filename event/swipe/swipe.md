@@ -1,4 +1,4 @@
-@constructor jQuery.event.swipe
+@page jQuery.event.swipe jQuery.event.swipe
 @parent jquerypp
 
 `jQuery.event.swipe` provides cross browser `swipeleft`, `swiperight`, `swipeup`, `swipedown` and a general `swipe` event.
