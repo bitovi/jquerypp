@@ -3,15 +3,13 @@ steal('jquery', function($){
 		getSetOne = function(v){ return v !== undefined ? (this.array[1] = v) : this.array[1]};
 
 /**
- * @class jQuery.Vector
+ * @constructor jQuery.Vector
  * @parent jquerypp
  *
  * `jQuery.Vector` represents a multi dimensional vector with shorthand methods for
  * working with two dimensions.
  *
  * It is mainly used in [jQuery.event.drag drag] & [jQuery.event.drop drop] events.
- *
- * @constructor creates a new vector instance from the arguments.  Example:
  *
  *      new jQuery.Vector(1,2)
  */
@@ -23,6 +21,10 @@ steal('jquery', function($){
 	/* @Prototype*/
 	{
 		/**
+		 * @function jQuery.Vector.prototype.app app
+		 * @signature `jQuery.vector.app([f])`
+		 *
+		 * @body
 		 * Applys the function to every item in the vector and returns a new vector.
 		 *
 		 * @param {Function} f The function to apply
@@ -37,6 +39,11 @@ steal('jquery', function($){
 			return new $.Vector(newArr);
 		},
 		/**
+		 * @function jQuery.Vector.prototype.plus plus
+		 * @signature `jQuery.vector.plus()`
+		 *
+		 * @body
+		 *
 		 * Adds two vectors together and returns a new instance. Example:
 		 *
 		 *      new $.Vector(1,2).plus(2,3) //-> (3, 5)
@@ -54,6 +61,10 @@ steal('jquery', function($){
 			return vec.update(arr);
 		},
 		/**
+		 * @function jQuery.Vector.prototype.minus minus
+		 * @signature `jQuery.vector.minus()`
+		 *
+		 * @body
 		 * Subtract one vector from another and returns a new instance. Example:
 		 *
 		 *      new $.Vector(4, 5).minus(2, 1) //-> (2, 4)
@@ -70,11 +81,15 @@ steal('jquery', function($){
 			return vec.update(arr);
 		},
 		/**
+		 * @function jQuery.Vector.prototype.equals equals
+		 * @signature `jQuery.vector.equals()`
+		 *
+		 * @body
+		 *
+		 * @return {jQuery.Vector}
 		 * Returns the current vector if it is equal to the vector passed in.
 		 *
 		 * `null` if otherwise.
-		 *
-		 * @return {jQuery.Vector}
 		 */
 		equals: function() {
 			var i, args = arguments[0] instanceof $.Vector ? arguments[0].array : $.makeArray(arguments),
@@ -88,6 +103,10 @@ steal('jquery', function($){
 			return vec.update(arr);
 		},
 		/**
+		 * @function jQuery.Vector.prototype.x x
+		 * @signature `jQuery.vector.x()`
+		 *
+		 * @body
 		 * Returns the first value of the vector.
 		 * You can also access the same value through the following aliases the
 		 * [jQuery.Vector.prototype.left vector.left()] and [jQuery.Vector.prototype.left vector.width()]
@@ -118,6 +137,10 @@ steal('jquery', function($){
 		 */
 		width: getSetZero,
 		/**
+		 * @function jQuery.Vector.prototype.y y
+		 * @signature `jQuery.vector.y()`
+		 *
+		 * @body
 		 * Returns the second value of the vector.
 		 * You can also access the same value through the [jQuery.Vector.prototype.top vector.top()]
 		 * and [jQuery.Vector.prototype.height vector.height()] aliases.
@@ -147,6 +170,11 @@ steal('jquery', function($){
 		 */
 		height: getSetOne,
 		/**
+		 * @function jQuery.Vector.prototype.toString toString
+		 * @signature `jQuery.vector.toString()`
+		 *
+		 * @body
+		 *
 		 * Returns a string representation of the vector in the form of (x,y,...)
 		 *
 		 *      var v = new $.Vector(4, 6, 1, 3);
@@ -158,6 +186,11 @@ steal('jquery', function($){
 			return "(" + this.array.join(', ') + ")";
 		},
 		/**
+		 * @function jQuery.Vector.prototype.update update
+		 * @signature `jQuery.vector.update([array])`
+		 *
+		 * @body
+		 *
 		 * Replaces the vectors contents
 		 *
 		 *      var v = new $.Vector(2, 3);
