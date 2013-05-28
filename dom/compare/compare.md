@@ -42,4 +42,4 @@ You can tests if the number returned by `$.fn.compare` matches any of these cond
 
 ## Demo
 
-@demo jmvc/jquerypp/dom/compare/compare.html
+@demo jquerypp/dom/compare/compare.html

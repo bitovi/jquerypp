@@ -29,4 +29,4 @@ from being shown for some reason, they can call preventDefault to avoid showing 
 In this case, the application developer doesn't want to show the second 
 tab until the checkbox is checked. 
 
-@demo jmvc/jquerypp/event/default/defaultjquery.html
+@demo jquerypp/event/default/defaultjquery.html

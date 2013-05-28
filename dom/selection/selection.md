@@ -41,4 +41,4 @@ Selection works with all elements. If you want to get selection information of t
 
 This demo shows setting the selection in various elements
 
-@demo jmvc/jquerypp/dom/selection/selection.html
+@demo jquerypp/dom/selection/selection.html

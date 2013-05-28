@@ -1,4 +1,4 @@
-@constructor jQuery.Range JQuery.Range
+@constructor jQuery.Range jQuery.Range
 @parent jquerypp
 
 @body
