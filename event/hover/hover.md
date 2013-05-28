@@ -1,5 +1,5 @@
-@page jQuery.event.hover
-@parent events
+@constructor jQuery.event.hover
+@parent jquerypp
 
 `jQuery.event.hover` provides delegate-able hover events.
 A hover happens when the mouse stops moving over an element for a period of time.
@@ -41,4 +41,4 @@ Or you can adjust [jQuery.Hover.prototype.delay] and [jQuery.Hover.prototype.dis
 
 ## Demo
 
-@demo jquerypp/event/hover/hover.html
+@demo jmvc/jquerypp/event/hover/hover.html

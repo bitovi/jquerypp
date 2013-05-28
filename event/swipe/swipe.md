@@ -1,5 +1,5 @@
-@page jQuery.event.swipe
-@parent events
+@constructor jQuery.event.swipe
+@parent jquerypp
 
 `jQuery.event.swipe` provides cross browser `swipeleft`, `swiperight`, `swipeup`, `swipedown` and a general `swipe` event.
 On mobile devices, swipe uses touch events. On desktop browsers, swipe uses mouseevents.
