@@ -142,7 +142,7 @@ steal('jquery', 'jquerypp/dom/compare', function ($) {
 		{
 			/**
 			 * @function jQuery.Range.prototype.moveToPoint moveToPoint
-			 * @signature `range.moveToPoint([point])`
+			 * @signature `Range.moveToPoint([point])`
 			 *
 			 * @body
 			 * Moves the range end and start position to a specific point.
@@ -221,7 +221,7 @@ steal('jquery', 'jquerypp/dom/compare', function ($) {
 			},
 			/**
 			 * @function jQuery.Range.prototype.overlaps overlaps
-			 * @signature `jQuery.range.overlaps([elRange])`
+			 * @signature `Range.overlaps([elRange])`
 			 *
 			 * @body
 			 * returns `true` if any portion of these two ranges overlap.
@@ -277,7 +277,7 @@ steal('jquery', 'jquerypp/dom/compare', function ($) {
 			},
 			/**
 			 * @function jQuery.Range.prototype.toString toString
-			 * @signature `jQuery.range.toString()`
+			 * @signature `Range.toString()`
 			 *
 			 * @body
 			 * Returns the text of the range.
@@ -291,7 +291,7 @@ steal('jquery', 'jquerypp/dom/compare', function ($) {
 			},
 			/**
 			 * @function jQuery.Range.prototype.start start
-			 * @signature `jQuery(el).range().start()`
+			 * @signature `Range.start()`
 			 *
 			 * @body
 			 * Gets or sets the start of the range.
@@ -384,7 +384,7 @@ steal('jquery', 'jquerypp/dom/compare', function ($) {
 			},
 			/**
 			 * @function jQuery.Range.prototype.end end
-			 * @signature `jQuery.range.end([end])`
+			 * @signature `Range.end([end])`
 			 *
 			 * @body
 			 * Gets or sets the end of the range.
@@ -467,7 +467,7 @@ steal('jquery', 'jquerypp/dom/compare', function ($) {
 			},
 			/**
 			 * @function jQuery.Range.prototype.parent parent
-			 * @signature `jQuery.range.parent()`
+			 * @signature `Range.parent()`
 			 *
 			 * @body
 			 * Returns the most common ancestor element of
@@ -506,7 +506,7 @@ steal('jquery', 'jquerypp/dom/compare', function ($) {
 			},
 			/**
 			 * @function jQuery.Range.prototype.rect rect
-			 * @signature `jQuery.range.rect([from])`
+			 * @signature `Range.rect([from])`
 			 *
 			 * @body
 			 * Returns the bounding rectangle of this range.
@@ -534,7 +534,7 @@ steal('jquery', 'jquerypp/dom/compare', function ($) {
 			},
 			/**
 			 * @function jQuery.Range.prototype.rects rects
-			 * @signature `jQuery.range.rects([from])`
+			 * @signature `Range.rects([from])`
 			 *
 			 * @body
 			 * returns the client rects.
@@ -605,7 +605,7 @@ steal('jquery', 'jquerypp/dom/compare', function ($) {
 
 		/**
 		 * @function jQuery.Range.prototype.compare compare
-		 * @signature `jQuery.range.compare([type], [compareRange])`
+		 * @signature `Range.compare([type], [compareRange])`
 		 *
 		 * @body
 		 * Compares one range to another range.
@@ -649,7 +649,7 @@ steal('jquery', 'jquerypp/dom/compare', function ($) {
 
 		/**
 		 * @function jQuery.Range.prototype.move move
-		 * @signature `jQuery.range.move([referenceRange])`
+		 * @signature `Range.move([referenceRange])`
 		 *
 		 * @body
 		 * Moves the endpoints of a range relative to another range.
@@ -702,7 +702,7 @@ steal('jquery', 'jquerypp/dom/compare', function ($) {
 		fn.
 		/**
 		 * @function jQuery.Range.prototype.clone clone
-		 * @signature `jQuery.range.clone()`
+		 * @signature `Range.clone()`
 		 *
 		 * @body
 		 * Clones the range and returns a new $.Range
@@ -722,7 +722,7 @@ steal('jquery', 'jquerypp/dom/compare', function ($) {
 		fn.
 		/**
 		 * @function jQuery.Range.prototype.select select
-		 * @signature `jQuery.range.select([el])`
+		 * @signature `Range.select([el])`
 		 *
 		 * @body
 		 * Selects an element with this range.  If nothing
