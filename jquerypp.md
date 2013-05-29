@@ -1,5 +1,5 @@
 @page jquerypp jQuery++
-@parent index 1
+@parent javascriptmvc 1
 @description jQuery's missing utils and special events
 
 jQuery++ is a collection of useful jQuery libraries that provide
