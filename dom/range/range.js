@@ -664,7 +664,7 @@ steal('jquery', 'jquerypp/dom/compare', function ($) {
 		 * to move to which referenceRange boundary point where:
 		 *
 		 *   - `"START_TO_START"` - the start of the range moves to the start of referenceRange
-		 *   - `"START\_TO\_END"` - the start of the range move to the end of referenceRange
+		 *   - `"START_TO_END"` - the start of the range move to the end of referenceRange
 		 *   - `"END_TO_END"` - the end of the range moves to the end of referenceRange
 		 *   - `"END_TO_START"` - the end of the range moves to the start of referenceRange
 		 *

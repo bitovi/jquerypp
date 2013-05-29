@@ -19,7 +19,7 @@ steal('jquery', 'jquerypp/lang/json', function($) {
      * @body
      *
      * `jQuery.cookie(name, [value], [options])` lets you create, read and remove cookies. It is the
-     * [jQuery cookie plugin](https://github.com/carhartl/jquery-cookie) written by [Klaus Hartl](stilbuero.de)
+     * [jQuery cookie plugin](https://github.com/carhartl/jquery-cookie) written by [Klaus Hartl](http://www.dasstilbuero.de/)
      * and dual licensed under the [MIT](http://www.opensource.org/licenses/mit-license.php)
      * and [GPL](http://www.gnu.org/licenses/gpl.html) licenses.
      *

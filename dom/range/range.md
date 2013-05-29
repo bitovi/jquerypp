@@ -2,7 +2,7 @@
 @parent jquerypp
 
 @body
-`jQuery.Range` provides text range helpers for creating, moving, and comparing ranges cross browser. You can get the currently selected range by calling [$.Range.current()](jQuery.Range.static.current) a new range can be created by passing
+`jQuery.Range` provides text range helpers for creating, moving, and comparing ranges cross browser. You can get the currently selected range by calling [jQuery.Range.static.current $.Range.current()] a new range can be created by passing
 
 - __undefined or null__ - returns a range with nothing selected
 - __HTMLElement__ - returns a range with the node's text selected

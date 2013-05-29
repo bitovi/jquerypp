@@ -52,7 +52,7 @@ steal('jquery', 'jquerypp/lang/vector', 'jquerypp/event/livehack', 'jquerypp/eve
 		lowerName: "drag",
 		current: null,
 		distance: 0,
-		/**
+		/** 
 		 * @function jQuery.Drag.mousedown
 		 * @parent jQuery.Drag.static
 		 * 
@@ -310,8 +310,8 @@ steal('jquery', 'jquerypp/lang/vector', 'jquerypp/event/livehack', 'jquerypp/eve
 			}
 			clearSelection();
 			/**
-			 * @property {[jQuery.Vector]} jQuery.Drag.location location
-			 * @property location
+			 * @property jQuery.Drag.prototype.location location
+			 * @parent jQuery.Drag.prototype
 			 * `drag.location` is a [jQuery.Vector] specifying where the element should be in the page.  This
 			 * takes into account the start position of the cursor on the element.
 			 *
@@ -706,7 +706,7 @@ steal('jquery', 'jquerypp/lang/vector', 'jquerypp/event/livehack', 'jquerypp/eve
 	 * `dragmove` is triggered when the drag element moves (similar to a mousemove).
 	 * The event handler gets an instance of [jQuery.Drag] passed as the second
 	 * parameter.
-	 * Use [jQuery.Drag::location] to determine the current position
+	 * Use [jQuery.Drag.prototype.location location] to determine the current position
 	 * as a [jQuery.Vector vector].
 	 *
 	 * For example, `dragmove` can be used to create a draggable element to resize
