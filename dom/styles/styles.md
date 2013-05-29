@@ -1,5 +1,6 @@
-@page jQuery.styles
+@function jQuery.styles jQuery.styles
 @parent jquerypp
+@signature `jQuery.(el).styles([style], [value])`
 
 `jQuery.styles` provides `jQuery.fn.styles` to rapidly get a set of computed styles from an element.
 
@@ -26,5 +27,4 @@ This plugin retrieves all needed style properties at once.
 The following demo illustrates the performance improvement `jQuery.fn.styles` provides by implementing
 a faster 'height' jQuery function called 'fastHeight'.
 
-@demo jquerypp/dom/styles/styles.html
-
+@demo jquerypp/dom/styles/styles.html 300

@@ -1,6 +1,6 @@
 steal('jquery', 'jquerypp/event/livehack', function ($) {
 	/**
-	 * @class jQuery.Hover
+	 * @constructor jQuery.Hover
 	 * @plugin jquerypp/event/hover
 	 * @download  http://jmvcsite.heroku.com/pluginify?plugins[]=jquerypp/event/hover/hover.js
 	 * @parent jQuery.event.hover
@@ -21,11 +21,14 @@ steal('jquery', 'jquerypp/event/livehack', function ($) {
 		this._leave = $.Hover.leave
 	};
 	/**
-	 * @Static
+	 * @static
 	 */
 	$.extend($.Hover, {
 		/**
-		 * @attribute delay
+		 * @property {Number} jQuery.Hover.delay delay
+		 * @parent jQuery.Hover.static
+		 *
+		 * @body
 		 *
 		 * `$.Hover.delay` is the delay (in milliseconds) after which the hover is
 		 * activated by default.
@@ -37,7 +40,10 @@ steal('jquery', 'jquerypp/event/livehack', function ($) {
 		 */
 		delay : 100,
 		/**
-		 * @attribute distance
+		 * @property {Number} jQuery.Hover.distance distance
+		 * @parent jQuery.Hover.static
+		 *
+		 * @body
 		 *
 		 * `$.Hover.distance` is the maximum distance (in pixels) that the mouse is allowed to
 		 * travel within the time of [jQuery.Hover.delay] in order to activate a hover.
@@ -52,7 +58,7 @@ steal('jquery', 'jquerypp/event/livehack', function ($) {
 	})
 
 	/**
-	 * @Prototype
+	 * @prototype
 	 */
 	$.extend($.Hover.prototype, {
 		/**
@@ -256,14 +262,13 @@ steal('jquery', 'jquerypp/event/livehack', function ($) {
 			}
 		};
 
-	/**
-	 * @add jQuery.event.special
-	 */
 // Attach events
 	event.setupHelper([
 	/**
-	 * @attribute hoverinit
+	 * @function jQuery.event.special.hoverinit hoverinit
 	 * @parent jQuery.event.hover
+	 *
+	 * @body
 	 *
 	 * `hoverinit` is called when a hover is about to start (on `mouseenter`). Listen for `hoverinit` events to configure
 	 * [jQuery.Hover::delay delay] and [jQuery.Hover::distance distance]
@@ -280,8 +285,10 @@ steal('jquery', 'jquerypp/event/livehack', function ($) {
 	 */
 		"hoverinit",
 	/**
-	 * @attribute hoverenter
+	 * @function jQuery.event.special.hoverenter hoverenter
 	 * @parent jQuery.event.hover
+	 *
+	 * @body
 	 *
 	 * `hoverenter` events are called when the mouses less than [jQuery.Hover.prototype.distance] pixels in
 	 * [jQuery.Hover.prototype.delay delay] milliseconds.
@@ -292,8 +299,10 @@ steal('jquery', 'jquerypp/event/livehack', function ($) {
 	 */
 		"hoverenter",
 	/**
-	 * @attribute hoverleave
+	 * @function jQuery.event.special.hoverleave hoverleave
 	 * @parent jQuery.event.hover
+	 *
+	 * @body
 	 *
 	 * `hoverleave` is called when the mouse leaves an element that has been hovered.
 	 *
@@ -303,8 +312,10 @@ steal('jquery', 'jquerypp/event/livehack', function ($) {
 	 */
 		"hoverleave",
 	/**
-	 * @attribute hovermove
+	 * @function jQuery.event.special.hovermove hovermove
 	 * @parent jQuery.event.hover
+	 *
+	 * @body
 	 *
 	 * `hovermove` is called when a `mousemove` occurs on an element that has been hovered.
 	 *

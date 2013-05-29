@@ -1,4 +1,4 @@
-@page jQuery.formParams
+@page jQuery.formParams jQuery.formParams
 @parent jquerypp
 @signature `jQuery(el).formParams([convert])`
 

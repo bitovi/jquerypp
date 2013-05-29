@@ -1,5 +1,7 @@
-@page jQuery.event.destroyed
+@constructor jQuery.event.destroyed
 @parent jquerypp
+
+@body
 
 `jQuery.event.destroyed` adds a `destroyed` event that is triggered when an element has been removed.
 
@@ -19,8 +21,8 @@ that do not leak.
 
 ## Quick Demo
 
-@demo jquerypp/event/destroyed/destroyed.html 
+@demo jquerypp/event/destroyed/destroyed.html 200
 
 ## More Involved Demo
 
-@demo jquerypp/event/destroyed/destroyed_menu.html
+@demo jquerypp/event/destroyed/destroyed_menu.html 

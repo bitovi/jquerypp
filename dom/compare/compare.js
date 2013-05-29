@@ -3,6 +3,7 @@ steal('jquery', function($) {
 /**
  * @function jQuery.fn.compare
  * @parent jQuery.compare
+ * @hide
  *
  * Compare two elements and return a bitmask as a number representing the following conditions:
  *

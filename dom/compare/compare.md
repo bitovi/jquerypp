@@ -1,14 +1,17 @@
-@page jQuery.compare
+@page jQuery.compare jQuery.compare
 @parent jquerypp
 @test jquerypp/dom/compare/qunit.html
 @plugin dom/compare
 
+@signature `jQuery(el).compare([el])`
+
+@body
 `jQuery.compare` adds `[jQuery.fn.compare jQuery.fn.compare(element)]` which compares the position of two nodes and returns a number representing
 a bitmask detailing how they are positioned relative to each other.
 
     $('#foo').compare($('#bar')) //-> Number
 
-You can expect it to return the same results as 
+You can expect it to return the same results as
 [http://www.w3.org/TR/DOM-Level-3-Core/core.html#Node3-compareDocumentPosition | compareDocumentPosition].
 Parts of this documentation and source come from [http://ejohn.org/blog/comparing-document-position | John Resig].
 
@@ -39,4 +42,4 @@ You can tests if the number returned by `$.fn.compare` matches any of these cond
 
 ## Demo
 
-@demo jquerypp/dom/compare/compare.html
+@demo jquerypp/dom/compare/compare.html 500

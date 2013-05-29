@@ -9,10 +9,10 @@ var current,
 $.Event.prototype.isPaused = returnFalse
 
 /**
- * @function jQuery.Event.prototype.pause
+ * @function jQuery.Event.prototype.pause pause
  * @parent jQuery.event.pause
  *
- * `event.paused()` pauses an event (to be resumed later):
+ * `event.pause()` pauses an event (to be resumed later):
  *
  *      $('.tab').on('show', function(ev) {
  *          ev.pause();
@@ -38,7 +38,7 @@ $.Event.prototype.pause = function(){
 };
 
 /**
- * @function jQuery.Event.prototype.resume
+ * @function jQuery.Event.prototype.resume resume
  * @parent jQuery.event.pause
  *
  * `event.resume()` resumes a paused event:

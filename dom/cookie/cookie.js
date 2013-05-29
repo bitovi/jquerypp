@@ -1,21 +1,34 @@
 steal('jquery', 'jquerypp/lang/json', function($) {
     /**
-     * @function jQuery.cookie
+     * @function jQuery.cookie jQuery.cookie
      * @parent jquerypp
      * @plugin jquerypp/dom/cookie
      * @author Klaus Hartl/klaus.hartl@stilbuero.de
      *
+     * @signature `jQuery.cookie(name, [value, ] [options])`
+     * @param {String} [name] The name of the cookie.
+     * @param {String} [value] The value of the cookie.
+     * @param {{}} [options] An object literal containing key/value pairs to provide optional cookie attributes. Values can be:
+     * @option {Integer|Date} expires Either an integer specifying the expiration date from now on in days or a Date object. If a negative value is specified (e.g. a date in the past), the cookie will be deleted. If set to null or omitted, the cookie will be a session cookie and will not be retained when the the browser exits.
+     * @option {String} domain The domain name
+     * @option {String} path The value of the path atribute of the cookie (default: path of page that created the cookie).
+     * @option {Boolean} secure If true, the secure attribute of the cookie will be set and the cookie transmission will require a secure protocol (like HTTPS).
+     *
+     * @return {String} the value of the cookie or {undefined} when setting the cookie.
+     *
+     * @body
+     *
      * `jQuery.cookie(name, [value], [options])` lets you create, read and remove cookies. It is the
-     * [jQuery cookie plugin](https://github.com/carhartl/jquery-cookie) written by [Klaus Hartl](stilbuero.de)
+     * [jQuery cookie plugin](https://github.com/carhartl/jquery-cookie) written by [Klaus Hartl](http://www.dasstilbuero.de/)
      * and dual licensed under the [MIT](http://www.opensource.org/licenses/mit-license.php)
      * and [GPL](http://www.gnu.org/licenses/gpl.html) licenses.
      *
 	 * ## Examples
-	 * 
+	 *
 	 * Set the value of a cookie.
-	 *  
+	 *
 	 *      $.cookie('the_cookie', 'the_value');
-	 * 
+	 *
 	 * Create a cookie with all available options.
 	 *
      *      $.cookie('the_cookie', 'the_value', {
@@ -38,16 +51,6 @@ steal('jquery', 'jquerypp/lang/json', function($) {
      *
 	 *      $.cookie('the_cookie');
      *
-     * @param {String} [name] The name of the cookie.
-     * @param {String} [value] The value of the cookie.
-     * @param {Object} [options] An object literal containing key/value pairs to provide optional cookie attributes. Values can be:
-     *
-     * - `expires` - Either an integer specifying the expiration date from now on in days or a Date object. If a negative value is specified (e.g. a date in the past), the cookie will be deleted. If set to null or omitted, the cookie will be a session cookie and will not be retained when the the browser exits.
-     * - `domain` - The domain name
-     * - `path` - The value of the path atribute of the cookie (default: path of page that created the cookie).
-     * - `secure` - If true, the secure attribute of the cookie will be set and the cookie transmission will require a secure protocol (like HTTPS).
-     *
-     * @return {String} the value of the cookie or {undefined} when setting the cookie.
      */
     $.cookie = function(name, value, options) {
         if (typeof value != 'undefined') {

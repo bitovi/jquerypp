@@ -22,19 +22,31 @@ var isPhantom = /Phantom/.test(navigator.userAgent),
  */
 var swipe = $.event.swipe = {
 	/**
-	 * @attribute delay
+	 * @property {Number} jQuery.event.swipe.delay delay
+	 * @parent jQuery.event.swipe
+	 *
+	 * @body
+	 * 
 	 * Delay is the upper limit of time the swipe motion can take in milliseconds.  This defaults to 500.
 	 *
 	 * A user must perform the swipe motion in this much time.
 	 */
 	delay : 500,
 	/**
-	 * @attribute max
+	 * @property {Number} jQuery.event.swipe.max max
+	 * @parent jQuery.event.swipe
+	 *
+	 * @body
+	 * 
 	 * The maximum distance the pointer must travel in pixels.  The default is 75 pixels.
 	 */
 	max : 320,
 	/**
-	 * @attribute min
+	 * @property {Number} jQuery.event.swipe.min min
+	 * @parent jQuery.event.swipe
+	 *
+	 * @body
+	 * 
 	 * The minimum distance the pointer must travel in pixels.  The default is 30 pixels.
 	 */
 	min : 30

@@ -1,6 +1,5 @@
-@page jQuery.within
+@function jQuery.within jQuery.within
 @parent jquerypp
-
 @signature `jQuery(el).within(left, top)`
 
 Helps to determine all elements that have a certain position or area in common by providing `[jQuery.fn.withinBox]` and `[jQuery.fn.within]`. The following example returns all `div` elements on the point 200px left and 200px from the top:
