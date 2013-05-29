@@ -5,18 +5,19 @@ steal('jquery', function($) {
                 y <  top + height &&
                 x >= left &&
                 x <  left + width);
-    } 
+    }
 /**
  * @function jQuery.fn.within
  * @parent jQuery.within
  * @plugin jquerypp/dom/within
- * 
+ * @hide
+ *
  * Returns all elements matching the selector that touch a given point:
- * 
+ *
  *     // get all elements that touch 200x200.
  *     $('*').within(200, 200);
- * 
- * @param {Number} left the position from the left of the page 
+ *
+ * @param {Number} left the position from the left of the page
  * @param {Number} top the position from the top of the page
  * @param {Boolean} [useOffsetCache=false] cache the dimensions and offset of the elements.
  * @return {jQuery} a jQuery collection of elements whos area
@@ -32,7 +33,7 @@ $.fn.within= function(left, top, useOffsetCache) {
 		}
 
 	    // uses either the cached offset or .offset()
-        var offset = useOffsetCache ? 
+        var offset = useOffsetCache ?
 						$.data(this,"offsetCache") || $.data(this,"offsetCache", q.offset()) :
 						q.offset();
 
@@ -45,7 +46,7 @@ $.fn.within= function(left, top, useOffsetCache) {
 			ret.push(this);
 		}
     });
-    
+
     return this.pushStack( $.unique( ret ), "within", left+","+top );
 }
 
@@ -74,7 +75,7 @@ $.fn.withinBox = function(left, top, width, height, useOffsetCache){
         if(this == document.documentElement) return  ret.push(this);
 
 	    // use cached offset or .offset()
-        var offset = useOffsetCache ? 
+        var offset = useOffsetCache ?
 			$.data(this,"offset") ||
 			$.data(this,"offset", q.offset()) :
 			q.offset();

@@ -41,4 +41,4 @@ Or you can adjust [jQuery.Hover.prototype.delay] and [jQuery.Hover.prototype.dis
 
 ## Demo
 
-@demo jquerypp/event/hover/hover.html
+@demo jquerypp/event/hover/hover.html 350
