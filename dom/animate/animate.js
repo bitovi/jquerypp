@@ -64,7 +64,7 @@ steal('jquery', 'jquerypp/dom/styles', function ($) {
 				}
 			}
 
-			return props.jquery === true || browser === null || browser.prefix === '-o-' || 
+			return props.jquery === true || browser === null || browser.prefix === '-o-' ||
 				// Animating empty properties
 				$.isEmptyObject(props) ||
 				// We can't do custom easing
@@ -199,6 +199,7 @@ steal('jquery', 'jquerypp/dom/styles', function ($) {
 	 * @parent jQuery.animate
 	 * @function jQuery.fn.animate
 	 * @signature $(element).animate(options)
+	 * @hide
 	 *
 	 * Animate CSS properties using native CSS animations, if possible.
 	 * Uses the original [$.fn.animate()](http://api.$.com/animate/) otherwise.
@@ -245,7 +246,7 @@ steal('jquery', 'jquerypp/dom/styles', function ($) {
 				// The animation end event handler.
 				// Will be called both on animation end and after calling .stop()
 				animationEnd = function (currentCSS, exec) {
-					// As long as we don't stop mid animation, then we will replace 
+					// As long as we don't stop mid animation, then we will replace
 					// the overflow values of the element being animated.
 					if(!exec) {
 						self[0].style.overflow = overflow[0];

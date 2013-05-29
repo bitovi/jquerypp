@@ -27,7 +27,7 @@ getElementsSelection = function(el, win){
 		fromElementToCurrent.move("END_TO_START", current);
 		startPos = fromElementToCurrent.toString().length
 	}
-	
+
 	// If the current range ends after our element
 	if(current.compare("END_TO_END", entireElement) >= 0){
 		// the end position is the last character
@@ -49,18 +49,18 @@ getElementsSelection = function(el, win){
 // This function branches between the various methods of getting the selection.
 getSelection = function(el){
 	var win = getWindow(el);
-	
+
 	// `selectionStart` means this is an input element in a standards browser.
 	if (el.selectionStart !== undefined) {
 
-		if(document.activeElement 
-		 	&& document.activeElement != el 
-			&& el.selectionStart == el.selectionEnd 
+		if(document.activeElement
+		 	&& document.activeElement != el
+			&& el.selectionStart == el.selectionEnd
 			&& el.selectionStart == 0){
 			return {start: el.value.length, end: el.value.length, width: 0};
 		}
 		return  {start: el.selectionStart, end: el.selectionEnd, width: el.selectionEnd - el.selectionStart};
-	} 
+	}
 	// getSelection means a 'normal' element in a standards browser.
 	else if(win.getSelection){
 		return getElementsSelection(el, win)
@@ -69,10 +69,10 @@ getSelection = function(el){
 		try {
 			// The following typically works for input elements in IE:
 			if (el.nodeName.toLowerCase() == 'input') {
-				var real = getWindow(el).document.selection.createRange(), 
+				var real = getWindow(el).document.selection.createRange(),
 					r = el.createTextRange();
 				r.setEndPoint("EndToStart", real);
-				
+
 				var start = r.text.length
 				return {
 					start: start,
@@ -86,12 +86,12 @@ getSelection = function(el){
 				if(!res){
 					return res;
 				}
-				// we have to clean up for ie's textareas which don't count for 
+				// we have to clean up for ie's textareas which don't count for
 				// newlines correctly
 				var current = $.Range.current().clone(),
 					r2 = current.clone().collapse().range,
 					r3 = current.clone().collapse(false).range;
-				
+
 				r2.moveStart('character', -1)
 				r3.moveStart('character', -1)
 				// if we aren't at the start, but previous is empty, we are at start of newline
@@ -102,13 +102,13 @@ getSelection = function(el){
 				if (res.endPos != 0 && r3.text == "") {
 					res.endPos += 2;
 				}
-				
+
 				return res
 			}
 		}catch(e){
 			return {start: el.value.length, end: el.value.length, width: 0};
 		}
-	} 
+	}
 },
 // Selects text within an element.  Depending if it's a form element or
 // not, or a standards based browser or not, we do different things.
@@ -130,7 +130,7 @@ select = function( el, start, end ) {
 		r.moveStart('character', start);
 		end = end || start;
 		r.moveEnd('character', end - el.value.length);
-		
+
 		r.select();
 	} else if(win.getSelection){
 		var	doc = win.document,
@@ -140,11 +140,11 @@ select = function( el, start, end ) {
 		getCharElement([el],ranges);
 		range.setStart(ranges[0].el, ranges[0].count);
 		range.setEnd(ranges[1].el, ranges[1].count);
-		
+
 		// removeAllRanges is necessary for webkit
         sel.removeAllRanges();
         sel.addRange(range);
-		
+
 	} else if(win.document.body.createTextRange){ //IE's weirdness
 		var range = document.body.createTextRange();
 		range.moveToElementText(el);
@@ -174,7 +174,7 @@ replaceWithLess = function(start, len, range, el){
 getCharElement = function( elems , range, len ) {
 	var elem,
 		start;
-	
+
 	len = len || 0;
 	for ( var i = 0; elems[i]; i++ ) {
 		elem = elems[i];
@@ -183,7 +183,7 @@ getCharElement = function( elems , range, len ) {
 			start = len
 			len += elem.nodeValue.length;
 			//check if len is now greater than what's in counts
-			replaceWithLess(start, len, range, elem ) 
+			replaceWithLess(start, len, range, elem )
 		// Traverse everything else, except comment nodes
 		} else if ( elem.nodeType !== 8 ) {
 			len = getCharElement( elem.childNodes, range, len );
@@ -194,6 +194,7 @@ getCharElement = function( elems , range, len ) {
 /**
  * @parent jQuery.selection
  * @function jQuery.fn.selection
+ * @hide
  *
  * Set or retrieve the currently selected text range. It works on all elements:
  *

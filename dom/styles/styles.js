@@ -84,6 +84,7 @@ steal('jquery', function( $ ) {
 	 * @function jQuery.fn.styles
 	 * @parent jQuery.styles
 	 * @plugin jQuery.styles
+	 * @hide
 	 *
 	 * Returns a set of computed styles. Pass the names of the styles you want to
 	 * retrieve as arguments:
