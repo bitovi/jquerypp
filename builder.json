@@ -2,55 +2,55 @@
 	"filename": "jquerypp.custom.js",
 	"banner": "/*!\n * <%= info.title || info.name %> - <%= info.version %>\n * <%= info.homepage %>\n * Copyright (c) <%= new Date().getFullYear() %> <%= info.author.name %>\n * <%= new Date().toUTCString() %>\n * Licensed <%= info.licenses[0].type %><% if(typeof url !== 'undefined') { %>\n * Download from: <%= url %>\n<% } %> */\n",
 	"modules": {
-		"jquerypp/animate": {
+		"jquerypp/dom/animate": {
 			"name": "jQuery.animate",
 			"description": "Animate using CSS animations",
 			"type": "dom",
 			"isDefault": true
 		},
-		"jquerypp/compare": {
+		"jquerypp/dom/compare": {
 			"name": "jQuery.compare",
 			"description": "Compare element document position",
 			"type": "dom",
 			"isDefault": true
 		},
-		"jquerypp/cookie": {
+		"jquerypp/dom/cookie": {
 			"name": "jQuery.cookie",
 			"description": "Read and write cookies",
 			"type": "dom",
 			"isDefault": true
 		},
-		"jquerypp/dimensions": {
+		"jquerypp/dom/dimensions": {
 			"name": "jQuery.dimensions",
 			"description": "Set and animate innerWidth and outerWidth",
 			"type": "dom",
 			"isDefault": true
 		},
-		"jquerypp/formParams": {
+		"jquerypp/dom/form_params": {
 			"name": "jQuery.formParams",
 			"description": "Serializes a form into an object",
 			"type": "dom",
 			"isDefault": true
 		},
-		"jquerypp/range": {
+		"jquerypp/dom/range": {
 			"name": "jQuery.range",
 			"description": "Create and manipulate text ranges",
 			"type": "dom",
 			"isDefault": true
 		},
-		"jquerypp/selection": {
+		"jquerypp/dom/selection": {
 			"name": "jQuery.selection",
 			"description": "Get and set the current text selection",
 			"type": "dom",
 			"isDefault": true
 		},
-		"jquerypp/styles": {
+		"jquerypp/dom/styles": {
 			"name": "jQuery.styles",
 			"description": "Quickly read computed styles",
 			"type": "dom",
 			"isDefault": true
 		},
-		"jquerypp/within": {
+		"jquerypp/dom/within": {
 			"name": "jQuery.within",
 			"description": "Get elements within an area or at a point",
 			"type": "dom",
