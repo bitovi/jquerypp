@@ -341,20 +341,6 @@ can.Control('Builder', {
 		} else {
 			button.attr('disabled', true).addClass('disabled');
 		}
-	},
-
-	'[type="submit"] click' : function(el, ev) {
-		el.hide();
-		var url = this.element.attr('action') + '?' + this.element.serialize(),
-			iframe = $('<iframe></iframe>').attr('src', url).hide().appendTo(this.element);
-		loader = this.element.find('.loading').show();
-		iframe.on('load', function() {
-			setTimeout(function() {
-				el.show();
-				loader.hide();
-			}, 1000);
-		})
-		ev.preventDefault();
 	}
 });
 
