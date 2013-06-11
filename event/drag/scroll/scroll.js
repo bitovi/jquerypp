@@ -8,6 +8,10 @@ $.Drag.prototype.
 	 * @plugin jquerypp/event/drag/scroll
 	 * @download  http://jmvcsite.heroku.com/pluginify?plugins[]=jquerypp/event/drag/scroll/scroll.js
 	 * 
+	 * @function jQuery.Drag.prototype.scrolls
+	 * @parent jQuery.Drag.prototype
+	 * 
+	 * @body
 	 * `drag.scrolls(elements, [options])` scroll elements with 
 	 * a scroll bar as the drag moves to borders.
 	 * 

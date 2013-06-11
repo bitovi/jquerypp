@@ -53,7 +53,7 @@ steal("jquery", function( $ ) {
 				} else {
 					data[ name ].push( value );
 				}
-				
+
 
 			}
 
@@ -64,6 +64,7 @@ steal("jquery", function( $ ) {
 	 * @parent jQuery.formParams
 	 * @plugin jquerypp/dom/form_params
 	 * @test jquerypp/dom/form_params/qunit.html
+	 * @hide
 	 *
 	 * Returns a JavaScript object for values in a form.
 	 * It creates nested objects by using bracket notation in the form element name.
@@ -99,10 +100,10 @@ steal("jquery", function( $ ) {
 			this.find("[name]").each(function() {
 				var $this = $(this),
 					value = params[ $this.attr("name") ];
-				
+
 				// Don't do all this work if there's no value
 				if ( value !== undefined ) {
-					
+
 					// Nested these if statements for performance
 					if ( $this.is(":radio") ) {
 						if ( $this.val() == value ) {

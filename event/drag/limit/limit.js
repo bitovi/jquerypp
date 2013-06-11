@@ -7,21 +7,25 @@ steal('jquery', 'jquerypp/event/drag/core', 'jquerypp/dom/styles', function( $ )
 
 	$.Drag.prototype
 	/**
-	 * @function limit
 	 * @plugin jquerypp/event/drag/limit
 	 * @download  http://jmvcsite.heroku.com/pluginify?plugins[]=jquerypp/event/event/drag/limit/limit.js
+	 *
+	 * @function jQuery.Drag.prototype.limit limit
+	 * @parent jQuery.Drag.prototype
+	 *
+	 * @body
 	 * `drag.limit(container, [center])` limits a drag to a containing element.
-	 * 
+	 *
 	 *     $("#todos").on(".todo","draginit", function( ev, drag ) {
 	 *       drag.limit($("#todos").parent())
 	 *     })
-	 * 
+	 *
 	 * @param {jQuery} container the jQuery-wrapped container element you do not want the drag element to escape.
-	 * @param {String} [center] can set the limit to the center of the object.  Can be 
+	 * @param {String} [center] can set the limit to the center of the object.  Can be
 	 *   'x', 'y' or 'both'.  By default it will keep the outer edges of the moving element within the
 	 * container element.  If you provide x, it will keep the horizontal center of the moving element
 	 * within the container element.  If you provide y, it will keep the vertical center of the moving
-	 * element within the container element.  If you provide both, it will keep the center of the 
+	 * element within the container element.  If you provide both, it will keep the center of the
 	 * moving element within the containing element.
 	 * @return {drag} returns the drag for chaining.
 	 */

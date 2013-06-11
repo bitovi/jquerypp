@@ -1,5 +1,5 @@
 @page jquerypp jQuery++
-@parent index 1
+@parent javascriptmvc 1
 @description jQuery's missing utils and special events
 
 jQuery++ is a collection of useful jQuery libraries that provide
@@ -9,11 +9,11 @@ implement and organize large-scale jQuery applications.
 ## DOM Helpers
 
 DOM helpers extend jQuery with extra functionality for
-manipulating the DOM. For example, [dimensions] lets you set the 
+manipulating the DOM. For example, [dimensions] lets you set the
 outer width and height of elements like:
 
     $('#foo').outerWidth(500);
-    
+
 jQuery++ comes with the following DOM helper plugins:
 
 - [jQuery.animate Animate] - Let jQuery use CSS animations.

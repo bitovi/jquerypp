@@ -1,7 +1,7 @@
-@page jQuery.event.key
+@page jQuery.event.key jQuery.event.key
 @parent jquerypp
 
-`jQuery.event.key` adds a [jQuery.Event.prototype.keyName keyName()] method to the
+`jQuery.event.key` adds a [$.Event.prototype.keyName keyName()] method to the
 [jQuery event object](http://api.jquery.com/category/events/event-object/)
 that returns a string representation of the current key:
 
@@ -40,13 +40,13 @@ The following tool generates a `$.event.key` mapping from your current keyboard 
 Just press the keys that don't get recognized properly and they will be added to the code block
 which you can copy and provide in your application:
 
-@iframe jquerypp/event/key/customizer.html 600
+<iframe src="../jquerypp/event/key/customizer.html" style="height: 600px;width: 100%"></iframe>
 
 Generally it is recommended to use `keypress` to retrieve the actual character being pressed.
 
-> Note: In Mac OS Firefox (currently version 12 and 13) won't return any values at all for international
+> Note: In Mac OS Firefox won't return any values at all for international
 characters on *keydown* and *keyup*.
 
 ## Demo
 
-@demo jquerypp/event/key/key.html
+@demo jquerypp/event/key/key.html 200

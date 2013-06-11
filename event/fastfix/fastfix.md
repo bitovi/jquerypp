@@ -1,4 +1,4 @@
-@page jQuery.event.fastfix
+@constructor jQuery.event.fastfix
 @parent jquerypp
 
 `jQuery.event.fastfix` provides a faster `jQuery.event.fix` using ES 5 Getters first introduced in
