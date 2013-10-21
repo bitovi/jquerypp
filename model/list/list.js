@@ -9,10 +9,13 @@ steal('can/util', 'can/model/list','jquerypp/model', function(can) {
 				ids.push(this.attr('id'));
 			});
 			arg = ids;
+			return getList.apply(this,arg);
 		} else if(arg.attr && arg.constructor && (id = arg.attr(arg.constructor.id))) {
 			arg = id;
+			return getList.apply(this,[arg]);
+		} else {
+			return getList.apply(this,arguments);
 		}
-		return getList.apply(this,arguments);
 	};
 	// restore the ability to push a list!arg
 	var push = $.Model.List.prototype.push;
