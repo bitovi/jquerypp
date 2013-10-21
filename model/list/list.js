@@ -18,8 +18,9 @@ steal('can/util', 'can/model/list','jquerypp/model', function(can) {
 	var push = $.Model.List.prototype.push;
 	$.Model.List.prototype.push = function(arg) {
 		if(arg instanceof $.Model.List) {
-			arg = can.makeArray(arg);
+			return push.apply(this,can.makeArray(arg));
+		} else {
+			return push.apply(this,arguments);
 		}
-		return push.apply(this,arguments);
 	};
 });
