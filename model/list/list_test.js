@@ -42,6 +42,16 @@ test("create", function(){
 	equals(this.people.get("a2")[0].id,"a2" , "get works")
 })
 
+test("push another list", function(){
+	var listOfPeople = new Person.List();
+	listOfPeople.push(
+		new Person({ name: "Barry" }),
+		new Person({ name: "Colin" })
+	);
+	equals(this.people.length, 20, 'started with 20 people');
+	this.people.push(listOfPeople);
+	equals(this.people.length, 22, 'pushed 2 more people');
+})
 
 test("splice", function(){
 	ok(this.people.get("a1").length,"something where a1 is")
