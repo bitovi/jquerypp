@@ -214,8 +214,8 @@ steal('jquery', function($){
 
 	$.Event.prototype.vector = function() {
 		// Get the first touch element for touch events
-		var touches = "ontouchend" in document && this.originalEvent.changedTouches.length
-				? this.originalEvent.changedTouches[0] : this;
+		var touches = "ontouchend" in document && this.originalEvent.changedTouches && 
+			this.originalEvent.changedTouches.length ? this.originalEvent.changedTouches[0] : this;
 		if ( this.originalEvent.synthetic ) {
 			var doc = document.documentElement,
 				body = document.body;
