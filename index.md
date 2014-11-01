@@ -756,7 +756,7 @@ arise, can also be hired for paid support, training, and development.
 ## Developing jQuery++
 
 To develop jQuery++, add features, etc, you first must install DoneJS. DoneJS is the
-parent project of jQuery++ and the 4.0 version of JavaSciptMVC. It has DocumentJS and
+parent project of jQuery++ and the 4.0 version of JavaScriptMVC. It has DocumentJS and
 Steal as submodules that are used to generate the documentation and build the jQuery++ downloads.
 
 ### Installing
