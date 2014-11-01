@@ -6,7 +6,7 @@ and enables it to animate properties using CSS 3 animations, if supported.
 If the browser doesn't support CSS animations, the original [jQuery.fn.animate()](http://api.jquery.com/animate/) will be used.
 
 Using browser CSS animations, which can make use of hardware acceleration,
-can improve your application performance especially on mobile devices (like the Webkit based
+can improve your application performance especially on mobile devices (like the WebKit based
 default browsers for iPhone, iPad and Android devices).
 
 ## Compatibility

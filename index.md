@@ -113,7 +113,7 @@ $('#element').css({
 });
 {% endhighlight %}
 
-Since CSS transitions are implemented natively in the browser and can make use of hardware acceleration, animations will perform a lot better, especially in Webkit based mobile browsers (iPhone, iPad, Android).
+Since CSS transitions are implemented natively in the browser and can make use of hardware acceleration, animations will perform a lot better, especially in WebKit based mobile browsers (iPhone, iPad, Android).
 
 ## compare `$(elA).compare(elB) -> Number`
 
