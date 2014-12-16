@@ -19,7 +19,7 @@ steal('jquery', 'jquerypp/lang/vector', 'jquerypp/event/livehack', 'jquerypp/eve
 			window.getSelection().removeAllRanges()
 		} : function(){},
 
-		supportTouch = "ontouchend" in document,
+		supportTouch = !window._phantom && "ontouchend" in document,
 	// Use touch events or map it to mouse events
 		startEvent = supportTouch ? "touchstart" : "mousedown",
 		stopEvent = supportTouch ? "touchend" : "mouseup",
