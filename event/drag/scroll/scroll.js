@@ -51,7 +51,8 @@ $.Scrollable = function(element, options){
 		delta : function(diff, distance){
 			return (distance - diff) / 2;
 		},
-		direction: "xy"
+		direction: "xy",
+		delay: 15
 	}, options);
 	this.x = this.options.direction.indexOf("x") != -1;
 	this.y = this.options.direction.indexOf("y") != -1;
@@ -129,7 +130,7 @@ $.extend($.Scrollable.prototype,{
 			var self = this;
 			this.interval =  setTimeout( function(){
 				self.move($(el), drag.movingElement, dx, dy, ev, ev.clientX, ev.clientY, ev.screenX, ev.screenY)
-			},15)
+			},this.options.delay)
 		}
 	},
 	/**
