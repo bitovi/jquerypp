@@ -21,6 +21,7 @@ steal("jquery",
 	"jquerypp/event/pause",
 	"jquerypp/event/resize",
 	"jquerypp/event/swipe",
+	"jquerypp/event/pinch",
 function($) {
 	return $;
 });
