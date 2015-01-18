@@ -42,6 +42,30 @@ test("create", function(){
 	equals(this.people.get("a2")[0].id,"a2" , "get works")
 })
 
+test("get", function(){
+	var listOfPeople = new Person.List([
+		new Person({ id: 1000, name: "Barry" }),
+		new Person({ id: 1001, name: "Colin" })
+	]);
+	var instanceMatch = listOfPeople.get(listOfPeople.attr('0'));
+	equals(instanceMatch[0].id, 1000, 'get works with model instance');
+	equals(instanceMatch.length, 1, 'result is correct length');
+
+	var listMatch = listOfPeople.get(new Person.List([listOfPeople.attr('0')]));
+	equals(listMatch[0].id, 1000, 'get works with model list instance');
+	equals(listMatch.length, 1, 'result is correct length');
+})
+
+test("push another list", function(){
+	var listOfPeople = new Person.List();
+	listOfPeople.push(
+		new Person({ name: "Barry" }),
+		new Person({ name: "Colin" })
+	);
+	equals(this.people.length, 20, 'started with 20 people');
+	this.people.push(listOfPeople);
+	equals(this.people.length, 22, 'pushed 2 more people');
+})
 
 test("splice", function(){
 	ok(this.people.get("a1").length,"something where a1 is")
