@@ -137,115 +137,116 @@
 	</div>
 </div>
 
-<script type='text/javascript' src='../../../steal/steal.js'></script>
+<script type='text/javascript' src='../../node_modules/steal/steal.js' main='@empty'></script>
 <script type='text/javascript' id="demo-source">
-steal("can/control",'jquerypp/event/pause','jquerypp/event/default')
-	.then(function(){
+steal('jquerypp/event/pause','jquerypp/event/default',function(){
 
 // create a widget listens for change and marks as dirty
-can.Control("Dirtybit", {
-}, {
-  init : function () {
-    this.element.data('formData', this.element.serialize())
-  },
-  "change" : function (el) {
-    this.check()
-  },
-  keyup : function (el) {
-    this.check()
-  },
-  click : function (el) {
-    this.check()
-  },
-  check : function () {
-    var el = this.element;
-    if (el.serialize() == el.data('formData')) {
-      el.removeClass('dirty')
-    } else {
-      el.addClass('dirty')
-    }
-  },
-  " set" : function () {
-    this.element.data('formData', this.element.serialize())
-        .removeClass('dirty');
-  }
-})
+$.fn.dirtybit = function(){
+	this.each(function(){
+		var element = $(this);
+		element.data('formData', element.serialize());
+		var check = function(){
+			 if (element.serialize() == element.data('formData')) {
+		      element.removeClass('dirty');
+		    } else {
+		      element.addClass('dirty');
+		    }
+		};
+		
+		element.bind("change keyup click", check)
+			.bind("set", function(){
+				element.data('formData', element.serialize())
+        			.removeClass('dirty');
+			});
+	});
+};
 
-can.Control("Tabs", {
-  init : function (el) {
-    $(el).children("li:first").addClass('active');
-    var tab = this.tab;
-    this.element.children("li:gt(0)").each(function () {
-      tab($(this)).hide()
-    })
-  },
-  tab : function (li) {
-    return $(li.find("a").attr("href").match(/#.*/)[0])
-  },
-  "li click" : function (el, ev) {
-    ev.preventDefault();
-    var active = this.element.find('.active')
-    old = this.tab(active),
-        cur = this.tab(el);
-    old.triggerAsync('hide', function () {
-      active.removeClass('active')
-      old.slideUp(function () {
-        el.addClass('active')
-        cur.slideDown()
-      });
-    })
-  }
-})
+$.fn.tabs = function(){
+	this.addClass("tabs")
+	this.each(function(){
+		var element = $(this);
+		var el = element;
+		var tab = function (li) {
+		   return $(li.find("a").attr("href").match(/#.*/)[0]);
+		};
+		
+		$(el).children("li:first").addClass('active');
 
-// a modal width
-can.Control("Modal", {
-  init : function () {
-    this.element.show();
-  },
-  "a click" : function (a) {
-    this.element.hide();
-    this.options[a.attr('id')]();
+	    element.children("li:gt(0)").each(function () {
+	      tab($(this)).hide();
+	    });
+		el.on("click","li", function(ev){
+			var el = $(this);
+			ev.preventDefault();
+		    var active = element.find('.active'),
+		    	old = tab(active),
+		        cur = tab(el);
+		    old.triggerAsync('hide', function () {
+		      active.removeClass('active')
+		      old.slideUp(function () {
+		        el.addClass('active')
+		        cur.slideDown()
+		      });
+		    });
+		});
+	});
+};
 
-    this.destroy();
-  }
-})
+$.fn.modal = function(options){
+	this.show();
+	this.each(function(){
+		var element = $(this);
+		element.on("click","a", function(){
+			var a = $(this);
+			element.hide();
+		    options[a.attr('id')]();
+		
+		    element.off("click","a", arguments.callee);
+		});
+	});
+};
 
-// create a saver widget
-can.Control("Saver", {
-}, {
-  " hide" : function (el, ev) {
-    if (el.hasClass('dirty')) {
-      ev.pause()
-      new Modal('#modal', {
-        yes : function () {
-          var save = $('<span>Saving</span>').appendTo(el);
-          $.post("/update", el.serialize(), function () {
-            save.remove();
-            el.trigger('set');
-            ev.resume();
-          })
-        },
-        no : function () {
-          ev.resume();
-        },
-        cancel : function () {
-          ev.preventDefault();
-          ev.resume();
-        }
-      })
-    }
-  }
-});
+$.fn.saver = function(){
+	this.each(function(){
+		var el = $(this);
+		el.bind("hide", function(ev){
+			if (el.hasClass('dirty')) {
+		      ev.pause();
+		      $('#modal').modal({
+		        yes : function () {
+		          var save = $('<span>Saving</span>').appendTo(el);
+		          $.post("/update", el.serialize(), function () {
+		            save.remove();
+		            el.trigger('set');
+		            ev.resume();
+		          });
+		        },
+		        no : function () {
+		          ev.resume();
+		        },
+		        cancel : function () {
+		          ev.preventDefault();
+		          ev.resume();
+		        }
+		      });
+		   };
+		});
+	});
+};
 
-new Tabs('#tabs');
+
+
+$('#tabs').tabs();
+
 $("#panels .tab").each(function() {
-  new Dirtybit(this);
-  new Saver(this);
+  $(this).dirtybit();
+  $(this).saver();
 });
 
 // a fake post method
 $.post = function (url, data, success) {
-  setTimeout(success, 500)
+  setTimeout(success, 500);
 };
 
 });

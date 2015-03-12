@@ -14,7 +14,7 @@
 <table id="demo-html">
 	<tr>
 		<td> <a href="javascript://" id='textarea'>Select Textarea</a></td>
-		<td><textarea id=''>012
+		<td><textarea id='textarea'>012
 456</textarea></td>
 	</tr>
 	<tr>
@@ -34,23 +34,22 @@
 	</tr>
 </table>
 <p>Selection width: <span id="selectionwidth">0</span></p>
-		<script type='text/javascript' 
-                src='../../../steal/steal.js'></script>
-		<script type='text/javascript'>
+<script type='text/javascript' src='../../node_modules/steal/steal.js' main='@empty'></script>
+<script type='text/javascript'>
 steal('jquerypp/dom/selection', function(){
 			
 	$('#textarea').click(function(){
 		$('textarea').selection(1,5).mouseup();
-	})
+	});
 	$('#input').click(function(){
 		$('input').selection(1,5).mouseup();
-	})
+	});
 	$('#p').click(function(){
 		$('#1').selection(1,5).mouseup();
-	})
+	});
 	$('#multi').click(function(){
 		$('#2').selection(1,5).mouseup();
-	})
+	});
 
 	$('textarea,input,#1,#2').mouseup(function(){
 		$('#selectionwidth').text($(this).selection().width);

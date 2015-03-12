@@ -1,4 +1,4 @@
-steal('funcunit/qunit',
+steal('steal-qunit',
 	'jquerypp/model',
 	'jquerypp/controller',
 	'jquerypp/view/ejs',
@@ -7,14 +7,14 @@ steal('funcunit/qunit',
 	
 module('integration',{
 	setup : function(){
-		$("#qunit-test-area").html("")
+		$("#qunit-fixture").html("")
 	}
 });
 
 test("controller can listen to model instances and model classes", function(){
 	
 	
-	$("#qunit-test-area").html("");
+	$("#qunit-fixture").html("");
 	
 	
 	
@@ -44,7 +44,7 @@ test("controller can listen to model instances and model classes", function(){
 	
 	var inst = new Test.ModelThing();
 	
-	$("<div>").appendTo( $("#qunit-test-area") )
+	$("<div>").appendTo( $("#qunit-fixture") )
 		.test_binder_thing({
 			model : Test.ModelThing,
 			instance: inst

@@ -1,9 +1,9 @@
-steal("jquerypp/event/hover", 'funcunit/syn', 'funcunit/qunit', function ($, Syn) {
+steal("jquerypp/event/hover", 'syn', 'steal-qunit', function ($, Syn) {
 
 	module("jquerypp/dom/hover")
 
 	test("hovering", function () {
-		$("#qunit-test-area").append("<div id='hover'>Content<div>")
+		$("#qunit-fixture").append("<div id='hover'>Content<div>")
 		var hoverenters = 0,
 			hoverinits = 0,
 			hoverleaves = 0,
@@ -57,7 +57,7 @@ steal("jquerypp/event/hover", 'funcunit/syn', 'funcunit/qunit', function ($, Syn
 	});
 
 	test("hoverInit delay 0 triggers hoverenter (issue #57)", function () {
-		$("#qunit-test-area").append("<div id='hoverzero'>Content<div>");
+		$("#qunit-fixture").append("<div id='hoverzero'>Content<div>");
 
 		var hoverenters = 0,
 			hoverinits = 0,

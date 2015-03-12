@@ -18,7 +18,7 @@ steal('jquery', 'jquerypp/event/livehack', function ($) {
 	$.Hover = function () {
 		this._delay = $.Hover.delay;
 		this._distance = $.Hover.distance;
-		this._leave = $.Hover.leave
+		this._leave = $.Hover.leave;
 	};
 	/**
 	 * @static
@@ -55,7 +55,7 @@ steal('jquery', 'jquerypp/event/livehack', function ($) {
 		 */
 		distance : 10,
 		leave : 0
-	})
+	});
 
 	/**
 	 * @prototype
@@ -139,7 +139,7 @@ steal('jquery', 'jquerypp/event/livehack', function ($) {
 			this._leave = leave;
 			return this;
 		}
-	})
+	});
 	var event = $.event,
 		handle = event.handle,
 		onmouseenter = function (ev) {
@@ -188,8 +188,8 @@ steal('jquery', 'jquerypp/event/livehack', function ($) {
 			// Callback for triggering hoverleave
 			callHoverLeave = function () {
 				$.each(event.find(delegate, ["hoverleave"], selector), function () {
-					this.call(enteredEl, ev, hover)
-				})
+					this.call(enteredEl, ev, hover);
+				});
 				cleanUp();
 			},
 			mousemove = function (ev) {
@@ -199,7 +199,7 @@ steal('jquery', 'jquerypp/event/livehack', function ($) {
 				loc = {
 					pageX : ev.pageX,
 					pageY : ev.pageY
-				}
+				};
 				lastEv = ev
 			},
 			mouseleave = function (ev) {
@@ -324,8 +324,8 @@ steal('jquery', 'jquerypp/event/livehack', function ($) {
 	 *          // but we provide it just in case
 	 *      })
 	 */
-		"hovermove"], "mouseenter", onmouseenter)
+		"hovermove"], "mouseenter", onmouseenter);
 
 
 	return $;
-})
+});

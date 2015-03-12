@@ -1,6 +1,20 @@
-steal('jquery', 'jquerypp/dom/animate', 'funcunit/qunit', './qunit.css', function ($) {
+steal('jquery', 
+	"jquerypp/dom/animate/test/fixture.html!system-text",
+	'jquerypp/dom/animate', 'steal-qunit', function ($, fixtureHTML) {
 
-	module("jquerypp/dom/animate");
+	module("jquerypp/dom/animate", {
+		setup: function(){
+			// make qunit-fixture something else
+			$("#qunit-fixture").prop("id","outer-qunit-fixture")
+				.replaceWith(fixtureHTML);
+		},
+		teardown: function(){
+			$("#outer-qunit-fixture").empty().prop("id","qunit-fixture");
+		}
+	});
+	var reset = function(){
+		$("#outer-qunit-fixture").html(fixtureHTML);
+	};
 
 	if ( $.fx ) {
 		test("sanity check", function() {
@@ -21,7 +35,7 @@ steal('jquery', 'jquerypp/dom/animate', 'funcunit/qunit', './qunit.css', functio
 
 			equal( div.css("display"), "block", "Make sure pre-hidden divs show" );
 
-			QUnit.reset();
+			reset();
 
 			hiddendiv = jQuery("div.hidden");
 
@@ -105,7 +119,7 @@ steal('jquery', 'jquerypp/dom/animate', 'funcunit/qunit', './qunit.css', functio
 
 		test("show(Number) - other displays", function() {
 			expect(15);
-			QUnit.reset();
+			reset();
 			stop();
 
 			// #show-tests * is set display: none in CSS
@@ -149,7 +163,7 @@ steal('jquery', 'jquerypp/dom/animate', 'funcunit/qunit', './qunit.css', functio
 // Supports #7397
 		test("Persist correct display value", function() {
 			expect(3);
-			QUnit.reset();
+			reset();
 			stop();
 
 			// #show-tests * is set display: none in CSS
@@ -1250,7 +1264,7 @@ steal('jquery', 'jquerypp/dom/animate', 'funcunit/qunit', './qunit.css', functio
 
 		test("hide hidden elements, with animation (bug #7141)", function() {
 			expect(3);
-			QUnit.reset();
+			reset();
 			stop();
 
 			var div = jQuery("<div style='display:none'></div>").appendTo("#qunit-fixture");

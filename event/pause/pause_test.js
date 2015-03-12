@@ -1,11 +1,11 @@
-steal('funcunit/qunit', 'funcunit/syn', 'jquerypp/event/pause').then(function (QUnit, Syn) {
+steal('steal-qunit', 'syn', 'jquerypp/event/pause',function (QUnit, Syn) {
 
 	module("jquerypp/event/pause", {setup : function () {
-		$("#qunit-test-area").html("")
+		$("#qunit-fixture").html("")
 		var div = $("<div id='wrapper_pause_test'><ul id='ul_pause_test'>" +
 			"<li><p>Hello</p>" +
 			"<ul><li><p id='foo_pause_test'>foo_pause_test Bar</p></li></ul>" +
-			"</li></ul></div>").appendTo($("#qunit-test-area"));
+			"</li></ul></div>").appendTo($("#qunit-fixture"));
 
 	}});
 
@@ -35,7 +35,7 @@ steal('funcunit/qunit', 'funcunit/syn', 'jquerypp/event/pause').then(function (Q
 
 		$('#wrapper_pause_test').bind('show', function () {
 			space()
-			equals(calls, 2, "both lis called");
+			equal(calls, 2, "both lis called");
 			start()
 		});
 		stop();

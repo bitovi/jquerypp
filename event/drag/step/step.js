@@ -2,7 +2,7 @@
  * @add jQuery.Drag.prototype
  */
 
-steal('jquery', 'jquerypp/event/drag/core', 'jquerypp/dom/styles', function( $ ) {
+steal('jquery', 'jquerypp/event/drag/core', function( $ ) {
 	var round = function( x, m ) {
 		return Math.round(x / m) * m;
 	}
@@ -43,12 +43,12 @@ steal('jquery', 'jquerypp/event/drag/core', 'jquerypp/dom/styles', function( $ )
 			amount = {
 				x: amount,
 				y: amount
-			}
+			};
 		}
 		container = container || $(document.body);
 		this._step = amount;
 
-		var styles = container.styles("borderTopWidth", "paddingTop", "borderLeftWidth", "paddingLeft");
+		var styles = container.css(["borderTopWidth", "paddingTop", "borderLeftWidth", "paddingLeft"]);
 		var top = parseInt(styles.borderTopWidth) + parseInt(styles.paddingTop),
 			left = parseInt(styles.borderLeftWidth) + parseInt(styles.paddingLeft);
 
@@ -76,9 +76,9 @@ steal('jquery', 'jquerypp/event/drag/core', 'jquerypp/dom/styles', function( $ )
 				}
 			}
 
-			oldPosition.call(this, offsetPositionv)
-		}
+			oldPosition.call(this, offsetPositionv);
+		};
 	})();
 
 	return $;
-})
+});

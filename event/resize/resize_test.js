@@ -1,5 +1,5 @@
 
-steal('funcunit/qunit', 'jquerypp/event/resize').then(function() {
+steal('steal-qunit', 'jquerypp/event/resize',function() {
 
 	module("jquerypp/event/resize")
 
@@ -13,21 +13,21 @@ steal('funcunit/qunit', 'jquerypp/event/resize').then(function() {
 				ids.push(this.id ? this.id : this)
 			}
 		},
-			divs = $("#qunit-test-area").html("<div id='1'><div id='1.1'></div><div id='1.2'></div></div><div id='2'></div>").find('div').bind('resize', record);
+			divs = $("#qunit-fixture").html("<div id='1'><div id='1.1'></div><div id='1.2'></div></div><div id='2'></div>").find('div').bind('resize', record);
 
 		$(document.body).bind('resize', record);
 
-		$("#qunit-test-area").children().eq(0).trigger("resize");
+		$("#qunit-fixture").children().eq(0).trigger("resize");
 
-		same(ids, ['1', '1.1', '1.2'])
+		deepEqual(ids, ['1', '1.1', '1.2'])
 
 		ids = [];
-		$("#qunit-test-area").trigger("resize");
-		same(ids, [document.body.tagName.toLowerCase(), '1', '1.1', '1.2', '2']);
+		$("#qunit-fixture").trigger("resize");
+		deepEqual(ids, [document.body.tagName.toLowerCase(), '1', '1.1', '1.2', '2']);
 
 		ids = [];
 		$(window).trigger("resize");
-		same(ids, [document.body.tagName.toLowerCase(), '1', '1.1', '1.2', '2']);
+		deepEqual(ids, [document.body.tagName.toLowerCase(), '1', '1.1', '1.2', '2']);
 
 		$(document.body).unbind('resize', record);
 	});
@@ -41,12 +41,12 @@ steal('funcunit/qunit', 'jquerypp/event/resize').then(function() {
 				ev.stopPropagation();
 			}
 		},
-			divs = $("#qunit-test-area").html("<div id='1'><div id='1.1'></div><div id='1.2'></div></div><div id='2'></div>").find('div').bind('resize', record);
+			divs = $("#qunit-fixture").html("<div id='1'><div id='1.1'></div><div id='1.2'></div></div><div id='2'></div>").find('div').bind('resize', record);
 
 		$(document.body).bind('resize', record);
 
 		$(window).trigger("resize");
-		same(ids, [document.body.tagName.toLowerCase(), '1']);
+		deepEqual(ids, [document.body.tagName.toLowerCase(), '1']);
 
 		$(document.body).unbind('resize', record);
 	});
@@ -58,15 +58,15 @@ steal('funcunit/qunit', 'jquerypp/event/resize').then(function() {
 				ids.push(this.id ? this.id : this);
 			},
 
-			divs = $("#qunit-test-area").html("<div id='1'><div id='1.1'><div id='1.1.1'></div></div></div>");
+			divs = $("#qunit-fixture").html("<div id='1'><div id='1.1'><div id='1.1.1'></div></div></div>");
 
 		divs.find("#1\\.1\\.1").bind("resize", record);
 		divs.find("#1").bind("resize", record);
 
 		$("#1\\.1").trigger("resize", [false]);
-		same(ids, ['1.1.1']);
+		deepEqual(ids, ['1.1.1']);
 
-		$("#qunit-test-area").empty();
+		$("#qunit-fixture").empty();
 	});
 
 

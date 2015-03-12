@@ -21,13 +21,13 @@
 	</head>
 	<body>
 	    <a href='javascript://' id='tap'>I'd Tap That</a>
-		<script type='text/javascript' 
-                src='../../../steal/steal.js?steal[app]=jquerypp/event/tap'>   
-        </script>
+		<script type='text/javascript' src='../../node_modules/steal/steal.js' main='@empty'></script>
 		<script type='text/javascript'>
-			$('#tap').bind('tap', function(){
-				console.log('tap')
-			})
+			steal("jquerypp/event/tap", function(){
+				$('#tap').bind('tap', function(){
+					console.log('tap');
+				});
+			});
 		</script>
 	</body>
 </html>

@@ -1,9 +1,9 @@
-steal('funcunit/qunit', 'funcunit/syn', 'jquerypp/event/key', function(QUnit, Syn) {
+steal('steal-qunit', 'syn', 'jquerypp/event/key', function(QUnit, Syn) {
 	
 module('jquerypp/event/key');
 
 test("type some things", function(){
-	$("#qunit-test-area").append("<input id='key' />")
+	$("#qunit-fixture").append("<input id='key' />")
 	var keydown, keypress, keyup;
 	$('#key').keydown(function(ev){
 		keydown = ev.keyName();
@@ -15,10 +15,10 @@ test("type some things", function(){
 	
 	stop();
 	
-	Syn.key("a","key", function(){
-		equals(keydown, "a","keydown");
-		equals(keypress,"a","keypress");
-		equals(keyup,   "a","keyup");
+	Syn.key("key","a", function(){
+		equal(keydown, "a","keydown");
+		equal(keypress,"a","keypress");
+		equal(keyup,   "a","keyup");
 		start();
 	});
 })

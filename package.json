@@ -2,17 +2,31 @@
   "name" : "jquerypp",
   "title" : "jQuery++",
   "description" : "jQuery's missing utils and special events",
-  "version" : "1.0.1",
+  "version" : "1.1.0-pre.0",
   "author" : {
     "name" : "Bitovi",
     "email" : "contact@bitovi.com",
     "web" : "http://bitovi.com/"
   },
+  "peerDependencies": {
+    "jquery": ">1.9.0"
+  },
   "devDependencies" : {
     "http-server" : "0.5.1",
     "grunt" : "0.4.0",
     "grunt-string-replace" : "0.2.2",
-    "grunt-shell" : "0.2.1"
+    "grunt-shell" : "0.2.1",
+    "steal-tools": "0.7.X",
+    "steal": "0.7.X",
+    "steal-qunit": "0.0.2",
+    "system-text": "0.1.0",
+    "syn": "0.1.X"
+  },
+  "system": {
+    "map": {
+      "jquery/jquery": "jquery",
+      "steal-qunit/steal-qunit": "steal-qunit"
+	}
   },
   "homepage" : "http://jquerypp.com",
   "repository" : {

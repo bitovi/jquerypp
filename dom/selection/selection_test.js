@@ -1,9 +1,9 @@
-steal("jquery", "funcunit/qunit", "jquerypp/dom/selection").then(function($) {
+steal("jquery", "steal-qunit", "jquerypp/dom/selection",function($) {
   	
 module("jquerypp/dom/selection");
 
 test("getCharElement", function(){
-	$("#qunit-test-area")
+	$("#qunit-fixture")
 		.html("<textarea>012\n456</textarea>"+
 			  "<input text='text' value='01234567' id='inp'/>"+
 			  "<p id='1'>0123456789</p>"+
@@ -19,11 +19,11 @@ test("getCharElement", function(){
 		*/
 		for(var i = 0; i < types.length; i++){
 			$(types[i]).selection(1, 5);
-			same($(types[i]).selection(), {start: 1, end: 5, width: 4}, types[i]);
+			deepEqual($(types[i]).selection(), {start: 1, end: 5, width: 4}, types[i]);
 		}
 		
 		start();
-	},1000)
+	},1000);
 });
 
 });

@@ -82,7 +82,7 @@ steal('jquery', function($){
 		},
 		/**
 		 * @function jQuery.Vector.prototype.equals equals
-		 * @signature `jQuery.vector.equals()`
+		 * @signature `jQuery.vector.equal()`
 		 *
 		 * @body
 		 *

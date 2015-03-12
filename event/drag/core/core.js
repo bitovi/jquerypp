@@ -180,7 +180,7 @@ steal('jquery', 'jquerypp/lang/vector', 'jquerypp/event/livehack', 'jquerypp/eve
 
 			this.element.trigger('move', this);
 			var pointer = ev.vector();
-			if ( this._start_position && this._start_position.equals(pointer) ) {
+			if ( this._start_position && this._start_position.equal(pointer) ) {
 				return;
 			}
 			this.draw(pointer, ev);
