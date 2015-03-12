@@ -1,6 +1,6 @@
 {
 	"filename": "jquerypp.custom.js",
-	"banner": "/*!\n * <%= info.title || info.name %> - <%= info.version %>\n * <%= info.homepage %>\n * Copyright (c) <%= new Date().getFullYear() %> <%= info.author.name %>\n * <%= new Date().toUTCString() %>\n * Licensed <%= info.licenses[0].type %><% if(typeof url !== 'undefined') { %>\n * Download from: <%= url %>\n<% } %> */\n",
+  "banner": "/*!\n * <%= pkg.title || pkg.name %> - <%= pkg.version %>\n * <%= pkg.homepage %>\n * Copyright (c) <%= new Date().getFullYear() %> <%= pkg.author.name %>\n * <%= new Date().toUTCString() %>\n * Licensed <%= pkg.licenses[0].type %>\n<% if(typeof url !== \"undefined\") { %>\n * Includes: <%= ids %>\n * Download from: <%= url %>\n<% } %> */\n",
 	"modules": {
 		"jquerypp/dom/animate/animate": {
 			"name": "jQuery.animate",
@@ -17,12 +17,6 @@
 		"jquerypp/dom/cookie/cookie": {
 			"name": "jQuery.cookie",
 			"description": "Read and write cookies",
-			"type": "dom",
-			"isDefault": true
-		},
-		"jquerypp/dom/dimensions/dimensions": {
-			"name": "jQuery.dimensions",
-			"description": "Set and animate innerWidth and outerWidth",
 			"type": "dom",
 			"isDefault": true
 		},
@@ -44,20 +38,14 @@
 			"type": "dom",
 			"isDefault": true
 		},
-		"jquerypp/dom/styles/styles": {
-			"name": "jQuery.styles",
-			"description": "Quickly read computed styles",
-			"type": "dom",
-			"isDefault": true
-		},
 		"jquerypp/dom/within/within": {
 			"name": "jQuery.within",
 			"description": "Get elements within an area or at a point",
 			"type": "dom",
 			"isDefault": true
 		},
-		"jquerypp/event/destroyed/destroyed": {
-			"name": "jQuery.event.destroyed",
+		"jquerypp/event/removed/removed": {
+			"name": "jQuery.event.removed",
 			"description": "An element is removed from the DOM",
 			"type": "event",
 			"isDefault": true
@@ -71,12 +59,6 @@
 		"jquerypp/event/drop/drop": {
 			"name": "jQuery.event.drop",
 			"description": "Delegatable drop events",
-			"type": "event",
-			"isDefault": true
-		},
-		"jquerypp/event/fastfix/fastfix": {
-			"name": "jQuery.event.fastfix",
-			"description": "Faster jQuery.event.fix using ES5 getters",
 			"type": "event",
 			"isDefault": true
 		},
