@@ -6,7 +6,7 @@ steal('jquery',
 		setup: function(){
 			// make qunit-fixture something else
 			$("#qunit-fixture").prop("id","outer-qunit-fixture")
-				.replaceWith(fixtureHTML);
+				.html(fixtureHTML);
 		},
 		teardown: function(){
 			$("#outer-qunit-fixture").empty().prop("id","qunit-fixture");
@@ -38,7 +38,7 @@ steal('jquery',
 			reset();
 
 			hiddendiv = jQuery("div.hidden");
-
+			
 			equal($.css( hiddendiv[0], "display"), "none", "hiddendiv is display: none");
 
 			hiddendiv.css("display", "block");
