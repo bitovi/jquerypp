@@ -1,0 +1,121 @@
+{
+	"filename": "jquerypp.custom.js",
+  "banner": "/*!\n * <%= pkg.title || pkg.name %> - <%= pkg.version %>\n * <%= pkg.homepage %>\n * Copyright (c) <%= new Date().getFullYear() %> <%= pkg.author.name %>\n * <%= new Date().toUTCString() %>\n * Licensed <%= pkg.licenses[0].type %>\n<% if(typeof url !== \"undefined\") { %>\n * Includes: <%= ids %>\n * Download from: <%= url %>\n<% } %> */\n",
+	"modules": {
+		"jquerypp/dom/animate/animate": {
+			"name": "jQuery.animate",
+			"description": "Animate using CSS animations",
+			"type": "dom",
+			"isDefault": true
+		},
+		"jquerypp/dom/compare/compare": {
+			"name": "jQuery.compare",
+			"description": "Compare element document position",
+			"type": "dom",
+			"isDefault": true
+		},
+		"jquerypp/dom/cookie/cookie": {
+			"name": "jQuery.cookie",
+			"description": "Read and write cookies",
+			"type": "dom",
+			"isDefault": true
+		},
+		"jquerypp/dom/form_params/form_params": {
+			"name": "jQuery.formParams",
+			"description": "Serializes a form into an object",
+			"type": "dom",
+			"isDefault": true
+		},
+		"jquerypp/dom/range/range": {
+			"name": "jQuery.range",
+			"description": "Create and manipulate text ranges",
+			"type": "dom",
+			"isDefault": true
+		},
+		"jquerypp/dom/selection/selection": {
+			"name": "jQuery.selection",
+			"description": "Get and set the current text selection",
+			"type": "dom",
+			"isDefault": true
+		},
+		"jquerypp/dom/within/within": {
+			"name": "jQuery.within",
+			"description": "Get elements within an area or at a point",
+			"type": "dom",
+			"isDefault": true
+		},
+		"jquerypp/event/removed/removed": {
+			"name": "jQuery.event.removed",
+			"description": "An element is removed from the DOM",
+			"type": "event",
+			"isDefault": true
+		},
+		"jquerypp/event/drag/drag": {
+			"name": "jQuery.event.drag",
+			"description": "Delegatable drag events",
+			"type": "event",
+			"isDefault": true
+		},
+		"jquerypp/event/drop/drop": {
+			"name": "jQuery.event.drop",
+			"description": "Delegatable drop events",
+			"type": "event",
+			"isDefault": true
+		},
+		"jquerypp/event/hover/hover": {
+			"name": "jQuery.event.hover",
+			"description": "Delegatable hover events",
+			"type": "event",
+			"isDefault": true
+		},
+		"jquerypp/event/key/key": {
+			"name": "jQuery.event.key",
+			"description": "Returns a string representation of the key pressed",
+			"type": "event",
+			"isDefault": true
+		},
+		"jquerypp/event/pause/pause": {
+			"name": "jQuery.event.pause",
+			"description": "Pause and resume event propagation",
+			"type": "event",
+			"isDefault": true
+		},
+		"jquerypp/event/resize/resize": {
+			"name": "jQuery.event.resize",
+			"description": "Listen to a resize event on every object",
+			"type": "event",
+			"isDefault": true
+		},
+		"jquerypp/event/swipe/swipe": {
+			"name": "jQuery.event.swipe",
+			"description": "Delegatable swipe events",
+			"type": "event",
+			"isDefault": true
+		}
+	},
+	"types": {
+		"dom": "DOM helpers",
+		"event": "Special events"
+	},
+	"pluginify": {
+		"shim": {
+			"jquery/jquery.js": "$"
+		},
+		"wrapper": "(function($) {\n<%= content %>\n})(jQuery);\n"
+	},
+	"configurations": {
+		"default": {
+			"description": "jQuery",
+			"isDefault": true
+		}
+	},
+	"ignore": ["dojo","dojo/dojo","dojo/main",
+		"jquery","jquery/jquery",
+		"mootools/mootools","mootools",
+		"zepto","zepto/zepto",
+		"yui","yui/yui"],
+	"exports": {
+		"jquery": "jQuery",
+		"zepto": "Zepto"
+	}
+}
