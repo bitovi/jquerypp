@@ -756,60 +756,6 @@ steal('jquery',
 			start();
 		};
 
-		test( "$.fx.prototype.cur() - <1.8 Back Compat", 7, function() {
-			var div = jQuery( "<div></div>" ).appendTo( "#qunit-fixture" ).css({
-				color: "#ABC",
-				border: "5px solid black",
-				left: "auto",
-				marginBottom: "-11000px"
-			})[0];
-
-			equal(
-				( new $.fx( div, {}, "color" ) ).cur(),
-				$.css( div, "color" ),
-				"Return the same value as $.css for complex properties (bug #7912)"
-			);
-
-			strictEqual(
-				( new $.fx( div, {}, "borderLeftWidth" ) ).cur(),
-				5,
-				"Return simple values parsed as Float"
-			);
-
-			// backgroundPosition actually returns 0% 0% in most browser
-			// this fakes a "" return
-			// hook now gets called twice because Tween will grab the current
-			// value as it is being newed
-			$.cssHooks.backgroundPosition = {
-				get: function() {
-					ok( true, "hook used" );
-					return "";
-				}
-			};
-
-			strictEqual(
-				( new $.fx( div, {}, "backgroundPosition" ) ).cur(),
-				0,
-				"Return 0 when $.css returns an empty string"
-			);
-
-			delete $.cssHooks.backgroundPosition;
-
-			strictEqual(
-				( new $.fx( div, {}, "left" ) ).cur(),
-				0,
-				"Return 0 when $.css returns 'auto'"
-			);
-
-			equal(
-				( new $.fx( div, {}, "marginBottom" ) ).cur(),
-				-11000,
-				"support negative values < -10000 (bug #7193)"
-			);
-
-			jQuery( div ).remove();
-		});
-
 		test("JS Overflow and Display", function() {
 			expect(2);
 			stop();

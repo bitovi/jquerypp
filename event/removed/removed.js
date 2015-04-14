@@ -1,7 +1,7 @@
 steal('jquery', function( $ ) {
 	/**
 	 * @attribute destroyed
-	 * @download  http://jmvcsite.heroku.com/pluginify?plugins[]=jquerypp/dom/destroyed/destroyed.js
+	 * @download  http://jmvcsite.heroku.com/pluginify?plugins[]=jquerypp/dom/removed/removed
 	 * @test jquerypp/event/destroyed/qunit.html
 	 */
 

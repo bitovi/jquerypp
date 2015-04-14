@@ -10,3 +10,4 @@ build/ci/can
 build/ci/jquery
 build/ci/funcunit
 build/ci/steal
+dist/
