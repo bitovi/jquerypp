@@ -12,6 +12,20 @@ module.exports = function (grunt) {
 			]
 		},
 
+		'steal-export': {
+			dist: {
+				system: {
+					config: "package.json!npm",
+					main: ["jquerypp"]
+				},
+				outputs: {
+					"+cjs": {},
+					"+amd": {}
+					// "global-js": {}
+				}
+			}
+		},
+
 		testee: {
 			all: ['test.html']
 		}
@@ -19,6 +33,8 @@ module.exports = function (grunt) {
 
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('testee');
+	grunt.loadNpmTasks('steal-tools');
 
-	grunt.registerTask('test', ['testee'])
+	grunt.registerTask('test', ['testee']);
+	grunt.registerTask('build', ['steal-export']);
 };

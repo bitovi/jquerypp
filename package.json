@@ -20,7 +20,7 @@
     "grunt-contrib-jshint": "^0.11.0",
     "steal": "0.7.X",
     "steal-qunit": "0.0.2",
-    "steal-tools": "0.7.X",
+    "steal-tools": "^0.8.2",
     "syn": "0.1.X",
     "system-text": "0.1.0",
     "testee": "^0.1.8"
