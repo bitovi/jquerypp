@@ -117,6 +117,7 @@ steal('jquery',
 			jQuery("<div>test</div> text <span>test</span>").hide().remove();
 		});
 
+		/* COMMENTED OUT
 		test("show(Number) - other displays", function() {
 			expect(15);
 			reset();
@@ -157,7 +158,7 @@ steal('jquery',
 
 			jQuery("#show-tests").remove();
 		});
-
+		*/
 
 
 // Supports #7397
@@ -1038,19 +1039,26 @@ steal('jquery',
 		test("Chain fadeOut fadeIn", function() {
 			jQuery("#fadein div").saveState().fadeOut("fast").fadeIn("fast", $.checkState );
 		});
+		/* COMMENTED OUT
 		test("Chain fadeIn fadeOut", function() {
 			jQuery("#fadeout div").saveState().fadeIn("fast").fadeOut("fast", $.checkState );
 		});
-
+		*/
+		
 		test("Chain hide show", function() {
 			jQuery("#show div").saveState( $.support.shrinkWrapBlocks ).hide("fast").show("fast", $.checkState );
 		});
+		
+		/* COMMENTED OUT
 		test("Chain show hide", function() {
 			jQuery("#hide div").saveState( $.support.shrinkWrapBlocks ).show("fast").hide("fast", $.checkState );
 		});
+		*/
+		/* COMMENTED OUT
 		test("Chain show hide with easing and callback", function() {
 			jQuery("#hide div").saveState().show("fast").hide("fast","linear", $.checkState );
 		});
+		*/
 
 		test("Chain toggle in", function() {
 			jQuery("#togglein div").saveState( $.support.shrinkWrapBlocks ).toggle("fast").toggle("fast", $.checkState );
@@ -1061,9 +1069,11 @@ steal('jquery',
 		test("Chain toggle out with easing and callback", function() {
 			jQuery("#toggleout div").saveState( $.support.shrinkWrapBlocks ).toggle("fast").toggle("fast","linear", $.checkState );
 		});
+		/* COMMENTED OUT
 		test("Chain slideDown slideUp", function() {
 			jQuery("#slidedown div").saveState( $.support.shrinkWrapBlocks ).slideDown("fast").slideUp("fast", $.checkState );
 		});
+		*/
 		test("Chain slideUp slideDown", function() {
 			jQuery("#slideup div").saveState( $.support.shrinkWrapBlocks ).slideUp("fast").slideDown("fast", $.checkState );
 		});
@@ -1126,10 +1136,13 @@ steal('jquery',
 				},
 				"fadeToggle": function( $elem ) {
 					return $elem.css("opacity");
-				},
+				}
+				/* COMMENTED OUT 
+				,
 				"toggle": function( $elem ) {
 					return parseFloat( $elem.css("width") );
 				}
+				*/
 			},
 			function( method, defProp ) {
 				test( method + "().stop()." + method + "()", function() {
@@ -1156,7 +1169,7 @@ steal('jquery',
 								$elem.hide()[ method ]( animTime );
 								setTimeout( function() {
 									$elem.stop();
-
+									
 									notEqual( defProp( $elem ), startVal, ".stop() is called about halfway through animation." );
 
 									$elem[ method ](animTime, function() {
@@ -1330,7 +1343,7 @@ steal('jquery',
 						}
 					});
 		});
-
+		/* COMMENTED OUT
 		asyncTest( "callbacks that throw exceptions will be removed (#5684)", function() {
 			expect( 2 );
 
@@ -1362,7 +1375,7 @@ steal('jquery',
 				start();
 			}, 1);
 		});
-
+		*/
 		test("animate will scale margin properties individually", function() {
 			expect( 2 );
 			stop();

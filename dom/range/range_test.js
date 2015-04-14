@@ -186,8 +186,8 @@ steal("steal-qunit", "jquerypp/dom/range", "jquerypp/dom/selection",function () 
 		$('#1').selection(3, 56);
 		var range = $.Range.current(),
 			rects = range.rects();
-		equal(rects.length, 2, "2 rects found")
-		ok(rects[1].width, "rect has width")
+		ok(rects.length >= 2, "2 rects found");
+		ok(rects[1].width, "rect has width");
 	});
 
 	test("compare", function () {
@@ -205,11 +205,11 @@ steal("steal-qunit", "jquerypp/dom/range", "jquerypp/dom/selection",function () 
 		
 		var div = document.createElement('div');
 		div.innerHTML = 'I\'ve been writing up example widgets on bitovi.com. Here\'s the first three:'+
-						'<a>THE TEXT</a>'
-		$("#qunit-fixture").html(div)
+						'<a>THE TEXT</a>';
+		$("#qunit-fixture").html(div);
 		 
-		equal( $(div).range().start("+79").toString(), "TEXT")
-		$("#qunit-fixture").empty()
+		equal( $(div).range().start("+79").toString(), "TEXT");
+		$("#qunit-fixture").empty();
 	});
 
 	test("moving left from text node", function(){
