@@ -322,11 +322,11 @@ Move the mouse in the following example and it will show the ids for `div` eleme
 
 ## EVENTS
 
-## destroyed `destroyed`
+## removed `removed`
 
-[Annotated source](http://jquerypp.com/release/latest/docs/destroyed.html)
+[Annotated source](http://jquerypp.com/release/latest/docs/removed.html)
 
-The `destroyed` event is triggered by [jQuery.event.destroyed](http://donejs.com/docs.html#!jQuery.event.destroyed) when the element is removed from the DOM using one of the jQuery [manipulation methods](http://api.jquery.com/category/manipulation/).
+The `destroyed` event is triggered by [jQuery.event.destroyed](http://donejs.com/docs.html#!jQuery.event.removed) when the element is removed from the DOM using one of the jQuery [manipulation methods](http://api.jquery.com/category/manipulation/).
 
 {% highlight javascript %}
 $('form').on('destroyed', function() {
