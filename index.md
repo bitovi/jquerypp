@@ -1,6 +1,6 @@
 ---
 layout: default
-version: 1.0.1
+version: 2.0.0
 ---
 
 # Hi, I'm jQuery++.
@@ -169,30 +169,6 @@ The example uses `jQuery.cookie` and [formParams](#formParams) to persist a form
 
 <iframe style="width: 100%; height: 300px" src="http://jsfiddle.net/wMN7G/embedded/result,html,js,css" allowfullscreen="allowfullscreen" frameborder="0">JSFiddle</iframe>
 
-## dimensions
-
-[Annotated source](http://jquerypp.com/release/latest/docs/dimensions.html)
-
-[jQuery.dimensions](http://donejs.com/docs.html#!jQuery.dimensions) overwrites `$.fn.innerWidth`, `$.fn.outerWidth`, `$.fn.innerHeight`, `$.fn.outerHeight` and enables `$.fn.animate` to animate these values. Inner dimensions include the padding where outer dimensions also take care of borders and margins (if *includeMargin* is set to `true`). Set and read these values using:
-
-* `$(el).innerHeight([height])`
-* `$(el).outerHeight([height], [includeMargin])`
-* `$(el).innerWidth([width])`
-* `$(el).outerWidth([width], [includeMargin])`
-
-And use `$(el).animate({ innerHeight : 100 })` to animate them. This is useful when you care about animating/setting the visual dimension of an element (which is what you typically want to do):
-
-{% highlight javascript %}
-$('#foo').outerWidth(100).innerHeight(50);
-$('#bar').animate({ outerWidth: 500 });
-{% endhighlight %}
-
-The following example lets you change the different width properties used by `$(el).innerWidth([width])` and
-`$(el).outerWidth([width], [includeMargin])` like margin, padding and border and shows how it influences the other
- values:
-
-<iframe style="width: 100%; height: 500px" src="http://jsfiddle.net/5ZbSH/embedded/result,html,js,css" allowfullscreen="allowfullscreen" frameborder="0">JSFiddle</iframe>
-
 ## formParams `$(form).formParams([convert]) -> Object|jQuery`
 
 [Annotated source](http://jquerypp.com/release/latest/docs/form_params.html)
@@ -321,22 +297,6 @@ $('#text').text().substring(selection.start, selection.end) // -> some
 The following example shows how `$.fn.selection` can be used. Initially the selection is set from position eight to 12. You can change the selection in the highlighted area and the status text will be updated:
 
 <iframe style="width: 100%; height: 200px" src="http://jsfiddle.net/uze4F/embedded/result,html,js,css" allowfullscreen="allowfullscreen" frameborder="0">JSFiddle</iframe>
-
-## styles `$(el).styles() -> Object`
-
-[Annotated source](http://jquerypp.com/release/latest/docs/styles.html)
-
-[jQuery.styles](http://donejs.com/docs.html#!jQuery.styles) adds `$.fn.styles` as a fast way of getting a set of computed styles from an element. It performs much faster than retrieving them individually e.g. by using [jQuery.css()](http://api.jquery.com/css/). Computed styles reflect the actual current style of an element, including browser defaults and CSS settings.
-
-{% highlight javascript %}
-$("#foo").styles('float','display')
-// -> { cssFloat: "left", display: "block" }
-{% endhighlight %}
-
-The following example implements a `fastHeight` jQuery plugin which uses `$.fn.styles` to calculate the element height and compares
-the runtime to the equivalent [jQuery.height](http://api.jquery.com/height/):
-
-<iframe style="width: 100%; height: 250px" src="http://jsfiddle.net/6CcaG/embedded/result,html,js,css" allowfullscreen="allowfullscreen" frameborder="0">JSFiddle</iframe>
 
 ## within `$(el).within(left, top, [useOffsetCache]) -> jQuery`
 
@@ -479,22 +439,6 @@ When adding drop-able elements after `dropinit`, for example when expanding a fo
 The following example shows two draggable elements and a drop area. When a drag starts it will create a copy of the element using `drag.ghost()`. The drop area will be highlighted when the drag moves over it and update the text when it is dropped:
 
 <iframe style="width: 100%; height: 250px" src="http://jsfiddle.net/3NkZM/embedded/result,html,js,css" allowfullscreen="allowfullscreen" frameborder="0">JSFiddle</iframe>
-
-## fastfix
-
-[Annotated source](http://jquerypp.com/release/latest/docs/fastfix.html)
-
-[jQuery.event.fastfix](http://donejs.com/docs.html#!jQuery.event.fastfix) speeds up `jQuery.event.fix` by using ECMAScript 5
-getters. `jQuery.event.fix` is used to normalize a DOM event before it gets passed as a
-[jQuery.Event](http://api.jquery.com/category/events/event-object/) instance to event handlers. This is usually done by
-*copying* the properties from the DOM event. `jQuery.event.fastfix` uses ES 5 getters to access these properties
-only when they are needed.
-
-Since `jQuery.event.fix` usually takes up a major portion of an applications runtime, using `jQuery.event.fastfix`
-can significantly improve overall performance - just by including this plugin. The following chart [compares the
-performance](http://jsperf.com/jquery-event-fix/6) of the original `jQuery.event.fix` and `jQuery.event.fastfix` in major browsers:
-
-![jQuery.event.fastfix performance](images/fastfix.png)
 
 ## hover `hoverinit` `hoverenter` `hovermove` `hoverleave`
 
@@ -652,7 +596,7 @@ $('#foo').on('resize', function() {
 $(document.body).resize();
 {% endhighlight %}
 
-The `resize` event makes creating application like layouts a lot easier. The following example creates a common layout with top, left, right and center elements within a container. Use the blue square to resize the outside container. The `resize` event will take care of adjusting the dimensions of the inside elements accordingly using the [jQuery.dimensions](#dimensions) plugin:
+The `resize` event makes creating application like layouts a lot easier. The following example creates a common layout with top, left, right and center elements within a container. Use the blue square to resize the outside container. The `resize` event will take care of adjusting the dimensions of the inside elements:
 
 <iframe style="width: 100%; height: 350px" src="http://jsfiddle.net/3dRGM/embedded/result,html,js,css" allowfullscreen="allowfullscreen" frameborder="0">JSFiddle</iframe>
 
@@ -722,7 +666,6 @@ Bitovi _(developers of jQuery++)_ offers [training](http://bitovi.com/training/)
 jQuery++ does things the jQuery way, which makes it really easy to learn if you are already familiar with jQuery.
 Get functionality that was always tricky to implement from one coherent library:
 
-- Set and animate outer and inner dimensions with [dimensions](#dimensions)
 - Serialize forms into objects with [formParams](#formparams)
 - [Drag](#drag) & [drop](#drop) events - no need for jQuery UI
 - [Resize](#resize) elements the right way
@@ -743,9 +686,7 @@ way of handling events.
 
 Some jQuery++ plugins can help to significantly speed up your applications. Use
 
-- [styles](#styles) to get computed style from an element a lot faster
 - [compare](#compare) to quickly compare element positions
-- [fastfix](#fastfix) to speed up jQuery's event handling on modern browsers
 - [destroyed](#destroyed) to avoid memory leaks and keep your references up to date when elements get removed from the DOM
 
 ### Supported
