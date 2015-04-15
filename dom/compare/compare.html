@@ -76,11 +76,10 @@
 	<tr class="no_16"><td>010000</td><td>16</td><td>.red contains .green</td></tr>
 </table>
 
-<script type='text/javascript'
-        src='../../../steal/steal.js'>
+<script type='text/javascript' src='../../node_modules/steal/steal.js' main='@empty'>
 </script>
 <script id="demo-source" type='text/javascript'>
-steal('jquerypp/dom/compare').then(function(){
+steal('jquerypp/dom/compare',function(){
 	var placing = 'red'
 	//on click, set red and green and compare positions
 	$('div').click(function(ev){
@@ -100,14 +99,14 @@ steal('jquerypp/dom/compare').then(function(){
 			 }
 		  });
 	  }
-	})
+	});
 	
 	$(function(){
 		if(window.parent == window){
 			$('.hide').show()
 		}
-	})
-})
+	});
+});
 
 </script>
 	</body>

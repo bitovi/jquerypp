@@ -1,28 +1,68 @@
 {
-  "name" : "jquerypp",
-  "title" : "jQuery++",
-  "description" : "jQuery's missing utils and special events",
-  "version" : "1.0.1",
-  "author" : {
-    "name" : "Bitovi",
-    "email" : "contact@bitovi.com",
-    "web" : "http://bitovi.com/"
+  "name": "jquerypp",
+  "title": "jQuery++",
+  "description": "jQuery's missing utils and special events",
+  "version": "2.0.0",
+  "author": {
+    "name": "Bitovi",
+    "email": "contact@bitovi.com",
+    "web": "http://bitovi.com/"
   },
-  "devDependencies" : {
-    "http-server" : "0.5.1",
-    "grunt" : "0.4.0",
-    "grunt-string-replace" : "0.2.2",
-    "grunt-shell" : "0.2.1"
+  "peerDependencies": {
+    "jquery": ">1.9.0"
   },
-  "homepage" : "http://jquerypp.com",
-  "repository" : {
-    "type" : "git",
-    "url" : "git@github.com:bitovi/jquerypp.git"
+  "scripts": {
+    "test": "grunt test --stack"
   },
-  "licenses" : [
-    {
-      "type" : "MIT",
-      "url" : "http://opensource.org/licenses/mit-license.php"
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-banner": "^0.3.1",
+    "grunt-cli": "^0.1.13",
+    "grunt-contrib-jshint": "^0.11.0",
+    "jquery": "^2.1.3",
+    "steal": "0.7.X",
+    "steal-qunit": "0.0.2",
+    "steal-tools": "^0.8.2",
+    "syn": "0.1.X",
+    "system-text": "0.1.0",
+    "testee": "^0.1.8"
+  },
+  "main": "./index",
+  "system": {
+    "main": "index",
+    "ignoreBrowser": true,
+    "map": {
+      "jquery/jquery": "jquery",
+      "steal-qunit/steal-qunit": "steal-qunit"
     }
-  ]
+  },
+  "homepage": "http://jquerypp.com",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:bitovi/jquerypp.git"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://opensource.org/licenses/mit-license.php"
+    }
+  ],
+  "browser": {
+    "./jquerypp": "./dist/cjs/index",
+    "./dom/animate/animate": "./dist/cjs/dom/animate/animate",
+    "./dom/compare/compare": "./dist/cjs/dom/compare/compare",
+    "./dom/cookie/cookie": "./dist/cjs/dom/cookie/cookie",
+    "./dom/form_params/form_params": "./dist/cjs/dom/form_params/form_params",
+    "./dom/range/range": "./dist/cjs/dom/range/range",
+    "./dom/selection/selection": "./dist/cjs/dom/selection/selection",
+    "./dom/within/within": "./dist/cjs/dom/within/within",
+    "./dom/destroyed/removed": "./dist/cjs/event/destroyed/removed",
+    "./dom/drag/drag": "./dist/cjs/event/drag/drag",
+    "./dom/drop/drop": "./dist/cjs/event/drop/drop",
+    "./dom/hover/hover": "./dist/cjs/event/hover/hover",
+    "./dom/key/key": "./dist/cjs/event/key/key",
+    "./dom/pause/pause": "./dist/cjs/event/pause/pause",
+    "./dom/resize/resize": "./dist/cjs/event/resize/resize",
+    "./dom/swipe/swipe": "./dist/cjs/event/swipe/swipe"
+  }
 }

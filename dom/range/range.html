@@ -29,8 +29,7 @@
 		<p>We'll figure out what to do with form elements later.</p>
 		<pre id='info'></pre>
 		</div>
-		<script type='text/javascript' 
-                src='../../../steal/steal.js'>   
+		<script type='text/javascript' src='../../node_modules/steal/steal.js' main='@empty'>    
 			
         </script>
 		<script type='text/javascript'>
@@ -57,9 +56,9 @@
 					curEnd = $(ender).addClass('end');
 					curParent = $(parenter).addClass('parent')
 					$("#info").html("startOffset = "+start.offset+"\nendOffset = "+end.offset)
-				})
+				});
 				
-			})
+			});
 			
 		</script>
 	</body>

@@ -25,23 +25,21 @@
 			</li>
 			<li>JavaScriptMVC is just WAY smart</li>
 		</ul>
-		<script type='text/javascript' 
-                src='../../../steal/steal.js?jquerypp/event/resize'>   
-			
-			$('.resizable').bind('resize', function(){
-				var self = $(this);
-				self.css("border-color","blue");
-				setTimeout(function(){ 
-					self.css("border-color","red");
-				},1000);
-			});
-			$(window).click(function(ev){
-				$(ev.target).trigger("resize")
-			})
-			
-        </script>
+		<script type='text/javascript' src='../../node_modules/steal/steal.js' main='@empty'></script>
+		</script>
 		<script type='text/javascript'>
-			
+			steal('jquerypp/event/resize', function(){
+				$('.resizable').bind('resize', function(){
+					var self = $(this);
+					self.css("border-color","blue");
+					setTimeout(function(){ 
+						self.css("border-color","red");
+					},1000);
+				});
+				$(window).click(function(ev){
+					$(ev.target).trigger("resize")
+				})
+			});
 		</script>
 	</body>
 </html>

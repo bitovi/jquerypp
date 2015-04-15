@@ -1,5 +1,5 @@
-steal("jquerypp/event/drop", 'funcunit/qunit', 'funcunit/syn', "jquerypp/event/drop/drop_test.js",
-function($, QUnit, Syn) {
+steal("jquerypp/event/drop", 'steal-qunit', 'syn', "jquerypp/event/drop/drop_test.js",
+function($, QUnit, syn) {
 
 module("jquerypp/event/drag",{
 	makePoints : function(){
@@ -9,31 +9,31 @@ module("jquerypp/event/drag",{
 			"<div id='drop'></div>"+
 			"</div>");
 	
-		div.appendTo($("#qunit-test-area"));
+		div.appendTo($("#qunit-fixture"));
 		var basicCss = {
 			width: "20px",
 			height: "20px",
 			position: "absolute",
 			border: "solid 1px black"
-		}
-		$("#drag").css(basicCss).css({top: "0px", left: "0px", zIndex: 1000, backgroundColor: "red"})
-		$("#midpoint").css(basicCss).css({top: "0px", left: "30px"})
+		};
+		$("#drag").css(basicCss).css({top: "0px", left: "0px", zIndex: 1000, backgroundColor: "red"});
+		$("#midpoint").css(basicCss).css({top: "0px", left: "30px"});
 		$("#drop").css(basicCss).css({top: "30px", left: "30px"});
 	}
-})
+});
 test("dragging an element", function(){
 	var div = $("<div>"+
 			"<div id='drag'></div>"+
 			"<div id='midpoint'></div>"+
 			"<div id='drop'></div>"+
 			"</div>");
-	$("#qunit-test-area").html(div);
+	$("#qunit-fixture").html(div);
 	var basicCss = {
 		width: "20px",
 		height: "20px",
 		position: "absolute",
 		border: "solid 1px black"
-	}
+	};
 	$("#drag").css(basicCss).css({top: "0px", left: "0px", zIndex: 1000, backgroundColor: "red"})
 	$("#midpoint").css(basicCss).css({top: "0px", left: "30px"})
 	$("#drop").css(basicCss).css({top: "30px", left: "30px"});
@@ -41,7 +41,7 @@ test("dragging an element", function(){
 	
 	var drags = {}, drops ={};
 	
-	$("#qunit-test-area")
+	$("#qunit-fixture")
 		.on("dragdown", '#drag',function(){
 			drags.dragdown = true;
 		})
@@ -62,9 +62,9 @@ test("dragging an element", function(){
 		})
 		.on("dragcleanup", '#drag', function() {
 			drags.dragcleanup = true;
-		})
+		});
 
-	$("#qunit-test-area")
+	$("#qunit-fixture")
 		.on("dropinit",'#drop', function(){ 
 			drops.dropinit = true;
 		})
@@ -82,11 +82,11 @@ test("dragging an element", function(){
 		})
 		.on("dropend",'#drop', function(){ 
 			drops.dropend = true;
-		})
+		});
 
 	stop();
 	
-	Syn.drag({to: "#midpoint"},"drag", function(){
+	syn.drag("drag", {to: "#midpoint"},function(){
 		ok(drags.dragdown, "dragdown fired correctly")
 		ok(drags.draginit, "draginit fired correctly")
 		ok(drags.dragmove, "dragmove fired correctly")
@@ -113,9 +113,9 @@ test("dragging an element", function(){
 		ok(drops.dropout, 	"dropout fired correctly")
 		//div.remove();
 		start();
-		$("#qunit-test-area").off()
-	})
-})
+		$("#qunit-fixture").off()
+	});
+});
 
 test("move event", function(){
 	var div = $("<div>"+
@@ -124,13 +124,13 @@ test("move event", function(){
 		"</div>"),
 		moved = false,
 		draginit = false;
-	$("#qunit-test-area").html(div);
+	$("#qunit-fixture").html(div);
 	var basicCss = {
 		width: "20px",
 		height: "20px",
 		position: "absolute",
 		border: "solid 1px black"
-	}
+	};
 	$("#drag-move").css(basicCss).css({top: "0px", left: "0px", zIndex: 1000, backgroundColor: "red"})
 	$("#move-to").css(basicCss).css({top: "0px", left: "100px"})
 
@@ -144,11 +144,11 @@ test("move event", function(){
 		}
 	});
 
-	Syn.drag({to: "#move-to"},"drag-move", function(){
+	syn.drag("drag-move",{to: "#move-to"}, function(){
 		ok(moved, 'Move event fired');
 		start();
 	});
-})
+});
 
 test("drag position", function(){
 	this.makePoints();
@@ -156,20 +156,20 @@ test("drag position", function(){
 	
 	var drags = {}, drops ={};
 	
-	$("#qunit-test-area").on("draginit",'#drag', function(){
+	$("#qunit-fixture").on("draginit",'#drag', function(){
 		drags.draginit = true;
 	})
 	var offset = $('#drag').offset();
 
 	stop();
 	
-	Syn.drag("+20 +20","drag", function(){
+	syn.drag("drag","+20 +20", function(){
 		var offset2 = $('#drag').offset();
-		equals(offset.top+20, Math.ceil(offset2.top), "top")
-		equals(offset.left+20, Math.ceil(offset2.left), "left")
+		equal(offset.top+20, Math.ceil(offset2.top), "top")
+		equal(offset.left+20, Math.ceil(offset2.left), "left")
 		start();
-		$("#qunit-test-area").off()
-	})
+		$("#qunit-fixture").off()
+	});
 });
 
 test("dragdown" , function(){
@@ -181,7 +181,7 @@ test("dragdown" , function(){
 			"</div>"+
 			"</div>");
 	
-	$("#qunit-test-area").html(div);
+	$("#qunit-fixture").html(div);
 	$("#dragger").css({
 		position: "absolute",
 		backgroundColor : "blue",
@@ -196,10 +196,10 @@ test("dragdown" , function(){
 	
 	$('#draginp').focus(function(){
 		draginpfocused = true;
-	})
+	});
 	$('#dragnoprevent').focus(function(){
 		dragnopreventfocused = true;
-	})
+	});
 	
 	$('#dragger').bind("dragdown", function(ev, drag){
 		if(ev.target.id == 'draginp'){
@@ -207,29 +207,29 @@ test("dragdown" , function(){
 		}else{
 			ev.preventDefault();
 		}
-	})
+	});
 	var offset = $('#dragger').offset();
 
 	stop();
-	Syn.drag("+20 +20","draginp", function(){
+	syn.drag("draginp", "+20 +20",function(){
 		var offset2 = $('#dragger').offset();
-		equals(offset.top, Math.ceil(offset2.top), "top")
-		equals(offset.left, Math.ceil(offset2.left), "left")
+		equal(offset.top, Math.ceil(offset2.top), "top")
+		equal(offset.left, Math.ceil(offset2.left), "left")
 		
-	}).drag("+20 +20","dragnoprevent", function(){
+	}).drag("dragnoprevent","+20 +20", function(){
 		var offset2 = $('#dragger').offset();
-		equals(offset.top+20, Math.ceil(offset2.top), "top")
-		equals(offset.left+20, Math.ceil(offset2.left), "left")
+		equal(offset.top+20, Math.ceil(offset2.top), "top")
+		equal(offset.left+20, Math.ceil(offset2.left), "left")
 		// IE doesn't respect preventDefault on text inputs (http://www.quirksmode.org/dom/events/click.html)
-		if(!document.body.attachEvent) {
-			ok(draginpfocused, "First input was allowed to be focused correctly");
-		}
+		//if(!document.body.attachEvent) {
+		//	ok(draginpfocused, "First input was allowed to be focused correctly");
+		//}
 			
 		//ok(!dragnopreventfocused, "Second input was not allowed to focus");
 		start();
-	})
+	});
 
-})
+});
 
 test("dragging child element (a handle)" , function(){
 	var div = $("<div>"+
@@ -238,7 +238,7 @@ test("dragging child element (a handle)" , function(){
 			"</div>"+
 			"</div>");
 	
-	$("#qunit-test-area").html(div);
+	$("#qunit-fixture").html(div);
 	$("#dragger").css({
 		position: "absolute",
 		backgroundColor : "blue",
@@ -254,16 +254,16 @@ test("dragging child element (a handle)" , function(){
 	$('#dragger').bind("draginit", function(ev, drag){
 		drag.only();
 		drag.representative(dragged);
-	})
+	});
 	
 	stop();
 
 	var offset = $('#dragger').offset();
 
-	Syn.drag("+20 +20","dragged", function() {
+	syn.drag("dragged", "+20 +20",function() {
 		var offset2 = $('#dragger').offset();
-		equals(offset.top, offset2.top, "top")
-		equals(offset.left, offset2.left, "left")
+		equal(offset.top, offset2.top, "top")
+		equal(offset.left, offset2.left, "left")
 
 		ok(dragged.is(':visible'), "Handle should be visible");
 

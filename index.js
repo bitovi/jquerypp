@@ -1,0 +1,20 @@
+steal('jquery',
+	'jquerypp/dom/animate',
+	'jquerypp/dom/compare',
+	'jquerypp/dom/cookie',
+	'jquerypp/dom/form_params',
+	'jquerypp/dom/range',
+	'jquerypp/dom/selection',
+	'jquerypp/dom/within',
+	'jquerypp/event/drag',
+	'jquerypp/event/drop',
+	'jquerypp/event/hover',
+	'jquerypp/event/key',
+	'jquerypp/event/pause',
+	'jquerypp/event/removed',
+	'jquerypp/event/resize',
+	'jquerypp/event/swipe',
+	'jquerypp/lang/vector',
+	function($) {
+		return $;
+	});

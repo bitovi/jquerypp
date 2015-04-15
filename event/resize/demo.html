@@ -72,11 +72,7 @@
 				<span>A footer</span>
 			</div>
 		</div>
-		<script type='text/javascript' 
-                src='../../../steal/steal.js'>   
-
-			
-			
+		<script type='text/javascript' src='../../node_modules/steal/steal.js' main='@empty'></script>
         </script>
 		<script type='text/ejs' id='rowEjs'>
 			<td><%= name %></td>
@@ -85,7 +81,7 @@
 		</script>
 		<script type='text/javascript'>
 				steal('canui/data/grid', 'can/control/plugin', 'canui/layout/split',
-					'jquerypp/dom/fixture').then(function(){
+					'jquerypp/dom/fixture',function(){
 		
 		$('#content').can_ui_layout_fill(document.body)
 		

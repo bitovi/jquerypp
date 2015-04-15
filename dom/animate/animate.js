@@ -1,4 +1,4 @@
-steal('jquery', 'jquerypp/dom/styles', function ($) {
+steal('jquery', function ($) {
 
 	// Overwrites `jQuery.fn.animate` to use CSS 3 animations if possible
 
@@ -295,7 +295,7 @@ steal('jquery', 'jquerypp/dom/styles', function ($) {
 			}
 
 			// Use $.styles
-			current = self.styles.apply(self, properties);
+			current = self.css.apply(self, properties);
 			$.each(properties, function(i, cur) {
 				// Convert a camelcased property name
 				var name = cur.replace(/([A-Z]|^ms)/g, "-$1" ).toLowerCase();

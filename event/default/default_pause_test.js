@@ -1,4 +1,4 @@
-steal('funcunit/qunit','jquerypp/event/default','jquerypp/event/pause', function() {
+steal('steal-qunit','jquerypp/event/default','jquerypp/event/pause', function() {
 
 module("jquerypp/event/default_pause");
 
@@ -6,7 +6,7 @@ module("jquerypp/event/default_pause");
 test("default and pause with delegate", function(){
 	var order = [];
 	stop();
-	$("#qunit-test-area").html("<div id='foo_default_pause'><p id='bar_default_pause'>hello</p></div>")
+	$("#qunit-fixture").html("<div id='foo_default_pause'><p id='bar_default_pause'>hello</p></div>")
 
 	$("#foo_default_pause").delegate("#bar_default_pause","default.show", function(){
 		order.push("default")
@@ -19,7 +19,7 @@ test("default and pause with delegate", function(){
 			ev.resume();
 			setTimeout(function(){
 				start();
-				same(order,['show','default'])
+				deepEqual(order,['show','default'])
 			},30)
 
 		},50)
@@ -31,7 +31,7 @@ test("default and pause with delegate", function(){
 });
 
 test("default and pause with live or on", function(){
-	$("#qunit-test-area").html("<div id='foo_default_pause'>hello</div>")
+	$("#qunit-fixture").html("<div id='foo_default_pause'>hello</div>")
 
 	var order = [],
 		defaultShow = function(){
@@ -44,7 +44,7 @@ test("default and pause with live or on", function(){
 				ev.resume();
 				setTimeout(function(){
 					start();
-					same(order,['show','default']);
+					deepEqual(order,['show','default']);
 					if($.fn.live){
 						$("#foo_default_pause").die("show");
 						$("#foo_default_pause").die("default.show");
@@ -75,7 +75,7 @@ test("default and pause with live or on", function(){
 
 
 test("triggerAsync", function(){
-	$("#qunit-test-area").html("<div id='foo_default_pause'>hello</div>")
+	$("#qunit-fixture").html("<div id='foo_default_pause'>hello</div>")
 
 	var order = [],
 		defaultShow = function(){
@@ -94,7 +94,7 @@ test("triggerAsync", function(){
 						$(document.body).off();
 					}
 					
-					same(order,['show','default','async'])
+					deepEqual(order,['show','default','async'])
 				},30)
 			},50)
 		};
@@ -115,7 +115,7 @@ test("triggerAsync", function(){
 });
 
 test("triggerAsync with prevented callback when ev.preventDefault() is called before event pause", function(){
-	$("#qunit-test-area").html("<div id='foo_default_pause'>hello</div>")
+	$("#qunit-fixture").html("<div id='foo_default_pause'>hello</div>")
 
 	var order = [];
 	stop();
@@ -134,7 +134,7 @@ test("triggerAsync with prevented callback when ev.preventDefault() is called be
 				start();
 				$(document.body).off("show");
 				$(document.body).off("default.show")
-				same(order,['show','prevented'])
+				deepEqual(order,['show','prevented'])
 			},30)
 		},50)
 	});
@@ -147,7 +147,7 @@ test("triggerAsync with prevented callback when ev.preventDefault() is called be
 	})
 });
 test("triggerAsync with prevented callback when ev.preventDefault() is called after event pause", function(){
-	$("#qunit-test-area").html("<div id='foo_default_pause'>hello</div>")
+	$("#qunit-fixture").html("<div id='foo_default_pause'>hello</div>")
 
 	var order = [];
 	stop();
@@ -166,7 +166,7 @@ test("triggerAsync with prevented callback when ev.preventDefault() is called af
 			setTimeout(function(){
 				start();
 				$(document.body).off("show").off("default.show")
-				same(order,['show','prevented'])
+				deepEqual(order,['show','prevented'])
 			},30)
 		},50)
 	});
@@ -180,7 +180,7 @@ test("triggerAsync with prevented callback when ev.preventDefault() is called af
 });
 
 test("triggerAsync within another triggerAsync", function(){
-	$("#qunit-test-area").html("<div id='foo_default_pause'>hello</div>")
+	$("#qunit-fixture").html("<div id='foo_default_pause'>hello</div>")
 
 	var order = [];
 	stop();
@@ -204,7 +204,7 @@ test("triggerAsync within another triggerAsync", function(){
 					
 					start();
 					$(document.body).off()
-					same(order,['show','hide','hide default',"hide async","show default","show async"])
+					deepEqual(order,['show','hide','hide default',"hide async","show default","show async"])
 				},30)
 				
 			}, function(){
@@ -221,7 +221,7 @@ test("triggerAsync within another triggerAsync", function(){
 });
 
 test("triggerAsync within another triggerAsync with prevented callback", function(){
-	$("#qunit-test-area").html("<div id='foo_default_pause'>hello</div>")
+	$("#qunit-fixture").html("<div id='foo_default_pause'>hello</div>")
 
 	var order = [];
 	stop();
@@ -245,7 +245,7 @@ test("triggerAsync within another triggerAsync with prevented callback", functio
 				setTimeout(function(){
 					start();
 					$(document.body).off()
-					same(order,['show','hide','hide default',"hide async","show prevented"])
+					deepEqual(order,['show','hide','hide default',"hide async","show prevented"])
 				},30)
 				
 			}, function(){

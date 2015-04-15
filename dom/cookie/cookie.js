@@ -1,4 +1,4 @@
-steal('jquery', 'jquerypp/lang/json', function($) {
+steal('jquery', function($) {
     /**
      * @function jQuery.cookie jQuery.cookie
      * @parent jquerypp
@@ -62,8 +62,8 @@ steal('jquery', 'jquerypp/lang/json', function($) {
                 options.expires = -1;
             }
 	        // convert value to JSON string
-            if (typeof value == 'object' && $.toJSON) {
-                value = $.toJSON(value);
+            if (typeof value == 'object' && JSON.stringify) {
+                value = JSON.stringify(value);
             }
             var expires = '';
 	        // Set expiry
@@ -102,9 +102,9 @@ steal('jquery', 'jquerypp/lang/json', function($) {
                 }
             }
 	        // Parse JSON from the cookie into an object
-            if ($.evalJSON && cookieValue && cookieValue.match(/^\s*\{/)) {
+            if (cookieValue && cookieValue.match(/^\s*\{/)) {
                 try {
-                    cookieValue = $.evalJSON(cookieValue);
+                    cookieValue = JSON.parse(cookieValue);
                 }
                 catch (e) {
                 }

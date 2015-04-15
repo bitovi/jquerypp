@@ -33,11 +33,10 @@
   <label><input type='radio' name='talk[timeLeft]' value='10'/> 10 min</label><br/>
 </form>
 </div>
-		<script type='text/javascript' 
-                src='../../../steal/steal.js'>   
-        </script>
+<script type='text/javascript' src='../../node_modules/steal/steal.js' main='@empty'>  
+</script>
 <script type='text/javascript' id="demo-source">
-steal('jquerypp/dom/form_params','jquerypp/lang/json').then(function(){
+steal('jquerypp/dom/form_params',function(){
 // updates the JSON text
 var update = function(){
   
@@ -45,7 +44,7 @@ var update = function(){
   var json = $('#fp').formParams(),
   
       // convert it to JSON
-      jsonString = $.toJSON( json );
+      jsonString = JSON.stringify( json );
   
   // show JSON
   $('#result').text( jsonString );
@@ -57,7 +56,7 @@ $('input[name="talk[peopleCount]"]').keyup(update);
 
 // show json right away
 update(); 
-})
+});
 </script>
 	</body>
 </html>

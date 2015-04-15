@@ -31,7 +31,7 @@ jQuery++ comes with the following DOM helper plugins:
 jQuery++ also adds a number of new events to jQuery that make creating responsive applications a lot easier:
 
 - [jQuery.event.default Default] - Provide default behaviors for events.
-- [jQuery.event.destroyed Destroyed] - Know when an element is removed from the page.
+- [jQuery.event.removed Removed] - Know when an element is removed from the page.
 - [jQuery.event.drag Drag] - Delegatable drag events.
 - [jQuery.event.drop Drop] - Delegatable drop events.
 - [jQuery.event.fastfix Fastfix] - Speed up jQuery event handling.

@@ -1,4 +1,4 @@
-steal("jquerypp/event/drop",'funcunit/syn', 'funcunit/qunit', function($, Syn) {
+steal("jquerypp/event/drop",'syn', 'steal-qunit', function($, syn) {
 	
 module("jquerypp/event/drop");
 
@@ -9,15 +9,15 @@ test("new drop added", 3, function(){
 			"<div id='drop'></div>"+
 			"</div>");
 
-	div.appendTo($("#qunit-test-area"));
+	div.appendTo($("#qunit-fixture"));
 	var basicCss = {
 		width: "20px",
 		height: "20px",
 		position: "absolute",
 		border: "solid 1px black"
-	}
-	$("#drag").css(basicCss).css({top: "0px", left: "0px", zIndex: 1000, backgroundColor: "red"})
-	$("#midpoint").css(basicCss).css({top: "0px", left: "30px"})
+	};
+	$("#drag").css(basicCss).css({top: "0px", left: "0px", zIndex: 1000, backgroundColor: "red"});
+	$("#midpoint").css(basicCss).css({top: "0px", left: "30px"});
 	$("#drop").css(basicCss).css({top: "0px", left: "60px"});
 
 	$('#drag').bind("draginit", function(){});
@@ -41,7 +41,7 @@ test("new drop added", 3, function(){
 		$.Drop.compile();
 	});
 	stop();
-	Syn.drag({to: "#drop"},"drag", function(){
+	syn.drag("drag",{to: "#drop"}, function(){
 		$('body').off('dropon');
 		start();
 	});
@@ -49,4 +49,4 @@ test("new drop added", 3, function(){
 
 
 
-})
+});

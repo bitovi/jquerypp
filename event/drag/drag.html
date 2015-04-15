@@ -83,12 +83,11 @@
 	<p>I should be able to drag on this</p>
 	<input type='text' value='I can be clicked on'/>
 </div>
-		<script type='text/javascript' src='../../../steal/steal.js'>   
-        </script>
-	<script type='text/javascript' id='demo-source'>
+<script type='text/javascript' src='../../node_modules/steal/steal.js' main='@empty'></script>
+<script type='text/javascript' id='demo-source'>
 steal("jquerypp/event/drag",
 	"jquerypp/event/drag/scroll",
-	"jquerypp/event/drag/limit").then(function(){
+	"jquerypp/event/drag/limit",function(){
 //drag with bind
 $("#drag").on("draginit",function(){})
 
@@ -124,8 +123,9 @@ $("#form-drag").on("dragdown",function(ev, drag){
 	if(ev.target.nodeName.toLowerCase() == 'input'){
 		drag.cancel();
 	}
-})
-})
+});
+
+});
 </script>
 	</body>
 </html>

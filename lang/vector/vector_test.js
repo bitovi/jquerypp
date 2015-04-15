@@ -1,4 +1,4 @@
-steal('funcunit/qunit','./vector.js').then(function(){
+steal('steal-qunit','./vector.js',function(){
 	
 	module("jquerypp/lang/vector")
 

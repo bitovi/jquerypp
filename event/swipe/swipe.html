@@ -29,22 +29,27 @@
 				<li>Swipe Me</li>
 			</ul>
 		</div>
-<script type='text/javascript' 
-        src='../../../steal/steal.js?jquerypp/event/swipe'>  
-$('#swipe').bind('swipe', function(){
-	console.log('swipe1')
-}).bind("swiperight", function(){
-	console.log('right')
-}).bind('swipeleft', function(){
-	console.log('left')
-}).bind('swipeup', function(){
-	console.log('up')
-}).bind('swipedown', function(){
-	console.log('down')
-})
-$('#swipes').delegate('li','swipe', function(){
-	console.log('swipe2')
-}) 
+<script type='text/javascript' src='../../node_modules/steal/steal.js' main='@empty'></script>
+</script>
+<script>
+steal("jquerypp/event/swipe", function(){
+	
+	$('#swipe').bind('swipe', function(){
+		console.log('swipe1')
+	}).bind("swiperight", function(){
+		console.log('right')
+	}).bind('swipeleft', function(){
+		console.log('left')
+	}).bind('swipeup', function(){
+		console.log('up')
+	}).bind('swipedown', function(){
+		console.log('down')
+	});
+	$('#swipes').delegate('li','swipe', function(){
+		console.log('swipe2')
+	});
+});
+
 </script>
 	</body>
 </html>

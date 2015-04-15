@@ -1,11 +1,11 @@
-steal('funcunit/qunit', 'jquerypp/event/move').then(function() {
+steal('steal-qunit', 'jquerypp/event/move',function() {
 	
 	module('jquerypp/event/reverse')
 	
 	$.event.reverse('test');
 	
 	test('Event bubbling', 3, function() {
-		$('#qunit-test-area').html('<div id="outer">' +
+		$('#qunit-fixture').html('<div id="outer">' +
 			'<div id="inner">' +
 			'<div id="innermost">Innermost div</div>' +
 			'</div>' +
@@ -21,7 +21,7 @@ steal('funcunit/qunit', 'jquerypp/event/move').then(function() {
 	});
 
 	test('stopPropagation', 2, function() {
-		$('#qunit-test-area').html('<div id="outer">' +
+		$('#qunit-fixture').html('<div id="outer">' +
 			'<div id="inner">' +
 			'<div id="innermost">Innermost div</div>' +
 			'</div>' +
@@ -41,14 +41,14 @@ steal('funcunit/qunit', 'jquerypp/event/move').then(function() {
 	});
 
 	test('passing data', 1, function() {
-		$('#qunit-test-area').html('<div id="outer">' +
+		$('#qunit-fixture').html('<div id="outer">' +
 			'<div id="inner">' +
 			'<div id="innermost">Innermost div</div>' +
 			'</div>' +
 			'</div>');
 
 		$('#inner').on('test', function(ev, data) {
-			equals(data.data, true, 'data passed!');
+			equal(data.data, true, 'data passed!');
 		});
 
 		$('#outer').trigger('test', { data: true });

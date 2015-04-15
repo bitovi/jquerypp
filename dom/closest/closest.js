@@ -47,4 +47,4 @@ steal('jquery', function($) {
 	}
 
 	return $;
-})
+});

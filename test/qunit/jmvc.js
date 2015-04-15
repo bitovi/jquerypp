@@ -1,5 +1,5 @@
 // Tests for the JavaScriptMVC compatibility layer. Will be removed eventually
-steal('funcunit/qunit', 'jquerypp/controller/view/test/qunit'
+steal('steal-qunit', 'jquerypp/controller/view/test/qunit'
 	, 'jquerypp/class/class_test.js'
 	, 'jquerypp/model/test/qunit'
 	, 'jquerypp/controller/controller_test.js'
