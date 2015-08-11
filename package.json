@@ -34,7 +34,10 @@
     "map": {
       "jquery/jquery": "jquery",
       "steal-qunit/steal-qunit": "steal-qunit"
-    }
+    },
+    "npmIgnore":[
+      "grunt", "grunt-banner", "grunt-cli", "grunt-contrib-jshint", "testee"
+    ]
   },
   "homepage": "http://jquerypp.com",
   "repository": {
