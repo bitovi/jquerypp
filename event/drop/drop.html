@@ -4,6 +4,10 @@
 	<head>
 		<title>drop</title>
         <style type='text/css'>
+          .demo-block{
+            border:1px solid #555555;
+            margin:2em 5em;
+          }
             .handle {
 				width: 100px;
 				height: 25px;
@@ -16,6 +20,11 @@
 				border: dashed 1px green;
 				cursor : pointer;
                 background-color: white;
+            }
+            #droparea, .drop-area {
+                padding: 20px;
+                border: solid 1px blue;
+                margin:4em 6em;
             }
             #dropout {
                 padding: 20px;
@@ -79,5 +88,148 @@ $('.dropmove')
   
 })
 </script>
+
+
+<hr />
+<h2>Option: tolerance</h2>
+    <div id='demo-pointer' class="demo-block">
+      <h2>Tolerance Demo - Pointer</h2>
+      <div class='handle'>Drag Me</div>
+      <h2>Dropout/Dropover</h2>
+      <div id='droparea-pointer' class="drop-area">
+        <pre>
+$('#droparea-pointer')
+  .bind("dropinit", function(ev, drop, drag){
+    drop.tolerance("pointer");
+  })
+  .bind("dropover", function(){ 
+    $(this).addClass('over') 
+  })
+  .bind("dropout", function(){ 
+    $(this).removeClass('over') 
+  });
+          </pre>
+      </div>
+    </div>
+
+    <div id='demo-touch' class="demo-block">
+      <h2>Tolerance Demo - Touch</h2>
+      <div class='handle'>Drag Me</div>
+      <h2>Dropout/Dropover</h2>
+      <div id='droparea-touch' class="drop-area">
+        <pre>
+$('#droparea-touch')
+  .bind("dropinit", function(ev, drop, drag){
+    drop.tolerance("touch");
+  })
+  .bind("dropover", function(){ 
+    $(this).addClass('over') 
+  })
+  .bind("dropout", function(){ 
+    $(this).removeClass('over') 
+  });
+        </pre>
+      </div>
+    </div>
+
+    <div id='demo-fit' class="demo-block">
+      <h2>Tolerance Demo - Fit</h2>
+      <div class='handle'>Drag Me</div>
+      <h2>Dropout/Dropover</h2>
+      <div id='droparea-fit' class="drop-area">
+        <pre>
+$('#droparea-fit')
+  .bind("dropinit", function(ev, drop, drag){
+    drop.tolerance("fit");
+  })
+  .bind("dropover", function(){ 
+    $(this).addClass('over') 
+  })
+  .bind("dropout", function(){ 
+    $(this).removeClass('over') 
+  });
+        </pre>
+      </div>
+    </div>
+
+    <div id='demo-intersect' class="demo-block">
+      <h2>Tolerance Demo - Intersect</h2>
+      <div class='handle'>Drag Me</div>
+      <h2>Dropout/Dropover</h2>
+      <div id='droparea-intersect' class="drop-area">
+        <pre>
+$('#droparea-intersect')
+  .bind("dropinit", function(ev, drop, drag){
+    drop.tolerance("intersect");
+  })
+  .bind("dropover", function(){ 
+    $(this).addClass('over') 
+  })
+  .bind("dropout", function(){ 
+    $(this).removeClass('over') 
+  });
+        </pre>
+      </div>
+    </div>
+
+    <script type='text/javascript' id='demo-source'>
+      steal('jquerypp/event/drop', 'jquerypp/event/drag/limit', 'jquerypp/event/drop/tolerance', function(){
+        //make drags
+        $('.handle').on("draginit", function(ev,drag){
+          drag.limit($(this).parent());
+        });
+
+                  
+        // ---- add dropout/dropover ----
+
+        //pointer
+        $('#droparea-pointer')
+          .bind("dropinit", function(ev, drop, drag){
+            drop.tolerance("pointer");
+          })
+          .bind("dropover", function(){ 
+            $(this).addClass('over') 
+          })
+          .bind("dropout", function(){ 
+            $(this).removeClass('over') 
+          });
+
+        //touch
+        $('#droparea-touch')
+          .bind("dropinit", function(ev, drop, drag){
+            drop.tolerance("touch");
+          })
+          .bind("dropover", function(){ 
+            $(this).addClass('over') 
+          })
+          .bind("dropout", function(){ 
+            $(this).removeClass('over') 
+          });
+
+        //fit
+        $('#droparea-fit')
+          .bind("dropinit", function(ev, drop, drag){
+            drop.tolerance("fit");
+          })
+          .bind("dropover", function(){ 
+            $(this).addClass('over') 
+          })
+          .bind("dropout", function(){ 
+            $(this).removeClass('over') 
+          });
+
+        //intersect
+        $('#droparea-intersect')
+          .bind("dropinit", function(ev, drop, drag){
+            drop.tolerance("intersect");
+          })
+          .bind("dropover", function(){ 
+            $(this).addClass('over') 
+          })
+          .bind("dropout", function(){ 
+            $(this).removeClass('over') 
+          });
+      });
+    </script>
 	</body>
 </html>
