@@ -284,8 +284,9 @@ steal('jquery', function ($) {
 				properties.push(prop);
 			}
 
-			if(getBrowser().prefix === '-moz-') {
+			if(getBrowser().prefix === '-moz-' || /Edge\/\d+/.test(navigator.userAgent)) {
 				// Normalize 'auto' properties in FF
+				// This is also needed in Edge (tested in 13)
 				$.each(properties, function(i, prop) {
 					var converter = ffProps[$.camelCase(prop)];
 					if(converter && self.css(prop) == 'auto') {
