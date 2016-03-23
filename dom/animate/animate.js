@@ -68,7 +68,7 @@ steal('jquery', function ($) {
 				// Animating empty properties
 				$.isEmptyObject(props) ||
 				// We can't do custom easing
-				(easing || easing && typeof easing == 'string') ||
+				(easing && typeof easing == 'string') ||
 				// Second parameter is an object - we can only handle primitives
 				$.isPlainObject(ops) ||
 				// Inline and non elements
