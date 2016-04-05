@@ -25,7 +25,7 @@
     "steal-tools": "^0.8.2",
     "syn": "0.1.X",
     "system-text": "0.1.0",
-    "testee": "^0.1.8"
+    "testee": "^0.2.5"
   },
   "main": "./index",
   "system": {

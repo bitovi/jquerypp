@@ -1178,14 +1178,14 @@ steal('jquery',
 			expect(11);
 			stop();
 
-			var _default_count = 0,
+			var _def_count = 0,
 				_special_count = 0,
 				propsBasic = { "padding": "10 20 30" },
 				propsSpecial = { "padding": [ "1 2 3", "_special" ] };
 
-			$.easing._default = function(p) {
+			$.easing._def = function(p) {
 				if ( p >= 1 ) {
-					_default_count++;
+					_def_count++;
 				}
 				return p;
 			};
@@ -1198,24 +1198,24 @@ steal('jquery',
 			};
 
 			jQuery("#foo")
-				.animate( propsBasic, 200, "_default", function() {
+				.animate( propsBasic, 200, "_def", function() {
 					equal( this.style.paddingTop, "10px", "padding-top was animated" );
 					equal( this.style.paddingLeft, "20px", "padding-left was animated" );
 					equal( this.style.paddingRight, "20px", "padding-right was animated" );
 					equal( this.style.paddingBottom, "30px", "padding-bottom was animated" );
-					equal( _default_count, 4, "per-animation default easing called for each property" );
-					_default_count = 0;
+					equal( _def_count, 4, "per-animation default easing called for each property" );
+					_def_count = 0;
 				})
-				.animate( propsSpecial, 200, "_default", function() {
+				.animate( propsSpecial, 200, "_def", function() {
 					equal( this.style.paddingTop, "1px", "padding-top was animated again" );
 					equal( this.style.paddingLeft, "2px", "padding-left was animated again" );
 					equal( this.style.paddingRight, "2px", "padding-right was animated again" );
 					equal( this.style.paddingBottom, "3px", "padding-bottom was animated again" );
-					equal( _default_count, 0, "per-animation default easing not called" );
+					equal( _def_count, 0, "per-animation default easing not called" );
 					equal( _special_count, 4, "special easing called for each property" );
 
 					jQuery(this).css("padding", "0");
-					delete $.easing._default;
+					delete $.easing._def;
 					delete $.easing._special;
 					start();
 				});
@@ -1693,7 +1693,7 @@ steal('jquery',
 			});
 		});*/
 
-		asyncTest("Animation callbacks (#11797)", 15, function() {
+		asyncTest("Animation callbacks (#11797)", 16, function() {
 			var targets = jQuery("#foo").children(),
 				done = false,
 				expectedProgress = 0;
@@ -1704,7 +1704,8 @@ steal('jquery',
 					ok( true, "empty: start" );
 				},
 				progress: function( anim, percent ) {
-					equal( percent, 0, "empty: progress 0" );
+					equal( percent, expectedProgress, "empty: progress " + expectedProgress );
+					expectedProgress++;
 				},
 				done: function() {
 					ok( true, "empty: done" );
@@ -1744,7 +1745,8 @@ steal('jquery',
 			}).stop();
 
 			ok( done, "stopped: stopped immediately" );
-
+			
+			expectedProgress = 0;
 			targets.eq( 2 ).animate({
 				opacity: 0
 			}, {
