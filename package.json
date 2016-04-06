@@ -12,7 +12,14 @@
     "jquery": ">1.9.0"
   },
   "scripts": {
-    "test": "grunt test --stack"
+	"preversion": "npm test && npm run build",
+    "version": "git commit -am \"Update dist for release\" && git checkout -b release && git add -f dist/",
+    "postversion": "git push --tags && git checkout master && git branch -D release && git push",
+    "release:patch": "npm version patch && npm publish",
+    "release:minor": "npm version minor && npm publish",
+    "release:major": "npm version major && npm publish",
+    "test": "grunt test --stack",
+    "build": "grunt build"
   },
   "devDependencies": {
     "grunt": "^0.4.5",
