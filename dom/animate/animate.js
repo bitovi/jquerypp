@@ -94,7 +94,7 @@ steal('jquery', function ($) {
 							prefix : ''
 						},
 						'MozTransition': {
-							transitionEnd : 'animationend',
+							transitionEnd : 'transitionend',
 							prefix : '-moz-'
 						},
 						'WebkitTransition': {
