@@ -113,7 +113,7 @@ $('#element').css({
 });
 {% endhighlight %}
 
-Since CSS transitions are implemented natively in the browser and can make use of hardware acceleration, animations will perform a lot better, especially in Webkit based mobile browsers (iPhone, iPad, Android).
+Since CSS transitions are implemented natively in the browser and can make use of hardware acceleration, animations will perform a lot better, especially in WebKit based mobile browsers (iPhone, iPad, Android).
 
 ## compare `$(elA).compare(elB) -> Number`
 
@@ -697,7 +697,7 @@ arise, can also be hired for paid support, training, and development.
 ## Developing jQuery++
 
 To develop jQuery++, add features, etc, you first must install DoneJS. DoneJS is the
-parent project of jQuery++ and the 4.0 version of JavaSciptMVC. It has DocumentJS and
+parent project of jQuery++ and the 4.0 version of JavaScriptMVC. It has DocumentJS and
 Steal as submodules that are used to generate the documentation and build the jQuery++ downloads.
 
 ### Installing
